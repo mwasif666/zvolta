@@ -1,0 +1,211 @@
+
+> zvolta-react@1.0.0 dev
+> vite --host 127.0.0.1 --port 4173
+
+
+  [32m[1mVITE[22m v5.4.21[39m  [2mready in [0m[1m1178[22m[2m[0m ms[22m
+
+  [32m➜[39m  [1mLocal[22m:   [36mhttp://127.0.0.1:[1m4173[22m/[39m
+[2m[32m  ➜[39m[22m[2m  press [22m[1mh + enter[22m[2m to show help[22m
+[2m2:50:29 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/main.jsx, /src/index.css[22m
+[2m2:50:36 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/NotFoundPage.jsx, /src/index.css[22m
+[2m2:50:36 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2m404.html[22m
+[2m2:50:37 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/AboutUsPage.jsx, /src/index.css[22m
+[2m2:50:37 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mabout-us.html[22m
+[2m2:50:37 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/AppstorePage.jsx, /src/index.css[22m
+[2m2:50:37 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mappstore.html[22m
+[2m2:50:37 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/BecomeChargingPartnerPage.jsx, /src/index.css[22m
+[2m2:50:37 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbecome-charging-partner.html[22m
+[2m2:50:38 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/BlogsPage.jsx, /src/index.css[22m
+[2m2:50:38 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mblogs.html[22m
+[2m2:50:38 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/ChargePage.jsx, /src/index.css[22m
+[2m2:50:38 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mcharge.html[22m
+[2m2:50:38 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/ChargingPartnersPage.jsx, /src/index.css[22m
+[2m2:50:38 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mcharging-partners.html[22m
+[2m2:50:39 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/ContactUsPage.jsx, /src/index.css[22m
+[2m2:50:39 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mcontact-us.html[22m
+[2m2:50:39 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/DriverNetworkPage.jsx, /src/index.css[22m
+[2m2:50:39 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mdriver-network.html[22m
+[2m2:50:39 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/HostPage.jsx, /src/index.css[22m
+[2m2:50:39 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mhost.html[22m
+[2m2:50:39 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/IndexPage.jsx, /src/index.css[22m
+[2m2:50:39 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mindex.html[22m
+[2m2:50:39 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/InvestFormPage.jsx, /src/index.css[22m
+[2m2:50:39 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2minvest-form.html[22m
+[2m2:50:39 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/InvestPage.jsx, /src/index.css[22m
+[2m2:50:39 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2minvest.html[22m
+[2m2:50:40 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/LoaderPage.jsx, /src/index.css[22m
+[2m2:50:40 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mLoader.html[22m
+[2m2:50:40 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/MobilePage.jsx, /src/index.css[22m
+[2m2:50:40 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mmobile.html[22m
+[2m2:50:40 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/PolicyPage.jsx, /src/index.css[22m
+[2m2:50:40 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mPolicy.html[22m
+[2m2:50:40 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/SoftwarePage.jsx, /src/index.css[22m
+[2m2:50:40 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2msoftware.html[22m
+[2m2:50:40 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/TestingPage.jsx, /src/index.css[22m
+[2m2:50:40 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mtesting.html[22m
+[2m2:50:40 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/VehiclesPage.jsx, /src/index.css[22m
+[2m2:50:40 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mvehicles.html[22m
+[2m2:50:40 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/main.jsx, /src/index.css[22m
+[2m2:50:40 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/main.jsx, /src/index.css[22m
+[2m2:51:08 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/main.jsx, /src/index.css[22m
+[2m3:08:05 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/main.jsx, /src/index.css[22m
+[2m3:08:22 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/main.jsx, /src/index.css[22m
+[2m3:08:53 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/main.jsx, /src/index.css[22m
+[2m3:09:19 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/NotFoundPage.jsx, /src/index.css[22m
+[2m3:09:19 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2m404.html[22m
+[2m3:09:20 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/AboutUsPage.jsx, /src/index.css[22m
+[2m3:09:20 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mabout-us.html[22m
+[2m3:09:20 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/AppstorePage.jsx, /src/index.css[22m
+[2m3:09:20 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mappstore.html[22m
+[2m3:09:20 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/BecomeChargingPartnerPage.jsx, /src/index.css[22m
+[2m3:09:20 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbecome-charging-partner.html[22m
+[2m3:09:20 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/BlogsPage.jsx, /src/index.css[22m
+[2m3:09:20 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mblogs.html[22m
+[2m3:09:20 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/ChargePage.jsx, /src/index.css[22m
+[2m3:09:20 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mcharge.html[22m
+[2m3:09:21 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/ChargingPartnersPage.jsx, /src/index.css[22m
+[2m3:09:21 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mcharging-partners.html[22m
+[2m3:09:21 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/ContactUsPage.jsx, /src/index.css[22m
+[2m3:09:21 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mcontact-us.html[22m
+[2m3:09:21 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/DriverNetworkPage.jsx, /src/index.css[22m
+[2m3:09:21 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mdriver-network.html[22m
+[2m3:09:21 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/HostPage.jsx, /src/index.css[22m
+[2m3:09:21 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mhost.html[22m
+[2m3:09:22 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/IndexPage.jsx, /src/index.css[22m
+[2m3:09:22 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mindex.html[22m
+[2m3:09:22 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/InvestFormPage.jsx, /src/index.css[22m
+[2m3:09:22 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2minvest-form.html[22m
+[2m3:09:22 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/InvestPage.jsx, /src/index.css[22m
+[2m3:09:22 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2minvest.html[22m
+[2m3:09:22 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/LoaderPage.jsx, /src/index.css[22m
+[2m3:09:22 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mLoader.html[22m
+[2m3:09:22 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/MobilePage.jsx, /src/index.css[22m
+[2m3:09:22 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mmobile.html[22m
+[2m3:09:23 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/PolicyPage.jsx, /src/index.css[22m
+[2m3:09:23 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mPolicy.html[22m
+[2m3:09:23 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/SoftwarePage.jsx, /src/index.css[22m
+[2m3:09:23 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2msoftware.html[22m
+[2m3:09:23 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/TestingPage.jsx, /src/index.css[22m
+[2m3:09:23 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mtesting.html[22m
+[2m3:09:23 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/VehiclesPage.jsx, /src/index.css[22m
+[2m3:09:23 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mvehicles.html[22m
+[2m3:09:34 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/NotFoundPage.jsx, /src/index.css[22m
+[2m3:09:34 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2m404.html[22m
+[2m3:09:34 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/AboutUsPage.jsx, /src/index.css[22m
+[2m3:09:34 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mabout-us.html[22m
+[2m3:09:34 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/AppstorePage.jsx, /src/index.css[22m
+[2m3:09:34 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mappstore.html[22m
+[2m3:09:35 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/BecomeChargingPartnerPage.jsx, /src/index.css[22m
+[2m3:09:35 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbecome-charging-partner.html[22m
+[2m3:09:35 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/BlogsPage.jsx, /src/index.css[22m
+[2m3:09:35 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mblogs.html[22m
+[2m3:09:35 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/ChargePage.jsx, /src/index.css[22m
+[2m3:09:35 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mcharge.html[22m
+[2m3:09:35 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/ChargingPartnersPage.jsx, /src/index.css[22m
+[2m3:09:35 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mcharging-partners.html[22m
+[2m3:09:35 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/ContactUsPage.jsx, /src/index.css[22m
+[2m3:09:35 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mcontact-us.html[22m
+[2m3:09:36 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/DriverNetworkPage.jsx, /src/index.css[22m
+[2m3:09:36 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mdriver-network.html[22m
+[2m3:09:36 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/HostPage.jsx, /src/index.css[22m
+[2m3:09:36 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mhost.html[22m
+[2m3:09:36 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/IndexPage.jsx, /src/index.css[22m
+[2m3:09:36 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mindex.html[22m
+[2m3:09:36 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/InvestFormPage.jsx, /src/index.css[22m
+[2m3:09:36 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2minvest-form.html[22m
+[2m3:09:37 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/InvestPage.jsx, /src/index.css[22m
+[2m3:09:37 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2minvest.html[22m
+[2m3:09:37 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/LoaderPage.jsx, /src/index.css[22m
+[2m3:09:37 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mLoader.html[22m
+[2m3:09:37 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/MobilePage.jsx, /src/index.css[22m
+[2m3:09:37 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mmobile.html[22m
+[2m3:09:37 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/PolicyPage.jsx, /src/index.css[22m
+[2m3:09:37 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mPolicy.html[22m
+[2m3:09:38 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/SoftwarePage.jsx, /src/index.css[22m
+[2m3:09:38 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2msoftware.html[22m
+[2m3:09:38 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/TestingPage.jsx, /src/index.css[22m
+[2m3:09:38 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mtesting.html[22m
+[2m3:09:38 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/VehiclesPage.jsx, /src/index.css[22m
+[2m3:09:38 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mvehicles.html[22m
+[2m3:09:55 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/NotFoundPage.jsx, /src/index.css[22m
+[2m3:09:55 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2m404.html[22m
+[2m3:09:56 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/AboutUsPage.jsx, /src/index.css[22m
+[2m3:09:56 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mabout-us.html[22m
+[2m3:09:56 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/AppstorePage.jsx, /src/index.css[22m
+[2m3:09:56 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mappstore.html[22m
+[2m3:09:56 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/BecomeChargingPartnerPage.jsx, /src/index.css[22m
+[2m3:09:56 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbecome-charging-partner.html[22m
+[2m3:09:56 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/BlogsPage.jsx, /src/index.css[22m
+[2m3:09:56 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mblogs.html[22m
+[2m3:09:57 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/ChargePage.jsx, /src/index.css[22m
+[2m3:09:57 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mcharge.html[22m
+[2m3:09:57 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/ChargingPartnersPage.jsx, /src/index.css[22m
+[2m3:09:57 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mcharging-partners.html[22m
+[2m3:09:57 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/ContactUsPage.jsx, /src/index.css[22m
+[2m3:09:57 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mcontact-us.html[22m
+[2m3:09:58 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/DriverNetworkPage.jsx, /src/index.css[22m
+[2m3:09:58 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mdriver-network.html[22m
+[2m3:09:58 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/HostPage.jsx, /src/index.css[22m
+[2m3:09:58 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mhost.html[22m
+[2m3:09:58 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/IndexPage.jsx, /src/index.css[22m
+[2m3:09:58 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mindex.html[22m
+[2m3:09:59 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/InvestFormPage.jsx, /src/index.css[22m
+[2m3:09:59 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2minvest-form.html[22m
+[2m3:09:59 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/InvestPage.jsx, /src/index.css[22m
+[2m3:09:59 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2minvest.html[22m
+[2m3:09:59 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/LoaderPage.jsx, /src/index.css[22m
+[2m3:09:59 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mLoader.html[22m
+[2m3:09:59 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/MobilePage.jsx, /src/index.css[22m
+[2m3:09:59 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mmobile.html[22m
+[2m3:09:59 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/PolicyPage.jsx, /src/index.css[22m
+[2m3:09:59 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mPolicy.html[22m
+[2m3:09:59 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/SoftwarePage.jsx, /src/index.css[22m
+[2m3:09:59 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2msoftware.html[22m
+[2m3:09:59 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/TestingPage.jsx, /src/index.css[22m
+[2m3:09:59 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mtesting.html[22m
+[2m3:10:00 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/VehiclesPage.jsx, /src/index.css[22m
+[2m3:10:00 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mvehicles.html[22m
+[2m3:10:00 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2msrc/generated/page-registry.js[22m
+[2m3:10:00 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2msrc/generated/legacy-scripts.js[22m
+[2m3:10:25 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/NotFoundPage.jsx, /src/index.css[22m
+[2m3:10:25 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2m404.html[22m
+[2m3:10:25 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/AboutUsPage.jsx, /src/index.css[22m
+[2m3:10:25 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mabout-us.html[22m
+[2m3:10:25 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/AppstorePage.jsx, /src/index.css[22m
+[2m3:10:25 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mappstore.html[22m
+[2m3:10:26 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/BecomeChargingPartnerPage.jsx, /src/index.css[22m
+[2m3:10:26 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbecome-charging-partner.html[22m
+[2m3:10:26 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/BlogsPage.jsx, /src/index.css[22m
+[2m3:10:26 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mblogs.html[22m
+[2m3:10:26 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/ChargePage.jsx, /src/index.css[22m
+[2m3:10:26 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mcharge.html[22m
+[2m3:10:26 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/ChargingPartnersPage.jsx, /src/index.css[22m
+[2m3:10:26 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mcharging-partners.html[22m
+[2m3:10:26 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/ContactUsPage.jsx, /src/index.css[22m
+[2m3:10:26 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mcontact-us.html[22m
+[2m3:10:27 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/DriverNetworkPage.jsx, /src/index.css[22m
+[2m3:10:27 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mdriver-network.html[22m
+[2m3:10:27 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/HostPage.jsx, /src/index.css[22m
+[2m3:10:27 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mhost.html[22m
+[2m3:10:27 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/IndexPage.jsx, /src/index.css[22m
+[2m3:10:27 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mindex.html[22m
+[2m3:10:27 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/InvestFormPage.jsx, /src/index.css[22m
+[2m3:10:27 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2minvest-form.html[22m
+[2m3:10:27 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/InvestPage.jsx, /src/index.css[22m
+[2m3:10:27 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2minvest.html[22m
+[2m3:10:27 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/LoaderPage.jsx, /src/index.css[22m
+[2m3:10:27 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mLoader.html[22m
+[2m3:10:27 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/MobilePage.jsx, /src/index.css[22m
+[2m3:10:28 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mmobile.html[22m
+[2m3:10:28 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/PolicyPage.jsx, /src/index.css[22m
+[2m3:10:28 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mPolicy.html[22m
+[2m3:10:28 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/SoftwarePage.jsx, /src/index.css[22m
+[2m3:10:28 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2msoftware.html[22m
+[2m3:10:28 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/TestingPage.jsx, /src/index.css[22m
+[2m3:10:28 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mtesting.html[22m
+[2m3:10:28 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/generated/pages/VehiclesPage.jsx, /src/index.css[22m
+[2m3:10:28 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mvehicles.html[22m
+[2m3:10:28 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2msrc/generated/page-registry.js[22m
+[2m3:10:28 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2msrc/generated/legacy-scripts.js[22m
+^C^C

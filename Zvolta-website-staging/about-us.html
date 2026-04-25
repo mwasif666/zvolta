@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About ZVolta - The Future of Electric Mobility in Pakistan</title>
+
+    <meta name="description" content="ZVolta is transforming electric mobility in Pakistan. Learn how we are empowering local communities through electric vehicle (EV) investments, charging stations, and rental opportunities.">
+    <meta name="keywords" content="Electric vehicles, EV charging stations, electric rickshaws, investment, Pakistan, clean energy, green transport, electric mobility">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://www.zvolta.com/about-us.html">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="About ZVolta - The Future of Electric Mobility in Pakistan">
+    <meta property="og:description" content="ZVolta connects people with opportunities in the growing EV ecosystem. Invest, host charging stations, or rent electric vehicles in Pakistan.">
+    <meta property="og:url" content="https://www.zvolta.com/about-us.html">
+    <meta property="og:image" content="https://www.zvolta.com/img/og-image.jpg">
+    <meta property="og:site_name" content="ZVolta">
+    <meta property="og:locale" content="en_PK">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="About ZVolta - The Future of Electric Mobility in Pakistan">
+    <meta name="twitter:description" content="Learn about ZVolta's mission to build a sustainable EV ecosystem in Pakistan through investment, charging infrastructure, and community empowerment.">
+    <meta name="twitter:image" content="https://www.zvolta.com/img/og-image.jpg">
+
+    <link rel="icon" href="favicon.ico" sizes="any">
+    <link rel="icon" href="icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="icon.png">
+    <link rel="manifest" href="site.webmanifest">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" xintegrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <link href="css/style.css" rel="stylesheet">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "AboutPage",
+      "mainEntity": {
+        "@type": "Organization",
+        "name": "ZVolta",
+        "url": "https://www.zvolta.com/",
+        "logo": "https://www.zvolta.com/icon.png",
+        "description": "ZVolta is building the future of electric mobility in Pakistan by connecting investors with EV drivers and enabling anyone to become a charging partner. Our mission is to make transportation cleaner, smarter, and more affordable for everyone."
+      },
+      "url": "https://www.zvolta.com/about-us.html"
+    }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Questrial', sans-serif;
+            background-color: #f8fafc;
+        }
+        /* Loader Styles */
+        #orion-loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #f1f1f1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+        #orion-loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+        .orion-loader-logo img {
+            width: 120px;
+        }
+        .hero-section {
+            position: relative;
+            overflow: hidden;
+            background-image: linear-gradient(135deg, #e0f2f1 0%, #ffffff 100%);
+        }
+        .bg-ev-asset {
+            position: absolute;
+            z-index: 0;
+            filter: blur(4px);
+            -webkit-filter: blur(4px);
+            transition: transform 0.5s ease-out;
+            will-change: transform;
+        }
+        .asset-1 { width: 250px; top: 10%; left: 5%; }
+        .asset-2 { width: 300px; top: 50%; right: 5%; transform: translateY(-50%); }
+        .asset-3 { width: 200px; bottom: 5%; left: 20%; }
+
+        @media (max-width: 768px) {
+            .bg-ev-asset { filter: blur(3px); -webkit-filter: blur(3px); opacity: 0.7; }
+            .asset-1 { width: 150px; top: 5%; left: -5%; }
+            .asset-2 { width: 200px; top: 60%; right: -10%; }
+            .asset-3 { display: none; }
+        }
+
+        .icon-card, .comparison-slider, .dark-cta-section {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        .icon-card.is-visible, .comparison-slider.is-visible, .dark-cta-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .icon-card {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.05), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .icon-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+        .dark-cta-section {
+            background-color: #1a202c;
+            position: relative;
+            overflow: hidden;
+        }
+        .dark-cta-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+            -webkit-mask-image: radial-gradient(ellipse 100% 80% at 50% 100%, black, transparent);
+            mask-image: radial-gradient(ellipse 100% 80% at 50% 100%, black, transparent);
+        }
+        .dark-cta-section::after {
+            content: '';
+            position: absolute;
+            bottom: -50%;
+            left: 50%;
+            width: 150%;
+            height: 100%;
+            transform: translateX(-50%);
+            background: radial-gradient(ellipse at bottom, rgba(16, 185, 129, 0.35), transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+        @keyframes shine {
+          0% { background-position: 200% center; }
+          100% { background-position: -200% center; }
+        }
+        .shiny-text {
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: shine 5s linear infinite;
+        }
+        .shiny-text.light-bg {
+             background-image: linear-gradient(120deg, #1f2937 35%, #798698 50%, #1f2937 65%);
+        }
+        .shiny-text.dark-bg {
+             background-image: linear-gradient(120deg, #9ca3af 35%, #ffffff 50%, #9ca3af 65%);
+        }
+        .user-select-none, img {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        /* Styles for the scrolled navbar */
+        .navbar-scrolled {
+            background-color: rgba(13, 13, 16, 0.85) !important;
+            border-color: rgba(55, 65, 81, 0.5) !important;
+        }
+        .navbar-scrolled a,
+        .navbar-scrolled button,
+        .navbar-scrolled span {
+            color: #e5e7eb !important;
+        }
+        .navbar-scrolled a:hover {
+            color: #ffffff !important;
+        }
+        .navbar-scrolled #mobile-menu-button:hover {
+            background-color: rgba(255, 255, 255, 0.1) !important;
+            color: #ffffff !important;
+        }
+        .navbar-scrolled a.shimmer-effect {
+            color: #ffffff !important;
+        }
+
+        /* Hamburger Menu Animation */
+        .hamburger-icon span {
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            transform-origin: center;
+        }
+        .hamburger-icon.is-active span:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+        }
+        .hamburger-icon.is-active span:nth-child(2) {
+            opacity: 0;
+        }
+        .hamburger-icon.is-active span:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
+        }
+
+        /* Mobile Menu Animation */
+        #mobile-menu {
+            transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.4s ease;
+            transform: translateY(-10px);
+            opacity: 0;
+            pointer-events: none;
+        }
+        #mobile-menu.is-open {
+            transform: translateY(0);
+            opacity: 1;
+            pointer-events: auto;
+        }
+        /* Footer Ellipse */
+        footer {
+            position: relative;
+            overflow: hidden;
+        }
+        footer::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            left: 50%;
+            transform: translateX(-50%) scaleY(0.5);
+            width: 80%;
+            height: 100px;
+            background: radial-gradient(ellipse at center, rgba(34, 197, 94, 0.3) 0%, rgba(34, 197, 94, 0) 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+    </style>
+</head>
+<body class="text-gray-700">
+
+<div id="orion-loader">
+    <div class="orion-loader-logo">
+      <img src="img/zvolta-loader.gif" alt="ZVolta is loading..." draggable="false">
+    </div>
+</div>
+
+<header class="sticky top-0 z-50 w-full transition-all duration-300">
+    <div id="navbar-container" class="container mx-auto transition-all duration-300">
+        <div id="main-navbar" class="bg-white/80 backdrop-blur-md border border-gray-200/60 shadow-lg custom-navbar-glass transition-all duration-300">
+            <nav class="flex items-center justify-between h-16 px-4 sm:px-6">
+                <div class="flex-shrink-0">
+                    <a href="index.html" class="flex items-center" aria-label="ZVolta Home">
+                        <img id="navbar-logo-img" src="img/full_Logoblack.png" alt="ZVolta Full Logo" class="navbar-logo h-8 w-auto" draggable="false">
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="about-us.html" class="text-gray-700 hover:text-green-600 transition-colors">About</a>
+                    <a href="charging-partners.html" class="text-gray-700 hover:text-green-600 transition-colors">Charge</a>
+                    <a href="vehicles.html" class="text-gray-700 hover:text-green-600 transition-colors">Rent</a>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <a href="contact-us.html" class="hidden sm:inline-block bg-green-600 text-white px-6 py-2 rounded-full font-semibold hover:bg-green-700 transition-colors shimmer-effect">Contact Us</a>
+                    <div class="hidden md:flex relative group">
+                        <button class="flex items-center text-gray-700 p-2 rounded-full">
+                            <span>Pakistan</span>
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                    </div>
+                    <div class="md:hidden flex items-center">
+                        <button id="mobile-menu-button" class="p-2 rounded-full text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-green-500 hamburger-icon" aria-controls="mobile-menu" aria-expanded="false">
+                            <span class="sr-only">Open main menu</span>
+                            <div class="space-y-1.5">
+                                <span class="block w-6 h-0.5 bg-current"></span>
+                                <span class="block w-6 h-0.5 bg-current"></span>
+                                <span class="block w-6 h-0.5 bg-current"></span>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </nav>
+        </div>
+
+        <div id="mobile-menu" class="hidden md:hidden mt-2">
+            <div class="bg-white/95 backdrop-blur-md rounded-2xl shadow-lg p-4 space-y-1">
+                <a href="about-us.html" class="block py-2 px-3 text-base text-gray-700 rounded-md hover:bg-gray-100 hover:text-green-600">About</a>
+                <a href="charging-partners.html" class="block py-2 px-3 text-base text-gray-700 rounded-md hover:bg-gray-100 hover:text-green-600">Charge</a>
+                <a href="vehicles.html" class="block py-2 px-3 text-base text-gray-700 rounded-md hover:bg-gray-100 hover:text-green-600">Rent</a>
+                <div class="border-t border-gray-200 my-2 pt-2">
+                    <a href="contact-us.html" class="block w-full text-left py-2 px-3 text-base text-gray-700 rounded-md hover:bg-gray-100 hover:text-green-600">Contact Us</a>
+                    <a href="#" class="block w-full text-left py-2 px-3 text-base text-gray-700 rounded-md hover:bg-gray-100 hover:text-green-600">Location: Pakistan</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+    <section class="hero-section pt-32 pb-20 md:pt-48 md:pb-32">
+        <div class="bg-ev-asset asset-1" data-speed="0.05"><img src="img/biomas_energy.png" alt="Clean energy icon representing ZVolta's mission" draggable="false"></div>
+        <div class="bg-ev-asset asset-2" data-speed="-0.07"><img src="img/charging%20station.png" alt="EV charging station asset" draggable="false"></div>
+        <div class="bg-ev-asset asset-3" data-speed="0.04"><img src="img/charging%20station%20location.png" alt="Map location icon for charging network" draggable="false"></div>
+        <div class="container mx-auto px-6 text-center max-w-4xl relative z-10">
+            <div class="inline-block bg-green-200 text-green-800 text-sm font-semibold px-4 py-1 rounded-full mb-6">
+                <i class="fas fa-info-circle mr-2"></i>About Us
+            </div>
+            <h1 class="text-4xl md:text-6xl font-bold text-gray-800">ZVolta is building the <span class="shiny-text light-bg">future of electric mobility.</span></h1>
+            <p class="mt-6 text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+                We are enabling Pakistan’s EV revolution, through our network of Charging Pods designed for convenience
+            </p>
+        </div>
+    </section>
+
+    <section class="py-20 bg-transparent">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <div class="icon-card flex flex-col">
+                    <div class="flex-grow">
+                        <div class="text-green-600 mb-4">
+                            <i class="fas fa-motorcycle fa-3x"></i>
+                        </div>
+                        <h3 class="font-bold text-xl mb-2 text-gray-800">Affordable Electric Vechicles</h3>
+                        <p class="text-gray-600">Providing accessible and clean electric rickshaws for daily rides across Pakistan.</p>
+                    </div>
+                    <a href="vehicles.html" class="inline-block bg-green-600 text-white px-6 py-2 rounded-full font-semibold hover:bg-green-700 transition-colors mt-6">Learn More</a>
+                </div>
+                <div class="icon-card flex flex-col">
+                    <div class="flex-grow">
+                         <div class="text-green-600 mb-4">
+                            <i class="fas fa-charging-station fa-3x"></i>
+                        </div>
+                        <h3 class="font-bold text-xl mb-2 text-gray-800">Clean Energy Access</h3>
+                        <p class="text-gray-600">Building a network of charging hubs to ensure clean energy is available in every neighborhood.</p>
+                    </div>
+                    <a href="charging-partners.html" class="inline-block bg-green-600 text-white px-6 py-2 rounded-full font-semibold hover:bg-green-700 transition-colors mt-6">Learn More</a>
+                </div>
+                <div class="icon-card flex flex-col">
+                    <div class="flex-grow">
+                         <div class="text-green-600 mb-4">
+                            <i class="fas fa-hand-holding-dollar fa-3x"></i>
+                        </div>
+                        <h3 class="font-bold text-xl mb-2 text-gray-800">Income Opportunities</h3>
+                        <p class="text-gray-600">Creating new revenue streams for business through EV charging at their locations</p>
+                    </div>
+                    <a href="invest.html" class="inline-block bg-green-600 text-white px-6 py-2 rounded-full font-semibold hover:bg-green-700 transition-colors mt-6">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-transparent">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-800">From Pollution to Progress</h2>
+            <p class="mt-4 text-lg md:text-xl text-gray-600 max-w-3xl mx-auto mb-12">
+                We are actively replacing noisy, fume-emitting rickshaws with silent, clean, and efficient electric vehicles.
+            </p>
+
+            <div class="comparison-slider relative max-w-4xl mx-auto">
+                <div class="relative w-full aspect-video overflow-hidden rounded-2xl shadow-2xl user-select-none">
+                    <div class="absolute inset-0">
+                        <img src="img/clean-volta.jpg" alt="Clean city street with ZVolta's electric rickshaws" class="object-cover w-full h-full user-select-none" draggable="false">
+                        <div class="absolute top-4 right-4 bg-green-500 text-white font-bold px-4 py-2 rounded-full">
+                            With ZVolta
+                        </div>
+                    </div>
+                    <div class="absolute inset-0 user-select-none" style="clip-path: inset(0 50% 0 0);">
+                        <img src="https://th-i.thgim.com/public/migration_catalog/article13518136.ece/alternates/FREE_1200/HY19POLUTINGAUTO" alt="Busy street with traditional, polluting auto rickshaws" class="object-cover w-full h-full brightness-75 user-select-none" draggable="false">
+                        <div class="absolute top-4 left-4 bg-gray-800 text-white font-bold px-4 py-2 rounded-full">
+                            Without ZVolta
+                        </div>
+                    </div>
+                    <div class="slider-handle absolute inset-y-0" style="left: 50%;">
+                        <div class="h-full w-1 bg-white"></div>
+                        <div class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 p-2 rounded-full bg-white shadow-lg cursor-pointer">
+                             <i class="fas fa-arrows-alt-h text-gray-700"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="dark-cta-section py-20">
+        <div class="relative z-10 container mx-auto px-6 text-center max-w-3xl">
+            <h2 class="text-3xl md:text-4xl font-bold shiny-text dark-bg">Join the EV Revolution. Invest with ZVolta.</h2>
+            <p class="mt-4 text-lg text-gray-300">
+                Become a part of Pakistan's clean energy transformation. Invest in an asset-backed, high-return industry and empower your community while earning passive income.
+            </p>
+            <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+                 <a href="invest.html" class="w-full sm:w-auto px-8 py-4 bg-green-500 text-white font-semibold rounded-lg hover:bg-green-600 transition-all duration-300 text-lg shadow-lg hover:shadow-green-500/50 transform hover:scale-105">
+                    Become an Investor <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+                 <a href="contact-us.html" class="w-full sm:w-auto px-8 py-4 bg-gray-800 border border-gray-600 text-gray-200 font-semibold rounded-lg hover:bg-gray-700 hover:border-gray-500 transition-all duration-300 text-lg shadow-lg transform hover:scale-105">
+                    Book a Call
+                </a>
+            </div>
+        </div>
+    </section>
+<footer class="bg-black text-gray-300">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-start">
+
+              <div class="lg:col-span-4">
+                  <h2 class="text-3xl sm:text-4xl font-bold text-white leading-tight">
+                      Ready to power up your future with EVs?
+                      <br>
+                      <a href="contact-us.html" class="text-green-400 hover:text-green-300 transition-colors">Get in touch.</a>
+                  </h2>
+              </div>
+
+              <div class="lg:col-span-8 lg:col-start-5">
+                 <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                     <div>
+                         <h3 class="font-semibold text-white">Company</h3>
+                         <ul class="mt-4 space-y-3">
+                             <li><a href="index.html" class="hover:text-white transition-colors">Home</a></li>
+                             <li><a href="about-us.html" class="hover:text-white transition-colors">About</a></li>
+                             <li><a href="invest.html" class="hover:text-white transition-colors">For Investors</a></li>
+                             <li><a href="charging-partners.html" class="hover:text-white transition-colors">Charging Partners</a></li>
+                         </ul>
+                     </div>
+                     <div>
+                         <h3 class="font-semibold text-white">Learn More</h3>
+                         <ul class="mt-4 space-y-3">
+                             <li><a href="driver-network.html" class="hover:text-white transition-colors">Drivers</a></li>
+                             <li><a href="invest-form.html" class="hover:text-white transition-colors">Invest</a></li>
+                             <li><a href="contact-us.html" class="hover:text-white transition-colors">Contact</a></li>
+                         </ul>
+                     </div>
+                      <div>
+                         <h3 class="font-semibold text-white">Connect</h3>
+                         <div class="flex space-x-5 mt-4">
+                              <a href="https://www.facebook.com/share/1FUNJfnPd5/?mibextid=wwXIfr" target="_blank" class="text-gray-400 hover:text-white transition-colors" aria-label="Follow ZVolta on Facebook">
+                                  <i class="bi bi-facebook" style="font-size: 1.5rem;" aria-hidden="true"></i>
+                              </a>
+                              <a href="https://www.instagram.com/zvolta.pk" target="_blank" class="text-gray-400 hover:text-white transition-colors" aria-label="Follow ZVolta on Instagram">
+                                  <i class="bi bi-instagram" style="font-size: 1.5rem;" aria-hidden="true"></i>
+                              </a>
+                              <a href="https://wa.me/+923104446529" target="_blank" class="text-gray-400 hover:text-white transition-colors" aria-label="Contact ZVolta on WhatsApp">
+                                  <i class="bi bi-whatsapp" style="font-size: 1.5rem;" aria-hidden="true"></i>
+                              </a>
+                              <a href="mailto:admin@zvolta.com" class="text-gray-400 hover:text-white transition-colors" aria-label="Email ZVolta">
+                                  <i class="bi bi-envelope" style="font-size: 1.5rem;" aria-hidden="true"></i>
+                              </a>
+                          </div>
+                     </div>
+                     <div>
+                        <h3 class="font-semibold text-white">Contact Details</h3>
+                        <ul class="mt-4 space-y-3 text-sm">
+                            <li class="flex items-center gap-x-2">
+                                <i class="bi bi-envelope text-lg" aria-hidden="true"></i>
+                                <a href="mailto:support@zvolta.com" class="hover:text-white transition-colors">support@zvolta.com</a>
+                            </li>
+                            <li class="flex items-center gap-x-2">
+                                <i class="bi bi-telephone text-lg" aria-hidden="true"></i>
+                                <a href="tel:+923104446529" class="hover:text-white transition-colors">‪+92 310 4446529‬</a>
+                            </li>
+                            <li class="flex items-start gap-x-2 pt-1">
+                                <i class="bi bi-geo-alt text-lg mt-1" aria-hidden="true"></i>
+                                <span class="leading-relaxed">36F, Street 36, Block 6, P.E.C.H.S, Karachi, Pakistan</span>
+                            </li>
+                        </ul>
+                    </div>
+                 </div>
+              </div>
+          </div>
+
+          <div class="mt-16 pt-8 border-t border-gray-800 flex flex-wrap justify-between items-center gap-4">
+              <div class="flex items-center text-sm text-gray-400">
+                  <img src="img/symbol logo2.png" alt="ZVolta Symbol" class="h-5 w-auto mr-3" width="20" height="20">
+                  <span>&copy; 2025 Z-Volta Pvt. Ltd. All rights reserved.</span>
+              </div>
+
+              <div class="text-sm text-gray-400">
+                  <ul class="flex flex-wrap justify-center sm:justify-end gap-x-4 gap-y-2">
+                      <li><a href="Policy.html#terms-and-conditions" class="hover:text-white transition-colors">Terms and Conditions</a></li>
+                      <li><a href="Policy.html#standard-service-policy" class="hover:text-white transition-colors">Standard Service Policy</a></li>
+                      <li><a href="Policy.html#privacy-policy" class="hover:text-white transition-colors">Privacy Policy</a></li>
+                      <li><a href="Policy.html#returns-policy" class="hover:text-white transition-colors">Returns Policy</a></li>
+                  </ul>
+              </div>
+          </div>
+      </div>
+  </footer>
+<script>
+(function() {
+    'use strict';
+
+    const getElement = (selector) => document.querySelector(selector);
+    const getElements = (selector) => document.querySelectorAll(selector);
+
+    function handlePageLoad() {
+        const loader = getElement('#orion-loader');
+        if (loader) {
+            window.addEventListener('load', () => {
+                loader.classList.add('hidden');
+                loader.addEventListener('transitionend', () => loader.remove());
+            }, { once: true });
+        }
+    }
+
+    function setupNavbar() {
+        const navbarContainer = getElement('#navbar-container');
+        const mobileMenuButton = getElement('#mobile-menu-button');
+        const mobileMenu = getElement('#mobile-menu');
+        const navbar = getElement('#main-navbar');
+        const navbarLogo = getElement('#navbar-logo-img');
+
+        if (mobileMenuButton && mobileMenu) {
+            mobileMenuButton.addEventListener('click', () => {
+                const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
+                mobileMenuButton.setAttribute('aria-expanded', String(!isExpanded));
+                mobileMenuButton.classList.toggle('is-active');
+                mobileMenu.classList.toggle('hidden');
+                mobileMenu.classList.toggle('is-open');
+            });
+        }
+
+        if (navbar && navbarLogo && navbarContainer) {
+            const logoDefault = 'img/full_Logoblack.png';
+            const logoScrolled = 'img/full_logowhite.png';
+            new Image().src = logoScrolled;
+
+            const handleScroll = () => {
+                const isScrolled = window.scrollY > 20;
+
+                navbar.classList.toggle('navbar-scrolled', isScrolled);
+                navbar.classList.toggle('rounded-full', isScrolled);
+                navbarContainer.classList.toggle('p-2', isScrolled);
+                navbarContainer.classList.toggle('sm:p-3', isScrolled);
+
+                if (navbarLogo) {
+                    navbarLogo.src = isScrolled ? logoScrolled : logoDefault;
+                }
+            };
+
+            // Set initial state on page load to ensure correct appearance
+            handleScroll();
+
+            window.addEventListener('scroll', handleScroll, { passive: true });
+        }
+    }
+
+    function setupParallax() {
+        const bgAssets = getElements('.bg-ev-asset');
+        if (bgAssets.length === 0) return;
+
+        const handleScroll = () => {
+            const scrollY = window.pageYOffset;
+            bgAssets.forEach(asset => {
+                const speed = parseFloat(asset.dataset.speed || '0');
+                const yPos = -scrollY * speed;
+                asset.style.transform = `translateY(${yPos}px)`;
+            });
+        };
+        window.addEventListener('scroll', handleScroll, { passive: true });
+    }
+
+    function setupComparisonSlider() {
+        const sliderContainer = getElement('.comparison-slider');
+        if (!sliderContainer) return;
+
+        const handle = sliderContainer.querySelector('.slider-handle');
+        const topImageContainer = sliderContainer.querySelector('div[style*="clip-path"]');
+        let isDragging = false;
+
+        const moveSlider = (clientX) => {
+            const rect = sliderContainer.getBoundingClientRect();
+            let position = ((clientX - rect.left) / rect.width) * 100;
+            position = Math.max(0, Math.min(100, position));
+
+            handle.style.left = `${position}%`;
+            topImageContainer.style.clipPath = `inset(0 ${100 - position}% 0 0)`;
+        };
+
+        const startDrag = (e) => {
+            e.preventDefault();
+            isDragging = true;
+        };
+        const stopDrag = () => { isDragging = false; };
+        const onDrag = (e) => {
+            if (!isDragging) return;
+            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+            moveSlider(clientX);
+        };
+
+        handle.addEventListener('mousedown', startDrag);
+        handle.addEventListener('touchstart', startDrag, { passive: false });
+        window.addEventListener('mouseup', stopDrag);
+        window.addEventListener('touchend', stopDrag);
+        window.addEventListener('mousemove', onDrag);
+        window.addEventListener('touchmove', onDrag, { passive: false });
+    }
+
+    function setupScrollAnimations() {
+        const animatedElements = getElements('.icon-card, .comparison-slider, .dark-cta-section');
+        if (animatedElements.length === 0) return;
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        animatedElements.forEach(el => observer.observe(el));
+    }
+
+    function initialize() {
+        handlePageLoad();
+        setupNavbar();
+        setupParallax();
+        setupComparisonSlider();
+        setupScrollAnimations();
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initialize);
+    } else {
+        initialize();
+    }
+})();
+</script>
+
+</body>
+</html>

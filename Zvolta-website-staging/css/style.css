@@ -1,0 +1,728 @@
+/* =========================================
+   1. FONTS & BASE SETUP
+   ========================================= */
+@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css');
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 20px;
+}
+
+body {
+  font-family: 'Inter Tight', sans-serif;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  background-color: #0a0a0a;
+  color: #111;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* =========================================
+   2. VIRTUAL SCROLL (GSAP)
+   ========================================= */
+#smooth-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 1;
+  touch-action: none; /* Prevents native scroll interference */
+}
+
+#smooth-content {
+  width: 100%;
+  will-change: transform;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background-color: transparent; }
+::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 9999px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+    transition: background-color 0.3s ease;
+}
+::-webkit-scrollbar-thumb:hover { background-color: rgba(255, 255, 255, 0.4); }
+
+/* =========================================
+   REMOVED: Custom Cursor Styles
+   ========================================= */
+
+/* =========================================
+   UPDATED: Strictly Green Glow Buttons
+   ========================================= */
+.btn-glow {
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  border-radius: 9999px;
+  padding: 1px; /* Border thickness */
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
+}
+
+.btn-glow:hover {
+    transform: scale(1.02);
+    box-shadow: 0 15px 40px -10px rgba(0,0,0,0.7);
+}
+
+/* Rotating Border */
+.btn-glow::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    var(--btn-color, #ffffff) 60deg,
+    transparent 120deg
+  );
+  animation: rotateBorder 4s linear infinite;
+  z-index: 0;
+}
+
+/* Inner Button Background */
+.btn-content {
+  position: relative;
+  z-index: 1;
+  background-color: #0a0a0a;
+  color: white;
+  width: 100%;
+  height: 100%;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 32px;
+  font-weight: 700;
+  gap: 8px;
+  border: 1px solid rgba(255,255,255,0.05); /* Subtle inner rim */
+}
+
+@keyframes rotateBorder {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* --- STRICTLY GREEN VARIANTS --- */
+/* 1. Hosting: Pure Emerald (The Brand Standard) */
+.btn-glow.hosting { --btn-color: #10b981; }
+
+/* 2. Charging: Electric Lime (High Energy) */
+.btn-glow.charging { --btn-color: #84cc16; }
+
+/* 3. Software: Deep Forest/Sage (Sophisticated Tech) */
+.btn-glow.software { --btn-color: #3f6212; }
+
+
+/* =========================================
+   NEW: Sleek Card UI
+   ========================================= */
+.sleek-card-layer {
+    position: absolute;
+    inset: 0;
+    border-radius: 1.5rem;
+    overflow: hidden;
+    background-color: #000; /* Dark base for depth */
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.1); /* Subtle bezel */
+}
+
+/* Gradient Overlay for Text Readability */
+.sleek-gradient {
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+    /* Gradient handled in utility classes for flexibility */
+}
+
+/* Big Number styling */
+.sleek-number {
+    font-family: 'Inter Tight', sans-serif;
+    font-weight: 800;
+    line-height: 1;
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    opacity: 0.1;
+    z-index: 5;
+    font-variant-numeric: tabular-nums;
+}
+/* =========================================
+   EXISTING STYLES (Keep these)
+   ========================================= */
+/* Ensure the .dynamic-word colors match the new palette */
+.text-gold { color: #d97706; } /* Amber-600 */
+/* =========================================
+   4. LOADER & PERFORMANCE
+   ========================================= */
+.will-change-transform {
+    will-change: transform, opacity;
+}
+
+#loader-blind-top { transform-origin: top; will-change: transform; }
+#loader-blind-bottom { transform-origin: bottom; will-change: transform; }
+#loader-logo, #loader-content { will-change: transform, opacity; }
+
+/* Pulse Animation */
+.animate-pulse-slow {
+    animation: pulseSlow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulseSlow {
+    0%, 100% { opacity: 0.3; transform: scale(0.8); }
+    50% { opacity: 0.8; transform: scale(1.5); }
+}
+
+/* =========================================
+   5. HERO SECTION
+   ========================================= */
+#hero-section {
+    position: relative;
+    z-index: 0;
+    width: 100%;
+    height: 100vh;
+    min-height: 600px;
+}
+
+/* Text Swapper Container */
+.word-swapper {
+    display: inline-block;
+    position: relative;
+    height: 1.18em;
+    line-height: 1.18em;
+    vertical-align: bottom;
+    overflow: hidden;
+    white-space: nowrap;
+    width: auto;
+    text-align: center;
+    transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.word-swapper span {
+    line-height: inherit;
+}
+
+/* Fade In Up Utility */
+.fade-in-up {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+@keyframes fadeInUp {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Content Overlay (White background wrapper) */
+.content-overlap {
+    position: relative;
+    z-index: 10;
+    background-color: white;
+    width: 100%;
+}
+
+/* =========================================
+   6. MISSION / STATS (Spotlight Grid)
+   ========================================= */
+#mission {
+    background-color: #ffffff;
+    position: relative;
+}
+
+.stat-container {
+    background-color: #0f0f0f;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 30px 30px;
+    border: 1px solid #27272a;
+    border-radius: 2rem;
+    padding: 3rem 2rem;
+
+    /* UPDATED: Removed 'transform' from transition to let GSAP handle it */
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+
+    /* ADDED: Hardware acceleration */
+    transform-style: preserve-3d;
+    will-change: transform;
+
+    cursor: default;
+    position: relative;
+    overflow: hidden;
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    isolation: isolate;
+}
+
+/* Spotlight Effect */
+.stat-container::before {
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background: radial-gradient(
+        800px circle at var(--x, 50%) var(--y, 50%),
+        rgba(22, 163, 74, 0.15),
+        transparent 40%
+    );
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.stat-container:hover::before { opacity: 1; }
+
+.stat-container:hover {
+    /* REMOVED: transform: translateY(-5px); (JS handles this now) */
+    border-color: rgba(22, 163, 74, 0.5);
+    box-shadow: 0 20px 50px -10px rgba(0,0,0,0.7); /* Deeper shadow for 3D feel */
+}
+
+/* Keep icon/text styles same as before */
+.stat-icon {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    font-size: 3.5rem;
+    color: #27272a;
+    transition: all 0.4s ease;
+    z-index: 1;
+}
+.stat-container:hover .stat-icon {
+    color: #16a34a;
+    transform: scale(1.1) translateZ(20px); /* Pops out in 3D */
+    filter: drop-shadow(0 0 8px rgba(22, 163, 74, 0.4));
+}
+/* Text Reveal Util */
+.reveal-text span { transition: color 0.1s linear, opacity 0.1s linear; }
+
+/* =========================================
+   7. HOW IT WORKS (Dynamic Section)
+   ========================================= */
+#how-it-works {
+    position: relative;
+    /* Clean transition for background color changes if needed via JS */
+    transition: background-color 0.5s ease;
+}
+
+/* Card Column: Holds the 3 stacked cards */
+.card-column {
+    position: relative;
+    transform-style: preserve-3d;
+    will-change: transform;
+}
+
+/* Card Layer: The individual Hosting/Charging/Software cards */
+.card-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden; /* Prevents flickering during flip */
+    background-color: white; /* Fallback */
+}
+
+/* Dynamic Word Animation Wrapper */
+.dynamic-word {
+    will-change: transform, opacity;
+}
+
+/* Scroll Progress Bar (Right Side) */
+#scroll-progress-bar {
+    box-shadow: 0 0 15px currentColor;
+    will-change: top, background-color;
+}
+
+/* =========================================
+   8. APP SECTION & MOCKUPS
+   ========================================= */
+#app-section {
+    perspective: 1000px;
+    background-color: #0a0a0a;
+}
+
+/* Store Buttons */
+.store-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 0.75rem 1.5rem;
+    border-radius: 1rem;
+    color: white;
+    transition: all 0.3s ease;
+    min-width: 180px;
+    cursor: pointer;
+}
+
+.store-btn:hover {
+    background-color: #ffffff;
+    border-color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+}
+
+.store-btn:hover i,
+.store-btn:hover span {
+    color: black !important;
+}
+
+/* Phone Mockup */
+.phone-mockup {
+    box-shadow:
+        0 0 0 2px #3f3f46, /* Outer bezel */
+        0 20px 50px -10px rgba(0,0,0,0.5); /* Deep shadow */
+    transition: transform 0.5s ease;
+    will-change: transform;
+}
+
+.app-phone-animate:hover .phone-mockup {
+    transform: scale(1.02) rotateX(2deg);
+}
+
+
+@keyframes floatCard {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+}
+
+/* Utilities */
+.perspective-1000 { perspective: 1000px; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+/* =========================================
+   APP SECTION: ARTIFACT-FREE LIGHTING
+   ========================================= */
+
+/* Base Floating Card Style */
+.floating-card-base {
+    background-color: #0a0a0a;
+    border-radius: 9999px;
+    position: relative;
+    /* Hardware acceleration to fix pixelation/tearing */
+    transform: translateZ(0);
+    -webkit-font-smoothing: antialiased;
+    /* Deep drop shadow for depth */
+    box-shadow: 0 20px 50px -10px rgba(0,0,0,0.9);
+}
+
+/* DIRECTIONAL LIGHTING (Using Box-Shadows Only - No Borders)
+   We use multiple inset shadows to create the "Highlight" edge without physical borders.
+*/
+
+/* 1. Top Left Card (Light source: Bottom Right) */
+.light-from-br {
+    background: linear-gradient(135deg, #050505 40%, rgba(22, 163, 74, 0.1) 100%);
+    box-shadow:
+        /* The Sharp Highlight Edge (Bottom & Right) */
+        inset -1px -1px 0 0 rgba(22, 163, 74, 0.6),
+        /* The Soft Inner Glow */
+        inset -10px -10px 30px -5px rgba(22, 163, 74, 0.2);
+}
+
+/* 2. Bottom Left Card (Light source: Top Right) */
+.light-from-tr {
+    background: linear-gradient(45deg, #050505 40%, rgba(22, 163, 74, 0.1) 100%);
+    box-shadow:
+        /* The Sharp Highlight Edge (Top & Right) */
+        inset -1px 1px 0 0 rgba(22, 163, 74, 0.6),
+        /* The Soft Inner Glow */
+        inset -10px 10px 30px -5px rgba(22, 163, 74, 0.2);
+}
+
+/* 3. Top Right Card (Light source: Bottom Left) */
+.light-from-bl {
+    background: linear-gradient(225deg, #050505 40%, rgba(22, 163, 74, 0.1) 100%);
+    box-shadow:
+        /* The Sharp Highlight Edge (Bottom & Left) */
+        inset 1px -1px 0 0 rgba(22, 163, 74, 0.6),
+        /* The Soft Inner Glow */
+        inset 10px -10px 30px -5px rgba(22, 163, 74, 0.2);
+}
+
+/* 4. Bottom Right Card (Light source: Top Left) */
+.light-from-tl {
+    background: linear-gradient(315deg, #050505 40%, rgba(22, 163, 74, 0.1) 100%);
+    box-shadow:
+        /* The Sharp Highlight Edge (Top & Left) */
+        inset 1px 1px 0 0 rgba(22, 163, 74, 0.6),
+        /* The Soft Inner Glow */
+        inset 10px 10px 30px -5px rgba(22, 163, 74, 0.2);
+}
+
+/* FIXED: Smoother Phone Glow (No Pixelation) */
+.smooth-radial-glow {
+    /* Uses a softer gradient spread to avoid banding artifacts */
+    background: radial-gradient(circle, rgba(22, 163, 74, 0.4) 0%, rgba(22, 163, 74, 0.05) 60%, transparent 70%);
+    /* Force GPU rendering */
+    transform: translateZ(0);
+    will-change: opacity;
+    /* Optional: subtle blend mode for better integration */
+    mix-blend-mode: screen;
+}
+/* =========================================
+   APP SECTION: PRECISE UI & ANIMATIONS
+   ========================================= */
+
+/* 1. The Continuous Float Animation */
+@keyframes floatY {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-12px); } /* Gentle bob */
+}
+
+/* Apply to cards with different delays for natural feel */
+.floating-card {
+    animation: floatY 6s ease-in-out infinite;
+    will-change: transform;
+}
+/* Stagger the float start times so they don't move in sync */
+#card-1 { animation-delay: 0s; }
+#card-2 { animation-delay: 1.5s; }
+#card-3 { animation-delay: 0.5s; }
+#card-4 { animation-delay: 2s; }
+
+
+/* 2. The Fixed "Soft" Glow */
+.smooth-radial-glow {
+    /* Large diffuse gradient */
+    background: radial-gradient(
+        circle at center,
+        rgba(22, 163, 74, 0.5) 0%,
+        rgba(22, 163, 74, 0.15) 40%,
+        transparent 70%
+    );
+    /* Heavy blur to kill pixels */
+    filter: blur(60px);
+    opacity: 0.8;
+    pointer-events: none;
+    transition: all 0.5s ease;
+}
+
+
+/* 3. Card Styling (Artifact-Free) */
+.floating-card-base {
+    background-color: #0a0a0a;
+    border-radius: 9999px;
+    position: relative;
+    /* Hardware acceleration */
+    transform: translateZ(0);
+    box-shadow: 0 20px 50px -10px rgba(0,0,0,0.9);
+}
+
+/* Directional Lighting (Inner Shadows) */
+.light-from-br {
+    background: linear-gradient(135deg, #050505 40%, rgba(22, 163, 74, 0.1) 100%);
+    box-shadow: inset -1px -1px 0 0 rgba(22, 163, 74, 0.6), inset -10px -10px 30px -5px rgba(22, 163, 74, 0.2);
+}
+.light-from-tr {
+    background: linear-gradient(45deg, #050505 40%, rgba(22, 163, 74, 0.1) 100%);
+    box-shadow: inset -1px 1px 0 0 rgba(22, 163, 74, 0.6), inset -10px 10px 30px -5px rgba(22, 163, 74, 0.2);
+}
+.light-from-bl {
+    background: linear-gradient(225deg, #050505 40%, rgba(22, 163, 74, 0.1) 100%);
+    box-shadow: inset 1px -1px 0 0 rgba(22, 163, 74, 0.6), inset 10px -10px 30px -5px rgba(22, 163, 74, 0.2);
+}
+.light-from-tl {
+    background: linear-gradient(315deg, #050505 40%, rgba(22, 163, 74, 0.1) 100%);
+    box-shadow: inset 1px 1px 0 0 rgba(22, 163, 74, 0.6), inset 10px 10px 30px -5px rgba(22, 163, 74, 0.2);
+}
+
+/* Partners  Layout */
+/* Pushes every even child down to create the 2-row effect */
+.staggered-track > div:nth-child(even) {
+    transform: translateY(50%); /* Adjust percentage if you want them closer/further apart vertically */
+}
+
+/* =========================================
+   9. FOOTER SPECIFIC STYLES
+   ========================================= */
+
+/* The Green Radial Glow on Top */
+.footer-top-glow {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 140vw; /* Wide eno ugh to cover edges */
+    height: 350px; /* Tall enough to be seen */
+    /* Strong Emerald to Transparent Gradient */
+    background: radial-gradient(
+        ellipse at top,
+        rgba(16, 185, 129, 0.4) 0%,
+        rgba(16, 185, 129, 0.05) 50%,
+        rgba(0, 0, 0, 0) 70%
+    );
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* The Text Gradient (Green Top -> White Bottom) */
+.footer-heading-gradient {
+    background: linear-gradient(200deg, #10b981 0%, #ffffff 85%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    display: inline-block;
+    line-height: 1.1;
+}
+/* =========================================
+   10. DYNAMIC NAV & DOCK
+   ========================================= */
+
+/* Dock Item Hover "Pop" Effect */
+.dock-item {
+    transition: all 0.3s cubic-bezier(0.2, 0, 0, 1);
+}
+
+.dock-item:hover {
+    transform: translateY(-5px) scale(1.1);
+}
+
+.dock-item:active {
+    transform: translateY(-2px) scale(0.95);
+}
+
+/* Tooltip Arrow */
+.dock-item span::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -4px;
+    border-width: 4px;
+    border-style: solid;
+    border-color: black transparent transparent transparent;
+}
+
+/* =========================================
+   10. DYNAMIC NAV & DOCK
+   ========================================= */
+
+/* Pill Hover Effect matching reference image */
+.dock-pill-link {
+    position: relative;
+    /* isolation: isolate creates a new stacking context,
+       ensuring the z-index -1 pseudo-element stays behind the text
+       but in front of the main dock background */
+    isolation: isolate;
+}
+
+/* The Background Pill pseudo-element */
+.dock-pill-link::before {
+    content: '';
+    position: absolute;
+    inset: 0; /* Stretches to fill the anchor size */
+
+    /* Subtle white background for the pill effect */
+    background-color: rgba(255, 255, 255, 0.15);
+    border-radius: 9999px; /* Full rounded corners */
+
+    /* Start hidden and slightly scaled down */
+    opacity: 0;
+    transform: scale(0.95);
+
+    /* Smooth transition */
+    transition: all 0.3s ease-out;
+
+    /* Place behind the text/icon */
+    z-index: -1;
+}
+
+/* Hover State: Fade in and scale up the pill */
+.dock-pill-link:hover::before {
+    opacity: 1;
+    transform: scale(1);
+}
+/* =========================================
+   15. LARGE SCREEN SCALING (MONITORS)
+   ========================================= */
+@media (min-width: 1920px) {
+    html {
+        font-size: 18px; /* Increases base scale by 12.5% */
+    }
+    /* Make scrollbar thicker for big screens */
+    ::-webkit-scrollbar { width: 14px; }
+}
+
+@media (min-width: 2560px) {
+    html {
+        font-size: 22px; /* Increases base scale by 37.5% for 4K */
+    }
+}
+/* =========================================
+   TEAM SECTION (Optimization)
+   ========================================= */
+#team-section {
+    position: relative;
+    z-index: 20; /* High index to sit above footer during pin */
+    /* Subtle noise texture */
+}
+
+.team-member {
+    will-change: transform; /* Hint for smoother scrolling */
+}
+
+.team-content {
+    /* Optimization: forces content onto its own composite layer */
+    transform: translateZ(0);
+    will-change: height, opacity;
+}
+/* =========================================
+   UPDATED SCROLLBAR STYLES
+   ========================================= */
+
+/* 1. Remove mix-blend-mode (Fixes color inversion issue) */
+#virtual-scrollbar-track {
+    mix-blend-mode: normal !important;
+    z-index: 10000;
+}
+
+/* 2. Arrow Transformation for Stories Section */
+#virtual-scrollbar-thumb.is-arrow-indicator {
+    background-color: transparent !important; /* Hide the bar */
+    border: none !important;
+    box-shadow: none !important;
+    /* Use Flexbox to center the icon */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Ensure the arrow is visible outside the standard bar width */
+    overflow: visible;
+    width: 40px; /* Wider hit area */
+    right: -14px; /* Center alignment adjustment */
+    transition: all 0.3s ease;
+}
+
+/* Create the Down Arrow using the Bootstrap Icon font code */
+#virtual-scrollbar-thumb.is-arrow-indicator::after {
+    content: '\F128'; /* Bootstrap "arrow-down" unicode */
+    font-family: 'bootstrap-icons';
+    font-size: 2.5rem;
+    color: #10b981; /* Emerald Green */
+    text-shadow: 0 4px 12px rgba(0,0,0,0.5); /* Shadow for visibility on white */
+    animation: bounceArrow 1.5s infinite;
+}
+
+@keyframes bounceArrow {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(10px); }
+    60% { transform: translateY(5px); }
+}

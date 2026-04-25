@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+  <title>ZVolta - Coming Soon</title>
+  <meta name="description" content="This page is currently under development.">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <link href="css/style.css" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter Tight', 'sans-serif'],
+            display: ['Inter Tight', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            'z-black': '#0a0a0a',
+            'z-gray': '#f4f4f5',
+            'z-green': '#16a34a'
+          },
+          animation: {
+            'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+      html, body {
+          overflow-x: hidden;
+          background-color: #0a0a0a;
+      }
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+      /* Loader specific utilities */
+      #loader-blind-top { transform-origin: top; will-change: transform; }
+      #loader-blind-bottom { transform-origin: bottom; will-change: transform; }
+  </style>
+</head>
+<body class="bg-z-black text-white font-sans antialiased selection:bg-z-green selection:text-white">
+
+  <div id="custom-loader" class="fixed inset-0 z-[10000] flex flex-col items-center justify-center pointer-events-none">
+      <div id="loader-blind-top" class="absolute top-0 left-0 w-full h-[51%] bg-z-black z-0 pointer-events-auto border-b border-white/5"></div>
+      <div id="loader-blind-bottom" class="absolute bottom-0 left-0 w-full h-[51%] bg-z-black z-0 pointer-events-auto border-t border-white/5"></div>
+      <div id="loader-content" class="relative z-10 flex flex-col items-center pointer-events-auto will-change-transform">
+          <div id="loader-glow" class="absolute inset-0 bg-z-green/10 blur-[100px] rounded-full scale-0 animate-pulse-slow"></div>
+          <div class="relative mb-10 w-24 h-24 md:w-32 md:h-32 flex items-center justify-center">
+              <img src="img/symbol logo.png" id="loader-logo" class="w-full h-full object-contain drop-shadow-[0_0_30px_rgba(22,163,74,0.3)] will-change-transform" alt="ZVolta Loading">
+          </div>
+          <div id="loader-bar-container" class="w-64 h-[2px] bg-zinc-800 rounded-full overflow-hidden relative mb-4">
+              <div id="loader-bar" class="absolute top-0 left-0 h-full w-0 bg-white shadow-[0_0_15px_2px_rgba(255,255,255,0.8)]"></div>
+          </div>
+          <div id="loader-status-container" class="h-6 overflow-hidden flex flex-col items-center">
+               <div id="loader-status" class="font-mono text-[10px] tracking-[0.4em] text-gray-500 uppercase">INITIALIZING...</div>
+          </div>
+      </div>
+  </div>
+
+  <a id="dynamic-logo" href="index.html" class="fixed top-6 left-6 z-[900] w-12 h-12 rounded-full bg-zinc-900/90 backdrop-blur-md border border-white/10 flex items-center justify-center shadow-xl hover:scale-105 transition-transform opacity-0">
+      <img src="img/symbol logo.png" alt="ZVolta" class="h-6 w-auto">
+  </a>
+
+  <button id="dynamic-sidebar-btn" class="fixed top-6 right-6 z-[900] w-12 h-12 rounded-full bg-[#006b45] backdrop-blur-md border border-emerald-500/30 text-white flex items-center justify-center shadow-xl hover:bg-[#008f5d] hover:scale-105 transition-all group opacity-0">
+      <i class="bi bi-list text-2xl group-hover:rotate-180 transition-transform duration-500"></i>
+  </button>
+
+  <div id="mobile-menu-overlay" class="fixed inset-0 z-[10000] invisible opacity-0 pointer-events-none">
+    <div id="mobile-menu-backdrop" class="absolute inset-0 bg-zinc-200/80 backdrop-blur-3xl opacity-0 transition-opacity duration-500"></div>
+    <div class="absolute top-6 right-6 z-50">
+        <button id="mobile-menu-close" class="w-14 h-14 bg-black text-white rounded-full flex items-center justify-center hover:bg-emerald-600 hover:rotate-90 transition-all duration-300 shadow-2xl opacity-0 translate-y-[-20px]">
+            <i class="bi bi-x-lg text-xl"></i>
+        </button>
+    </div>
+    <div class="absolute inset-0 w-full h-[100dvh] overflow-y-auto overflow-x-hidden no-scrollbar">
+        <div class="w-full min-h-full max-w-[1600px] mx-auto p-4 pt-24 md:p-6 lg:p-10 grid grid-cols-1 lg:grid-cols-12 gap-4 pb-24">
+            <div class="menu-card lg:col-span-5 bg-black rounded-[2.5rem] p-8 md:p-12 flex flex-col justify-between relative overflow-hidden group min-h-[500px] opacity-0 translate-y-[50px]">
+                 <div class="absolute top-8 right-8 w-32 h-32 opacity-20 bg-[radial-gradient(#10b981_2px,transparent_2px)] [background-size:8px_8px] rounded-full pointer-events-none"></div>
+                 <nav class="flex flex-col gap-4 mt-4 relative z-10">
+                    <a href="index.html#hero-section" class="mobile-menu-link text-5xl md:text-6xl font-display font-bold text-white hover:text-emerald-500 transition-colors flex items-center justify-between group/link">Home <i class="bi bi-arrow-right text-3xl opacity-0 -translate-x-8 group-hover/link:opacity-100 group-hover/link:translate-x-0 transition-all duration-300 text-emerald-500"></i></a>
+                    <div class="h-px bg-white/10 w-full"></div>
+                    <a href="index.html#host" class="mobile-menu-link text-5xl md:text-6xl font-display font-bold text-white hover:text-emerald-500 transition-colors flex items-center justify-between group/link">Hosting <i class="bi bi-arrow-right text-3xl opacity-0 -translate-x-8 group-hover/link:opacity-100 group-hover/link:translate-x-0 transition-all duration-300 text-emerald-500"></i></a>
+                    <div class="h-px bg-white/10 w-full"></div>
+                    <a href="index.html#map" class="mobile-menu-link text-5xl md:text-6xl font-display font-bold text-white hover:text-emerald-500 transition-colors flex items-center justify-between group/link">Charging <i class="bi bi-arrow-right text-3xl opacity-0 -translate-x-8 group-hover/link:opacity-100 group-hover/link:translate-x-0 transition-all duration-300 text-emerald-500"></i></a>
+                    <div class="h-px bg-white/10 w-full"></div>
+                    <a href="index.html#software" class="mobile-menu-link text-5xl md:text-6xl font-display font-bold text-white hover:text-emerald-500 transition-colors flex items-center justify-between group/link">Software <i class="bi bi-arrow-right text-3xl opacity-0 -translate-x-8 group-hover/link:opacity-100 group-hover/link:translate-x-0 transition-all duration-300 text-emerald-500"></i></a>
+                 </nav>
+                 <div class="mt-12 relative z-10">
+                    <p class="text-zinc-500 text-xs uppercase tracking-[0.2em] mb-2 font-bold">Contact us</p>
+                    <a href="mailto:admin@zvolta.com" class="text-xl md:text-2xl text-white font-mono hover:text-emerald-400 transition-colors border-b border-transparent hover:border-emerald-400 pb-1">admin@zvolta.com</a>
+                 </div>
+            </div>
+            <div class="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-4 h-full content-start">
+                <a href="index.html#host" class="menu-card bg-black rounded-[2.5rem] p-8 relative group overflow-hidden flex flex-col justify-end h-[280px] lg:h-auto opacity-0 translate-y-[50px]">
+                    <div class="absolute inset-0 bg-zinc-900 scale-y-0 origin-bottom group-hover:scale-y-100 transition-transform duration-500 ease-[cubic-bezier(0.2,0,0,1)]"></div>
+                    <div class="absolute top-8 right-8 w-16 h-16 bg-zinc-900 rounded-2xl flex items-center justify-center text-emerald-500 group-hover:bg-emerald-500 group-hover:text-black transition-all duration-300 shadow-xl z-10"><i class="bi bi-buildings-fill text-3xl"></i></div>
+                    <div class="relative z-10"><h3 class="text-2xl font-bold text-white group-hover:translate-x-1 transition-transform">Host A Charger</h3><p class="text-zinc-500 mt-2 opacity-100 group-hover:text-zinc-300 transition-colors">Turn your parking into revenue.</p></div>
+                </a>
+                <a href="index.html#map" class="menu-card bg-black rounded-[2.5rem] p-8 relative group overflow-hidden flex flex-col justify-end h-[280px] lg:h-auto opacity-0 translate-y-[50px]">
+                    <div class="absolute inset-0 bg-zinc-900 scale-y-0 origin-bottom group-hover:scale-y-100 transition-transform duration-500 ease-[cubic-bezier(0.2,0,0,1)]"></div>
+                    <div class="absolute top-8 right-8 w-16 h-16 bg-zinc-900 rounded-2xl flex items-center justify-center text-emerald-500 group-hover:bg-emerald-500 group-hover:text-black transition-all duration-300 shadow-xl z-10"><i class="bi bi-geo-alt-fill text-3xl"></i></div>
+                    <div class="relative z-10"><h3 class="text-2xl font-bold text-white group-hover:translate-x-1 transition-transform">Find Stations</h3><p class="text-zinc-500 mt-2 opacity-100 group-hover:text-zinc-300 transition-colors">Locate chargers nearby instantly.</p></div>
+                </a>
+            </div>
+        </div>
+    </div>
+  </div>
+
+  <div class="fixed top-[-20%] left-[-20%] w-[120vw] h-[120vw] bg-emerald-500/10 blur-[100px] rounded-full pointer-events-none z-0 animate-pulse-slow"></div>
+  <div class="fixed bottom-[-10%] right-[-10%] w-[100vw] h-[100vw] bg-lime-500/5 blur-[120px] rounded-full pointer-events-none z-0"></div>
+
+  <main class="relative z-10 w-full min-h-screen flex flex-col items-center justify-center px-6 pt-24 pb-24 text-center">
+
+      <div class="mb-8 w-24 h-24 rounded-full bg-zinc-900 border border-emerald-500/30 flex items-center justify-center shadow-[0_0_40px_rgba(16,185,129,0.15)] animate-pulse-slow opacity-0 translate-y-4 reveal-element">
+          <i class="bi bi-cone-striped text-4xl text-emerald-500"></i>
+      </div>
+
+      <h1 class="text-5xl md:text-7xl font-display font-bold tracking-tight mb-6 opacity-0 translate-y-4 reveal-element" style="transition-delay: 0.1s;">
+          Powering <br> <span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-emerald-400 to-emerald-600">Up Soon</span>
+      </h1>
+
+      <p class="text-zinc-400 text-lg md:text-xl max-w-lg mb-10 leading-relaxed opacity-0 translate-y-4 reveal-element" style="transition-delay: 0.2s;">
+          This page is currently plugged in and charging. We are building something electric for you.
+      </p>
+
+      <a href="index.html" class="group relative px-8 py-4 bg-zinc-900 text-white rounded-full font-bold text-lg border border-zinc-700 hover:border-emerald-500 transition-all duration-300 opacity-0 translate-y-4 reveal-element hover:bg-emerald-600 hover:text-black hover:shadow-[0_0_30px_rgba(16,185,129,0.4)]" style="transition-delay: 0.3s;">
+          <span class="relative z-10 flex items-center gap-2">
+              Return Home <i class="bi bi-arrow-right transition-transform group-hover:translate-x-1"></i>
+          </span>
+      </a>
+
+  </main>
+
+  <footer class="bg-black text-white pt-24 pb-12 border-t border-white/10 relative overflow-hidden z-20">
+    <div class="max-w-[1400px] mx-auto px-6 mb-20 text-center">
+        <h2 class="text-4xl md:text-5xl font-display font-bold tracking-tight mb-4">
+            Let's move electric <br> forward together.
+        </h2>
+    </div>
+
+    <div class="border-y border-white/10 bg-black">
+        <div class="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-white/10">
+            <div class="group p-8 md:p-12 hover:bg-white/5 transition-colors duration-300 flex flex-col h-full min-h-[300px]">
+                 <div class="mb-auto">
+                     <h3 class="text-xl md:text-2xl font-bold mb-6 text-white">Host A Charger</h3>
+                     <ul class="space-y-4 text-zinc-400">
+                        <li><a href="charging-partners.html" class="hover:text-emerald-400 transition-colors block py-1">Charging Partners</a></li>
+                        <li><a href="invest.html" class="hover:text-emerald-400 transition-colors block py-1">For Investors</a></li>
+                        <li><a href="invest-form.html" class="hover:text-emerald-400 transition-colors block py-1">Site requirements</a></li>
+                        <li><a href="about-us.html" class="hover:text-emerald-400 transition-colors block py-1">About Us</a></li>
+                     </ul>
+                 </div>
+                 <div class="mt-8 pt-6 border-t border-white/10">
+                    <a href="invest-form.html" class="flex items-center justify-between text-white font-bold group-hover:text-emerald-400 transition-colors">
+                        Start hosting <i class="bi bi-arrow-right -rotate-45 group-hover:rotate-0 transition-transform duration-300"></i>
+                    </a>
+                 </div>
+            </div>
+
+            <div class="group p-8 md:p-12 hover:bg-white/5 transition-colors duration-300 flex flex-col h-full min-h-[300px]">
+                 <div class="mb-auto">
+                     <h3 class="text-xl md:text-2xl font-bold mb-6 text-white">Charge Your EV</h3>
+                     <ul class="space-y-4 text-zinc-400">
+                        <li><a href="driver-network.html" class="hover:text-emerald-400 transition-colors block py-1">Drivers Network</a></li>
+                        <li><a href="driver-network.html" class="hover:text-emerald-400 transition-colors block py-1">Using the app</a></li>
+                        <li><a href="contact-us.html" class="hover:text-emerald-400 transition-colors block py-1">Charging support</a></li>
+                        <li><a href="Policy.html#standard-service-policy" class="hover:text-emerald-400 transition-colors block py-1">Service Policy</a></li>
+                     </ul>
+                 </div>
+                 <div class="mt-8 pt-6 border-t border-white/10">
+                    <a href="driver-network.html" class="flex items-center justify-between text-white font-bold group-hover:text-emerald-400 transition-colors">
+                        Find A Station <i class="bi bi-arrow-right -rotate-45 group-hover:rotate-0 transition-transform duration-300"></i>
+                    </a>
+                 </div>
+            </div>
+
+            <div class="group p-8 md:p-12 hover:bg-white/5 transition-colors duration-300 flex flex-col h-full min-h-[300px]">
+                 <div class="mb-auto">
+                     <h3 class="text-xl md:text-2xl font-bold mb-6 text-white">Software For Operators</h3>
+                     <ul class="space-y-4 text-zinc-400">
+                        <li><a href="contact-us.html" class="hover:text-emerald-400 transition-colors block py-1">Platform overview</a></li>
+                        <li><a href="contact-us.html" class="hover:text-emerald-400 transition-colors block py-1">OCPP compatibility</a></li>
+                        <li><a href="contact-us.html" class="hover:text-emerald-400 transition-colors block py-1">Integrations</a></li>
+                        <li><a href="contact-us.html" class="hover:text-emerald-400 transition-colors block py-1">Contact Support</a></li>
+                     </ul>
+                 </div>
+                 <div class="mt-8 pt-6 border-t border-white/10">
+                    <a href="contact-us.html" class="flex items-center justify-between text-white font-bold group-hover:text-emerald-400 transition-colors">
+                        Book a demo <i class="bi bi-arrow-right -rotate-45 group-hover:rotate-0 transition-transform duration-300"></i>
+                    </a>
+                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-[1400px] mx-auto px-6 pt-12 flex flex-col md:flex-row justify-between items-center gap-6">
+        <div class="flex flex-col md:flex-row items-center gap-6">
+            <img src="img/full_logowhite.png" alt="ZVolta" class="h-8 md:h-10 opacity-90">
+            <div class="hidden md:block w-px h-6 bg-zinc-800"></div>
+            <div class="text-zinc-500 text-sm flex gap-6">
+                <span>© 2025 ZVolta Inc.</span>
+                <a href="Policy.html#privacy-policy" class="hover:text-white transition-colors">Privacy</a>
+                <a href="Policy.html#terms-and-conditions" class="hover:text-white transition-colors">Terms</a>
+                <a href="Policy.html#returns-policy" class="hover:text-white transition-colors">Returns</a>
+            </div>
+        </div>
+
+        <div class="flex gap-6">
+            <a href="https://www.facebook.com/share/1FUNJfnPd5/?mibextid=wwXIfr" target="_blank" class="text-zinc-500 hover:text-white transition-colors"><i class="bi bi-facebook text-xl"></i></a>
+            <a href="https://www.instagram.com/zvolta.pk" target="_blank" class="text-zinc-500 hover:text-white transition-colors"><i class="bi bi-instagram text-xl"></i></a>
+            <a href="https://wa.me/+923104446529" target="_blank" class="text-zinc-500 hover:text-white transition-colors"><i class="bi bi-whatsapp text-xl"></i></a>
+            <a href="mailto:admin@zvolta.com" class="text-zinc-500 hover:text-white transition-colors"><i class="bi bi-envelope text-xl"></i></a>
+        </div>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // --- 1. LOADER ANIMATION ---
+        const loader = document.getElementById('custom-loader');
+        const loaderBar = document.getElementById('loader-bar');
+        const loaderLogo = document.getElementById('loader-logo');
+        const blindTop = document.getElementById('loader-blind-top');
+        const blindBottom = document.getElementById('loader-blind-bottom');
+        const loaderContent = document.getElementById('loader-content');
+
+        // Simulating load time (quicker than index since fewer assets)
+        const tl = gsap.timeline({
+            defaults: { ease: "power3.inOut" },
+            onComplete: () => {
+                loader.style.display = 'none';
+
+                // Show Content
+                gsap.to('.reveal-element', {
+                    y: 0,
+                    opacity: 1,
+                    duration: 0.8,
+                    stagger: 0.15,
+                    ease: "power2.out"
+                });
+
+                // Show Nav
+                gsap.to(['#dynamic-logo', '#dynamic-sidebar-btn'], {
+                    opacity: 1,
+                    duration: 0.5,
+                    delay: 0.2
+                });
+            }
+        });
+
+        tl.to(loaderBar, { width: "100%", duration: 1.5, ease: "power2.inOut" })
+          .to(loaderBar, { backgroundColor: "#16a34a", duration: 0.1 })
+          .to(loaderLogo, { scale: 20, duration: 0.6, ease: "expo.in" })
+          .to(loaderLogo, { opacity: 0, duration: 0.2 }, "-=0.2")
+          .set(loaderContent, { opacity: 0 })
+          .to(blindTop, { scaleY: 0, duration: 0.8, ease: "power4.inOut" }, "-=0.3")
+          .to(blindBottom, { scaleY: 0, duration: 0.8, ease: "power4.inOut" }, "<");
+
+
+        // --- 2. MOBILE MENU LOGIC ---
+        const menuBtn = document.getElementById('dynamic-sidebar-btn');
+        const menuOverlay = document.getElementById('mobile-menu-overlay');
+        const menuBackdrop = document.getElementById('mobile-menu-backdrop');
+        const menuClose = document.getElementById('mobile-menu-close');
+        const menuCards = document.querySelectorAll('.menu-card');
+        const menuLinks = document.querySelectorAll('.mobile-menu-link');
+        let isMenuOpen = false;
+
+        const menuTl = gsap.timeline({ paused: true, reversed: true });
+        menuTl
+            .to(menuOverlay, { autoAlpha: 1, duration: 0 })
+            .set(menuOverlay, { pointerEvents: "auto" })
+            .to(menuBackdrop, { opacity: 1, duration: 0.4, ease: "power2.out" })
+            .to(menuClose, { opacity: 1, y: 0, duration: 0.4, ease: "back.out(1.7)" }, "-=0.2")
+            .to(menuCards, { y: 0, opacity: 1, duration: 0.6, stagger: 0.08, ease: "power3.out" }, "-=0.3")
+            .from(menuLinks, { x: -20, opacity: 0, duration: 0.4, stagger: 0.05, ease: "power2.out" }, "-=0.4");
+
+        function toggleMenu() {
+            if (!isMenuOpen) {
+                menuTl.play();
+                document.body.style.overflow = 'hidden';
+            } else {
+                menuTl.reverse();
+                document.body.style.overflow = '';
+            }
+            isMenuOpen = !isMenuOpen;
+        }
+
+        if(menuBtn) menuBtn.addEventListener('click', toggleMenu);
+        if(menuClose) menuClose.addEventListener('click', toggleMenu);
+
+        if(menuOverlay) {
+            menuOverlay.addEventListener('click', (e) => {
+                if (e.target === document.querySelector('#mobile-menu-overlay > div')) {
+                    if(isMenuOpen) toggleMenu();
+                }
+            });
+        }
+
+        menuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if(isMenuOpen) toggleMenu();
+            });
+        });
+    });
+  </script>
+
+</body>
+</html>

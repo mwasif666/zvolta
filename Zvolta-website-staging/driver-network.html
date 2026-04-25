@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Driver Network | ZVolta - Driving Jobs Made Easy</title>
+    <meta name="description" content="Join ZVolta's driver network with zero down payment. Rent an electric rickshaw with our flexible rent-and-earn model and get 24/7 support. Start your driving job today!">
+    <meta name="keywords" content="driving jobs, driver network, rent electric rickshaw, EV jobs, ZVolta, zero down payment, earn money driving">
+    <meta name="author" content="ZVolta">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="preload" href="img/zvolta-2.jpg" as="image">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" as="style">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Questrial&display=swap"></noscript>
+<!-- Favicon for browsers -->
+<link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="canonical" href="https://www.zvolta.com/driver-network.html">
+
+<!-- PNG icons for different resolutions -->
+<link rel="icon" type="image/png" sizes="48x48" href="icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon.png">
+
+<!-- SVG icon (modern browsers) -->
+<link rel="icon" href="/icon.svg" type="image/svg+xml">
+
+<!-- Apple devices -->
+<link rel="apple-touch-icon" href="/icon.png">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/style.css">
+
+    <script>
+        // Tailwind CSS configuration
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Questrial', 'sans-serif'],
+                    },
+                    colors: {
+                        'primary-emerald': '#06D6A0',
+                        'primary-emerald-dark': '#05B88A',
+                        'accent-yellow': '#F8FFE5',
+                        'dark-text': '#1F2937',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html { scroll-behavior: smooth; }
+
+        .steps-container::before {
+            content: ''; position: absolute; top: 56px; left: 10%; right: 10%; height: 2px;
+            background-image: linear-gradient(to right, #D1D5DB 50%, transparent 50%);
+            background-size: 20px 2px; background-repeat: repeat-x; z-index: 0;
+        }
+        .step-card { position: relative; z-index: 1; }
+
+        [data-scroll-animate], [data-load-animate] {
+            opacity: 0; transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .is-visible { opacity: 1; transform: translateY(0); }
+
+        /* Web Orbit: Dynamic Navbar Styles */
+        #nav-container {
+            /* This is the default state (at the top of the page) */
+            transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            background-color: transparent;
+            border-color: transparent;
+            box-shadow: none;
+        }
+        header.scrolled #nav-container {
+            /* This state is applied on scroll */
+            background-color: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(16px);
+            --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
+            box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+            border-color: rgba(229, 231, 235, 0.6);
+        }
+    </style>
+</head>
+
+<body class="bg-white font-sans text-dark-text antialiased loading">
+    <div id="orion-loader">
+        <div class="orion-loader-logo">
+            <img src="img/zvolta-loader.gif" alt="Loading..." draggable="false">
+        </div>
+    </div>
+
+    <header id="site-header" class="fixed top-0 left-0 right-0 z-50 w-full p-2 sm:p-3 transition-all duration-300">
+        <div class="container mx-auto">
+            <div id="nav-container" class="rounded-full border backdrop-blur-md">
+                <nav class="flex items-center justify-between h-16 px-4 sm:px-6">
+                    <div class="flex-shrink-0">
+                        <a href="index.html" class="flex items-center" aria-label="ZVolta Home">
+                            <img src="img/full_Logoblack.png" alt="ZVolta Full Logo" class="navbar-logo">
+                        </a>
+                    </div>
+                    <div class="hidden md:flex items-center space-x-8">
+                        <a href="about-us.html" class="text-gray-700 hover:text-primary-emerald transition-colors">About</a>
+                        <a href="charging-partners.html" class="text-gray-700 hover:text-primary-emerald transition-colors">Charge</a>
+                        <a href="vehicles.html" class="text-gray-700 hover:text-primary-emerald transition-colors">Rent</a>
+                        <a href="driver-network.html" class="text-gray-700 hover:text-primary-emerald transition-colors">Earn</a>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <a href="contact-us.html" class="hidden sm:inline-block bg-dark-text text-white px-6 py-2.5 rounded-full font-semibold hover:bg-gray-800 transition-colors">Contact Us</a>
+                        <div class="md:hidden flex items-center">
+                            <button id="mobile-menu-button" class="p-2 rounded-full text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-green-500" aria-controls="mobile-menu" aria-expanded="false">
+                                <span class="sr-only">open main menu</span>
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                            </button>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            <div id="mobile-menu" class="hidden md:hidden mt-2">
+                <div class="bg-white/95 backdrop-blur-md rounded-2xl shadow-lg p-4 space-y-1">
+                    <a href="about-us.html" class="block py-2 px-3 text-base text-gray-700 rounded-md hover:bg-gray-100 hover:text-primary-emerald">About</a>
+                    <a href="charging-partners.html" class="block py-2 px-3 text-base text-gray-700 rounded-md hover:bg-gray-100 hover:text-primary-emerald">Charge</a>
+                    <a href="vehicles.html" class="block py-2 px-3 text-base text-gray-700 rounded-md hover:bg-gray-100 hover:text-primary-emerald">Rent</a>
+                    <a href="driver-network.html" class="block py-2 px-3 text-base text-gray-700 rounded-md hover:bg-gray-100 hover:text-primary-emerald">Earn</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="pt-24">
+        <section class="grid grid-cols-1 lg:grid-cols-2" style="min-height: calc(100vh - 96px);">
+            <div class="flex flex-col justify-center bg-gray-50 px-6 sm:px-12 lg:px-16 py-20 lg:py-0">
+                <div class="max-w-xl mx-auto lg:mx-0">
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-medium text-dark-text leading-tight tracking-tighter" data-load-animate>
+                        Drive <b>Your</b> Future.
+                        <br>
+                        Earn On <em class="not-italic text-primary-emerald font-bold">Your</em>Terms.
+                    </h1>
+                    <p class="mt-6 text-lg sm:text-xl text-gray-600 max-w-lg" data-load-animate data-delay="100">
+                        We've created a simple rent-and-earn model with zero downpayment, so you can focus on what matters: driving and earning.
+                    </p>
+                    <div class="mt-10 flex flex-col sm:flex-row items-start sm:items-center gap-6" data-load-animate data-delay="200">
+                        <a href="contact-us.html" class="bg-dark-text text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-gray-800 transition-all duration-300 transform hover:-translate-y-1">
+                            Get Started
+                        </a>
+                        <a href="#steps" class="group flex items-center gap-2 text-dark-text font-semibold">
+                            <span>How It Works</span>
+                            <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="order-first lg:order-last h-64 lg:h-auto bg-cover bg-center" style="background-image: url('img/zvolta-5.jpg');">
+                <img src="img/zvolta-5.jpg" alt="Electric rickshaw parked on a street" class="sr-only">
+            </div>
+        </section>
+
+        <section id="steps" class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-20">
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-dark-text" data-scroll-animate>Your Journey in 3 Simple Steps</h2>
+                    <p class="mt-4 text-lg text-gray-600" data-scroll-animate data-delay="100">Getting on the road with ZVolta is fast and straightforward.</p>
+                </div>
+                <div class="relative">
+                    <div class="hidden md:block steps-container"></div>
+                    <div class="grid md:grid-cols-3 gap-12">
+                        <div class="step-card text-center bg-white" data-scroll-animate>
+                            <div class="mb-6 inline-block bg-accent-yellow text-primary-emerald-dark p-6 rounded-full transition-all duration-300 hover:shadow-xl hover:-translate-y-2 ring-8 ring-white">
+                                <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2">Step 1: Apply Online</h3>
+                            <p class="text-gray-600 px-4">Fill out our quick online form. It takes just a few minutes to tell us about yourself and get started.</p>
+                        </div>
+                        <div class="step-card text-center bg-white" data-scroll-animate data-delay="200">
+                            <div class="mb-6 inline-block bg-accent-yellow text-primary-emerald-dark p-6 rounded-full transition-all duration-300 hover:shadow-xl hover:-translate-y-2 ring-8 ring-white">
+                                <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2">Step 2: Get Verified</h3>
+                            <p class="text-gray-600 px-4">Our team will quickly review your application and guide you through a simple and secure verification process.</p>
+                        </div>
+                        <div class="step-card text-center bg-white" data-scroll-animate data-delay="400">
+                            <div class="mb-6 inline-block bg-accent-yellow text-primary-emerald-dark p-6 rounded-full transition-all duration-300 hover:shadow-xl hover:-translate-y-2 ring-8 ring-white">
+                                <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path><path d="M17.657 17.657L19.07 19.07M4.929 4.93L6.343 6.343m12.728 0l-1.414 1.414M6.343 17.657l1.414-1.414M12 21a9 9 0 100-18 9 9 0 000 18z"></path></svg>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2">Step 3: Start Driving</h3>
+                            <p class="text-gray-600 px-4">Choose your EV, get the keys, and hit the road. You can start earning from your very first day.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="py-20 bg-gray-50">
+            <div class="container mx-auto px-6">
+                 <div class="grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
+                    <div class="pr-0 md:pr-10 order-2 md:order-1" data-scroll-animate>
+                        <h2 class="text-3xl md:text-4xl font-extrabold text-dark-text mb-6">Why Drive With ZVolta?</h2>
+                        <p class="text-gray-600 mb-8 text-lg">We're more than just a vehicle provider; we're your partner in success. We handle the hassles so you can focus on driving and earning.</p>
+                        <ul class="space-y-5 text-gray-700">
+                            <li class="flex items-start">
+                                <svg class="w-6 h-6 text-primary-emerald mr-3 flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                <div><span class="font-bold">Zero Downpayment.</span> Save your self from initial up-front partial payment</div>
+                            </li>
+                             <li class="flex items-start">
+                                <svg class="w-6 h-6 text-primary-emerald mr-3 flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                <div><span class="font-bold">Modern, Reliable EVs.</span> Access our fleet of GPS-enabled, well-maintained electric vehicles with 24/7 support and service.</div>
+                            </li>
+                             <li class="flex items-start">
+                                <svg class="w-6 h-6 text-primary-emerald mr-3 flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                <div><span class="font-bold">Rent and earn model.</span>Earn an Income by simply renting or EVs</div>
+                            </li>
+                             <li class="flex items-start">
+                                <svg class="w-6 h-6 text-primary-emerald mr-3 flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                <div><span class="font-bold">Join the Movement.</span> Be a part of building a cleaner, greener transportation future.</div>
+                            </li>
+                        </ul>
+                    </div>
+                     <div class="mt-10 md:mt-0 order-1 md:order-2" data-scroll-animate data-delay="200">
+                        <img src="img/zvolta-9.png" alt="Happy ZVolta driver with an electric rickshaw" class="rounded-xl shadow-2xl object-cover w-full h-full" onerror="this.onerror=null;this.src='https://placehold.co/800x600/E0E0E0/BDBDBD?text=Image+Not+Found';" loading="lazy">
+                    </div>
+                 </div>
+            </div>
+        </section>
+        <section id="join" class="bg-white">
+            <div class="container mx-auto px-6 py-20 text-center bg-accent-yellow rounded-2xl my-10" data-scroll-animate>
+                 <h2 class="text-3xl md:text-4xl font-extrabold text-dark-text mb-4">Ready To Earn Extra Income?</h2>
+                <p class="text-lg text-gray-800 max-w-2xl mx-auto mb-10">Take the driver's seat in your career. Join ZVolta today and unlock a new way to earn.</p>
+                 <a href="contact-us.html" class="group flex items-center justify-center gap-3 bg-primary-emerald text-white font-bold text-lg py-4 px-8 rounded-full shadow-lg hover:bg-primary-emerald-dark transition-all duration-300 transform hover:-translate-y-1 w-fit mx-auto">
+                    Contact Us
+                    <svg class="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path></svg>
+                </a>
+            </div>
+        </section>
+    </main>
+<footer class="bg-black text-gray-300">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-start">
+
+              <div class="lg:col-span-4">
+                  <h2 class="text-3xl sm:text-4xl font-bold text-white leading-tight">
+                      Ready to power up your future with EVs?
+                      <br>
+                      <a href="contact-us.html" class="text-green-400 hover:text-green-300 transition-colors">Get in touch.</a>
+                  </h2>
+              </div>
+
+              <div class="lg:col-span-8 lg:col-start-5">
+                 <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                     <div>
+                         <h3 class="font-semibold text-white">Company</h3>
+                         <ul class="mt-4 space-y-3">
+                             <li><a href="index.html" class="hover:text-white transition-colors">Home</a></li>
+                             <li><a href="about-us.html" class="hover:text-white transition-colors">About</a></li>
+                             <li><a href="invest.html" class="hover:text-white transition-colors">For Investors</a></li>
+                             <li><a href="charging-partners.html" class="hover:text-white transition-colors">Charging Partners</a></li>
+                         </ul>
+                     </div>
+                     <div>
+                         <h3 class="font-semibold text-white">Learn More</h3>
+                         <ul class="mt-4 space-y-3">
+                             <li><a href="driver-network.html" class="hover:text-white transition-colors">Drivers</a></li>
+                             <li><a href="invest-form.html" class="hover:text-white transition-colors">Invest</a></li>
+                             <li><a href="contact-us.html" class="hover:text-white transition-colors">Contact</a></li>
+                         </ul>
+                     </div>
+                      <div>
+                         <h3 class="font-semibold text-white">Connect</h3>
+                         <div class="flex space-x-5 mt-4">
+                              <a href="https://www.facebook.com/share/1FUNJfnPd5/?mibextid=wwXIfr" target="_blank" class="text-gray-400 hover:text-white transition-colors" aria-label="Follow ZVolta on Facebook">
+                                  <i class="bi bi-facebook" style="font-size: 1.5rem;" aria-hidden="true"></i>
+                              </a>
+                              <a href="https://www.instagram.com/zvolta.pk" target="_blank" class="text-gray-400 hover:text-white transition-colors" aria-label="Follow ZVolta on Instagram">
+                                  <i class="bi bi-instagram" style="font-size: 1.5rem;" aria-hidden="true"></i>
+                              </a>
+                              <a href="https://wa.me/+923104446529" target="_blank" class="text-gray-400 hover:text-white transition-colors" aria-label="Contact ZVolta on WhatsApp">
+                                  <i class="bi bi-whatsapp" style="font-size: 1.5rem;" aria-hidden="true"></i>
+                              </a>
+                              <a href="mailto:admin@zvolta.com" class="text-gray-400 hover:text-white transition-colors" aria-label="Email ZVolta">
+                                  <i class="bi bi-envelope" style="font-size: 1.5rem;" aria-hidden="true"></i>
+                              </a>
+                          </div>
+                     </div>
+                     <div>
+                        <h3 class="font-semibold text-white">Contact Details</h3>
+                        <ul class="mt-4 space-y-3 text-sm">
+                            <li class="flex items-center gap-x-2">
+                                <i class="bi bi-envelope text-lg" aria-hidden="true"></i>
+                                <a href="mailto:support@zvolta.com" class="hover:text-white transition-colors">support@zvolta.com</a>
+                            </li>
+                            <li class="flex items-center gap-x-2">
+                                <i class="bi bi-telephone text-lg" aria-hidden="true"></i>
+                                <a href="tel:+923104446529" class="hover:text-white transition-colors">‪+92 310 4446529‬</a>
+                            </li>
+                            <li class="flex items-start gap-x-2 pt-1">
+                                <i class="bi bi-geo-alt text-lg mt-1" aria-hidden="true"></i>
+                                <span class="leading-relaxed">36F, Street 36, Block 6, P.E.C.H.S, Karachi, Pakistan</span>
+                            </li>
+                        </ul>
+                    </div>
+                 </div>
+              </div>
+          </div>
+
+          <div class="mt-16 pt-8 border-t border-gray-800 flex flex-wrap justify-between items-center gap-4">
+              <div class="flex items-center text-sm text-gray-400">
+                  <img src="img/symbol logo2.png" alt="ZVolta Symbol" class="h-5 w-auto mr-3" width="20" height="20">
+                  <span>&copy; 2025 Z-Volta Pvt. Ltd. All rights reserved.</span>
+              </div>
+
+              <div class="text-sm text-gray-400">
+                  <ul class="flex flex-wrap justify-center sm:justify-end gap-x-4 gap-y-2">
+                      <li><a href="Policy.html#terms-and-conditions" class="hover:text-white transition-colors">Terms and Conditions</a></li>
+                      <li><a href="Policy.html#standard-service-policy" class="hover:text-white transition-colors">Standard Service Policy</a></li>
+                      <li><a href="Policy.html#privacy-policy" class="hover:text-white transition-colors">Privacy Policy</a></li>
+                      <li><a href="Policy.html#returns-policy" class="hover:text-white transition-colors">Returns Policy</a></li>
+                  </ul>
+              </div>
+          </div>
+      </div>
+  </footer>
+    <script defer>
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('orion-loader');
+            if (loader) {
+                loader.classList.add('hidden');
+                document.body.classList.remove('loading');
+                document.body.classList.add('loaded');
+                setTimeout(() => loader.remove(), 800);
+            }
+
+            const loadAnimatedElements = document.querySelectorAll('[data-load-animate]');
+            loadAnimatedElements.forEach((el) => {
+                const delay = parseInt(el.dataset.delay) || 0;
+                setTimeout(() => {
+                    el.classList.add('is-visible');
+                }, delay);
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Web Orbit: Dynamic Navbar Logic ---
+            const header = document.getElementById('site-header');
+            if (header) {
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 50) { // Activates after scrolling 50px
+                        header.classList.add('scrolled');
+                    } else {
+                        header.classList.remove('scrolled');
+                    }
+                });
+            }
+
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => {
+                const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
+                mobileMenuButton.setAttribute('aria-expanded', !isExpanded);
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            const scrollAnimatedElements = document.querySelectorAll('[data-scroll-animate]');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const delay = parseInt(entry.target.dataset.delay) || 0;
+                        setTimeout(() => {
+                           entry.target.classList.add('is-visible');
+                        }, delay);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            scrollAnimatedElements.forEach(el => observer.observe(el));
+
+
+        });
+    </script>
+</body>
+
+</html>

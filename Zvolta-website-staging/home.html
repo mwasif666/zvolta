@@ -1,0 +1,1393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ZVolta - Charging Should Feel Easy</title>
+  <meta name="description" content="ZVolta builds the tools that support people, places, and all the possibilities ahead in the electric future.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link href="css/style.css" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        screens: {
+            'sm': '640px',
+            'md': '768px',
+            'lg': '1024px',
+            'xl': '1280px',
+            '2xl': '1536px',
+            '3xl': '1920px', // Monitor Breakpoint
+        },
+        extend: {
+          fontFamily: {
+            sans: ['Inter Tight', 'sans-serif'],
+            display: ['Inter Tight', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            'z-black': '#0a0a0a',
+            'z-gray': '#f4f4f5',
+            'z-green': '#16a34a'
+          },
+          borderRadius: {
+            '4xl': '2.5rem',
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-z-black text-z-black font-sans antialiased selection:bg-z-green selection:text-white" style="overscroll-behavior: none;">
+<a id="dynamic-logo" href="#hero-section" class="fixed top-6 left-6 z-[900] w-12 h-12 rounded-full bg-zinc-900/90 backdrop-blur-md border border-white/10 flex items-center justify-center shadow-xl opacity-0 pointer-events-none transition-all duration-500 hover:scale-105">
+      <img src="img/symbol logo.png" alt="ZVolta" class="h-6 w-auto">
+  </a>
+
+  <button id="dynamic-sidebar-btn" class="fixed top-6 right-6 z-[900] w-12 h-12 rounded-full bg-[#006b45] backdrop-blur-md border border-emerald-500/30 text-white flex items-center justify-center shadow-xl opacity-0 pointer-events-none transition-all duration-500 hover:bg-[#008f5d] hover:scale-105 group">
+      <i class="bi bi-list text-2xl group-hover:rotate-180 transition-transform duration-500"></i>
+  </button>
+
+  <div id="floating-dock-container" class="hidden md:block fixed top-6 left-1/2 -translate-x-1/2 z-[900] -translate-y-[200%] transition-transform duration-700 cubic-bezier(0.34, 1.56, 0.64, 1)">
+      <div class="flex items-center gap-1 p-1.5 bg-[#111]/90 backdrop-blur-xl border border-white/10 rounded-full shadow-2xl ring-1 ring-white/5 px-2">
+
+          <a href="#hero-section" class="dock-pill-link group w-10 h-10 flex items-center justify-center rounded-full text-white/60 hover:text-white transition-colors relative z-10">
+              <i class="bi bi-house-door-fill text-lg"></i>
+          </a>
+
+          <div class="w-px h-5 bg-white/10 mx-1"></div>
+
+          <a href="https://zvolta.com/charging-partners.html" class="dock-pill-link px-4 py-2 rounded-full text-xs font-bold text-white/60 hover:text-white transition-colors relative z-10">
+              Hosting
+          </a>
+
+          <a href="charge.html" class="dock-pill-link px-4 py-2 rounded-full text-xs font-bold text-white/60 hover:text-white transition-colors relative z-10">
+              Charging
+          </a>
+
+          <a href="software.html" class="dock-pill-link px-4 py-2 rounded-full text-xs font-bold text-white/60 hover:text-white transition-colors relative z-10">
+              Software
+          </a>
+
+      </div>
+  </div>
+
+<div id="mobile-menu-overlay" class="fixed inset-0 z-[10000] invisible opacity-0 pointer-events-none">
+
+    <div id="mobile-menu-backdrop" class="absolute inset-0 bg-zinc-200/80 backdrop-blur-3xl opacity-0 transition-opacity duration-500"></div>
+
+    <div class="absolute top-6 right-6 z-50">
+        <button id="mobile-menu-close" class="w-14 h-14 bg-black text-white rounded-full flex items-center justify-center hover:bg-emerald-600 hover:rotate-90 transition-all duration-300 shadow-2xl opacity-0 translate-y-[-20px]">
+            <i class="bi bi-x-lg text-xl"></i>
+        </button>
+    </div>
+
+    <div class="absolute inset-0 w-full h-[100dvh] overflow-y-auto overflow-x-hidden no-scrollbar">
+
+        <div class="w-full min-h-full max-w-[1600px] mx-auto p-4 pt-24 md:p-6 lg:p-10 grid grid-cols-1 lg:grid-cols-12 gap-4 pb-24">
+
+            <div class="menu-card lg:col-span-5 bg-black rounded-[2.5rem] p-8 md:p-12 flex flex-col justify-between relative overflow-hidden group min-h-[500px] opacity-0 translate-y-[50px]">
+
+                 <div class="absolute top-8 right-8 w-32 h-32 opacity-20 bg-[radial-gradient(#10b981_2px,transparent_2px)] [background-size:8px_8px] rounded-full pointer-events-none"></div>
+
+                 <nav class="flex flex-col gap-4 mt-4 relative z-10">
+                    <a href="#hero-section" class="mobile-menu-link text-5xl md:text-6xl font-display font-bold text-white hover:text-emerald-500 transition-colors flex items-center justify-between group/link">
+                        Home
+                        <i class="bi bi-arrow-right text-3xl opacity-0 -translate-x-8 group-hover/link:opacity-100 group-hover/link:translate-x-0 transition-all duration-300 text-emerald-500"></i>
+                    </a>
+                    <div class="h-px bg-white/10 w-full"></div>
+
+                    <a href="https://zvolta.com/charging-partners.html" class="mobile-menu-link text-5xl md:text-6xl font-display font-bold text-white hover:text-emerald-500 transition-colors flex items-center justify-between group/link">
+                        Hosting
+                        <i class="bi bi-arrow-right text-3xl opacity-0 -translate-x-8 group-hover/link:opacity-100 group-hover/link:translate-x-0 transition-all duration-300 text-emerald-500"></i>
+                    </a>
+                    <div class="h-px bg-white/10 w-full"></div>
+
+                    <a href="charge.html" class="mobile-menu-link text-5xl md:text-6xl font-display font-bold text-white hover:text-emerald-500 transition-colors flex items-center justify-between group/link">
+                        Charging
+                        <i class="bi bi-arrow-right text-3xl opacity-0 -translate-x-8 group-hover/link:opacity-100 group-hover/link:translate-x-0 transition-all duration-300 text-emerald-500"></i>
+                    </a>
+                    <div class="h-px bg-white/10 w-full"></div>
+
+                    <a href="software.html" class="mobile-menu-link text-5xl md:text-6xl font-display font-bold text-white hover:text-emerald-500 transition-colors flex items-center justify-between group/link">
+                        Software
+                        <i class="bi bi-arrow-right text-3xl opacity-0 -translate-x-8 group-hover/link:opacity-100 group-hover/link:translate-x-0 transition-all duration-300 text-emerald-500"></i>
+                    </a>
+                 </nav>
+
+                 <div class="mt-12 relative z-10">
+                    <p class="text-zinc-500 text-xs uppercase tracking-[0.2em] mb-2 font-bold">Contact us</p>
+                    <a href="mailto:support@zvolta.com" class="text-xl md:text-2xl text-white font-mono hover:text-emerald-400 transition-colors border-b border-transparent hover:border-emerald-400 pb-1">support@zvolta.com</a>
+                 </div>
+            </div>
+
+            <div class="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-4 h-full content-start">
+
+                <a href="https://zvolta.com/charging-partners.html" class="menu-card bg-black rounded-[2.5rem] p-8 relative group overflow-hidden flex flex-col justify-end h-[280px] lg:h-auto opacity-0 translate-y-[50px]">
+                    <div class="absolute inset-0 bg-zinc-900 scale-y-0 origin-bottom group-hover:scale-y-100 transition-transform duration-500 ease-[cubic-bezier(0.2,0,0,1)]"></div>
+                    <div class="absolute top-8 right-8 w-16 h-16 bg-zinc-900 rounded-2xl flex items-center justify-center text-emerald-500 group-hover:bg-emerald-500 group-hover:text-black transition-all duration-300 shadow-xl z-10">
+                        <i class="bi bi-buildings-fill text-3xl"></i>
+                    </div>
+                    <div class="relative z-10">
+                        <h3 class="text-2xl font-bold text-white group-hover:translate-x-1 transition-transform">Host A Charger</h3>
+                        <p class="text-zinc-500 mt-2 opacity-100 group-hover:text-zinc-300 transition-colors">Turn your parking into revenue.</p>
+                    </div>
+                </a>
+
+                <a href="charge.html" class="menu-card bg-black rounded-[2.5rem] p-8 relative group overflow-hidden flex flex-col justify-end h-[280px] lg:h-auto opacity-0 translate-y-[50px]">
+                    <div class="absolute inset-0 bg-zinc-900 scale-y-0 origin-bottom group-hover:scale-y-100 transition-transform duration-500 ease-[cubic-bezier(0.2,0,0,1)]"></div>
+                    <div class="absolute top-8 right-8 w-16 h-16 bg-zinc-900 rounded-2xl flex items-center justify-center text-emerald-500 group-hover:bg-emerald-500 group-hover:text-black transition-all duration-300 shadow-xl z-10">
+                         <i class="bi bi-geo-alt-fill text-3xl"></i>
+                    </div>
+                    <div class="relative z-10">
+                        <h3 class="text-2xl font-bold text-white group-hover:translate-x-1 transition-transform">Find Stations</h3>
+                        <p class="text-zinc-500 mt-2 opacity-100 group-hover:text-zinc-300 transition-colors">Locate chargers nearby instantly.</p>
+                    </div>
+                </a>
+
+                <a href="software.html" class="menu-card bg-black rounded-[2.5rem] p-8 relative group overflow-hidden flex flex-col justify-end h-[280px] lg:h-auto opacity-0 translate-y-[50px]">
+                    <div class="absolute inset-0 bg-zinc-900 scale-y-0 origin-bottom group-hover:scale-y-100 transition-transform duration-500 ease-[cubic-bezier(0.2,0,0,1)]"></div>
+                     <div class="absolute top-8 right-8 w-16 h-16 bg-zinc-900 rounded-2xl flex items-center justify-center text-emerald-500 group-hover:bg-emerald-500 group-hover:text-black transition-all duration-300 shadow-xl z-10">
+                         <i class="bi bi-laptop-fill text-3xl"></i>
+                    </div>
+                    <div class="relative z-10">
+                        <h3 class="text-2xl font-bold text-white group-hover:translate-x-1 transition-transform">Software</h3>
+                        <p class="text-zinc-500 mt-2 opacity-100 group-hover:text-zinc-300 transition-colors">Powerful tools for operators.</p>
+                    </div>
+                </a>
+
+                <a href="coming-soon.html" class="menu-card bg-black rounded-[2.5rem] p-8 relative group overflow-hidden flex flex-col justify-end h-[280px] lg:h-auto opacity-0 translate-y-[50px]">
+                    <div class="absolute inset-0 bg-zinc-900 scale-y-0 origin-bottom group-hover:scale-y-100 transition-transform duration-500 ease-[cubic-bezier(0.2,0,0,1)]"></div>
+                     <div class="absolute top-8 right-8 w-16 h-16 bg-zinc-900 rounded-2xl flex items-center justify-center text-emerald-500 group-hover:bg-emerald-500 group-hover:text-black transition-all duration-300 shadow-xl z-10">
+                         <i class="bi bi-people-fill text-3xl"></i>
+                    </div>
+                    <div class="relative z-10">
+                        <h3 class="text-2xl font-bold text-white group-hover:translate-x-1 transition-transform">Company</h3>
+                        <p class="text-zinc-500 mt-2 opacity-100 group-hover:text-zinc-300 transition-colors">Our mission and careers.</p>
+                    </div>
+                </a>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+  <div id="custom-loader" class="fixed inset-0 z-[10000] flex flex-col items-center justify-center pointer-events-none">
+      <div id="loader-blind-top" class="absolute top-0 left-0 w-full h-[51%] bg-z-black z-0 pointer-events-auto border-b border-white/5"></div>
+      <div id="loader-blind-bottom" class="absolute bottom-0 left-0 w-full h-[51%] bg-z-black z-0 pointer-events-auto border-t border-white/5"></div>
+      <div id="loader-content" class="relative z-10 flex flex-col items-center pointer-events-auto will-change-transform">
+          <div id="loader-glow" class="absolute inset-0 bg-z-green/10 blur-[100px] rounded-full scale-0 animate-pulse-slow"></div>
+          <div class="relative mb-10 w-24 h-24 md:w-32 md:h-32 flex items-center justify-center">
+              <img src="img/symbol logo.png" id="loader-logo" class="w-full h-full object-contain drop-shadow-[0_0_30px_rgba(22,163,74,0.3)] will-change-transform" alt="ZVolta Loading">
+          </div>
+          <div id="loader-bar-container" class="w-64 h-[2px] bg-zinc-800 rounded-full overflow-hidden relative mb-4">
+              <div id="loader-bar" class="absolute top-0 left-0 h-full w-0 bg-white shadow-[0_0_15px_2px_rgba(255,255,255,0.8)]"></div>
+          </div>
+          <div id="loader-status-container" class="h-6 overflow-hidden flex flex-col items-center">
+               <div id="loader-status" class="font-mono text-[10px] tracking-[0.4em] text-gray-500 uppercase">INITIALIZING...</div>
+          </div>
+      </div>
+  </div>
+
+
+
+  <div id="smooth-wrapper">
+    <div id="smooth-content">
+
+        <main class="w-full">
+
+    <section id="hero-section" class="relative w-full h-screen bg-gray-900 flex flex-col items-center justify-end text-center group overflow-hidden p-0 m-0 pb-20">
+    <img id="hero-bg-img"
+         src="https://res.cloudinary.com/dk4bqjm38/image/upload/v1770803382/Zv_-_Main_Banner_Day_tquqsm.png"
+         alt="ZVolta Background"
+         class="absolute inset-0 w-full h-full object-cover z-0 select-none pointer-events-none"
+         data-critical="true">
+
+    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent z-0"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-6">
+        <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl 3xl:text-8xl font-display font-medium tracking-tight text-white leading-[1.1] mb-6 drop-shadow-lg">
+            <span id="hero-changing-word" class="word-swapper text-white"></span> Should Feel Easy
+        </h1>
+
+        <p class="text-base sm:text-lg md:text-xl 3xl:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed font-light mb-10 fade-in-up delay-100 px-4">
+            And we build the tools that support people, places, and all the possibilities ahead.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center w-full fade-in-up delay-200">
+            <a href="coming-soon.html" class="w-full sm:w-auto px-10 py-4 bg-white text-black rounded-full font-bold hover:bg-emerald-500 hover:text-white transition-all duration-300 flex items-center justify-center gap-2 shadow-lg text-lg">
+                Learn How <i class="bi bi-arrow-right"></i>
+            </a>
+            <a href="contact-us.html" class="w-full sm:w-auto px-10 py-4 bg-zinc-900/40 backdrop-blur-md border border-white/10 text-white rounded-full font-bold hover:bg-white/20 transition-all duration-300 flex items-center justify-center gap-2 text-lg">
+                Contact Us
+            </a>
+        </div>
+    </div>
+</section>
+
+          <div class="content-overlap rounded-t-[3rem] overflow-hidden">
+  <section id="horizontal-scroll-section" class="py-12 px-4 md:px-8 bg-transparent border-t border-white/10 md:min-h-screen flex flex-col justify-center">
+    <div class="max-w-[1600px] 3xl:max-w-[2200px] mx-auto w-full">
+        <div id="cards-wrapper" class="flex flex-col md:grid md:grid-cols-3 gap-6 w-full">
+
+            <div class="card-hover-trigger group relative w-full md:w-auto h-[450px] md:h-[550px] 3xl:h-[750px] overflow-hidden bg-zinc-900 rounded-[2.5rem] transition-transform duration-500 hover:-translate-y-2 border border-white/5">
+
+                <div class="absolute inset-0 w-full h-full card-slideshow">
+                    <img src="img/Host/03.jpg" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out scale-110 opacity-100" alt="Host Slide 1">
+                    <img src="img/Host/02.png" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out scale-110 opacity-0" alt="Host Slide 2">
+                    <img src="img/Host/03.png" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out scale-110 opacity-0" alt="Host Slide 3">
+                    <img src="img/Host/04.png" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out scale-110 opacity-0" alt="Host Slide 4">
+                    <img src="img/Host/05.png" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out scale-110 opacity-0" alt="Host Slide 5">
+                    <img src="img/Host/Host.png" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out scale-110 opacity-0" alt="Host Slide 6">
+                </div>
+
+                <div class="absolute inset-0 bg-gradient-to-b from-black/90 to-transparent z-10 pointer-events-none"></div>
+
+                <div class="absolute inset-0 p-8 3xl:p-12 flex flex-col justify-between text-white z-20 pointer-events-none">
+                    <div class="pt-2">
+                        <h3 class="text-3xl md:text-4xl 3xl:text-6xl font-display font-bold mb-4 leading-tight">Host A Charger</h3>
+                        <p class="text-gray-300 text-sm md:text-base 3xl:text-xl leading-relaxed max-w-sm font-light opacity-90">Place a charger at your site, earn steady revenue, and support your ESG goals.</p>
+                    </div>
+
+                    <div class="flex justify-end pointer-events-auto">
+                        <a href="host.html" class="inline-flex items-center gap-2 px-8 py-3 bg-white text-black rounded-full font-bold text-sm 3xl:text-lg transition-transform duration-300 hover:scale-105 hover:bg-emerald-400 hover:text-white shadow-lg">
+                            Start Hosting <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-hover-trigger group relative w-full md:w-auto h-[450px] md:h-[550px] 3xl:h-[750px] overflow-hidden bg-zinc-900 rounded-[2.5rem] transition-transform duration-500 hover:-translate-y-2 border border-white/5">
+
+                <div class="absolute inset-0 w-full h-full card-slideshow">
+                    <img src="img/Charge/01.png" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out scale-110 opacity-100" alt="Charge Slide 1">
+                    <img src="img/Charge/02.png" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out scale-110 opacity-0" alt="Charge Slide 2">
+                    <img src="img/Charge/03.png" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out scale-110 opacity-0" alt="Charge Slide 3">
+                    <img src="img/Charge/04.png" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out scale-110 opacity-0" alt="Charge Slide 4">
+                    <img src="img/Charge/05.png" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out scale-110 opacity-0" alt="Charge Slide 5">
+                    <img src="img/Charge/06.png" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out scale-110 opacity-0" alt="Charge Slide 6">
+                </div>
+
+                <div class="absolute inset-0 bg-gradient-to-b from-black/90 to-transparent z-10 pointer-events-none"></div>
+
+                <div class="absolute inset-0 p-8 3xl:p-12 flex flex-col justify-between text-white z-20 pointer-events-none">
+                    <div class="pt-2">
+                        <h3 class="text-3xl md:text-4xl 3xl:text-6xl font-display font-bold mb-4 leading-tight">Charge your vehicle</h3>
+                        <p class="text-gray-300 text-sm md:text-base 3xl:text-xl leading-relaxed max-w-sm font-light opacity-90">Fast and simple charging for cars, bikes, and everything electric.</p>
+                    </div>
+
+                    <div class="flex justify-end pointer-events-auto">
+                        <a href="charge.html" class="inline-flex items-center gap-2 px-8 py-3 bg-white text-black rounded-full font-bold text-sm 3xl:text-lg transition-transform duration-300 hover:scale-105 hover:bg-emerald-400 hover:text-white shadow-lg">
+                            Find a station <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-hover-trigger group relative w-full md:w-auto h-[450px] md:h-[550px] 3xl:h-[750px] overflow-hidden bg-zinc-900 rounded-[2.5rem] transition-transform duration-500 hover:-translate-y-2 border border-white/5">
+
+                <div class="absolute inset-0 w-full h-full card-slideshow">
+                    <img src="img/Operate/01.png" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out scale-110 opacity-100" alt="Operate Slide 1">
+                    <img src="img/Operate/02.png" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out scale-110 opacity-0" alt="Operate Slide 2">
+                    <img src="img/Operate/03.png" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out scale-110 opacity-0" alt="Operate Slide 3">
+                    <img src="img/Operate/04.png" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out scale-110 opacity-0" alt="Operate Slide 4">
+                    <img src="img/Operate/05.png" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out scale-110 opacity-0" alt="Operate Slide 5">
+                    <img src="img/Operate/Operate.png" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out scale-110 opacity-0" alt="Operate Slide 6">
+                </div>
+
+                <div class="absolute inset-0 bg-gradient-to-b from-black/90 to-transparent z-10 pointer-events-none"></div>
+
+                <div class="absolute inset-0 p-8 3xl:p-12 flex flex-col justify-between text-white z-20 pointer-events-none">
+                    <div class="pt-2">
+                        <h3 class="text-3xl md:text-4xl 3xl:text-6xl font-display font-bold mb-4 leading-tight">Software for operators</h3>
+                        <p class="text-gray-300 text-sm md:text-base 3xl:text-xl leading-relaxed max-w-sm font-light opacity-90">Open software that helps operators connect hardware and manage stations.</p>
+                    </div>
+
+                    <div class="flex justify-end pointer-events-auto">
+                        <a href="software.html" class="inline-flex items-center gap-2 px-8 py-3 bg-white text-black rounded-full font-bold text-sm 3xl:text-lg transition-transform duration-300 hover:scale-105 hover:bg-emerald-400 hover:text-white shadow-lg">
+                            Book a demo <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+</div>
+             <section id="mission" class="py-24 px-4 md:px-8 bg-white relative">
+    <div class="max-w-[1400px] 3xl:max-w-[2000px] mx-auto">
+    <h2 class="reveal-text w-full max-w-full text-2xl sm:text-3xl md:text-5xl 2xl:text-7xl font-display font-bold leading-[1.1] text-black mb-16 text-left">
+            We create practical tools for a world moving electric, building simple and reliable systems that help more people make the switch.
+        </h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 3xl:gap-8">
+
+            <div class="stat-container group relative p-8 flex flex-col h-[320px] 3xl:h-[450px] rounded-[2rem] bg-zinc-900 border-none shadow-xl overflow-hidden" style="background-image: none;">
+                <img src="https://res.cloudinary.com/dk4bqjm38/image/upload/v1770809680/Electricity_Reduced_segp20.png" class="absolute inset-0 w-full h-full object-cover opacity-30 group-hover:opacity-50 transition-opacity duration-500" alt="Energy Delivered">
+
+                <div class="relative z-10 flex-grow flex items-center justify-center">
+                    <div class="flex items-baseline gap-1">
+                        <span class="stat-number text-6xl 3xl:text-8xl text-white font-bold tracking-tighter" data-target="700">0</span>
+                        <span class="stat-unit text-emerald-500 text-3xl 3xl:text-5xl font-bold ml-1">KWh</span>
+                    </div>
+                </div>
+
+                <div class="relative z-10 stat-label text-center text-zinc-300 text-xs 3xl:text-base tracking-[0.2em] font-bold group-hover:text-white uppercase mb-2">
+                    Energy Delivered
+                </div>
+            </div>
+
+            <div class="stat-container group relative p-8 flex flex-col h-[320px] 3xl:h-[450px] rounded-[2rem] bg-zinc-900 border-none shadow-xl overflow-hidden" style="background-image: none;">
+                <img src="https://res.cloudinary.com/dk4bqjm38/image/upload/v1770809685/C02_Reduced_mggfhr.png" class="absolute inset-0 w-full h-full object-cover opacity-30 group-hover:opacity-50 transition-opacity duration-500" alt="CO2 Reduced">
+
+                <div class="relative z-10 flex-grow flex items-center justify-center">
+                    <div class="flex items-baseline gap-1">
+                        <span class="stat-number text-6xl 3xl:text-8xl text-white font-bold tracking-tighter" data-target="770">0</span>
+                        <span class="stat-unit text-emerald-500 text-3xl 3xl:text-5xl font-bold ml-1">Kg</span>
+                    </div>
+                </div>
+
+                <div class="relative z-10 stat-label text-center text-zinc-300 text-xs 3xl:text-base tracking-[0.2em] font-bold group-hover:text-white uppercase mb-2">
+                    CO2 Reduced
+                </div>
+            </div>
+
+            <div class="stat-container group relative p-8 flex flex-col h-[320px] 3xl:h-[450px] rounded-[2rem] bg-zinc-900 border-none shadow-xl overflow-hidden" style="background-image: none;">
+                <img src="https://res.cloudinary.com/dk4bqjm38/image/upload/v1770809679/Charging_Netwrok_oof6dg.png" class="absolute inset-0 w-full h-full object-cover opacity-30 group-hover:opacity-50 transition-opacity duration-500" alt="Active Chargers">
+
+                <div class="relative z-10 flex-grow flex items-center justify-center">
+                    <div class="flex items-baseline gap-1">
+                        <span class="stat-number text-6xl 3xl:text-8xl text-white font-bold tracking-tighter" data-target="20">0</span>
+                                              <span class="stat-unit text-emerald-500 text-3xl 3xl:text-5xl font-bold ml-1">+</span>
+
+                    </div>
+                </div>
+
+                <div class="relative z-10 stat-label text-center text-zinc-300 text-xs 3xl:text-base tracking-[0.2em] font-bold group-hover:text-white uppercase mb-2">
+                    Active Chargers
+                </div>
+            </div>
+
+            <div class="stat-container group relative p-8 flex flex-col h-[320px] 3xl:h-[450px] rounded-[2rem] bg-zinc-900 border-none shadow-xl overflow-hidden" style="background-image: none;">
+                <img src="https://res.cloudinary.com/dk4bqjm38/image/upload/v1770809582/Sites_pcc9iv.png" class="absolute inset-0 w-full h-full object-cover opacity-30 group-hover:opacity-50 transition-opacity duration-500" alt="Sites Powered">
+
+                <div class="relative z-10 flex-grow flex items-center justify-center">
+                    <div class="flex items-baseline gap-1">
+                        <span class="stat-number text-6xl 3xl:text-8xl text-white font-bold tracking-tighter" data-target="10">0</span>
+                                              <span class="stat-unit text-emerald-500 text-3xl 3xl:text-5xl font-bold ml-1">+</span>
+
+                    </div>
+                </div>
+
+                <div class="relative z-10 stat-label text-center text-zinc-300 text-xs 3xl:text-base tracking-[0.2em] font-bold group-hover:text-white uppercase mb-2">
+                    Sites Powered
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+ <section id="how-it-works" class="relative bg-zinc-50 text-black overflow-hidden py-10 -mt-px">
+    <div class="absolute inset-x-0 top-0 h-[4px] bg-zinc-50 z-[60] pointer-events-none"></div>
+    <div class="absolute right-6 top-1/2 -translate-y-1/2 h-[200px] 3xl:h-[400px] w-[4px] bg-gray-200 rounded-full z-50 hidden md:block overflow-hidden">
+        <div id="scroll-progress-bar" class="w-full h-1/3 bg-emerald-600 rounded-full absolute top-0 left-0 transition-all duration-500 ease-out shadow-[0_0_15px_currentColor]"></div>
+    </div>
+
+    <div id="how-pin-container" class="w-full min-h-[90vh] md:h-screen flex flex-col items-center justify-center gap-6 md:gap-12 relative px-4 md:px-8 py-10 will-change-transform">
+
+        <div class="text-center z-20 w-full max-w-[1400px] 3xl:max-w-[2000px] shrink-0">
+            <h2 class="text-4xl sm:text-5xl md:text-7xl lg:text-8xl 3xl:text-9xl font-display font-bold tracking-tighter text-black flex flex-wrap justify-center items-center gap-x-4 leading-tight">
+                <span>How</span>
+                <div class="grid grid-cols-1 grid-rows-1 items-center justify-items-center w-auto h-[1.2em] overflow-hidden relative z-10">
+                    <span class="dynamic-word col-start-1 row-start-1 block text-emerald-700 font-bold" data-state="0">Hosting</span>
+                    <span class="dynamic-word col-start-1 row-start-1 block text-lime-600 font-bold" data-state="1">Charging</span>
+                    <span class="dynamic-word col-start-1 row-start-1 block text-[#1a4031] font-bold" data-state="2">Software</span>
+                </div>
+                <span>Works</span>
+            </h2>
+        </div>
+
+        <div class="w-full max-w-[1400px] 3xl:max-w-[2000px] grid grid-cols-2 md:grid-cols-4 gap-4 md:h-[60vh] 3xl:h-[55vh] shrink-0">
+
+            <div class="relative rounded-[2.5rem] bg-gray-100 shadow-2xl card-column aspect-[3/4] md:aspect-auto group border border-white/50">
+                <div class="sleek-card-layer bg-white" data-state="0">
+                    <img src="img/Grids/05.png" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" style="object-position: 0% 50%;" alt="Assessment">
+                    <div class="absolute inset-0 bg-gradient-to-t from-emerald-950/90 via-emerald-900/20 to-transparent"></div>
+                    <span class="sleek-number text-7xl md:text-8xl text-white/20">01</span>
+                    <div class="absolute inset-0 p-8 flex flex-col justify-end z-20">
+                        <div class="w-12 h-1 bg-emerald-400 mb-4 rounded-full"></div>
+                        <h3 class="text-2xl 3xl:text-4xl font-bold text-white mb-2">Assessment</h3>
+                        <p class="text-base 3xl:text-xl text-emerald-50 leading-snug">Tell us about your site, your goals, and how many chargers you want.</p>
+                    </div>
+                </div>
+                <div class="sleek-card-layer bg-zinc-900" data-state="1">
+                    <img src="img/Grids/02.png" class="absolute inset-0 w-full h-full object-cover opacity-90 transition-transform duration-700 group-hover:scale-105" style="object-position: 0% 50%;">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-lime-900/40 to-transparent"></div>
+                    <span class="sleek-number text-7xl md:text-8xl text-white/20">01</span>
+                    <div class="absolute inset-0 p-8 flex flex-col justify-end z-20">
+                        <div class="w-12 h-1 bg-lime-400 mb-4 rounded-full"></div>
+                        <h3 class="text-2xl 3xl:text-4xl font-bold text-white mb-2">Locate</h3>
+                        <p class="text-base 3xl:text-xl text-gray-200 leading-snug">Open the app to find a nearby charger that fits your vehicle.</p>
+                    </div>
+                </div>
+                <div class="sleek-card-layer bg-[#051810]" data-state="2">
+                    <img src="img/Grids/03.png" class="absolute inset-0 w-full h-full object-cover opacity-90 transition-transform duration-700 group-hover:scale-105" style="object-position: 0% 50%;">
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#02120a] via-[#064e3b]/30 to-transparent"></div>
+                    <span class="sleek-number text-7xl md:text-8xl text-white/10">01</span>
+                    <div class="absolute inset-0 p-8 flex flex-col justify-end z-20">
+                        <div class="w-12 h-1 bg-[#6ee7b7] mb-4 rounded-full"></div>
+                        <h3 class="text-2xl 3xl:text-4xl font-bold text-[#d1fae5] mb-2">Hardware</h3>
+                        <p class="text-base 3xl:text-xl text-gray-400 leading-snug">Share your hardware details and how you run your charging operations today.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="relative rounded-[2.5rem] bg-gray-100 shadow-2xl card-column aspect-[3/4] md:aspect-auto group border border-white/50">
+                <div class="sleek-card-layer bg-white" data-state="0">
+                    <img src="img/Grids/05.png" class="absolute inset-0 w-full h-full object-cover" style="object-position: 33.33% 50%;">
+                    <div class="absolute inset-0 bg-gradient-to-t from-emerald-950/90 via-emerald-900/20 to-transparent"></div>
+                    <span class="sleek-number text-7xl md:text-8xl text-white/20">02</span>
+                    <div class="absolute inset-0 p-8 flex flex-col justify-end z-20">
+                        <div class="w-12 h-1 bg-emerald-400 mb-4 rounded-full"></div>
+                        <h3 class="text-2xl 3xl:text-4xl font-bold text-white mb-2">Planning</h3>
+                        <p class="text-base 3xl:text-xl text-emerald-50 leading-snug">We assess your layout and power needs and guide you to the best setup.</p>
+                    </div>
+                </div>
+                <div class="sleek-card-layer bg-zinc-900" data-state="1">
+                    <img src="img/Grids/02.png" class="absolute inset-0 w-full h-full object-cover opacity-80" style="object-position: 33.33% 50%;">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-lime-900/40 to-transparent"></div>
+                    <span class="sleek-number text-7xl md:text-8xl text-white/20">02</span>
+                    <div class="absolute inset-0 p-8 flex flex-col justify-end z-20">
+                        <div class="w-12 h-1 bg-lime-400 mb-4 rounded-full"></div>
+                        <h3 class="text-2xl 3xl:text-4xl font-bold text-white mb-2">Plug In</h3>
+                        <p class="text-base 3xl:text-xl text-gray-200 leading-snug">Park, plug in, and start a session with a tap or by scanning the code.</p>
+                    </div>
+                </div>
+                <div class="sleek-card-layer bg-[#051810]" data-state="2">
+                    <img src="img/Grids/03.png" class="absolute inset-0 w-full h-full object-cover opacity-80" style="object-position: 33.33% 50%;">
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#02120a] via-[#064e3b]/30 to-transparent"></div>
+                    <span class="sleek-number text-7xl md:text-8xl text-white/10">02</span>
+                    <div class="absolute inset-0 p-8 flex flex-col justify-end z-20">
+                        <div class="w-12 h-1 bg-[#6ee7b7] mb-4 rounded-full"></div>
+                        <h3 class="text-2xl 3xl:text-4xl font-bold text-[#d1fae5] mb-2">Connect</h3>
+                        <p class="text-base 3xl:text-xl text-gray-400 leading-snug">We connect your chargers to our OCPP-ready platform and set up your pricing.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="relative rounded-[2.5rem] bg-gray-100 shadow-2xl card-column aspect-[3/4] md:aspect-auto group border border-white/50">
+                <div class="sleek-card-layer bg-white" data-state="0">
+                    <img src="img/Grids/05.png" class="absolute inset-0 w-full h-full object-cover" style="object-position: 66.66% 50%;">
+                    <div class="absolute inset-0 bg-gradient-to-t from-emerald-950/90 via-emerald-900/20 to-transparent"></div>
+                    <span class="sleek-number text-7xl md:text-8xl text-white/20">03</span>
+                    <div class="absolute inset-0 p-8 flex flex-col justify-end z-20">
+                        <div class="w-12 h-1 bg-emerald-400 mb-4 rounded-full"></div>
+                        <h3 class="text-2xl 3xl:text-4xl font-bold text-white mb-2">Install</h3>
+                        <p class="text-base 3xl:text-xl text-emerald-50 leading-snug">We install the chargers, connect the software, and prepare everything for launch.</p>
+                    </div>
+                </div>
+                <div class="sleek-card-layer bg-zinc-900" data-state="1">
+                    <img src="img/Grids/02.png" class="absolute inset-0 w-full h-full object-cover opacity-80" style="object-position: 66.66% 50%;">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-lime-900/40 to-transparent"></div>
+                    <span class="sleek-number text-7xl md:text-8xl text-white/20">03</span>
+                    <div class="absolute inset-0 p-8 flex flex-col justify-end z-20">
+                        <div class="w-12 h-1 bg-lime-400 mb-4 rounded-full"></div>
+                        <h3 class="text-2xl 3xl:text-4xl font-bold text-white mb-2">Charge</h3>
+                        <p class="text-base 3xl:text-xl text-gray-200 leading-snug">Watch your charging progress in real time with simple, clear pricing.</p>
+                    </div>
+                </div>
+                <div class="sleek-card-layer bg-[#051810]" data-state="2">
+                    <img src="img/Grids/03.png" class="absolute inset-0 w-full h-full object-cover opacity-80" style="object-position: 66.66% 50%;">
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#02120a] via-[#064e3b]/30 to-transparent"></div>
+                    <span class="sleek-number text-7xl md:text-8xl text-white/10">03</span>
+                    <div class="absolute inset-0 p-8 flex flex-col justify-end z-20">
+                        <div class="w-12 h-1 bg-[#6ee7b7] mb-4 rounded-full"></div>
+                        <h3 class="text-2xl 3xl:text-4xl font-bold text-[#d1fae5] mb-2">Monitor</h3>
+                        <p class="text-base 3xl:text-xl text-gray-400 leading-snug">You monitor status, manage users, and handle payments from one dashboard.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="relative rounded-[2.5rem] bg-gray-100 shadow-2xl card-column aspect-[3/4] md:aspect-auto group border border-white/50">
+                <div class="sleek-card-layer bg-white" data-state="0">
+                    <img src="img/Grids/05.png" class="absolute inset-0 w-full h-full object-cover" style="object-position: 100% 50%;">
+                    <div class="absolute inset-0 bg-gradient-to-t from-emerald-950/90 via-emerald-900/20 to-transparent"></div>
+                    <span class="sleek-number text-7xl md:text-8xl text-white/20">04</span>
+                    <div class="absolute inset-0 p-8 flex flex-col justify-end z-20">
+                        <div class="w-12 h-1 bg-emerald-400 mb-4 rounded-full"></div>
+                        <h3 class="text-2xl 3xl:text-4xl font-bold text-white mb-2">Go Live</h3>
+                        <p class="text-base 3xl:text-xl text-emerald-50 leading-snug">You go live, earn from every session, and track your impact over time.</p>
+                    </div>
+                </div>
+                <div class="sleek-card-layer bg-zinc-900" data-state="1">
+                    <img src="img/Grids/02.png" class="absolute inset-0 w-full h-full object-cover opacity-80" style="object-position: 100% 50%;">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-lime-900/40 to-transparent"></div>
+                    <span class="sleek-number text-7xl md:text-8xl text-white/20">04</span>
+                    <div class="absolute inset-0 p-8 flex flex-col justify-end z-20">
+                        <div class="w-12 h-1 bg-lime-400 mb-4 rounded-full"></div>
+                        <h3 class="text-2xl 3xl:text-4xl font-bold text-white mb-2">Go</h3>
+                        <p class="text-base 3xl:text-xl text-gray-200 leading-snug">Unplug when you are ready and continue on your way.</p>
+                    </div>
+                </div>
+                <div class="sleek-card-layer bg-[#051810]" data-state="2">
+                    <img src="img/Grids/03.png" class="absolute inset-0 w-full h-full object-cover opacity-80" style="object-position: 100% 50%;">
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#02120a] via-[#064e3b]/30 to-transparent"></div>
+                    <span class="sleek-number text-7xl md:text-8xl text-white/10">04</span>
+                    <div class="absolute inset-0 p-8 flex flex-col justify-end z-20">
+                        <div class="w-12 h-1 bg-[#6ee7b7] mb-4 rounded-full"></div>
+                        <h3 class="text-2xl 3xl:text-4xl font-bold text-[#d1fae5] mb-2">Scale</h3>
+                        <p class="text-base 3xl:text-xl text-gray-400 leading-snug">Use insights and reports to improve uptime and grow your network.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="flex flex-col md:flex-row items-center justify-center gap-4 z-20 w-full relative shrink-0 min-h-[120px]">
+            <div class="btn-group absolute top-0 flex justify-center gap-2 transition-all duration-300 opacity-100 w-full" data-state="0">
+                <a href="https://zvolta.com/charging-partners.html" class="btn-glow hosting w-62 xl:w-86">
+                    <div class="btn-content xl:text-xl xl:py-4">
+                        Start Hosting for 74,999 PKR <i class="bi bi-arrow-right"></i>
+                    </div>
+                </a>
+            </div>
+
+            <div class="btn-group absolute top-0 flex justify-center gap-2 transition-all duration-300 opacity-0 pointer-events-none w-full" data-state="1">
+                <a href="https://zvolta.com/mobile" class="btn-glow charging w-62 xl:w-86">
+                    <div class="btn-content xl:text-xl xl:py-4">
+                        See Stations Nearby <i class="bi bi-arrow-right"></i>
+                    </div>
+                </a>
+            </div>
+
+            <div class="btn-group absolute top-0 flex justify-center gap-2 transition-all duration-300 opacity-0 pointer-events-none w-full" data-state="2">
+                <a href="software.html" class="btn-glow software w-62 xl:w-86">
+                    <div class="btn-content xl:text-xl xl:py-4">
+                        Book A Demo <i class="bi bi-arrow-right"></i>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+
+
+    </div>
+</section>
+
+
+           <section id="app-section" class="relative py-24 px-6 overflow-hidden bg-[#050505] text-white">
+
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[60vw] bg-[#16a34a]/10 blur-[120px] rounded-full pointer-events-none z-0"></div>
+
+    <div class="relative z-10 max-w-7xl 3xl:max-w-[1800px] mx-auto flex flex-col items-center text-center">
+
+        <div class="max-w-4xl mx-auto mb-8 app-content-animate">
+            <h2 class="text-3xl md:text-5xl 3xl:text-7xl font-display font-bold tracking-tight mb-6">
+                Everything you need <br>
+                <span class="text-[#16a34a]">in one simple app.</span>
+            </h2>
+        </div>
+
+        <div class="relative p-1 bg-zinc-900/80 backdrop-blur-md rounded-full inline-flex items-center gap-1 border border-white/5 mb-12 shadow-2xl z-20">
+            <div id="app-tab-bg" class="absolute left-1 top-1 h-[calc(100%-8px)] w-[calc(50%-4px)] bg-[#16a34a] rounded-full transition-all duration-300 ease-[cubic-bezier(0.2,0,0.2,1)] shadow-[0_0_20px_rgba(22,163,74,0.4)]"></div>
+
+            <button class="app-tab active relative z-10 px-8 py-3 3xl:py-5 rounded-full text-sm md:text-base 3xl:text-xl font-bold transition-colors duration-300 text-white w-[140px] md:w-[180px] 3xl:w-[240px]" data-target="user">
+                For EV Users
+            </button>
+            <button class="app-tab relative z-10 px-8 py-3 3xl:py-5 rounded-full text-sm md:text-base 3xl:text-xl font-bold transition-colors duration-300 text-gray-400 hover:text-white w-[140px] md:w-[180px] 3xl:w-[240px]" data-target="host">
+                For Hosts
+            </button>
+        </div>
+
+        <div class="relative w-full max-w-[1000px] 3xl:max-w-[1400px] h-[550px] md:h-[650px] 3xl:h-[850px] flex justify-center items-center perspective-1000">
+
+            <div id="card-1" class="hidden md:block absolute top-[10%] left-[12%] z-30 floating-card">
+                <div class="floating-card-base light-from-br py-3 px-5 3xl:py-6 3xl:px-8 flex items-center gap-4 min-w-[200px] 3xl:min-w-[300px]">
+                    <div class="w-10 h-10 3xl:w-14 3xl:h-14 rounded-full bg-[#16a34a]/10 text-[#16a34a] flex items-center justify-center icon-box shrink-0">
+                        <i class="bi bi-geo-alt-fill text-lg 3xl:text-2xl"></i>
+                    </div>
+                    <div class="text-left">
+                        <div class="text-white text-sm 3xl:text-lg font-bold leading-tight mb-0.5 card-title">Live Map</div>
+                        <div class="text-gray-500 text-[11px] 3xl:text-sm leading-tight card-desc">Find chargers nearby</div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="card-2" class="hidden md:block absolute bottom-[20%] left-[8%] z-30 floating-card" style="animation-delay: 1s;">
+                <div class="floating-card-base light-from-tr py-3 px-5 3xl:py-6 3xl:px-8 flex items-center gap-4 min-w-[200px] 3xl:min-w-[300px]">
+                    <div class="w-10 h-10 3xl:w-14 3xl:h-14 rounded-full bg-[#16a34a]/10 text-[#16a34a] flex items-center justify-center icon-box shrink-0">
+                        <i class="bi bi-qr-code text-lg 3xl:text-2xl"></i>
+                    </div>
+                    <div class="text-left">
+                        <div class="text-white text-sm 3xl:text-lg font-bold leading-tight mb-0.5 card-title">Instant Start</div>
+                        <div class="text-gray-500 text-[11px] 3xl:text-sm leading-tight card-desc">Scan to charge</div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="card-3" class="hidden md:block absolute top-[15%] right-[12%] z-30 floating-card" style="animation-delay: 0.5s;">
+                <div class="floating-card-base light-from-bl py-3 px-5 3xl:py-6 3xl:px-8 flex items-center gap-4 min-w-[200px] 3xl:min-w-[300px]">
+                    <div class="w-10 h-10 3xl:w-14 3xl:h-14 rounded-full bg-[#16a34a]/10 text-[#16a34a] flex items-center justify-center icon-box shrink-0">
+                        <i class="bi bi-tag-fill text-lg 3xl:text-2xl"></i>
+                    </div>
+                    <div class="text-left">
+                        <div class="text-white text-sm 3xl:text-lg font-bold leading-tight mb-0.5 card-title">Clear Pricing</div>
+                        <div class="text-gray-500 text-[11px] 3xl:text-sm leading-tight card-desc">See rates instantly</div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="card-4" class="hidden md:block absolute bottom-[25%] right-[8%] z-30 floating-card" style="animation-delay: 1.5s;">
+                <div class="floating-card-base light-from-tl py-3 px-5 3xl:py-6 3xl:px-8 flex items-center gap-4 min-w-[200px] 3xl:min-w-[300px]">
+                    <div class="w-10 h-10 3xl:w-14 3xl:h-14 rounded-full bg-[#16a34a]/10 text-[#16a34a] flex items-center justify-center icon-box shrink-0">
+                        <i class="bi bi-wallet2 text-lg 3xl:text-2xl"></i>
+                    </div>
+                    <div class="text-left">
+                        <div class="text-white text-sm 3xl:text-lg font-bold leading-tight mb-0.5 card-title">History</div>
+                        <div class="text-gray-500 text-[11px] 3xl:text-sm leading-tight card-desc">Track your spending</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="relative w-[280px] md:w-[320px] 3xl:w-[420px] h-full transition-transform duration-700 ease-out will-change-transform z-20">
+                <div class="phone-mockup border-zinc-800 bg-zinc-950 border-[10px] rounded-[3rem] h-full w-full shadow-2xl relative overflow-hidden">
+                    <img id="app-screen-img" src="img/app-1.png" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500" alt="App Screen">
+                    <div class="absolute top-0 left-1/2 -translate-x-1/2 h-[24px] w-[100px] bg-black rounded-b-2xl z-30"></div>
+                </div>
+                <div id="app-phone-glow" class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[80%] smooth-radial-glow -z-10 transition-colors duration-500"></div>
+            </div>
+
+        </div>
+
+        <div class="mt-12 flex flex-col sm:flex-row gap-4 justify-center items-center w-full z-20">
+            <a href="appstore.html" class="store-btn group bg-zinc-900 border-zinc-700 hover:bg-white hover:border-white 3xl:px-8 3xl:py-4 rounded-full">
+                <i class="bi bi-apple text-2xl 3xl:text-3xl group-hover:text-black transition-colors"></i>
+                <div class="flex flex-col items-start leading-none">
+                    <span class="text-[10px] 3xl:text-xs uppercase tracking-wider opacity-70 group-hover:text-black">Download on the</span>
+                    <span class="text-lg 3xl:text-2xl font-bold group-hover:text-black">App Store</span>
+                </div>
+            </a>
+            <a href="https://play.google.com/store/apps/details?id=app.zvolta.android" class="store-btn group bg-zinc-900 border-zinc-700 hover:bg-white hover:border-white 3xl:px-8 3xl:py-4 rounded-full">
+                <i class="bi bi-google-play text-2xl 3xl:text-3xl group-hover:text-black transition-colors"></i>
+                <div class="flex flex-col items-start leading-none">
+                    <span class="text-[10px] 3xl:text-xs uppercase tracking-wider opacity-70 group-hover:text-black">Get it on</span>
+                    <span class="text-lg 3xl:text-2xl font-bold group-hover:text-black">Google Play</span>
+                </div>
+            </a>
+        </div>
+
+    </div>
+</section>
+            <section id="bento-section" class="py-24 px-4 md:px-8 bg-white text-zinc-900 overflow-hidden">
+    <div class="max-w-[1200px] 3xl:max-w-[1800px] mx-auto">
+
+        <div class="grid grid-cols-1 md:grid-cols-3 grid-rows-auto md:grid-rows-[minmax(350px,auto)_minmax(350px,auto)] 3xl:grid-rows-[minmax(500px,auto)_minmax(500px,auto)] gap-6 3xl:gap-10">
+
+            <div class="md:col-span-2 bg-zinc-900 border border-zinc-800 rounded-[2.5rem] p-8 md:p-12 3xl:p-16 relative overflow-hidden group hover:border-emerald-500/50 hover:shadow-[0_0_40px_-10px_rgba(16,185,129,0.3)] transition-all duration-500 text-white">
+                <div class="relative z-10 flex flex-col h-full justify-between">
+                    <div>
+                        <h2 class="text-3xl md:text-5xl 3xl:text-7xl font-display font-bold mb-6 tracking-tight text-white group-hover:text-emerald-50 transition-colors duration-300">
+                            A cleaner way forward
+                        </h2>
+                        <ul class="space-y-4 text-zinc-400 text-sm md:text-lg 3xl:text-2xl max-w-2xl 3xl:max-w-4xl">
+                            <li class="flex items-start gap-3 group-hover:translate-x-2 transition-transform duration-300 delay-0">
+                                <i class="bi bi-check-circle-fill text-emerald-500 mt-1 shrink-0"></i>
+                                <span>Every charge on our network replaces fossil fuel use.</span>
+                            </li>
+                            <li class="flex items-start gap-3 group-hover:translate-x-2 transition-transform duration-300 delay-75">
+                                <i class="bi bi-check-circle-fill text-emerald-500 mt-1 shrink-0"></i>
+                                <span>Every hosted site brings more clean energy into communities.</span>
+                            </li>
+                            <li class="flex items-start gap-3 group-hover:translate-x-2 transition-transform duration-300 delay-100">
+                                <i class="bi bi-check-circle-fill text-emerald-500 mt-1 shrink-0"></i>
+                                <span>Every operator using our software helps expand electric access.</span>
+                            </li>
+                            <li class="flex items-start gap-3 group-hover:translate-x-2 transition-transform duration-300 delay-150">
+                                <i class="bi bi-check-circle-fill text-emerald-500 mt-1 shrink-0"></i>
+                                <span>Together, we make the shift to electric easier for everyone.</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="mt-8">
+                        <a href="about-us.html" class="inline-flex items-center gap-2 text-emerald-400 font-bold hover:text-emerald-300 transition-colors group/link 3xl:text-2xl">
+                            Learn more about our sustainability goals
+                            <i class="bi bi-arrow-right group-hover/link:translate-x-1 transition-transform"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="absolute top-0 right-0 w-64 h-64 bg-emerald-500/10 blur-[80px] rounded-full pointer-events-none transition-transform duration-700 group-hover:scale-150 group-hover:-translate-y-10 group-hover:translate-x-10"></div>
+            </div>
+
+            <div class="md:col-span-1 bg-zinc-900 border border-zinc-800 rounded-[2.5rem] p-8 relative overflow-hidden group hover:border-emerald-500/50 hover:shadow-2xl transition-all duration-500 flex flex-col text-white">
+                <div class="flex justify-between items-start mb-4 z-10">
+                    <h3 class="text-5xl 3xl:text-7xl font-bold text-white tracking-tighter group-hover:text-emerald-400 transition-colors">770 Kg</h3>
+                    <span class="text-[10px] 3xl:text-sm uppercase tracking-widest text-zinc-500 border border-zinc-700 px-2 py-1 rounded-full group-hover:border-emerald-500/30 group-hover:text-emerald-500 transition-colors">CO2 Saved</span>
+                </div>
+
+                <div class="flex-grow flex items-end relative w-full h-full pt-8">
+                    <div class="w-full h-full transition-transform duration-500 group-hover:scale-110 origin-bottom">
+                        <svg viewBox="0 0 100 50" class="w-full h-full overflow-visible drop-shadow-[0_0_10px_rgba(16,185,129,0.3)]">
+                            <path d="M0,40 C20,40 25,20 40,30 C55,40 60,10 80,15 C90,18 95,5 100,0"
+                                  fill="none" stroke="#10b981" stroke-width="3" stroke-linecap="round"
+                                  class="transition-all duration-500 group-hover:stroke-[4px]" />
+                            <path d="M0,40 C20,40 25,20 40,30 C55,40 60,10 80,15 C90,18 95,5 100,0 V50 H0 Z"
+                                  fill="url(#greenGradient)" opacity="0.2" class="group-hover:opacity-0.4 transition-opacity duration-500" />
+                            <defs>
+                                <linearGradient id="greenGradient" x1="0" x2="0" y1="0" y2="1">
+                                    <stop offset="0%" stop-color="#10b981"/>
+                                    <stop offset="100%" stop-color="transparent"/>
+                                </linearGradient>
+                            </defs>
+                            <circle cx="100" cy="0" r="4" fill="#10b981" stroke="#050505" stroke-width="2" class="group-hover:r-[6px] transition-all duration-300" />
+                        </svg>
+                    </div>
+                </div>
+                <div class="mt-4 flex justify-between text-xs 3xl:text-base text-zinc-500 font-mono relative z-10">
+                    <span>JAN</span><span>DEC</span>
+                </div>
+            </div>
+
+            <div class="md:col-span-1 bg-zinc-900 border border-zinc-800 rounded-[2.5rem] p-8 relative overflow-hidden group hover:border-lime-500/50 hover:shadow-2xl transition-all duration-500 flex flex-col text-white">
+                 <div class="flex justify-between items-start mb-6">
+                    <h3 class="text-2xl 3xl:text-4xl font-bold text-white group-hover:text-lime-400 transition-colors">Capacity</h3>
+                    <span class="text-[10px] 3xl:text-sm uppercase tracking-widest text-zinc-500 border border-zinc-700 px-2 py-1 rounded-full group-hover:border-lime-500/30 group-hover:text-lime-500 transition-colors">Real-time</span>
+                </div>
+
+                <div class="flex items-end justify-between h-40 3xl:h-60 gap-2 mt-auto">
+                    <div class="w-full bg-zinc-800 rounded-t-sm h-[40%] group-hover:h-[55%] group-hover:bg-zinc-700 transition-all duration-500 ease-out delay-0"></div>
+                    <div class="w-full bg-lime-500 rounded-t-sm h-[80%] group-hover:h-[95%] group-hover:shadow-[0_0_20px_rgba(132,204,22,0.6)] transition-all duration-500 ease-out delay-75"></div>
+                    <div class="w-full bg-zinc-800 rounded-t-sm h-[50%] group-hover:h-[60%] group-hover:bg-zinc-700 transition-all duration-500 ease-out delay-100"></div>
+                    <div class="w-full bg-zinc-800 rounded-t-sm h-[30%] group-hover:h-[45%] group-hover:bg-zinc-700 transition-all duration-500 ease-out delay-150"></div>
+                    <div class="w-full bg-lime-500/50 rounded-t-sm h-[65%] group-hover:h-[75%] transition-all duration-500 ease-out delay-200"></div>
+                    <div class="w-full bg-zinc-800 rounded-t-sm h-[45%] group-hover:h-[50%] group-hover:bg-zinc-700 transition-all duration-500 ease-out delay-300"></div>
+                </div>
+                <div class="mt-4 flex justify-between text-xs 3xl:text-base text-zinc-500 font-mono uppercase">
+                    <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+                </div>
+            </div>
+
+            <div class="md:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-6 3xl:gap-10 h-full">
+
+                <div class="bg-zinc-900 border border-zinc-800 rounded-[2.5rem] p-8 relative overflow-hidden group hover:border-emerald-500/50 transition-all duration-500 flex flex-col justify-between text-white">
+                    <div class="z-10 relative">
+                        <h3 class="text-xl 3xl:text-3xl font-bold mb-1 group-hover:text-emerald-400 transition-colors">Connector Types</h3>
+                        <p class="text-xs 3xl:text-base text-zinc-500">Universal compatibility</p>
+                    </div>
+
+                    <div class="relative h-32 3xl:h-48 flex items-center justify-center my-4">
+                        <div class="absolute inset-0 flex items-center justify-center transition-transform duration-500 group-hover:scale-110">
+                             <div class="absolute w-20 h-20 3xl:w-28 3xl:h-28 rounded-full border-[6px] border-emerald-500/20 border-t-emerald-500 animate-spin-slow"></div>
+
+                             <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-2 w-10 h-10 3xl:w-14 3xl:h-14 rounded-full bg-lime-500 flex items-center justify-center text-black font-bold text-[10px] 3xl:text-xs shadow-lg transition-transform duration-500 group-hover:-translate-y-4">CCS</div>
+                             <div class="absolute bottom-2 right-4 w-10 h-10 3xl:w-14 3xl:h-14 rounded-full bg-emerald-600 flex items-center justify-center text-white font-bold text-[10px] 3xl:text-xs shadow-lg transition-transform duration-500 group-hover:translate-x-2 group-hover:translate-y-2">Universal</div>
+                             <div class="absolute bottom-2 left-4 w-10 h-10 3xl:w-14 3xl:h-14 rounded-full bg-zinc-700 flex items-center justify-center text-white font-bold text-[10px] 3xl:text-xs shadow-lg border border-white/10 transition-transform duration-500 group-hover:-translate-x-2 group-hover:translate-y-2">Type2</div>
+                        </div>
+
+                        <div class="absolute w-16 h-16 3xl:w-20 3xl:h-20 rounded-full bg-zinc-800 flex items-center justify-center border border-zinc-700 group-hover:border-zinc-500 transition-colors">
+                            <i class="bi bi-lightning-charge-fill text-2xl 3xl:text-3xl text-white group-hover:text-yellow-400 transition-colors"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex flex-col gap-6 3xl:gap-10">
+
+                    <div class="flex-1 bg-zinc-900 border border-zinc-800 rounded-[2.5rem] p-6 relative overflow-hidden group hover:border-zinc-600 transition-all duration-300 flex items-center justify-between text-white cursor-pointer hover:bg-zinc-800">
+                        <div>
+                             <h4 class="font-bold text-lg 3xl:text-2xl text-white group-hover:text-emerald-400 transition-colors">Explore Network</h4>
+                             <div class="flex gap-2 mt-2">
+                                 <span class="text-[10px] 3xl:text-sm bg-emerald-500/10 text-emerald-500 px-2 py-1 rounded border border-emerald-500/20">Available</span>
+                                 <span class="text-[10px] 3xl:text-sm bg-zinc-800 text-zinc-400 px-2 py-1 rounded border border-white/5">Fast</span>
+                             </div>
+                        </div>
+                        <i class="bi bi-sliders text-2xl 3xl:text-4xl text-zinc-600 group-hover:text-white group-hover:rotate-90 transition-all duration-500"></i>
+                    </div>
+
+                    <div class="flex-1 bg-gradient-to-r from-zinc-800 to-zinc-900 border border-zinc-700 rounded-[2.5rem] p-2 pr-6 relative overflow-hidden group hover:border-emerald-500/50 hover:from-zinc-800 hover:to-emerald-900/20 transition-all duration-300 flex items-center gap-4 text-white cursor-pointer">
+                         <div class="w-14 h-14 3xl:w-20 3xl:h-20 rounded-full bg-white flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-300">
+                            <i class="bi bi-map-fill text-black text-xl 3xl:text-2xl"></i>
+                         </div>
+                         <div class="flex-grow">
+                             <div class="text-sm 3xl:text-lg font-bold text-white">Plan your route</div>
+                             <div class="text-[11px] 3xl:text-base text-zinc-400 group-hover:text-emerald-300 transition-colors">View Map in App</div>
+                         </div>
+                         <div class="w-10 h-10 3xl:w-14 3xl:h-14 rounded-full border border-white/20 flex items-center justify-center text-white group-hover:bg-emerald-500 group-hover:border-emerald-500 group-hover:text-black transition-all duration-300">
+                             <i class="bi bi-arrow-right 3xl:text-xl group-hover:-rotate-45 transition-transform duration-300"></i>
+                         </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+  <section id="stories-section" class="h-screen max-h-screen bg-white text-zinc-900 border-t border-gray-100 overflow-hidden relative flex flex-col justify-center py-4">
+
+    <div class="max-w-[1400px] 3xl:max-w-[2000px] mx-auto px-4 md:px-8 mb-6 shrink-0 z-10">
+        <div class="text-center max-w-3xl 3xl:max-w-5xl mx-auto mb-6">
+            <h2 class="text-3xl md:text-5xl 3xl:text-6xl font-display font-bold tracking-tight mb-2">
+                Stories from the people <br>and places we support
+            </h2>
+        </div>
+
+        <div class="flex flex-wrap justify-center gap-2" id="stories-filters">
+            <button class="filter-btn active px-4 py-1.5 3xl:px-6 3xl:py-3 rounded-full border border-zinc-200 bg-zinc-900 text-white text-xs md:text-sm 3xl:text-base font-semibold transition-all hover:bg-zinc-800" data-filter="all">All Stories</button>
+            <button class="filter-btn px-4 py-1.5 3xl:px-6 3xl:py-3 rounded-full border border-zinc-200 bg-white text-zinc-600 text-xs md:text-sm 3xl:text-base font-semibold transition-all hover:bg-gray-100 hover:border-gray-300" data-filter="ev-users">EV Users</button>
+            <button class="filter-btn px-4 py-1.5 3xl:px-6 3xl:py-3 rounded-full border border-zinc-200 bg-white text-zinc-600 text-xs md:text-sm 3xl:text-base font-semibold transition-all hover:bg-gray-100 hover:border-gray-300" data-filter="hosts">Hosts</button>
+            <button class="filter-btn px-4 py-1.5 3xl:px-6 3xl:py-3 rounded-full border border-zinc-200 bg-white text-zinc-600 text-xs md:text-sm 3xl:text-base font-semibold transition-all hover:bg-gray-100 hover:border-gray-300" data-filter="operators">Operators</button>
+            <button class="filter-btn px-4 py-1.5 3xl:px-6 3xl:py-3 rounded-full border border-zinc-200 bg-white text-zinc-600 text-xs md:text-sm 3xl:text-base font-semibold transition-all hover:bg-gray-100 hover:border-gray-300" data-filter="sustainability">Sustainability</button>
+        </div>
+    </div>
+
+    <div id="stories-track" class="flex gap-4 3xl:gap-8 w-fit pl-4 md:pl-8 pr-8 items-center h-auto">
+
+        <div class="story-card group relative min-w-[280px] md:min-w-[320px] 3xl:min-w-[450px] h-[350px] md:h-[380px] 3xl:h-[550px] rounded-[1.5rem] overflow-hidden cursor-pointer border border-gray-100 shadow-md shadow-gray-200/50" data-category="ev-users impact">
+            <img src="https://placehold.co/400x600/18181b/ffffff?text=Urban+Living" alt="EV User Story" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+            <div class="absolute inset-0 p-6 3xl:p-10 flex flex-col justify-end text-white">
+                <div class="mb-2">
+                    <span class="text-[9px] 3xl:text-xs uppercase tracking-widest bg-white/20 backdrop-blur-md px-2 py-1 rounded-full border border-white/10">EV Users</span>
+                </div>
+                <h3 class="text-xl 3xl:text-3xl font-bold leading-tight mb-1">The Urban Commuter</h3>
+                <p class="text-xs 3xl:text-base text-gray-300 line-clamp-2">How Sarah switched to electric without a home charger.</p>
+            </div>
+        </div>
+
+        <div class="story-card group relative min-w-[280px] md:min-w-[320px] 3xl:min-w-[450px] h-[350px] md:h-[380px] 3xl:h-[550px] rounded-[1.5rem] overflow-hidden cursor-pointer border border-gray-100 shadow-md shadow-gray-200/50" data-category="hosts places">
+            <img src="https://placehold.co/400x600/064e3b/ffffff?text=Green+Plaza" alt="Host Story" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+            <div class="absolute inset-0 p-6 3xl:p-10 flex flex-col justify-end text-white">
+                <div class="mb-2">
+                    <span class="text-[9px] 3xl:text-xs uppercase tracking-widest bg-emerald-500/80 backdrop-blur-md px-2 py-1 rounded-full border border-emerald-400/20">Hosts</span>
+                </div>
+                <h3 class="text-xl 3xl:text-3xl font-bold leading-tight mb-1">The Green Plaza Hotel</h3>
+                <p class="text-xs 3xl:text-base text-gray-300 line-clamp-2">Attracting new guests with seamless destination charging.</p>
+            </div>
+        </div>
+
+        <div class="story-card group relative min-w-[280px] md:min-w-[320px] 3xl:min-w-[450px] h-[350px] md:h-[380px] 3xl:h-[550px] rounded-[1.5rem] overflow-hidden cursor-pointer border border-gray-100 shadow-md shadow-gray-200/50" data-category="operators sustainability">
+            <img src="https://placehold.co/400x600/3f3f46/ffffff?text=Fleet+Ops" alt="Operator Story" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+            <div class="absolute inset-0 p-6 3xl:p-10 flex flex-col justify-end text-white">
+                <div class="mb-2">
+                    <span class="text-[9px] 3xl:text-xs uppercase tracking-widest bg-blue-500/80 backdrop-blur-md px-2 py-1 rounded-full border border-blue-400/20">Operators</span>
+                </div>
+                <h3 class="text-xl 3xl:text-3xl font-bold leading-tight mb-1">City Fleet Systems</h3>
+                <p class="text-xs 3xl:text-base text-gray-300 line-clamp-2">Managing 500+ chargers with 99.9% uptime.</p>
+            </div>
+        </div>
+
+        <div class="story-card group relative min-w-[280px] md:min-w-[320px] 3xl:min-w-[450px] h-[350px] md:h-[380px] 3xl:h-[550px] rounded-[1.5rem] overflow-hidden cursor-pointer border border-gray-100 shadow-md shadow-gray-200/50" data-category="sustainability impact">
+            <img src="https://placehold.co/400x600/14532d/ffffff?text=Reforest" alt="Sustainability Story" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+            <div class="absolute inset-0 p-6 3xl:p-10 flex flex-col justify-end text-white">
+                <div class="mb-2">
+                    <span class="text-[9px] 3xl:text-xs uppercase tracking-widest bg-lime-500/80 text-black backdrop-blur-md px-2 py-1 rounded-full border border-lime-400/20">Sustainability</span>
+                </div>
+                <h3 class="text-xl 3xl:text-3xl font-bold leading-tight mb-1">Carbon Zero Project</h3>
+                <p class="text-xs 3xl:text-base text-gray-300 line-clamp-2">Offsetting emissions one kilowatt at a time.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="max-w-[1400px] 3xl:max-w-[2000px] mx-auto px-4 md:px-8 mt-8 shrink-0 z-10">
+        <div class="flex justify-center items-center gap-3 group/explore cursor-pointer">
+            <a href="blogs.html" class="px-6 py-3 3xl:px-10 3xl:py-5 bg-zinc-900 text-white rounded-full font-bold text-xs md:text-sm 3xl:text-lg transition-colors duration-300 group-hover/explore:bg-emerald-600">
+                Explore All Pages
+            </a>
+            <a href="blogs.html" class="w-10 h-10 md:w-12 md:h-12 3xl:w-16 3xl:h-16 flex items-center justify-center bg-gray-100 border border-zinc-200 rounded-full text-black transition-all duration-300 group-hover/explore:bg-emerald-600 group-hover/explore:text-white group-hover/explore:border-emerald-600">
+                <i class="bi bi-arrow-right text-base md:text-lg 3xl:text-xl"></i>
+            </a>
+        </div>
+    </div>
+</section>
+<section id="partners-section" class="py-24 bg-white border-t border-gray-200 overflow-hidden relative">
+
+    <div class="max-w-[1400px] 3xl:max-w-[2000px] mx-auto px-4 md:px-8 text-center mb-16">
+        <h2 class="text-3xl md:text-5xl 3xl:text-7xl font-display font-bold tracking-tight text-zinc-900 mb-4">
+            Trusted by partners <br> shaping the electric future
+        </h2>
+    </div>
+
+    <div class="relative w-full max-w-[100vw] overflow-hidden py-4 mb-12 group flex flex-col justify-center">
+
+        <div class="absolute top-0 left-0 w-24 md:w-48 h-full bg-gradient-to-r from-zinc-50 to-transparent z-10 pointer-events-none"></div>
+        <div class="absolute top-0 right-0 w-24 md:w-48 h-full bg-gradient-to-l from-zinc-50 to-transparent z-10 pointer-events-none"></div>
+
+        <div class="w-full overflow-hidden mb-6">
+            <div id="partner-track-top" class="flex items-center gap-6 md:gap-8 3xl:gap-16 w-max will-change-transform px-4">
+
+                <div class="partner-item w-28 h-28 md:w-36 md:h-36 3xl:w-48 3xl:h-48 overflow-hidden border-2 border-white  shrink-0 bg-white grayscale hover:grayscale-0 transition-all duration-500">
+                    <img src="https://revoo-ev.com.pk/static/home/images/logofiamfz1-1.svg"
+                         class="w-full h-full object-contain p-4"
+                         alt="Revoo">
+                </div>
+
+                <div class="partner-item w-28 h-28 md:w-36 md:h-36 3xl:w-48 3xl:h-48 overflow-hidden border-2 border-white  shrink-0 bg-white grayscale hover:grayscale-0 transition-all duration-500">
+                    <img src="https://vlektra.com/wp-content/uploads/2025/03/image-42-e1755686386806.png"
+                         class="w-full h-full object-contain p-4 invert"
+                         alt="Vlektra">
+                </div>
+
+                <div class="partner-item w-28 h-28 md:w-36 md:h-36 3xl:w-48 3xl:h-48  overflow-hidden border-2 border-white  shrink-0 bg-white grayscale hover:grayscale-0 transition-all duration-500">
+                    <img src="https://workhall.co/_next/image?url=%2Fimages%2Fwh.png&w=128&q=100"
+                         class="w-full h-full object-contain p-4"
+                         alt="Orko">
+                </div>
+
+                <div class="partner-item w-28 h-28 md:w-36 md:h-36 3xl:w-48 3xl:h-48 overflow-hidden border-2 border-white shrink-0 bg-white grayscale hover:grayscale-0 transition-all duration-500">
+                    <img src="https://aim-motors.com/wp-content/uploads/2024/08/logo-w1.jpg"
+                         class="w-full h-full object-contain p-4"
+                         alt="AIM Motors">
+                </div>
+
+
+
+            </div>
+        </div>
+
+        <div class="w-full overflow-hidden">
+            <div id="partner-track-bottom" class="flex items-center gap-6 md:gap-8 3xl:gap-16 w-max will-change-transform px-4">
+
+                <div class="partner-item w-28 h-28 md:w-36 md:h-36 3xl:w-48 3xl:h-48  overflow-hidden border-2 border-white  shrink-0 bg-white grayscale hover:grayscale-0 transition-all duration-500">
+                    <img src="img/Black-logo.webp"
+                         class="w-full h-full object-contain p-4"
+                         alt="Sazgar">
+                </div>
+
+                <div class="partner-item w-28 h-28 md:w-36 md:h-36 3xl:w-48 3xl:h-48 overflow-hidden border-2 border-white  shrink-0 bg-white grayscale hover:grayscale-0 transition-all duration-500">
+                    <img src="https://ecodost.com.pk/wp-content/uploads/2024/05/Ecodost-01.svg"
+                         class="w-full h-full object-contain p-4 invert"
+                         alt="Ecodost">
+                </div>
+
+                <div class="partner-item w-28 h-28 md:w-36 md:h-36 3xl:w-48 3xl:h-48  overflow-hidden border-2 border-white shrink-0 bg-white grayscale hover:grayscale-0 transition-all duration-500">
+                    <img src="https://workhall.co/_next/image?url=%2Fimages%2Fwh.png&w=128&q=100"
+                         class="w-full h-full object-contain p-4"
+                         alt="Workhall">
+                </div>
+
+                <div class="partner-item w-28 h-28 md:w-36 md:h-36 3xl:w-48 3xl:h-48 overflow-hidden border-2 border-white  shrink-0 bg-white grayscale hover:grayscale-0 transition-all duration-500">
+                    <img src="https://www.ignitesportspavilion.com/images/ignite_logo.png"
+                         class="w-full h-full object-contain p-4 invert"
+                         alt="Ignite">
+                </div>
+
+
+
+            </div>
+        </div>
+
+    </div>
+
+    <div class="max-w-3xl 3xl:max-w-5xl mx-auto px-4 text-center">
+        <p class="text-lg md:text-xl 3xl:text-3xl text-zinc-500 mb-12 leading-relaxed font-light">
+            From local businesses to large operators, we work with groups bringing cleaner energy to more places.
+        </p>
+
+        <div class="flex justify-center items-center gap-3 group/partner cursor-pointer">
+            <a href="charging-partners.html" class="px-8 py-4 3xl:px-12 3xl:py-6 bg-zinc-900 text-white rounded-full font-bold text-base md:text-lg 3xl:text-2xl transition-colors duration-300 group-hover/partner:bg-emerald-600 shadow-xl">
+                Become A Partner
+            </a>
+            <a href="charging-partners.html" class="w-14 h-14 3xl:w-20 3xl:h-20 flex items-center justify-center bg-gray-100 border border-zinc-200 rounded-full text-black transition-all duration-300 group-hover/partner:bg-emerald-600 group-hover/partner:text-white group-hover/partner:border-emerald-600 shadow-md">
+                <i class="bi bi-arrow-right text-xl 3xl:text-2xl group-hover/partner:-rotate-45 transition-transform duration-300"></i>
+            </a>
+        </div>
+    </div>
+</section>
+
+<style>
+    /* Custom Keyframes for the Team Marquee */
+    @keyframes marquee-up {
+        0% { transform: translateY(0); }
+        100% { transform: translateY(-50%); }
+    }
+    @keyframes marquee-down {
+        0% { transform: translateY(-50%); }
+        100% { transform: translateY(0); }
+    }
+    .animate-marquee-up {
+        animation: marquee-up 30s linear infinite;
+    }
+    .animate-marquee-down {
+        animation: marquee-down 30s linear infinite;
+    }
+    /* Hover state: Pause or Slow down */
+    .group\/card:hover .animate-marquee-up,
+    .group\/card:hover .animate-marquee-down {
+        animation-play-state: paused;
+    }
+</style>
+
+<section id="team-section" class="relative w-full min-h-screen bg-[#e5e5e5] text-black flex flex-col justify-center z-20 py-24">
+
+    <div class="max-w-[1400px] w-full mx-auto px-6 relative flex flex-col justify-center">
+
+        <div class="text-center mb-16 shrink-0">
+            <h2 class="text-3xl md:text-5xl 3xl:text-6xl font-display font-bold leading-tight max-w-7xl mx-auto text-zinc-900 tracking-tight">
+                With a team moving electric forward <br class="hidden md:block">
+                using simple tools and a lot of care.
+            </h2>
+        </div>
+
+        <div class="team-list w-full border-t border-black/10" id="team-accordion-wrapper">
+
+            <div class="team-member border-b border-black/10 overflow-hidden relative">
+                <div class="team-header flex justify-between items-center py-6 cursor-pointer group">
+                    <h3 class="text-3xl md:text-5xl font-bold group-hover:text-[#16a34a] transition-colors">Nashit Iqbal</h3>
+                    <span class="text-sm font-mono uppercase tracking-widest opacity-60 group-hover:opacity-100">Founder</span>
+                </div>
+
+                <div class="team-content overflow-hidden h-0 opacity-0">
+                    <div class="pb-8 pt-4">
+                        <div class="bg-[#022c22] rounded-[2.5rem] p-8 md:p-12 flex flex-col md:flex-row gap-10 items-center shadow-2xl text-white">
+                            <div class="w-full md:w-[320px] h-[380px] bg-white/10 rounded-3xl shrink-0 relative overflow-hidden group/img">
+                                <img src="https://res.cloudinary.com/dk4bqjm38/image/upload/v1770808499/ZV_-_Nashit_q5zunh.png" class="absolute inset-0 w-full h-full object-cover transition-all duration-500" alt="Nashit Iqbal">
+                                <div class="absolute inset-0 bg-gradient-to-tr from-white/20 to-transparent opacity-50"></div>
+                            </div>
+                            <div class="relative pl-0 md:pl-4 max-w-3xl">
+                                <i class="bi bi-quote text-7xl text-[#16a34a] absolute -top-10 -left-8 opacity-30"></i>
+                                <p class="text-3xl md:text-4xl 3xl:text-5xl font-display font-bold leading-tight">
+                                    Who makes things look intentional
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="team-member border-b border-black/10 overflow-hidden relative">
+                <div class="team-header flex justify-between items-center py-6 cursor-pointer group">
+                    <h3 class="text-3xl md:text-5xl font-bold group-hover:text-[#16a34a] transition-colors">Anusha Shahid</h3>
+                    <span class="text-sm font-mono uppercase tracking-widest opacity-60 group-hover:opacity-100">Founder</span>
+                </div>
+
+                <div class="team-content overflow-hidden h-0 opacity-0">
+                    <div class="pb-8 pt-4">
+                        <div class="bg-[#022c22] rounded-[2.5rem] p-8 md:p-12 flex flex-col md:flex-row gap-10 items-center shadow-2xl text-white">
+                            <div class="w-full md:w-[320px] h-[380px] bg-white/10 rounded-3xl shrink-0 relative overflow-hidden group/img">
+                                <img src="https://res.cloudinary.com/dk4bqjm38/image/upload/v1770808499/ZV_-_Anusha_vzwcmd.png" class="absolute inset-0 w-full h-full object-cover transition-all duration-500" alt="Anusha">
+                                <div class="absolute inset-0 bg-gradient-to-tr from-white/20 to-transparent opacity-50"></div>
+                            </div>
+                            <div class="relative pl-0 md:pl-4 max-w-3xl">
+                                <i class="bi bi-quote text-7xl text-[#16a34a] absolute -top-10 -left-8 opacity-30"></i>
+                                <p class="text-3xl md:text-4xl 3xl:text-5xl font-display font-bold leading-tight">
+                                   who makes sure things feel right
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="team-member border-b border-black/10 overflow-hidden relative">
+                <div class="team-header flex justify-between items-center py-6 cursor-pointer group">
+                    <h3 class="text-3xl md:text-5xl font-bold group-hover:text-[#16a34a] transition-colors">The Team</h3>
+                    <span class="text-sm font-mono uppercase tracking-widest opacity-60 group-hover:opacity-100">See All Members</span>
+                </div>
+
+                <div class="team-content overflow-hidden h-0 opacity-0">
+                    <div class="pb-8 pt-4">
+                        <a href="team.html" class="relative block w-full h-[550px] bg-[#022c22] rounded-[2.5rem] overflow-hidden group/card shadow-2xl isolate">
+
+                            <div class="absolute inset-0 grid grid-cols-5 gap-3 p-3 opacity-40 group-hover/card:opacity-20 transition-opacity duration-500">
+
+                                <div class="relative overflow-hidden h-full rounded-2xl bg-white/5">
+                                    <div class="animate-marquee-up flex flex-col gap-3 w-full">
+                                        <img src="https://res.cloudinary.com/dk4bqjm38/image/upload/v1770808499/ZV_-_Nashit_q5zunh.png" class="w-full aspect-[3/4] object-cover rounded-xl" alt="Member">
+                                        <img src="https://res.cloudinary.com/dk4bqjm38/image/upload/v1770808499/ZV_-_Anusha_vzwcmd.png" class="w-full aspect-[3/4] object-cover rounded-xl" alt="Member">
+                                        <img src="https://res.cloudinary.com/dk4bqjm38/image/upload/v1770808499/ZV_-_Anila_tpqzqx.png" class="w-full aspect-[3/4] object-cover rounded-xl" alt="Member">
+                                        <img src="https://res.cloudinary.com/dk4bqjm38/image/upload/v1770808499/ZV_-_Nashit_q5zunh.png" class="w-full aspect-[3/4] object-cover rounded-xl" alt="Member">
+                                        <img src="https://res.cloudinary.com/dk4bqjm38/image/upload/v1770808499/ZV_-_Anusha_vzwcmd.png" class="w-full aspect-[3/4] object-cover rounded-xl" alt="Member">
+                                        <img src="https://res.cloudinary.com/dk4bqjm38/image/upload/v1770808499/ZV_-_Anila_tpqzqx.png" class="w-full aspect-[3/4] object-cover rounded-xl" alt="Member">
+                                    </div>
+                                </div>
+
+                                <div class="relative overflow-hidden h-full rounded-2xl bg-white/5 mt-8">
+                                    <div class="animate-marquee-down flex flex-col gap-3 w-full">
+                                        <img src="https://res.cloudinary.com/dk4bqjm38/image/upload/v1770808499/ZV_-_Anila_tpqzqx.png" class="w-full aspect-[3/4] object-cover rounded-xl" alt="Member">
+                                        <img src="https://res.cloudinary.com/dk4bqjm38/image/upload/v1770808499/ZV_-_Nashit_q5zunh.png" class="w-full aspect-[3/4] object-cover rounded-xl" alt="Member">
+                                        <img src="https://res.cloudinary.com/dk4bqjm38/image/upload/v1770808499/ZV_-_Anusha_vzwcmd.png" class="w-full aspect-[3/4] object-cover rounded-xl" alt="Member">
+                                        <img src="https://res.cloudinary.com/dk4bqjm38/image/upload/v1770808499/ZV_-_Anila_tpqzqx.png" class="w-full aspect-[3/4] object-cover rounded-xl" alt="Member">
+                                        <img src="https://res.cloudinary.com/dk4bqjm38/image/upload/v1770808499/ZV_-_Nashit_q5zunh.png" class="w-full aspect-[3/4] object-cover rounded-xl" alt="Member">
+                                        <img src="https://res.cloudinary.com/dk4bqjm38/image/upload/v1770808499/ZV_-_Anusha_vzwcmd.png" class="w-full aspect-[3/4] object-cover rounded-xl" alt="Member">
+                                    </div>
+                                </div>
+
+                                <div></div>
+
+                                <div class="relative overflow-hidden h-full rounded-2xl bg-white/5">
+                                    <div class="animate-marquee-up flex flex-col gap-3 w-full" style="animation-delay: -5s;">
+                                        <img src="https://res.cloudinary.com/dk4bqjm38/image/upload/v1770808499/ZV_-_Anusha_vzwcmd.png" class="w-full aspect-[3/4] object-cover rounded-xl" alt="Member">
+                                        <img src="https://res.cloudinary.com/dk4bqjm38/image/upload/v1770808499/ZV_-_Anila_tpqzqx.png" class="w-full aspect-[3/4] object-cover rounded-xl" alt="Member">
+                                        <img src="https://res.cloudinary.com/dk4bqjm38/image/upload/v1770808499/ZV_-_Nashit_q5zunh.png" class="w-full aspect-[3/4] object-cover rounded-xl" alt="Member">
+                                        <img src="https://res.cloudinary.com/dk4bqjm38/image/upload/v1770808499/ZV_-_Anusha_vzwcmd.png" class="w-full aspect-[3/4] object-cover rounded-xl" alt="Member">
+                                        <img src="https://res.cloudinary.com/dk4bqjm38/image/upload/v1770808499/ZV_-_Anila_tpqzqx.png" class="w-full aspect-[3/4] object-cover rounded-xl" alt="Member">
+                                        <img src="https://res.cloudinary.com/dk4bqjm38/image/upload/v1770808499/ZV_-_Nashit_q5zunh.png" class="w-full aspect-[3/4] object-cover rounded-xl" alt="Member">
+                                    </div>
+                                </div>
+
+                                <div class="relative overflow-hidden h-full rounded-2xl bg-white/5 mt-8">
+                                    <div class="animate-marquee-down flex flex-col gap-3 w-full" style="animation-delay: -5s;">
+                                        <img src="https://res.cloudinary.com/dk4bqjm38/image/upload/v1770808499/ZV_-_Nashit_q5zunh.png" class="w-full aspect-[3/4] object-cover rounded-xl" alt="Member">
+                                        <img src="https://res.cloudinary.com/dk4bqjm38/image/upload/v1770808499/ZV_-_Anusha_vzwcmd.png" class="w-full aspect-[3/4] object-cover rounded-xl" alt="Member">
+                                        <img src="https://res.cloudinary.com/dk4bqjm38/image/upload/v1770808499/ZV_-_Anila_tpqzqx.png" class="w-full aspect-[3/4] object-cover rounded-xl" alt="Member">
+                                        <img src="https://res.cloudinary.com/dk4bqjm38/image/upload/v1770808499/ZV_-_Nashit_q5zunh.png" class="w-full aspect-[3/4] object-cover rounded-xl" alt="Member">
+                                        <img src="https://res.cloudinary.com/dk4bqjm38/image/upload/v1770808499/ZV_-_Anusha_vzwcmd.png" class="w-full aspect-[3/4] object-cover rounded-xl" alt="Member">
+                                        <img src="https://res.cloudinary.com/dk4bqjm38/image/upload/v1770808499/ZV_-_Anila_tpqzqx.png" class="w-full aspect-[3/4] object-cover rounded-xl" alt="Member">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="absolute inset-0 flex flex-col items-center justify-center text-center z-10 bg-gradient-to-r from-[#022c22]/10 via-[#022c22]/90 to-[#022c22]/10">
+                                <h4 class="text-4xl md:text-7xl font-display font-bold text-white mb-4 drop-shadow-xl">
+                                    Meet the<br>Whole Team
+                                </h4>
+                                <span class="text-emerald-400 font-mono text-sm md:text-base uppercase tracking-[0.2em] mb-8 bg-[#022c22]/80 px-4 py-1 rounded-full border border-emerald-500/20">
+                                    10+ Passionate Builders
+                                </span>
+
+                                <div class="w-20 h-20 rounded-full bg-white text-black flex items-center justify-center shadow-[0_0_40px_rgba(255,255,255,0.3)] transition-transform duration-500 group-hover/card:scale-110 group-hover/card:rotate-[-45deg]">
+                                    <i class="bi bi-arrow-right text-3xl"></i>
+                                </div>
+                            </div>
+
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section id="contact-section" class="py-24 bg-white text-zinc-900 relative border-t border-gray-100 overflow-hidden">
+
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-emerald-500/5 blur-[120px] rounded-full pointer-events-none -z-10"></div>
+
+    <div class="max-w-4xl mx-auto px-6 relative z-10">
+
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-5xl 3xl:text-7xl font-display font-bold tracking-tight text-zinc-900 mb-6">
+                Here to help you <br> take the next step
+            </h2>
+            <p class="text-zinc-500 text-lg md:text-xl font-light max-w-xl mx-auto">
+                Reach out to us for hosting, charging, or software solutions.
+            </p>
+        </div>
+
+        <div class="relative bg-zinc-900 p-8 md:p-14 rounded-[3rem] border border-zinc-800 shadow-2xl shadow-emerald-900/10 overflow-hidden">
+
+            <div class="absolute top-0 right-0 w-64 h-64 bg-emerald-500/10 blur-[80px] rounded-full pointer-events-none"></div>
+
+            <form id="contact-form" action="https://formspree.io/f/mvgrykro" method="POST" class="relative z-10 space-y-8 transition-opacity duration-500">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="group space-y-3">
+                        <label for="name" class="text-xs font-bold text-zinc-500 uppercase tracking-widest pl-5 group-focus-within:text-emerald-400 transition-colors">Name</label>
+                        <input type="text" name="name" id="name" required placeholder="John Doe"
+                               class="w-full h-14 bg-black border border-zinc-800 rounded-full px-6 text-lg text-white placeholder:text-zinc-700 focus:border-emerald-500/50 focus:bg-zinc-950 focus:outline-none focus:ring-4 focus:ring-emerald-500/10 transition-all duration-300">
+                    </div>
+                    <div class="group space-y-3">
+                        <label for="email" class="text-xs font-bold text-zinc-500 uppercase tracking-widest pl-5 group-focus-within:text-emerald-400 transition-colors">Email</label>
+                        <input type="email" name="email" id="email" required placeholder="john@example.com"
+                               class="w-full h-14 bg-black border border-zinc-800 rounded-full px-6 text-lg text-white placeholder:text-zinc-700 focus:border-emerald-500/50 focus:bg-zinc-950 focus:outline-none focus:ring-4 focus:ring-emerald-500/10 transition-all duration-300">
+                    </div>
+                    <div class="group space-y-3 md:col-span-2">
+                        <label for="phone" class="text-xs font-bold text-zinc-500 uppercase tracking-widest pl-5 group-focus-within:text-emerald-400 transition-colors">Phone Number</label>
+                        <input type="tel" name="phone" id="phone" required placeholder="+1 (555) 000-0000"
+                               class="w-full h-14 bg-black border border-zinc-800 rounded-full px-6 text-lg text-white placeholder:text-zinc-700 focus:border-emerald-500/50 focus:bg-zinc-950 focus:outline-none focus:ring-4 focus:ring-emerald-500/10 transition-all duration-300">
+                    </div>
+                </div>
+<div class="group space-y-3 relative">
+    <label class="text-xs font-bold text-zinc-500 uppercase tracking-widest pl-5 group-focus-within:text-emerald-400 transition-colors">How can we help?</label>
+
+    <div id="custom-dropdown" class="relative w-full">
+        <button type="button" id="dropdown-trigger"
+                class="w-full h-14 bg-black border border-zinc-800 rounded-full px-6 text-lg text-white flex items-center justify-between focus:border-emerald-500/50 focus:outline-none focus:ring-4 focus:ring-emerald-500/10 transition-all duration-300">
+            <span id="dropdown-selected-text" class="text-zinc-500">Select an option</span>
+            <i class="bi bi-chevron-down text-emerald-500 transition-transform duration-300" id="dropdown-arrow"></i>
+        </button>
+
+        <ul id="dropdown-menu"
+            class="absolute z-[100] w-full mt-2 bg-zinc-900 border border-zinc-800 rounded-[2rem] overflow-hidden shadow-2xl opacity-0 translate-y-[-10px] pointer-events-none transition-all duration-300">
+            <li class="dropdown-item px-6 py-4 hover:bg-emerald-500 hover:text-white cursor-pointer transition-colors text-white border-b border-white/5" data-value="Hosting">Hosting</li>
+            <li class="dropdown-item px-6 py-4 hover:bg-emerald-500 hover:text-white cursor-pointer transition-colors text-white border-b border-white/5" data-value="Charging">Charging</li>
+            <li class="dropdown-item px-6 py-4 hover:bg-emerald-500 hover:text-white cursor-pointer transition-colors text-white border-b border-white/5" data-value="Software">Software</li>
+            <li class="dropdown-item px-6 py-4 hover:bg-emerald-500 hover:text-white cursor-pointer transition-colors text-white border-b border-white/5" data-value="General Query">General Query</li>
+            <li class="dropdown-item px-6 py-4 hover:bg-emerald-500 hover:text-white cursor-pointer transition-colors text-white border-b border-white/5" data-value="Career">Career Opportunity</li>
+            <li class="dropdown-item px-6 py-4 hover:bg-emerald-500 hover:text-white cursor-pointer transition-colors text-white" data-value="Support">Customer Support</li>
+        </ul>
+
+        <input type="hidden" name="subject" id="dropdown-hidden-input" required>
+    </div>
+</div>
+                <div class="group space-y-3">
+                    <label for="message" class="text-xs font-bold text-zinc-500 uppercase tracking-widest pl-5 group-focus-within:text-emerald-400 transition-colors">Message</label>
+                    <textarea name="message" id="message" rows="5" required placeholder="Tell us how we can help..."
+                              class="w-full bg-black border border-zinc-800 rounded-3xl px-6 py-6 text-lg text-white placeholder:text-zinc-700 focus:border-emerald-500/50 focus:bg-zinc-950 focus:outline-none focus:ring-4 focus:ring-emerald-500/10 transition-all duration-300 resize-none"></textarea>
+                </div>
+
+                <div class="flex flex-col items-center pt-6">
+                    <button type="submit" id="contact-submit-btn" class="group relative px-12 py-5 bg-white text-black rounded-full font-bold text-lg transition-all duration-300 hover:bg-emerald-500 hover:text-white hover:scale-[1.02] hover:shadow-[0_0_30px_-5px_rgba(16,185,129,0.4)] w-full md:w-auto min-w-[240px] overflow-hidden">
+                        <span id="btn-text" class="relative z-10 flex items-center gap-3 justify-center">
+                            Send Message <i class="bi bi-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                        </span>
+                        <div id="btn-loader" class="hidden absolute inset-0 z-20 flex items-center justify-center bg-zinc-900">
+                            <div class="w-6 h-6 border-2 border-white/30 border-t-emerald-500 rounded-full animate-spin"></div>
+                        </div>
+                    </button>
+                    <p id="form-error" class="hidden text-red-400 text-sm mt-4 font-medium flex items-center gap-2">
+                        <i class="bi bi-exclamation-circle-fill"></i> Oops! Submission failed. Please try again.
+                    </p>
+                </div>
+            </form>
+
+            <div id="contact-success" class="hidden absolute inset-0 z-20 flex flex-col items-center justify-center text-center p-8 opacity-0 transition-opacity duration-500 bg-zinc-900/95 backdrop-blur-md rounded-[3rem]">
+                <div class="w-24 h-24 bg-emerald-500/10 text-emerald-500 rounded-full flex items-center justify-center mb-6 shadow-xl shadow-emerald-500/10 border border-emerald-500/20 animate-[bounce_1s_ease-in-out_infinite]">
+                    <i class="bi bi-check-lg text-5xl"></i>
+                </div>
+                <h3 class="text-3xl md:text-4xl font-display font-bold text-white mb-3">Message Sent!</h3>
+                <p class="text-zinc-400 max-w-md text-lg mb-10 leading-relaxed">Thanks for reaching out. We'll get back to you shortly.</p>
+                <button id="reset-form-btn" class="px-8 py-3 bg-white text-black rounded-full font-bold hover:bg-emerald-500 hover:text-white transition-all duration-300">
+                    Send another message
+                </button>
+            </div>
+
+        </div>
+    </div>
+</section>
+<footer class="bg-black text-white pt-24 pb-12 border-t border-white/10 relative overflow-hidden">
+
+    <div class="max-w-[1400px] mx-auto px-6 mb-20 text-center">
+        <h2 class="text-3xl md:text-5xl 3xl:text-7xl font-display font-bold tracking-tight mb-4 md:whitespace-nowrap">
+            Let's move electric forward together.
+        </h2>
+    </div>
+
+    <div class="border-t border-white/10 bg-black">
+        <div class="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-white/10">
+
+            <div class="group p-8 md:p-12 hover:bg-white/5 transition-colors duration-300 flex flex-col h-full min-h-[300px]">
+                 <div class="mb-auto">
+                     <h3 class="text-xl md:text-2xl font-bold mb-6 text-white">Host A Charger</h3>
+                     <ul class="space-y-4 text-zinc-400">
+                        <li><a href="charging-partners.html" class="hover:text-emerald-400 transition-colors block py-1">Charging Partners</a></li>
+                        <li><a href="about-us.html" class="hover:text-emerald-400 transition-colors block py-1">About Us</a></li>
+                     </ul>
+                 </div>
+                 <div class="mt-8 pt-6 border-t border-white/10">
+                    <a href="https://zvolta.com/charging-partners.html" class="flex items-center justify-between text-white font-bold group-hover:text-emerald-400 transition-colors">
+                        Start hosting <i class="bi bi-arrow-right -rotate-45 group-hover:rotate-0 transition-transform duration-300"></i>
+                    </a>
+                 </div>
+            </div>
+
+            <div class="group p-8 md:p-12 hover:bg-white/5 transition-colors duration-300 flex flex-col h-full min-h-[300px]">
+                 <div class="mb-auto">
+                     <h3 class="text-xl md:text-2xl font-bold mb-6 text-white">Charge Your EV</h3>
+                     <ul class="space-y-4 text-zinc-400">
+                        <li><a href="https://zvolta.com/mobile" class="hover:text-emerald-400 transition-colors block py-1">Using the app</a></li>
+                        <li><a href="https://wa.me/+923104446529" target="_blank" class="hover:text-emerald-400 transition-colors block py-1">Charging support</a></li>
+                        <li><a href="Policy.html#standard-service-policy" class="hover:text-emerald-400 transition-colors block py-1">Service Policy</a></li>
+                     </ul>
+                 </div>
+                 <div class="mt-8 pt-6 border-t border-white/10">
+                    <a href="https://zvolta.com/mobile" class="flex items-center justify-between text-white font-bold group-hover:text-emerald-400 transition-colors">
+                        Find A Station <i class="bi bi-arrow-right -rotate-45 group-hover:rotate-0 transition-transform duration-300"></i>
+                    </a>
+                 </div>
+            </div>
+
+            <div class="group p-8 md:p-12 hover:bg-white/5 transition-colors duration-300 flex flex-col h-full min-h-[300px]">
+                 <div class="mb-auto">
+                     <h3 class="text-xl md:text-2xl font-bold mb-6 text-white">Software For Operators</h3>
+                     <ul class="space-y-4 text-zinc-400">
+                        <li class="py-1 opacity-60 cursor-default">Platform overview <span class="text-xs bg-zinc-800 px-2 py-0.5 rounded ml-2 text-zinc-400">Coming Soon</span></li>
+                        <li class="py-1 opacity-60 cursor-default">OCPP compatibility <span class="text-xs bg-zinc-800 px-2 py-0.5 rounded ml-2 text-zinc-400">Coming Soon</span></li>
+                        <li class="py-1 opacity-60 cursor-default">Integrations <span class="text-xs bg-zinc-800 px-2 py-0.5 rounded ml-2 text-zinc-400">Coming Soon</span></li>
+                        <li><a href="contact-us.html" class="hover:text-emerald-400 transition-colors block py-1">Contact Support</a></li>
+                     </ul>
+                 </div>
+                 <div class="mt-8 pt-6 border-t border-white/10">
+                    <a href="contact-us.html" class="flex items-center justify-between text-white font-bold group-hover:text-emerald-400 transition-colors">
+                        Book a demo <i class="bi bi-arrow-right -rotate-45 group-hover:rotate-0 transition-transform duration-300"></i>
+                    </a>
+                 </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="border-y border-white/10 bg-black">
+        <div class="max-w-[1400px] mx-auto py-10 px-6 md:px-12">
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-y-8 gap-x-4 text-zinc-400 text-base font-medium">
+
+                <div class="flex flex-col gap-2">
+                    <a href="coming-soon.html" class="hover:text-white transition-colors">About</a>
+                    <a href="coming-soon.html" class="hover:text-white transition-colors">Careers</a>
+                </div>
+
+                <div class="flex flex-col gap-2">
+                    <a href="blogs.html" class="hover:text-white transition-colors">Stories</a>
+                    <a href="coming-soon.html" class="hover:text-white transition-colors">Contact</a>
+                </div>
+
+                <div class="flex flex-col gap-2">
+                    <a href="coming-soon.html" class="hover:text-white transition-colors">Sustainability</a>
+                    <a href="Policy.html#privacy-policy" class="hover:text-white transition-colors">Privacy Policy</a>
+                </div>
+
+                <div class="flex flex-col gap-2">
+                    <a href="coming-soon.html" class="hover:text-white transition-colors">Team</a>
+                    <a href="charging-partners.html" class="hover:text-white transition-colors">Partners</a>
+                </div>
+
+                <div class="flex flex-col gap-2">
+                    <a href="Policy.html#terms-and-conditions" class="hover:text-white transition-colors">Terms of Service</a>
+                    <a href="coming-soon.html" class="hover:text-white transition-colors">Submit a Report</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-[1400px] mx-auto px-6 pt-12 flex flex-col md:flex-row justify-between items-center gap-6">
+        <div class="flex flex-col md:flex-row items-center gap-6">
+            <img src="img/full_logowhite.png" alt="ZVolta" class="h-8 md:h-10 opacity-90">
+            <div class="hidden md:block w-px h-6 bg-zinc-800"></div>
+            <div class="text-zinc-500 text-sm flex gap-6">
+                <span>© 2025 ZVolta Inc.</span>
+            </div>
+        </div>
+
+        <div class="flex gap-6">
+            <a href="https://www.facebook.com/share/1FUNJfnPd5/?mibextid=wwXIfr" target="_blank" class="text-zinc-500 hover:text-white transition-colors"><i class="bi bi-facebook text-xl"></i></a>
+            <a href="https://www.instagram.com/zvolta.pk" target="_blank" class="text-zinc-500 hover:text-white transition-colors"><i class="bi bi-instagram text-xl"></i></a>
+            <a href="https://wa.me/+923104446529" target="_blank" class="text-zinc-500 hover:text-white transition-colors"><i class="bi bi-whatsapp text-xl"></i></a>
+            <a href="mailto:support@zvolta.com" class="text-zinc-500 hover:text-white transition-colors"><i class="bi bi-envelope text-xl"></i></a>
+        </div>
+    </div>
+
+</footer>
+
+            </div>
+
+        </main>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/Observer.min.js"></script>
+  <script src="js/script.js"></script>
+<div id="virtual-scrollbar-track" class="fixed top-0 right-1 h-full w-1.5 z-[9999] pointer-events-none mix-blend-difference hidden md:block">
+    <div id="virtual-scrollbar-thumb" class="w-full bg-emerald-500 rounded-full absolute top-0 right-0 opacity-0 transition-opacity duration-300"></div>
+</div>
+</body>
+</html>

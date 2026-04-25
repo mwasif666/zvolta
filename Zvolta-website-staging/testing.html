@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Modern Capital Platform</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+            },
+            colors: {
+              orange: {
+                500: '#F97316',
+              }
+            }
+          },
+        },
+      };
+    </script>
+
+    <style>
+        /* --- ADDED THIS FOR BETTER SMOOTH SCROLL --- */
+        body {
+            overscroll-behavior: none;
+        }
+
+        /* Basic syntax highlighting for the demo code */
+        .token-keyword { color: #c792ea; }
+        .token-function { color: #82aaff; }
+        .token-string { color: #c3e88d; }
+        .token-comment { color: #546e7a; }
+        .token-punctuation { color: #89ddff; }
+        .token-tag { color: #f07178; }
+        .token-attr-name { color: #ffcb6b; }
+    </style>
+</head>
+<body class="bg-black text-white font-sans overflow-x-hidden">
+
+    <div id="smooth-wrapper">
+        <div id="smooth-content">
+
+            <header class="absolute top-0 left-0 w-full z-50 p-6 md:px-10">
+                <nav class="max-w-7xl mx-auto flex justify-between items-center">
+                    <div class="flex items-center gap-7">
+                        <a href="#" class="text-xl font-bold border-2 border-white rounded px-1.5 py-0">pipe</a>
+                        <a href="#" class="text-sm font-medium hidden md:block hover:opacity-80 transition-opacity">For Entrepreneurs</a>
+                        <a href="#" class="text-sm font-medium hidden md:block hover:opacity-80 transition-opacity">For Partners</a>
+                    </div>
+                    <div class="flex items-center gap-6">
+                        <a href="#" class="text-sm font-medium hidden md:block hover:opacity-80 transition-opacity">Resources</a>
+                        <a href="#" class="text-sm font-medium hover:opacity-80 transition-opacity">Sign in</a>
+                        <a href="#" class="text-sm font-semibold bg-white text-black px-4 py-2 rounded-full hover:opacity-90 transition-opacity">Get Started</a>
+                    </div>
+                </nav>
+            </header>
+
+            <main class="min-h-[90vh] flex items-center justify-center text-center px-4 pt-32 pb-16">
+                <div class="max-w-4xl mx-auto">
+
+                    <span class="text-xs font-bold text-gray-400 tracking-widest uppercase" data-speed="0.8">
+                        GROW ON YOUR TERMS
+                    </span>
+
+                    <h1 class="text-5xl md:text-7xl lg:text-8xl font-semibold my-4 leading-none" data-speed="0.5">
+                        The modern capital platform
+                        <span class="block">For growth on your terms</span>
+                    </h1>
+
+                    <a href="#" class="inline-block bg-white text-black text-lg font-semibold px-7 py-3.5 rounded-full mt-6 hover:opacity-90 transition-opacity">
+                        Unlock Capital
+                    </a>
+                </div>
+            </main>
+
+            <section class="horizontal-scroll-container relative w-full mb-24">
+                <div class="panels-container flex w-max py-16 pl-10 md:pl-20 lg:pl-40">
+
+                    <div class="panel w-[420px] h-[550px] mr-5 rounded-2xl bg-zinc-900 border border-zinc-800 overflow-hidden shrink-0">
+                        <img src="https://placehold.co/420x550/111111/333333?text=Mobile+UI" alt="Mobile UI Screenshot" class="w-full h-full object-cover">
+                    </div>
+
+                    <div class="panel w-[420px] h-[550px] mr-5 rounded-2xl bg-[#050505] border border-zinc-800 overflow-hidden shrink-0 p-5">
+                        <div class="flex gap-5 pb-3 border-b border-zinc-800 mb-4">
+                            <span class="text-sm font-semibold text-white cursor-pointer">React</span>
+                            <span class="text-sm font-semibold text-gray-500 cursor-pointer hover:text-white">PHP</span>
+                            <span class="text-sm font-semibold text-gray-500 cursor-pointer hover:text-white">Lisp</span>
+                            <span class="text-sm font-semibold text-gray-500 cursor-pointer hover:text-white">Smalltalk</span>
+                            <span class="text-sm font-semibold text-gray-500 cursor-pointer hover:text-white">Brainf...</span>
+                        </div>
+                        <pre><code class="font-mono text-xs leading-relaxed text-gray-400">
+<span class="token-keyword">import</span> React <span class="token-keyword">from</span> <span class="token-string">"react"</span>
+<span class="token-keyword">import</span> <span class="token-punctuation">{</span> PjsEmbed <span class="token-punctuation">}</span> <span class="token-keyword">from</span> <span class="token-string">"@pipe/ui-embeddable"</span>
+
+<span class="token-keyword">function</span> <span class="token-function">PipeEmbedPage</span><span class="token-punctuation">(</span> <span class="token-punctuation">)</span> <span class="token-punctuation">=></span> <span class="token-punctuation">{</span>
+  <span class="token-keyword">return</span> <span class="token-punctuation">(</span>
+    <span class="token-tag">&lt;Layout&gt;</span>
+      <span class="token-tag">&lt;PjsEmbed</span>
+        <span class="token-attr-name">clientName</span><span class="token-punctuation">=</span><span class="token-string">"YOUR_CLIENT_NAME"</span>
+        <span class="token-attr-name">onSuccess</span><span class="token-punctuation">=</span><span class="token-punctuation">{</span> <span class="token-punctuation">(</span><span class="token-attr-name">authCode</span><span class="token-punctuation">)</span> <span class="token-punctuation">=></span> <span class="token-punctuation">{</span>
+          <span class="token-comment">// send authCode to your backend</span>
+        <span class="token-punctuation">}}</span>
+      <span class="token-tag">/&gt;</span>
+    <span class="token-tag">&lt;/Layout&gt;</span>
+  <span class="token-punctuation">)</span>
+<span class="token-punctuation">}</span>
+                        </code></pre>
+                    </div>
+
+                    <div class="panel w-[420px] h-[550px] mr-5 rounded-2xl bg-zinc-900 border border-zinc-800 overflow-hidden shrink-0">
+                        <img src="https://placehold.co/420x550/1c3a4a/ffffff?text=Image+1" alt="Person in blue turtleneck" class="w-full h-full object-cover">
+                    </div>
+
+                    <div class="panel w-[420px] h-[550px] mr-5 rounded-2xl bg-zinc-900 border border-zinc-800 overflow-hidden shrink-0">
+                        <img src="https://placehold.co/420x550/4a3a2a/ffffff?text=Image+2" alt="Person holding paper" class="w-full h-full object-cover">
+                    </div>
+
+                    <div class="panel w-[420px] h-[550px] mr-5 rounded-2xl bg-[#030303] border border-zinc-800 overflow-hidden shrink-0 flex items-center justify-center">
+                        <svg width="144" height="48" viewBox="0 0 144 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M120 2L142 24L120 46" class="stroke-orange-500" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M84 2L106 24L84 46" class="stroke-orange-500" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M0 24H142" class="stroke-orange-500" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+
+                    <div class="panel w-[420px] h-[550px] mr-5 rounded-2xl bg-zinc-900 border border-zinc-800 overflow-hidden shrink-0">
+                        <img src="https://placehold.co/420x550/4a4a2a/ffffff?text=Image+3" alt="Person at desk" class="w-full h-full object-cover">
+                    </div>
+
+                </div>
+            </section>
+
+            <section class="max-w-4xl mx-auto text-center py-24 px-6">
+                <h2 class="text-4xl md:text-5xl font-semibold leading-tight">We’re eliminating the friction and bias of traditional financing,</h2>
+                <p class="text-xl text-gray-400 mt-6 max-w-3xl mx-auto">
+                    connecting business builders to quick, easy capital, and helping small to mid-size businesses build something bigger.
+                </p>
+            </section>
+
+            <footer class="bg-zinc-900/50 border-t border-zinc-800 p-8">
+                <div class="max-w-7xl mx-auto flex flex-wrap justify-center md:justify-around gap-x-10 gap-y-6 text-gray-400">
+                    <div class="flex items-center gap-3 text-sm">
+                        <span class="text-lg text-white">&#9906;</span>
+                        <p>Click, connect, and unlock capital</p>
+                    </div>
+                    <div class="flex items-center gap-3 text-sm">
+                        <span class="text-lg text-white">&#128278;</span>
+                        <p>One flat fee with no hidden interest</p>
+                    </div>
+                    <div class="flex items-center gap-3 text-sm">
+                        <span class="text-lg text-white">&#8646;</span>
+                        <p>Automatic payments that flex with sales</p>
+                    </div>
+                    <div class="flex items-center gap-3 text-sm">
+                        <span class="text-lg text-white">&#9889;</span>
+                        <p>Frictionless payouts in just days</p>
+                    </div>
+                </div>
+            </footer>
+
+        </div> </div> <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollSmoother.min.js"></script>
+
+    <script src="app.js"></script>
+
+</body>
+</html>

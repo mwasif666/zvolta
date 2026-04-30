@@ -1,9 +1,9 @@
-import { SmartLink } from '../../components/SmartLink';
+import { SmartLink } from "../components/SmartLink";
 
 export default function BecomeChargingPartnerPage() {
   return (
     <>
-      <style data-page-style="become-charging-partner.html:1">{`body {
+      <style data-page-style="become-charging-partner:1">{`body {
             font-family: 'Questrial', sans-serif;
         }
         .form-select {
@@ -37,16 +37,16 @@ export default function BecomeChargingPartnerPage() {
         <div
           id="orion-loader"
           style={{
-            position: 'fixed',
+            position: "fixed",
             top: 0,
             left: 0,
-            width: '100%',
-            height: '100%',
-            background: 'white',
+            width: "100%",
+            height: "100%",
+            background: "white",
             zIndex: 9999,
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
           }}
         >
           <div className="orion-loader-logo">
@@ -200,7 +200,7 @@ export default function BecomeChargingPartnerPage() {
                 </SmartLink>
               </div>
               <h2 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-4">
-                Become a{' '}
+                Become a{" "}
                 <span className="gradient-text">Charging Partner.</span>
               </h2>
               <p className="text-gray-600 text-lg mb-8">
@@ -272,8 +272,8 @@ export default function BecomeChargingPartnerPage() {
             className="lg:w-1/2 w-full relative flex items-center justify-center p-8"
             style={{
               backgroundImage: 'url("img/twisty-gradient-2-comp.jpg")',
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
+              backgroundSize: "cover",
+              backgroundPosition: "center",
             }}
           >
             <div className="absolute inset-0 bg-black opacity-25" />
@@ -432,7 +432,7 @@ export default function BecomeChargingPartnerPage() {
                       name="message"
                       rows={4}
                       className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 transition"
-                      defaultValue={''}
+                      defaultValue={""}
                     />
                   </div>
                   <div className="mb-8">
@@ -610,7 +610,7 @@ export default function BecomeChargingPartnerPage() {
                       >
                         <i
                           className="bi bi-facebook"
-                          style={{ fontSize: '1.5rem' }}
+                          style={{ fontSize: "1.5rem" }}
                           aria-hidden="true"
                         />
                       </SmartLink>
@@ -622,7 +622,7 @@ export default function BecomeChargingPartnerPage() {
                       >
                         <i
                           className="bi bi-instagram"
-                          style={{ fontSize: '1.5rem' }}
+                          style={{ fontSize: "1.5rem" }}
                           aria-hidden="true"
                         />
                       </SmartLink>
@@ -634,7 +634,7 @@ export default function BecomeChargingPartnerPage() {
                       >
                         <i
                           className="bi bi-whatsapp"
-                          style={{ fontSize: '1.5rem' }}
+                          style={{ fontSize: "1.5rem" }}
                           aria-hidden="true"
                         />
                       </SmartLink>
@@ -645,7 +645,7 @@ export default function BecomeChargingPartnerPage() {
                       >
                         <i
                           className="bi bi-envelope"
-                          style={{ fontSize: '1.5rem' }}
+                          style={{ fontSize: "1.5rem" }}
                           aria-hidden="true"
                         />
                       </SmartLink>

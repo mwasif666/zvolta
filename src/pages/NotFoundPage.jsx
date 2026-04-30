@@ -1,7 +1,7 @@
 export default function NotFoundPage() {
   return (
     <>
-      <style data-page-style="404.html:1">{`* {
+      <style data-page-style="404:1">{`* {
       line-height: 1.2;
       margin: 0;
     }

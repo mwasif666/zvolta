@@ -1,4 +1,4 @@
-import { SmartLink } from '../../components/SmartLink';
+﻿import { SmartLink } from "../components/SmartLink";
 
 export default function ChargingPartnersPage() {
   return (
@@ -8,14 +8,14 @@ export default function ChargingPartnersPage() {
           id="dynamic-logo"
           href="/"
           className="fixed top-6 left-6 z-[900] w-12 h-12 rounded-full bg-zinc-900/90 backdrop-blur-md border border-white/10 flex items-center justify-center shadow-xl transition-all duration-500 hover:scale-105"
-          style={{ opacity: 1, pointerEvents: 'auto' }}
+          style={{ opacity: 1, pointerEvents: "auto" }}
         >
           <img src="img/symbol logo.png" alt="ZVolta" className="h-6 w-auto" />
         </SmartLink>
         <button
           id="dynamic-sidebar-btn"
           className="fixed top-6 right-6 z-[900] w-12 h-12 rounded-full bg-[#006b45] backdrop-blur-md border border-emerald-500/30 text-white flex items-center justify-center shadow-xl transition-all duration-500 hover:bg-[#008f5d] hover:scale-105 group"
-          style={{ opacity: 1, pointerEvents: 'auto' }}
+          style={{ opacity: 1, pointerEvents: "auto" }}
         >
           <i className="bi bi-list text-2xl group-hover:rotate-180 transition-transform duration-500" />
         </button>
@@ -162,7 +162,7 @@ export default function ChargingPartnersPage() {
             <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-emerald-500/10 blur-[120px] rounded-full pointer-events-none animate-pulse-slow" />
             <div
               className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-emerald-900/10 blur-[100px] rounded-full pointer-events-none animate-pulse-slow"
-              style={{ animationDelay: '2s' }}
+              style={{ animationDelay: "2s" }}
             />
             <div className="max-w-[1400px] w-full mx-auto px-6 grid lg:grid-cols-2 gap-12 lg:gap-16 items-center relative z-10">
               <div className="text-center lg:text-left order-2 lg:order-1 fade-in-up">
@@ -178,8 +178,8 @@ export default function ChargingPartnersPage() {
                 </h1>
                 <p className="text-base sm:text-lg md:text-xl text-gray-300 max-w-xl mx-auto lg:mx-0 leading-relaxed font-light mb-10">
                   Transform your location into a revenue-generating EV hub. We
-                  install, manage, and maintain the chargers—you simply provide
-                  the space.
+                  install, manage, and maintain the chargersâ€”you simply
+                  provide the space.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                   <SmartLink
@@ -200,7 +200,7 @@ export default function ChargingPartnersPage() {
                 <div className="absolute inset-0 border border-white/5 rounded-full scale-90 animate-spin-slow" />
                 <div
                   className="absolute inset-0 border border-emerald-500/10 rounded-full scale-75 animate-spin-slow"
-                  style={{ animationDirection: 'reverse' }}
+                  style={{ animationDirection: "reverse" }}
                 />
                 <div className="relative z-10 w-full h-full flex items-center justify-center transition-transform duration-500 group-hover:scale-105 group-hover:rotate-1 animate-float-slow">
                   <img
@@ -220,7 +220,7 @@ export default function ChargingPartnersPage() {
             <div className="max-w-[1400px] mx-auto px-6">
               <div className="text-center mb-20">
                 <h2 className="text-3xl md:text-5xl font-display font-bold mb-6 text-white">
-                  Simple Path to{' '}
+                  Simple Path to{" "}
                   <span className="text-emerald-500">Income</span>
                 </h2>
                 <p className="text-zinc-400 text-lg max-w-2xl mx-auto">
@@ -510,24 +510,24 @@ export default function ChargingPartnersPage() {
                   className="h-10 w-auto object-contain object-left mb-10 opacity-80"
                 />
                 <h2 className="text-4xl md:text-6xl font-display font-bold mb-6">
-                  Become a <br />{' '}
+                  Become a <br />{" "}
                   <span className="text-emerald-500">Partner</span>.
                 </h2>
                 <p className="text-xl text-zinc-400 mb-10 leading-relaxed">
-                  Join ZVolta’s nationwide network. Fill out the form, and our
+                  Join ZVoltaâ€™s nationwide network. Fill out the form, and our
                   team will get back to you to assess your site.
                 </p>
                 <ul className="space-y-4 text-zinc-300">
                   <li className="flex gap-3">
-                    <i className="bi bi-check-circle-fill text-emerald-500" />{' '}
+                    <i className="bi bi-check-circle-fill text-emerald-500" />{" "}
                     <span>Daily passive income</span>
                   </li>
                   <li className="flex gap-3">
-                    <i className="bi bi-check-circle-fill text-emerald-500" />{' '}
+                    <i className="bi bi-check-circle-fill text-emerald-500" />{" "}
                     <span>Full technical support</span>
                   </li>
                   <li className="flex gap-3">
-                    <i className="bi bi-check-circle-fill text-emerald-500" />{' '}
+                    <i className="bi bi-check-circle-fill text-emerald-500" />{" "}
                     <span>Part of Pakistan's future</span>
                   </li>
                 </ul>
@@ -707,7 +707,7 @@ export default function ChargingPartnersPage() {
                       rows={3}
                       className="w-full bg-zinc-900 border border-zinc-800 rounded-3xl px-6 py-4 text-white placeholder:text-zinc-700 focus:border-emerald-500 focus:outline-none resize-none"
                       placeholder="Additional details..."
-                      defaultValue={''}
+                      defaultValue={""}
                     />
                   </div>
                   <button
@@ -715,7 +715,7 @@ export default function ChargingPartnersPage() {
                     id="submit-button"
                     className="w-full h-16 bg-white text-black rounded-full font-bold text-xl hover:bg-emerald-500 hover:text-white transition-all duration-300 shadow-lg mt-4 flex items-center justify-center gap-3 group"
                   >
-                    Submit Application{' '}
+                    Submit Application{" "}
                     <i className="bi bi-arrow-right group-hover:translate-x-1 transition-transform" />
                   </button>
                 </form>
@@ -791,7 +791,7 @@ export default function ChargingPartnersPage() {
                     href="/charging-partners"
                     className="flex items-center justify-between text-white font-bold group-hover:text-emerald-400 transition-colors"
                   >
-                    Start hosting{' '}
+                    Start hosting{" "}
                     <i className="bi bi-arrow-right -rotate-45 group-hover:rotate-0 transition-transform duration-300" />
                   </SmartLink>
                 </div>
@@ -826,7 +826,7 @@ export default function ChargingPartnersPage() {
                     href="/charge"
                     className="flex items-center justify-between text-white font-bold group-hover:text-emerald-400 transition-colors"
                   >
-                    Find A Station{' '}
+                    Find A Station{" "}
                     <i className="bi bi-arrow-right -rotate-45 group-hover:rotate-0 transition-transform duration-300" />
                   </SmartLink>
                 </div>
@@ -838,7 +838,7 @@ export default function ChargingPartnersPage() {
                   </h3>
                   <ul className="space-y-4 text-zinc-400">
                     <li className="py-1 opacity-60 cursor-default">
-                      Platform overview{' '}
+                      Platform overview{" "}
                       <span className="text-xs bg-zinc-800 px-2 py-0.5 rounded ml-2 text-zinc-400">
                         Coming Soon
                       </span>
@@ -858,7 +858,7 @@ export default function ChargingPartnersPage() {
                     href="/contact-us"
                     className="flex items-center justify-between text-white font-bold group-hover:text-emerald-400 transition-colors"
                   >
-                    Book a demo{' '}
+                    Book a demo{" "}
                     <i className="bi bi-arrow-right -rotate-45 group-hover:rotate-0 transition-transform duration-300" />
                   </SmartLink>
                 </div>
@@ -950,7 +950,7 @@ export default function ChargingPartnersPage() {
               />
               <div className="hidden md:block w-px h-6 bg-zinc-800" />
               <div className="text-zinc-500 text-sm flex gap-6">
-                <span>© 2025 ZVolta Inc.</span>
+                <span>Â© 2025 ZVolta Inc.</span>
               </div>
             </div>
             <div className="flex gap-6">

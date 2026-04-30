@@ -4,57 +4,59 @@ import {
 } from "./generated/page-registry";
 
 const routeLabels = {
-  "404.html": "Page Not Found",
-  "about-us.html": "About Us",
-  "appstore.html": "App Store",
-  "become-charging-partner.html": "Become Charging Partner",
-  "blogs.html": "Blogs",
-  "charge.html": "Charge",
-  "charging-partners.html": "Charging Partners",
-  "coming-soon.html": "Coming Soon",
-  "contact-us.html": "Contact Us",
-  "driver-network.html": "Driver Network",
-  "home.html": "Home Page",
-  "host.html": "Host",
-  "index.html": "Home",
-  "invest-form.html": "Investment Form",
-  "invest.html": "Invest",
-  "Loader.html": "Loader",
-  "mobile.html": "Mobile App",
-  "Policy.html": "Policy",
-  "roi-calculator.html": "ROI Calculator",
-  "software.html": "Software",
-  "team.html": "Team",
-  "testing.html": "Testing",
-  "vehicles.html": "Vehicles",
+  404: "Page Not Found",
+  "about-us": "About Us",
+  appstore: "App Store",
+  "become-charging-partner": "Become Charging Partner",
+  blogs: "Blogs",
+  careers: "Careers",
+  charge: "Charge",
+  "charging-partners": "Charging Partners",
+  "coming-soon": "Coming Soon",
+  "contact-us": "Contact Us",
+  "driver-network": "Driver Network",
+  home: "Home Page",
+  host: "Host",
+  index: "Home",
+  "invest-form": "Investment Form",
+  invest: "Invest",
+  loader: "Loader",
+  mobile: "Mobile App",
+  policy: "Policy",
+  "roi-calculator": "ROI Calculator",
+  software: "Software",
+  team: "Team",
+  testing: "Testing",
+  vehicles: "Vehicles",
 };
 
 const shortRouteLabels = {
-  "become-charging-partner.html": "Become Partner",
-  "charging-partners.html": "Partners",
-  "contact-us.html": "Contact",
-  "driver-network.html": "Drivers",
-  "invest-form.html": "Invest Form",
-  "roi-calculator.html": "ROI",
+  "become-charging-partner": "Become Partner",
+  careers: "Careers",
+  "charging-partners": "Partners",
+  "contact-us": "Contact",
+  "driver-network": "Drivers",
+  "invest-form": "Invest Form",
+  "roi-calculator": "ROI",
 };
 
 const primaryNavigationPageIds = [
-  "index.html",
-  "vehicles.html",
-  "charging-partners.html",
-  "charge.html",
-  "software.html",
-  "invest.html",
-  "contact-us.html",
+  "index",
+  "vehicles",
+  "charging-partners",
+  "charge",
+  "software",
+  "invest",
+  "careers",
+  "contact-us",
 ];
 
-const hiddenNavigationPageIds = new Set(["404.html"]);
+const hiddenNavigationPageIds = new Set(["404"]);
 
 function labelFromPageId(pageId) {
   return (
     routeLabels[pageId] ??
     pageId
-      .replace(/\.html$/i, "")
       .replace(/[-_]+/g, " ")
       .replace(/\b\w/g, (letter) => letter.toUpperCase())
   );
@@ -78,6 +80,12 @@ export const siteRoutes = routeEntries.map((entry) => {
 
 const siteRoutesByPageId = new Map(
   siteRoutes.map((route) => [route.pageId, route]),
+);
+
+const siteRoutesByPath = new Map(
+  siteRoutes.flatMap((route) =>
+    route.paths.map((path) => [path.toLowerCase(), route]),
+  ),
 );
 
 function routesFromPageIds(pageIds) {
@@ -109,43 +117,52 @@ export const footerLinkGroups = [
   {
     title: "Company",
     links: routesFromPageIds([
-      "index.html",
-      "about-us.html",
-      "team.html",
-      "blogs.html",
-      "contact-us.html",
-      "Policy.html",
+      "index",
+      "about-us",
+      "team",
+      "careers",
+      "blogs",
+      "contact-us",
+      "policy",
     ]),
   },
   {
     title: "Charging",
     links: routesFromPageIds([
-      "charge.html",
-      "charging-partners.html",
-      "become-charging-partner.html",
-      "software.html",
-      "host.html",
-      "mobile.html",
-      "appstore.html",
+      "charge",
+      "charging-partners",
+      "become-charging-partner",
+      "software",
+      "host",
+      "mobile",
+      "appstore",
     ]),
   },
   {
     title: "EV Programs",
     links: routesFromPageIds([
-      "vehicles.html",
-      "driver-network.html",
-      "invest.html",
-      "invest-form.html",
-      "Loader.html",
-      "roi-calculator.html",
+      "vehicles",
+      "driver-network",
+      "invest",
+      "invest-form",
+      "loader",
+      "roi-calculator",
     ]),
   },
   {
     title: "Other Pages",
-    links: routesFromPageIds(["home.html", "coming-soon.html", "testing.html"]),
+    links: routesFromPageIds(["home", "coming-soon", "testing"]),
   },
 ];
 
 export function getRouteByPageId(pageId) {
   return siteRoutesByPageId.get(pageId);
+}
+
+export function getRouteByPathname(pathname) {
+  return siteRoutesByPath.get(pathname.toLowerCase());
+}
+
+export function getCanonicalPathname(pathname) {
+  return getRouteByPathname(pathname)?.path ?? pathname;
 }

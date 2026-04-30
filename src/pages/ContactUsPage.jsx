@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { SmartLink } from "../../components/SmartLink";
+import { SmartLink } from "../components/SmartLink";
 
 const dockLinks = [
   {
@@ -170,7 +170,7 @@ export default function ContactUsPage() {
 
   return (
     <>
-      <style data-page-style="contact-us.html:1">{`body {
+      <style data-page-style="contact-us:1">{`body {
         font-family: 'Questrial', sans-serif;
       }
       .form-container-bg {

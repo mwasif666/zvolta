@@ -1,29 +1,18 @@
-import { SmartLink } from '../../components/SmartLink';
+import { SmartLink } from "../components/SmartLink";
 
-export default function AppstorePage() {
+export default function ChargePage() {
   return (
     <>
-      <style data-page-style="appstore.html:1">{`html, body {
+      <style data-page-style="charge:1">{`html, body {
           overflow-x: hidden;
           background-color: #0a0a0a;
       }
       .no-scrollbar::-webkit-scrollbar { display: none; }
       .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-      /* Carousel Mask */
-      .carousel-mask {
-          mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
-          -webkit-mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
-      }
-
-      /* Input Autofill Fix */
-      input:-webkit-autofill,
-      input:-webkit-autofill:hover,
-      input:-webkit-autofill:focus,
-      input:-webkit-autofill:active{
-          -webkit-box-shadow: 0 0 0 30px #0a0a0a inset !important;
-          -webkit-text-fill-color: white !important;
-      }`}</style>
+      /* Loader specific utilities */
+      #loader-blind-top { transform-origin: top; will-change: transform; }
+      #loader-blind-bottom { transform-origin: bottom; will-change: transform; }`}</style>
       <div>
         <div
           id="custom-loader"
@@ -113,7 +102,7 @@ export default function AppstorePage() {
                     href="/#hero-section"
                     className="mobile-menu-link text-5xl md:text-6xl font-display font-bold text-white hover:text-emerald-500 transition-colors flex items-center justify-between group/link"
                   >
-                    Home{' '}
+                    Home{" "}
                     <i className="bi bi-arrow-right text-3xl opacity-0 -translate-x-8 group-hover/link:opacity-100 group-hover/link:translate-x-0 transition-all duration-300 text-emerald-500" />
                   </SmartLink>
                   <div className="h-px bg-white/10 w-full" />
@@ -121,7 +110,7 @@ export default function AppstorePage() {
                     href="/#host"
                     className="mobile-menu-link text-5xl md:text-6xl font-display font-bold text-white hover:text-emerald-500 transition-colors flex items-center justify-between group/link"
                   >
-                    Hosting{' '}
+                    Hosting{" "}
                     <i className="bi bi-arrow-right text-3xl opacity-0 -translate-x-8 group-hover/link:opacity-100 group-hover/link:translate-x-0 transition-all duration-300 text-emerald-500" />
                   </SmartLink>
                   <div className="h-px bg-white/10 w-full" />
@@ -129,7 +118,7 @@ export default function AppstorePage() {
                     href="/#map"
                     className="mobile-menu-link text-5xl md:text-6xl font-display font-bold text-white hover:text-emerald-500 transition-colors flex items-center justify-between group/link"
                   >
-                    Charging{' '}
+                    Charging{" "}
                     <i className="bi bi-arrow-right text-3xl opacity-0 -translate-x-8 group-hover/link:opacity-100 group-hover/link:translate-x-0 transition-all duration-300 text-emerald-500" />
                   </SmartLink>
                   <div className="h-px bg-white/10 w-full" />
@@ -137,7 +126,7 @@ export default function AppstorePage() {
                     href="/#software"
                     className="mobile-menu-link text-5xl md:text-6xl font-display font-bold text-white hover:text-emerald-500 transition-colors flex items-center justify-between group/link"
                   >
-                    Software{' '}
+                    Software{" "}
                     <i className="bi bi-arrow-right text-3xl opacity-0 -translate-x-8 group-hover/link:opacity-100 group-hover/link:translate-x-0 transition-all duration-300 text-emerald-500" />
                   </SmartLink>
                 </nav>
@@ -192,103 +181,38 @@ export default function AppstorePage() {
             </div>
           </div>
         </div>
-        <div className="fixed top-[-20%] left-[-20%] w-[120vw] h-[120vw] bg-emerald-500/10 blur-[100px] rounded-full pointer-events-none z-0" />
+        <div className="fixed top-[-20%] left-[-20%] w-[120vw] h-[120vw] bg-emerald-500/10 blur-[100px] rounded-full pointer-events-none z-0 animate-pulse-slow" />
         <div className="fixed bottom-[-10%] right-[-10%] w-[100vw] h-[100vw] bg-lime-500/5 blur-[120px] rounded-full pointer-events-none z-0" />
-        <main className="relative z-10 flex flex-col items-center justify-center w-full min-h-screen px-4 pt-28 pb-20 max-w-4xl mx-auto">
-          <div className="text-center mb-12 w-full reveal-element opacity-0 translate-y-4">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 text-emerald-400 text-[10px] md:text-xs font-bold tracking-widest uppercase mb-6 backdrop-blur-md shadow-[0_0_20px_rgba(16,185,129,0.2)]">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
-              </span>
-              Arriving 2026
-            </div>
-            <h1 className="text-5xl md:text-7xl font-display font-bold tracking-tight mb-6 leading-[1.05]">
-              The ZVolta App <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-br from-white via-emerald-200 to-emerald-500">
-                Is Almost Here.
-              </span>
-            </h1>
-            <p className="text-zinc-400 text-lg md:text-xl leading-relaxed max-w-lg mx-auto mb-8">
-              Available now on Android. Coming to iOS in 2026.
-            </p>
-            <div className="flex flex-col md:flex-row items-center justify-center gap-4">
-              <SmartLink
-                href="https://play.google.com/store/apps/details?id=app.zvolta.android"
-                target="_blank"
-                className="group relative px-6 py-3 bg-white text-black border border-white rounded-xl flex items-center gap-3 hover:bg-emerald-500 hover:border-emerald-500 hover:text-white transition-all duration-300 shadow-xl hover:shadow-[0_0_20px_rgba(16,185,129,0.4)] transform hover:scale-105"
-              >
-                <i className="bi bi-google-play text-2xl group-hover:scale-110 transition-transform duration-300" />
-                <div className="text-left">
-                  <div className="text-[10px] uppercase tracking-wider font-bold opacity-80">
-                    Get it on
-                  </div>
-                  <div className="text-sm font-bold">Google Play</div>
-                </div>
-              </SmartLink>
-              <div className="group relative px-6 py-3 bg-zinc-900 border border-zinc-800 rounded-xl flex items-center gap-3 cursor-not-allowed opacity-70">
-                <i className="bi bi-apple text-2xl text-zinc-500" />
-                <div className="text-left">
-                  <div className="text-[10px] text-zinc-600 uppercase tracking-wider font-bold">
-                    Coming 2026
-                  </div>
-                  <div className="text-sm font-bold text-zinc-500">
-                    App Store
-                  </div>
-                </div>
-              </div>
-            </div>
+        <main className="relative z-10 w-full min-h-screen flex flex-col items-center justify-center px-6 pt-24 pb-24 text-center">
+          <div className="mb-8 w-24 h-24 rounded-full bg-zinc-900 border border-emerald-500/30 flex items-center justify-center shadow-[0_0_40px_rgba(16,185,129,0.15)] animate-pulse-slow opacity-0 translate-y-4 reveal-element">
+            <i className="bi bi-cone-striped text-4xl text-emerald-500" />
           </div>
-          <div
-            className="relative w-full group reveal-element opacity-0 translate-y-4"
-            style={{ transitionDelay: '0.2s' }}
+          <h1
+            className="text-5xl md:text-7xl font-display font-bold tracking-tight mb-6 opacity-0 translate-y-4 reveal-element"
+            style={{ transitionDelay: "0.1s" }}
           >
-            <button
-              id="scroll-left"
-              className="hidden md:flex absolute -left-4 md:-left-12 top-1/2 -translate-y-1/2 z-30 w-12 h-12 bg-black/50 hover:bg-black/80 text-white rounded-full items-center justify-center backdrop-blur-md border border-white/10 transition-all duration-300 shadow-xl opacity-0 group-hover:opacity-100 disabled:opacity-0 active:scale-95"
-            >
-              <i className="bi bi-chevron-left text-xl" />
-            </button>
-            <div
-              id="screenshot-container"
-              className="carousel-mask w-full overflow-x-auto no-scrollbar flex gap-6 px-16 snap-x snap-mandatory scroll-smooth pb-4"
-            >
-              <div className="snap-center shrink-0">
-                <img
-                  src="img/mobile1.png"
-                  className="w-[260px] md:w-[340px] rounded-3xl shadow-2xl border border-white/10"
-                  alt="App Screenshot 1"
-                />
-              </div>
-              <div className="snap-center shrink-0">
-                <img
-                  src="img/mobile2.png"
-                  className="w-[260px] md:w-[340px] rounded-3xl shadow-2xl border border-white/10"
-                  alt="App Screenshot 2"
-                />
-              </div>
-              <div className="snap-center shrink-0">
-                <img
-                  src="img/mobile3.png"
-                  className="w-[260px] md:w-[340px] rounded-3xl shadow-2xl border border-white/10"
-                  alt="App Screenshot 3"
-                />
-              </div>
-              <div className="snap-center shrink-0">
-                <img
-                  src="img/mobile4.png"
-                  className="w-[260px] md:w-[340px] rounded-3xl shadow-2xl border border-white/10"
-                  alt="App Screenshot 4"
-                />
-              </div>
-            </div>
-            <button
-              id="scroll-right"
-              className="hidden md:flex absolute -right-4 md:-right-12 top-1/2 -translate-y-1/2 z-30 w-12 h-12 bg-black/50 hover:bg-black/80 text-white rounded-full items-center justify-center backdrop-blur-md border border-white/10 transition-all duration-300 shadow-xl opacity-0 group-hover:opacity-100 active:scale-95"
-            >
-              <i className="bi bi-chevron-right text-xl" />
-            </button>
-          </div>
+            Powering <br />{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-emerald-400 to-emerald-600">
+              Up Soon
+            </span>
+          </h1>
+          <p
+            className="text-zinc-400 text-lg md:text-xl max-w-lg mb-10 leading-relaxed opacity-0 translate-y-4 reveal-element"
+            style={{ transitionDelay: "0.2s" }}
+          >
+            This page is currently plugged in and charging. We are building
+            something electric for you.
+          </p>
+          <SmartLink
+            href="/"
+            className="group relative px-8 py-4 bg-zinc-900 text-white rounded-full font-bold text-lg border border-zinc-700 hover:border-emerald-500 transition-all duration-300 opacity-0 translate-y-4 reveal-element hover:bg-emerald-600 hover:text-black hover:shadow-[0_0_30px_rgba(16,185,129,0.4)]"
+            style={{ transitionDelay: "0.3s" }}
+          >
+            <span className="relative z-10 flex items-center gap-2">
+              Return Home{" "}
+              <i className="bi bi-arrow-right transition-transform group-hover:translate-x-1" />
+            </span>
+          </SmartLink>
         </main>
         <footer className="bg-black text-white pt-24 pb-12 border-t border-white/10 relative overflow-hidden z-20">
           <div className="max-w-[1400px] mx-auto px-6 mb-20 text-center">
@@ -343,7 +267,7 @@ export default function AppstorePage() {
                     href="/invest-form"
                     className="flex items-center justify-between text-white font-bold group-hover:text-emerald-400 transition-colors"
                   >
-                    Start hosting{' '}
+                    Start hosting{" "}
                     <i className="bi bi-arrow-right -rotate-45 group-hover:rotate-0 transition-transform duration-300" />
                   </SmartLink>
                 </div>
@@ -393,7 +317,7 @@ export default function AppstorePage() {
                     href="/driver-network"
                     className="flex items-center justify-between text-white font-bold group-hover:text-emerald-400 transition-colors"
                   >
-                    Find A Station{' '}
+                    Find A Station{" "}
                     <i className="bi bi-arrow-right -rotate-45 group-hover:rotate-0 transition-transform duration-300" />
                   </SmartLink>
                 </div>
@@ -443,7 +367,7 @@ export default function AppstorePage() {
                     href="/contact-us"
                     className="flex items-center justify-between text-white font-bold group-hover:text-emerald-400 transition-colors"
                   >
-                    Book a demo{' '}
+                    Book a demo{" "}
                     <i className="bi bi-arrow-right -rotate-45 group-hover:rotate-0 transition-transform duration-300" />
                   </SmartLink>
                 </div>

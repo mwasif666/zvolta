@@ -1,12 +1,6 @@
 import { Suspense, lazy, useEffect, useMemo } from "react";
 import { createRoot } from "react-dom/client";
-import {
-  BrowserRouter,
-  Route,
-  Routes,
-  useLocation,
-  useNavigate,
-} from "react-router-dom";
+import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import "./index.css";
 import { SiteLayout } from "./components/SiteLayout";
 import { routeEntries } from "./routes";
@@ -14,109 +8,9 @@ import { useLegacyPageRuntime } from "./lib/legacy-page-runtime";
 
 function loadNotFoundPage() {
   const notFoundRoute =
-    routeEntries.find((entry) => entry.pageId === "404.html") ??
-    routeEntries[0];
+    routeEntries.find((entry) => entry.pageId === "404") ?? routeEntries[0];
 
   return notFoundRoute?.load;
-}
-
-function getCanonicalPathname(pathname) {
-  if (!pathname) {
-    return pathname;
-  }
-
-  if (pathname === "/index.html") {
-    return "/";
-  }
-
-  const routeEntry = routeEntries.find((entry) =>
-    entry.paths.some(
-      (candidate) => candidate.toLowerCase() === pathname.toLowerCase(),
-    ),
-  );
-
-  return routeEntry?.paths[0] ?? pathname;
-}
-
-function normalizeInternalPath(url) {
-  const canonicalPathname = getCanonicalPathname(url.pathname);
-  return `${canonicalPathname}${url.search}${url.hash}`;
-}
-
-function shouldHandleClientNavigation(anchor, event) {
-  if (!anchor) {
-    return false;
-  }
-
-  if (
-    event.defaultPrevented ||
-    event.button !== 0 ||
-    anchor.target === "_blank" ||
-    anchor.hasAttribute("download") ||
-    event.metaKey ||
-    event.ctrlKey ||
-    event.shiftKey ||
-    event.altKey
-  ) {
-    return false;
-  }
-
-  const rawHref = anchor.getAttribute("href");
-
-  if (!rawHref || rawHref.startsWith("#")) {
-    return false;
-  }
-
-  if (/^(mailto:|tel:|javascript:)/i.test(rawHref)) {
-    return false;
-  }
-
-  const resolvedUrl = new URL(anchor.href, window.location.href);
-
-  if (resolvedUrl.origin !== window.location.origin) {
-    return false;
-  }
-
-  return (
-    /\.(html)?$/i.test(resolvedUrl.pathname) ||
-    routeEntries.some((entry) => entry.paths.includes(resolvedUrl.pathname))
-  );
-}
-
-function NavigationController() {
-  const navigate = useNavigate();
-  const location = useLocation();
-
-  useEffect(() => {
-    const canonicalPath = getCanonicalPathname(location.pathname);
-
-    if (canonicalPath !== location.pathname) {
-      navigate(`${canonicalPath}${location.search}${location.hash}`, {
-        replace: true,
-      });
-    }
-  }, [location.hash, location.pathname, location.search, navigate]);
-
-  useEffect(() => {
-    const handleClick = (event) => {
-      const anchor = event.target.closest("a");
-
-      if (!shouldHandleClientNavigation(anchor, event)) {
-        return;
-      }
-
-      const nextUrl = new URL(anchor.href, window.location.href);
-      const nextPath = normalizeInternalPath(nextUrl);
-
-      event.preventDefault();
-      navigate(nextPath);
-    };
-
-    document.addEventListener("click", handleClick);
-    return () => document.removeEventListener("click", handleClick);
-  }, [navigate]);
-
-  return null;
 }
 
 function ScrollController() {
@@ -180,37 +74,33 @@ function AppRouter() {
 
   return (
     <BrowserRouter>
-      <NavigationController />
       <ScrollController />
       <SiteLayout>
         <Routes>
           {routeEntries
-            .filter((entry) => entry.pageId !== "404.html")
-            .flatMap((entry) =>
-              entry.paths.map((routePath) => (
-                <Route
-                  key={`${entry.pageId}:${routePath}`}
-                  path={routePath}
-                  element={
-                    <RoutedPage
-                      loadPage={entry.load}
-                      pageId={entry.pageId}
-                      meta={entry.meta}
-                    />
-                  }
-                />
-              )),
-            )}
+            .filter((entry) => entry.pageId !== "404")
+            .map((entry) => (
+              <Route
+                key={`${entry.pageId}:${entry.paths[0]}`}
+                path={entry.paths[0]}
+                element={
+                  <RoutedPage
+                    loadPage={entry.load}
+                    pageId={entry.pageId}
+                    meta={entry.meta}
+                  />
+                }
+              />
+            ))}
           {notFoundLoader ? (
             <Route
               path="*"
               element={
                 <RoutedPage
                   loadPage={notFoundLoader}
-                  pageId="404.html"
+                  pageId="404"
                   meta={
-                    routeEntries.find((entry) => entry.pageId === "404.html")
-                      ?.meta
+                    routeEntries.find((entry) => entry.pageId === "404")?.meta
                   }
                 />
               }

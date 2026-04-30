@@ -1,9 +1,9 @@
-import { SmartLink } from '../../components/SmartLink';
+import { SmartLink } from "../components/SmartLink";
 
 export default function DriverNetworkPage() {
   return (
     <>
-      <style data-page-style="driver-network.html:1">{`html { scroll-behavior: smooth; }
+      <style data-page-style="driver-network:1">{`html { scroll-behavior: smooth; }
 
         .steps-container::before {
             content: ''; position: absolute; top: 56px; left: 10%; right: 10%; height: 2px;
@@ -161,7 +161,7 @@ export default function DriverNetworkPage() {
         <main className="pt-24">
           <section
             className="grid grid-cols-1 lg:grid-cols-2"
-            style={{ minHeight: 'calc(100vh - 96px)' }}
+            style={{ minHeight: "calc(100vh - 96px)" }}
           >
             <div className="flex flex-col justify-center bg-gray-50 px-6 sm:px-12 lg:px-16 py-20 lg:py-0">
               <div className="max-w-xl mx-auto lg:mx-0">
@@ -171,7 +171,7 @@ export default function DriverNetworkPage() {
                 >
                   Drive <b>Your</b> Future.
                   <br />
-                  Earn On{' '}
+                  Earn On{" "}
                   <em className="not-italic text-primary-emerald font-bold">
                     Your
                   </em>
@@ -371,7 +371,7 @@ export default function DriverNetworkPage() {
                         />
                       </svg>
                       <div>
-                        <span className="font-bold">Zero Downpayment.</span>{' '}
+                        <span className="font-bold">Zero Downpayment.</span>{" "}
                         Save your self from initial up-front partial payment
                       </div>
                     </li>
@@ -388,7 +388,7 @@ export default function DriverNetworkPage() {
                         />
                       </svg>
                       <div>
-                        <span className="font-bold">Modern, Reliable EVs.</span>{' '}
+                        <span className="font-bold">Modern, Reliable EVs.</span>{" "}
                         Access our fleet of GPS-enabled, well-maintained
                         electric vehicles with 24/7 support and service.
                       </div>
@@ -575,7 +575,7 @@ export default function DriverNetworkPage() {
                       >
                         <i
                           className="bi bi-facebook"
-                          style={{ fontSize: '1.5rem' }}
+                          style={{ fontSize: "1.5rem" }}
                           aria-hidden="true"
                         />
                       </SmartLink>
@@ -587,7 +587,7 @@ export default function DriverNetworkPage() {
                       >
                         <i
                           className="bi bi-instagram"
-                          style={{ fontSize: '1.5rem' }}
+                          style={{ fontSize: "1.5rem" }}
                           aria-hidden="true"
                         />
                       </SmartLink>
@@ -599,7 +599,7 @@ export default function DriverNetworkPage() {
                       >
                         <i
                           className="bi bi-whatsapp"
-                          style={{ fontSize: '1.5rem' }}
+                          style={{ fontSize: "1.5rem" }}
                           aria-hidden="true"
                         />
                       </SmartLink>
@@ -610,7 +610,7 @@ export default function DriverNetworkPage() {
                       >
                         <i
                           className="bi bi-envelope"
-                          style={{ fontSize: '1.5rem' }}
+                          style={{ fontSize: "1.5rem" }}
                           aria-hidden="true"
                         />
                       </SmartLink>

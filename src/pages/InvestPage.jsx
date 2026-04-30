@@ -1,4 +1,4 @@
-import { SmartLink } from '../../components/SmartLink';
+﻿import { SmartLink } from "../components/SmartLink";
 
 export default function InvestPage() {
   return (
@@ -232,7 +232,7 @@ export default function InvestPage() {
               <section className="py-24 px-6 bg-white relative border-t border-gray-100">
                 <div className="max-w-7xl mx-auto text-center mb-20">
                   <h2 className="text-4xl md:text-6xl font-display font-bold text-zinc-900 mb-6">
-                    A Simple Path to <br />{' '}
+                    A Simple Path to <br />{" "}
                     <span className="text-emerald-600">Passive Income</span>
                   </h2>
                   <p className="text-xl text-zinc-500 max-w-2xl mx-auto">
@@ -300,7 +300,7 @@ export default function InvestPage() {
                     </div>
                     <div className="md:w-1/2 p-10 md:p-16">
                       <h2 className="text-3xl md:text-5xl font-display font-bold mb-6">
-                        No Driving. No Maintenance. <br />{' '}
+                        No Driving. No Maintenance. <br />{" "}
                         <span className="text-emerald-500">
                           We Manage Everything.
                         </span>
@@ -328,7 +328,7 @@ export default function InvestPage() {
                       <i className="bi bi-question-lg text-3xl text-emerald-600" />
                     </div>
                     <h2 className="text-4xl md:text-5xl font-display font-bold text-zinc-900 mb-6">
-                      What would you like to know about{' '}
+                      What would you like to know about{" "}
                       <span className="text-emerald-600">ZVolta?</span>
                     </h2>
                     <SmartLink
@@ -669,7 +669,7 @@ export default function InvestPage() {
                           href="/invest-form"
                           className="flex items-center justify-between text-white font-bold group-hover:text-emerald-400 transition-colors"
                         >
-                          Start hosting{' '}
+                          Start hosting{" "}
                           <i className="bi bi-arrow-right -rotate-45 group-hover:rotate-0 transition-transform duration-300" />
                         </SmartLink>
                       </div>
@@ -719,7 +719,7 @@ export default function InvestPage() {
                           href="/driver-network"
                           className="flex items-center justify-between text-white font-bold group-hover:text-emerald-400 transition-colors"
                         >
-                          Find A Station{' '}
+                          Find A Station{" "}
                           <i className="bi bi-arrow-right -rotate-45 group-hover:rotate-0 transition-transform duration-300" />
                         </SmartLink>
                       </div>
@@ -769,7 +769,7 @@ export default function InvestPage() {
                           href="/contact-us"
                           className="flex items-center justify-between text-white font-bold group-hover:text-emerald-400 transition-colors"
                         >
-                          Book a demo{' '}
+                          Book a demo{" "}
                           <i className="bi bi-arrow-right -rotate-45 group-hover:rotate-0 transition-transform duration-300" />
                         </SmartLink>
                       </div>
@@ -785,7 +785,7 @@ export default function InvestPage() {
                     />
                     <div className="hidden md:block w-px h-6 bg-zinc-800" />
                     <div className="text-zinc-500 text-sm flex gap-6">
-                      <span>© 2025 ZVolta Inc.</span>
+                      <span>Â© 2025 ZVolta Inc.</span>
                       <SmartLink
                         href="/policy#privacy-policy"
                         className="hover:text-white transition-colors"

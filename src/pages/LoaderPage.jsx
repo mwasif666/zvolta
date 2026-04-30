@@ -1,7 +1,7 @@
 export default function LoaderPage() {
   return (
     <>
-      <style data-page-style="Loader.html:1">{`/* Loader Background */
+      <style data-page-style="loader:1">{`/* Loader Background */
 #orion-loader {
   position: fixed;
   top: 0;

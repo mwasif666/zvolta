@@ -1,9 +1,9 @@
-import { SmartLink } from '../../components/SmartLink';
+import { SmartLink } from "../components/SmartLink";
 
 export default function VehiclesPage() {
   return (
     <>
-      <style data-page-style="vehicles.html:1">{`/* =========================================
+      <style data-page-style="vehicles:1">{`/* =========================================
            PAGE-SPECIFIC STYLING (Preserved)
            ========================================= */
 
@@ -305,7 +305,7 @@ export default function VehiclesPage() {
                           For Every Passenger
                         </h3>
                         <p className="text-green-400 font-semibold flex items-center gap-2 font-mono text-sm">
-                          Explore Passenger EVs{' '}
+                          Explore Passenger EVs{" "}
                           <i className="fas fa-arrow-right group-hover:translate-x-1 transition-transform" />
                         </p>
                       </div>
@@ -324,7 +324,7 @@ export default function VehiclesPage() {
                           For Every Load
                         </h3>
                         <p className="text-green-400 font-semibold flex items-center gap-2 font-mono text-sm">
-                          Explore Loader EVs{' '}
+                          Explore Loader EVs{" "}
                           <i className="fas fa-arrow-right group-hover:translate-x-1 transition-transform" />
                         </p>
                       </div>
@@ -531,7 +531,7 @@ export default function VehiclesPage() {
                             href="/invest-form"
                             className="flex items-center justify-between text-white font-bold group-hover:text-emerald-400 transition-colors"
                           >
-                            Start hosting{' '}
+                            Start hosting{" "}
                             <i className="bi bi-arrow-right -rotate-45 group-hover:rotate-0 transition-transform duration-300" />
                           </SmartLink>
                         </div>
@@ -581,7 +581,7 @@ export default function VehiclesPage() {
                             href="/driver-network"
                             className="flex items-center justify-between text-white font-bold group-hover:text-emerald-400 transition-colors"
                           >
-                            Find A Station{' '}
+                            Find A Station{" "}
                             <i className="bi bi-arrow-right -rotate-45 group-hover:rotate-0 transition-transform duration-300" />
                           </SmartLink>
                         </div>
@@ -631,7 +631,7 @@ export default function VehiclesPage() {
                             href="/contact-us"
                             className="flex items-center justify-between text-white font-bold group-hover:text-emerald-400 transition-colors"
                           >
-                            Book a demo{' '}
+                            Book a demo{" "}
                             <i className="bi bi-arrow-right -rotate-45 group-hover:rotate-0 transition-transform duration-300" />
                           </SmartLink>
                         </div>

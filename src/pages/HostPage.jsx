@@ -1,9 +1,9 @@
-import { SmartLink } from '../../components/SmartLink';
+import { SmartLink } from "../components/SmartLink";
 
-export default function ComingSoonPage() {
+export default function HostPage() {
   return (
     <>
-      <style data-page-style="coming-soon.html:1">{`html, body {
+      <style data-page-style="host:1">{`html, body {
           overflow-x: hidden;
           background-color: #0a0a0a;
       }
@@ -102,7 +102,7 @@ export default function ComingSoonPage() {
                     href="/#hero-section"
                     className="mobile-menu-link text-5xl md:text-6xl font-display font-bold text-white hover:text-emerald-500 transition-colors flex items-center justify-between group/link"
                   >
-                    Home{' '}
+                    Home{" "}
                     <i className="bi bi-arrow-right text-3xl opacity-0 -translate-x-8 group-hover/link:opacity-100 group-hover/link:translate-x-0 transition-all duration-300 text-emerald-500" />
                   </SmartLink>
                   <div className="h-px bg-white/10 w-full" />
@@ -110,7 +110,7 @@ export default function ComingSoonPage() {
                     href="/#host"
                     className="mobile-menu-link text-5xl md:text-6xl font-display font-bold text-white hover:text-emerald-500 transition-colors flex items-center justify-between group/link"
                   >
-                    Hosting{' '}
+                    Hosting{" "}
                     <i className="bi bi-arrow-right text-3xl opacity-0 -translate-x-8 group-hover/link:opacity-100 group-hover/link:translate-x-0 transition-all duration-300 text-emerald-500" />
                   </SmartLink>
                   <div className="h-px bg-white/10 w-full" />
@@ -118,7 +118,7 @@ export default function ComingSoonPage() {
                     href="/#map"
                     className="mobile-menu-link text-5xl md:text-6xl font-display font-bold text-white hover:text-emerald-500 transition-colors flex items-center justify-between group/link"
                   >
-                    Charging{' '}
+                    Charging{" "}
                     <i className="bi bi-arrow-right text-3xl opacity-0 -translate-x-8 group-hover/link:opacity-100 group-hover/link:translate-x-0 transition-all duration-300 text-emerald-500" />
                   </SmartLink>
                   <div className="h-px bg-white/10 w-full" />
@@ -126,7 +126,7 @@ export default function ComingSoonPage() {
                     href="/#software"
                     className="mobile-menu-link text-5xl md:text-6xl font-display font-bold text-white hover:text-emerald-500 transition-colors flex items-center justify-between group/link"
                   >
-                    Software{' '}
+                    Software{" "}
                     <i className="bi bi-arrow-right text-3xl opacity-0 -translate-x-8 group-hover/link:opacity-100 group-hover/link:translate-x-0 transition-all duration-300 text-emerald-500" />
                   </SmartLink>
                 </nav>
@@ -189,16 +189,16 @@ export default function ComingSoonPage() {
           </div>
           <h1
             className="text-5xl md:text-7xl font-display font-bold tracking-tight mb-6 opacity-0 translate-y-4 reveal-element"
-            style={{ transitionDelay: '0.1s' }}
+            style={{ transitionDelay: "0.1s" }}
           >
-            Powering <br />{' '}
+            Powering <br />{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-emerald-400 to-emerald-600">
               Up Soon
             </span>
           </h1>
           <p
             className="text-zinc-400 text-lg md:text-xl max-w-lg mb-10 leading-relaxed opacity-0 translate-y-4 reveal-element"
-            style={{ transitionDelay: '0.2s' }}
+            style={{ transitionDelay: "0.2s" }}
           >
             This page is currently plugged in and charging. We are building
             something electric for you.
@@ -206,10 +206,10 @@ export default function ComingSoonPage() {
           <SmartLink
             href="/"
             className="group relative px-8 py-4 bg-zinc-900 text-white rounded-full font-bold text-lg border border-zinc-700 hover:border-emerald-500 transition-all duration-300 opacity-0 translate-y-4 reveal-element hover:bg-emerald-600 hover:text-black hover:shadow-[0_0_30px_rgba(16,185,129,0.4)]"
-            style={{ transitionDelay: '0.3s' }}
+            style={{ transitionDelay: "0.3s" }}
           >
             <span className="relative z-10 flex items-center gap-2">
-              Return Home{' '}
+              Return Home{" "}
               <i className="bi bi-arrow-right transition-transform group-hover:translate-x-1" />
             </span>
           </SmartLink>
@@ -267,7 +267,7 @@ export default function ComingSoonPage() {
                     href="/invest-form"
                     className="flex items-center justify-between text-white font-bold group-hover:text-emerald-400 transition-colors"
                   >
-                    Start hosting{' '}
+                    Start hosting{" "}
                     <i className="bi bi-arrow-right -rotate-45 group-hover:rotate-0 transition-transform duration-300" />
                   </SmartLink>
                 </div>
@@ -317,7 +317,7 @@ export default function ComingSoonPage() {
                     href="/driver-network"
                     className="flex items-center justify-between text-white font-bold group-hover:text-emerald-400 transition-colors"
                   >
-                    Find A Station{' '}
+                    Find A Station{" "}
                     <i className="bi bi-arrow-right -rotate-45 group-hover:rotate-0 transition-transform duration-300" />
                   </SmartLink>
                 </div>
@@ -367,7 +367,7 @@ export default function ComingSoonPage() {
                     href="/contact-us"
                     className="flex items-center justify-between text-white font-bold group-hover:text-emerald-400 transition-colors"
                   >
-                    Book a demo{' '}
+                    Book a demo{" "}
                     <i className="bi bi-arrow-right -rotate-45 group-hover:rotate-0 transition-transform duration-300" />
                   </SmartLink>
                 </div>

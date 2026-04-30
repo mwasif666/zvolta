@@ -9,41 +9,48 @@
   </url>
 
   <url>
-    <loc>https://www.zvolta.com/about-us.html</loc>
+    <loc>https://www.zvolta.com/about-us</loc>
     <lastmod>2025-08-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://www.zvolta.com/charging-partners.html</loc>
+    <loc>https://www.zvolta.com/charging-partners</loc>
     <lastmod>2025-08-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
-    <loc>https://www.zvolta.com/vehicles.html</loc>
+    <loc>https://www.zvolta.com/vehicles</loc>
     <lastmod>2025-08-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
-    <loc>https://www.zvolta.com/driver-network.html</loc>
+    <loc>https://www.zvolta.com/driver-network</loc>
     <lastmod>2025-08-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
-    <loc>https://www.zvolta.com/invest.html</loc>
+    <loc>https://www.zvolta.com/careers</loc>
+    <lastmod>2026-04-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.zvolta.com/invest</loc>
     <lastmod>2025-08-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 <url>
-    <loc>https://www.zvolta.com/Policy.html</loc>
+    <loc>https://www.zvolta.com/policy</loc>
     <lastmod>2025-08-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>

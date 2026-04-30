@@ -1,9 +1,9 @@
-import { SmartLink } from '../../components/SmartLink';
+import { SmartLink } from "../components/SmartLink";
 
 export default function AboutUsPage() {
   return (
     <>
-      <style data-page-style="about-us.html:1">{`body {
+      <style data-page-style="about-us:1">{`body {
             font-family: 'Questrial', sans-serif;
             background-color: #f8fafc;
         }
@@ -358,7 +358,7 @@ export default function AboutUsPage() {
               About Us
             </div>
             <h1 className="text-4xl md:text-6xl font-bold text-gray-800">
-              ZVolta is building the{' '}
+              ZVolta is building the{" "}
               <span className="shiny-text light-bg">
                 future of electric mobility.
               </span>
@@ -459,7 +459,7 @@ export default function AboutUsPage() {
                 </div>
                 <div
                   className="absolute inset-0 user-select-none"
-                  style={{ clipPath: 'inset(0 50% 0 0)' }}
+                  style={{ clipPath: "inset(0 50% 0 0)" }}
                 >
                   <img
                     src="https://th-i.thgim.com/public/migration_catalog/article13518136.ece/alternates/FREE_1200/HY19POLUTINGAUTO"
@@ -473,7 +473,7 @@ export default function AboutUsPage() {
                 </div>
                 <div
                   className="slider-handle absolute inset-y-0"
-                  style={{ left: '50%' }}
+                  style={{ left: "50%" }}
                 >
                   <div className="h-full w-1 bg-white" />
                   <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 p-2 rounded-full bg-white shadow-lg cursor-pointer">
@@ -604,7 +604,7 @@ export default function AboutUsPage() {
                       >
                         <i
                           className="bi bi-facebook"
-                          style={{ fontSize: '1.5rem' }}
+                          style={{ fontSize: "1.5rem" }}
                           aria-hidden="true"
                         />
                       </SmartLink>
@@ -616,7 +616,7 @@ export default function AboutUsPage() {
                       >
                         <i
                           className="bi bi-instagram"
-                          style={{ fontSize: '1.5rem' }}
+                          style={{ fontSize: "1.5rem" }}
                           aria-hidden="true"
                         />
                       </SmartLink>
@@ -628,7 +628,7 @@ export default function AboutUsPage() {
                       >
                         <i
                           className="bi bi-whatsapp"
-                          style={{ fontSize: '1.5rem' }}
+                          style={{ fontSize: "1.5rem" }}
                           aria-hidden="true"
                         />
                       </SmartLink>
@@ -639,7 +639,7 @@ export default function AboutUsPage() {
                       >
                         <i
                           className="bi bi-envelope"
-                          style={{ fontSize: '1.5rem' }}
+                          style={{ fontSize: "1.5rem" }}
                           aria-hidden="true"
                         />
                       </SmartLink>

@@ -1,8 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { useLocation } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import { footerLinkGroups, getRouteByPageId } from "../routes";
-import { SmartLink } from "./SmartLink";
 
 const MENU_CLOSE_DURATION_MS = 900;
 
@@ -61,6 +60,14 @@ function MenuCardIcon({ type }) {
     );
   }
 
+  if (type === "briefcase") {
+    return (
+      <svg {...commonProps}>
+        <path d="M9 4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2h4.25A2.75 2.75 0 0 1 22 8.75v8.5A2.75 2.75 0 0 1 19.25 20H4.75A2.75 2.75 0 0 1 2 17.25v-8.5A2.75 2.75 0 0 1 4.75 6H9V4Zm4 2V4h-2v2h2Zm7 6.2V8.75A.75.75 0 0 0 19.25 8H4.75A.75.75 0 0 0 4 8.75v3.45c2.35 1.12 4.94 1.68 8 1.68s5.65-.56 8-1.68ZM4 14.35v2.9c0 .41.34.75.75.75h14.5c.41 0 .75-.34.75-.75v-2.9c-2.42 1-5.02 1.5-8 1.5s-5.58-.5-8-1.5Z" />
+      </svg>
+    );
+  }
+
   return (
     <svg {...commonProps}>
       <path d="M4 21V9l8-5 8 5v12h-6v-6h-4v6H4Zm3-2h1v-2H7v2Zm0-4h1v-2H7v2Zm0-4h1V9H7v2Zm4 0h2V9h-2v2Zm5 0h1V9h-1v2Zm0 4h1v-2h-1v2Zm0 4h1v-2h-1v2Z" />
@@ -69,35 +76,31 @@ function MenuCardIcon({ type }) {
 }
 
 function DockLink({ route, pathname, children, className = "", onClick }) {
-  const isActive = isRouteActive(route, pathname);
-
   return (
-    <SmartLink
-      href={route.path}
-      className={[
-        "dock-pill-link relative z-10 rounded-full px-4 py-2 text-xs font-bold transition-colors",
-        isActive ? "bg-white/10 text-white" : "text-white/60 hover:text-white",
-        className,
-      ].join(" ")}
+    <NavLink
+      to={route.path}
+      className={({ isActive }) =>
+        [
+          "dock-pill-link relative z-10 rounded-full px-4 py-2 text-xs font-bold transition-colors",
+          isActive || isRouteActive(route, pathname)
+            ? "bg-white/10 text-white"
+            : "text-white/60 hover:text-white",
+          className,
+        ].join(" ")
+      }
       onClick={onClick}
     >
       {children ?? route.shortLabel}
-    </SmartLink>
+    </NavLink>
   );
 }
 
-function MenuLink({
-  item,
-  pathname,
-  onClick,
-  openDelay,
-  closeDelay,
-}) {
+function MenuLink({ item, onClick, openDelay, closeDelay }) {
   const { route, label } = item;
 
   return (
-    <SmartLink
-      href={route.path}
+    <NavLink
+      to={route.path}
       style={{
         "--menu-link-delay": `${openDelay}ms`,
         "--menu-link-close-delay": `${closeDelay}ms`,
@@ -109,16 +112,14 @@ function MenuLink({
       onClick={onClick}
     >
       {label}
-    </SmartLink>
+    </NavLink>
   );
 }
 
 function getIsSmoothFooterRoute(pathname) {
   const normalizedPathname = pathname.toLowerCase();
 
-  return ["/", "/index.html", "/home", "/home.html"].includes(
-    normalizedPathname,
-  );
+  return ["/", "/home"].includes(normalizedPathname);
 }
 
 function SiteHeader() {
@@ -127,11 +128,12 @@ function SiteHeader() {
   const [isMenuClosing, setIsMenuClosing] = useState(false);
   const closeTimerRef = useRef(null);
   const { pathname } = useLocation();
-  const homeRoute = getRouteByPageId("index.html");
-  const hostingRoute = getRouteByPageId("charging-partners.html");
-  const chargingRoute = getRouteByPageId("charge.html");
-  const softwareRoute = getRouteByPageId("software.html");
-  const companyRoute = getRouteByPageId("coming-soon.html");
+  const homeRoute = getRouteByPageId("index");
+  const hostingRoute = getRouteByPageId("charging-partners");
+  const chargingRoute = getRouteByPageId("charge");
+  const softwareRoute = getRouteByPageId("software");
+  const companyRoute = getRouteByPageId("coming-soon");
+  const careersRoute = getRouteByPageId("careers");
   const dockRoutes = useMemo(
     () => [hostingRoute, chargingRoute, softwareRoute].filter(Boolean),
     [hostingRoute, chargingRoute, softwareRoute],
@@ -144,7 +146,7 @@ function SiteHeader() {
         chargingRoute ? { route: chargingRoute, label: "Charging" } : null,
         softwareRoute ? { route: softwareRoute, label: "Software" } : null,
       ].filter(Boolean),
-    [chargingRoute, homeRoute, hostingRoute, softwareRoute],
+    [careersRoute, chargingRoute, homeRoute, hostingRoute, softwareRoute],
   );
   const menuCards = useMemo(
     () =>
@@ -177,12 +179,20 @@ function SiteHeader() {
           ? {
               route: companyRoute,
               title: "Company",
-              description: "Our mission and careers.",
+              description: "Our mission and story.",
               icon: "people",
             }
           : null,
+        careersRoute
+          ? {
+              route: careersRoute,
+              title: "Careers",
+              description: "Join the EV mobility team.",
+              icon: "briefcase",
+            }
+          : null,
       ].filter(Boolean),
-    [chargingRoute, companyRoute, hostingRoute, softwareRoute],
+    [careersRoute, chargingRoute, companyRoute, hostingRoute, softwareRoute],
   );
 
   const clearCloseTimer = () => {
@@ -245,8 +255,8 @@ function SiteHeader() {
         aria-label="Main"
       >
         {homeRoute ? (
-          <SmartLink
-            href={homeRoute.path}
+          <Link
+            to={homeRoute.path}
             className="relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-white/80 transition-colors hover:text-white"
             aria-label="ZVolta home"
             onClick={closeMobileMenu}
@@ -256,15 +266,15 @@ function SiteHeader() {
               alt="ZVolta"
               className="h-6 w-auto"
             />
-          </SmartLink>
+          </Link>
         ) : null}
         <div className="mx-1 hidden h-5 w-px bg-white/10 sm:block" />
         <div className="hidden items-center gap-1 sm:flex">
           {dockRoutes.map((route) => (
             <DockLink key={route.pageId} route={route} pathname={pathname}>
-              {route.pageId === "charging-partners.html"
+              {route.pageId === "charging-partners"
                 ? "Hosting"
-                : route.pageId === "charge.html"
+                : route.pageId === "charge"
                   ? "Charging"
                   : route.shortLabel}
             </DockLink>
@@ -303,9 +313,9 @@ function SiteHeader() {
             <MenuIcon isOpen />
           </button>
 
-          <div className="h-[100dvh] overflow-y-auto overflow-x-hidden p-4 pt-16 sm:p-6 sm:pt-16 lg:p-10 lg:pt-14">
+          <div className="site-menu-shell h-[100dvh] overflow-y-auto overflow-x-hidden p-4 pt-16 sm:p-6 sm:pt-16 lg:p-10 lg:pt-14">
             <div className="mx-auto grid min-h-full w-full max-w-[1820px] grid-cols-1 gap-4 lg:grid-cols-12">
-              <div className="relative flex min-h-[500px] flex-col justify-between overflow-hidden rounded-[2rem] bg-black p-8 sm:p-10 lg:col-span-5">
+              <div className="site-menu-panel relative flex min-h-[500px] flex-col justify-between overflow-hidden rounded-[2rem] bg-black p-8 sm:p-10 lg:col-span-5">
                 <div className="pointer-events-none absolute right-8 top-8 h-32 w-32 rounded-full bg-[radial-gradient(#10b981_2px,transparent_2px)] opacity-20 [background-size:8px_8px]" />
                 <nav className="relative z-10 mt-4 flex flex-col gap-4">
                   {menuLinks.map((route, index) => (
@@ -313,7 +323,7 @@ function SiteHeader() {
                       key={route.route.pageId}
                       className="site-menu-nav-row"
                       style={{
-                        "--menu-row-delay": `${220 + index * 90}ms`,
+                        "--menu-row-delay": `${340 + index * 100}ms`,
                         "--menu-row-close-delay": `${
                           Math.max(0, menuLinks.length - index - 1) * 70
                         }ms`,
@@ -324,12 +334,10 @@ function SiteHeader() {
                       ) : null}
                       <MenuLink
                         item={route}
-                        openDelay={240 + index * 90}
-                        closeDelay={Math.max(
-                          0,
-                          menuLinks.length - index - 1,
-                        ) * 70}
-                        pathname={pathname}
+                        openDelay={380 + index * 100}
+                        closeDelay={
+                          Math.max(0, menuLinks.length - index - 1) * 70
+                        }
                         onClick={closeMobileMenu}
                       />
                     </div>
@@ -339,30 +347,28 @@ function SiteHeader() {
                 <div
                   className="site-menu-contact relative z-10 mt-12"
                   style={{
-                    "--menu-contact-delay": `${260 + menuLinks.length * 90}ms`,
+                    "--menu-contact-delay": `${420 + menuLinks.length * 100}ms`,
                   }}
                 >
                   <p className="mb-2 text-xs font-bold uppercase tracking-[0.2em] text-zinc-500">
                     Contact us
                   </p>
-                  <SmartLink
+                  <a
                     href="mailto:support@zvolta.com"
                     className="border-b border-transparent pb-1 font-mono text-xl text-white transition-colors hover:border-emerald-400 hover:text-emerald-400 md:text-2xl"
                   >
                     support@zvolta.com
-                  </SmartLink>
+                  </a>
                 </div>
               </div>
 
               <div className="grid content-start gap-4 md:grid-cols-2 lg:col-span-7">
                 {menuCards.map((card, index) => (
-                  <SmartLink
+                  <Link
                     key={card.title}
-                    href={card.route.path}
+                    to={card.route.path}
                     style={{
-                      "--menu-card-delay": `${
-                        340 + menuLinks.length * 90 + index * 95
-                      }ms`,
+                      "--menu-card-delay": `${520 + index * 120}ms`,
                       "--menu-card-close-delay": `${
                         Math.max(0, menuCards.length - index - 1) * 70
                       }ms`,
@@ -370,7 +376,7 @@ function SiteHeader() {
                     className="menu-card site-menu-card group relative flex h-[160px] flex-col justify-center overflow-hidden rounded-[2rem] bg-black p-8 md:h-[160px]"
                     onClick={closeMobileMenu}
                   >
-                    <div className="absolute inset-0 origin-bottom scale-y-0 bg-zinc-900 transition-transform duration-500 group-hover:scale-y-100" />
+                    <div className="site-menu-card-hover-layer absolute inset-0 origin-bottom scale-y-0 bg-zinc-900 transition-transform duration-500 group-hover:scale-y-100" />
                     <div className="absolute right-8 top-1/2 z-10 flex h-20 w-20 -translate-y-1/2 items-center justify-center rounded-md bg-zinc-900 text-emerald-500 transition-colors duration-300 group-hover:bg-emerald-500 group-hover:text-black">
                       <MenuCardIcon type={card.icon} />
                     </div>
@@ -382,7 +388,7 @@ function SiteHeader() {
                         {card.description}
                       </p>
                     </div>
-                  </SmartLink>
+                  </Link>
                 ))}
               </div>
             </div>
@@ -454,8 +460,8 @@ function SiteFooter() {
     <footer className="site-footer bg-zinc-950 text-white">
       <div className="mx-auto grid w-full max-w-7xl gap-10 px-4 py-12 sm:px-6 lg:grid-cols-[1.2fr_2fr] lg:px-8">
         <div>
-          <SmartLink
-            href="/"
+          <Link
+            to="/"
             className="inline-flex rounded-md p-2 transition-colors hover:bg-white/10"
             aria-label="ZVolta home"
           >
@@ -464,24 +470,24 @@ function SiteFooter() {
               alt="ZVolta"
               className="h-10 w-auto max-w-[160px] object-contain"
             />
-          </SmartLink>
+          </Link>
           <p className="mt-5 max-w-sm text-sm leading-6 text-zinc-400">
             Pakistan's clean mobility network for charging, vehicles, drivers,
             hosts, and operators.
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
-            <SmartLink
+            <a
               href="mailto:support@zvolta.com"
               className="rounded-md border border-white/15 px-3 py-2 text-sm text-zinc-200 transition-colors hover:border-emerald-400 hover:text-white"
             >
               support@zvolta.com
-            </SmartLink>
-            <SmartLink
+            </a>
+            <a
               href="tel:+923104446529"
               className="rounded-md border border-white/15 px-3 py-2 text-sm text-zinc-200 transition-colors hover:border-emerald-400 hover:text-white"
             >
               +92 310 444 6529
-            </SmartLink>
+            </a>
           </div>
         </div>
 
@@ -494,12 +500,12 @@ function SiteFooter() {
               <ul className="mt-4 grid gap-3">
                 {group.links.map((route) => (
                   <li key={route.pageId}>
-                    <SmartLink
-                      href={route.path}
+                    <Link
+                      to={route.path}
                       className="text-sm text-zinc-400 transition-colors hover:text-white"
                     >
                       {route.label}
-                    </SmartLink>
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -510,14 +516,14 @@ function SiteFooter() {
 
       <div className="border-t border-white/10">
         <div className="mx-auto flex w-full max-w-7xl flex-col gap-3 px-4 py-5 text-sm text-zinc-500 sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
-          <p>© 2026 ZVolta. All rights reserved.</p>
+          <p>&copy; 2026 ZVolta. All rights reserved.</p>
           <div className="flex flex-wrap gap-4">
-            <SmartLink href="/policy" className="hover:text-zinc-200">
+            <Link to="/policy" className="hover:text-zinc-200">
               Policies
-            </SmartLink>
-            <SmartLink href="/contact-us" className="hover:text-zinc-200">
+            </Link>
+            <Link to="/contact-us" className="hover:text-zinc-200">
               Contact
-            </SmartLink>
+            </Link>
           </div>
         </div>
       </div>

@@ -36,12 +36,15 @@
 
   .site-menu-overlay {
     opacity: 0;
-    animation: site-menu-overlay-in 0.35s ease-out forwards;
+    animation: site-menu-overlay-in 0.12s ease-out forwards;
   }
 
   .site-menu-backdrop {
-    opacity: 0;
-    animation: site-menu-backdrop-in 0.4s ease-out forwards;
+    opacity: 1;
+    clip-path: inset(0 0 100% 0);
+    will-change: clip-path;
+    animation: site-menu-backdrop-in 0.72s cubic-bezier(0.22, 1, 0.36, 1)
+      forwards;
   }
 
   .site-menu-close {
@@ -51,29 +54,55 @@
       forwards;
   }
 
+  .site-menu-shell {
+    opacity: 0;
+    transform: translateY(68px) scale(0.97);
+    transform-origin: top center;
+    will-change: opacity, transform;
+    animation: site-menu-shell-in 0.72s cubic-bezier(0.22, 1, 0.36, 1) 0.18s
+      forwards;
+  }
+
+  .site-menu-panel {
+    opacity: 0;
+    transform: translateY(72px) scale(0.965);
+    transform-origin: bottom left;
+    will-change: opacity, transform;
+    animation: site-menu-panel-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.24s
+      forwards;
+  }
+
   .site-menu-card {
     opacity: 0;
-    transform: translateY(50px);
-    animation: site-menu-card-in 0.62s cubic-bezier(0.22, 1, 0.36, 1)
+    transform: translateY(72px) scale(0.955);
+    transform-origin: bottom center;
+    will-change: opacity, transform;
+    animation: site-menu-card-in 0.68s cubic-bezier(0.22, 1, 0.36, 1)
       var(--menu-card-delay, 120ms) forwards;
+  }
+
+  .site-menu-card-hover-layer {
+    border-radius: inherit;
   }
 
   .site-menu-nav-row {
     opacity: 0;
-    transform: translateX(-22px);
-    animation: site-menu-nav-row-in 0.42s ease-out var(--menu-row-delay, 200ms)
-      forwards;
+    transform: translateX(-42px);
+    will-change: opacity, transform;
+    animation: site-menu-nav-row-in 0.5s cubic-bezier(0.22, 1, 0.36, 1)
+      var(--menu-row-delay, 200ms) forwards;
   }
 
   .site-menu-link {
-    animation: site-menu-link-in 0.36s ease-out var(--menu-link-delay, 260ms)
-      both;
+    animation: site-menu-link-in 0.46s cubic-bezier(0.22, 1, 0.36, 1)
+      var(--menu-link-delay, 260ms) both;
   }
 
   .site-menu-contact {
     opacity: 0;
-    transform: translateY(18px);
-    animation: site-menu-contact-in 0.42s ease-out
+    transform: translateY(26px);
+    will-change: opacity, transform;
+    animation: site-menu-contact-in 0.46s cubic-bezier(0.22, 1, 0.36, 1)
       var(--menu-contact-delay, 420ms) forwards;
   }
 
@@ -126,7 +155,8 @@
 
   .site-menu-overlay.is-closing .site-menu-backdrop {
     opacity: 1;
-    animation: site-menu-backdrop-out 0.55s ease-in forwards;
+    clip-path: inset(0);
+    animation: site-menu-backdrop-out 0.62s ease-in forwards;
   }
 
   .site-menu-overlay.is-closing .site-menu-close {
@@ -135,9 +165,21 @@
     animation: site-menu-close-out 0.3s ease-in 0.05s forwards;
   }
 
+  .site-menu-overlay.is-closing .site-menu-shell {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    animation: site-menu-shell-out 0.42s ease-in forwards;
+  }
+
+  .site-menu-overlay.is-closing .site-menu-panel {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    animation: site-menu-panel-out 0.38s ease-in 0.03s forwards;
+  }
+
   .site-menu-overlay.is-closing .site-menu-card {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
     animation: site-menu-card-out 0.42s ease-in
       var(--menu-card-close-delay, 0ms) forwards;
   }
@@ -168,7 +210,7 @@
 
   @keyframes site-menu-backdrop-in {
     to {
-      opacity: 1;
+      clip-path: inset(0);
     }
   }
 
@@ -179,10 +221,24 @@
     }
   }
 
+  @keyframes site-menu-shell-in {
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  @keyframes site-menu-panel-in {
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
   @keyframes site-menu-card-in {
     to {
       opacity: 1;
-      transform: translateY(0);
+      transform: translateY(0) scale(1);
     }
   }
 
@@ -196,7 +252,7 @@
   @keyframes site-menu-link-in {
     from {
       opacity: 0;
-      transform: translateX(-6px);
+      transform: translateX(-18px);
     }
 
     to {
@@ -220,7 +276,7 @@
 
   @keyframes site-menu-backdrop-out {
     to {
-      opacity: 0;
+      clip-path: inset(100% 0 0 0);
     }
   }
 
@@ -231,10 +287,24 @@
     }
   }
 
+  @keyframes site-menu-shell-out {
+    to {
+      opacity: 0;
+      transform: translateY(32px) scale(0.985);
+    }
+  }
+
+  @keyframes site-menu-panel-out {
+    to {
+      opacity: 0;
+      transform: translateY(34px) scale(0.98);
+    }
+  }
+
   @keyframes site-menu-card-out {
     to {
       opacity: 0;
-      transform: translateY(34px);
+      transform: translateY(34px) scale(0.98);
     }
   }
 
@@ -265,18 +335,6 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .site-menu-overlay,
-    .site-menu-backdrop,
-    .site-menu-close,
-    .site-menu-card,
-    .site-menu-nav-row,
-    .site-menu-link,
-    .site-menu-contact {
-      animation: none;
-      opacity: 1;
-      transform: none;
-    }
-
     .site-menu-toggle-bar {
       transition: none;
     }

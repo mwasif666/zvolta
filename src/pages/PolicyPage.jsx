@@ -1,9 +1,9 @@
-import { SmartLink } from '../../components/SmartLink';
+import { SmartLink } from "../components/SmartLink";
 
 export default function PolicyPage() {
   return (
     <>
-      <style data-page-style="Policy.html:1">{`/* --- Base Styles --- */
+      <style data-page-style="policy:1">{`/* --- Base Styles --- */
         body {
             font-family: 'Questrial', sans-serif;
             background-color: #F8FAFC; /* Lighter Slate */
@@ -893,12 +893,12 @@ export default function PolicyPage() {
                     <br />
                     Zvolta Private Limited
                     <br />
-                    Email:{' '}
+                    Email:{" "}
                     <SmartLink href="mailto:support@zvolta.com">
                       support@zvolta.com
                     </SmartLink>
                     <br />
-                    Phone:{' '}
+                    Phone:{" "}
                     <SmartLink href="tel:+923104446529">
                       +923104446529
                     </SmartLink>
@@ -1044,12 +1044,12 @@ export default function PolicyPage() {
                     <br />
                     Zvolta Private Limited
                     <br />
-                    Email:{' '}
+                    Email:{" "}
                     <SmartLink href="mailto:support@zvolta.com">
                       support@zvolta.com
                     </SmartLink>
                     <br />
-                    Phone:{' '}
+                    Phone:{" "}
                     <SmartLink href="tel:+923104446529">
                       +923104446529
                     </SmartLink>
@@ -1422,12 +1422,12 @@ export default function PolicyPage() {
                   <p>
                     <b>Support Channels:</b>
                     <br />
-                    Email:{' '}
+                    Email:{" "}
                     <SmartLink href="mailto:support@zvolta.com">
                       support@zvolta.com
                     </SmartLink>
                     <br />
-                    Phone:{' '}
+                    Phone:{" "}
                     <SmartLink href="tel:+923104446529">
                       +923104446529
                     </SmartLink>
@@ -1989,7 +1989,7 @@ export default function PolicyPage() {
                       >
                         <i
                           className="bi bi-instagram"
-                          style={{ fontSize: '1.5rem' }}
+                          style={{ fontSize: "1.5rem" }}
                           aria-hidden="true"
                         />
                       </SmartLink>
@@ -2001,7 +2001,7 @@ export default function PolicyPage() {
                       >
                         <i
                           className="bi bi-whatsapp"
-                          style={{ fontSize: '1.5rem' }}
+                          style={{ fontSize: "1.5rem" }}
                           aria-hidden="true"
                         />
                       </SmartLink>
@@ -2012,7 +2012,7 @@ export default function PolicyPage() {
                       >
                         <i
                           className="bi bi-envelope"
-                          style={{ fontSize: '1.5rem' }}
+                          style={{ fontSize: "1.5rem" }}
                           aria-hidden="true"
                         />
                       </SmartLink>

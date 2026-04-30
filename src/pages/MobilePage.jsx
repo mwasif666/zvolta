@@ -1,69 +1,28 @@
-import { SmartLink } from '../../components/SmartLink';
+import { SmartLink } from "../components/SmartLink";
 
-export default function SoftwarePage() {
+export default function MobilePage() {
   return (
     <>
-      <style data-page-style="software.html:1">{`html, body {
+      <style data-page-style="mobile:1">{`html, body {
           overflow-x: hidden;
           background-color: #0a0a0a;
+      }
+      .glass-panel {
+          background: rgba(255, 255, 255, 0.03);
+          backdrop-filter: blur(10px);
+          -webkit-backdrop-filter: blur(10px);
+          border: 1px solid rgba(255, 255, 255, 0.05);
       }
       .no-scrollbar::-webkit-scrollbar { display: none; }
       .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-      /* Loader specific utilities */
-      #loader-blind-top { transform-origin: top; will-change: transform; }
-      #loader-blind-bottom { transform-origin: bottom; will-change: transform; }`}</style>
+      /* GRADIENT FADE MASK FOR CAROUSEL */
+      .carousel-mask {
+          /* Fades out the left and right edges (15% from each side) */
+          mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
+          -webkit-mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
+      }`}</style>
       <div>
-        <div
-          id="custom-loader"
-          className="fixed inset-0 z-[10000] flex flex-col items-center justify-center pointer-events-none"
-        >
-          <div
-            id="loader-blind-top"
-            className="absolute top-0 left-0 w-full h-[51%] bg-z-black z-0 pointer-events-auto border-b border-white/5"
-          />
-          <div
-            id="loader-blind-bottom"
-            className="absolute bottom-0 left-0 w-full h-[51%] bg-z-black z-0 pointer-events-auto border-t border-white/5"
-          />
-          <div
-            id="loader-content"
-            className="relative z-10 flex flex-col items-center pointer-events-auto will-change-transform"
-          >
-            <div
-              id="loader-glow"
-              className="absolute inset-0 bg-z-green/10 blur-[100px] rounded-full scale-0 animate-pulse-slow"
-            />
-            <div className="relative mb-10 w-24 h-24 md:w-32 md:h-32 flex items-center justify-center">
-              <img
-                src="img/symbol logo.png"
-                id="loader-logo"
-                className="w-full h-full object-contain drop-shadow-[0_0_30px_rgba(22,163,74,0.3)] will-change-transform"
-                alt="ZVolta Loading"
-              />
-            </div>
-            <div
-              id="loader-bar-container"
-              className="w-64 h-[2px] bg-zinc-800 rounded-full overflow-hidden relative mb-4"
-            >
-              <div
-                id="loader-bar"
-                className="absolute top-0 left-0 h-full w-0 bg-white shadow-[0_0_15px_2px_rgba(255,255,255,0.8)]"
-              />
-            </div>
-            <div
-              id="loader-status-container"
-              className="h-6 overflow-hidden flex flex-col items-center"
-            >
-              <div
-                id="loader-status"
-                className="font-mono text-[10px] tracking-[0.4em] text-gray-500 uppercase"
-              >
-                INITIALIZING...
-              </div>
-            </div>
-          </div>
-        </div>
         <SmartLink
           id="dynamic-logo"
           href="/"
@@ -79,7 +38,7 @@ export default function SoftwarePage() {
         </button>
         <div
           id="mobile-menu-overlay"
-          className="fixed inset-0 z-[10000] invisible opacity-0 pointer-events-none"
+          className="fixed inset-0 z-[10000] invisible opacity-0 pointer-events-none transition-opacity duration-300"
         >
           <div
             id="mobile-menu-backdrop"
@@ -102,7 +61,7 @@ export default function SoftwarePage() {
                     href="/#hero-section"
                     className="mobile-menu-link text-5xl md:text-6xl font-display font-bold text-white hover:text-emerald-500 transition-colors flex items-center justify-between group/link"
                   >
-                    Home{' '}
+                    Home{" "}
                     <i className="bi bi-arrow-right text-3xl opacity-0 -translate-x-8 group-hover/link:opacity-100 group-hover/link:translate-x-0 transition-all duration-300 text-emerald-500" />
                   </SmartLink>
                   <div className="h-px bg-white/10 w-full" />
@@ -110,7 +69,7 @@ export default function SoftwarePage() {
                     href="/#host"
                     className="mobile-menu-link text-5xl md:text-6xl font-display font-bold text-white hover:text-emerald-500 transition-colors flex items-center justify-between group/link"
                   >
-                    Hosting{' '}
+                    Hosting{" "}
                     <i className="bi bi-arrow-right text-3xl opacity-0 -translate-x-8 group-hover/link:opacity-100 group-hover/link:translate-x-0 transition-all duration-300 text-emerald-500" />
                   </SmartLink>
                   <div className="h-px bg-white/10 w-full" />
@@ -118,7 +77,7 @@ export default function SoftwarePage() {
                     href="/#map"
                     className="mobile-menu-link text-5xl md:text-6xl font-display font-bold text-white hover:text-emerald-500 transition-colors flex items-center justify-between group/link"
                   >
-                    Charging{' '}
+                    Charging{" "}
                     <i className="bi bi-arrow-right text-3xl opacity-0 -translate-x-8 group-hover/link:opacity-100 group-hover/link:translate-x-0 transition-all duration-300 text-emerald-500" />
                   </SmartLink>
                   <div className="h-px bg-white/10 w-full" />
@@ -126,7 +85,7 @@ export default function SoftwarePage() {
                     href="/#software"
                     className="mobile-menu-link text-5xl md:text-6xl font-display font-bold text-white hover:text-emerald-500 transition-colors flex items-center justify-between group/link"
                   >
-                    Software{' '}
+                    Software{" "}
                     <i className="bi bi-arrow-right text-3xl opacity-0 -translate-x-8 group-hover/link:opacity-100 group-hover/link:translate-x-0 transition-all duration-300 text-emerald-500" />
                   </SmartLink>
                 </nav>
@@ -183,36 +142,120 @@ export default function SoftwarePage() {
         </div>
         <div className="fixed top-[-20%] left-[-20%] w-[120vw] h-[120vw] bg-emerald-500/10 blur-[100px] rounded-full pointer-events-none z-0 animate-pulse-slow" />
         <div className="fixed bottom-[-10%] right-[-10%] w-[100vw] h-[100vw] bg-lime-500/5 blur-[120px] rounded-full pointer-events-none z-0" />
-        <main className="relative z-10 w-full min-h-screen flex flex-col items-center justify-center px-6 pt-24 pb-24 text-center">
-          <div className="mb-8 w-24 h-24 rounded-full bg-zinc-900 border border-emerald-500/30 flex items-center justify-center shadow-[0_0_40px_rgba(16,185,129,0.15)] animate-pulse-slow opacity-0 translate-y-4 reveal-element">
-            <i className="bi bi-cone-striped text-4xl text-emerald-500" />
+        <main className="relative z-10 flex flex-col items-center justify-center w-full min-h-screen px-0 pt-28 pb-16 max-w-lg mx-auto">
+          <div className="text-center mb-8 w-full px-6">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 text-emerald-400 text-[10px] md:text-xs font-bold tracking-widest uppercase mb-6 backdrop-blur-md shadow-[0_0_20px_rgba(16,185,129,0.2)]">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+              </span>
+              Location Detected
+            </div>
+            <h1 className="text-5xl md:text-6xl font-display font-bold tracking-tight mb-4 leading-[1.05]">
+              Ready to <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-br from-white via-emerald-200 to-emerald-500">
+                Charge?
+              </span>
+            </h1>
+            <p className="text-zinc-400 text-base md:text-lg leading-relaxed max-w-xs mx-auto">
+              Scan, Pay, and Go.
+            </p>
           </div>
-          <h1
-            className="text-5xl md:text-7xl font-display font-bold tracking-tight mb-6 opacity-0 translate-y-4 reveal-element"
-            style={{ transitionDelay: '0.1s' }}
-          >
-            Powering <br />{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-emerald-400 to-emerald-600">
-              Up Soon
-            </span>
-          </h1>
-          <p
-            className="text-zinc-400 text-lg md:text-xl max-w-lg mb-10 leading-relaxed opacity-0 translate-y-4 reveal-element"
-            style={{ transitionDelay: '0.2s' }}
-          >
-            This page is currently plugged in and charging. We are building
-            something electric for you.
-          </p>
-          <SmartLink
-            href="/"
-            className="group relative px-8 py-4 bg-zinc-900 text-white rounded-full font-bold text-lg border border-zinc-700 hover:border-emerald-500 transition-all duration-300 opacity-0 translate-y-4 reveal-element hover:bg-emerald-600 hover:text-black hover:shadow-[0_0_30px_rgba(16,185,129,0.4)]"
-            style={{ transitionDelay: '0.3s' }}
-          >
-            <span className="relative z-10 flex items-center gap-2">
-              Return Home{' '}
-              <i className="bi bi-arrow-right transition-transform group-hover:translate-x-1" />
-            </span>
-          </SmartLink>
+          <div className="relative w-full group mb-10">
+            <button
+              id="scroll-left"
+              className="absolute left-2 top-1/2 -translate-y-1/2 z-30 w-12 h-12 bg-black/50 hover:bg-black/80 text-white rounded-full flex items-center justify-center backdrop-blur-md border border-white/10 transition-all duration-300 shadow-xl opacity-0 group-hover:opacity-100 disabled:opacity-0 active:scale-95"
+            >
+              <i className="bi bi-chevron-left text-xl" />
+            </button>
+            <div
+              id="screenshot-container"
+              className="carousel-mask w-full overflow-x-auto no-scrollbar flex gap-6 px-16 snap-x snap-mandatory scroll-smooth pb-4"
+            >
+              <div className="snap-center shrink-0">
+                <img
+                  src="img/mobile1.png"
+                  className="w-[260px] md:w-[340px] rounded-2xl shadow-2xl border border-white/10"
+                  alt="App Screenshot 1"
+                />
+              </div>
+              <div className="snap-center shrink-0">
+                <img
+                  src="img/mobile2.png"
+                  className="w-[260px] md:w-[340px] rounded-2xl shadow-2xl border border-white/10"
+                  alt="App Screenshot 2"
+                />
+              </div>
+              <div className="snap-center shrink-0">
+                <img
+                  src="img/mobile3.png"
+                  className="w-[260px] md:w-[340px] rounded-2xl shadow-2xl border border-white/10"
+                  alt="App Screenshot 3"
+                />
+              </div>
+              <div className="snap-center shrink-0">
+                <img
+                  src="img/mobile4.png"
+                  className="w-[260px] md:w-[340px] rounded-2xl shadow-2xl border border-white/10"
+                  alt="App Screenshot 4"
+                />
+              </div>
+            </div>
+            <button
+              id="scroll-right"
+              className="absolute right-2 top-1/2 -translate-y-1/2 z-30 w-12 h-12 bg-black/50 hover:bg-black/80 text-white rounded-full flex items-center justify-center backdrop-blur-md border border-white/10 transition-all duration-300 shadow-xl opacity-0 group-hover:opacity-100 active:scale-95"
+            >
+              <i className="bi bi-chevron-right text-xl" />
+            </button>
+          </div>
+          <div className="w-full flex flex-col gap-3 px-6">
+            <SmartLink
+              href="https://play.google.com/store/apps/details?id=app.zvolta.android"
+              className="group relative w-full rounded-2xl overflow-hidden transform transition-transform active:scale-95 duration-200"
+            >
+              <div className="absolute inset-0 bg-gradient-to-r from-emerald-600 via-lime-400 to-emerald-600 animate-gradient-x opacity-100" />
+              <div className="relative m-[1px] bg-zinc-900 hover:bg-zinc-800 transition-colors rounded-[15px] px-6 py-4 flex items-center justify-between group-hover:bg-zinc-800/90">
+                <div className="flex items-center gap-4">
+                  <i className="bi bi-google-play text-3xl text-emerald-400 group-hover:scale-110 transition-transform duration-300" />
+                  <div className="text-left">
+                    <div className="text-[9px] uppercase tracking-wider text-emerald-400/80 font-bold mb-0.5">
+                      Recommended
+                    </div>
+                    <div className="text-lg font-bold text-white leading-none">
+                      Get the App
+                    </div>
+                  </div>
+                </div>
+                <i className="bi bi-chevron-right text-zinc-500 group-hover:text-white transition-colors" />
+              </div>
+            </SmartLink>
+            <div className="flex items-center gap-4 w-full py-1">
+              <div className="h-px bg-white/5 flex-grow" />
+              <span className="text-zinc-600 text-[10px] font-mono uppercase tracking-widest">
+                Or instant web access
+              </span>
+              <div className="h-px bg-white/5 flex-grow" />
+            </div>
+            <SmartLink
+              href="https://evrental-app.orkofleet.com/login"
+              className="w-full glass-panel hover:bg-white/5 text-zinc-300 hover:text-white rounded-2xl px-6 py-4 flex items-center justify-between transition-all duration-200 active:scale-95 border border-white/5 hover:border-white/20"
+            >
+              <div className="flex items-center gap-4">
+                <div className="w-9 h-9 rounded-full bg-zinc-800 flex items-center justify-center border border-white/5">
+                  <i className="bi bi-globe text-lg" />
+                </div>
+                <div className="text-left">
+                  <div className="text-base font-bold leading-none">
+                    Use Web Browser
+                  </div>
+                  <div className="text-[10px] text-zinc-500 mt-1">
+                    No download required
+                  </div>
+                </div>
+              </div>
+              <i className="bi bi-box-arrow-up-right text-sm text-zinc-600" />
+            </SmartLink>
+          </div>
         </main>
         <footer className="bg-black text-white pt-24 pb-12 border-t border-white/10 relative overflow-hidden z-20">
           <div className="max-w-[1400px] mx-auto px-6 mb-20 text-center">
@@ -267,7 +310,7 @@ export default function SoftwarePage() {
                     href="/invest-form"
                     className="flex items-center justify-between text-white font-bold group-hover:text-emerald-400 transition-colors"
                   >
-                    Start hosting{' '}
+                    Start hosting{" "}
                     <i className="bi bi-arrow-right -rotate-45 group-hover:rotate-0 transition-transform duration-300" />
                   </SmartLink>
                 </div>
@@ -317,7 +360,7 @@ export default function SoftwarePage() {
                     href="/driver-network"
                     className="flex items-center justify-between text-white font-bold group-hover:text-emerald-400 transition-colors"
                   >
-                    Find A Station{' '}
+                    Find A Station{" "}
                     <i className="bi bi-arrow-right -rotate-45 group-hover:rotate-0 transition-transform duration-300" />
                   </SmartLink>
                 </div>
@@ -367,7 +410,7 @@ export default function SoftwarePage() {
                     href="/contact-us"
                     className="flex items-center justify-between text-white font-bold group-hover:text-emerald-400 transition-colors"
                   >
-                    Book a demo{' '}
+                    Book a demo{" "}
                     <i className="bi bi-arrow-right -rotate-45 group-hover:rotate-0 transition-transform duration-300" />
                   </SmartLink>
                 </div>

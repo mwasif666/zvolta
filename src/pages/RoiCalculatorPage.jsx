@@ -1,7 +1,7 @@
 export default function RoiCalculatorPage() {
   return (
     <>
-      <style data-page-style="roi-calculator.html:1">{`* {
+      <style data-page-style="roi-calculator:1">{`* {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -528,10 +528,10 @@ export default function RoiCalculatorPage() {
                   <div style={{ marginBottom: 20 }}>
                     <label
                       style={{
-                        fontSize: '1rem',
+                        fontSize: "1rem",
                         fontWeight: 600,
-                        color: '#333',
-                        display: 'block',
+                        color: "#333",
+                        display: "block",
                         marginBottom: 15,
                       }}
                     >
@@ -539,7 +539,7 @@ export default function RoiCalculatorPage() {
                     </label>
                     <div
                       className="charger-module"
-                      style={{ borderLeftColor: '#28a745' }}
+                      style={{ borderLeftColor: "#28a745" }}
                     >
                       <div className="input-group" style={{ marginBottom: 0 }}>
                         <label>Average Usage Per Day (Hours)</label>
@@ -560,24 +560,24 @@ export default function RoiCalculatorPage() {
                   </div>
                   <div
                     style={{
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      alignItems: 'center',
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
                       marginBottom: 15,
                     }}
                   >
                     <label
                       style={{
                         margin: 0,
-                        fontSize: '1rem',
+                        fontSize: "1rem",
                         fontWeight: 600,
-                        color: '#333',
+                        color: "#333",
                       }}
                     >
                       📦 Additional Modules (Each = 2 Chargers)
                     </label>
                     <span
-                      style={{ fontSize: '0.85rem', color: '#666' }}
+                      style={{ fontSize: "0.85rem", color: "#666" }}
                       id="totalModulesCount"
                     >
                       0 Modules
@@ -701,16 +701,16 @@ export default function RoiCalculatorPage() {
                       <div
                         className="progress-fill"
                         id="roiProgress"
-                        style={{ width: '0%' }}
+                        style={{ width: "0%" }}
                       >
                         0% ROI
                       </div>
                     </div>
                     <p
                       style={{
-                        textAlign: 'center',
-                        color: '#666',
-                        fontSize: '0.9rem',
+                        textAlign: "center",
+                        color: "#666",
+                        fontSize: "0.9rem",
                         marginTop: 10,
                       }}
                     >
@@ -720,13 +720,13 @@ export default function RoiCalculatorPage() {
                 </div>
                 <div
                   id="noResults"
-                  style={{ textAlign: 'center', color: '#999', padding: 40 }}
+                  style={{ textAlign: "center", color: "#999", padding: 40 }}
                 >
                   <svg
                     width={100}
                     height={100}
                     viewBox="0 0 100 100"
-                    style={{ opacity: '0.3', marginBottom: 20 }}
+                    style={{ opacity: "0.3", marginBottom: 20 }}
                   >
                     <circle
                       cx={50}
@@ -746,7 +746,7 @@ export default function RoiCalculatorPage() {
                       Rs
                     </text>
                   </svg>
-                  <p style={{ fontSize: '1.1rem' }}>
+                  <p style={{ fontSize: "1.1rem" }}>
                     Enter your parameters and click Calculate to see results
                   </p>
                 </div>
@@ -757,8 +757,8 @@ export default function RoiCalculatorPage() {
               <div className="card-header">💡 Investment Insights</div>
               <div
                 style={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+                  display: "grid",
+                  gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
                   gap: 20,
                 }}
               >
@@ -866,10 +866,10 @@ export default function RoiCalculatorPage() {
                 <div style={{ marginBottom: 20 }}>
                   <label
                     style={{
-                      fontSize: '1rem',
+                      fontSize: "1rem",
                       fontWeight: 600,
-                      color: '#333',
-                      display: 'block',
+                      color: "#333",
+                      display: "block",
                       marginBottom: 15,
                     }}
                   >
@@ -877,7 +877,7 @@ export default function RoiCalculatorPage() {
                   </label>
                   <div
                     className="charger-module"
-                    style={{ borderLeftColor: '#28a745' }}
+                    style={{ borderLeftColor: "#28a745" }}
                   >
                     <div className="input-group" style={{ marginBottom: 0 }}>
                       <label>Average Usage Per Day (Hours)</label>
@@ -898,24 +898,24 @@ export default function RoiCalculatorPage() {
                 </div>
                 <div
                   style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
                     marginBottom: 15,
                   }}
                 >
                   <label
                     style={{
                       margin: 0,
-                      fontSize: '1rem',
+                      fontSize: "1rem",
                       fontWeight: 600,
-                      color: '#333',
+                      color: "#333",
                     }}
                   >
                     📦 Additional Modules (Each = 1 Charger)
                   </label>
                   <span
-                    style={{ fontSize: '0.85rem', color: '#666' }}
+                    style={{ fontSize: "0.85rem", color: "#666" }}
                     id="totalModulesCount7"
                   >
                     0 Modules
@@ -1041,16 +1041,16 @@ export default function RoiCalculatorPage() {
                     <div
                       className="progress-fill"
                       id="roiProgress7"
-                      style={{ width: '0%' }}
+                      style={{ width: "0%" }}
                     >
                       0% ROI
                     </div>
                   </div>
                   <p
                     style={{
-                      textAlign: 'center',
-                      color: '#666',
-                      fontSize: '0.9rem',
+                      textAlign: "center",
+                      color: "#666",
+                      fontSize: "0.9rem",
                       marginTop: 10,
                     }}
                   >
@@ -1060,13 +1060,13 @@ export default function RoiCalculatorPage() {
               </div>
               <div
                 id="noResults7"
-                style={{ textAlign: 'center', color: '#999', padding: 40 }}
+                style={{ textAlign: "center", color: "#999", padding: 40 }}
               >
                 <svg
                   width={100}
                   height={100}
                   viewBox="0 0 100 100"
-                  style={{ opacity: '0.3', marginBottom: 20 }}
+                  style={{ opacity: "0.3", marginBottom: 20 }}
                 >
                   <circle
                     cx={50}
@@ -1086,7 +1086,7 @@ export default function RoiCalculatorPage() {
                     Rs
                   </text>
                 </svg>
-                <p style={{ fontSize: '1.1rem' }}>
+                <p style={{ fontSize: "1.1rem" }}>
                   Enter your parameters and click Calculate to see results
                 </p>
               </div>
@@ -1097,8 +1097,8 @@ export default function RoiCalculatorPage() {
             <div className="card-header">💡 Investment Insights (7 kWh)</div>
             <div
               style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
                 gap: 20,
               }}
             >

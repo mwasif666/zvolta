@@ -1,9 +1,9 @@
-import { SmartLink } from '../../components/SmartLink';
+import { SmartLink } from "../components/SmartLink";
 
 export default function InvestFormPage() {
   return (
     <>
-      <style data-page-style="invest-form.html:1">{`body {
+      <style data-page-style="invest-form:1">{`body {
       font-family: 'Questrial', sans-serif;
     }
     .form-container-bg {
@@ -74,16 +74,16 @@ export default function InvestFormPage() {
         <div
           id="orion-loader"
           style={{
-            position: 'fixed',
+            position: "fixed",
             top: 0,
             left: 0,
-            width: '100%',
-            height: '100%',
-            background: 'white',
+            width: "100%",
+            height: "100%",
+            background: "white",
             zIndex: 9999,
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
           }}
         >
           <div className="orion-loader-logo">
@@ -243,7 +243,7 @@ export default function InvestFormPage() {
                   INVEST WITH ZVOLTA
                 </p>
                 <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mt-4 leading-tight">
-                  Invest in the Future of{' '}
+                  Invest in the Future of{" "}
                   <span className="animated-gradient-text">Mobility.</span>
                 </h1>
                 <p className="mt-6 text-gray-600">
@@ -606,7 +606,7 @@ export default function InvestFormPage() {
                       >
                         <i
                           className="bi bi-facebook"
-                          style={{ fontSize: '1.5rem' }}
+                          style={{ fontSize: "1.5rem" }}
                           aria-hidden="true"
                         />
                       </SmartLink>
@@ -618,7 +618,7 @@ export default function InvestFormPage() {
                       >
                         <i
                           className="bi bi-instagram"
-                          style={{ fontSize: '1.5rem' }}
+                          style={{ fontSize: "1.5rem" }}
                           aria-hidden="true"
                         />
                       </SmartLink>
@@ -630,7 +630,7 @@ export default function InvestFormPage() {
                       >
                         <i
                           className="bi bi-whatsapp"
-                          style={{ fontSize: '1.5rem' }}
+                          style={{ fontSize: "1.5rem" }}
                           aria-hidden="true"
                         />
                       </SmartLink>
@@ -641,7 +641,7 @@ export default function InvestFormPage() {
                       >
                         <i
                           className="bi bi-envelope"
-                          style={{ fontSize: '1.5rem' }}
+                          style={{ fontSize: "1.5rem" }}
                           aria-hidden="true"
                         />
                       </SmartLink>

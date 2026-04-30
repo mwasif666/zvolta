@@ -1,9 +1,9 @@
-import { SmartLink } from '../../components/SmartLink';
+import { SmartLink } from "../components/SmartLink";
 
 export default function TestingPage() {
   return (
     <>
-      <style data-page-style="testing.html:1">{`/* --- ADDED THIS FOR BETTER SMOOTH SCROLL --- */
+      <style data-page-style="testing:1">{`/* --- ADDED THIS FOR BETTER SMOOTH SCROLL --- */
         body {
             overscroll-behavior: none;
         }
@@ -114,73 +114,73 @@ export default function TestingPage() {
                 </div>
                 <pre>
                   <code className="font-mono text-xs leading-relaxed text-gray-400">
-                    {'\n'}
-                    <span className="token-keyword">import</span> React{' '}
-                    <span className="token-keyword">from</span>{' '}
+                    {"\n"}
+                    <span className="token-keyword">import</span> React{" "}
+                    <span className="token-keyword">from</span>{" "}
                     <span className="token-string">"react"</span>
-                    {'\n'}
-                    <span className="token-keyword">import</span>{' '}
-                    <span className="token-punctuation">{'{'}</span> PjsEmbed{' '}
-                    <span className="token-punctuation">{'}'}</span>{' '}
-                    <span className="token-keyword">from</span>{' '}
+                    {"\n"}
+                    <span className="token-keyword">import</span>{" "}
+                    <span className="token-punctuation">{"{"}</span> PjsEmbed{" "}
+                    <span className="token-punctuation">{"}"}</span>{" "}
+                    <span className="token-keyword">from</span>{" "}
                     <span className="token-string">"@pipe/ui-embeddable"</span>
-                    {'\n'}
-                    {'\n'}
-                    <span className="token-keyword">function</span>{' '}
+                    {"\n"}
+                    {"\n"}
+                    <span className="token-keyword">function</span>{" "}
                     <span className="token-function">PipeEmbedPage</span>
-                    <span className="token-punctuation">(</span>{' '}
-                    <span className="token-punctuation">)</span>{' '}
-                    <span className="token-punctuation">=&gt;</span>{' '}
-                    <span className="token-punctuation">{'{'}</span>
-                    {'\n'}
-                    {'  '}
-                    <span className="token-keyword">return</span>{' '}
+                    <span className="token-punctuation">(</span>{" "}
+                    <span className="token-punctuation">)</span>{" "}
+                    <span className="token-punctuation">=&gt;</span>{" "}
+                    <span className="token-punctuation">{"{"}</span>
+                    {"\n"}
+                    {"  "}
+                    <span className="token-keyword">return</span>{" "}
                     <span className="token-punctuation">(</span>
-                    {'\n'}
-                    {'    '}
+                    {"\n"}
+                    {"    "}
                     <span className="token-tag">&lt;Layout&gt;</span>
-                    {'\n'}
-                    {'      '}
+                    {"\n"}
+                    {"      "}
                     <span className="token-tag">&lt;PjsEmbed</span>
-                    {'\n'}
-                    {'        '}
+                    {"\n"}
+                    {"        "}
                     <span className="token-attr-name">clientName</span>
                     <span className="token-punctuation">=</span>
                     <span className="token-string">"YOUR_CLIENT_NAME"</span>
-                    {'\n'}
-                    {'        '}
+                    {"\n"}
+                    {"        "}
                     <span className="token-attr-name">onSuccess</span>
                     <span className="token-punctuation">=</span>
-                    <span className="token-punctuation">{'{'}</span>{' '}
+                    <span className="token-punctuation">{"{"}</span>{" "}
                     <span className="token-punctuation">(</span>
                     <span className="token-attr-name">authCode</span>
-                    <span className="token-punctuation">)</span>{' '}
-                    <span className="token-punctuation">=&gt;</span>{' '}
-                    <span className="token-punctuation">{'{'}</span>
-                    {'\n'}
-                    {'          '}
+                    <span className="token-punctuation">)</span>{" "}
+                    <span className="token-punctuation">=&gt;</span>{" "}
+                    <span className="token-punctuation">{"{"}</span>
+                    {"\n"}
+                    {"          "}
                     <span className="token-comment">
                       // send authCode to your backend
                     </span>
-                    {'\n'}
-                    {'        '}
+                    {"\n"}
+                    {"        "}
                     <span className="token-punctuation">
-                      {'}'}
-                      {'}'}
+                      {"}"}
+                      {"}"}
                     </span>
-                    {'\n'}
-                    {'      '}
+                    {"\n"}
+                    {"      "}
                     <span className="token-tag">/&gt;</span>
-                    {'\n'}
-                    {'    '}
+                    {"\n"}
+                    {"    "}
                     <span className="token-tag">&lt;/Layout&gt;</span>
-                    {'\n'}
-                    {'  '}
+                    {"\n"}
+                    {"  "}
                     <span className="token-punctuation">)</span>
-                    {'\n'}
-                    <span className="token-punctuation">{'}'}</span>
-                    {'\n'}
-                    {'                        '}
+                    {"\n"}
+                    <span className="token-punctuation">{"}"}</span>
+                    {"\n"}
+                    {"                        "}
                   </code>
                 </pre>
               </div>
@@ -267,7 +267,7 @@ export default function TestingPage() {
               </div>
             </div>
           </footer>
-        </div>{' '}
+        </div>{" "}
       </div>
     </>
   );

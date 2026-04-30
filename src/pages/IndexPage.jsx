@@ -1,4 +1,4 @@
-import { SmartLink } from '../../components/SmartLink';
+﻿import { SmartLink } from "../components/SmartLink";
 
 export default function IndexPage() {
   return (
@@ -257,7 +257,7 @@ export default function IndexPage() {
                     <span
                       id="hero-changing-word"
                       className="word-swapper text-white"
-                    />{' '}
+                    />{" "}
                     Should Feel Easy
                   </h1>
                   <p className="text-base sm:text-lg md:text-xl 3xl:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed font-light mb-10 fade-in-up delay-100 px-4">
@@ -469,7 +469,7 @@ export default function IndexPage() {
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 3xl:gap-8">
                     <div
                       className="stat-container group relative p-8 flex flex-col h-[320px] 3xl:h-[450px] rounded-[2rem] bg-zinc-900 border-none shadow-xl overflow-hidden"
-                      style={{ backgroundImage: 'none' }}
+                      style={{ backgroundImage: "none" }}
                     >
                       <img
                         src="https://res.cloudinary.com/dk4bqjm38/image/upload/v1770809680/Electricity_Reduced_segp20.png"
@@ -495,7 +495,7 @@ export default function IndexPage() {
                     </div>
                     <div
                       className="stat-container group relative p-8 flex flex-col h-[320px] 3xl:h-[450px] rounded-[2rem] bg-zinc-900 border-none shadow-xl overflow-hidden"
-                      style={{ backgroundImage: 'none' }}
+                      style={{ backgroundImage: "none" }}
                     >
                       <img
                         src="https://res.cloudinary.com/dk4bqjm38/image/upload/v1770809685/C02_Reduced_mggfhr.png"
@@ -521,7 +521,7 @@ export default function IndexPage() {
                     </div>
                     <div
                       className="stat-container group relative p-8 flex flex-col h-[320px] 3xl:h-[450px] rounded-[2rem] bg-zinc-900 border-none shadow-xl overflow-hidden"
-                      style={{ backgroundImage: 'none' }}
+                      style={{ backgroundImage: "none" }}
                     >
                       <img
                         src="https://res.cloudinary.com/dk4bqjm38/image/upload/v1770809679/Charging_Netwrok_oof6dg.png"
@@ -547,7 +547,7 @@ export default function IndexPage() {
                     </div>
                     <div
                       className="stat-container group relative p-8 flex flex-col h-[320px] 3xl:h-[450px] rounded-[2rem] bg-zinc-900 border-none shadow-xl overflow-hidden"
-                      style={{ backgroundImage: 'none' }}
+                      style={{ backgroundImage: "none" }}
                     >
                       <img
                         src="https://res.cloudinary.com/dk4bqjm38/image/upload/v1770809582/Sites_pcc9iv.png"
@@ -621,7 +621,7 @@ export default function IndexPage() {
                         <img
                           src="img/Grids/05.png"
                           className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                          style={{ objectPosition: '0% 50%' }}
+                          style={{ objectPosition: "0% 50%" }}
                           alt="Assessment"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-emerald-950/90 via-emerald-900/20 to-transparent" />
@@ -646,7 +646,7 @@ export default function IndexPage() {
                         <img
                           src="img/Grids/02.png"
                           className="absolute inset-0 w-full h-full object-cover opacity-90 transition-transform duration-700 group-hover:scale-105"
-                          style={{ objectPosition: '0% 50%' }}
+                          style={{ objectPosition: "0% 50%" }}
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black via-lime-900/40 to-transparent" />
                         <span className="sleek-number text-7xl md:text-8xl text-white/20">
@@ -670,7 +670,7 @@ export default function IndexPage() {
                         <img
                           src="img/Grids/03.png"
                           className="absolute inset-0 w-full h-full object-cover opacity-90 transition-transform duration-700 group-hover:scale-105"
-                          style={{ objectPosition: '0% 50%' }}
+                          style={{ objectPosition: "0% 50%" }}
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-[#02120a] via-[#064e3b]/30 to-transparent" />
                         <span className="sleek-number text-7xl md:text-8xl text-white/10">
@@ -693,7 +693,7 @@ export default function IndexPage() {
                         <img
                           src="img/Grids/05.png"
                           className="absolute inset-0 w-full h-full object-cover"
-                          style={{ objectPosition: '33.33% 50%' }}
+                          style={{ objectPosition: "33.33% 50%" }}
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-emerald-950/90 via-emerald-900/20 to-transparent" />
                         <span className="sleek-number text-7xl md:text-8xl text-white/20">
@@ -717,7 +717,7 @@ export default function IndexPage() {
                         <img
                           src="img/Grids/02.png"
                           className="absolute inset-0 w-full h-full object-cover opacity-80"
-                          style={{ objectPosition: '33.33% 50%' }}
+                          style={{ objectPosition: "33.33% 50%" }}
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black via-lime-900/40 to-transparent" />
                         <span className="sleek-number text-7xl md:text-8xl text-white/20">
@@ -741,7 +741,7 @@ export default function IndexPage() {
                         <img
                           src="img/Grids/03.png"
                           className="absolute inset-0 w-full h-full object-cover opacity-80"
-                          style={{ objectPosition: '33.33% 50%' }}
+                          style={{ objectPosition: "33.33% 50%" }}
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-[#02120a] via-[#064e3b]/30 to-transparent" />
                         <span className="sleek-number text-7xl md:text-8xl text-white/10">
@@ -764,7 +764,7 @@ export default function IndexPage() {
                         <img
                           src="img/Grids/05.png"
                           className="absolute inset-0 w-full h-full object-cover"
-                          style={{ objectPosition: '66.66% 50%' }}
+                          style={{ objectPosition: "66.66% 50%" }}
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-emerald-950/90 via-emerald-900/20 to-transparent" />
                         <span className="sleek-number text-7xl md:text-8xl text-white/20">
@@ -788,7 +788,7 @@ export default function IndexPage() {
                         <img
                           src="img/Grids/02.png"
                           className="absolute inset-0 w-full h-full object-cover opacity-80"
-                          style={{ objectPosition: '66.66% 50%' }}
+                          style={{ objectPosition: "66.66% 50%" }}
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black via-lime-900/40 to-transparent" />
                         <span className="sleek-number text-7xl md:text-8xl text-white/20">
@@ -812,7 +812,7 @@ export default function IndexPage() {
                         <img
                           src="img/Grids/03.png"
                           className="absolute inset-0 w-full h-full object-cover opacity-80"
-                          style={{ objectPosition: '66.66% 50%' }}
+                          style={{ objectPosition: "66.66% 50%" }}
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-[#02120a] via-[#064e3b]/30 to-transparent" />
                         <span className="sleek-number text-7xl md:text-8xl text-white/10">
@@ -835,7 +835,7 @@ export default function IndexPage() {
                         <img
                           src="img/Grids/05.png"
                           className="absolute inset-0 w-full h-full object-cover"
-                          style={{ objectPosition: '100% 50%' }}
+                          style={{ objectPosition: "100% 50%" }}
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-emerald-950/90 via-emerald-900/20 to-transparent" />
                         <span className="sleek-number text-7xl md:text-8xl text-white/20">
@@ -859,7 +859,7 @@ export default function IndexPage() {
                         <img
                           src="img/Grids/02.png"
                           className="absolute inset-0 w-full h-full object-cover opacity-80"
-                          style={{ objectPosition: '100% 50%' }}
+                          style={{ objectPosition: "100% 50%" }}
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black via-lime-900/40 to-transparent" />
                         <span className="sleek-number text-7xl md:text-8xl text-white/20">
@@ -882,7 +882,7 @@ export default function IndexPage() {
                         <img
                           src="img/Grids/03.png"
                           className="absolute inset-0 w-full h-full object-cover opacity-80"
-                          style={{ objectPosition: '100% 50%' }}
+                          style={{ objectPosition: "100% 50%" }}
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-[#02120a] via-[#064e3b]/30 to-transparent" />
                         <span className="sleek-number text-7xl md:text-8xl text-white/10">
@@ -911,7 +911,7 @@ export default function IndexPage() {
                         className="btn-glow hosting w-62 xl:w-86"
                       >
                         <div className="btn-content xl:text-xl xl:py-4">
-                          Start Hosting for 74,999 PKR{' '}
+                          Start Hosting for 74,999 PKR{" "}
                           <i className="bi bi-arrow-right" />
                         </div>
                       </SmartLink>
@@ -925,7 +925,7 @@ export default function IndexPage() {
                         className="btn-glow charging w-62 xl:w-86"
                       >
                         <div className="btn-content xl:text-xl xl:py-4">
-                          See Stations Nearby{' '}
+                          See Stations Nearby{" "}
                           <i className="bi bi-arrow-right" />
                         </div>
                       </SmartLink>
@@ -998,7 +998,7 @@ export default function IndexPage() {
                     <div
                       id="card-2"
                       className="hidden md:block absolute bottom-[20%] left-[8%] z-30 floating-card"
-                      style={{ animationDelay: '1s' }}
+                      style={{ animationDelay: "1s" }}
                     >
                       <div className="floating-card-base light-from-tr py-3 px-5 3xl:py-6 3xl:px-8 flex items-center gap-4 min-w-[200px] 3xl:min-w-[300px]">
                         <div className="w-10 h-10 3xl:w-14 3xl:h-14 rounded-full bg-[#16a34a]/10 text-[#16a34a] flex items-center justify-center icon-box shrink-0">
@@ -1017,7 +1017,7 @@ export default function IndexPage() {
                     <div
                       id="card-3"
                       className="hidden md:block absolute top-[15%] right-[12%] z-30 floating-card"
-                      style={{ animationDelay: '0.5s' }}
+                      style={{ animationDelay: "0.5s" }}
                     >
                       <div className="floating-card-base light-from-bl py-3 px-5 3xl:py-6 3xl:px-8 flex items-center gap-4 min-w-[200px] 3xl:min-w-[300px]">
                         <div className="w-10 h-10 3xl:w-14 3xl:h-14 rounded-full bg-[#16a34a]/10 text-[#16a34a] flex items-center justify-center icon-box shrink-0">
@@ -1036,7 +1036,7 @@ export default function IndexPage() {
                     <div
                       id="card-4"
                       className="hidden md:block absolute bottom-[25%] right-[8%] z-30 floating-card"
-                      style={{ animationDelay: '1.5s' }}
+                      style={{ animationDelay: "1.5s" }}
                     >
                       <div className="floating-card-base light-from-tl py-3 px-5 3xl:py-6 3xl:px-8 flex items-center gap-4 min-w-[200px] 3xl:min-w-[300px]">
                         <div className="w-10 h-10 3xl:w-14 3xl:h-14 rounded-full bg-[#16a34a]/10 text-[#16a34a] flex items-center justify-center icon-box shrink-0">
@@ -1062,10 +1062,7 @@ export default function IndexPage() {
                         />
                         <div className="" />
                       </div>
-                      <div
-                        id="app-phone-glow"
-                        className=""
-                      />
+                      <div id="app-phone-glow" className="" />
                     </div>
                   </div>
                   <div className="mt-12 flex flex-col sm:flex-row gap-4 justify-center items-center w-full z-20">
@@ -1412,7 +1409,7 @@ export default function IndexPage() {
               <style
                 dangerouslySetInnerHTML={{
                   __html:
-                    '\n    /* Custom Keyframes for the Team Marquee */\n    @keyframes marquee-up {\n        0% { transform: translateY(0); }\n        100% { transform: translateY(-50%); }\n    }\n    @keyframes marquee-down {\n        0% { transform: translateY(-50%); }\n        100% { transform: translateY(0); }\n    }\n    .animate-marquee-up {\n        animation: marquee-up 30s linear infinite;\n    }\n    .animate-marquee-down {\n        animation: marquee-down 30s linear infinite;\n    }\n    /* Hover state: Pause or Slow down */\n    .group\\/card:hover .animate-marquee-up,\n    .group\\/card:hover .animate-marquee-down {\n        animation-play-state: paused;\n    }\n',
+                    "\n    /* Custom Keyframes for the Team Marquee */\n    @keyframes marquee-up {\n        0% { transform: translateY(0); }\n        100% { transform: translateY(-50%); }\n    }\n    @keyframes marquee-down {\n        0% { transform: translateY(-50%); }\n        100% { transform: translateY(0); }\n    }\n    .animate-marquee-up {\n        animation: marquee-up 30s linear infinite;\n    }\n    .animate-marquee-down {\n        animation: marquee-down 30s linear infinite;\n    }\n    /* Hover state: Pause or Slow down */\n    .group\\/card:hover .animate-marquee-up,\n    .group\\/card:hover .animate-marquee-down {\n        animation-play-state: paused;\n    }\n",
                 }}
               />
               <section
@@ -1422,7 +1419,7 @@ export default function IndexPage() {
                 <div className="max-w-[1400px] w-full mx-auto px-6 relative flex flex-col justify-center">
                   <div className="text-center mb-16 shrink-0">
                     <h2 className="text-3xl md:text-5xl 3xl:text-6xl font-display font-bold leading-tight max-w-7xl mx-auto text-zinc-900 tracking-tight">
-                      With a team moving electric forward{' '}
+                      With a team moving electric forward{" "}
                       <br className="hidden md:block" />
                       using simple tools and a lot of care.
                     </h2>
@@ -1579,7 +1576,7 @@ export default function IndexPage() {
                               <div className="relative overflow-hidden h-full rounded-2xl bg-white/5">
                                 <div
                                   className="animate-marquee-up flex flex-col gap-3 w-full"
-                                  style={{ animationDelay: '-5s' }}
+                                  style={{ animationDelay: "-5s" }}
                                 >
                                   <img
                                     src="https://res.cloudinary.com/dk4bqjm38/image/upload/v1770808499/ZV_-_Anusha_vzwcmd.png"
@@ -1616,7 +1613,7 @@ export default function IndexPage() {
                               <div className="relative overflow-hidden h-full rounded-2xl bg-white/5 mt-8">
                                 <div
                                   className="animate-marquee-down flex flex-col gap-3 w-full"
-                                  style={{ animationDelay: '-5s' }}
+                                  style={{ animationDelay: "-5s" }}
                                 >
                                   <img
                                     src="https://res.cloudinary.com/dk4bqjm38/image/upload/v1770808499/ZV_-_Nashit_q5zunh.png"
@@ -1684,7 +1681,8 @@ export default function IndexPage() {
                       take the next step
                     </h2>
                     <p className="text-zinc-500 text-lg md:text-xl font-light max-w-xl mx-auto">
-                      Reach out to us for hosting, charging, or software solutions.
+                      Reach out to us for hosting, charging, or software
+                      solutions.
                     </p>
                   </div>
                   <div
@@ -1833,7 +1831,7 @@ export default function IndexPage() {
                           required
                           placeholder="Tell us how we can help..."
                           className="w-full bg-black border border-zinc-800 rounded-3xl px-6 py-6 text-lg text-white placeholder:text-zinc-700 focus:border-emerald-500/50 focus:bg-zinc-950 focus:outline-none focus:ring-4 focus:ring-emerald-500/10 transition-all duration-300 resize-none"
-                          defaultValue={''}
+                          defaultValue={""}
                         />
                       </div>
                       <div className="flex flex-col items-center pt-6">
@@ -1846,7 +1844,7 @@ export default function IndexPage() {
                             id="btn-text"
                             className="relative z-10 flex items-center gap-3 justify-center"
                           >
-                            Send Message{' '}
+                            Send Message{" "}
                             <i className="bi bi-arrow-right group-hover:translate-x-1 transition-transform" />
                           </span>
                           <div
@@ -1925,7 +1923,7 @@ export default function IndexPage() {
                           href="/charging-partners"
                           className="flex items-center justify-between text-white font-bold group-hover:text-emerald-400 transition-colors"
                         >
-                          Start hosting{' '}
+                          Start hosting{" "}
                           <i className="bi bi-arrow-right -rotate-45 group-hover:rotate-0 transition-transform duration-300" />
                         </SmartLink>
                       </div>
@@ -1968,7 +1966,7 @@ export default function IndexPage() {
                           href="https://zvolta.com/mobile"
                           className="flex items-center justify-between text-white font-bold group-hover:text-emerald-400 transition-colors"
                         >
-                          Find A Station{' '}
+                          Find A Station{" "}
                           <i className="bi bi-arrow-right -rotate-45 group-hover:rotate-0 transition-transform duration-300" />
                         </SmartLink>
                       </div>
@@ -1980,19 +1978,19 @@ export default function IndexPage() {
                         </h3>
                         <ul className="space-y-4 text-zinc-400">
                           <li className="py-1 opacity-60 cursor-default">
-                            Platform overview{' '}
+                            Platform overview{" "}
                             <span className="text-xs bg-zinc-800 px-2 py-0.5 rounded ml-2 text-zinc-400">
                               Coming Soon
                             </span>
                           </li>
                           <li className="py-1 opacity-60 cursor-default">
-                            OCPP compatibility{' '}
+                            OCPP compatibility{" "}
                             <span className="text-xs bg-zinc-800 px-2 py-0.5 rounded ml-2 text-zinc-400">
                               Coming Soon
                             </span>
                           </li>
                           <li className="py-1 opacity-60 cursor-default">
-                            Integrations{' '}
+                            Integrations{" "}
                             <span className="text-xs bg-zinc-800 px-2 py-0.5 rounded ml-2 text-zinc-400">
                               Coming Soon
                             </span>
@@ -2012,7 +2010,7 @@ export default function IndexPage() {
                           href="/contact-us"
                           className="flex items-center justify-between text-white font-bold group-hover:text-emerald-400 transition-colors"
                         >
-                          Book a demo{' '}
+                          Book a demo{" "}
                           <i className="bi bi-arrow-right -rotate-45 group-hover:rotate-0 transition-transform duration-300" />
                         </SmartLink>
                       </div>
@@ -2104,7 +2102,7 @@ export default function IndexPage() {
                     />
                     <div className="hidden md:block w-px h-6 bg-zinc-800" />
                     <div className="text-zinc-500 text-sm flex gap-6">
-                      <span>© 2025 ZVolta Inc.</span>
+                      <span>Â© 2025 ZVolta Inc.</span>
                     </div>
                   </div>
                   <div className="flex gap-6">

@@ -25,167 +25,6 @@
     min-width: 0;
   }
 
-  #contact-section.contact-stack-section {
-    isolation: isolate;
-  }
-
-  #contact-section .contact-stack-hero {
-    background:
-      radial-gradient(circle at 88% 18%, rgb(16 185 129 / 0.08), transparent 26rem),
-      #ffffff;
-  }
-
-  #contact-section .contact-stack-title {
-    font-size: clamp(4.75rem, 10vw, 12.5rem);
-    line-height: 0.95;
-    letter-spacing: 0;
-    max-width: 13ch;
-    will-change: transform;
-  }
-
-  #contact-section .contact-stack-copy,
-  #contact-section .contact-form-stage,
-  #contact-section .contact-intro {
-    will-change: transform, opacity;
-  }
-
-  #contact-section .contact-form-card {
-    background: #ffffff !important;
-    border: 0 !important;
-    border-radius: 0 !important;
-    box-shadow: none !important;
-    overflow: visible !important;
-    padding: 0 !important;
-  }
-
-  #contact-section .contact-form-card > .absolute {
-    display: none;
-  }
-
-  #contact-section #contact-form {
-    max-width: min(100%, 72rem) !important;
-    margin: 0 !important;
-  }
-
-  #contact-section #contact-form .group {
-    gap: 0;
-  }
-
-  #contact-section #contact-form label {
-    display: block;
-    padding-left: 0 !important;
-    margin-bottom: 0.85rem;
-    color: #71717a !important;
-    font-size: 0.95rem !important;
-    font-weight: 500 !important;
-    letter-spacing: 0 !important;
-    text-transform: none !important;
-  }
-
-  #contact-section #contact-form input,
-  #contact-section #contact-form textarea,
-  #contact-section #dropdown-trigger {
-    width: 100%;
-    min-height: 4.75rem;
-    background: transparent !important;
-    border: 0 !important;
-    border-bottom: 1px solid rgb(24 24 27 / 0.28) !important;
-    border-radius: 0 !important;
-    color: #18181b !important;
-    font-size: clamp(1.35rem, 1.9vw, 2rem) !important;
-    line-height: 1.25;
-    padding: 0 0 1.1rem !important;
-    box-shadow: none !important;
-    outline: none !important;
-  }
-
-  #contact-section #contact-form input::placeholder,
-  #contact-section #contact-form textarea::placeholder,
-  #contact-section #dropdown-selected-text {
-    color: #71717a !important;
-  }
-
-  #contact-section #contact-form input:focus,
-  #contact-section #contact-form textarea:focus,
-  #contact-section #dropdown-trigger:focus {
-    border-bottom-color: #18181b !important;
-    box-shadow: none !important;
-  }
-
-  #contact-section #message {
-    min-height: 8rem;
-    resize: vertical;
-  }
-
-  #contact-section #custom-dropdown {
-    position: relative;
-  }
-
-  #contact-section #dropdown-trigger {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  #contact-section #dropdown-menu {
-    background: #ffffff !important;
-    border: 1px solid rgb(24 24 27 / 0.18) !important;
-    border-radius: 1.5rem !important;
-    color: #18181b !important;
-    overflow: hidden;
-  }
-
-  #contact-section .dropdown-item {
-    color: #18181b !important;
-    border-bottom: 1px solid rgb(24 24 27 / 0.08) !important;
-  }
-
-  #contact-section .dropdown-item:hover {
-    background: #18181b !important;
-    color: #ffffff !important;
-  }
-
-  #contact-section #contact-submit-btn {
-    align-self: flex-start;
-    background: #111111 !important;
-    color: #ffffff !important;
-    border: 1px solid #111111;
-    border-radius: 999px !important;
-    box-shadow: none !important;
-  }
-
-  #contact-section #contact-submit-btn:hover {
-    background: #16a34a !important;
-    border-color: #16a34a;
-  }
-
-  #contact-section #contact-success {
-    background: rgb(255 255 255 / 0.96) !important;
-    color: #18181b;
-    border: 1px solid rgb(24 24 27 / 0.1);
-    border-radius: 2rem !important;
-    min-height: 30rem;
-  }
-
-  #contact-section #contact-success h3 {
-    color: #18181b !important;
-  }
-
-  #contact-section #contact-success p {
-    color: #52525b !important;
-  }
-
-  @media (max-width: 767px) {
-    #contact-section .contact-stack-title {
-      font-size: clamp(4rem, 18vw, 6.5rem);
-    }
-
-    #contact-section .contact-stack-hero {
-      align-items: flex-end;
-      padding-bottom: 5rem;
-    }
-  }
-
   .legacy-page-shell header,
   .legacy-page-shell footer:not(.site-footer),
   .legacy-page-shell #dynamic-logo,
@@ -219,11 +58,64 @@
       var(--menu-card-delay, 120ms) forwards;
   }
 
-  .site-menu-link {
+  .site-menu-nav-row {
     opacity: 0;
-    transform: translateX(-20px);
-    animation: site-menu-link-in 0.42s ease-out var(--menu-link-delay, 260ms)
+    transform: translateX(-22px);
+    animation: site-menu-nav-row-in 0.42s ease-out var(--menu-row-delay, 200ms)
       forwards;
+  }
+
+  .site-menu-link {
+    animation: site-menu-link-in 0.36s ease-out var(--menu-link-delay, 260ms)
+      both;
+  }
+
+  .site-menu-contact {
+    opacity: 0;
+    transform: translateY(18px);
+    animation: site-menu-contact-in 0.42s ease-out
+      var(--menu-contact-delay, 420ms) forwards;
+  }
+
+  .site-menu-toggle-icon {
+    color: inherit;
+  }
+
+  .site-menu-toggle-bar {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    border-radius: 9999px;
+    background: currentColor;
+    transform-origin: center;
+    transition:
+      transform 0.32s cubic-bezier(0.4, 0, 0.2, 1),
+      opacity 0.2s ease;
+  }
+
+  .site-menu-toggle-bar.bar-1 {
+    top: 2px;
+  }
+
+  .site-menu-toggle-bar.bar-2 {
+    top: 7px;
+  }
+
+  .site-menu-toggle-bar.bar-3 {
+    top: 12px;
+  }
+
+  .site-menu-toggle-icon.is-open .site-menu-toggle-bar.bar-1 {
+    transform: translateY(5px) rotate(45deg);
+  }
+
+  .site-menu-toggle-icon.is-open .site-menu-toggle-bar.bar-2 {
+    opacity: 0;
+  }
+
+  .site-menu-toggle-icon.is-open .site-menu-toggle-bar.bar-3 {
+    transform: translateY(-5px) rotate(-45deg);
   }
 
   .site-menu-overlay.is-closing {
@@ -250,11 +142,22 @@
       var(--menu-card-close-delay, 0ms) forwards;
   }
 
-  .site-menu-overlay.is-closing .site-menu-link {
+  .site-menu-overlay.is-closing .site-menu-nav-row {
     opacity: 1;
     transform: translateX(0);
-    animation: site-menu-link-out 0.32s ease-in
+    animation: site-menu-nav-row-out 0.3s ease-in
+      var(--menu-row-close-delay, 0ms) forwards;
+  }
+
+  .site-menu-overlay.is-closing .site-menu-link {
+    animation: site-menu-link-out 0.24s ease-in
       var(--menu-link-close-delay, 0ms) forwards;
+  }
+
+  .site-menu-overlay.is-closing .site-menu-contact {
+    opacity: 1;
+    transform: translateY(0);
+    animation: site-menu-contact-out 0.26s ease-in 0ms forwards;
   }
 
   @keyframes site-menu-overlay-in {
@@ -283,10 +186,29 @@
     }
   }
 
-  @keyframes site-menu-link-in {
+  @keyframes site-menu-nav-row-in {
     to {
       opacity: 1;
       transform: translateX(0);
+    }
+  }
+
+  @keyframes site-menu-link-in {
+    from {
+      opacity: 0;
+      transform: translateX(-6px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes site-menu-contact-in {
+    to {
+      opacity: 1;
+      transform: translateY(0);
     }
   }
 
@@ -316,10 +238,29 @@
     }
   }
 
+  @keyframes site-menu-nav-row-out {
+    to {
+      opacity: 0;
+      transform: translateX(-14px);
+    }
+  }
+
   @keyframes site-menu-link-out {
+    from {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
     to {
       opacity: 0;
       transform: translateX(-16px);
+    }
+  }
+
+  @keyframes site-menu-contact-out {
+    to {
+      opacity: 0;
+      transform: translateY(12px);
     }
   }
 
@@ -328,10 +269,16 @@
     .site-menu-backdrop,
     .site-menu-close,
     .site-menu-card,
-    .site-menu-link {
+    .site-menu-nav-row,
+    .site-menu-link,
+    .site-menu-contact {
       animation: none;
       opacity: 1;
       transform: none;
+    }
+
+    .site-menu-toggle-bar {
+      transition: none;
     }
   }
 }

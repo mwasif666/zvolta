@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 import { footerLinkGroups, getRouteByPageId } from "../routes";
 import { SmartLink } from "./SmartLink";
 
-const MENU_CLOSE_DURATION_MS = 620;
+const MENU_CLOSE_DURATION_MS = 900;
 
 function isRouteActive(route, pathname) {
   const normalizedPathname = pathname.toLowerCase();
@@ -15,20 +15,16 @@ function isRouteActive(route, pathname) {
 }
 
 function MenuIcon({ isOpen }) {
-  if (isOpen) {
-    return (
-      <span aria-hidden="true" className="relative h-4 w-4">
-        <span className="absolute left-0 top-1/2 h-px w-4 -translate-y-1/2 rotate-45 rounded-full bg-current" />
-        <span className="absolute left-0 top-1/2 h-px w-4 -translate-y-1/2 -rotate-45 rounded-full bg-current" />
-      </span>
-    );
-  }
-
   return (
-    <span aria-hidden="true" className="grid w-4 gap-1">
-      <span className="h-px rounded-full bg-current" />
-      <span className="h-px rounded-full bg-current" />
-      <span className="h-px rounded-full bg-current" />
+    <span
+      aria-hidden="true"
+      className={`site-menu-toggle-icon relative h-4 w-4 ${
+        isOpen ? "is-open" : ""
+      }`}
+    >
+      <span className="site-menu-toggle-bar bar-1" />
+      <span className="site-menu-toggle-bar bar-2" />
+      <span className="site-menu-toggle-bar bar-3" />
     </span>
   );
 }
@@ -90,15 +86,20 @@ function DockLink({ route, pathname, children, className = "", onClick }) {
   );
 }
 
-function MenuLink({ item, pathname, onClick, index, totalCount }) {
+function MenuLink({
+  item,
+  pathname,
+  onClick,
+  openDelay,
+  closeDelay,
+}) {
   const { route, label } = item;
-  const closeDelay = Math.max(0, totalCount - index - 1) * 45;
 
   return (
     <SmartLink
       href={route.path}
       style={{
-        "--menu-link-delay": `${260 + index * 55}ms`,
+        "--menu-link-delay": `${openDelay}ms`,
         "--menu-link-close-delay": `${closeDelay}ms`,
       }}
       className={[
@@ -308,14 +309,26 @@ function SiteHeader() {
                 <div className="pointer-events-none absolute right-8 top-8 h-32 w-32 rounded-full bg-[radial-gradient(#10b981_2px,transparent_2px)] opacity-20 [background-size:8px_8px]" />
                 <nav className="relative z-10 mt-4 flex flex-col gap-4">
                   {menuLinks.map((route, index) => (
-                    <div key={route.route.pageId} className="site-menu-nav-row">
+                    <div
+                      key={route.route.pageId}
+                      className="site-menu-nav-row"
+                      style={{
+                        "--menu-row-delay": `${220 + index * 90}ms`,
+                        "--menu-row-close-delay": `${
+                          Math.max(0, menuLinks.length - index - 1) * 70
+                        }ms`,
+                      }}
+                    >
                       {index > 0 ? (
                         <div className="mb-4 h-px w-full bg-white/10" />
                       ) : null}
                       <MenuLink
                         item={route}
-                        index={index}
-                        totalCount={menuLinks.length}
+                        openDelay={240 + index * 90}
+                        closeDelay={Math.max(
+                          0,
+                          menuLinks.length - index - 1,
+                        ) * 70}
                         pathname={pathname}
                         onClick={closeMobileMenu}
                       />
@@ -323,7 +336,12 @@ function SiteHeader() {
                   ))}
                 </nav>
 
-                <div className="relative z-10 mt-12">
+                <div
+                  className="site-menu-contact relative z-10 mt-12"
+                  style={{
+                    "--menu-contact-delay": `${260 + menuLinks.length * 90}ms`,
+                  }}
+                >
                   <p className="mb-2 text-xs font-bold uppercase tracking-[0.2em] text-zinc-500">
                     Contact us
                   </p>
@@ -342,9 +360,11 @@ function SiteHeader() {
                     key={card.title}
                     href={card.route.path}
                     style={{
-                      "--menu-card-delay": `${120 + index * 80}ms`,
+                      "--menu-card-delay": `${
+                        340 + menuLinks.length * 90 + index * 95
+                      }ms`,
                       "--menu-card-close-delay": `${
-                        Math.max(0, menuCards.length - index - 1) * 55
+                        Math.max(0, menuCards.length - index - 1) * 70
                       }ms`,
                     }}
                     className="menu-card site-menu-card group relative flex h-[160px] flex-col justify-center overflow-hidden rounded-[2rem] bg-black p-8 md:h-[160px]"

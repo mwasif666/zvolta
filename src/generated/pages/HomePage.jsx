@@ -1839,37 +1839,27 @@ export default function HomePage() {
               </section>
               <section
                 id="contact-section"
-                className="contact-stack-section bg-white text-zinc-900 relative border-t border-gray-100 overflow-hidden"
+                className="py-24 bg-white text-zinc-900 relative border-t border-gray-100 overflow-hidden"
               >
-                <div className="contact-stack-hero relative z-0 min-h-screen flex items-center px-6 py-24">
-                  <div className="max-w-[1500px] mx-auto w-full">
-                    <h2 className="contact-stack-title font-display font-medium tracking-tight text-zinc-900">
-                      Let's Reimagine
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-emerald-500/5 blur-[120px] rounded-full pointer-events-none -z-10" />
+                <div className="max-w-4xl mx-auto px-6 relative z-10">
+                  <div className="text-center mb-16">
+                    <h2 className="text-3xl md:text-5xl 3xl:text-7xl font-display font-bold tracking-tight text-zinc-900 mb-6">
+                      Here to help you
                       <br />
-                      What's Possible.
+                      take the next step
                     </h2>
-                    <p className="contact-stack-copy mt-10 max-w-3xl text-xl md:text-2xl text-zinc-500 font-light">
+                    <p className="text-zinc-500 text-lg md:text-xl font-light max-w-xl mx-auto">
                       Reach out to us for hosting, charging, or software solutions.
                     </p>
                   </div>
-                </div>
-                <div className="contact-form-stage relative z-10 bg-white px-6 pb-24">
-                  <div className="max-w-[1500px] mx-auto border-t border-zinc-300 pt-12 md:pt-20">
-                    <div className="contact-intro mb-16">
-                      <h2 className="contact-intro-title text-4xl md:text-6xl 3xl:text-7xl font-display font-medium tracking-tight text-zinc-900 mb-6">
-                        First, let's get to know each other
-                      </h2>
-                      <p className="contact-intro-copy text-zinc-500 text-lg md:text-xl font-light max-w-3xl">
-                        Use the same connected form to tell us what you need.
-                      </p>
-                    </div>
-                  <div className="contact-form-card relative bg-zinc-900 p-8 md:p-14 rounded-[3rem] border border-zinc-800 shadow-2xl shadow-emerald-900/10 overflow-hidden">
+                  <div className="relative bg-zinc-900 p-8 md:p-14 rounded-[3rem] border border-zinc-800 shadow-2xl shadow-emerald-900/10 overflow-hidden">
                     <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-500/10 blur-[80px] rounded-full pointer-events-none" />
                     <form
                       id="contact-form"
                       action="https://formspree.io/f/mvgrykro"
                       method="POST"
-                      className="relative z-10 max-w-4xl mx-auto space-y-8 transition-opacity duration-500"
+                      className="relative z-10 space-y-8 transition-opacity duration-500"
                     >
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <div className="group space-y-3">
@@ -2057,7 +2047,6 @@ export default function HomePage() {
                         Send another message
                       </button>
                     </div>
-                  </div>
                   </div>
                 </div>
               </section>

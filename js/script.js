@@ -903,162 +903,264 @@ document.addEventListener('DOMContentLoaded', function () {
   // =========================================
     // 14. MOBILE MENU (FULL SCREEN CARD GRID)
     // =========================================
-    const menuBtn = document.getElementById('dynamic-sidebar-btn');
-    const menuOverlay = document.getElementById('mobile-menu-overlay');
-    const menuBackdrop = document.getElementById('mobile-menu-backdrop');
-    const menuClose = document.getElementById('mobile-menu-close');
+    let menuBtn = document.getElementById('dynamic-sidebar-btn');
+    let menuOverlay = document.getElementById('mobile-menu-overlay');
+    let menuBackdrop = document.getElementById('mobile-menu-backdrop');
+    let menuClose = document.getElementById('mobile-menu-close');
     const menuCards = document.querySelectorAll('.menu-card');
-    const menuLinks = document.querySelectorAll('.mobile-menu-link');
+    let menuLinks = document.querySelectorAll('.mobile-menu-link');
 
-    let isMenuOpen = false;
-
-    const menuTl = gsap.timeline({ paused: true, reversed: true });
-
-    menuTl
-        .to(menuOverlay, { autoAlpha: 1, duration: 0 })
-        .set(menuOverlay, { pointerEvents: "auto" })
-        .to(menuBackdrop, { opacity: 1, duration: 0.4, ease: "power2.out" })
-        .to(menuClose, {
-            opacity: 1,
-            y: 0,
-            duration: 0.4,
-            ease: "back.out(1.7)"
-        }, "-=0.2")
-        .to(menuCards, {
-            y: 0,
-            opacity: 1,
-            duration: 0.6,
-            stagger: 0.08,
-            ease: "power3.out"
-        }, "-=0.3")
-        .from(menuLinks, {
-            x: -20,
-            opacity: 0,
-            duration: 0.4,
-            stagger: 0.05,
-            ease: "power2.out"
-        }, "-=0.4");
-
-
-    function toggleMenu() {
-        if (!isMenuOpen) {
-            menuTl.play();
-            if(scrollObserver) scrollObserver.disable();
-            document.body.style.overflow = 'hidden';
-        } else {
-            menuTl.reverse();
-            if(scrollObserver) scrollObserver.enable();
-            document.body.style.overflow = '';
+    const cloneWithoutListeners = (element) => {
+        if (!element) {
+            return null;
         }
-        isMenuOpen = !isMenuOpen;
-    }
+        const clonedElement = element.cloneNode(true);
+        element.parentNode?.replaceChild(clonedElement, element);
+        return clonedElement;
+    };
 
-    if(menuBtn) menuBtn.addEventListener('click', toggleMenu);
-    if(menuClose) menuClose.addEventListener('click', toggleMenu);
+    if (menuBtn && menuOverlay && menuBackdrop && menuClose) {
+        menuBtn = cloneWithoutListeners(menuBtn);
+        menuClose = cloneWithoutListeners(menuClose);
+        menuLinks = Array.from(menuLinks).map((link) => cloneWithoutListeners(link));
+        menuOverlay = document.getElementById('mobile-menu-overlay');
+        menuBackdrop = document.getElementById('mobile-menu-backdrop');
 
-    if(menuOverlay) {
-        menuOverlay.addEventListener('click', (e) => {
-            if (e.target === document.querySelector('#mobile-menu-overlay > div')) {
-                 if(isMenuOpen) toggleMenu();
-            }
-        });
-    }
-
-    menuLinks.forEach(link => {
-        link.addEventListener('click', () => {
-             if(isMenuOpen) toggleMenu();
-        });
-    });
-
-    // =========================================
-    // 15. CONTACT STACKING SECTION + FORM
-    // =========================================
-    let contactSetupAttempts = 0;
-
-    function setupContactSection() {
-        const contactSection = document.getElementById('contact-section');
-        const contactForm = document.getElementById('contact-form');
-        const trigger = document.getElementById('dropdown-trigger');
-        const menu = document.getElementById('dropdown-menu');
-        const arrow = document.getElementById('dropdown-arrow');
-        const selectedText = document.getElementById('dropdown-selected-text');
-        const hiddenInput = document.getElementById('dropdown-hidden-input');
-        const items = document.querySelectorAll('.dropdown-item');
-        const contactHero = contactSection?.querySelector('.contact-stack-hero');
-        const contactTitle = contactSection?.querySelector('.contact-stack-title');
-        const contactCopy = contactSection?.querySelector('.contact-stack-copy');
-        const contactFormStage = contactSection?.querySelector('.contact-form-stage');
-        const contactIntro = contactSection?.querySelector('.contact-intro');
-
-        const contactSetupMissing =
-            !contactSection ||
-            !contactForm ||
-            !trigger ||
-            !contactHero ||
-            !contactTitle ||
-            !contactFormStage ||
-            typeof gsap === 'undefined' ||
-            typeof ScrollTrigger === 'undefined';
-
-        if (contactSetupMissing) {
-            if (contactSetupAttempts < 300) {
-                contactSetupAttempts += 1;
-                setTimeout(setupContactSection, 100);
-            }
+        if (!menuBtn || !menuClose || !menuOverlay || !menuBackdrop) {
             return;
         }
 
-        if (!contactSection || contactSection.dataset.contactReady === 'true') return;
-        contactSection.dataset.contactReady = 'true';
+        let isMenuOpen = false;
+        let menuAnimation = null;
 
-        if (contactHero && contactTitle && contactFormStage) {
-            gsap.set([contactFormStage, contactIntro], { autoAlpha: 0, y: 90 });
+        const setMenuClosedState = () => {
+            gsap.set(menuOverlay, { autoAlpha: 0, pointerEvents: "none" });
+            gsap.set(menuBackdrop, { opacity: 0 });
+            gsap.set(menuClose, { opacity: 0, y: -20 });
+            gsap.set(menuCards, { opacity: 0, y: 50 });
+            gsap.set(menuLinks, { opacity: 0, x: -24 });
+        };
 
-            ScrollTrigger.create({
-                trigger: contactSection,
-                start: 'top top',
-                end: '+=1200',
-                pin: contactHero,
-                pinSpacing: false,
-                pinType: 'transform',
-                anticipatePin: 1,
-                invalidateOnRefresh: true
-            });
+        const openMenu = () => {
+            menuAnimation?.kill();
+            setMenuClosedState();
+            gsap.set(menuOverlay, { autoAlpha: 1, pointerEvents: "auto" });
 
-            const contactStackTl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: contactSection,
-                    start: 'top top',
-                    end: '+=1200',
-                    scrub: true,
-                    invalidateOnRefresh: true
+            menuAnimation = gsap.timeline({
+                defaults: { overwrite: "auto" }
+            })
+                .to(menuBackdrop, { opacity: 1, duration: 0.35, ease: "power2.out" })
+                .to(menuClose, {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.38,
+                    ease: "back.out(1.7)"
+                }, "-=0.1")
+                .to(menuLinks, {
+                    x: 0,
+                    opacity: 1,
+                    duration: 0.42,
+                    stagger: 0.08,
+                    ease: "power3.out"
+                }, "-=0.05")
+                .to(menuCards, {
+                    y: 0,
+                    opacity: 1,
+                    duration: 0.56,
+                    stagger: 0.1,
+                    ease: "power3.out"
+                }, "-=0.2");
+
+            if(scrollObserver) scrollObserver.disable();
+            document.body.style.overflow = 'hidden';
+            isMenuOpen = true;
+        };
+
+        const closeMenu = () => {
+            menuAnimation?.kill();
+            menuAnimation = gsap.timeline({
+                defaults: { overwrite: "auto" },
+                onComplete: () => {
+                    gsap.set(menuOverlay, { autoAlpha: 0, pointerEvents: "none" });
                 }
-            });
+            })
+                .to(menuCards, {
+                    y: 38,
+                    opacity: 0,
+                    duration: 0.3,
+                    stagger: {
+                        each: 0.06,
+                        from: "end"
+                    },
+                    ease: "power2.in"
+                })
+                .to(menuLinks, {
+                    x: -18,
+                    opacity: 0,
+                    duration: 0.24,
+                    stagger: {
+                        each: 0.05,
+                        from: "end"
+                    },
+                    ease: "power2.in"
+                }, "-=0.22")
+                .to(menuClose, {
+                    opacity: 0,
+                    y: -16,
+                    duration: 0.2,
+                    ease: "power2.in"
+                }, "-=0.16")
+                .to(menuBackdrop, {
+                    opacity: 0,
+                    duration: 0.25,
+                    ease: "power2.in"
+                }, "-=0.14");
 
-            contactStackTl.to(contactTitle, {
-                scale: () => (window.innerWidth < 768 ? 0.64 : 0.48),
-                yPercent: () => (window.innerWidth < 768 ? -18 : -24),
-                transformOrigin: 'left top',
-                ease: 'none'
-            }, 0);
+            if(scrollObserver) scrollObserver.enable();
+            document.body.style.overflow = '';
+            isMenuOpen = false;
+        };
 
-            if (contactCopy) {
-                contactStackTl.to(contactCopy, { autoAlpha: 0, y: -36, ease: 'none' }, 0);
+        setMenuClosedState();
+
+        function toggleMenu() {
+            if (isMenuOpen) {
+                closeMenu();
+                return;
             }
-
-            contactStackTl.to(contactFormStage, { autoAlpha: 1, y: 0, ease: 'none' }, 0.28);
-            if (contactIntro) {
-                contactStackTl.to(contactIntro, { autoAlpha: 1, y: 0, ease: 'none' }, 0.36);
-            }
+            openMenu();
         }
 
-        const successMsg = document.getElementById('contact-success');
-        const submitBtn = document.getElementById('contact-submit-btn');
-        const btnText = document.getElementById('btn-text');
-        const btnLoader = document.getElementById('btn-loader');
-        const formError = document.getElementById('form-error');
-        const resetBtn = document.getElementById('reset-form-btn');
+        const handleMenuButtonClick = (event) => {
+            event.stopImmediatePropagation();
+            toggleMenu();
+        };
 
+        const handleMenuCloseClick = (event) => {
+            event.stopImmediatePropagation();
+            toggleMenu();
+        };
+
+        menuBtn.addEventListener('click', handleMenuButtonClick, true);
+        menuClose.addEventListener('click', handleMenuCloseClick, true);
+
+        menuOverlay.addEventListener('click', (e) => {
+            e.stopImmediatePropagation();
+            if (e.target === menuBackdrop && isMenuOpen) {
+                toggleMenu();
+            }
+        }, true);
+
+        menuLinks.forEach((link) => {
+            if (!link) {
+                return;
+            }
+            link.addEventListener('click', (event) => {
+                event.stopImmediatePropagation();
+                if (isMenuOpen) {
+                    toggleMenu();
+                }
+            }, true);
+        });
+    }
+
+    // =========================================
+    // 15. CONTACT FORM FULLSCREEN EXPAND ANIMATION
+    // =========================================
+    const contactSection = document.getElementById('contact-section');
+
+    if (contactSection) {
+      const contactFormShell =
+        contactSection.querySelector('#contact-form-shell') ||
+        contactSection.querySelector('[data-contact-form-shell="true"]') ||
+        contactSection.querySelector('.relative.bg-zinc-900.rounded-\\[3rem\\]');
+      const contactHeading = contactSection.querySelector('h2');
+      const contactCopy = contactSection.querySelector('p');
+      const contactSectionRoot = contactSection.querySelector('.max-w-4xl.mx-auto.px-6');
+
+      if (contactFormShell && contactSectionRoot) {
+        const expanderClass = 'contact-form-bg-expander';
+        let contactExpander = contactSection.querySelector(`.${expanderClass}`);
+
+        if (!contactExpander) {
+          contactExpander = document.createElement('div');
+          contactExpander.className = expanderClass;
+          contactExpander.setAttribute('aria-hidden', 'true');
+          contactSection.prepend(contactExpander);
+        }
+
+        const updateExpanderBounds = () => {
+          const sectionRect = contactSection.getBoundingClientRect();
+          const shellRect = contactFormShell.getBoundingClientRect();
+          const offsetLeft = shellRect.left - sectionRect.left;
+          const offsetTop = shellRect.top - sectionRect.top;
+
+          gsap.set(contactExpander, {
+            x: offsetLeft,
+            y: offsetTop,
+            width: shellRect.width,
+            height: shellRect.height,
+            borderRadius: gsap.getProperty(contactFormShell, 'borderRadius'),
+          });
+        };
+
+        gsap.set(contactSection, { backgroundColor: '#ffffff' });
+        gsap.set(contactExpander, {
+          position: 'absolute',
+          zIndex: 0,
+          backgroundColor: '#09090b',
+          transformOrigin: 'center center',
+          scale: 1,
+          willChange: 'transform, border-radius'
+        });
+        gsap.set(contactSectionRoot, { position: 'relative', zIndex: 2 });
+        gsap.set(contactFormShell, { position: 'relative', zIndex: 3, backgroundColor: 'transparent' });
+
+        updateExpanderBounds();
+
+        ScrollTrigger.create({
+          trigger: contactSection,
+          start: 'top 90%',
+          end: 'bottom -8%',
+          scrub: 1.2,
+          invalidateOnRefresh: true,
+          onRefreshInit: updateExpanderBounds,
+          onRefresh: updateExpanderBounds,
+          onUpdate: (self) => {
+            if (self.progress > 0.001) {
+              gsap.set(contactHeading, { color: '#ffffff', opacity: 1 });
+              gsap.set(contactCopy, { color: '#ffffff', opacity: 1 });
+            } else {
+              gsap.set(contactHeading, { color: '#18181b', opacity: 1 });
+              gsap.set(contactCopy, { color: '#71717a', opacity: 1 });
+            }
+          },
+          animation: gsap.timeline()
+            .to(contactExpander, {
+              scale: 6.4,
+              borderRadius: 0,
+              ease: 'none'
+            }, 0)
+            .to(contactSection, {
+              backgroundColor: '#09090b',
+              ease: 'none'
+            }, 0)
+        });
+      }
+    }
+
+    // =========================================
+    // 15. CONTACT FORM HANDLING
+    // =========================================
+    const contactForm = document.getElementById('contact-form');
+    const successMsg = document.getElementById('contact-success');
+    const submitBtn = document.getElementById('contact-submit-btn');
+    const btnText = document.getElementById('btn-text');
+    const btnLoader = document.getElementById('btn-loader');
+    const formError = document.getElementById('form-error');
+    const resetBtn = document.getElementById('reset-form-btn');
+
+    if (contactForm) {
         contactForm.addEventListener('submit', async function(e) {
             e.preventDefault();
 
@@ -1137,8 +1239,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
         ScrollTrigger.refresh();
     }
-
-    setupContactSection();
 
     // =========================================
     // HERO DAY/NIGHT CYCLE

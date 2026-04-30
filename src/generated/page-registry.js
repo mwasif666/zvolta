@@ -31,7 +31,7 @@ export const routeEntries = [
     meta: {
       title: "Become a ZVolta Charging Partner | Earn with Your Property",
       description:
-        "Join ZVolta’s nationwide EV charging network. Turn your property into a smart charging station, earn passive income, and be part of Pakistan's clean energy future.",
+        "Join ZVolta's nationwide EV charging network. Turn your property into a smart charging station, earn passive income, and be part of Pakistan's clean energy future.",
     },
     load: () => import("../pages/BecomeChargingPartnerPage.jsx"),
   },
@@ -39,10 +39,21 @@ export const routeEntries = [
     pageId: "blogs",
     paths: ["/blogs"],
     meta: {
-      title: "ZVolta - Coming Soon",
-      description: "This page is currently under development.",
+      title: "ZVolta Blog | EV Charging, Mobility & Operator Insights",
+      description:
+        "Read ZVolta updates and practical insights on EV charging, electric rickshaws, host partners, driver support, and clean mobility in Pakistan.",
     },
     load: () => import("../pages/BlogsPage.jsx"),
+  },
+  {
+    pageId: "blog-detail",
+    paths: ["/blog-details", "/blogs/:slug"],
+    meta: {
+      title: "ZVolta Blog Details | Clean Mobility Insights",
+      description:
+        "Detailed ZVolta insight on EV charging, mobility operations, driver programs, host partnerships, and charging software.",
+    },
+    load: () => import("../pages/BlogDetailPage.jsx"),
   },
   {
     pageId: "careers",
@@ -146,7 +157,7 @@ export const routeEntries = [
     meta: {
       title: "Invest in EV Rickshaws | ZVolta Passive Income Opportunities",
       description:
-        "Join ZVolta’s EV revolution: invest in 3- or 6-seater electric rickshaws and earn fixed monthly returns, fully managed. Clean, hassle-free passive income in Pakistan.",
+        "Join ZVolta's EV revolution: invest in 3- or 6-seater electric rickshaws and earn fixed monthly returns, fully managed. Clean, hassle-free passive income in Pakistan.",
     },
     load: () => import("../pages/InvestPage.jsx"),
   },

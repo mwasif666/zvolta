@@ -8,6 +8,7 @@ const routeLabels = {
   "about-us": "About Us",
   appstore: "App Store",
   "become-charging-partner": "Become Charging Partner",
+  "blog-detail": "Blog Details",
   blogs: "Blogs",
   careers: "Careers",
   charge: "Charge",

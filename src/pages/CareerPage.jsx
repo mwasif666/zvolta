@@ -147,7 +147,7 @@ export default function CareerPage() {
     <>
       <style data-page-style="careers:1">{`
         .career-page {
-          --career-bg: #05070d;
+          --career-bg: #000504;
           --career-panel: rgba(255, 255, 255, 0.055);
           --career-border: rgba(255, 255, 255, 0.18);
           --career-muted: rgba(255, 255, 255, 0.68);
@@ -157,7 +157,7 @@ export default function CareerPage() {
           overflow-x: hidden;
           background:
             radial-gradient(circle at 18% 12%, rgba(16, 240, 138, 0.18), transparent 28rem),
-            radial-gradient(circle at 82% 38%, rgba(31, 98, 255, 0.16), transparent 32rem),
+            radial-gradient(circle at 82% 38%, rgba(255, 255, 255, 0.08), transparent 32rem),
             var(--career-bg);
           color: #ffffff;
         }
@@ -174,15 +174,23 @@ export default function CareerPage() {
         .career-page__hero {
           position: relative;
           isolation: isolate;
-          min-height: 700px;
+          min-height: 500px;
           display: flex;
-          align-items: flex-end;
-          padding: 150px 0 86px;
+          align-items: center;
+          padding: 150px 0 100px;
           background-image:
-            linear-gradient(180deg, rgba(3, 5, 10, 0.35), rgba(3, 5, 10, 0.96)),
-            url("/img/aivora-career/bootcamp-bg.png");
+            radial-gradient(circle at 50% 42%, rgba(0, 255, 151, 0.16), transparent 32rem),
+            linear-gradient(180deg, rgba(0, 5, 4, 0.58), rgba(0, 5, 4, 0.94)),
+            url("/img/zvolta-3.jpg");
           background-size: cover;
-          background-position: center;
+          background-position: center, center, center 46%;
+          text-align: center;
+        }
+
+        .career-page__hero .career-page__container {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
         }
 
         .career-page__hero::after {
@@ -195,19 +203,41 @@ export default function CareerPage() {
         }
 
         .career-page__crumbs {
-          display: flex;
+          display: inline-flex;
           align-items: center;
           gap: 10px;
-          margin-bottom: 20px;
-          color: var(--career-muted);
-          font-size: 14px;
-          font-weight: 700;
-          text-transform: uppercase;
-          letter-spacing: 0.18em;
+          position: relative;
+          margin: 0;
+          color: #ffffff;
+          font-size: 16px;
+          font-weight: 600;
+          text-transform: capitalize;
+          letter-spacing: 0;
+        }
+
+        .career-page__crumbs::before,
+        .career-page__crumbs::after {
+          content: "";
+          position: absolute;
+          top: 50%;
+          width: 8px;
+          height: 8px;
+          border-radius: 999px;
+          background: var(--career-primary);
+          transform: translateY(-50%);
+        }
+
+        .career-page__crumbs::before {
+          left: -18px;
+        }
+
+        .career-page__crumbs::after {
+          right: -18px;
         }
 
         .career-page__crumbs a {
-          color: #ffffff;
+          color: inherit;
+          text-decoration: none;
           transition: color 0.2s ease;
         }
 
@@ -218,7 +248,7 @@ export default function CareerPage() {
         .career-page__crumbs span::before {
           content: "/";
           margin-right: 10px;
-          color: rgba(255, 255, 255, 0.36);
+          color: rgba(255, 255, 255, 0.75);
         }
 
         .career-page__eyebrow,
@@ -230,19 +260,23 @@ export default function CareerPage() {
           letter-spacing: 0.18em;
         }
 
+        .career-page__eyebrow {
+          margin: 22px 0 12px;
+        }
+
         .career-page__hero-title {
           max-width: 850px;
           margin: 0;
           color: #ffffff;
-          font-size: clamp(64px, 10vw, 138px);
-          font-weight: 800;
-          line-height: 0.9;
-          letter-spacing: 0;
+          font-size: clamp(44px, 8vw, 88px);
+          font-weight: 500;
+          line-height: 0.95;
+          letter-spacing: -0.06em;
         }
 
         .career-page__hero-copy {
           max-width: 690px;
-          margin: 26px 0 0;
+          margin: 22px auto 0;
           color: rgba(255, 255, 255, 0.76);
           font-size: clamp(18px, 2vw, 24px);
           line-height: 1.55;
@@ -253,7 +287,8 @@ export default function CareerPage() {
           grid-template-columns: repeat(3, minmax(0, 1fr));
           gap: 14px;
           max-width: 760px;
-          margin-top: 42px;
+          width: 100%;
+          margin: 34px auto 0;
         }
 
         .career-page__stat {
@@ -770,7 +805,7 @@ export default function CareerPage() {
 
         @media (max-width: 1023px) {
           .career-page__hero {
-            min-height: 520px;
+            min-height: 500px;
             padding-top: 132px;
           }
 
@@ -809,12 +844,12 @@ export default function CareerPage() {
           }
 
           .career-page__hero {
-            min-height: 540px;
-            padding: 130px 0 62px;
+            min-height: 420px;
+            padding: 130px 0 76px;
           }
 
           .career-page__hero-title {
-            font-size: clamp(54px, 18vw, 88px);
+            font-size: clamp(46px, 16vw, 76px);
           }
 
           .career-page__hero-copy {
@@ -907,10 +942,10 @@ export default function CareerPage() {
       <div className="career-page">
         <section className="career-page__hero">
           <div className="career-page__container">
-            {/* <nav className="career-page__crumbs" aria-label="Breadcrumb">
+            <nav className="career-page__crumbs" aria-label="Breadcrumb">
               <SmartLink href="/">Home</SmartLink>
               <span>Careers</span>
-            </nav> */}
+            </nav>
             <p className="career-page__eyebrow">Join ZVolta</p>
             <h1 className="career-page__hero-title">Careers</h1>
             <p className="career-page__hero-copy">

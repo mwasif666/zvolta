@@ -79,19 +79,21 @@ function AppRouter() {
         <Routes>
           {routeEntries
             .filter((entry) => entry.pageId !== "404")
-            .map((entry) => (
-              <Route
-                key={`${entry.pageId}:${entry.paths[0]}`}
-                path={entry.paths[0]}
-                element={
-                  <RoutedPage
-                    loadPage={entry.load}
-                    pageId={entry.pageId}
-                    meta={entry.meta}
-                  />
-                }
-              />
-            ))}
+            .flatMap((entry) =>
+              entry.paths.map((path) => (
+                <Route
+                  key={`${entry.pageId}:${path}`}
+                  path={path}
+                  element={
+                    <RoutedPage
+                      loadPage={entry.load}
+                      pageId={entry.pageId}
+                      meta={entry.meta}
+                    />
+                  }
+                />
+              )),
+            )}
           {notFoundLoader ? (
             <Route
               path="*"

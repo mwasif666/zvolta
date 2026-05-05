@@ -17,7 +17,7 @@ const routeLabels = {
   "contact-us": "Contact Us",
   "driver-network": "Driver Network",
   home: "Home Page",
-  host: "Host",
+  host: "Host a Charger",
   index: "Home",
   "invest-form": "Investment Form",
   invest: "Invest",
@@ -49,7 +49,7 @@ const shortRouteLabels = {
 const primaryNavigationPageIds = [
   "index",
   "vehicles",
-  "charging-partners",
+  "host",
   "charge",
   "software",
   "invest",

@@ -136,8 +136,9 @@ export const routeEntries = [
     pageId: "host",
     paths: ["/host"],
     meta: {
-      title: "ZVolta - Coming Soon",
-      description: "This page is currently under development.",
+      title: "Host a Charger | ZVolta EV Charging",
+      description:
+        "Host a ZVolta EV charger, earn from your space, and bring clean charging to apartments, offices, restaurants, campuses, hospitals, and public sites.",
     },
     load: () => import("../pages/HostPage.jsx"),
   },

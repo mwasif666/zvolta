@@ -129,7 +129,7 @@ function SiteHeader() {
   const closeTimerRef = useRef(null);
   const { pathname } = useLocation();
   const homeRoute = getRouteByPageId("index");
-  const hostingRoute = getRouteByPageId("charging-partners");
+  const hostingRoute = getRouteByPageId("host");
   const chargingRoute = getRouteByPageId("charge");
   const softwareRoute = getRouteByPageId("software");
   const companyRoute = getRouteByPageId("about-us");
@@ -272,7 +272,7 @@ function SiteHeader() {
         <div className="hidden items-center gap-1 sm:flex">
           {dockRoutes.map((route) => (
             <DockLink key={route.pageId} route={route} pathname={pathname}>
-              {route.pageId === "charging-partners"
+              {route.pageId === "charging-partners" || route.pageId === "host"
                 ? "Hosting"
                 : route.pageId === "charge"
                   ? "Charging"

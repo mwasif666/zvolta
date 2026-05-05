@@ -9,9 +9,9 @@ export const routeEntries = [
     pageId: "about-us",
     paths: ["/about-us"],
     meta: {
-      title: "About ZVolta - The Future of Electric Mobility in Pakistan",
+      title: "About ZVolta | Building The Practical Electric Layer",
       description:
-        "ZVolta is transforming electric mobility in Pakistan. Learn how we are empowering local communities through electric vehicle (EV) investments, charging stations, and rental opportunities.",
+        "Learn how ZVolta connects charging, vehicle programs, software, and support to make electric mobility more practical across Pakistan.",
     },
     load: () => import("../pages/AboutUsPage.jsx"),
   },
@@ -103,6 +103,16 @@ export const routeEntries = [
     load: () => import("../pages/ContactUsPage.jsx"),
   },
   {
+    pageId: "partners",
+    paths: ["/partners"],
+    meta: {
+      title: "Partners | ZVolta Charging And Mobility Partnerships",
+      description:
+        "Explore how ZVolta works with host locations, fleet operators, and rollout collaborators to expand practical electric mobility.",
+    },
+    load: () => import("../pages/PartnersPage.jsx"),
+  },
+  {
     pageId: "driver-network",
     paths: ["/driver-network"],
     meta: {
@@ -178,13 +188,13 @@ export const routeEntries = [
   },
   {
     pageId: "policy",
-    paths: ["/policy"],
+    paths: ["/legal", "/policy"],
     meta: {
-      title: "Policies | Zvolta",
+      title: "Legal | ZVolta Policies And Terms",
       description:
-        "Review the Terms and Conditions, Privacy Policy, Returns Policy, and Standard Service Policy for Zvolta Private Limited.",
+        "Review ZVolta's legal information covering terms, privacy, program responsibilities, and payment-related policy areas.",
     },
-    load: () => import("../pages/PolicyPage.jsx"),
+    load: () => import("../pages/LegalPage.jsx"),
   },
   {
     pageId: "roi-calculator",
@@ -202,11 +212,32 @@ export const routeEntries = [
     load: () => import("../pages/SoftwarePage.jsx"),
   },
   {
+    pageId: "stories",
+    paths: ["/stories"],
+    meta: {
+      title: "Stories | ZVolta Field, Partner And Driver Stories",
+      description:
+        "Read ZVolta stories from the field across host locations, drivers, operators, and the network behind practical EV adoption.",
+    },
+    load: () => import("../pages/StoriesPage.jsx"),
+  },
+  {
+    pageId: "support",
+    paths: ["/support"],
+    meta: {
+      title: "Support | ZVolta Help For Drivers, Hosts And Operators",
+      description:
+        "Get support information for ZVolta drivers, host partners, operators, and policy-related questions across the electric mobility network.",
+    },
+    load: () => import("../pages/SupportPage.jsx"),
+  },
+  {
     pageId: "team",
     paths: ["/team"],
     meta: {
-      title: "ZVolta - Coming Soon",
-      description: "This page is currently under development.",
+      title: "Team | ZVolta People, Culture And Operating Mindset",
+      description:
+        "Meet the ZVolta team and learn how founders, field operators, partnerships, support, and product work together across the network.",
     },
     load: () => import("../pages/TeamPage.jsx"),
   },

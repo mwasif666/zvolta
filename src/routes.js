@@ -23,9 +23,12 @@ const routeLabels = {
   invest: "Invest",
   loader: "Loader",
   mobile: "Mobile App",
-  policy: "Policy",
+  partners: "Partners",
+  policy: "Legal",
   "roi-calculator": "ROI Calculator",
   software: "Software",
+  stories: "Stories",
+  support: "Support",
   team: "Team",
   testing: "Testing",
   vehicles: "Vehicles",
@@ -38,7 +41,9 @@ const shortRouteLabels = {
   "contact-us": "Contact",
   "driver-network": "Drivers",
   "invest-form": "Invest Form",
+  policy: "Legal",
   "roi-calculator": "ROI",
+  support: "Support",
 };
 
 const primaryNavigationPageIds = [
@@ -121,10 +126,9 @@ export const footerLinkGroups = [
       "index",
       "about-us",
       "team",
+      "partners",
+      "stories",
       "careers",
-      "blogs",
-      "contact-us",
-      "policy",
     ]),
   },
   {
@@ -151,8 +155,14 @@ export const footerLinkGroups = [
     ]),
   },
   {
-    title: "Other Pages",
-    links: routesFromPageIds(["home", "coming-soon", "testing"]),
+    title: "Help",
+    links: routesFromPageIds([
+      "support",
+      "contact-us",
+      "policy",
+      "blogs",
+      "home",
+    ]),
   },
 ];
 

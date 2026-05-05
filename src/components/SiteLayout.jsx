@@ -132,7 +132,7 @@ function SiteHeader() {
   const hostingRoute = getRouteByPageId("charging-partners");
   const chargingRoute = getRouteByPageId("charge");
   const softwareRoute = getRouteByPageId("software");
-  const companyRoute = getRouteByPageId("coming-soon");
+  const companyRoute = getRouteByPageId("about-us");
   const careersRoute = getRouteByPageId("careers");
   const dockRoutes = useMemo(
     () => [hostingRoute, chargingRoute, softwareRoute].filter(Boolean),
@@ -518,8 +518,8 @@ function SiteFooter() {
         <div className="mx-auto flex w-full max-w-7xl flex-col gap-3 px-4 py-5 text-sm text-zinc-500 sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
           <p>&copy; 2026 ZVolta. All rights reserved.</p>
           <div className="flex flex-wrap gap-4">
-            <Link to="/policy" className="hover:text-zinc-200">
-              Policies
+            <Link to="/legal" className="hover:text-zinc-200">
+              Legal
             </Link>
             <Link to="/contact-us" className="hover:text-zinc-200">
               Contact

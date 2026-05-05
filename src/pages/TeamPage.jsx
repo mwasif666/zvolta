@@ -1,441 +1,286 @@
 import { SmartLink } from "../components/SmartLink";
+import bgLarge from "../../aivora/src/images/team/noice-bg02.png";
+import bgSmall from "../../aivora/src/images/team/noice-bg.png";
+import teamBg from "../../aivora/src/images/bg/team-bg.png";
+
+const leaders = [
+  {
+    name: "Nashit Iqbal",
+    role: "Founder",
+    note: "Keeps ZVolta focused on practical EV adoption, rollout quality, and a product story that feels intentional in the real world.",
+    image: "/img/Team/ZV%20-%20Nashit.png",
+  },
+  {
+    name: "Anusha Shahid",
+    role: "Founder",
+    note: "Shapes how the company feels across communication, product expression, and the small details that build trust over time.",
+    image: "/img/Team/ZV%20-%20Anusha.png",
+  },
+];
+
+const teamPods = [
+  {
+    title: "Anila",
+    role: "Core team",
+    image: "/img/Team/ZV%20-%20Anila.png",
+    tone: "Brings consistency to execution and keeps the moving pieces aligned.",
+  },
+  {
+    title: "Field Operations",
+    role: "On-ground network care",
+    image: "/img/zvolta-maidan.jpg",
+    tone: "The people solving live issues, understanding site behavior, and keeping uptime honest.",
+  },
+  {
+    title: "Site Partnerships",
+    role: "Growth and rollout",
+    image: "/img/host%20An%20EV%20charging.jpg",
+    tone: "Works with locations and partner programs so expansion stays commercially useful.",
+  },
+  {
+    title: "Support Systems",
+    role: "Drivers and operators",
+    image: "/img/charging-post.jpg",
+    tone: "Helps drivers, hosts, and teams understand what to do next when something needs attention.",
+  },
+  {
+    title: "Product Layer",
+    role: "Software and visibility",
+    image: "/img/app-1.png",
+    tone: "Turns sessions, payments, and site signals into a cleaner operating picture.",
+  },
+  {
+    title: "Network Thinking",
+    role: "Shared mindset",
+    image: "/img/clean-volta.jpg",
+    tone: "Every part of the company is building toward a system that is easier to trust.",
+  },
+];
+
+const teamPrinciples = [
+  "Stay close to the field.",
+  "Keep decisions practical.",
+  "Design with care.",
+  "Move as one system.",
+];
 
 export default function TeamPage() {
   return (
-    <>
-      <style data-page-style="team:1">{`html, body {
-          overflow-x: hidden;
-          background-color: #0a0a0a;
-      }
-      .no-scrollbar::-webkit-scrollbar { display: none; }
-      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    <div className="relative overflow-hidden bg-[#040605] text-white">
+      <div className="pointer-events-none absolute left-[-8rem] top-32 h-80 w-80 rounded-full bg-emerald-500/15 blur-3xl" />
+      <div className="pointer-events-none absolute right-[-8rem] top-1/2 h-96 w-96 rounded-full bg-lime-400/10 blur-3xl" />
 
-      /* Loader specific utilities */
-      #loader-blind-top { transform-origin: top; will-change: transform; }
-      #loader-blind-bottom { transform-origin: bottom; will-change: transform; }`}</style>
-      <div>
-        <div
-          id="custom-loader"
-          className="fixed inset-0 z-[10000] flex flex-col items-center justify-center pointer-events-none"
-        >
-          <div
-            id="loader-blind-top"
-            className="absolute top-0 left-0 w-full h-[51%] bg-z-black z-0 pointer-events-auto border-b border-white/5"
-          />
-          <div
-            id="loader-blind-bottom"
-            className="absolute bottom-0 left-0 w-full h-[51%] bg-z-black z-0 pointer-events-auto border-t border-white/5"
-          />
-          <div
-            id="loader-content"
-            className="relative z-10 flex flex-col items-center pointer-events-auto will-change-transform"
-          >
-            <div
-              id="loader-glow"
-              className="absolute inset-0 bg-z-green/10 blur-[100px] rounded-full scale-0 animate-pulse-slow"
-            />
-            <div className="relative mb-10 w-24 h-24 md:w-32 md:h-32 flex items-center justify-center">
-              <img
-                src="img/symbol logo.png"
-                id="loader-logo"
-                className="w-full h-full object-contain drop-shadow-[0_0_30px_rgba(22,163,74,0.3)] will-change-transform"
-                alt="ZVolta Loading"
-              />
+      <section
+        className="relative overflow-hidden border-b border-white/10 bg-cover bg-center pt-32"
+        style={{ backgroundImage: "url('/img/aivora-career/bootcamp-bg.png')" }}
+      >
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-[#050806]/85 to-[#040605]" />
+        <div className="relative mx-auto w-full max-w-7xl px-4 pb-20 sm:px-6 lg:px-8">
+          <nav className="mb-5 flex items-center gap-3 text-sm font-semibold text-white/70">
+            <SmartLink href="/" className="transition-colors hover:text-emerald-400">
+              Home
+            </SmartLink>
+            <span>/</span>
+            <span className="text-white">Team</span>
+          </nav>
+
+          <div className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-end">
+            <div>
+              <span className="inline-flex rounded-full border border-emerald-500/30 bg-emerald-500/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.24em] text-emerald-300">
+                Aivora team page inspired
+              </span>
+              <h1 className="mt-5 text-5xl font-medium leading-[0.95] tracking-[-0.06em] sm:text-6xl lg:text-7xl">
+                The people shaping how
+                <span className="text-emerald-400"> ZVolta feels </span>
+                and how it runs.
+              </h1>
             </div>
-            <div
-              id="loader-bar-container"
-              className="w-64 h-[2px] bg-zinc-800 rounded-full overflow-hidden relative mb-4"
-            >
-              <div
-                id="loader-bar"
-                className="absolute top-0 left-0 h-full w-0 bg-white shadow-[0_0_15px_2px_rgba(255,255,255,0.8)]"
-              />
-            </div>
-            <div
-              id="loader-status-container"
-              className="h-6 overflow-hidden flex flex-col items-center"
-            >
-              <div
-                id="loader-status"
-                className="font-mono text-[10px] tracking-[0.4em] text-gray-500 uppercase"
+
+            <p className="max-w-2xl text-base leading-8 text-white/72 sm:text-lg">
+              This page follows the spirit of the Aivora team layout: big
+              profile moments up front, then a broader look at the groups that
+              keep the company moving across rollout, support, partnerships, and
+              product.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section
+        className="relative py-20"
+        style={{
+          backgroundImage: `linear-gradient(rgba(4,6,5,0.92), rgba(4,6,5,0.98)), url(${teamBg})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
+        <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid gap-8 lg:grid-cols-2">
+            {leaders.map((leader) => (
+              <article
+                key={leader.name}
+                className="group relative overflow-hidden rounded-[2.4rem] border border-white/10 bg-[#07110d] p-6 shadow-[0_24px_80px_rgba(0,0,0,0.34)] sm:p-8"
               >
-                INITIALIZING...
+                <img
+                  src={bgLarge}
+                  alt=""
+                  aria-hidden="true"
+                  className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-25"
+                />
+                <div className="relative z-10 grid gap-6 md:grid-cols-[0.9fr_1.1fr] md:items-center">
+                  <div className="overflow-hidden rounded-[1.75rem] border border-white/10 bg-white/5">
+                    <img
+                      src={leader.image}
+                      alt={leader.name}
+                      className="h-full min-h-[320px] w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                  </div>
+                  <div>
+                    <span className="text-xs font-bold uppercase tracking-[0.24em] text-emerald-300">
+                      {leader.role}
+                    </span>
+                    <h2 className="mt-4 text-3xl font-medium tracking-[-0.04em] sm:text-4xl">
+                      {leader.name}
+                    </h2>
+                    <p className="mt-5 text-base leading-8 text-white/72">
+                      {leader.note}
+                    </p>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="pb-20">
+        <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mb-10 flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
+            <div>
+              <span className="text-sm font-bold uppercase tracking-[0.24em] text-emerald-300">
+                Wider team picture
+              </span>
+              <h2 className="mt-4 text-4xl font-medium tracking-[-0.05em] sm:text-5xl">
+                Not just titles. Operating lanes.
+              </h2>
+            </div>
+            <p className="max-w-2xl text-sm leading-7 text-white/68">
+              The Aivora version used a mix of big and small team cards. Here we
+              keep that staggered rhythm, but the cards reflect how ZVolta is
+              actually organized today.
+            </p>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+            {teamPods.map((pod, index) => (
+              <article
+                key={pod.title}
+                className={`group relative overflow-hidden rounded-[2rem] border border-white/10 bg-[#07100c] p-5 shadow-[0_18px_50px_rgba(0,0,0,0.28)] ${
+                  index < 2 ? "xl:col-span-1" : ""
+                }`}
+              >
+                <img
+                  src={bgSmall}
+                  alt=""
+                  aria-hidden="true"
+                  className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-35"
+                />
+                <div className="relative z-10">
+                  <div className="overflow-hidden rounded-[1.5rem] border border-white/10">
+                    <img
+                      src={pod.image}
+                      alt={pod.title}
+                      className="h-64 w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                  </div>
+                  <div className="mt-5">
+                    <span className="text-xs font-bold uppercase tracking-[0.22em] text-emerald-300">
+                      {pod.role}
+                    </span>
+                    <h3 className="mt-3 text-2xl font-medium tracking-[-0.04em]">
+                      {pod.title}
+                    </h3>
+                    <p className="mt-3 text-sm leading-7 text-white/70">
+                      {pod.tone}
+                    </p>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-y border-white/10 bg-[#06100b] py-16">
+        <div className="mx-auto grid w-full max-w-7xl gap-6 px-4 sm:grid-cols-2 sm:px-6 lg:grid-cols-4 lg:px-8">
+          {teamPrinciples.map((item, index) => (
+            <div
+              key={item}
+              className="rounded-[1.75rem] border border-white/10 bg-white/[0.04] p-6"
+            >
+              <span className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-emerald-500/12 text-sm font-bold text-emerald-300">
+                0{index + 1}
+              </span>
+              <p className="mt-4 text-lg font-medium tracking-[-0.03em] text-white">
+                {item}
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="py-20">
+        <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="rounded-[2.4rem] border border-white/10 bg-gradient-to-r from-[#07110d] via-[#0b1711] to-black p-8 shadow-[0_24px_80px_rgba(0,0,0,0.34)] sm:p-10">
+            <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+              <div>
+                <span className="text-sm font-bold uppercase tracking-[0.24em] text-emerald-300">
+                  Work with us
+                </span>
+                <h2 className="mt-4 text-4xl font-medium tracking-[-0.05em] sm:text-5xl">
+                  If the mission fits, the next step is easy.
+                </h2>
+                <p className="mt-5 max-w-2xl text-base leading-8 text-white/68">
+                  ZVolta is still growing, but the bar is already clear: build
+                  practical systems, communicate cleanly, and care about how the
+                  work lands in the field.
+                </p>
+                <div className="mt-8 flex flex-wrap gap-4">
+                  <SmartLink
+                    href="/careers"
+                    className="inline-flex items-center justify-center rounded-full bg-emerald-400 px-7 py-3.5 text-sm font-bold text-[#04120c] transition-transform duration-300 hover:-translate-y-1"
+                  >
+                    Explore careers
+                  </SmartLink>
+                  <SmartLink
+                    href="/about-us"
+                    className="inline-flex items-center justify-center rounded-full border border-white/15 bg-white/5 px-7 py-3.5 text-sm font-bold text-white transition-all duration-300 hover:border-emerald-400/40 hover:bg-white/10"
+                  >
+                    Company story
+                  </SmartLink>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
+                <div className="overflow-hidden rounded-[1.75rem] border border-white/10">
+                  <img
+                    src="/img/Team/ZV%20-%20Anila.png"
+                    alt="Anila"
+                    className="h-full min-h-[220px] w-full object-cover"
+                  />
+                </div>
+                <div className="overflow-hidden rounded-[1.75rem] border border-white/10">
+                  <img
+                    src="/img/zvolta-1.jpg"
+                    alt="ZVolta vehicle"
+                    className="h-full min-h-[220px] w-full object-cover"
+                  />
+                </div>
               </div>
             </div>
           </div>
         </div>
-        <SmartLink
-          id="dynamic-logo"
-          href="/"
-          className="fixed top-6 left-6 z-[900] w-12 h-12 rounded-full bg-zinc-900/90 backdrop-blur-md border border-white/10 flex items-center justify-center shadow-xl hover:scale-105 transition-transform"
-        >
-          <img src="img/symbol logo.png" alt="ZVolta" className="h-6 w-auto" />
-        </SmartLink>
-        <button
-          id="dynamic-sidebar-btn"
-          className="fixed top-6 right-6 z-[900] w-12 h-12 rounded-full bg-[#006b45] backdrop-blur-md border border-emerald-500/30 text-white flex items-center justify-center shadow-xl hover:bg-[#008f5d] hover:scale-105 transition-all group"
-        >
-          <i className="bi bi-list text-2xl group-hover:rotate-180 transition-transform duration-500" />
-        </button>
-        <div
-          id="mobile-menu-overlay"
-          className="fixed inset-0 z-[10000] invisible opacity-0 pointer-events-none"
-        >
-          <div
-            id="mobile-menu-backdrop"
-            className="absolute inset-0 bg-zinc-200/80 backdrop-blur-3xl opacity-0 transition-opacity duration-500"
-          />
-          <div className="absolute top-6 right-6 z-50">
-            <button
-              id="mobile-menu-close"
-              className="w-14 h-14 bg-black text-white rounded-full flex items-center justify-center hover:bg-emerald-600 hover:rotate-90 transition-all duration-300 shadow-2xl opacity-0 translate-y-[-20px]"
-            >
-              <i className="bi bi-x-lg text-xl" />
-            </button>
-          </div>
-          <div className="absolute inset-0 w-full h-[100dvh] overflow-y-auto overflow-x-hidden no-scrollbar">
-            <div className="w-full min-h-full max-w-[1600px] mx-auto p-4 pt-24 md:p-6 lg:p-10 grid grid-cols-1 lg:grid-cols-12 gap-4 pb-24">
-              <div className="menu-card lg:col-span-5 bg-black rounded-[2.5rem] p-8 md:p-12 flex flex-col justify-between relative overflow-hidden group min-h-[500px] opacity-0 translate-y-[50px]">
-                <div className="absolute top-8 right-8 w-32 h-32 opacity-20 bg-[radial-gradient(#10b981_2px,transparent_2px)] [background-size:8px_8px] rounded-full pointer-events-none" />
-                <nav className="flex flex-col gap-4 mt-4 relative z-10">
-                  <SmartLink
-                    href="/#hero-section"
-                    className="mobile-menu-link text-5xl md:text-6xl font-display font-bold text-white hover:text-emerald-500 transition-colors flex items-center justify-between group/link"
-                  >
-                    Home{" "}
-                    <i className="bi bi-arrow-right text-3xl opacity-0 -translate-x-8 group-hover/link:opacity-100 group-hover/link:translate-x-0 transition-all duration-300 text-emerald-500" />
-                  </SmartLink>
-                  <div className="h-px bg-white/10 w-full" />
-                  <SmartLink
-                    href="/#host"
-                    className="mobile-menu-link text-5xl md:text-6xl font-display font-bold text-white hover:text-emerald-500 transition-colors flex items-center justify-between group/link"
-                  >
-                    Hosting{" "}
-                    <i className="bi bi-arrow-right text-3xl opacity-0 -translate-x-8 group-hover/link:opacity-100 group-hover/link:translate-x-0 transition-all duration-300 text-emerald-500" />
-                  </SmartLink>
-                  <div className="h-px bg-white/10 w-full" />
-                  <SmartLink
-                    href="/#map"
-                    className="mobile-menu-link text-5xl md:text-6xl font-display font-bold text-white hover:text-emerald-500 transition-colors flex items-center justify-between group/link"
-                  >
-                    Charging{" "}
-                    <i className="bi bi-arrow-right text-3xl opacity-0 -translate-x-8 group-hover/link:opacity-100 group-hover/link:translate-x-0 transition-all duration-300 text-emerald-500" />
-                  </SmartLink>
-                  <div className="h-px bg-white/10 w-full" />
-                  <SmartLink
-                    href="/#software"
-                    className="mobile-menu-link text-5xl md:text-6xl font-display font-bold text-white hover:text-emerald-500 transition-colors flex items-center justify-between group/link"
-                  >
-                    Software{" "}
-                    <i className="bi bi-arrow-right text-3xl opacity-0 -translate-x-8 group-hover/link:opacity-100 group-hover/link:translate-x-0 transition-all duration-300 text-emerald-500" />
-                  </SmartLink>
-                </nav>
-                <div className="mt-12 relative z-10">
-                  <p className="text-zinc-500 text-xs uppercase tracking-[0.2em] mb-2 font-bold">
-                    Contact us
-                  </p>
-                  <SmartLink
-                    href="mailto:admin@zvolta.com"
-                    className="text-xl md:text-2xl text-white font-mono hover:text-emerald-400 transition-colors border-b border-transparent hover:border-emerald-400 pb-1"
-                  >
-                    admin@zvolta.com
-                  </SmartLink>
-                </div>
-              </div>
-              <div className="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-4 h-full content-start">
-                <SmartLink
-                  href="/#host"
-                  className="menu-card bg-black rounded-[2.5rem] p-8 relative group overflow-hidden flex flex-col justify-end h-[280px] lg:h-auto opacity-0 translate-y-[50px]"
-                >
-                  <div className="absolute inset-0 bg-zinc-900 scale-y-0 origin-bottom group-hover:scale-y-100 transition-transform duration-500 ease-[cubic-bezier(0.2,0,0,1)]" />
-                  <div className="absolute top-8 right-8 w-16 h-16 bg-zinc-900 rounded-2xl flex items-center justify-center text-emerald-500 group-hover:bg-emerald-500 group-hover:text-black transition-all duration-300 shadow-xl z-10">
-                    <i className="bi bi-buildings-fill text-3xl" />
-                  </div>
-                  <div className="relative z-10">
-                    <h3 className="text-2xl font-bold text-white group-hover:translate-x-1 transition-transform">
-                      Host A Charger
-                    </h3>
-                    <p className="text-zinc-500 mt-2 opacity-100 group-hover:text-zinc-300 transition-colors">
-                      Turn your parking into revenue.
-                    </p>
-                  </div>
-                </SmartLink>
-                <SmartLink
-                  href="/#map"
-                  className="menu-card bg-black rounded-[2.5rem] p-8 relative group overflow-hidden flex flex-col justify-end h-[280px] lg:h-auto opacity-0 translate-y-[50px]"
-                >
-                  <div className="absolute inset-0 bg-zinc-900 scale-y-0 origin-bottom group-hover:scale-y-100 transition-transform duration-500 ease-[cubic-bezier(0.2,0,0,1)]" />
-                  <div className="absolute top-8 right-8 w-16 h-16 bg-zinc-900 rounded-2xl flex items-center justify-center text-emerald-500 group-hover:bg-emerald-500 group-hover:text-black transition-all duration-300 shadow-xl z-10">
-                    <i className="bi bi-geo-alt-fill text-3xl" />
-                  </div>
-                  <div className="relative z-10">
-                    <h3 className="text-2xl font-bold text-white group-hover:translate-x-1 transition-transform">
-                      Find Stations
-                    </h3>
-                    <p className="text-zinc-500 mt-2 opacity-100 group-hover:text-zinc-300 transition-colors">
-                      Locate chargers nearby instantly.
-                    </p>
-                  </div>
-                </SmartLink>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="fixed top-[-20%] left-[-20%] w-[120vw] h-[120vw] bg-emerald-500/10 blur-[100px] rounded-full pointer-events-none z-0 animate-pulse-slow" />
-        <div className="fixed bottom-[-10%] right-[-10%] w-[100vw] h-[100vw] bg-lime-500/5 blur-[120px] rounded-full pointer-events-none z-0" />
-        <main className="relative z-10 w-full min-h-screen flex flex-col items-center justify-center px-6 pt-24 pb-24 text-center">
-          <div className="mb-8 w-24 h-24 rounded-full bg-zinc-900 border border-emerald-500/30 flex items-center justify-center shadow-[0_0_40px_rgba(16,185,129,0.15)] animate-pulse-slow opacity-0 translate-y-4 reveal-element">
-            <i className="bi bi-cone-striped text-4xl text-emerald-500" />
-          </div>
-          <h1
-            className="text-5xl md:text-7xl font-display font-bold tracking-tight mb-6 opacity-0 translate-y-4 reveal-element"
-            style={{ transitionDelay: "0.1s" }}
-          >
-            Powering <br />{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-emerald-400 to-emerald-600">
-              Up Soon
-            </span>
-          </h1>
-          <p
-            className="text-zinc-400 text-lg md:text-xl max-w-lg mb-10 leading-relaxed opacity-0 translate-y-4 reveal-element"
-            style={{ transitionDelay: "0.2s" }}
-          >
-            This page is currently plugged in and charging. We are building
-            something electric for you.
-          </p>
-          <SmartLink
-            href="/"
-            className="group relative px-8 py-4 bg-zinc-900 text-white rounded-full font-bold text-lg border border-zinc-700 hover:border-emerald-500 transition-all duration-300 opacity-0 translate-y-4 reveal-element hover:bg-emerald-600 hover:text-black hover:shadow-[0_0_30px_rgba(16,185,129,0.4)]"
-            style={{ transitionDelay: "0.3s" }}
-          >
-            <span className="relative z-10 flex items-center gap-2">
-              Return Home{" "}
-              <i className="bi bi-arrow-right transition-transform group-hover:translate-x-1" />
-            </span>
-          </SmartLink>
-        </main>
-        <footer className="bg-black text-white pt-24 pb-12 border-t border-white/10 relative overflow-hidden z-20">
-          <div className="max-w-[1400px] mx-auto px-6 mb-20 text-center">
-            <h2 className="text-4xl md:text-5xl font-display font-bold tracking-tight mb-4">
-              Let's move electric <br /> forward together.
-            </h2>
-          </div>
-          <div className="border-y border-white/10 bg-black">
-            <div className="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-white/10">
-              <div className="group p-8 md:p-12 hover:bg-white/5 transition-colors duration-300 flex flex-col h-full min-h-[300px]">
-                <div className="mb-auto">
-                  <h3 className="text-xl md:text-2xl font-bold mb-6 text-white">
-                    Host A Charger
-                  </h3>
-                  <ul className="space-y-4 text-zinc-400">
-                    <li>
-                      <SmartLink
-                        href="/charging-partners"
-                        className="hover:text-emerald-400 transition-colors block py-1"
-                      >
-                        Charging Partners
-                      </SmartLink>
-                    </li>
-                    <li>
-                      <SmartLink
-                        href="/invest"
-                        className="hover:text-emerald-400 transition-colors block py-1"
-                      >
-                        For Investors
-                      </SmartLink>
-                    </li>
-                    <li>
-                      <SmartLink
-                        href="/invest-form"
-                        className="hover:text-emerald-400 transition-colors block py-1"
-                      >
-                        Site requirements
-                      </SmartLink>
-                    </li>
-                    <li>
-                      <SmartLink
-                        href="/about-us"
-                        className="hover:text-emerald-400 transition-colors block py-1"
-                      >
-                        About Us
-                      </SmartLink>
-                    </li>
-                  </ul>
-                </div>
-                <div className="mt-8 pt-6 border-t border-white/10">
-                  <SmartLink
-                    href="/invest-form"
-                    className="flex items-center justify-between text-white font-bold group-hover:text-emerald-400 transition-colors"
-                  >
-                    Start hosting{" "}
-                    <i className="bi bi-arrow-right -rotate-45 group-hover:rotate-0 transition-transform duration-300" />
-                  </SmartLink>
-                </div>
-              </div>
-              <div className="group p-8 md:p-12 hover:bg-white/5 transition-colors duration-300 flex flex-col h-full min-h-[300px]">
-                <div className="mb-auto">
-                  <h3 className="text-xl md:text-2xl font-bold mb-6 text-white">
-                    Charge Your EV
-                  </h3>
-                  <ul className="space-y-4 text-zinc-400">
-                    <li>
-                      <SmartLink
-                        href="/driver-network"
-                        className="hover:text-emerald-400 transition-colors block py-1"
-                      >
-                        Drivers Network
-                      </SmartLink>
-                    </li>
-                    <li>
-                      <SmartLink
-                        href="/driver-network"
-                        className="hover:text-emerald-400 transition-colors block py-1"
-                      >
-                        Using the app
-                      </SmartLink>
-                    </li>
-                    <li>
-                      <SmartLink
-                        href="/contact-us"
-                        className="hover:text-emerald-400 transition-colors block py-1"
-                      >
-                        Charging support
-                      </SmartLink>
-                    </li>
-                    <li>
-                      <SmartLink
-                        href="/policy#standard-service-policy"
-                        className="hover:text-emerald-400 transition-colors block py-1"
-                      >
-                        Service Policy
-                      </SmartLink>
-                    </li>
-                  </ul>
-                </div>
-                <div className="mt-8 pt-6 border-t border-white/10">
-                  <SmartLink
-                    href="/driver-network"
-                    className="flex items-center justify-between text-white font-bold group-hover:text-emerald-400 transition-colors"
-                  >
-                    Find A Station{" "}
-                    <i className="bi bi-arrow-right -rotate-45 group-hover:rotate-0 transition-transform duration-300" />
-                  </SmartLink>
-                </div>
-              </div>
-              <div className="group p-8 md:p-12 hover:bg-white/5 transition-colors duration-300 flex flex-col h-full min-h-[300px]">
-                <div className="mb-auto">
-                  <h3 className="text-xl md:text-2xl font-bold mb-6 text-white">
-                    Software For Operators
-                  </h3>
-                  <ul className="space-y-4 text-zinc-400">
-                    <li>
-                      <SmartLink
-                        href="/contact-us"
-                        className="hover:text-emerald-400 transition-colors block py-1"
-                      >
-                        Platform overview
-                      </SmartLink>
-                    </li>
-                    <li>
-                      <SmartLink
-                        href="/contact-us"
-                        className="hover:text-emerald-400 transition-colors block py-1"
-                      >
-                        OCPP compatibility
-                      </SmartLink>
-                    </li>
-                    <li>
-                      <SmartLink
-                        href="/contact-us"
-                        className="hover:text-emerald-400 transition-colors block py-1"
-                      >
-                        Integrations
-                      </SmartLink>
-                    </li>
-                    <li>
-                      <SmartLink
-                        href="/contact-us"
-                        className="hover:text-emerald-400 transition-colors block py-1"
-                      >
-                        Contact Support
-                      </SmartLink>
-                    </li>
-                  </ul>
-                </div>
-                <div className="mt-8 pt-6 border-t border-white/10">
-                  <SmartLink
-                    href="/contact-us"
-                    className="flex items-center justify-between text-white font-bold group-hover:text-emerald-400 transition-colors"
-                  >
-                    Book a demo{" "}
-                    <i className="bi bi-arrow-right -rotate-45 group-hover:rotate-0 transition-transform duration-300" />
-                  </SmartLink>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="max-w-[1400px] mx-auto px-6 pt-12 flex flex-col md:flex-row justify-between items-center gap-6">
-            <div className="flex flex-col md:flex-row items-center gap-6">
-              <img
-                src="img/full_logowhite.png"
-                alt="ZVolta"
-                className="h-8 md:h-10 opacity-90"
-              />
-              <div className="hidden md:block w-px h-6 bg-zinc-800" />
-              <div className="text-zinc-500 text-sm flex gap-6">
-                <span>© 2025 ZVolta Inc.</span>
-                <SmartLink
-                  href="/policy#privacy-policy"
-                  className="hover:text-white transition-colors"
-                >
-                  Privacy
-                </SmartLink>
-                <SmartLink
-                  href="/policy#terms-and-conditions"
-                  className="hover:text-white transition-colors"
-                >
-                  Terms
-                </SmartLink>
-                <SmartLink
-                  href="/policy#returns-policy"
-                  className="hover:text-white transition-colors"
-                >
-                  Returns
-                </SmartLink>
-              </div>
-            </div>
-            <div className="flex gap-6">
-              <SmartLink
-                href="https://www.facebook.com/share/1FUNJfnPd5/?mibextid=wwXIfr"
-                target="_blank"
-                className="text-zinc-500 hover:text-white transition-colors"
-              >
-                <i className="bi bi-facebook text-xl" />
-              </SmartLink>
-              <SmartLink
-                href="https://www.instagram.com/zvolta.pk"
-                target="_blank"
-                className="text-zinc-500 hover:text-white transition-colors"
-              >
-                <i className="bi bi-instagram text-xl" />
-              </SmartLink>
-              <SmartLink
-                href="https://wa.me/+923104446529"
-                target="_blank"
-                className="text-zinc-500 hover:text-white transition-colors"
-              >
-                <i className="bi bi-whatsapp text-xl" />
-              </SmartLink>
-              <SmartLink
-                href="mailto:admin@zvolta.com"
-                className="text-zinc-500 hover:text-white transition-colors"
-              >
-                <i className="bi bi-envelope text-xl" />
-              </SmartLink>
-            </div>
-          </div>
-        </footer>
-      </div>
-    </>
+      </section>
+    </div>
   );
 }

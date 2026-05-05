@@ -1,743 +1,389 @@
 import { SmartLink } from "../components/SmartLink";
+import aboutImg05 from "../../aivora/src/images/about/img05.jpg";
+import aboutImg06 from "../../aivora/src/images/about/img06.jpg";
+import aboutImg07 from "../../aivora/src/images/about/img07.jpg";
+import aboutImg08 from "../../aivora/src/images/about/img08.jpg";
+import aboutBg from "../../aivora/src/images/bg/about-bg02.png";
+
+const imageColumns = [
+  aboutImg05,
+  aboutImg06,
+  aboutImg07,
+  aboutImg08,
+];
+
+const featureCards = [
+  {
+    title: "Charging with real-world logic",
+    copy:
+      "We plan around access, dwell time, uptime, and driver behavior so chargers become useful infrastructure, not decorative hardware.",
+  },
+  {
+    title: "Vehicle programs that stay grounded",
+    copy:
+      "ZVolta connects EV access with onboarding, charging guidance, and support so adoption works beyond the first handover.",
+  },
+  {
+    title: "Software that keeps operators aligned",
+    copy:
+      "Sessions, payments, field issues, and site visibility all need one rhythm. Our software layer helps teams stay coordinated.",
+  },
+];
+
+const stats = [
+  { value: "Charging", label: "Built around practical site usage" },
+  { value: "Drivers", label: "Supported through onboarding and field realities" },
+  { value: "Hosts", label: "Connected to a cleaner revenue model" },
+  { value: "Operators", label: "Given better visibility across the network" },
+];
+
+const partnerPills = [
+  "Host locations",
+  "Driver programs",
+  "Fleet movement",
+  "Site operations",
+  "Charging software",
+  "Support systems",
+  "Field maintenance",
+  "Local rollout",
+];
+
+function AboutColumn({ image, reverse = false }) {
+  const images = [image, image, image];
+
+  return (
+    <div
+      className={`hidden h-[540px] overflow-hidden rounded-[2rem] border border-white/10 bg-black/30 lg:block ${
+        reverse ? "about-page__column--reverse" : ""
+      }`}
+    >
+      <div className="about-page__column-track flex flex-col gap-4 p-4">
+        {[...images, ...images].map((item, index) => (
+          <div
+            key={`${item}-${index}`}
+            className="overflow-hidden rounded-[1.5rem] border border-white/10"
+          >
+            <img
+              src={item}
+              alt="Aivora inspired about visual"
+              className="h-40 w-full object-cover"
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 export default function AboutUsPage() {
   return (
     <>
-      <style data-page-style="about-us:1">{`body {
-            font-family: 'Questrial', sans-serif;
-            background-color: #f8fafc;
-        }
-        /* Loader Styles */
-        #orion-loader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #f1f1f1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-            transition: opacity 0.8s ease, visibility 0.8s ease;
-        }
-        #orion-loader.hidden {
-            opacity: 0;
-            visibility: hidden;
-        }
-        .orion-loader-logo img {
-            width: 120px;
-        }
-        .hero-section {
-            position: relative;
-            overflow: hidden;
-            background-image: linear-gradient(135deg, #e0f2f1 0%, #ffffff 100%);
-        }
-        .bg-ev-asset {
-            position: absolute;
-            z-index: 0;
-            filter: blur(4px);
-            -webkit-filter: blur(4px);
-            transition: transform 0.5s ease-out;
-            will-change: transform;
-        }
-        .asset-1 { width: 250px; top: 10%; left: 5%; }
-        .asset-2 { width: 300px; top: 50%; right: 5%; transform: translateY(-50%); }
-        .asset-3 { width: 200px; bottom: 5%; left: 20%; }
-
-        @media (max-width: 768px) {
-            .bg-ev-asset { filter: blur(3px); -webkit-filter: blur(3px); opacity: 0.7; }
-            .asset-1 { width: 150px; top: 5%; left: -5%; }
-            .asset-2 { width: 200px; top: 60%; right: -10%; }
-            .asset-3 { display: none; }
+      <style data-page-style="about-us:3">{`
+        .about-page__column-track {
+          animation: about-column-up 28s linear infinite;
         }
 
-        .icon-card, .comparison-slider, .dark-cta-section {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
-        }
-        .icon-card.is-visible, .comparison-slider.is-visible, .dark-cta-section.is-visible {
-            opacity: 1;
-            transform: translateY(0);
+        .about-page__column--reverse .about-page__column-track {
+          animation-name: about-column-down;
         }
 
-        .icon-card {
-            background: rgba(255, 255, 255, 0.6);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 1rem;
-            padding: 2rem;
-            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.05), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-            text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .icon-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-        }
-        .dark-cta-section {
-            background-color: #1a202c;
-            position: relative;
-            overflow: hidden;
-        }
-        .dark-cta-section::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background-image:
-                linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-            background-size: 40px 40px;
-            -webkit-mask-image: radial-gradient(ellipse 100% 80% at 50% 100%, black, transparent);
-            mask-image: radial-gradient(ellipse 100% 80% at 50% 100%, black, transparent);
-        }
-        .dark-cta-section::after {
-            content: '';
-            position: absolute;
-            bottom: -50%;
-            left: 50%;
-            width: 150%;
-            height: 100%;
-            transform: translateX(-50%);
-            background: radial-gradient(ellipse at bottom, rgba(16, 185, 129, 0.35), transparent 70%);
-            pointer-events: none;
-            z-index: 0;
-        }
-        @keyframes shine {
-          0% { background-position: 200% center; }
-          100% { background-position: -200% center; }
-        }
-        .shiny-text {
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            animation: shine 5s linear infinite;
-        }
-        .shiny-text.light-bg {
-             background-image: linear-gradient(120deg, #1f2937 35%, #798698 50%, #1f2937 65%);
-        }
-        .shiny-text.dark-bg {
-             background-image: linear-gradient(120deg, #9ca3af 35%, #ffffff 50%, #9ca3af 65%);
-        }
-        .user-select-none, img {
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-        }
-        /* Styles for the scrolled navbar */
-        .navbar-scrolled {
-            background-color: rgba(13, 13, 16, 0.85) !important;
-            border-color: rgba(55, 65, 81, 0.5) !important;
-        }
-        .navbar-scrolled a,
-        .navbar-scrolled button,
-        .navbar-scrolled span {
-            color: #e5e7eb !important;
-        }
-        .navbar-scrolled a:hover {
-            color: #ffffff !important;
-        }
-        .navbar-scrolled #mobile-menu-button:hover {
-            background-color: rgba(255, 255, 255, 0.1) !important;
-            color: #ffffff !important;
-        }
-        .navbar-scrolled a.shimmer-effect {
-            color: #ffffff !important;
+        .about-page__pill-row {
+          animation: about-pill-slide 20s linear infinite;
+          width: max-content;
         }
 
-        /* Hamburger Menu Animation */
-        .hamburger-icon span {
-            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-            transform-origin: center;
-        }
-        .hamburger-icon.is-active span:nth-child(1) {
-            transform: translateY(8px) rotate(45deg);
-        }
-        .hamburger-icon.is-active span:nth-child(2) {
-            opacity: 0;
-        }
-        .hamburger-icon.is-active span:nth-child(3) {
-            transform: translateY(-8px) rotate(-45deg);
+        @keyframes about-column-up {
+          0% { transform: translateY(0); }
+          100% { transform: translateY(calc(-50% - 0.5rem)); }
         }
 
-        /* Mobile Menu Animation */
-        #mobile-menu {
-            transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.4s ease;
-            transform: translateY(-10px);
-            opacity: 0;
-            pointer-events: none;
+        @keyframes about-column-down {
+          0% { transform: translateY(calc(-50% - 0.5rem)); }
+          100% { transform: translateY(0); }
         }
-        #mobile-menu.is-open {
-            transform: translateY(0);
-            opacity: 1;
-            pointer-events: auto;
+
+        @keyframes about-pill-slide {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
         }
-        /* Footer Ellipse */
-        footer {
-            position: relative;
-            overflow: hidden;
-        }
-        footer::after {
-            content: '';
-            position: absolute;
-            bottom: -50px;
-            left: 50%;
-            transform: translateX(-50%) scaleY(0.5);
-            width: 80%;
-            height: 100px;
-            background: radial-gradient(ellipse at center, rgba(34, 197, 94, 0.3) 0%, rgba(34, 197, 94, 0) 70%);
-            pointer-events: none;
-            z-index: 0;
-        }`}</style>
-      <div>
-        <div id="orion-loader">
-          <div className="orion-loader-logo">
-            <img
-              src="img/zvolta-loader.gif"
-              alt="ZVolta is loading..."
-              draggable="false"
-            />
-          </div>
-        </div>
-        <header className="sticky top-0 z-50 w-full transition-all duration-300">
-          <div
-            id="navbar-container"
-            className="container mx-auto transition-all duration-300"
-          >
-            <div
-              id="main-navbar"
-              className="bg-white/80 backdrop-blur-md border border-gray-200/60 shadow-lg custom-navbar-glass transition-all duration-300"
-            >
-              <nav className="flex items-center justify-between h-16 px-4 sm:px-6">
-                <div className="flex-shrink-0">
-                  <SmartLink
-                    href="/"
-                    className="flex items-center"
-                    aria-label="ZVolta Home"
-                  >
-                    <img
-                      id="navbar-logo-img"
-                      src="img/full_Logoblack.png"
-                      alt="ZVolta Full Logo"
-                      className="navbar-logo h-8 w-auto"
-                      draggable="false"
-                    />
-                  </SmartLink>
-                </div>
-                <div className="hidden md:flex items-center space-x-8">
-                  <SmartLink
-                    href="/about-us"
-                    className="text-gray-700 hover:text-green-600 transition-colors"
-                  >
-                    About
-                  </SmartLink>
-                  <SmartLink
-                    href="/charging-partners"
-                    className="text-gray-700 hover:text-green-600 transition-colors"
-                  >
-                    Charge
-                  </SmartLink>
-                  <SmartLink
-                    href="/vehicles"
-                    className="text-gray-700 hover:text-green-600 transition-colors"
-                  >
-                    Rent
-                  </SmartLink>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <SmartLink
-                    href="/contact-us"
-                    className="hidden sm:inline-block bg-green-600 text-white px-6 py-2 rounded-full font-semibold hover:bg-green-700 transition-colors shimmer-effect"
-                  >
-                    Contact Us
-                  </SmartLink>
-                  <div className="hidden md:flex relative group">
-                    <button className="flex items-center text-gray-700 p-2 rounded-full">
-                      <span>Pakistan</span>
-                      <svg
-                        className="w-4 h-4 ml-1"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M19 9l-7 7-7-7"
-                        />
-                      </svg>
-                    </button>
-                  </div>
-                  <div className="md:hidden flex items-center">
-                    <button
-                      id="mobile-menu-button"
-                      className="p-2 rounded-full text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-green-500 hamburger-icon"
-                      aria-controls="mobile-menu"
-                      aria-expanded="false"
-                    >
-                      <span className="sr-only">Open main menu</span>
-                      <div className="space-y-1.5">
-                        <span className="block w-6 h-0.5 bg-current" />
-                        <span className="block w-6 h-0.5 bg-current" />
-                        <span className="block w-6 h-0.5 bg-current" />
-                      </div>
-                    </button>
-                  </div>
-                </div>
+      `}</style>
+
+      <div className="relative overflow-hidden bg-[#030504] text-white">
+        <img
+          src={aboutBg}
+          alt=""
+          aria-hidden="true"
+          className="pointer-events-none absolute left-1/2 top-0 w-[1200px] max-w-none -translate-x-1/2 opacity-30"
+        />
+        <div className="pointer-events-none absolute left-[-10rem] top-24 h-80 w-80 rounded-full bg-emerald-500/15 blur-3xl" />
+        <div className="pointer-events-none absolute right-[-8rem] top-1/3 h-96 w-96 rounded-full bg-lime-400/10 blur-3xl" />
+
+        <section
+          className="relative overflow-hidden border-b border-white/10 bg-cover bg-center pt-32"
+          style={{ backgroundImage: "url('/img/aivora-career/bootcamp-bg.png')" }}
+        >
+          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-[#050806]/85 to-[#030504]" />
+          <div className="relative mx-auto flex w-full max-w-7xl flex-col gap-12 px-4 pb-20 sm:px-6 lg:grid lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:px-8">
+            <div>
+              <nav className="mb-5 flex items-center gap-3 text-sm font-semibold text-white/70">
+                <SmartLink href="/" className="transition-colors hover:text-emerald-400">
+                  Home
+                </SmartLink>
+                <span>/</span>
+                <span className="text-white">About Us</span>
               </nav>
-            </div>
-            <div id="mobile-menu" className="hidden md:hidden mt-2">
-              <div className="bg-white/95 backdrop-blur-md rounded-2xl shadow-lg p-4 space-y-1">
-                <SmartLink
-                  href="/about-us"
-                  className="block py-2 px-3 text-base text-gray-700 rounded-md hover:bg-gray-100 hover:text-green-600"
-                >
-                  About
-                </SmartLink>
-                <SmartLink
-                  href="/charging-partners"
-                  className="block py-2 px-3 text-base text-gray-700 rounded-md hover:bg-gray-100 hover:text-green-600"
-                >
-                  Charge
-                </SmartLink>
-                <SmartLink
-                  href="/vehicles"
-                  className="block py-2 px-3 text-base text-gray-700 rounded-md hover:bg-gray-100 hover:text-green-600"
-                >
-                  Rent
-                </SmartLink>
-                <div className="border-t border-gray-200 my-2 pt-2">
-                  <SmartLink
-                    href="/contact-us"
-                    className="block w-full text-left py-2 px-3 text-base text-gray-700 rounded-md hover:bg-gray-100 hover:text-green-600"
-                  >
-                    Contact Us
-                  </SmartLink>
-                  <SmartLink
-                    href="#"
-                    className="block w-full text-left py-2 px-3 text-base text-gray-700 rounded-md hover:bg-gray-100 hover:text-green-600"
-                  >
-                    Location: Pakistan
-                  </SmartLink>
-                </div>
-              </div>
-            </div>
-          </div>
-        </header>
-        <section className="hero-section pt-32 pb-20 md:pt-48 md:pb-32">
-          <div className="bg-ev-asset asset-1" data-speed="0.05">
-            <img
-              src="img/biomas_energy.png"
-              alt="Clean energy icon representing ZVolta's mission"
-              draggable="false"
-            />
-          </div>
-          <div className="bg-ev-asset asset-2" data-speed="-0.07">
-            <img
-              src="img/charging%20station.png"
-              alt="EV charging station asset"
-              draggable="false"
-            />
-          </div>
-          <div className="bg-ev-asset asset-3" data-speed="0.04">
-            <img
-              src="img/charging%20station%20location.png"
-              alt="Map location icon for charging network"
-              draggable="false"
-            />
-          </div>
-          <div className="container mx-auto px-6 text-center max-w-4xl relative z-10">
-            <div className="inline-block bg-green-200 text-green-800 text-sm font-semibold px-4 py-1 rounded-full mb-6">
-              <i className="fas fa-info-circle mr-2" />
-              About Us
-            </div>
-            <h1 className="text-4xl md:text-6xl font-bold text-gray-800">
-              ZVolta is building the{" "}
-              <span className="shiny-text light-bg">
-                future of electric mobility.
+              <span className="mb-4 inline-flex rounded-full border border-emerald-500/30 bg-emerald-500/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.24em] text-emerald-300">
+                Aivora pattern, ZVolta purpose
               </span>
-            </h1>
-            <p className="mt-6 text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
-              We are enabling Pakistan’s EV revolution, through our network of
-              Charging Pods designed for convenience
-            </p>
-          </div>
-        </section>
-        <section className="py-20 bg-transparent">
-          <div className="container mx-auto px-6">
-            <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-              <div className="icon-card flex flex-col">
-                <div className="flex-grow">
-                  <div className="text-green-600 mb-4">
-                    <i className="fas fa-motorcycle fa-3x" />
-                  </div>
-                  <h3 className="font-bold text-xl mb-2 text-gray-800">
-                    Affordable Electric Vechicles
-                  </h3>
-                  <p className="text-gray-600">
-                    Providing accessible and clean electric rickshaws for daily
-                    rides across Pakistan.
-                  </p>
-                </div>
-                <SmartLink
-                  href="/vehicles"
-                  className="inline-block bg-green-600 text-white px-6 py-2 rounded-full font-semibold hover:bg-green-700 transition-colors mt-6"
-                >
-                  Learn More
-                </SmartLink>
-              </div>
-              <div className="icon-card flex flex-col">
-                <div className="flex-grow">
-                  <div className="text-green-600 mb-4">
-                    <i className="fas fa-charging-station fa-3x" />
-                  </div>
-                  <h3 className="font-bold text-xl mb-2 text-gray-800">
-                    Clean Energy Access
-                  </h3>
-                  <p className="text-gray-600">
-                    Building a network of charging hubs to ensure clean energy
-                    is available in every neighborhood.
-                  </p>
-                </div>
+              <h1 className="max-w-4xl text-5xl font-medium leading-[0.95] tracking-[-0.06em] sm:text-6xl lg:text-7xl">
+                Building the practical
+                <span className="text-emerald-400"> electric layer </span>
+                for Pakistan.
+              </h1>
+              <p className="mt-6 max-w-2xl text-base leading-8 text-white/72 sm:text-lg">
+                ZVolta is focused on what makes electric mobility actually work
+                on the ground: reliable charging, clear operating software,
+                vehicle access, and support that respects how people move every
+                day.
+              </p>
+              <div className="mt-10 flex flex-wrap gap-4">
                 <SmartLink
                   href="/charging-partners"
-                  className="inline-block bg-green-600 text-white px-6 py-2 rounded-full font-semibold hover:bg-green-700 transition-colors mt-6"
+                  className="inline-flex items-center justify-center rounded-full bg-emerald-400 px-7 py-3.5 text-sm font-bold text-[#04120c] transition-transform duration-300 hover:-translate-y-1"
                 >
-                  Learn More
+                  Explore hosting
                 </SmartLink>
-              </div>
-              <div className="icon-card flex flex-col">
-                <div className="flex-grow">
-                  <div className="text-green-600 mb-4">
-                    <i className="fas fa-hand-holding-dollar fa-3x" />
-                  </div>
-                  <h3 className="font-bold text-xl mb-2 text-gray-800">
-                    Income Opportunities
-                  </h3>
-                  <p className="text-gray-600">
-                    Creating new revenue streams for business through EV
-                    charging at their locations
-                  </p>
-                </div>
                 <SmartLink
-                  href="/invest"
-                  className="inline-block bg-green-600 text-white px-6 py-2 rounded-full font-semibold hover:bg-green-700 transition-colors mt-6"
+                  href="/support"
+                  className="inline-flex items-center justify-center rounded-full border border-white/15 bg-white/5 px-7 py-3.5 text-sm font-bold text-white transition-all duration-300 hover:border-emerald-400/40 hover:bg-white/10"
                 >
-                  Learn More
+                  See support model
                 </SmartLink>
               </div>
             </div>
-          </div>
-        </section>
-        <section className="py-20 bg-transparent">
-          <div className="container mx-auto px-6 text-center">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-800">
-              From Pollution to Progress
-            </h2>
-            <p className="mt-4 text-lg md:text-xl text-gray-600 max-w-3xl mx-auto mb-12">
-              We are actively replacing noisy, fume-emitting rickshaws with
-              silent, clean, and efficient electric vehicles.
-            </p>
-            <div className="comparison-slider relative max-w-4xl mx-auto">
-              <div className="relative w-full aspect-video overflow-hidden rounded-2xl shadow-2xl user-select-none">
-                <div className="absolute inset-0">
-                  <img
-                    src="img/clean-volta.jpg"
-                    alt="Clean city street with ZVolta's electric rickshaws"
-                    className="object-cover w-full h-full user-select-none"
-                    draggable="false"
-                  />
-                  <div className="absolute top-4 right-4 bg-green-500 text-white font-bold px-4 py-2 rounded-full">
-                    With ZVolta
+
+            <div className="relative">
+              <div className="overflow-hidden rounded-[2rem] border border-white/10 bg-[#07110c]/80 p-4 shadow-[0_24px_80px_rgba(0,0,0,0.35)] backdrop-blur">
+                <div className="grid gap-4 sm:grid-cols-[1.1fr_0.9fr]">
+                  <div className="overflow-hidden rounded-[1.5rem]">
+                    <img
+                      src="/img/zvolta-maidan.jpg"
+                      alt="ZVolta charging site"
+                      className="h-full min-h-[320px] w-full object-cover"
+                    />
                   </div>
-                </div>
-                <div
-                  className="absolute inset-0 user-select-none"
-                  style={{ clipPath: "inset(0 50% 0 0)" }}
-                >
-                  <img
-                    src="https://th-i.thgim.com/public/migration_catalog/article13518136.ece/alternates/FREE_1200/HY19POLUTINGAUTO"
-                    alt="Busy street with traditional, polluting auto rickshaws"
-                    className="object-cover w-full h-full brightness-75 user-select-none"
-                    draggable="false"
-                  />
-                  <div className="absolute top-4 left-4 bg-gray-800 text-white font-bold px-4 py-2 rounded-full">
-                    Without ZVolta
-                  </div>
-                </div>
-                <div
-                  className="slider-handle absolute inset-y-0"
-                  style={{ left: "50%" }}
-                >
-                  <div className="h-full w-1 bg-white" />
-                  <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 p-2 rounded-full bg-white shadow-lg cursor-pointer">
-                    <i className="fas fa-arrows-alt-h text-gray-700" />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-        <section className="dark-cta-section py-20">
-          <div className="relative z-10 container mx-auto px-6 text-center max-w-3xl">
-            <h2 className="text-3xl md:text-4xl font-bold shiny-text dark-bg">
-              Join the EV Revolution. Invest with ZVolta.
-            </h2>
-            <p className="mt-4 text-lg text-gray-300">
-              Become a part of Pakistan's clean energy transformation. Invest in
-              an asset-backed, high-return industry and empower your community
-              while earning passive income.
-            </p>
-            <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
-              <SmartLink
-                href="/invest"
-                className="w-full sm:w-auto px-8 py-4 bg-green-500 text-white font-semibold rounded-lg hover:bg-green-600 transition-all duration-300 text-lg shadow-lg hover:shadow-green-500/50 transform hover:scale-105"
-              >
-                Become an Investor <i className="fas fa-arrow-right ml-2" />
-              </SmartLink>
-              <SmartLink
-                href="/contact-us"
-                className="w-full sm:w-auto px-8 py-4 bg-gray-800 border border-gray-600 text-gray-200 font-semibold rounded-lg hover:bg-gray-700 hover:border-gray-500 transition-all duration-300 text-lg shadow-lg transform hover:scale-105"
-              >
-                Book a Call
-              </SmartLink>
-            </div>
-          </div>
-        </section>
-        <footer className="bg-black text-gray-300">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-start">
-              <div className="lg:col-span-4">
-                <h2 className="text-3xl sm:text-4xl font-bold text-white leading-tight">
-                  Ready to power up your future with EVs?
-                  <br />
-                  <SmartLink
-                    href="/contact-us"
-                    className="text-green-400 hover:text-green-300 transition-colors"
-                  >
-                    Get in touch.
-                  </SmartLink>
-                </h2>
-              </div>
-              <div className="lg:col-span-8 lg:col-start-5">
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-                  <div>
-                    <h3 className="font-semibold text-white">Company</h3>
-                    <ul className="mt-4 space-y-3">
-                      <li>
-                        <SmartLink
-                          href="/"
-                          className="hover:text-white transition-colors"
-                        >
-                          Home
-                        </SmartLink>
-                      </li>
-                      <li>
-                        <SmartLink
-                          href="/about-us"
-                          className="hover:text-white transition-colors"
-                        >
-                          About
-                        </SmartLink>
-                      </li>
-                      <li>
-                        <SmartLink
-                          href="/invest"
-                          className="hover:text-white transition-colors"
-                        >
-                          For Investors
-                        </SmartLink>
-                      </li>
-                      <li>
-                        <SmartLink
-                          href="/charging-partners"
-                          className="hover:text-white transition-colors"
-                        >
-                          Charging Partners
-                        </SmartLink>
-                      </li>
-                    </ul>
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-white">Learn More</h3>
-                    <ul className="mt-4 space-y-3">
-                      <li>
-                        <SmartLink
-                          href="/driver-network"
-                          className="hover:text-white transition-colors"
-                        >
-                          Drivers
-                        </SmartLink>
-                      </li>
-                      <li>
-                        <SmartLink
-                          href="/invest-form"
-                          className="hover:text-white transition-colors"
-                        >
-                          Invest
-                        </SmartLink>
-                      </li>
-                      <li>
-                        <SmartLink
-                          href="/contact-us"
-                          className="hover:text-white transition-colors"
-                        >
-                          Contact
-                        </SmartLink>
-                      </li>
-                    </ul>
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-white">Connect</h3>
-                    <div className="flex space-x-5 mt-4">
-                      <SmartLink
-                        href="https://www.facebook.com/share/1FUNJfnPd5/?mibextid=wwXIfr"
-                        target="_blank"
-                        className="text-gray-400 hover:text-white transition-colors"
-                        aria-label="Follow ZVolta on Facebook"
-                      >
-                        <i
-                          className="bi bi-facebook"
-                          style={{ fontSize: "1.5rem" }}
-                          aria-hidden="true"
-                        />
-                      </SmartLink>
-                      <SmartLink
-                        href="https://www.instagram.com/zvolta.pk"
-                        target="_blank"
-                        className="text-gray-400 hover:text-white transition-colors"
-                        aria-label="Follow ZVolta on Instagram"
-                      >
-                        <i
-                          className="bi bi-instagram"
-                          style={{ fontSize: "1.5rem" }}
-                          aria-hidden="true"
-                        />
-                      </SmartLink>
-                      <SmartLink
-                        href="https://wa.me/+923104446529"
-                        target="_blank"
-                        className="text-gray-400 hover:text-white transition-colors"
-                        aria-label="Contact ZVolta on WhatsApp"
-                      >
-                        <i
-                          className="bi bi-whatsapp"
-                          style={{ fontSize: "1.5rem" }}
-                          aria-hidden="true"
-                        />
-                      </SmartLink>
-                      <SmartLink
-                        href="mailto:admin@zvolta.com"
-                        className="text-gray-400 hover:text-white transition-colors"
-                        aria-label="Email ZVolta"
-                      >
-                        <i
-                          className="bi bi-envelope"
-                          style={{ fontSize: "1.5rem" }}
-                          aria-hidden="true"
-                        />
-                      </SmartLink>
+                  <div className="flex flex-col gap-4">
+                    <div className="rounded-[1.5rem] border border-white/10 bg-white/5 p-5">
+                      <p className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-300">
+                        What we connect
+                      </p>
+                      <p className="mt-3 text-sm leading-7 text-white/72">
+                        Charging sites, drivers, hosts, operators, and the
+                        software that keeps the whole system readable.
+                      </p>
+                    </div>
+                    <div className="overflow-hidden rounded-[1.5rem]">
+                      <img
+                        src="/img/app-1.png"
+                        alt="ZVolta software layer"
+                        className="h-44 w-full object-cover"
+                      />
                     </div>
                   </div>
-                  <div>
-                    <h3 className="font-semibold text-white">
-                      Contact Details
-                    </h3>
-                    <ul className="mt-4 space-y-3 text-sm">
-                      <li className="flex items-center gap-x-2">
-                        <i
-                          className="bi bi-envelope text-lg"
-                          aria-hidden="true"
-                        />
-                        <SmartLink
-                          href="mailto:support@zvolta.com"
-                          className="hover:text-white transition-colors"
-                        >
-                          support@zvolta.com
-                        </SmartLink>
-                      </li>
-                      <li className="flex items-center gap-x-2">
-                        <i
-                          className="bi bi-telephone text-lg"
-                          aria-hidden="true"
-                        />
-                        <SmartLink
-                          href="tel:+923104446529"
-                          className="hover:text-white transition-colors"
-                        >
-                          ‪+92 310 4446529‬
-                        </SmartLink>
-                      </li>
-                      <li className="flex items-start gap-x-2 pt-1">
-                        <i
-                          className="bi bi-geo-alt text-lg mt-1"
-                          aria-hidden="true"
-                        />
-                        <span className="leading-relaxed">
-                          36F, Street 36, Block 6, P.E.C.H.S, Karachi, Pakistan
-                        </span>
-                      </li>
-                    </ul>
+                </div>
+              </div>
+              <div className="absolute -bottom-6 -left-6 hidden rounded-[1.5rem] border border-white/10 bg-black/70 px-5 py-4 text-sm text-white/70 shadow-2xl backdrop-blur md:block">
+                <span className="block text-xs font-bold uppercase tracking-[0.2em] text-emerald-300">
+                  Operating lens
+                </span>
+                <span className="mt-2 block max-w-[14rem]">
+                  Every site should feel useful, visible, and easier to trust.
+                </span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="relative py-20">
+          <div className="mx-auto grid w-full max-w-7xl gap-4 px-4 sm:px-6 lg:grid-cols-[120px_120px_minmax(0,1fr)_120px_120px] lg:px-8">
+            <AboutColumn image={imageColumns[0]} />
+            <AboutColumn image={imageColumns[1]} reverse />
+
+            <div className="rounded-[2.25rem] border border-white/10 bg-[#07110d]/85 p-6 shadow-[0_24px_80px_rgba(0,0,0,0.35)] backdrop-blur sm:p-8">
+              <div className="overflow-hidden rounded-[1.75rem] border border-white/10">
+                <img
+                  src="/img/clean-volta.jpg"
+                  alt="ZVolta electric mobility"
+                  className="h-[220px] w-full object-cover sm:h-[280px]"
+                />
+              </div>
+              <div className="mt-6">
+                <span className="inline-flex rounded-full border border-emerald-500/30 bg-emerald-500/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.2em] text-emerald-300">
+                  Who we are
+                </span>
+                <h2 className="mt-5 text-3xl font-medium leading-tight tracking-[-0.05em] sm:text-4xl">
+                  We grow the network by staying close to the field.
+                </h2>
+                <p className="mt-4 text-base leading-8 text-white/72">
+                  The Aivora about page had a strong image-led rhythm. Here we
+                  keep that spirit, but the story is fully ZVolta: access,
+                  uptime, clarity, and support working together so electric
+                  mobility feels more practical every month.
+                </p>
+              </div>
+            </div>
+
+            <AboutColumn image={imageColumns[2]} />
+            <AboutColumn image={imageColumns[3]} reverse />
+          </div>
+        </section>
+
+        <section className="relative pb-20">
+          <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="mx-auto max-w-4xl text-center">
+              <span className="text-sm font-bold uppercase tracking-[0.22em] text-emerald-300">
+                Why ZVolta works this way
+              </span>
+              <h2 className="mt-4 text-4xl font-medium leading-tight tracking-[-0.05em] sm:text-5xl">
+                Electric mobility gets easier when every layer makes sense
+                together.
+              </h2>
+              <p className="mt-5 text-base leading-8 text-white/68">
+                We do not treat chargers, programs, software, and support as
+                separate stories. The network becomes credible when those layers
+                reinforce each other.
+              </p>
+            </div>
+
+            <div className="mt-12 grid gap-6 lg:grid-cols-3">
+              {featureCards.map((card, index) => (
+                <div
+                  key={card.title}
+                  className="rounded-[2rem] border border-white/10 bg-white/[0.04] p-7 shadow-[0_20px_60px_rgba(0,0,0,0.28)]"
+                >
+                  <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-500/12 text-sm font-bold text-emerald-300">
+                    0{index + 1}
+                  </span>
+                  <h3 className="mt-5 text-2xl font-medium tracking-[-0.03em]">
+                    {card.title}
+                  </h3>
+                  <p className="mt-4 text-sm leading-7 text-white/70">
+                    {card.copy}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="overflow-hidden border-y border-white/10 bg-[#06100b] py-8">
+          <div className="about-page__pill-row flex gap-4">
+            {[...partnerPills, ...partnerPills].map((pill, index) => (
+              <span
+                key={`${pill}-${index}`}
+                className="inline-flex shrink-0 items-center rounded-full border border-white/10 bg-white/5 px-5 py-3 text-sm font-semibold text-white/78"
+              >
+                {pill}
+              </span>
+            ))}
+          </div>
+        </section>
+
+        <section className="py-20">
+          <div className="mx-auto grid w-full max-w-7xl gap-8 px-4 sm:px-6 lg:grid-cols-[0.95fr_1.05fr] lg:px-8">
+            <div className="rounded-[2.25rem] border border-white/10 bg-[#08120d] p-8">
+              <span className="text-sm font-bold uppercase tracking-[0.2em] text-emerald-300">
+                Working principles
+              </span>
+              <h2 className="mt-4 text-3xl font-medium leading-tight tracking-[-0.05em] sm:text-4xl">
+                We expand carefully, operate visibly, and learn quickly.
+              </h2>
+              <ul className="mt-8 space-y-5 text-sm leading-7 text-white/72">
+                <li className="border-l-2 border-emerald-400/40 pl-4">
+                  Sites should be easy to explain to a host and easy to use for
+                  a driver.
+                </li>
+                <li className="border-l-2 border-emerald-400/40 pl-4">
+                  Support feedback should improve the next product or operating
+                  decision.
+                </li>
+                <li className="border-l-2 border-emerald-400/40 pl-4">
+                  Growth should make the network stronger, not noisier.
+                </li>
+              </ul>
+            </div>
+
+            <div className="grid gap-5 sm:grid-cols-2">
+              {stats.map((item) => (
+                <div
+                  key={item.value}
+                  className="rounded-[1.75rem] border border-white/10 bg-white/[0.04] p-6"
+                >
+                  <p className="text-2xl font-medium tracking-[-0.04em] text-emerald-300">
+                    {item.value}
+                  </p>
+                  <p className="mt-3 text-sm leading-7 text-white/70">
+                    {item.label}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="pb-24">
+          <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="rounded-[2.5rem] border border-white/10 bg-gradient-to-br from-[#07110d] via-[#0a1711] to-black p-8 shadow-[0_24px_80px_rgba(0,0,0,0.35)] sm:p-10">
+              <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+                <div>
+                  <span className="text-sm font-bold uppercase tracking-[0.22em] text-emerald-300">
+                    Next stop
+                  </span>
+                  <h2 className="mt-4 text-4xl font-medium leading-tight tracking-[-0.05em] sm:text-5xl">
+                    Meet the people and partner model behind the rollout.
+                  </h2>
+                  <p className="mt-5 max-w-2xl text-base leading-8 text-white/68">
+                    If you want the fuller picture, the next useful pages are
+                    `Team`, `Partners`, and `Stories`. Together they explain how
+                    ZVolta thinks, who it builds with, and how the work looks in
+                    motion.
+                  </p>
+                  <div className="mt-8 flex flex-wrap gap-4">
+                    <SmartLink
+                      href="/team"
+                      className="inline-flex items-center justify-center rounded-full bg-emerald-400 px-7 py-3.5 text-sm font-bold text-[#04120c] transition-transform duration-300 hover:-translate-y-1"
+                    >
+                      Meet the team
+                    </SmartLink>
+                    <SmartLink
+                      href="/partners"
+                      className="inline-flex items-center justify-center rounded-full border border-white/15 bg-white/5 px-7 py-3.5 text-sm font-bold text-white transition-all duration-300 hover:border-emerald-400/40 hover:bg-white/10"
+                    >
+                      See partner model
+                    </SmartLink>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="overflow-hidden rounded-[1.75rem] border border-white/10">
+                    <img
+                      src="/img/Team/ZV%20-%20Nashit.png"
+                      alt="Nashit Iqbal"
+                      className="h-full min-h-[250px] w-full object-cover"
+                    />
+                  </div>
+                  <div className="overflow-hidden rounded-[1.75rem] border border-white/10">
+                    <img
+                      src="/img/Team/ZV%20-%20Anusha.png"
+                      alt="Anusha Shahid"
+                      className="h-full min-h-[250px] w-full object-cover"
+                    />
                   </div>
                 </div>
               </div>
             </div>
-            <div className="mt-16 pt-8 border-t border-gray-800 flex flex-wrap justify-between items-center gap-4">
-              <div className="flex items-center text-sm text-gray-400">
-                <img
-                  src="img/symbol logo2.png"
-                  alt="ZVolta Symbol"
-                  className="h-5 w-auto mr-3"
-                  width={20}
-                  height={20}
-                />
-                <span>© 2025 Z-Volta Pvt. Ltd. All rights reserved.</span>
-              </div>
-              <div className="text-sm text-gray-400">
-                <ul className="flex flex-wrap justify-center sm:justify-end gap-x-4 gap-y-2">
-                  <li>
-                    <SmartLink
-                      href="/policy#terms-and-conditions"
-                      className="hover:text-white transition-colors"
-                    >
-                      Terms and Conditions
-                    </SmartLink>
-                  </li>
-                  <li>
-                    <SmartLink
-                      href="/policy#standard-service-policy"
-                      className="hover:text-white transition-colors"
-                    >
-                      Standard Service Policy
-                    </SmartLink>
-                  </li>
-                  <li>
-                    <SmartLink
-                      href="/policy#privacy-policy"
-                      className="hover:text-white transition-colors"
-                    >
-                      Privacy Policy
-                    </SmartLink>
-                  </li>
-                  <li>
-                    <SmartLink
-                      href="/policy#returns-policy"
-                      className="hover:text-white transition-colors"
-                    >
-                      Returns Policy
-                    </SmartLink>
-                  </li>
-                </ul>
-              </div>
-            </div>
           </div>
-        </footer>
+        </section>
       </div>
     </>
   );

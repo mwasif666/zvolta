@@ -298,9 +298,17 @@ export default function BlogsPage() {
           min-height: 520px;
         }
 
-        .blog-page__feature-card img,
-        .blog-page__card-image img {
+        .blog-page__feature-card img {
           display: block;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: transform 0.65s cubic-bezier(0.2, 0, 0, 1), filter 0.3s ease;
+        }
+
+        .blog-page__card-image img {
+          position: absolute;
+          inset: 0;
           width: 100%;
           height: 100%;
           object-fit: cover;
@@ -399,9 +407,11 @@ export default function BlogsPage() {
         }
 
         .blog-page__top-item img {
+          display: block;
           width: 100%;
           height: 100%;
           object-fit: cover;
+          align-self: stretch;
         }
 
         .blog-page__top-item div {
@@ -449,6 +459,7 @@ export default function BlogsPage() {
         }
 
         .blog-page__card-image {
+          position: relative;
           overflow: hidden;
           min-height: 280px;
         }

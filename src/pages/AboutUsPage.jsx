@@ -204,27 +204,24 @@ export default function AboutUsPage() {
           </div>
         </section>
 
-        <section className="relative py-20">
-          <div className="mx-auto grid w-full max-w-7xl gap-4 px-4 sm:px-6 lg:grid-cols-[120px_120px_minmax(0,1fr)_120px_120px] lg:px-8">
-            <AboutColumn image={imageColumns[0]} />
-            <AboutColumn image={imageColumns[1]} reverse />
-
-            <div className="rounded-[2.25rem] border border-white/10 bg-[#07110d]/85 p-6 shadow-[0_24px_80px_rgba(0,0,0,0.35)] backdrop-blur sm:p-8">
+        <section className="relative border-b border-white/10 py-20">
+          <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
               <div className="overflow-hidden rounded-[1.75rem] border border-white/10">
                 <img
                   src="/img/clean-volta.jpg"
                   alt="ZVolta electric mobility"
-                  className="h-[220px] w-full object-cover sm:h-[280px]"
+                  className="h-[280px] w-full object-cover sm:h-[380px]"
                 />
               </div>
-              <div className="mt-6">
+              <div>
                 <span className="inline-flex rounded-full border border-emerald-500/30 bg-emerald-500/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.2em] text-emerald-300">
                   Who we are
                 </span>
-                <h2 className="mt-5 text-3xl font-medium leading-tight tracking-[-0.05em] sm:text-4xl">
+                <h2 className="mt-5 text-3xl font-medium leading-tight tracking-[-0.05em] text-white sm:text-4xl">
                   We grow the network by staying close to the field.
                 </h2>
-                <p className="mt-4 text-base leading-8 text-white/72">
+                <p className="mt-4 text-base leading-8 text-white/70">
                   The Aivora about page had a strong image-led rhythm. Here we
                   keep that spirit, but the story is fully ZVolta: access,
                   uptime, clarity, and support working together so electric
@@ -232,23 +229,20 @@ export default function AboutUsPage() {
                 </p>
               </div>
             </div>
-
-            <AboutColumn image={imageColumns[2]} />
-            <AboutColumn image={imageColumns[3]} reverse />
           </div>
         </section>
 
-        <section className="relative pb-20">
+        <section className="relative border-b border-[#E5E5E5] bg-white py-20">
           <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="mx-auto max-w-4xl text-center">
-              <span className="text-sm font-bold uppercase tracking-[0.22em] text-emerald-300">
+              <span className="text-sm font-bold uppercase tracking-[0.22em] text-emerald-600">
                 Why ZVolta works this way
               </span>
-              <h2 className="mt-4 text-4xl font-medium leading-tight tracking-[-0.05em] sm:text-5xl">
+              <h2 className="mt-4 text-4xl font-medium leading-tight tracking-[-0.05em] text-zinc-900 sm:text-5xl">
                 Electric mobility gets easier when every layer makes sense
                 together.
               </h2>
-              <p className="mt-5 text-base leading-8 text-white/68">
+              <p className="mt-5 text-base leading-8 text-zinc-500">
                 We do not treat chargers, programs, software, and support as
                 separate stories. The network becomes credible when those layers
                 reinforce each other.
@@ -259,15 +253,15 @@ export default function AboutUsPage() {
               {featureCards.map((card, index) => (
                 <div
                   key={card.title}
-                  className="rounded-[2rem] border border-white/10 bg-white/[0.04] p-7 shadow-[0_20px_60px_rgba(0,0,0,0.28)]"
+                  className="rounded-[2rem] border border-[#E5E5E5] bg-[#F5F5F5] p-7"
                 >
-                  <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-500/12 text-sm font-bold text-emerald-300">
+                  <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-50 text-sm font-bold text-emerald-600">
                     0{index + 1}
                   </span>
-                  <h3 className="mt-5 text-2xl font-medium tracking-[-0.03em]">
+                  <h3 className="mt-5 text-2xl font-medium tracking-[-0.03em] text-zinc-900">
                     {card.title}
                   </h3>
-                  <p className="mt-4 text-sm leading-7 text-white/70">
+                  <p className="mt-4 text-sm leading-7 text-zinc-500">
                     {card.copy}
                   </p>
                 </div>
@@ -276,12 +270,12 @@ export default function AboutUsPage() {
           </div>
         </section>
 
-        <section className="overflow-hidden border-y border-white/10 bg-[#06100b] py-8">
+        <section className="overflow-hidden border-y border-[#E5E5E5] bg-white py-8">
           <div className="about-page__pill-row flex gap-4">
             {[...partnerPills, ...partnerPills].map((pill, index) => (
               <span
                 key={`${pill}-${index}`}
-                className="inline-flex shrink-0 items-center rounded-full border border-white/10 bg-white/5 px-5 py-3 text-sm font-semibold text-white/78"
+                className="inline-flex shrink-0 items-center rounded-full border border-[#E0E0E0] bg-[#F5F5F5] px-5 py-3 text-sm font-semibold text-zinc-700"
               >
                 {pill}
               </span>

@@ -185,21 +185,14 @@ export default function PartnersPage() {
               <img
                 src="/img/charging-post.jpg"
                 alt="Charging post"
-                className="h-full min-h-[220px] w-full object-cover"
+                className="h-[360px] w-full object-cover"
               />
             </div>
             <div className="overflow-hidden rounded-[1.75rem] border border-white/10">
               <img
-                src="/img/ev-charging-station-blue.png"
+                src="/img/zvolta-maidan.jpg"
                 alt="EV charger"
-                className="h-full min-h-[220px] w-full object-cover"
-              />
-            </div>
-            <div className="overflow-hidden rounded-[1.75rem] border border-white/10 sm:col-span-2">
-              <img
-                src="/img/zvolta-2.jpg"
-                alt="ZVolta vehicle"
-                className="h-56 w-full object-cover"
+                className="h-[360px] w-full object-cover"
               />
             </div>
           </div>

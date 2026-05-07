@@ -59,7 +59,8 @@ export default function StoriesPage() {
                 <img
                   src={featured.cardImage}
                   alt={featured.title}
-                  className="h-full min-h-[320px] w-full object-cover"
+                  className="h-full w-full object-cover"
+                  style={{ display: "block" }}
                 />
               </div>
               <div className="p-8 sm:p-10">
@@ -117,12 +118,12 @@ export default function StoriesPage() {
                 key={post.id}
                 className="overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.04]"
               >
-                <div className="grid md:grid-cols-[0.44fr_0.56fr]">
+                <div className="grid md:grid-cols-[280px_1fr]">
                   <div className="overflow-hidden">
                     <img
                       src={post.cardImage}
                       alt={post.title}
-                      className="h-full min-h-[260px] w-full object-cover"
+                      className="h-full w-full object-cover"
                     />
                   </div>
                   <div className="p-7">

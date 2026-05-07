@@ -79,8 +79,8 @@ export const blogPosts = [
     date: "March 28, 2026",
     readTime: "5 min read",
     author: "Product Team",
-    image: "/img/app-1.png",
-    cardImage: "/img/app-1.png",
+    image: "/img/zvolta-3.jpg",
+    cardImage: "/img/zvolta-3.jpg",
     title: "The software layer behind a reliable charging operation",
     excerpt:
       "Charging networks need dashboards, alerts, payment visibility, and operational workflows that help teams move quickly.",

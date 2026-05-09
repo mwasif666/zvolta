@@ -1056,7 +1056,7 @@ export default function HomePage() {
                       <div className="phone-mockup border-zinc-800 bg-zinc-950 border-[10px] rounded-[3rem] h-full w-full shadow-2xl relative overflow-hidden">
                         <img
                           id="app-screen-img"
-                          src="img/Gray and Black Modern Handphone Mockup Instagram Story(5).png"
+                          src="img/app-2.png"
                           className=""
                           alt="App Screen"
                         />

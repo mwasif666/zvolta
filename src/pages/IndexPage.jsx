@@ -1056,7 +1056,7 @@ export default function IndexPage() {
                       <div className="phone-mockup h-full w-full shadow-2xl relative overflow-hidden">
                         <img
                           id="app-screen-img"
-                          src="img/Gray and Black Modern Handphone Mockup Instagram Story(5).png"
+                          src="img/app-2.png"
                           className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500"
                           alt="App Screen"
                         />

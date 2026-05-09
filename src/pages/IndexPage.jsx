@@ -1710,7 +1710,7 @@ export default function IndexPage() {
                             name="name"
                             id="name"
                             required
-                            placeholder="John Doe"
+                            placeholder="Ahmed Khan"
                             className="w-full h-14 bg-black border border-zinc-800 rounded-full px-6 text-lg text-white placeholder:text-zinc-700 focus:border-emerald-500/50 focus:bg-zinc-950 focus:outline-none focus:ring-4 focus:ring-emerald-500/10 transition-all duration-300"
                           />
                         </div>
@@ -1726,7 +1726,7 @@ export default function IndexPage() {
                             name="email"
                             id="email"
                             required
-                            placeholder="john@example.com"
+                            placeholder="ahmed.khan@gmail.com"
                             className="w-full h-14 bg-black border border-zinc-800 rounded-full px-6 text-lg text-white placeholder:text-zinc-700 focus:border-emerald-500/50 focus:bg-zinc-950 focus:outline-none focus:ring-4 focus:ring-emerald-500/10 transition-all duration-300"
                           />
                         </div>
@@ -1742,7 +1742,7 @@ export default function IndexPage() {
                             name="phone"
                             id="phone"
                             required
-                            placeholder="+1 (555) 000-0000"
+                            placeholder="+92 300 1234567"
                             className="w-full h-14 bg-black border border-zinc-800 rounded-full px-6 text-lg text-white placeholder:text-zinc-700 focus:border-emerald-500/50 focus:bg-zinc-950 focus:outline-none focus:ring-4 focus:ring-emerald-500/10 transition-all duration-300"
                           />
                         </div>

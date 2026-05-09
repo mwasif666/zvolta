@@ -685,6 +685,12 @@ document.addEventListener("DOMContentLoaded", function () {
   const appTabs = document.querySelectorAll(".app-tab");
   const appTabBg = document.getElementById("app-tab-bg");
   const screenImg = document.getElementById("app-screen-img");
+  const userScreenSrc =
+    screenImg?.dataset.userSrc ||
+    "https://res.cloudinary.com/diywraupt/image/upload/v1778335134/Gray_and_Black_Modern_Handphone_Mockup_Instagram_Story_5_iti1ef.png";
+  const hostScreenSrc =
+    screenImg?.dataset.hostSrc ||
+    "https://res.cloudinary.com/diywraupt/image/upload/v1778335192/Gray_and_Black_Modern_Handphone_Mockup_Instagram_Story_6_dw7l4e.png";
 
   const appData = {
     user: [
@@ -750,10 +756,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         tl.add(() => {
-          const newSrc =
-            target === "user"
-              ? "img/Gray and Black Modern Handphone Mockup Instagram Story(5).png"
-              : "https://res.cloudinary.com/diywraupt/image/upload/v1778335192/Gray_and_Black_Modern_Handphone_Mockup_Instagram_Story_6_dw7l4e.png";
+          const newSrc = target === "user" ? userScreenSrc : hostScreenSrc;
           screenImg.src = newSrc;
           cards.forEach((card, i) => {
             card.querySelector(".card-title").innerText = data[i].title;

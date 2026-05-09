@@ -1057,6 +1057,8 @@ export default function HomePage() {
                         <img
                           id="app-screen-img"
                           src="https://res.cloudinary.com/diywraupt/image/upload/v1778335134/Gray_and_Black_Modern_Handphone_Mockup_Instagram_Story_5_iti1ef.png"
+                          data-user-src="https://res.cloudinary.com/diywraupt/image/upload/v1778335134/Gray_and_Black_Modern_Handphone_Mockup_Instagram_Story_5_iti1ef.png"
+                          data-host-src="https://res.cloudinary.com/diywraupt/image/upload/v1778335192/Gray_and_Black_Modern_Handphone_Mockup_Instagram_Story_6_dw7l4e.png"
                           className=""
                           alt="App Screen"
                         />

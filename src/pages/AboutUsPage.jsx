@@ -184,7 +184,7 @@ export default function AboutUsPage() {
                     </div>
                     <div className="overflow-hidden rounded-[1.5rem]">
                       <img
-                        src="https://res.cloudinary.com/diywraupt/image/upload/v1778334294/app-1_lbtjn5.png"
+                        src="/img/app-1.png"
                         alt="ZVolta software layer"
                         className="h-44 w-full object-cover"
                       />

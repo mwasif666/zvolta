@@ -407,7 +407,7 @@ export default function VehiclesPage() {
                         <div className="absolute inset-0 bg-gradient-to-b from-emerald-50 to-white z-0" />
                         <div className="absolute inset-0 flex items-center justify-center p-8 z-10 transition-transform duration-700 group-hover:scale-105">
                           <img
-                            src="img/Flux_Dev_a_highly_detailed_loader_rickshaw_with_a_sturdy_metal_3.jpg"
+                            src="img/loader-ev.jpg"
                             alt="EV Loader"
                             className="w-full h-auto max-h-[60%] object-contain drop-shadow-2xl"
                             data-inline-onerror="this.src='https://placehold.co/600x400/transparent/333?text=Heavy+Loader'"

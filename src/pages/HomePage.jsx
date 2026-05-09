@@ -1056,8 +1056,8 @@ export default function HomePage() {
                       <div className="phone-mockup border-zinc-800 bg-zinc-950 border-[10px] rounded-[3rem] h-full w-full shadow-2xl relative overflow-hidden">
                         <img
                           id="app-screen-img"
-                          src="https://res.cloudinary.com/diywraupt/image/upload/v1778334300/app-2_ojsdxo.png"
-                          className="w-full h-full object-cover object-top"
+                          src="https://res.cloudinary.com/diywraupt/image/upload/v1778335134/Gray_and_Black_Modern_Handphone_Mockup_Instagram_Story_5_iti1ef.png"
+                          className=""
                           alt="App Screen"
                         />
                         <div />
@@ -1872,7 +1872,7 @@ export default function HomePage() {
                             name="name"
                             id="name"
                             required
-                            placeholder="Ahmed Khan"
+                            placeholder="John Doe"
                             className="w-full h-14 bg-black border border-zinc-800 rounded-full px-6 text-lg text-white placeholder:text-zinc-700 focus:border-emerald-500/50 focus:bg-zinc-950 focus:outline-none focus:ring-4 focus:ring-emerald-500/10 transition-all duration-300"
                           />
                         </div>
@@ -1888,7 +1888,7 @@ export default function HomePage() {
                             name="email"
                             id="email"
                             required
-                            placeholder="ahmed.khan@gmail.com"
+                            placeholder="john@example.com"
                             className="w-full h-14 bg-black border border-zinc-800 rounded-full px-6 text-lg text-white placeholder:text-zinc-700 focus:border-emerald-500/50 focus:bg-zinc-950 focus:outline-none focus:ring-4 focus:ring-emerald-500/10 transition-all duration-300"
                           />
                         </div>
@@ -1904,7 +1904,7 @@ export default function HomePage() {
                             name="phone"
                             id="phone"
                             required
-                            placeholder="+92 300 1234567"
+                            placeholder="+1 (555) 000-0000"
                             className="w-full h-14 bg-black border border-zinc-800 rounded-full px-6 text-lg text-white placeholder:text-zinc-700 focus:border-emerald-500/50 focus:bg-zinc-950 focus:outline-none focus:ring-4 focus:ring-emerald-500/10 transition-all duration-300"
                           />
                         </div>

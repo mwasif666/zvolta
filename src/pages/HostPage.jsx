@@ -834,7 +834,7 @@ export default function HostPage() {
                 <div className="rounded-[32px] border border-[#1F1F1F] bg-[#111111] p-3">
                   <div className="overflow-hidden rounded-[24px] border border-[#1F1F1F] bg-black">
                     <img
-                      src="https://res.cloudinary.com/diywraupt/image/upload/v1778334300/app-2_ojsdxo.png"
+                      src="/img/app-2.png"
                       alt="Zvolta app usage and charging controls"
                       className="h-[620px] w-[300px] object-cover object-top"
                     />

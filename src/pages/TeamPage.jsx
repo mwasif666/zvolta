@@ -46,7 +46,7 @@ const teamPods = [
   {
     title: "Product Layer",
     role: "Software and visibility",
-    image: "https://res.cloudinary.com/diywraupt/image/upload/v1778334294/app-1_lbtjn5.png",
+    image: "/img/app-1.png",
     tone: "Turns sessions, payments, and site signals into a cleaner operating picture.",
   },
   {

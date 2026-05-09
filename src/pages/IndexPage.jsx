@@ -1056,7 +1056,7 @@ export default function IndexPage() {
                       <div className="phone-mockup h-full w-full shadow-2xl relative overflow-hidden">
                         <img
                           id="app-screen-img"
-                          src="img/app-2.png"
+                          src="https://res.cloudinary.com/diywraupt/image/upload/v1778334300/app-2_ojsdxo.png"
                           className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500"
                           alt="App Screen"
                         />

@@ -1056,7 +1056,7 @@ export default function HomePage() {
                       <div className="phone-mockup border-zinc-800 bg-zinc-950 border-[10px] rounded-[3rem] h-full w-full shadow-2xl relative overflow-hidden">
                         <img
                           id="app-screen-img"
-                          src="img/app-2.png"
+                          src="https://res.cloudinary.com/diywraupt/image/upload/v1778334300/app-2_ojsdxo.png"
                           className="w-full h-full object-cover object-top"
                           alt="App Screen"
                         />

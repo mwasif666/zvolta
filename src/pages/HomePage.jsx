@@ -1057,7 +1057,7 @@ export default function HomePage() {
                         <img
                           id="app-screen-img"
                           src="img/app-2.png"
-                          className=""
+                          className="w-full h-full object-cover object-top"
                           alt="App Screen"
                         />
                         <div />

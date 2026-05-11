@@ -633,7 +633,7 @@ export default function HomePage() {
                           <h3 className="text-2xl 3xl:text-4xl font-bold text-white mb-2">
                             Assessment
                           </h3>
-                          <p className="text-base 3xl:text-xl text-emerald-50 leading-snug min-h-[4.2em]">
+                          <p className="text-base 3xl:text-xl text-white leading-snug min-h-[4.2em]">
                             Tell us about your site, your goals, and how many
                             chargers you want.
                           </p>
@@ -657,7 +657,7 @@ export default function HomePage() {
                           <h3 className="text-2xl 3xl:text-4xl font-bold text-white mb-2">
                             Locate
                           </h3>
-                          <p className="text-base 3xl:text-xl text-gray-200 leading-snug min-h-[4.2em]">
+                          <p className="text-base 3xl:text-xl text-white leading-snug min-h-[4.2em]">
                             Open the app to find a nearby charger that fits your
                             vehicle.
                           </p>
@@ -681,7 +681,7 @@ export default function HomePage() {
                           <h3 className="text-2xl 3xl:text-4xl font-bold text-[#d1fae5] mb-2">
                             Hardware
                           </h3>
-                          <p className="text-base 3xl:text-xl text-gray-400 leading-snug min-h-[4.2em]">
+                          <p className="text-base 3xl:text-xl text-white leading-snug min-h-[4.2em]">
                             Share your hardware details and how you run your
                             charging operations today.
                           </p>
@@ -704,7 +704,7 @@ export default function HomePage() {
                           <h3 className="text-2xl 3xl:text-4xl font-bold text-white mb-2">
                             Planning
                           </h3>
-                          <p className="text-base 3xl:text-xl text-emerald-50 leading-snug min-h-[4.2em]">
+                          <p className="text-base 3xl:text-xl text-white leading-snug min-h-[4.2em]">
                             We assess your layout and power needs and guide you
                             to the best setup.
                           </p>
@@ -728,7 +728,7 @@ export default function HomePage() {
                           <h3 className="text-2xl 3xl:text-4xl font-bold text-white mb-2">
                             Plug In
                           </h3>
-                          <p className="text-base 3xl:text-xl text-gray-200 leading-snug min-h-[4.2em]">
+                          <p className="text-base 3xl:text-xl text-white leading-snug min-h-[4.2em]">
                             Park, plug in, and start a session with a tap or by
                             scanning the code.
                           </p>
@@ -752,7 +752,7 @@ export default function HomePage() {
                           <h3 className="text-2xl 3xl:text-4xl font-bold text-[#d1fae5] mb-2">
                             Connect
                           </h3>
-                          <p className="text-base 3xl:text-xl text-gray-400 leading-snug min-h-[4.2em]">
+                          <p className="text-base 3xl:text-xl text-white leading-snug min-h-[4.2em]">
                             We connect your chargers to our OCPP-ready platform
                             and set up your pricing.
                           </p>
@@ -775,7 +775,7 @@ export default function HomePage() {
                           <h3 className="text-2xl 3xl:text-4xl font-bold text-white mb-2">
                             Install
                           </h3>
-                          <p className="text-base 3xl:text-xl text-emerald-50 leading-snug min-h-[4.2em]">
+                          <p className="text-base 3xl:text-xl text-white leading-snug min-h-[4.2em]">
                             We install the chargers, connect the software, and
                             prepare everything for launch.
                           </p>
@@ -799,7 +799,7 @@ export default function HomePage() {
                           <h3 className="text-2xl 3xl:text-4xl font-bold text-white mb-2">
                             Charge
                           </h3>
-                          <p className="text-base 3xl:text-xl text-gray-200 leading-snug min-h-[4.2em]">
+                          <p className="text-base 3xl:text-xl text-white leading-snug min-h-[4.2em]">
                             Watch your charging progress in real time with
                             simple, clear pricing.
                           </p>
@@ -823,7 +823,7 @@ export default function HomePage() {
                           <h3 className="text-2xl 3xl:text-4xl font-bold text-[#d1fae5] mb-2">
                             Monitor
                           </h3>
-                          <p className="text-base 3xl:text-xl text-gray-400 leading-snug min-h-[4.2em]">
+                          <p className="text-base 3xl:text-xl text-white leading-snug min-h-[4.2em]">
                             You monitor status, manage users, and handle
                             payments from one dashboard.
                           </p>
@@ -846,7 +846,7 @@ export default function HomePage() {
                           <h3 className="text-2xl 3xl:text-4xl font-bold text-white mb-2">
                             Go Live
                           </h3>
-                          <p className="text-base 3xl:text-xl text-emerald-50 leading-snug min-h-[4.2em]">
+                          <p className="text-base 3xl:text-xl text-white leading-snug min-h-[4.2em]">
                             You go live, earn from every session, and track your
                             impact over time.
                           </p>
@@ -870,7 +870,7 @@ export default function HomePage() {
                           <h3 className="text-2xl 3xl:text-4xl font-bold text-white mb-2">
                             Go
                           </h3>
-                          <p className="text-base 3xl:text-xl text-gray-200 leading-snug min-h-[4.2em]">
+                          <p className="text-base 3xl:text-xl text-white leading-snug min-h-[4.2em]">
                             Unplug when you are ready and continue on your way.
                           </p>
                         </div>
@@ -893,7 +893,7 @@ export default function HomePage() {
                           <h3 className="text-2xl 3xl:text-4xl font-bold text-[#d1fae5] mb-2">
                             Scale
                           </h3>
-                          <p className="text-base 3xl:text-xl text-gray-400 leading-snug min-h-[4.2em]">
+                          <p className="text-base 3xl:text-xl text-white leading-snug min-h-[4.2em]">
                             Use insights and reports to improve uptime and grow
                             your network.
                           </p>

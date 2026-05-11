@@ -1,7 +1,7 @@
 import {
   pageRegistry,
-  routeEntries as generatedRouteEntries,
-} from "./generated/page-registry";
+  routeEntries as pageRouteEntries,
+} from "./page-registry";
 
 const routeLabels = {
   404: "Page Not Found",
@@ -68,7 +68,7 @@ function labelFromPageId(pageId) {
   );
 }
 
-export const routeEntries = generatedRouteEntries;
+export const routeEntries = pageRouteEntries;
 export { pageRegistry };
 
 export const siteRoutes = routeEntries.map((entry) => {

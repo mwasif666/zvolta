@@ -423,7 +423,7 @@ export default function ChargerSpecPage({ spec }) {
           />
           <div className="mt-12">
             <DataTable
-              rows={common.safetyFeatures}
+              rows={spec.safetyFeatures ?? common.safetyFeatures}
               headers={["Safety feature", "What it means"]}
             />
           </div>
@@ -442,7 +442,7 @@ export default function ChargerSpecPage({ spec }) {
           />
           <div className="mt-12">
             <DataTable
-              rows={common.importedComparisonRows}
+              rows={spec.importedComparisonRows ?? common.importedComparisonRows}
               headers={[
                 "Feature",
                 `Zvolta ${spec.power} smart charger`,

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SmartLink } from "../SmartLink";
@@ -168,6 +168,13 @@ const stories = [
   "How a fleet used charging data to manage daily operations.",
 ];
 
+const formatPKR = (value) =>
+  new Intl.NumberFormat("en-PK", {
+    style: "currency",
+    currency: "PKR",
+    maximumFractionDigits: 0,
+  }).format(value);
+
 function Icon({ name, className = "h-5 w-5" }) {
   const props = {
     className,
@@ -213,6 +220,45 @@ function Icon({ name, className = "h-5 w-5" }) {
         <circle cx="18" cy="18" r="3" />
         <path d="m8.6 10.6 6.8-3.2" />
         <path d="m8.6 13.4 6.8 3.2" />
+      </svg>
+    );
+  }
+
+  if (name === "chart") {
+    return (
+      <svg {...props}>
+        <path d="M4 19V5" />
+        <path d="M4 19h16" />
+        <path d="m7 15 4-4 3 3 5-7" />
+      </svg>
+    );
+  }
+
+  if (name === "clock") {
+    return (
+      <svg {...props}>
+        <circle cx="12" cy="12" r="9" />
+        <path d="M12 7v5l3 2" />
+      </svg>
+    );
+  }
+
+  if (name === "wallet") {
+    return (
+      <svg {...props}>
+        <path d="M4 7h14a2 2 0 0 1 2 2v9H6a2 2 0 0 1-2-2V7Z" />
+        <path d="M4 7V6a2 2 0 0 1 2-2h11v3" />
+        <path d="M16 13h.01" />
+      </svg>
+    );
+  }
+
+  if (name === "layers") {
+    return (
+      <svg {...props}>
+        <path d="m12 3 9 5-9 5-9-5 9-5Z" />
+        <path d="m3 12 9 5 9-5" />
+        <path d="m3 16 9 5 9-5" />
       </svg>
     );
   }
@@ -305,43 +351,24 @@ function PhoneMini() {
     <div className="software-phone">
       <div className="software-phone-frame">
         <div className="software-phone-speaker" />
-        <div className="software-phone-screen">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-[10px] text-zinc-400">Zvolta app</p>
-              <p className="text-base font-bold text-zinc-950">
-                Nearby chargers
-              </p>
-            </div>
-            <span className="h-9 w-9 rounded-full bg-[#00E5A8]" />
-          </div>
-          <div
-            className="mt-3 flex-1 rounded-2xl bg-[#E2EBDF] p-3"
-            style={{ minHeight: 0 }}
-          >
-            <div className="relative h-full rounded-xl bg-[#D3E1D0]">
-              <span className="absolute left-8 top-8 h-9 w-9 rounded-full bg-[#00E5A8]" />
-              <span className="absolute bottom-6 right-8 h-7 w-7 rounded-full bg-[#00E5A8] opacity-60" />
-              <span className="absolute right-12 top-16 h-5 w-5 rounded-full bg-[#00E5A8] opacity-40" />
-            </div>
-          </div>
-          <div className="mt-3 rounded-2xl bg-[#06130F] p-4 text-white">
-            <p className="text-[10px] text-white/50">Active session</p>
-            <p className="mt-1 text-2xl font-semibold">4.8 kWh</p>
-            <div className="mt-3 h-1.5 rounded-full bg-white/10">
-              <div className="h-full w-[68%] rounded-full bg-[#00E5A8]" />
-            </div>
-          </div>
-          <div className="mt-3 grid grid-cols-2 gap-2">
-            <div className="rounded-xl bg-zinc-100 p-3">
-              <p className="text-[10px] text-zinc-500">Pay</p>
-              <p className="text-sm font-bold text-zinc-950">App</p>
-            </div>
-            <div className="rounded-xl bg-zinc-100 p-3">
-              <p className="text-[10px] text-zinc-500">QR</p>
-              <p className="text-sm font-bold text-zinc-950">Scan</p>
-            </div>
-          </div>
+        <div
+          style={{
+            position: "relative",
+            height: "100%",
+            overflow: "hidden",
+            borderRadius: "32px",
+          }}
+        >
+          <img
+            src="https://res.cloudinary.com/diywraupt/image/upload/v1778762258/d60c7cfe-e7c3-40f4-a386-3082cbd21bbf.png"
+            alt="Zvolta app screen"
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              display: "block",
+            }}
+          />
         </div>
       </div>
     </div>
@@ -526,6 +553,444 @@ function ComparisonColumn({ title, items, positive = false }) {
   );
 }
 
+function RangeField({
+  label,
+  value,
+  min,
+  max,
+  step,
+  onChange,
+  accent = "green",
+  suffix,
+}) {
+  return (
+    <label className="block">
+      <span className="mb-3 flex items-center justify-between gap-4 text-sm font-semibold text-white">
+        <span>{label}</span>
+        <span
+          className={accent === "blue" ? "text-[#63A8FF]" : "text-[#00E5A8]"}
+        >
+          {suffix || value}
+        </span>
+      </span>
+      <input
+        type="range"
+        min={min}
+        max={max}
+        step={step}
+        value={value}
+        onChange={(event) => onChange(Number(event.target.value))}
+        className={
+          accent === "blue"
+            ? "software-roi-range software-roi-range-blue"
+            : "software-roi-range"
+        }
+      />
+    </label>
+  );
+}
+
+function ProjectionChart({ data, formatValue }) {
+  const width = 640;
+  const height = 260;
+  const padding = { top: 18, right: 18, bottom: 32, left: 52 };
+  const values = data.map((point) => point.cashFlow);
+  const minValue = Math.min(0, ...values);
+  const maxValue = Math.max(0, ...values);
+  const span = maxValue - minValue || 1;
+
+  const xFor = (index) =>
+    padding.left +
+    (index / (data.length - 1)) * (width - padding.left - padding.right);
+  const yFor = (value) =>
+    padding.top +
+    ((maxValue - value) / span) * (height - padding.top - padding.bottom);
+
+  const linePath = data
+    .map(
+      (point, index) =>
+        `${index === 0 ? "M" : "L"} ${xFor(index)} ${yFor(point.cashFlow)}`,
+    )
+    .join(" ");
+  const areaPath = `${linePath} L ${xFor(data.length - 1)} ${yFor(0)} L ${xFor(0)} ${yFor(0)} Z`;
+  const zeroY = yFor(0);
+  const ticks = [0, 2, 4, 6, 8, 10];
+
+  return (
+    <div className="overflow-hidden rounded-lg border border-[#1F1F1F] bg-[#0B0B0B] p-4">
+      <svg
+        viewBox={`0 0 ${width} ${height}`}
+        className="h-[280px] w-full"
+        role="img"
+        aria-label="10 year cumulative cash flow chart"
+      >
+        <defs>
+          <linearGradient
+            id="softwareRoiCashGradient"
+            x1="0"
+            y1="0"
+            x2="0"
+            y2="1"
+          >
+            <stop offset="0%" stopColor="#00E5A8" stopOpacity="0.28" />
+            <stop offset="100%" stopColor="#00E5A8" stopOpacity="0" />
+          </linearGradient>
+        </defs>
+        {[0.25, 0.5, 0.75].map((ratio) => {
+          const y =
+            padding.top + ratio * (height - padding.top - padding.bottom);
+          return (
+            <line
+              key={ratio}
+              x1={padding.left}
+              x2={width - padding.right}
+              y1={y}
+              y2={y}
+              stroke="#1F1F1F"
+            />
+          );
+        })}
+        <line
+          x1={padding.left}
+          x2={width - padding.right}
+          y1={zeroY}
+          y2={zeroY}
+          stroke="#65706C"
+          strokeWidth="1.5"
+        />
+        <path d={areaPath} fill="url(#softwareRoiCashGradient)" />
+        <path
+          d={linePath}
+          fill="none"
+          stroke="#00E5A8"
+          strokeWidth="4"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        {data.map((point, index) => (
+          <circle
+            key={point.year}
+            cx={xFor(index)}
+            cy={yFor(point.cashFlow)}
+            r={index % 2 === 0 ? 4 : 0}
+            fill="#00E5A8"
+          />
+        ))}
+        {ticks.map((tick) => (
+          <text
+            key={tick}
+            x={xFor(tick)}
+            y={height - 8}
+            textAnchor="middle"
+            fill="#A1A1A1"
+            fontSize="12"
+          >
+            Y{tick}
+          </text>
+        ))}
+        <text x="8" y={yFor(maxValue) + 4} fill="#A1A1A1" fontSize="11">
+          {formatValue(maxValue)}
+        </text>
+        <text x="8" y={zeroY + 4} fill="#A1A1A1" fontSize="11">
+          0
+        </text>
+      </svg>
+    </div>
+  );
+}
+
+function ModularRoiCalculator() {
+  const [baseChargerCost, setBaseChargerCost] = useState(75000);
+  const [marginPerUnit, setMarginPerUnit] = useState(15);
+  const [primaryUsage, setPrimaryUsage] = useState(8);
+  const [additionalChargers, setAdditionalChargers] = useState(0);
+  const [usageAddon1, setUsageAddon1] = useState(4);
+  const [usageAddon2, setUsageAddon2] = useState(2);
+
+  const kwhPerHour = 1;
+  const daysPerYear = 365;
+  const costPerPair = 75000;
+
+  const results = useMemo(() => {
+    const totalCapEx = baseChargerCost + (additionalChargers / 2) * costPerPair;
+    const primaryAnnualRevenue =
+      primaryUsage * marginPerUnit * kwhPerHour * daysPerYear;
+    const expansionARevenue =
+      additionalChargers >= 2
+        ? 2 * usageAddon1 * marginPerUnit * kwhPerHour * daysPerYear
+        : 0;
+    const expansionBRevenue =
+      additionalChargers >= 4
+        ? 2 * usageAddon2 * marginPerUnit * kwhPerHour * daysPerYear
+        : 0;
+    const totalAnnualRevenue =
+      primaryAnnualRevenue + expansionARevenue + expansionBRevenue;
+    const paybackYears =
+      totalAnnualRevenue > 0 ? totalCapEx / totalAnnualRevenue : 0;
+    const annualROI =
+      totalCapEx > 0 ? (totalAnnualRevenue / totalCapEx) * 100 : 0;
+    const chartData = Array.from({ length: 11 }, (_, year) => ({
+      year,
+      cashFlow: Math.round(-totalCapEx + totalAnnualRevenue * year),
+    }));
+
+    return {
+      totalCapEx,
+      primaryAnnualRevenue,
+      expansionARevenue,
+      expansionBRevenue,
+      totalAnnualRevenue,
+      monthlyRevenue: totalAnnualRevenue / 12,
+      paybackYears,
+      annualROI,
+      chartData,
+    };
+  }, [
+    additionalChargers,
+    baseChargerCost,
+    marginPerUnit,
+    primaryUsage,
+    usageAddon1,
+    usageAddon2,
+  ]);
+
+  const compactPKR = (value) => `Rs.${Math.round(value / 1000)}k`;
+
+  return (
+    <section id="roi-calculator" className="software-section">
+      <div className="software-container">
+        <div className="grid gap-10">
+          <div className="software-reveal mx-auto max-w-5xl text-center">
+            <p className="mb-4 text-xs font-semibold uppercase text-[#00E5A8]">
+              Estimate your earnings
+            </p>
+            <h2 className="text-[38px] font-semibold leading-[1.08] text-white md:text-[48px] lg:whitespace-nowrap">
+              See how much your charging site can earn.
+            </h2>
+            <p className="mx-auto mt-6 max-w-3xl text-base leading-7 text-[#A1A1A1]">
+              Adjust charger cost, margin, and daily usage to model investment,
+              annual revenue, payback time, and expansion returns.
+            </p>
+          </div>
+
+          <div className="software-stagger grid gap-4 md:grid-cols-3">
+            {[
+              [
+                "Annual revenue",
+                formatPKR(results.totalAnnualRevenue),
+                "chart",
+              ],
+              [
+                "Payback time",
+                `${results.paybackYears.toFixed(1)} years`,
+                "clock",
+              ],
+              ["Annual ROI", `${results.annualROI.toFixed(1)}%`, "wallet"],
+            ].map(([label, value, icon]) => (
+              <div
+                key={label}
+                className="rounded-lg border border-[#1F1F1F] bg-[#111111] p-6"
+              >
+                <div className="mb-5 grid h-10 w-10 place-items-center rounded-lg bg-[#0B0B0B] text-[#00E5A8]">
+                  <Icon name={icon} className="h-5 w-5" />
+                </div>
+                <p className="text-xs font-semibold uppercase text-[#A1A1A1]">
+                  {label}
+                </p>
+                <p className="mt-2 text-2xl font-semibold text-white">
+                  {value}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          <div className="software-reveal w-full rounded-lg border border-[#1F1F1F] bg-[#111111] p-5 md:p-8">
+            <div className="grid gap-8 xl:grid-cols-[0.86fr_1.14fr]">
+              <div className="grid gap-5">
+                <div className="rounded-lg border border-[#1F1F1F] bg-[#0B0B0B] p-5">
+                  <div className="mb-5 flex items-center gap-3 border-b border-[#1F1F1F] pb-4">
+                    <Icon name="chart" className="h-5 w-5 text-[#00E5A8]" />
+                    <h3 className="text-lg font-semibold text-white">
+                      Base setup
+                    </h3>
+                  </div>
+                  <div className="grid gap-6">
+                    <RangeField
+                      label="Primary charger cost"
+                      min={30000}
+                      max={150000}
+                      step={5000}
+                      value={baseChargerCost}
+                      onChange={setBaseChargerCost}
+                      suffix={formatPKR(baseChargerCost)}
+                    />
+                    <RangeField
+                      label="Margin per unit"
+                      min={5}
+                      max={100}
+                      step={1}
+                      value={marginPerUnit}
+                      onChange={setMarginPerUnit}
+                      suffix={`Rs. ${marginPerUnit}`}
+                    />
+                    <RangeField
+                      label="Primary usage"
+                      min={1}
+                      max={24}
+                      step={1}
+                      value={primaryUsage}
+                      onChange={setPrimaryUsage}
+                      suffix={`${primaryUsage} hrs/day`}
+                    />
+                  </div>
+                </div>
+
+                <div className="rounded-lg border border-[#1F1F1F] bg-[#0B0B0B] p-5">
+                  <div className="mb-5 flex items-center gap-3 border-b border-[#1F1F1F] pb-4">
+                    <Icon name="layers" className="h-5 w-5 text-[#63A8FF]" />
+                    <h3 className="text-lg font-semibold text-white">
+                      Modular expansion
+                    </h3>
+                  </div>
+                  <div className="grid grid-cols-3 gap-2">
+                    {[0, 2, 4].map((value) => (
+                      <button
+                        type="button"
+                        key={value}
+                        onClick={() => setAdditionalChargers(value)}
+                        className={`min-h-11 rounded-lg border px-3 text-sm font-semibold transition duration-300 ${
+                          additionalChargers === value
+                            ? "border-[#63A8FF] bg-[#63A8FF] text-black"
+                            : "border-[#1F1F1F] bg-[#111111] text-white hover:border-[#63A8FF]/70"
+                        }`}
+                      >
+                        {value === 0 ? "None" : `${value} units`}
+                      </button>
+                    ))}
+                  </div>
+                  {additionalChargers >= 2 ? (
+                    <div className="mt-6 rounded-lg border border-[#1F1F1F] bg-[#111111] p-4">
+                      <RangeField
+                        label="Usage chargers 2-3"
+                        min={0}
+                        max={24}
+                        step={0.5}
+                        value={usageAddon1}
+                        onChange={setUsageAddon1}
+                        accent="blue"
+                        suffix={`${usageAddon1} hrs/day`}
+                      />
+                    </div>
+                  ) : null}
+                  {additionalChargers >= 4 ? (
+                    <div className="mt-4 rounded-lg border border-[#1F1F1F] bg-[#111111] p-4">
+                      <RangeField
+                        label="Usage chargers 4-5"
+                        min={0}
+                        max={24}
+                        step={0.5}
+                        value={usageAddon2}
+                        onChange={setUsageAddon2}
+                        accent="blue"
+                        suffix={`${usageAddon2} hrs/day`}
+                      />
+                    </div>
+                  ) : null}
+                </div>
+
+                <div className="rounded-lg border border-[#00E5A8]/30 bg-[#06130F] p-5">
+                  <p className="text-xs font-semibold uppercase text-[#00E5A8]">
+                    Total investment
+                  </p>
+                  <p className="mt-2 text-3xl font-semibold text-white">
+                    {formatPKR(results.totalCapEx)}
+                  </p>
+                  <div className="mt-4 grid gap-2 border-t border-[#00E5A8]/15 pt-4 text-xs">
+                    <div className="flex justify-between gap-4 text-[#A1A1A1]">
+                      <span>Base unit</span>
+                      <span className="text-white">
+                        {formatPKR(baseChargerCost)}
+                      </span>
+                    </div>
+                    {additionalChargers > 0 ? (
+                      <div className="flex justify-between gap-4 text-[#A1A1A1]">
+                        <span>{additionalChargers} add-ons</span>
+                        <span className="text-[#63A8FF]">
+                          +{formatPKR((additionalChargers / 2) * costPerPair)}
+                        </span>
+                      </div>
+                    ) : null}
+                  </div>
+                </div>
+              </div>
+
+              <div className="grid gap-5">
+                <div className="rounded-lg border border-[#1F1F1F] bg-[#0B0B0B] p-5">
+                  <p className="text-sm font-semibold text-[#A1A1A1]">
+                    Monthly earnings
+                  </p>
+                  <p className="mt-4 text-[42px] font-semibold leading-none text-white md:text-[56px]">
+                    {formatPKR(results.monthlyRevenue)}
+                  </p>
+                </div>
+
+                <div className="rounded-lg border border-[#1F1F1F] bg-[#0B0B0B] p-5">
+                  <div className="mb-5">
+                    <h3 className="text-lg font-semibold text-white">
+                      Breakeven projection
+                    </h3>
+                    <p className="mt-1 text-sm text-[#A1A1A1]">
+                      Cumulative cash flow over 10 years
+                    </p>
+                  </div>
+                  <ProjectionChart
+                    data={results.chartData}
+                    formatValue={compactPKR}
+                  />
+                </div>
+
+                <div className="rounded-lg border border-[#1F1F1F] bg-[#0B0B0B] p-5">
+                  <h3 className="text-xs font-semibold uppercase text-[#A1A1A1]">
+                    Revenue breakdown
+                  </h3>
+                  <div className="mt-5 grid gap-4 text-sm">
+                    <div className="flex items-center justify-between gap-4">
+                      <span className="text-[#A1A1A1]">Primary charger</span>
+                      <span className="font-semibold text-white">
+                        {formatPKR(results.primaryAnnualRevenue)} / yr
+                      </span>
+                    </div>
+                    {additionalChargers >= 2 ? (
+                      <div className="flex items-center justify-between gap-4 border-t border-[#1F1F1F] pt-4">
+                        <span className="text-[#A1A1A1]">Expansion set A</span>
+                        <span className="font-semibold text-[#63A8FF]">
+                          {formatPKR(results.expansionARevenue)} / yr
+                        </span>
+                      </div>
+                    ) : null}
+                    {additionalChargers >= 4 ? (
+                      <div className="flex items-center justify-between gap-4 border-t border-[#1F1F1F] pt-4">
+                        <span className="text-[#A1A1A1]">Expansion set B</span>
+                        <span className="font-semibold text-[#63A8FF]">
+                          {formatPKR(results.expansionBRevenue)} / yr
+                        </span>
+                      </div>
+                    ) : null}
+                  </div>
+                </div>
+                {/* 
+                <SecondaryButton href="/roi-calculator" className="w-fit">
+                  Open full ROI calculator
+                </SecondaryButton> */}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export default function SoftwarePage() {
   const pageRef = useRef(null);
   const [smartState, setSmartState] = useState(smartSteps[0]);
@@ -679,6 +1144,49 @@ export default function SoftwarePage() {
 
         .software-story-scroll::-webkit-scrollbar {
           display: none;
+        }
+
+        .software-roi-range {
+          width: 100%;
+          height: 8px;
+          appearance: none;
+          border-radius: 999px;
+          background: #1F1F1F;
+          cursor: pointer;
+          accent-color: #00E5A8;
+        }
+
+        .software-roi-range::-webkit-slider-thumb {
+          width: 18px;
+          height: 18px;
+          appearance: none;
+          border-radius: 999px;
+          border: 3px solid #0B0B0B;
+          background: #00E5A8;
+          box-shadow: 0 0 0 1px rgba(0, 229, 168, 0.45);
+        }
+
+        .software-roi-range::-moz-range-thumb {
+          width: 18px;
+          height: 18px;
+          border: 3px solid #0B0B0B;
+          border-radius: 999px;
+          background: #00E5A8;
+          box-shadow: 0 0 0 1px rgba(0, 229, 168, 0.45);
+        }
+
+        .software-roi-range-blue {
+          accent-color: #63A8FF;
+        }
+
+        .software-roi-range-blue::-webkit-slider-thumb {
+          background: #63A8FF;
+          box-shadow: 0 0 0 1px rgba(99, 168, 255, 0.45);
+        }
+
+        .software-roi-range-blue::-moz-range-thumb {
+          background: #63A8FF;
+          box-shadow: 0 0 0 1px rgba(99, 168, 255, 0.45);
         }
 
         .software-phone {
@@ -886,10 +1394,21 @@ export default function SoftwarePage() {
                           {smartState.copy}
                         </p>
                         <div className="mt-5 grid grid-cols-3 gap-2 border-t border-[#00E5A8]/20 pt-4">
-                          {[["28", "Available"], ["12", "In use"], ["03", "Offline"]].map(([val, label]) => (
-                            <div key={label} className="rounded-lg bg-[#06130F] p-3 text-center">
-                              <p className="text-xl font-semibold text-white">{val}</p>
-                              <p className="mt-1 text-[10px] text-[#A1A1A1]">{label}</p>
+                          {[
+                            ["28", "Available"],
+                            ["12", "In use"],
+                            ["03", "Offline"],
+                          ].map(([val, label]) => (
+                            <div
+                              key={label}
+                              className="rounded-lg bg-[#06130F] p-3 text-center"
+                            >
+                              <p className="text-xl font-semibold text-white">
+                                {val}
+                              </p>
+                              <p className="mt-1 text-[10px] text-[#A1A1A1]">
+                                {label}
+                              </p>
                             </div>
                           ))}
                         </div>
@@ -980,6 +1499,8 @@ export default function SoftwarePage() {
             <DashboardMockup variant="host" />
           </div>
         </PageSection>
+
+        <ModularRoiCalculator />
 
         <PageSection>
           <div className="grid gap-14 lg:grid-cols-[0.75fr_1.25fr] lg:items-center">

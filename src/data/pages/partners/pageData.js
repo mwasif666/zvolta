@@ -4,9 +4,9 @@ const partnersPageData = {
   componentFile: "PartnersPage.jsx",
   paths: ["/partners"],
   meta: {
-    title: "Partners | ZVolta Charging And Mobility Partnerships",
+    title: "Zvolta Partners | EV Charging Partners in Pakistan",
     description:
-      "Explore how ZVolta works with host locations, fleet operators, and rollout collaborators to expand practical electric mobility.",
+      "See the businesses, locations, and operators working with Zvolta to bring EV charging, smart software, and cleaner energy to more places in Pakistan.",
   },
 };
 

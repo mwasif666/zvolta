@@ -6,6 +6,9 @@ import blogsPageData from "./data/pages/blogs/pageData";
 import blogDetailPageData from "./data/pages/blog-detail/pageData";
 import careersPageData from "./data/pages/careers/pageData";
 import chargePageData from "./data/pages/charge/pageData";
+import threeKwChargerPageData from "./data/pages/3kw-charger/pageData";
+import sevenKwChargerPageData from "./data/pages/7kw-charger/pageData";
+import twentyTwoKwChargerPageData from "./data/pages/22kw-charger/pageData";
 import chargingPartnersPageData from "./data/pages/charging-partners/pageData";
 import comingSoonPageData from "./data/pages/coming-soon/pageData";
 import contactUsPageData from "./data/pages/contact-us/pageData";
@@ -75,6 +78,24 @@ export const routeEntries = [
     paths: chargePageData.paths,
     meta: chargePageData.meta,
     load: () => import("./pages/charge/index.jsx"),
+  },
+  {
+    pageId: threeKwChargerPageData.pageId,
+    paths: threeKwChargerPageData.paths,
+    meta: threeKwChargerPageData.meta,
+    load: () => import("./pages/3kw-charger/index.jsx"),
+  },
+  {
+    pageId: sevenKwChargerPageData.pageId,
+    paths: sevenKwChargerPageData.paths,
+    meta: sevenKwChargerPageData.meta,
+    load: () => import("./pages/7kw-charger/index.jsx"),
+  },
+  {
+    pageId: twentyTwoKwChargerPageData.pageId,
+    paths: twentyTwoKwChargerPageData.paths,
+    meta: twentyTwoKwChargerPageData.meta,
+    load: () => import("./pages/22kw-charger/index.jsx"),
   },
   {
     pageId: chargingPartnersPageData.pageId,

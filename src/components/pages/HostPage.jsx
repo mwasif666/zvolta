@@ -2,32 +2,32 @@ import { useMemo, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { SmartLink } from "../SmartLink";
 
-const chargerCards = [
+const chargers = [
   {
     title: "3kW Charger",
     description: "Small spaces, low usage, EV bikes",
-    cta: "Explore 3kW",
+    href: "/3kw-charger",
   },
   {
     title: "7kW Charger",
     description: "Offices, apartments, daily use",
-    cta: "Explore 7kW",
+    href: "/7kw-charger",
   },
   {
     title: "22kW Charger",
     description: "High traffic, commercial spaces",
-    cta: "Explore 22kW",
+    href: "/22kw-charger",
   },
 ];
 
-const hostReasons = [
+const hostBenefits = [
   "Bring more visitors",
   "Increase dwell time",
   "Earn from every session",
   "Support ESG and sustainability goals",
 ];
 
-const audience = [
+const audiences = [
   "Apartments",
   "Offices",
   "Restaurants",
@@ -36,61 +36,54 @@ const audience = [
   "Public spaces",
 ];
 
-const bestLocations = [
-  {
-    title: "Visible parking",
-    description: "Drivers can find the charger without staff support.",
-    icon: "pin",
-  },
-  {
-    title: "Repeat visits",
-    description: "Daily traffic turns charging into a habit.",
-    icon: "repeat",
-  },
-  {
-    title: "Safe access",
-    description: "Clear entry, lighting, and space for the cable.",
-    icon: "shield",
-  },
-  {
-    title: "Useful waiting time",
-    description: "People can shop, work, eat, or study while charging.",
-    icon: "clock",
-  },
+const bestFitLocations = [
+  "Apartment buildings",
+  "Universities and colleges",
+  "Hospitals and parks",
+  "Offices and coworking spaces",
+  "Showrooms",
+  "Malls and outlets",
+  "Cafes and restaurants",
+  "Masjids, temples, and churches",
+  "Residential and commercial properties",
 ];
 
 const installationOptions = [
-  { title: "Vertical wall", shape: "vertical" },
-  { title: "Horizontal wall", shape: "horizontal" },
-  { title: "Square", shape: "square" },
-  { title: "Standing", shape: "standing" },
-  { title: "Hanging", shape: "hanging" },
+  { title: "Vertical wall", type: "vertical" },
+  { title: "Horizontal wall", type: "horizontal" },
+  { title: "Square", type: "square" },
+  { title: "Standing", type: "standing" },
+  { title: "Hanging", type: "hanging" },
 ];
 
 const safetyFeatures = [
   {
     feature: "2 year warranty",
-    description: "Hardware coverage for every deployed charger.",
+    description: "Local hardware support for every charger.",
   },
   {
     feature: "RCBO protection",
-    description: "No current leakage protection built into the system.",
+    description: "Prevents current leakage, even in rain.",
   },
   {
     feature: "Surge protection",
-    description: "Electrical protection for unstable supply conditions.",
+    description: "Built for voltage spikes and site variation.",
   },
   {
-    feature: "Single phase support up to 7kW",
-    description: "Works with common site power for smaller installs.",
+    feature: "Single phase support",
+    description: "Works on single phase power up to 7kW.",
   },
   {
     feature: "CCS Type 2 connector",
-    description: "Connector support for compatible EV charging needs.",
+    description: "Compatible with most EV charging needs.",
+  },
+  {
+    feature: "Daily reliability",
+    description: "Designed for repeated public use.",
   },
 ];
 
-const remoteFeatures = [
+const remoteControls = [
   "Track usage",
   "Set pricing",
   "Control timings",
@@ -98,43 +91,25 @@ const remoteFeatures = [
 ];
 
 const paymentSteps = [
-  {
-    title: "Find",
-    description: "Drivers see your charger on the app.",
-    icon: "map",
-  },
-  {
-    title: "Plug",
-    description: "They connect and start the session.",
-    icon: "plug",
-  },
-  {
-    title: "Pay",
-    description: "Payment is handled before they leave.",
-    icon: "wallet",
-  },
+  { title: "Find", description: "Users find your charger in the Zvolta app." },
+  { title: "Plug", description: "They start the session at your location." },
+  { title: "Pay", description: "Payment is handled directly in the app." },
+];
+
+const marketingPoints = [
+  "Listed on Zvolta app",
+  "Featured on social media",
+  "Bring new users without ads",
 ];
 
 const pricingPlans = [
   {
     title: "3kW",
-    bestFor: "EV bikes and light use",
-    details: ["Compact install", "Low energy demand", "Entry-level hosting"],
+    price: "Starts from 75k",
+    detail: "Small sites and EV bikes",
   },
-  {
-    title: "7kW",
-    bestFor: "Daily office and apartment use",
-    details: [
-      "Single phase support",
-      "Balanced charging speed",
-      "Most common fit",
-    ],
-  },
-  {
-    title: "22kW",
-    bestFor: "Commercial traffic",
-    details: ["High-traffic locations", "Faster turnaround", "Expansion-ready"],
-  },
+  { title: "7kW", price: "Available", detail: "Offices and apartments" },
+  { title: "22kW", price: "Available", detail: "Commercial traffic" },
 ];
 
 const partnerLogos = [
@@ -147,63 +122,29 @@ const partnerLogos = [
 
 const stories = [
   {
-    title: "How apartments turn parking into a service",
-    meta: "Host guide",
+    title: "Coworking spaces using chargers as a USP",
+    category: "Workspace",
     image: "/img/Host/03.png",
   },
   {
-    title: "Why restaurants benefit from charging dwell time",
-    meta: "Site strategy",
+    title: "Restaurants increasing customer time",
+    category: "Hospitality",
     image: "/img/Host/Host.png",
   },
   {
-    title: "Choosing the right charger for daily visitors",
-    meta: "Charging basics",
+    title: "Businesses earning passive income",
+    category: "Revenue",
     image: "/img/Host/02.png",
+  },
+  {
+    title: "Brands working toward sustainability goals",
+    category: "ESG",
+    image: "/img/clean-volta.jpg",
   },
 ];
 
-function Reveal({ as = "div", children, className = "", delay = 0 }) {
-  const shouldReduceMotion = useReducedMotion();
-  const Component = motion[as] ?? motion.div;
-
-  return (
-    <Component
-      className={className}
-      initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{
-        duration: shouldReduceMotion ? 0.01 : 0.7,
-        delay: shouldReduceMotion ? 0 : delay,
-        ease: [0.22, 1, 0.36, 1],
-      }}
-    >
-      {children}
-    </Component>
-  );
-}
-
-function LoadReveal({ children, className = "", delay = 0 }) {
-  const shouldReduceMotion = useReducedMotion();
-
-  return (
-    <motion.div
-      className={className}
-      initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{
-        duration: shouldReduceMotion ? 0.01 : 0.7,
-        delay: shouldReduceMotion ? 0 : delay,
-        ease: [0.22, 1, 0.36, 1],
-      }}
-    >
-      {children}
-    </motion.div>
-  );
-}
-
 function Icon({ name, className = "h-5 w-5" }) {
-  const common = {
+  const props = {
     className,
     viewBox: "0 0 24 24",
     fill: "none",
@@ -214,117 +155,136 @@ function Icon({ name, className = "h-5 w-5" }) {
     "aria-hidden": "true",
   };
 
-  switch (name) {
-    case "arrow":
-      return (
-        <svg {...common}>
-          <path d="M5 12h14" />
-          <path d="m13 6 6 6-6 6" />
-        </svg>
-      );
-    case "bolt":
-      return (
-        <svg {...common}>
-          <path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z" />
-        </svg>
-      );
-    case "building":
-      return (
-        <svg {...common}>
-          <path d="M4 21V5a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v16" />
-          <path d="M9 21v-5h3v5" />
-          <path d="M8 7h1" />
-          <path d="M12 7h1" />
-          <path d="M8 11h1" />
-          <path d="M12 11h1" />
-          <path d="M17 9h2a1 1 0 0 1 1 1v11" />
-          <path d="M3 21h18" />
-        </svg>
-      );
-    case "pin":
-      return (
-        <svg {...common}>
-          <path d="M12 21s6-5.4 6-11a6 6 0 1 0-12 0c0 5.6 6 11 6 11Z" />
-          <path d="M12 12.2a2.2 2.2 0 1 0 0-4.4 2.2 2.2 0 0 0 0 4.4Z" />
-        </svg>
-      );
-    case "repeat":
-      return (
-        <svg {...common}>
-          <path d="m17 2 4 4-4 4" />
-          <path d="M3 11V9a3 3 0 0 1 3-3h15" />
-          <path d="m7 22-4-4 4-4" />
-          <path d="M21 13v2a3 3 0 0 1-3 3H3" />
-        </svg>
-      );
-    case "shield":
-      return (
-        <svg {...common}>
-          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z" />
-          <path d="m9 12 2 2 4-5" />
-        </svg>
-      );
-    case "clock":
-      return (
-        <svg {...common}>
-          <circle cx="12" cy="12" r="9" />
-          <path d="M12 7v5l3 2" />
-        </svg>
-      );
-    case "map":
-      return (
-        <svg {...common}>
-          <path d="m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3V6Z" />
-          <path d="M9 3v15" />
-          <path d="M15 6v15" />
-        </svg>
-      );
-    case "plug":
-      return (
-        <svg {...common}>
-          <path d="M8 2v6" />
-          <path d="M16 2v6" />
-          <path d="M6 8h12v4a6 6 0 0 1-12 0V8Z" />
-          <path d="M12 18v4" />
-        </svg>
-      );
-    case "wallet":
-      return (
-        <svg {...common}>
-          <path d="M4 7h16v12H4a2 2 0 0 1-2-2V5a2 2 0 0 0 2 2Z" />
-          <path d="M18 11h4v4h-4a2 2 0 0 1 0-4Z" />
-          <path d="M4 7l12-4v4" />
-        </svg>
-      );
-    case "check":
-      return (
-        <svg {...common}>
-          <path d="m5 12 4 4L19 6" />
-        </svg>
-      );
-    case "phone":
-      return (
-        <svg {...common}>
-          <rect x="7" y="2.5" width="10" height="19" rx="2" />
-          <path d="M10 18h4" />
-        </svg>
-      );
-    default:
-      return (
-        <svg {...common}>
-          <circle cx="12" cy="12" r="9" />
-          <path d="M12 7v10" />
-          <path d="M7 12h10" />
-        </svg>
-      );
+  if (name === "arrow") {
+    return (
+      <svg {...props}>
+        <path d="M5 12h14" />
+        <path d="m13 6 6 6-6 6" />
+      </svg>
+    );
   }
+
+  if (name === "check") {
+    return (
+      <svg {...props}>
+        <path d="m5 12 4 4L19 6" />
+      </svg>
+    );
+  }
+
+  if (name === "bolt") {
+    return (
+      <svg {...props}>
+        <path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z" />
+      </svg>
+    );
+  }
+
+  if (name === "phone") {
+    return (
+      <svg {...props}>
+        <rect x="7" y="2.5" width="10" height="19" rx="2.4" />
+        <path d="M10 18h4" />
+      </svg>
+    );
+  }
+
+  if (name === "map") {
+    return (
+      <svg {...props}>
+        <path d="m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3V6Z" />
+        <path d="M9 3v15" />
+        <path d="M15 6v15" />
+      </svg>
+    );
+  }
+
+  if (name === "plug") {
+    return (
+      <svg {...props}>
+        <path d="M8 2v6" />
+        <path d="M16 2v6" />
+        <path d="M6 8h12v4a6 6 0 0 1-12 0V8Z" />
+        <path d="M12 18v4" />
+      </svg>
+    );
+  }
+
+  if (name === "wallet") {
+    return (
+      <svg {...props}>
+        <path d="M4 7h16v12H4a2 2 0 0 1-2-2V5a2 2 0 0 0 2 2Z" />
+        <path d="M18 11h4v4h-4a2 2 0 0 1 0-4Z" />
+        <path d="M4 7l12-4v4" />
+      </svg>
+    );
+  }
+
+  return (
+    <svg {...props}>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M12 7v10" />
+      <path d="M7 12h10" />
+    </svg>
+  );
+}
+
+function Reveal({ children, className = "", delay = 0, as = "div" }) {
+  const reduceMotion = useReducedMotion();
+  const Component = motion[as] ?? motion.div;
+
+  return (
+    <Component
+      className={className}
+      initial={{ opacity: 0, y: reduceMotion ? 0 : 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.22 }}
+      transition={{
+        duration: reduceMotion ? 0.01 : 0.7,
+        delay: reduceMotion ? 0 : delay,
+        ease: [0.22, 1, 0.36, 1],
+      }}
+    >
+      {children}
+    </Component>
+  );
+}
+
+function PageSection({ children, className = "", id }) {
+  return (
+    <section id={id} className={`host-section ${className}`}>
+      <div className="host-container">{children}</div>
+    </section>
+  );
+}
+
+function SectionIntro({ eyebrow, title, copy, centered = false }) {
+  return (
+    <Reveal className={`${centered ? "mx-auto text-center" : ""} max-w-3xl`}>
+      {eyebrow ? (
+        <p className="mb-4 text-xs font-semibold uppercase text-[#00E5A8]">
+          {eyebrow}
+        </p>
+      ) : null}
+      <h2 className="text-[32px] font-semibold leading-[1.12] text-white md:text-[36px]">
+        {title}
+      </h2>
+      {copy ? (
+        <p
+          className={`${centered ? "mx-auto" : ""} mt-4 max-w-2xl text-base leading-7 text-[#A1A1A1]`}
+        >
+          {copy}
+        </p>
+      ) : null}
+    </Reveal>
+  );
 }
 
 function PrimaryButton({ href = "/contact-us", children, className = "" }) {
   return (
     <SmartLink
       href={href}
-      className={`inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-[#00E5A8] px-5 py-3 text-sm font-semibold text-black transition duration-300 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-[#00E5A8]/50 ${className}`}
+      className={`inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-[#00E5A8] px-5 py-3 text-sm font-semibold text-black transition duration-300 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-[#00E5A8]/45 ${className}`}
     >
       {children}
       <Icon name="arrow" className="h-4 w-4" />
@@ -336,7 +296,7 @@ function SecondaryButton({ href = "/contact-us", children, className = "" }) {
   return (
     <SmartLink
       href={href}
-      className={`inline-flex min-h-12 items-center justify-center gap-2 rounded-lg border border-[#1F1F1F] bg-[#111111] px-5 py-3 text-sm font-semibold text-white transition duration-300 hover:scale-[1.02] hover:border-[#00E5A8]/45 ${className}`}
+      className={`inline-flex min-h-12 items-center justify-center gap-2 rounded-lg border border-[#1F1F1F] bg-[#111111] px-5 py-3 text-sm font-semibold text-white transition duration-300 hover:scale-[1.02] hover:border-[#00E5A8]/50 focus:outline-none focus:ring-2 focus:ring-white/20 ${className}`}
     >
       {children}
       <Icon name="arrow" className="h-4 w-4" />
@@ -344,86 +304,51 @@ function SecondaryButton({ href = "/contact-us", children, className = "" }) {
   );
 }
 
-function SectionHeading({
-  eyebrow,
-  title,
-  copy,
-  centered = false,
-  light = false,
-}) {
-  return (
-    <Reveal className={`${centered ? "mx-auto text-center" : ""} max-w-3xl`}>
-      {eyebrow ? (
-        <p className="mb-4 text-xs font-semibold uppercase text-[#00E5A8]">
-          {eyebrow}
-        </p>
-      ) : null}
-      <h2
-        className={`text-[32px] font-semibold leading-[1.12] sm:text-[36px] ${light ? "text-zinc-900" : "text-white"}`}
-      >
-        {title}
-      </h2>
-      {copy ? (
-        <p
-          className={`${centered ? "mx-auto" : ""} mt-4 max-w-2xl text-base leading-7 ${light ? "text-zinc-500" : "text-[#A1A1A1]"}`}
-        >
-          {copy}
-        </p>
-      ) : null}
-    </Reveal>
-  );
-}
-
-function ChargerMiniature({ size = "large" }) {
-  const dimensions =
-    size === "small"
-      ? "h-16 w-8"
-      : size === "medium"
-        ? "h-24 w-12"
-        : "h-32 w-16";
+function ChargerIllustration({ size = "large" }) {
+  const sizeClass = size === "small" ? "h-24 w-16" : "h-36 w-24";
 
   return (
-    <div
-      className={`${dimensions} relative rounded-md border border-[#242424] bg-[#141414] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.03)]`}
-    >
-      <div className="absolute left-2 right-2 top-3 h-3 rounded-sm bg-[#232323]" />
-      <div className="absolute left-2 right-2 top-8 h-7 rounded-sm border border-[#2B2B2B] bg-[#0B0B0B]" />
-      <div className="absolute bottom-3 left-2 h-1.5 w-1.5 rounded-full bg-[#00E5A8]" />
-      <div className="absolute bottom-3 left-5 h-1.5 w-1.5 rounded-full bg-[#2B2B2B]" />
-      <div className="absolute bottom-3 right-2 h-1.5 w-1.5 rounded-full bg-[#2B2B2B]" />
+    <div className={`${sizeClass} relative`}>
+      <div className="absolute inset-x-3 top-0 h-full rounded-lg border border-[#2A2A2A] bg-[#141414] shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]">
+        <div className="mx-auto mt-4 h-3 w-10 rounded-sm bg-[#232323]" />
+        <div className="mx-auto mt-4 h-12 w-10 rounded-md border border-[#2A2A2A] bg-[#0B0B0B]" />
+        <div className="absolute bottom-4 left-5 h-2 w-2 rounded-full bg-[#00E5A8]" />
+        <div className="absolute bottom-4 right-5 h-2 w-2 rounded-full bg-[#303030]" />
+      </div>
+      <div className="absolute bottom-8 right-0 h-12 w-10 rounded-br-full border-b border-r border-[#2A2A2A]" />
     </div>
   );
 }
 
-function InstallShape({ shape }) {
+function InstallationDiagram({ type }) {
   return (
-    <div className="flex h-32 items-center justify-center rounded-lg border border-[#E5E5E5] bg-[#F5F5F5]">
-      {shape === "vertical" ? (
-        <div className="h-24 w-16 rounded-md border border-[#D0D0D0] bg-white p-2">
-          <div className="h-full w-5 rounded-sm bg-[#E0E0E0]" />
+    <div className="grid h-40 place-items-center rounded-lg border border-[#1F1F1F] bg-[#0B0B0B]">
+      {type === "vertical" ? (
+        <div className="h-28 w-16 rounded-md border border-[#2A2A2A] bg-[#151515] p-2">
+          <div className="h-full w-5 rounded-sm bg-[#242424]" />
         </div>
       ) : null}
-      {shape === "horizontal" ? (
-        <div className="h-16 w-24 rounded-md border border-[#D0D0D0] bg-white p-2">
-          <div className="h-5 w-full rounded-sm bg-[#E0E0E0]" />
+      {type === "horizontal" ? (
+        <div className="h-16 w-28 rounded-md border border-[#2A2A2A] bg-[#151515] p-2">
+          <div className="h-5 w-full rounded-sm bg-[#242424]" />
         </div>
       ) : null}
-      {shape === "square" ? (
-        <div className="grid h-20 w-20 place-items-center rounded-md border border-[#D0D0D0] bg-white">
-          <div className="h-8 w-8 rounded-sm bg-[#E0E0E0]" />
+      {type === "square" ? (
+        <div className="grid h-24 w-24 place-items-center rounded-md border border-[#2A2A2A] bg-[#151515]">
+          <div className="h-9 w-9 rounded-sm bg-[#242424]" />
         </div>
       ) : null}
-      {shape === "standing" ? (
+      {type === "standing" ? (
         <div className="flex flex-col items-center">
-          <ChargerMiniature size="medium" />
-          <div className="mt-2 h-1 w-16 rounded-full bg-[#D0D0D0]" />
+          <ChargerIllustration size="small" />
+          <div className="mt-2 h-1 w-20 rounded-full bg-[#2A2A2A]" />
         </div>
       ) : null}
-      {shape === "hanging" ? (
-        <div className="relative h-24 w-24">
-          <div className="absolute left-1/2 top-0 h-8 w-px bg-[#D0D0D0]" />
-          <div className="absolute left-1/2 top-8 h-14 w-10 -translate-x-1/2 rounded-md border border-[#D0D0D0] bg-white" />
-          <div className="absolute bottom-0 left-[52px] h-8 w-8 rounded-full border border-[#D0D0D0] border-l-transparent border-t-transparent" />
+      {type === "hanging" ? (
+        <div className="relative h-28 w-28">
+          <div className="absolute left-1/2 top-0 h-9 w-px bg-[#2A2A2A]" />
+          <div className="absolute left-1/2 top-9 h-16 w-12 -translate-x-1/2 rounded-md border border-[#2A2A2A] bg-[#151515]" />
+          <div className="absolute bottom-0 left-[58px] h-9 w-9 rounded-full border border-l-transparent border-t-transparent border-[#2A2A2A]" />
         </div>
       ) : null}
     </div>
@@ -431,19 +356,18 @@ function InstallShape({ shape }) {
 }
 
 export default function HostPage() {
-  const [chargers, setChargers] = useState(2);
-  const [price, setPrice] = useState(120);
+  const [chargerCount, setChargerCount] = useState(2);
+  const [unitPrice, setUnitPrice] = useState(120);
   const [usage, setUsage] = useState(8);
-  const shouldReduceMotion = useReducedMotion();
 
   const monthlyEarnings = useMemo(
-    () => Math.max(0, chargers * price * usage * 30),
-    [chargers, price, usage],
+    () => Math.max(0, chargerCount * unitPrice * usage * 30),
+    [chargerCount, unitPrice, usage],
   );
 
   return (
     <>
-      <style data-page-style="host:2">{`
+      <style data-page-style="host-page">{`
         .host-page {
           background: #0B0B0B;
           color: #FFFFFF;
@@ -452,15 +376,8 @@ export default function HostPage() {
           overflow-x: hidden;
         }
 
-        .host-page h1,
-        .host-page h2,
-        .host-page h3,
-        .host-page p {
-          overflow-wrap: break-word;
-        }
-
-        .host-section {
-          padding: 120px 0;
+        .host-page * {
+          box-sizing: border-box;
         }
 
         .host-container {
@@ -469,9 +386,14 @@ export default function HostPage() {
           padding: 0 24px;
         }
 
+        .host-section {
+          padding: 120px 0;
+          border-bottom: 1px solid #1F1F1F;
+        }
+
         .host-logo-track {
-          animation: host-logo-scroll 28s linear infinite;
           width: max-content;
+          animation: host-logo-scroll 30s linear infinite;
         }
 
         .host-stories {
@@ -488,12 +410,12 @@ export default function HostPage() {
         }
 
         @media (max-width: 767px) {
-          .host-section {
-            padding: 84px 0;
-          }
-
           .host-container {
             padding: 0 18px;
+          }
+
+          .host-section {
+            padding: 84px 0;
           }
         }
 
@@ -504,134 +426,110 @@ export default function HostPage() {
         }
       `}</style>
 
-      <div className="host-page overflow-hidden font-sans">
-        <section className="relative border-b border-[#1F1F1F] pt-32 md:pt-36">
-          <div className="host-container grid gap-14 pb-24 lg:grid-cols-[1fr_0.92fr] lg:items-center">
-            <LoadReveal className="w-full min-w-0 max-w-[calc(100vw-36px)] sm:max-w-[690px]">
+      <div className="host-page font-sans">
+        <section className="border-b border-[#1F1F1F] pt-32 md:pt-40">
+          <div className="host-container grid min-h-[calc(100vh-80px)] gap-16 pb-24 lg:grid-cols-[1fr_0.88fr] lg:items-center">
+            <Reveal>
               <p className="mb-5 text-xs font-semibold uppercase text-[#00E5A8]">
-                Host a Charger
+                Host a charger
               </p>
-              <h1 className="max-w-full text-[22px] font-semibold leading-[1.1] text-white sm:text-[32px] md:text-[40px] lg:text-[46px] sm:leading-[1.08]">
-                Turn your space into a revenue stream.
+              <h1 className="max-w-4xl text-[40px] font-semibold leading-[1.04] tracking-normal text-white md:text-[56px]">
+                Earn steady income, bring more people in, and support your ESG
+                and sustainability goals from the space you already have.
               </h1>
-              <p className="mt-6 max-w-[320px] text-base leading-7 text-[#A1A1A1] sm:max-w-xl">
-                Install a Zvolta EV charger at your location and start earning
-                passive income from day one. Attract EV drivers, increase dwell
-                time, and strengthen your ESG and sustainability credentials —
-                all without any upfront costs. We handle installation,
-                maintenance, and support so you can focus on what matters most.
-              </p>
               <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-                <PrimaryButton href="/contact-us" className="w-full sm:w-auto">
-                  Start hosting
-                </PrimaryButton>
-                <SecondaryButton
-                  href="/contact-us"
-                  className="w-full sm:w-auto"
-                >
+                <PrimaryButton href="/contact-us">Start hosting</PrimaryButton>
+                <SecondaryButton href="/contact-us">
                   Get a free consultation
                 </SecondaryButton>
               </div>
-            </LoadReveal>
+            </Reveal>
 
-            <LoadReveal
-              delay={0.12}
-              className="w-full min-w-0 max-w-[calc(100vw-36px)] sm:max-w-none"
-            >
-              <div className="relative">
-                <div className="overflow-hidden rounded-lg border border-[#1F1F1F] bg-[#111111]">
-                  <img
-                    src="/img/Host/Host.png"
-                    alt="Zvolta charger installed outside a commercial location"
-                    className="h-[420px] w-full object-cover object-center sm:h-[560px] lg:h-[650px]"
-                  />
-                </div>
+            <Reveal delay={0.12}>
+              <div className="relative overflow-hidden rounded-lg border border-[#1F1F1F] bg-[#111111]">
+                <img
+                  src="/img/Host/Host.png"
+                  alt="Zvolta charger installed at a host location"
+                  className="h-[430px] w-full object-cover object-center md:h-[610px]"
+                />
                 <div className="absolute bottom-5 left-5 rounded-lg border border-[#1F1F1F] bg-[#0B0B0B] px-4 py-3">
-                  <p className="text-xs text-[#A1A1A1]">Hosted site</p>
+                  <p className="text-xs text-[#A1A1A1]">Host setup</p>
                   <p className="mt-1 text-sm font-semibold text-white">
                     Free installation
                   </p>
                 </div>
               </div>
-            </LoadReveal>
-          </div>
-        </section>
-
-        <section className="host-section border-b border-[#E5E5E5] bg-white">
-          <div className="host-container">
-            <SectionHeading
-              eyebrow="Charger fit"
-              title="Choose the charger that matches your space."
-              copy="Every location has different traffic, dwell time, and power needs."
-              light
-            />
-
-            <div className="mt-12 grid gap-8 lg:grid-cols-3">
-              {chargerCards.map((card, index) => (
-                <Reveal key={card.title} delay={index * 0.08}>
-                  <motion.article
-                    whileHover={
-                      shouldReduceMotion ? undefined : { scale: 1.02 }
-                    }
-                    transition={{ duration: 0.25, ease: "easeOut" }}
-                    className="group flex min-h-[280px] flex-col rounded-lg border border-[#E5E5E5] bg-[#F5F5F5] p-8"
-                  >
-                    <div className="mb-10 flex items-center justify-between">
-                      <ChargerMiniature
-                        size={index === 2 ? "large" : "medium"}
-                      />
-                      <span className="text-xs font-semibold text-zinc-400">
-                        0{index + 1}
-                      </span>
-                    </div>
-                    <h3 className="text-[24px] font-semibold leading-tight text-zinc-900">
-                      {card.title}
-                    </h3>
-                    <p className="mt-3 text-base leading-7 text-zinc-500">
-                      {card.description}
-                    </p>
-                    <SmartLink
-                      href="/contact-us"
-                      className="mt-auto inline-flex items-center gap-2 pt-8 text-sm font-semibold text-zinc-900 transition-colors group-hover:text-[#00E5A8]"
-                    >
-                      {card.cta}
-                      <Icon name="arrow" className="h-4 w-4" />
-                    </SmartLink>
-                  </motion.article>
-                </Reveal>
-              ))}
-            </div>
-
-            <Reveal
-              className="mt-10 flex flex-col items-start justify-between gap-5 rounded-lg border border-[#E5E5E5] bg-[#F5F5F5] p-6 sm:flex-row sm:items-center"
-              delay={0.12}
-            >
-              <p className="text-lg font-semibold text-zinc-900">
-                Not sure which one fits your space
-              </p>
-              <SecondaryButton href="/contact-us" className="w-full sm:w-auto">
-                Take the quiz
-              </SecondaryButton>
             </Reveal>
           </div>
         </section>
 
-        <section className="host-section border-b border-[#1F1F1F]">
-          <div className="host-container grid gap-16 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+        <PageSection id="chargers">
+          <SectionIntro
+            eyebrow="Choose your charger"
+            title="Match charging power to how people use your space."
+            copy="Start with the charger that fits your traffic and power supply."
+          />
+
+          <div className="mt-12 grid gap-8 lg:grid-cols-3">
+            {chargers.map((charger, index) => (
+              <Reveal key={charger.title} delay={index * 0.08}>
+                <motion.article
+                  whileHover={{ scale: 1.02 }}
+                  transition={{ duration: 0.25, ease: "easeOut" }}
+                  className="group flex min-h-[310px] flex-col rounded-lg border border-[#1F1F1F] bg-[#111111] p-8"
+                >
+                  <div className="mb-10 flex items-start justify-between">
+                    <ChargerIllustration
+                      size={index === 0 ? "small" : "large"}
+                    />
+                    <span className="text-xs font-semibold text-[#A1A1A1]">
+                      0{index + 1}
+                    </span>
+                  </div>
+                  <h3 className="text-[24px] font-semibold leading-tight text-white">
+                    {charger.title}
+                  </h3>
+                  <p className="mt-3 text-base leading-7 text-[#A1A1A1]">
+                    {charger.description}
+                  </p>
+                  <SmartLink
+                    href={charger.href}
+                    className="mt-auto inline-flex items-center gap-2 pt-8 text-sm font-semibold text-white transition-colors group-hover:text-[#00E5A8]"
+                  >
+                    Learn more
+                    <Icon name="arrow" className="h-4 w-4" />
+                  </SmartLink>
+                </motion.article>
+              </Reveal>
+            ))}
+          </div>
+
+          <Reveal className="mt-10 flex flex-col items-start justify-between gap-5 rounded-lg border border-[#1F1F1F] bg-[#111111] p-6 sm:flex-row sm:items-center">
+            <p className="text-lg font-semibold text-white">
+              Not sure which one fits your space
+            </p>
+            <SecondaryButton href="/contact-us">Take the quiz</SecondaryButton>
+          </Reveal>
+        </PageSection>
+
+        <PageSection>
+          <div className="grid gap-16 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
             <Reveal>
               <p className="mb-4 text-xs font-semibold uppercase text-[#00E5A8]">
-                Why host
+                Why host a charger
               </p>
-              <h2 className="text-[32px] font-semibold leading-[1.12] text-white sm:text-[36px]">
-                Turn unused parking into a cleaner commercial asset.
+              <h2 className="text-[32px] font-semibold leading-[1.12] text-white md:text-[36px]">
+                Add a useful service and turn waiting time into site value.
               </h2>
               <div className="mt-8 grid gap-4">
-                {hostReasons.map((reason) => (
-                  <div key={reason} className="flex items-center gap-4">
+                {hostBenefits.map((benefit) => (
+                  <div key={benefit} className="flex items-center gap-4">
                     <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg border border-[#1F1F1F] bg-[#111111] text-[#00E5A8]">
                       <Icon name="check" className="h-4 w-4" />
                     </span>
-                    <p className="text-base font-medium text-white">{reason}</p>
+                    <p className="text-base font-medium text-white">
+                      {benefit}
+                    </p>
                   </div>
                 ))}
               </div>
@@ -641,226 +539,202 @@ export default function HostPage() {
             </Reveal>
 
             <Reveal delay={0.1}>
-              <div className="grid gap-4 sm:grid-cols-[0.9fr_1.1fr]">
-                <div className="overflow-hidden rounded-lg border border-[#1F1F1F] bg-[#111111]">
-                  <img
-                    src="/img/Host/02.png"
-                    alt="Zvolta charger outside an office building"
-                    className="h-[420px] w-full object-cover"
-                  />
-                </div>
-                <div className="grid gap-4">
-                  <div className="rounded-lg border border-[#1F1F1F] bg-[#111111] p-7">
-                    <p className="text-4xl font-semibold text-white">100%</p>
-                    <p className="mt-2 text-base leading-7 text-[#A1A1A1]">
-                      Your earnings stay with you.
-                    </p>
-                  </div>
-                  <div className="rounded-lg border border-[#1F1F1F] bg-[#111111] p-7">
-                    <p className="text-4xl font-semibold text-white">Free</p>
-                    <p className="mt-2 text-base leading-7 text-[#A1A1A1]">
-                      Installation for all chargers.
-                    </p>
-                  </div>
-                </div>
+              <div className="rounded-lg border border-[#1F1F1F] bg-[#111111] p-6">
+                <img
+                  src="/img/host An EV charging.jpg"
+                  alt="EV charging host location"
+                  className="h-[460px] w-full rounded-lg object-cover"
+                />
               </div>
             </Reveal>
           </div>
-        </section>
+        </PageSection>
 
-        <section className="host-section border-b border-[#E5E5E5] bg-white">
-          <div className="host-container">
-            <SectionHeading
-              title="If people already come and stay at your location, this works."
-              copy="Zvolta is designed for spaces where charging naturally fits into the visit."
-              light
-            />
-            <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {audience.map((item, index) => (
-                <Reveal key={item} delay={index * 0.05}>
-                  <div className="rounded-lg border border-[#E5E5E5] bg-[#F5F5F5] px-6 py-5">
-                    <p className="text-lg font-semibold text-zinc-900">
-                      {item}
-                    </p>
-                  </div>
-                </Reveal>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="host-section border-b border-[#1F1F1F]">
-          <div className="host-container">
-            <SectionHeading
-              eyebrow="Site fit"
-              title="Where it works best."
-              copy="The best charger sites are easy to reach, easy to see, and useful while drivers wait."
-            />
-            <div className="mt-12 grid gap-5 lg:grid-cols-4">
-              {bestLocations.map((item, index) => (
-                <Reveal key={item.title} delay={index * 0.06}>
-                  <div className="min-h-[260px] rounded-lg border border-[#1F1F1F] bg-[#111111] p-6">
-                    <div className="grid h-14 w-14 place-items-center rounded-lg border border-[#1F1F1F] bg-[#0B0B0B] text-[#00E5A8]">
-                      <Icon name={item.icon} className="h-6 w-6" />
-                    </div>
-                    <h3 className="mt-12 text-[24px] font-semibold leading-tight text-white">
-                      {item.title}
-                    </h3>
-                    <p className="mt-3 text-base leading-7 text-[#A1A1A1]">
-                      {item.description}
-                    </p>
-                  </div>
-                </Reveal>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="host-section border-b border-[#E5E5E5] bg-white">
-          <div className="host-container">
-            <SectionHeading
-              eyebrow="Installation"
-              title="Install the charger in the orientation your site needs."
-              copy="The setup is planned around wall space, parking flow, and cable reach."
-              light
-            />
-            <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
-              {installationOptions.map((option, index) => (
-                <Reveal key={option.title} delay={index * 0.05}>
-                  <InstallShape shape={option.shape} />
-                  <p className="mt-4 text-sm font-semibold text-zinc-900">
-                    {option.title}
-                  </p>
-                </Reveal>
-              ))}
-            </div>
-            <Reveal className="mt-10 rounded-lg border border-[#E5E5E5] bg-[#F5F5F5] p-6 text-center">
-              <p className="text-xl font-semibold text-zinc-900">
-                Installation is free for all chargers
-              </p>
-            </Reveal>
-          </div>
-        </section>
-
-        <section className="host-section border-b border-[#1F1F1F]">
-          <div className="host-container">
-            <SectionHeading
-              eyebrow="Safety and reliability"
-              title="Built for daily use, protected for real sites."
-              copy="The safety layer is structured into the installation and hardware."
-            />
-            <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {safetyFeatures.map((item, index) => (
-                <Reveal
-                  key={item.feature}
-                  delay={index * 0.06}
-                  className="flex flex-col gap-4 rounded-xl border border-[#1F1F1F] bg-[#111111] p-6 transition-shadow hover:shadow-lg hover:shadow-black/30"
-                >
-                  <div className="grid h-10 w-10 place-items-center rounded-lg bg-[#00E5A8]/10 text-[#00E5A8]">
-                    <Icon name="shield" className="h-5 w-5" />
-                  </div>
-                  <div>
-                    <p className="text-base font-semibold text-white">
-                      {item.feature}
-                    </p>
-                    <p className="mt-1.5 text-sm leading-6 text-[#A1A1A1]">
-                      {item.description}
-                    </p>
-                  </div>
-                </Reveal>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="host-section border-b border-[#E5E5E5] bg-white">
-          <div className="host-container">
-            <SectionHeading
-              eyebrow="Payments"
-              title="Find. Plug. Pay."
-              copy="The driver flow is clear, fast, and familiar."
-              light
-            />
-            <div className="mt-12 grid gap-5 lg:grid-cols-3">
-              {paymentSteps.map((step, index) => (
-                <Reveal key={step.title} delay={index * 0.08}>
-                  <div className="relative rounded-xl border border-[#E5E5E5] bg-[#F5F5F5] p-8 transition-shadow hover:shadow-md">
-                    <div className="mb-12 flex items-center justify-between">
-                      <span className="grid h-12 w-12 place-items-center rounded-lg border border-[#E0E0E0] bg-white text-[#00E5A8]">
-                        <Icon name={step.icon} className="h-5 w-5" />
-                      </span>
-                      {index < paymentSteps.length - 1 ? (
-                        <Icon
-                          name="arrow"
-                          className="hidden h-5 w-5 text-zinc-400 lg:block"
-                        />
-                      ) : null}
-                    </div>
-                    <h3 className="text-[24px] font-semibold text-zinc-900">
-                      {step.title}
-                    </h3>
-                    <p className="mt-3 text-base leading-7 text-zinc-500">
-                      {step.description}
-                    </p>
-                  </div>
-                </Reveal>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="host-section border-b border-[#1F1F1F]">
-          <div className="host-container">
-            <SectionHeading
-              centered
-              eyebrow="Remote management"
-              title="Control every charger without adding staff."
-              copy="A simple app layer keeps usage, pricing, timing, and access visible."
-            />
-            <div className="mt-14 grid gap-10 lg:grid-cols-[1fr_340px_1fr] lg:items-center">
-              <div className="grid gap-5">
-                {remoteFeatures.slice(0, 2).map((feature, index) => (
-                  <Reveal key={feature} delay={index * 0.05}>
-                    <div className="rounded-lg border border-[#1F1F1F] bg-[#111111] p-6">
-                      <p className="text-xl font-semibold text-white">
-                        {feature}
-                      </p>
-                    </div>
-                  </Reveal>
-                ))}
-              </div>
-
-              <Reveal delay={0.1} className="mx-auto">
-                <div className="rounded-[32px] border border-[#1F1F1F] bg-[#111111] p-3">
-                  <div className="overflow-hidden rounded-[24px] border border-[#1F1F1F] bg-black">
-                    <img
-                      src="/img/app-2.png"
-                      alt="Zvolta app usage and charging controls"
-                      className="h-[620px] w-[300px] object-cover object-top"
-                    />
-                  </div>
+        <PageSection>
+          <SectionIntro
+            eyebrow="Who should host"
+            title="If people already come and stay at your location, this works."
+            copy="Charging fits sites where visitors, residents, staff, or customers spend time."
+          />
+          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {audiences.map((item, index) => (
+              <Reveal key={item} delay={index * 0.04}>
+                <div className="rounded-lg border border-[#1F1F1F] bg-[#111111] px-6 py-5 text-lg font-semibold text-white">
+                  {item}
                 </div>
               </Reveal>
+            ))}
+          </div>
+          <PrimaryButton href="/contact-us" className="mt-10">
+            Get a free consultation
+          </PrimaryButton>
+        </PageSection>
 
-              <div className="grid gap-5">
-                {remoteFeatures.slice(2).map((feature, index) => (
-                  <Reveal key={feature} delay={index * 0.05}>
-                    <div className="rounded-lg border border-[#1F1F1F] bg-[#111111] p-6">
-                      <p className="text-xl font-semibold text-white">
-                        {feature}
-                      </p>
-                    </div>
-                  </Reveal>
-                ))}
+        <PageSection>
+          <SectionIntro
+            eyebrow="Where it works best"
+            title="High dwell time. Clear access. Everyday footfall."
+            copy="The best sites are easy to find, safe to use, and already part of someone's routine."
+          />
+          <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {bestFitLocations.map((location, index) => (
+              <Reveal key={location} delay={index * 0.035}>
+                <div className="group flex min-h-28 items-center gap-4 rounded-lg border border-[#1F1F1F] bg-[#111111] p-5 transition duration-300 hover:scale-[1.02] hover:border-[#00E5A8]/40">
+                  <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-[#0B0B0B] text-[#00E5A8]">
+                    <Icon name="map" className="h-5 w-5" />
+                  </span>
+                  <p className="text-base font-semibold leading-6 text-white">
+                    {location}
+                  </p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+          <SecondaryButton href="/contact-us" className="mt-10">
+            Check your site
+          </SecondaryButton>
+        </PageSection>
+
+        <PageSection>
+          <SectionIntro
+            eyebrow="Installation options"
+            title="Clean mounting options for different spaces."
+            copy="Wall, standing, and hanging setups keep the install practical."
+          />
+          <div className="mt-12 grid gap-6 md:grid-cols-5">
+            {installationOptions.map((option, index) => (
+              <Reveal key={option.title} delay={index * 0.05}>
+                <div className="rounded-lg border border-[#1F1F1F] bg-[#111111] p-4">
+                  <InstallationDiagram type={option.type} />
+                  <p className="mt-4 text-sm font-semibold text-white">
+                    {option.title}
+                  </p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+          <Reveal className="mt-8 flex flex-col items-start justify-between gap-5 rounded-lg border border-[#1F1F1F] bg-[#111111] p-6 sm:flex-row sm:items-center">
+            <p className="text-lg font-semibold text-white">
+              Installation is free for all chargers
+            </p>
+            <PrimaryButton href="/contact-us">
+              Book a site assessment
+            </PrimaryButton>
+          </Reveal>
+        </PageSection>
+
+        <PageSection>
+          <SectionIntro
+            eyebrow="Safety and reliability"
+            title="Built for everyday charging in local conditions."
+            copy="Protection, compatibility, and support are part of the system."
+          />
+          <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+            {safetyFeatures.map((item, index) => (
+              <Reveal key={item.feature} delay={index * 0.05}>
+                <div className="h-full rounded-lg border border-[#1F1F1F] bg-[#111111] p-6">
+                  <div className="mb-8 grid h-10 w-10 place-items-center rounded-lg bg-[#0B0B0B] text-[#00E5A8]">
+                    <Icon name="bolt" className="h-5 w-5" />
+                  </div>
+                  <h3 className="text-xl font-semibold text-white">
+                    {item.feature}
+                  </h3>
+                  <p className="mt-3 text-sm leading-6 text-[#A1A1A1]">
+                    {item.description}
+                  </p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+          <SecondaryButton href="/charge" className="mt-10">
+            View full specs
+          </SecondaryButton>
+        </PageSection>
+
+        <PageSection>
+          <SectionIntro
+            centered
+            eyebrow="Remote management"
+            title="Run everything from your phone."
+            copy="Track sessions, pricing, timings, and charger status without staff on site."
+          />
+          <div className="mt-14 grid gap-8 lg:grid-cols-[1fr_340px_1fr] lg:items-center">
+            <div className="grid gap-5">
+              {remoteControls.slice(0, 2).map((control, index) => (
+                <Reveal key={control} delay={index * 0.06}>
+                  <div className="rounded-lg border border-[#1F1F1F] bg-[#111111] p-6 text-xl font-semibold text-white">
+                    {control}
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+
+            <Reveal delay={0.1} className="mx-auto">
+              <div className="rounded-[32px] border border-[#1F1F1F] bg-[#111111] p-3">
+                <div className="overflow-hidden rounded-[24px] border border-[#1F1F1F] bg-black">
+                  <img
+                    src="/img/app-2.png"
+                    alt="Zvolta app dashboard"
+                    className="h-[610px] w-[296px] object-cover object-top"
+                  />
+                </div>
               </div>
+            </Reveal>
+
+            <div className="grid gap-5">
+              {remoteControls.slice(2).map((control, index) => (
+                <Reveal key={control} delay={index * 0.06}>
+                  <div className="rounded-lg border border-[#1F1F1F] bg-[#111111] p-6 text-xl font-semibold text-white">
+                    {control}
+                  </div>
+                </Reveal>
+              ))}
             </div>
           </div>
-        </section>
+          <div className="mt-10 text-center">
+            <SecondaryButton href="/software">See how it works</SecondaryButton>
+          </div>
+        </PageSection>
 
-        {/* <section className="border-b border-[#1F1F1F] bg-[#111111] py-24 md:py-32">
+        <PageSection>
+          <SectionIntro
+            eyebrow="Payments made simple"
+            title="Users find your charger, start charging, and pay directly."
+            copy="No cash handling. No manual work. The app handles the user flow."
+          />
+          <div className="mt-12 grid gap-6 lg:grid-cols-3">
+            {paymentSteps.map((step, index) => (
+              <Reveal key={step.title} delay={index * 0.08}>
+                <div className="relative min-h-64 rounded-lg border border-[#1F1F1F] bg-[#111111] p-8">
+                  <div className="mb-12 flex items-center justify-between">
+                    <span className="grid h-12 w-12 place-items-center rounded-lg border border-[#1F1F1F] bg-[#0B0B0B] text-[#00E5A8]">
+                      <Icon
+                        name={
+                          index === 0 ? "map" : index === 1 ? "plug" : "wallet"
+                        }
+                        className="h-5 w-5"
+                      />
+                    </span>
+                    <span className="text-sm font-semibold text-[#A1A1A1]">
+                      0{index + 1}
+                    </span>
+                  </div>
+                  <h3 className="text-[24px] font-semibold text-white">
+                    {step.title}
+                  </h3>
+                  <p className="mt-3 text-base leading-7 text-[#A1A1A1]">
+                    {step.description}
+                  </p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </PageSection>
+
+        <section className="border-b border-[#1F1F1F] bg-[#111111] py-24 md:py-32">
           <div className="host-container">
             <Reveal className="max-w-5xl">
-              <div className="grid gap-4 text-[40px] font-semibold leading-[1.05] text-white sm:text-[56px]">
+              <div className="grid gap-4 text-[40px] font-semibold leading-[1.05] text-white md:text-[56px]">
                 <p>You set the price</p>
                 <p>You set the timings</p>
                 <p>You control access</p>
@@ -868,67 +742,26 @@ export default function HostPage() {
               <p className="mt-8 max-w-xl text-base leading-7 text-[#A1A1A1]">
                 Keep 100% of your earnings. No revenue sharing.
               </p>
-            </Reveal>
-          </div>
-        </section> */}
-
-        <section className="host-section border-b border-[#E5E5E5] bg-white">
-          <div className="host-container grid gap-14 lg:grid-cols-[0.85fr_1fr] lg:items-center">
-            <Reveal>
-              <p className="mb-4 text-xs font-semibold uppercase text-[#00E5A8]">
-                Expansion
-              </p>
-              <h2 className="text-[32px] font-semibold leading-[1.12] text-zinc-900 sm:text-[36px]">
-                Start small, expand when the site proves demand.
-              </h2>
-              <div className="mt-8 grid gap-4">
-                <p className="text-xl font-semibold text-zinc-900">
-                  Add more anytime
-                </p>
-                <p className="text-xl font-semibold text-zinc-900">
-                  Modules cost 50% of charger
-                </p>
-              </div>
-            </Reveal>
-
-            <Reveal delay={0.1}>
-              <div className="rounded-xl border border-[#E5E5E5] bg-[#F5F5F5] p-8">
-                <div className="flex flex-col items-center gap-8 sm:flex-row sm:justify-center">
-                  <div className="flex flex-col items-center gap-4">
-                    <ChargerMiniature size="large" />
-                    <p className="text-sm font-semibold text-zinc-400">
-                      1 charger
-                    </p>
-                  </div>
-                  <Icon name="arrow" className="h-8 w-8 text-zinc-400" />
-                  <div className="flex items-end gap-4">
-                    <ChargerMiniature size="medium" />
-                    <ChargerMiniature size="large" />
-                    <ChargerMiniature size="medium" />
-                  </div>
-                </div>
-              </div>
+              <PrimaryButton href="/contact-us" className="mt-9">
+                Start hosting
+              </PrimaryButton>
             </Reveal>
           </div>
         </section>
 
-        <section className="host-section border-b border-[#1F1F1F] bg-[#111111]">
-          <div className="host-container grid gap-14 lg:grid-cols-[1fr_0.85fr] lg:items-center">
+        <section className="border-b border-[#1F1F1F] bg-[#111111] py-[120px] md:py-[132px]">
+          <div className="host-container grid gap-14 lg:grid-cols-[0.9fr_1fr] lg:items-center">
             <Reveal>
               <p className="mb-4 text-xs font-semibold uppercase text-[#00E5A8]">
-                Marketing
+                Marketing and visibility
               </p>
-              <h2 className="text-[32px] font-semibold leading-[1.12] text-white sm:text-[36px]">
+              <h2 className="text-[32px] font-semibold leading-[1.12] text-white md:text-[36px]">
                 Get free marketing for your site
               </h2>
               <div className="mt-8 grid gap-4">
-                {[
-                  "Listed on Zvolta app",
-                  "Featured on social media",
-                  "Bring new users without ads",
-                ].map((point) => (
+                {marketingPoints.map((point) => (
                   <div key={point} className="flex items-center gap-4">
-                    <span className="grid h-8 w-8 place-items-center rounded-lg border border-[#1F1F1F] bg-[#0B0B0B] text-[#00E5A8]">
+                    <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg border border-[#1F1F1F] bg-[#0B0B0B] text-[#00E5A8]">
                       <Icon name="check" className="h-4 w-4" />
                     </span>
                     <p className="text-base font-medium text-white">{point}</p>
@@ -942,64 +775,107 @@ export default function HostPage() {
 
             <Reveal delay={0.1}>
               <div className="rounded-lg border border-[#1F1F1F] bg-[#0B0B0B] p-8">
-                <img
-                  src="/img/full_logowhite.png"
-                  alt="Zvolta"
-                  className="h-9 w-auto"
-                />
+                <div className="flex items-center justify-between gap-6">
+                  <img
+                    src="/img/full_logowhite.png"
+                    alt="Zvolta"
+                    className="h-9 w-auto"
+                  />
+                  <span className="rounded-lg border border-[#1F1F1F] px-3 py-2 text-xs font-semibold uppercase text-[#00E5A8]">
+                    Partner badge
+                  </span>
+                </div>
                 <div className="my-12 h-px bg-[#1F1F1F]" />
-                <p className="text-xs font-semibold uppercase text-[#00E5A8]">
-                  Badge
-                </p>
-                <p className="mt-5 text-[36px] font-semibold leading-[1.08] text-white">
+                <p className="max-w-md text-[34px] font-semibold leading-[1.08] text-white md:text-[44px]">
                   Zvolta Clean Energy Partner
                 </p>
-                <p className="mt-5 max-w-sm text-base leading-7 text-[#A1A1A1]">
-                  A clean signal for visitors, residents, and teams.
+                <p className="mt-6 max-w-sm text-base leading-7 text-[#A1A1A1]">
+                  Show visitors that your space supports clean energy and EV
+                  adoption.
                 </p>
               </div>
             </Reveal>
           </div>
         </section>
 
-        <section className="host-section border-b border-[#E5E5E5] bg-white">
-          <div className="host-container">
-            <SectionHeading
-              eyebrow="ROI calculator"
-              title="Estimate monthly earnings before you commit."
-              copy="A clean planning view for the first conversation."
-              light
+        <PageSection>
+          <div className="grid gap-14 lg:grid-cols-[0.85fr_1fr] lg:items-center">
+            <Reveal>
+              <p className="mb-4 text-xs font-semibold uppercase text-[#00E5A8]">
+                Add more as you grow
+              </p>
+              <h2 className="text-[32px] font-semibold leading-[1.12] text-white md:text-[36px]">
+                Start with one charger. Add more anytime.
+              </h2>
+              <div className="mt-8 grid gap-4 text-xl font-semibold text-white">
+                <p>Connect chargers using add-on modules</p>
+                <p>Each module costs 50% of the charger price</p>
+              </div>
+              <SecondaryButton href="/charge" className="mt-9">
+                Explore add-ons
+              </SecondaryButton>
+            </Reveal>
+
+            <Reveal delay={0.1}>
+              <div className="rounded-lg border border-[#1F1F1F] bg-[#111111] p-8">
+                <div className="flex flex-col items-center gap-8 sm:flex-row sm:justify-center">
+                  <div className="flex flex-col items-center gap-4">
+                    <ChargerIllustration />
+                    <p className="text-sm font-semibold text-[#A1A1A1]">
+                      1 charger
+                    </p>
+                  </div>
+                  <Icon name="arrow" className="h-8 w-8 text-[#A1A1A1]" />
+                  <div className="flex items-end gap-4">
+                    <ChargerIllustration size="small" />
+                    <ChargerIllustration />
+                    <ChargerIllustration size="small" />
+                  </div>
+                </div>
+              </div>
+            </Reveal>
+          </div>
+        </PageSection>
+
+        <PageSection id="roi">
+          <div className="grid gap-12 lg:grid-cols-[0.8fr_1fr] lg:items-start">
+            <SectionIntro
+              eyebrow="Estimate your earnings"
+              title="See how much your site can earn."
+              copy="Adjust charger count, price, and usage to model a simple monthly estimate."
             />
-            <Reveal className="mt-12 grid gap-8 rounded-xl border border-[#E5E5E5] bg-[#F5F5F5] p-6 md:p-8 lg:grid-cols-[1fr_0.8fr]">
+            <Reveal className="rounded-lg border border-[#1F1F1F] bg-[#111111] p-6 md:p-8">
               <div className="grid gap-5">
                 <label className="grid gap-3">
-                  <span className="text-sm font-semibold text-zinc-700">
+                  <span className="text-sm font-semibold text-white">
                     Number of chargers
                   </span>
                   <input
                     type="number"
                     min="1"
-                    value={chargers}
+                    value={chargerCount}
                     onChange={(event) =>
-                      setChargers(Number(event.target.value))
+                      setChargerCount(Number(event.target.value))
                     }
-                    className="h-12 rounded-lg border border-[#E0E0E0] bg-white px-4 text-zinc-900 outline-none transition focus:border-[#00E5A8]"
+                    className="h-12 rounded-lg border border-[#1F1F1F] bg-[#0B0B0B] px-4 text-white outline-none transition focus:border-[#00E5A8]"
                   />
                 </label>
                 <label className="grid gap-3">
-                  <span className="text-sm font-semibold text-zinc-700">
+                  <span className="text-sm font-semibold text-white">
                     Price per unit
                   </span>
                   <input
                     type="number"
                     min="0"
-                    value={price}
-                    onChange={(event) => setPrice(Number(event.target.value))}
-                    className="h-12 rounded-lg border border-[#E0E0E0] bg-white px-4 text-zinc-900 outline-none transition focus:border-[#00E5A8]"
+                    value={unitPrice}
+                    onChange={(event) =>
+                      setUnitPrice(Number(event.target.value))
+                    }
+                    className="h-12 rounded-lg border border-[#1F1F1F] bg-[#0B0B0B] px-4 text-white outline-none transition focus:border-[#00E5A8]"
                   />
                 </label>
                 <label className="grid gap-3">
-                  <span className="text-sm font-semibold text-zinc-700">
+                  <span className="text-sm font-semibold text-white">
                     Usage
                   </span>
                   <input
@@ -1007,128 +883,124 @@ export default function HostPage() {
                     min="0"
                     value={usage}
                     onChange={(event) => setUsage(Number(event.target.value))}
-                    className="h-12 rounded-lg border border-[#E0E0E0] bg-white px-4 text-zinc-900 outline-none transition focus:border-[#00E5A8]"
+                    className="h-12 rounded-lg border border-[#1F1F1F] bg-[#0B0B0B] px-4 text-white outline-none transition focus:border-[#00E5A8]"
                   />
                 </label>
               </div>
-              <div className="flex flex-col justify-between rounded-xl border border-[#E0E0E0] bg-white p-8">
-                <p className="text-sm font-semibold text-zinc-400">
+              <div className="mt-8 rounded-lg border border-[#1F1F1F] bg-[#0B0B0B] p-6">
+                <p className="text-sm font-semibold text-[#A1A1A1]">
                   Monthly earnings
                 </p>
-                <p className="mt-6 text-[42px] font-semibold leading-none text-zinc-900">
+                <p className="mt-4 text-[40px] font-semibold leading-none text-white md:text-[52px]">
                   PKR {monthlyEarnings.toLocaleString("en-PK")}
                 </p>
-                <p className="mt-8 text-sm leading-6 text-zinc-400">
-                  Estimate only. Final returns depend on live usage.
-                </p>
               </div>
+              <SecondaryButton href="/roi-calculator" className="mt-6">
+                Try ROI calculator
+              </SecondaryButton>
             </Reveal>
           </div>
-        </section>
+        </PageSection>
 
-        <section className="host-section border-b border-[#1F1F1F]">
-          <div className="host-container">
-            <SectionHeading
-              eyebrow="Pricing"
-              title="Three charger plans, one simple payment path."
-              copy="Choose the setup after Zvolta reviews your site."
-            />
-            <div className="mt-12 grid gap-8 lg:grid-cols-3">
-              {pricingPlans.map((plan, index) => (
-                <Reveal key={plan.title} delay={index * 0.08}>
-                  <div className="rounded-lg border border-[#1F1F1F] bg-[#111111] p-8">
-                    <p className="text-[36px] font-semibold text-white">
-                      {plan.title}
-                    </p>
-                    <p className="mt-3 text-base leading-7 text-[#A1A1A1]">
-                      {plan.bestFor}
-                    </p>
-                    <div className="my-8 h-px bg-[#1F1F1F]" />
-                    <ul className="grid gap-4">
-                      {plan.details.map((detail) => (
-                        <li key={detail} className="flex items-center gap-3">
-                          <Icon
-                            name="check"
-                            className="h-4 w-4 text-[#00E5A8]"
-                          />
-                          <span className="text-sm text-white">{detail}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </Reveal>
-              ))}
-            </div>
-            <Reveal className="mt-10 grid gap-4 rounded-lg border border-[#1F1F1F] bg-[#111111] p-6 sm:grid-cols-2">
-              <p className="text-xl font-semibold text-white">0% interest</p>
-              <p className="text-xl font-semibold text-white">
-                12 month installment
-              </p>
-            </Reveal>
+        <PageSection id="pricing">
+          <SectionIntro
+            eyebrow="Pricing"
+            title="Simple charger options with flexible payments."
+            copy="3kW starts from 75k. 7kW and 22kW are available after site review."
+          />
+          <div className="mt-12 grid gap-8 lg:grid-cols-3">
+            {pricingPlans.map((plan, index) => (
+              <Reveal key={plan.title} delay={index * 0.08}>
+                <div className="h-full rounded-lg border border-[#1F1F1F] bg-[#111111] p-8">
+                  <h3 className="text-[36px] font-semibold leading-none text-white">
+                    {plan.title}
+                  </h3>
+                  <p className="mt-6 text-xl font-semibold text-white">
+                    {plan.price}
+                  </p>
+                  <p className="mt-3 text-base leading-7 text-[#A1A1A1]">
+                    {plan.detail}
+                  </p>
+                </div>
+              </Reveal>
+            ))}
           </div>
-        </section>
+          <Reveal className="mt-10 grid gap-4 rounded-lg border border-[#1F1F1F] bg-[#111111] p-6 sm:grid-cols-2">
+            <p className="text-xl font-semibold text-white">0% interest</p>
+            <p className="text-xl font-semibold text-white">
+              12 month installment plans available
+            </p>
+          </Reveal>
+          <SecondaryButton href="#pricing" className="mt-8">
+            View pricing
+          </SecondaryButton>
+        </PageSection>
 
-        <section className="overflow-hidden border-b border-[#E5E5E5] bg-white py-16">
+        <section className="overflow-hidden border-b border-[#1F1F1F] py-20">
           <div className="host-container mb-8">
-            <SectionHeading
-              eyebrow="Partners"
-              title="Built with businesses that move Pakistan forward."
-              light
+            <SectionIntro
+              eyebrow="Already hosting"
+              title="Businesses use Zvolta chargers to earn and support sustainability."
+              copy="Partner sites get app visibility, cleaner customer service, and a practical ESG action."
             />
           </div>
           <div className="host-logo-track flex gap-5">
             {[...partnerLogos, ...partnerLogos].map((logo, index) => (
               <div
                 key={`${logo.alt}-${index}`}
-                className="flex h-24 w-44 shrink-0 items-center justify-center rounded-lg border border-[#E5E5E5] bg-[#F5F5F5] px-6 grayscale"
+                className="flex h-24 w-44 shrink-0 items-center justify-center rounded-lg border border-[#1F1F1F] bg-[#111111] px-6 grayscale"
               >
                 <img
                   src={logo.src}
                   alt={logo.alt}
-                  className="max-h-10 max-w-full object-contain opacity-60"
+                  className="max-h-10 max-w-full object-contain opacity-60 invert"
                 />
               </div>
             ))}
           </div>
-        </section>
-
-        <section className="host-section border-b border-[#1F1F1F]">
-          <div className="host-container">
-            <SectionHeading
-              eyebrow="Stories"
-              title="Practical notes for host locations."
-              copy="Short reads for teams comparing charger fit, customer flow, and site value."
-            />
-            <div className="host-stories mt-12 flex snap-x gap-6 overflow-x-auto pb-4">
-              {stories.map((story, index) => (
-                <Reveal key={story.title} delay={index * 0.06}>
-                  <article className="w-[340px] shrink-0 snap-start overflow-hidden rounded-lg border border-[#1F1F1F] bg-[#111111] sm:w-[390px]">
-                    <img
-                      src={story.image}
-                      alt=""
-                      className="h-56 w-full object-cover"
-                    />
-                    <div className="p-6">
-                      <p className="text-xs font-semibold uppercase text-[#00E5A8]">
-                        {story.meta}
-                      </p>
-                      <h3 className="mt-4 text-[24px] font-semibold leading-tight text-white">
-                        {story.title}
-                      </h3>
-                    </div>
-                  </article>
-                </Reveal>
-              ))}
-            </div>
+          <div className="host-container mt-8">
+            <SecondaryButton href="/partners">Explore partners</SecondaryButton>
           </div>
         </section>
 
-        <section className="host-section border-b border-[#1F1F1F]">
-          <div className="host-container grid gap-12 lg:grid-cols-[0.8fr_1fr]">
-            <SectionHeading
-              eyebrow="Contact"
-              title="Tell us about your space."
-              copy="Share the location type, expected traffic, and any power details you already know."
+        <PageSection>
+          <SectionIntro
+            eyebrow="Real stories"
+            title="How hosts use charging to create site value."
+            copy="Practical examples from workspaces, restaurants, and sustainability-led businesses."
+          />
+          <div className="host-stories mt-12 flex snap-x gap-6 overflow-x-auto pb-4">
+            {stories.map((story, index) => (
+              <Reveal key={story.title} delay={index * 0.05}>
+                <article className="w-[320px] shrink-0 snap-start overflow-hidden rounded-lg border border-[#1F1F1F] bg-[#111111] sm:w-[390px]">
+                  <img
+                    src={story.image}
+                    alt=""
+                    className="h-56 w-full object-cover"
+                  />
+                  <div className="p-6">
+                    <p className="text-xs font-semibold uppercase text-[#00E5A8]">
+                      {story.category}
+                    </p>
+                    <h3 className="mt-4 text-[24px] font-semibold leading-tight text-white">
+                      {story.title}
+                    </h3>
+                  </div>
+                </article>
+              </Reveal>
+            ))}
+          </div>
+          <SecondaryButton href="/stories" className="mt-8">
+            Explore stories
+          </SecondaryButton>
+        </PageSection>
+
+        <PageSection>
+          <div className="grid gap-12 lg:grid-cols-[0.8fr_1fr]">
+            <SectionIntro
+              eyebrow="Need help"
+              title="Tell us about your space and we will guide you."
+              copy="Share your location type, expected traffic, and the power details you already know."
             />
             <Reveal>
               <form
@@ -1154,12 +1026,12 @@ export default function HostPage() {
                 <label className="grid gap-3">
                   <span className="text-sm font-semibold text-white">Type</span>
                   <select className="h-12 rounded-lg border border-[#1F1F1F] bg-[#0B0B0B] px-4 text-white outline-none transition focus:border-[#00E5A8]">
-                    <option>Apartment</option>
-                    <option>Office</option>
-                    <option>Restaurant</option>
-                    <option>University</option>
-                    <option>Hospital</option>
-                    <option>Public space</option>
+                    <option>Apartment building</option>
+                    <option>Office or coworking</option>
+                    <option>Restaurant or cafe</option>
+                    <option>University or hospital</option>
+                    <option>Parking or public space</option>
+                    <option>Commercial property</option>
                   </select>
                 </label>
                 <label className="grid gap-3">
@@ -1175,18 +1047,18 @@ export default function HostPage() {
                   type="submit"
                   className="inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-[#00E5A8] px-5 py-3 text-sm font-semibold text-black transition duration-300 hover:scale-[1.02]"
                 >
-                  Submit request
+                  Get a free consultation
                   <Icon name="arrow" className="h-4 w-4" />
                 </button>
               </form>
             </Reveal>
           </div>
-        </section>
+        </PageSection>
 
         <section className="py-24 md:py-32">
           <div className="host-container">
             <Reveal className="mx-auto max-w-3xl text-center">
-              <p className="text-[40px] font-semibold leading-[1.08] text-white sm:text-[56px]">
+              <p className="text-[40px] font-semibold leading-[1.08] text-white md:text-[56px]">
                 Bring EV charging to your space
               </p>
               <PrimaryButton href="/contact-us" className="mt-8">

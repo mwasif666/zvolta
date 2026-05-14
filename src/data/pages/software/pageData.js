@@ -4,8 +4,9 @@ const softwarePageData = {
   componentFile: "SoftwarePage.jsx",
   paths: ["/software"],
   meta: {
-    title: "ZVolta - Coming Soon",
-    description: "This page is currently under development.",
+    title: "Zvolta EV Charging Software | OCPP Ready Charging Platform",
+    description:
+      "License Zvolta's EV charging software to manage chargers, users, payments, pricing, dashboards, and smart charging networks with OCPP-ready support.",
   },
 };
 

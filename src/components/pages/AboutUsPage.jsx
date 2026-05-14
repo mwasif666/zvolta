@@ -1,38 +1,35 @@
 import { SmartLink } from "../SmartLink";
-import aboutImg05 from "../../../aivora/src/images/about/img05.jpg";
-import aboutImg06 from "../../../aivora/src/images/about/img06.jpg";
-import aboutImg07 from "../../../aivora/src/images/about/img07.jpg";
-import aboutImg08 from "../../../aivora/src/images/about/img08.jpg";
-import aboutBg from "../../../aivora/src/images/bg/about-bg02.png";
 
 const imageColumns = [
-  aboutImg05,
-  aboutImg06,
-  aboutImg07,
-  aboutImg08,
+  "/img/zvolta-1.jpg",
+  "/img/zvolta-2.jpg",
+  "/img/zvolta-3.jpg",
+  "/img/zvolta-4.jpg",
 ];
+
+const aboutBg = "/img/backgrounds/img.png";
 
 const featureCards = [
   {
     title: "Charging with real-world logic",
-    copy:
-      "We plan around access, dwell time, uptime, and driver behavior so chargers become useful infrastructure, not decorative hardware.",
+    copy: "We plan around access, dwell time, uptime, and driver behavior so chargers become useful infrastructure, not decorative hardware.",
   },
   {
     title: "Vehicle programs that stay grounded",
-    copy:
-      "ZVolta connects EV access with onboarding, charging guidance, and support so adoption works beyond the first handover.",
+    copy: "ZVolta connects EV access with onboarding, charging guidance, and support so adoption works beyond the first handover.",
   },
   {
     title: "Software that keeps operators aligned",
-    copy:
-      "Sessions, payments, field issues, and site visibility all need one rhythm. Our software layer helps teams stay coordinated.",
+    copy: "Sessions, payments, field issues, and site visibility all need one rhythm. Our software layer helps teams stay coordinated.",
   },
 ];
 
 const stats = [
   { value: "Charging", label: "Built around practical site usage" },
-  { value: "Drivers", label: "Supported through onboarding and field realities" },
+  {
+    value: "Drivers",
+    label: "Supported through onboarding and field realities",
+  },
   { value: "Hosts", label: "Connected to a cleaner revenue model" },
   { value: "Operators", label: "Given better visibility across the network" },
 ];
@@ -120,13 +117,18 @@ export default function AboutUsPage() {
 
         <section
           className="relative overflow-hidden border-b border-white/10 bg-cover bg-center pt-32"
-          style={{ backgroundImage: "url('/img/aivora-career/bootcamp-bg.png')" }}
+          style={{
+            backgroundImage: "url('/img/aivora-career/bootcamp-bg.png')",
+          }}
         >
           <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-[#050806]/85 to-[#030504]" />
           <div className="relative mx-auto flex w-full max-w-7xl flex-col gap-12 px-4 pb-20 sm:px-6 lg:grid lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:px-8">
             <div>
               <nav className="mb-5 flex items-center gap-3 text-sm font-semibold text-white/70">
-                <SmartLink href="/" className="transition-colors hover:text-emerald-400">
+                <SmartLink
+                  href="/"
+                  className="transition-colors hover:text-emerald-400"
+                >
                   Home
                 </SmartLink>
                 <span>/</span>

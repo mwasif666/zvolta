@@ -4,8 +4,9 @@ const chargePageData = {
   componentFile: "ChargePage.jsx",
   paths: ["/charge"],
   meta: {
-    title: "ZVolta - Coming Soon",
-    description: "This page is currently under development.",
+    title: "Zvolta EV Charging App in Pakistan | Find, Charge and Pay",
+    description:
+      "Find nearby EV charging stations in Pakistan, check availability, scan QR codes, charge your EV, and pay through the Zvolta app.",
   },
 };
 

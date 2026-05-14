@@ -709,7 +709,7 @@ export default function ChargePage() {
           color: #FFFFFF;
           letter-spacing: 0;
           max-width: 100vw;
-          overflow-x: hidden;
+          overflow-x: clip;
         }
 
         .charge-container {
@@ -738,6 +738,15 @@ export default function ChargePage() {
         }
 
         .charge-stack-panel--find {
+          z-index: 2;
+          box-shadow: 0 -28px 80px rgba(0, 0, 0, 0.42);
+        }
+
+        .charge-stack-panel--pay {
+          z-index: 1;
+        }
+
+        .charge-stack-panel--bookings {
           z-index: 2;
           box-shadow: 0 -28px 80px rgba(0, 0, 0, 0.42);
         }
@@ -804,8 +813,14 @@ export default function ChargePage() {
         @media (min-width: 1024px) {
           .charge-stack-panel {
             position: sticky;
-            top: 0;
+            top: -50px;
             overflow: hidden;
+          }
+        }
+
+        @media (min-width: 1920px) {
+          .charge-stack-panel {
+            top: 0;
           }
         }
       `}</style>
@@ -1009,66 +1024,72 @@ export default function ChargePage() {
           </div>
         </section>
 
-        <PageSection>
-          <div className="grid gap-14 lg:grid-cols-[0.85fr_1fr] lg:items-center">
-            <div>
-              <SectionIntro
-                eyebrow="Clear payments"
-                title="Pay through the app and keep a full record."
-                copy="You only pay for the charging session you use."
-              />
-              <div className="charge-stagger mt-8 grid gap-4 sm:grid-cols-2">
-                {paymentPoints.map((point) => (
-                  <div
-                    key={point}
-                    className="rounded-lg border border-[#1F1F1F] bg-[#111111] p-5 text-base font-semibold text-white"
-                  >
-                    {point}
+        <div className="charge-stack">
+          <section className="charge-stack-panel charge-stack-panel--pay charge-section border-b border-[#1F1F1F]">
+            <div className="charge-container">
+              <div className="grid gap-14 lg:grid-cols-[0.85fr_1fr] lg:items-center">
+                <div>
+                  <SectionIntro
+                    eyebrow="Clear payments"
+                    title="Pay through the app and keep a full record."
+                    copy="You only pay for the charging session you use."
+                  />
+                  <div className="charge-stagger mt-8 grid gap-4 sm:grid-cols-2">
+                    {paymentPoints.map((point) => (
+                      <div
+                        key={point}
+                        className="rounded-lg border border-[#1F1F1F] bg-[#111111] p-5 text-base font-semibold text-white"
+                      >
+                        {point}
+                      </div>
+                    ))}
                   </div>
-                ))}
+                  <PrimaryButton href={APP_LINK} className="mt-9">
+                    View payment options
+                  </PrimaryButton>
+                </div>
+                <div className="charge-reveal">
+                  <PhoneMockup screen="wallet" />
+                </div>
               </div>
-              <PrimaryButton href={APP_LINK} className="mt-9">
-                View payment options
-              </PrimaryButton>
             </div>
-            <div className="charge-reveal">
-              <PhoneMockup screen="wallet" />
-            </div>
-          </div>
-        </PageSection>
+          </section>
 
-        <PageSection>
-          <div className="grid gap-14 lg:grid-cols-[1fr_0.75fr] lg:items-center">
-            <div>
-              <SectionIntro
-                eyebrow="Bookings and session history"
-                title="Your charging history stays in one place."
-                copy="View active sessions, past sessions, payments, wallet history, and chargers you use often."
-              />
-              <div className="charge-stagger mt-8 grid gap-4 sm:grid-cols-2">
-                {[
-                  "Active sessions",
-                  "Past sessions",
-                  "Payment history",
-                  "Saved chargers",
-                ].map((item) => (
-                  <div
-                    key={item}
-                    className="rounded-lg border border-[#1F1F1F] bg-[#111111] p-5 text-base font-semibold text-white"
-                  >
-                    {item}
+          <section className="charge-stack-panel charge-stack-panel--bookings charge-section border-b border-[#1F1F1F]">
+            <div className="charge-container">
+              <div className="grid gap-14 lg:grid-cols-[1fr_0.75fr] lg:items-center">
+                <div>
+                  <SectionIntro
+                    eyebrow="Bookings and session history"
+                    title="Your charging history stays in one place."
+                    copy="View active sessions, past sessions, payments, wallet history, and chargers you use often."
+                  />
+                  <div className="charge-stagger mt-8 grid gap-4 sm:grid-cols-2">
+                    {[
+                      "Active sessions",
+                      "Past sessions",
+                      "Payment history",
+                      "Saved chargers",
+                    ].map((item) => (
+                      <div
+                        key={item}
+                        className="rounded-lg border border-[#1F1F1F] bg-[#111111] p-5 text-base font-semibold text-white"
+                      >
+                        {item}
+                      </div>
+                    ))}
                   </div>
-                ))}
+                  <PrimaryButton href={APP_LINK} className="mt-9">
+                    Manage your charging
+                  </PrimaryButton>
+                </div>
+                <div className="charge-reveal">
+                  <PhoneMockup screen="history" />
+                </div>
               </div>
-              <PrimaryButton href={APP_LINK} className="mt-9">
-                Manage your charging
-              </PrimaryButton>
             </div>
-            <div className="charge-reveal">
-              <PhoneMockup screen="history" />
-            </div>
-          </div>
-        </PageSection>
+          </section>
+        </div>
 
         <PageSection>
           <div className="grid gap-14 lg:grid-cols-[0.8fr_1fr] lg:items-center">

@@ -302,36 +302,40 @@ function ChargerMini({ active = false }) {
 
 function PhoneMini() {
   return (
-    <div className="mx-auto h-[340px] w-[168px] rounded-[28px] border border-[#2A2A2A] bg-black p-2 shadow-2xl">
-      <div className="h-full rounded-[22px] bg-white p-4">
-        <div className="flex items-center justify-between">
-          <div>
-            <p className="text-[10px] text-zinc-500">Zvolta app</p>
-            <p className="text-sm font-bold text-zinc-950">Nearby chargers</p>
+    <div className="software-phone">
+      <div className="software-phone-frame">
+        <div className="software-phone-speaker" />
+        <div className="software-phone-screen">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-[10px] text-zinc-400">Zvolta app</p>
+              <p className="text-base font-bold text-zinc-950">Nearby chargers</p>
+            </div>
+            <span className="h-9 w-9 rounded-full bg-[#00E5A8]" />
           </div>
-          <span className="h-8 w-8 rounded-full bg-[#00E5A8]" />
-        </div>
-        <div className="mt-4 h-28 rounded-2xl bg-[#E2EBDF] p-3">
-          <div className="relative h-full rounded-xl bg-[#D3E1D0]">
-            <span className="absolute left-8 top-8 h-8 w-8 rounded-full bg-[#00E5A8]" />
-            <span className="absolute bottom-5 right-6 h-8 w-8 rounded-full bg-[#00E5A8]" />
+          <div className="mt-3 flex-1 rounded-2xl bg-[#E2EBDF] p-3" style={{ minHeight: 0 }}>
+            <div className="relative h-full rounded-xl bg-[#D3E1D0]">
+              <span className="absolute left-8 top-8 h-9 w-9 rounded-full bg-[#00E5A8]" />
+              <span className="absolute bottom-6 right-8 h-7 w-7 rounded-full bg-[#00E5A8] opacity-60" />
+              <span className="absolute right-12 top-16 h-5 w-5 rounded-full bg-[#00E5A8] opacity-40" />
+            </div>
           </div>
-        </div>
-        <div className="mt-4 rounded-2xl bg-[#06130F] p-4 text-white">
-          <p className="text-[10px] text-white/50">Active session</p>
-          <p className="mt-2 text-2xl font-semibold">4.8 kWh</p>
-          <div className="mt-3 h-2 rounded-full bg-white/10">
-            <div className="h-full w-[68%] rounded-full bg-[#00E5A8]" />
+          <div className="mt-3 rounded-2xl bg-[#06130F] p-4 text-white">
+            <p className="text-[10px] text-white/50">Active session</p>
+            <p className="mt-1 text-2xl font-semibold">4.8 kWh</p>
+            <div className="mt-3 h-1.5 rounded-full bg-white/10">
+              <div className="h-full w-[68%] rounded-full bg-[#00E5A8]" />
+            </div>
           </div>
-        </div>
-        <div className="mt-4 grid grid-cols-2 gap-2">
-          <div className="rounded-xl bg-zinc-100 p-3">
-            <p className="text-[10px] text-zinc-500">Pay</p>
-            <p className="text-sm font-bold text-zinc-950">App</p>
-          </div>
-          <div className="rounded-xl bg-zinc-100 p-3">
-            <p className="text-[10px] text-zinc-500">QR</p>
-            <p className="text-sm font-bold text-zinc-950">Scan</p>
+          <div className="mt-3 grid grid-cols-2 gap-2">
+            <div className="rounded-xl bg-zinc-100 p-3">
+              <p className="text-[10px] text-zinc-500">Pay</p>
+              <p className="text-sm font-bold text-zinc-950">App</p>
+            </div>
+            <div className="rounded-xl bg-zinc-100 p-3">
+              <p className="text-[10px] text-zinc-500">QR</p>
+              <p className="text-sm font-bold text-zinc-950">Scan</p>
+            </div>
           </div>
         </div>
       </div>
@@ -442,8 +446,8 @@ function DashboardMockup({ variant = "operator", compact = false }) {
 function ProductNetworkVisual() {
   return (
     <div className="software-network relative rounded-lg border border-[#1F1F1F] bg-[#111111] p-6">
-      <div className="grid gap-6 md:grid-cols-[0.7fr_1fr] md:items-center">
-        <div className="rounded-lg border border-[#1F1F1F] bg-[#0B0B0B] p-6">
+      <div className="grid gap-6 md:grid-cols-[0.7fr_1fr] md:items-start">
+        <div className="flex flex-col items-center justify-start rounded-lg border border-[#1F1F1F] bg-[#0B0B0B] p-6">
           <ChargerMini active />
           <p className="mt-5 text-center text-sm font-semibold text-white">
             Smart charger
@@ -471,7 +475,7 @@ function ProductNetworkVisual() {
           </div>
         </div>
       </div>
-      <div className="software-line absolute left-[28%] top-1/2 hidden h-px w-[20%] bg-[#00E5A8]/60 md:block" />
+      <div className="software-line absolute left-[30%] top-[34%] hidden h-px w-[12%] bg-[#00E5A8]/60 md:block" />
     </div>
   );
 }
@@ -645,6 +649,46 @@ export default function SoftwarePage() {
 
         .software-story-scroll::-webkit-scrollbar {
           display: none;
+        }
+
+        .software-phone {
+          width: min(300px, 82vw);
+          margin: 0 auto;
+        }
+
+        .software-phone-frame {
+          position: relative;
+          aspect-ratio: 10 / 19;
+          border-radius: 42px;
+          border: 1px solid #2A2A2A;
+          background: #050505;
+          padding: 12px;
+          box-shadow:
+            inset 0 0 0 2px rgba(255,255,255,0.04),
+            0 28px 80px rgba(0,0,0,0.42);
+        }
+
+        .software-phone-speaker {
+          position: absolute;
+          top: 21px;
+          left: 50%;
+          z-index: 4;
+          width: 78px;
+          height: 21px;
+          transform: translateX(-50%);
+          border-radius: 999px;
+          background: #050505;
+        }
+
+        .software-phone-screen {
+          position: relative;
+          height: 100%;
+          overflow: hidden;
+          border-radius: 32px;
+          background: white;
+          padding: 46px 16px 20px;
+          display: flex;
+          flex-direction: column;
         }
 
         @media (max-width: 767px) {

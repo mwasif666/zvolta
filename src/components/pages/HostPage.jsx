@@ -107,9 +107,20 @@ const pricingPlans = [
     title: "3kW",
     price: "Starts from 75k",
     detail: "Small sites and EV bikes",
+    href: "/3kw-charger",
   },
-  { title: "7kW", price: "Available", detail: "Offices and apartments" },
-  { title: "22kW", price: "Available", detail: "Commercial traffic" },
+  {
+    title: "7kW",
+    price: "Available",
+    detail: "Offices and apartments",
+    href: "/7kw-charger",
+  },
+  {
+    title: "22kW",
+    price: "Available",
+    detail: "Commercial traffic",
+    href: "/22kw-charger",
+  },
 ];
 
 const partnerLogos = [
@@ -393,7 +404,42 @@ export default function HostPage() {
 
         .host-logo-track {
           width: max-content;
-          animation: host-logo-scroll 30s linear infinite;
+          display: flex;
+          will-change: transform;
+        }
+
+        .host-logo-set {
+          display: flex;
+          flex-shrink: 0;
+          gap: 24px;
+          padding-right: 24px;
+        }
+
+        .host-logo-strip {
+          overflow: hidden;
+          position: relative;
+          border-radius: 12px;
+        }
+
+        .host-logo-strip::before,
+        .host-logo-strip::after {
+          content: '';
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          width: 120px;
+          z-index: 2;
+          pointer-events: none;
+        }
+
+        .host-logo-strip::before {
+          left: 0;
+          background: linear-gradient(to right, #0B0B0B, transparent);
+        }
+
+        .host-logo-strip::after {
+          right: 0;
+          background: linear-gradient(to left, #0B0B0B, transparent);
         }
 
         .host-stories {
@@ -404,11 +450,6 @@ export default function HostPage() {
           display: none;
         }
 
-        @keyframes host-logo-scroll {
-          from { transform: translateX(0); }
-          to { transform: translateX(-50%); }
-        }
-
         @media (max-width: 767px) {
           .host-container {
             padding: 0 18px;
@@ -417,26 +458,26 @@ export default function HostPage() {
           .host-section {
             padding: 84px 0;
           }
-        }
 
-        @media (prefers-reduced-motion: reduce) {
-          .host-logo-track {
-            animation: none;
+          .host-logo-set {
+            gap: 14px;
+            padding-right: 14px;
           }
         }
+
       `}</style>
 
       <div className="host-page font-sans">
         <section className="border-b border-[#1F1F1F] pt-32 md:pt-40">
           <div className="host-container grid min-h-[calc(100vh-80px)] gap-16 pb-24 lg:grid-cols-[1fr_0.88fr] lg:items-center">
             <Reveal>
-              <p className="mb-5 text-xs font-semibold uppercase text-[#00E5A8]">
+              <h1 className="mb-5 max-w-4xl text-[40px] font-semibold leading-[1.04] tracking-normal text-white md:text-[56px]">
                 Host a charger
-              </p>
-              <h1 className="max-w-4xl text-[40px] font-semibold leading-[1.04] tracking-normal text-white md:text-[56px]">
+              </h1>
+              <p className="max-w-2xl text-base leading-7 text-[#A1A1A1]">
                 Earn steady income, bring more people in, and support your ESG
                 and sustainability goals from the space you already have.
-              </h1>
+              </p>
               <div className="mt-9 flex flex-col gap-3 sm:flex-row">
                 <PrimaryButton href="/contact-us">Start hosting</PrimaryButton>
                 <SecondaryButton href="/contact-us">
@@ -450,7 +491,7 @@ export default function HostPage() {
                 <img
                   src="/img/Host/Host.png"
                   alt="Zvolta charger installed at a host location"
-                  className="h-[430px] w-full object-cover object-center md:h-[610px]"
+                  className="h-[320px] w-full object-cover object-center md:h-[420px]"
                 />
                 <div className="absolute bottom-5 left-5 rounded-lg border border-[#1F1F1F] bg-[#0B0B0B] px-4 py-3">
                   <p className="text-xs text-[#A1A1A1]">Host setup</p>
@@ -478,10 +519,8 @@ export default function HostPage() {
                   transition={{ duration: 0.25, ease: "easeOut" }}
                   className="group flex min-h-[310px] flex-col rounded-lg border border-[#1F1F1F] bg-[#111111] p-8"
                 >
-                  <div className="mb-10 flex items-start justify-between">
-                    <ChargerIllustration
-                      size={index === 0 ? "small" : "large"}
-                    />
+                  <div className="mb-10 flex h-36 items-start justify-between">
+                    <ChargerIllustration size="large" />
                     <span className="text-xs font-semibold text-[#A1A1A1]">
                       0{index + 1}
                     </span>
@@ -539,13 +578,11 @@ export default function HostPage() {
             </Reveal>
 
             <Reveal delay={0.1}>
-              <div className="rounded-lg border border-[#1F1F1F] bg-[#111111] p-6">
-                <img
-                  src="/img/host An EV charging.jpg"
-                  alt="EV charging host location"
-                  className="h-[460px] w-full rounded-lg object-cover"
-                />
-              </div>
+              <img
+                src="/img/host An EV charging.jpg"
+                alt="EV charging host location"
+                className="h-[460px] w-full rounded-lg object-cover"
+              />
             </Reveal>
           </div>
         </PageSection>
@@ -733,13 +770,13 @@ export default function HostPage() {
 
         <section className="border-b border-[#1F1F1F] bg-[#111111] py-24 md:py-32">
           <div className="host-container">
-            <Reveal className="max-w-5xl">
+            <Reveal className="mx-auto max-w-5xl text-center">
               <div className="grid gap-4 text-[40px] font-semibold leading-[1.05] text-white md:text-[56px]">
                 <p>You set the price</p>
                 <p>You set the timings</p>
                 <p>You control access</p>
               </div>
-              <p className="mt-8 max-w-xl text-base leading-7 text-[#A1A1A1]">
+              <p className="mx-auto mt-8 max-w-xl text-base leading-7 text-[#A1A1A1]">
                 Keep 100% of your earnings. No revenue sharing.
               </p>
               <PrimaryButton href="/contact-us" className="mt-9">
@@ -911,7 +948,7 @@ export default function HostPage() {
           <div className="mt-12 grid gap-8 lg:grid-cols-3">
             {pricingPlans.map((plan, index) => (
               <Reveal key={plan.title} delay={index * 0.08}>
-                <div className="h-full rounded-lg border border-[#1F1F1F] bg-[#111111] p-8">
+                <div className="group flex h-full flex-col rounded-lg border border-[#1F1F1F] bg-[#111111] p-8">
                   <h3 className="text-[36px] font-semibold leading-none text-white">
                     {plan.title}
                   </h3>
@@ -921,13 +958,20 @@ export default function HostPage() {
                   <p className="mt-3 text-base leading-7 text-[#A1A1A1]">
                     {plan.detail}
                   </p>
+                  <SmartLink
+                    href={plan.href}
+                    className="mt-auto inline-flex items-center gap-2 pt-8 text-sm font-semibold text-white transition-colors group-hover:text-[#00E5A8]"
+                  >
+                    Learn more
+                    <Icon name="arrow" className="h-4 w-4" />
+                  </SmartLink>
                 </div>
               </Reveal>
             ))}
           </div>
           <Reveal className="mt-10 grid gap-4 rounded-lg border border-[#1F1F1F] bg-[#111111] p-6 sm:grid-cols-2">
             <p className="text-xl font-semibold text-white">0% interest</p>
-            <p className="text-xl font-semibold text-white">
+            <p className="text-right text-xl font-semibold text-white">
               12 month installment plans available
             </p>
           </Reveal>
@@ -936,30 +980,54 @@ export default function HostPage() {
           </SecondaryButton>
         </PageSection>
 
-        <section className="overflow-hidden border-b border-[#1F1F1F] py-20">
-          <div className="host-container mb-8">
+        <section className="border-b border-[#1F1F1F] py-24 md:py-28">
+          <div className="host-container">
             <SectionIntro
               eyebrow="Already hosting"
               title="Businesses use Zvolta chargers to earn and support sustainability."
               copy="Partner sites get app visibility, cleaner customer service, and a practical ESG action."
             />
-          </div>
-          <div className="host-logo-track flex gap-5">
-            {[...partnerLogos, ...partnerLogos].map((logo, index) => (
-              <div
-                key={`${logo.alt}-${index}`}
-                className="flex h-24 w-44 shrink-0 items-center justify-center rounded-lg border border-[#1F1F1F] bg-[#111111] px-6 grayscale"
+
+            <div className="host-logo-strip mt-12">
+              <motion.div
+                className="host-logo-track"
+                aria-label="Zvolta partner logos"
+                animate={{ x: ["0%", "-50%"] }}
+                transition={{
+                  duration: 40,
+                  ease: "linear",
+                  repeat: Infinity,
+                  repeatType: "loop",
+                }}
               >
-                <img
-                  src={logo.src}
-                  alt={logo.alt}
-                  className="max-h-10 max-w-full object-contain opacity-60 invert"
-                />
-              </div>
-            ))}
-          </div>
-          <div className="host-container mt-8">
-            <SecondaryButton href="/partners">Explore partners</SecondaryButton>
+                {[0, 1].map((setIndex) => (
+                  <div
+                    key={setIndex}
+                    className="host-logo-set"
+                    aria-hidden={setIndex === 1 ? "true" : undefined}
+                  >
+                    {[...partnerLogos, ...partnerLogos].map((logo, index) => (
+                      <div
+                        key={`${logo.alt}-${setIndex}-${index}`}
+                        className="flex h-24 w-[220px] shrink-0 items-center justify-center rounded-lg border border-[#1F1F1F] bg-[#111111] px-8 grayscale transition duration-300 hover:border-[#00E5A8]/35 hover:grayscale-0 sm:w-[240px]"
+                      >
+                        <img
+                          src={logo.src}
+                          alt={setIndex === 0 ? logo.alt : ""}
+                          className="max-h-11 max-w-full object-contain opacity-65 invert"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                ))}
+              </motion.div>
+            </div>
+
+            <div className="mt-10">
+              <SecondaryButton href="/partners">
+                Explore partners
+              </SecondaryButton>
+            </div>
           </div>
         </section>
 

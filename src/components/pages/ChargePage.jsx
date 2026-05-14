@@ -502,6 +502,66 @@ function AppTop({ title, dark = false }) {
   );
 }
 
+const NAV_ICONS = {
+  home: (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={2}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="h-4 w-4"
+    >
+      <path d="M3 12L12 3l9 9" />
+      <path d="M9 21V12h6v9" />
+      <path d="M5 10v11h14V10" />
+    </svg>
+  ),
+  map: (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={2}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="h-4 w-4"
+    >
+      <path d="M12 21C12 21 5 14.5 5 9a7 7 0 0 1 14 0c0 5.5-7 12-7 12Z" />
+      <circle cx="12" cy="9" r="2.5" />
+    </svg>
+  ),
+  charge: (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={2}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="h-4 w-4"
+    >
+      <path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z" />
+    </svg>
+  ),
+  wallet: (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={2}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="h-4 w-4"
+    >
+      <rect x="2" y="6" width="20" height="14" rx="2" />
+      <path d="M16 14a1 1 0 1 0 2 0 1 1 0 0 0-2 0Z" />
+      <path d="M2 10h20" />
+    </svg>
+  ),
+};
+
 function AppNav({ active, dark = false }) {
   const items = ["home", "map", "charge", "wallet"];
 
@@ -512,8 +572,10 @@ function AppNav({ active, dark = false }) {
       {items.map((item) => (
         <span
           key={item}
-          className={`h-8 rounded-xl ${active === item ? "bg-[#00E5A8]" : dark ? "bg-white/10" : "bg-white/10"}`}
-        />
+          className={`flex h-8 items-center justify-center rounded-xl ${active === item ? "bg-[#00E5A8] text-black" : "text-white/40"}`}
+        >
+          {NAV_ICONS[item]}
+        </span>
       ))}
     </div>
   );
@@ -661,14 +723,33 @@ export default function ChargePage() {
           border-bottom: 1px solid #1F1F1F;
         }
 
+        .charge-stack {
+          position: relative;
+        }
+
+        .charge-stack-panel {
+          position: relative;
+          min-height: 100vh;
+          background: #0B0B0B;
+        }
+
+        .charge-stack-panel--hero {
+          z-index: 1;
+        }
+
+        .charge-stack-panel--find {
+          z-index: 2;
+          box-shadow: 0 -28px 80px rgba(0, 0, 0, 0.42);
+        }
+
         .charge-phone {
           width: min(330px, 82vw);
-          margin: 0 auto;
+          margin-left: auto;
         }
 
         .charge-phone-frame {
           position: relative;
-          aspect-ratio: 9 / 18.8;
+          aspect-ratio: 10 / 19;
           border-radius: 42px;
           border: 1px solid #2A2A2A;
           background: #050505;
@@ -719,68 +800,85 @@ export default function ChargePage() {
             width: min(300px, 88vw);
           }
         }
+
+        @media (min-width: 1024px) {
+          .charge-stack-panel {
+            position: sticky;
+            top: 0;
+            overflow: hidden;
+          }
+        }
       `}</style>
 
       <div ref={pageRef} className="charge-page font-sans">
-        <section className="relative overflow-hidden border-b border-[#1F1F1F] pt-32 md:pt-40">
-          <div className="pointer-events-none absolute left-1/2 top-20 h-[560px] w-[560px] -translate-x-1/2 rounded-full bg-[#00E5A8]/8 blur-[120px]" />
-          <div className="charge-container relative grid min-h-[calc(100vh-80px)] gap-16 pb-24 lg:grid-cols-[1fr_0.78fr] lg:items-center">
-            <div className="charge-hero-copy max-w-3xl">
-              <p className="text-xs font-semibold uppercase text-[#00E5A8]">
-                Zvolta charging
-              </p>
-              <h1 className="mt-5 text-[44px] font-semibold leading-[1.03] text-white md:text-[64px]">
-                Charge your EV with less stress.
-              </h1>
-              <p className="mt-6 max-w-2xl text-base leading-7 text-[#A1A1A1] md:text-lg">
-                Find nearby Zvolta stations, check availability, start charging
-                from the app, and pay without any manual work.
-              </p>
-              <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-                <PrimaryButton href={APP_LINK}>Download the app</PrimaryButton>
-                <SecondaryButton href={MAP_LINK}>
-                  Find a station
-                </SecondaryButton>
+        <div className="charge-stack">
+          <section className="charge-stack-panel charge-stack-panel--hero relative overflow-hidden border-b border-[#1F1F1F] pt-32 md:pt-40">
+            <div className="pointer-events-none absolute left-1/2 top-20 h-[560px] w-[560px] -translate-x-1/2 rounded-full bg-[#00E5A8]/8 blur-[120px]" />
+            <div className="charge-container relative grid min-h-[calc(100vh-80px)] gap-16 pb-24 lg:grid-cols-[1fr_0.78fr] lg:items-center">
+              <div className="charge-hero-copy max-w-3xl">
+                <p className="text-xs font-semibold uppercase text-[#00E5A8]">
+                  Zvolta charging
+                </p>
+                <h1 className="mt-5 text-[44px] font-semibold leading-[1.03] text-white md:text-[64px]">
+                  Charge your EV with less stress.
+                </h1>
+                <p className="mt-6 max-w-2xl text-base leading-7 text-[#A1A1A1] md:text-lg">
+                  Find nearby Zvolta stations, check availability, start
+                  charging from the app, and pay without any manual work.
+                </p>
+                <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+                  <PrimaryButton href={APP_LINK}>
+                    Download the app
+                  </PrimaryButton>
+                  <SecondaryButton href={MAP_LINK}>
+                    Find a station
+                  </SecondaryButton>
+                </div>
+                <p className="mt-6 text-sm leading-6 text-[#A1A1A1]">
+                  Built for EV bikes, scooters, rickshaws, and cars in Pakistan.
+                </p>
               </div>
-              <p className="mt-6 text-sm leading-6 text-[#A1A1A1]">
-                Built for EV bikes, scooters, rickshaws, and cars in Pakistan.
-              </p>
-            </div>
 
-            <div className="charge-phone-hero">
-              <PhoneMockup screen="home" />
+              <div className="charge-phone-hero flex justify-end">
+                <PhoneMockup screen="home" />
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        <PageSection id="find-charger">
-          <div className="grid gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-            <div>
-              <SectionIntro
-                eyebrow="Find a charger near you"
-                title="Search around your location or along your route."
-                copy="See station details before you go, so you know what to expect."
-              />
-              <div className="charge-stagger mt-8 grid gap-3 sm:grid-cols-2">
-                {beforeChargeItems.slice(1).map((item) => (
-                  <div
-                    key={item}
-                    className="rounded-lg border border-[#1F1F1F] bg-[#111111] px-4 py-3 text-sm font-semibold text-white"
-                  >
-                    {item}
+          <section
+            id="find-charger"
+            className="charge-stack-panel charge-stack-panel--find border-b border-[#1F1F1F]"
+          >
+            <div className="charge-container">
+              <div className="grid min-h-screen lg:grid-cols-[1fr_1fr] lg:items-center">
+                <div className="py-28 lg:py-32">
+                  <SectionIntro
+                    eyebrow="Find a charger near you"
+                    title="Search around your location or along your route."
+                    copy="See station details before you go, so you know what to expect."
+                  />
+                  <div className="charge-stagger mt-8 grid gap-3 sm:grid-cols-2">
+                    {beforeChargeItems.slice(1).map((item) => (
+                      <div
+                        key={item}
+                        className="rounded-lg border border-[#1F1F1F] bg-[#111111] px-4 py-3 text-sm font-semibold text-white"
+                      >
+                        {item}
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
-              <PrimaryButton href={MAP_LINK} className="mt-9">
-                Find nearby stations
-              </PrimaryButton>
-            </div>
+                  <PrimaryButton href={MAP_LINK} className="mt-9">
+                    Find nearby stations
+                  </PrimaryButton>
+                </div>
 
-            <div className="charge-map-panel charge-reveal rounded-lg border border-[#1F1F1F] bg-[#111111] p-6">
-              <PhoneMockup screen="map" />
+                <div className="charge-map-panel charge-reveal hidden lg:flex lg:justify-end">
+                  <PhoneMockup screen="map" />
+                </div>
+              </div>
             </div>
-          </div>
-        </PageSection>
+          </section>
+        </div>
 
         <PageSection>
           <SectionIntro
@@ -871,39 +969,45 @@ export default function ChargePage() {
           </SecondaryButton>
         </PageSection>
 
-        <PageSection className="bg-[#0B0B0B]">
-          <SectionIntro
-            centered
-            eyebrow="Simple app experience"
-            title="Everything you need is inside the Zvolta app."
-            copy="Scroll through the core charging flow, from finding a charger to getting support."
-          />
-          <div className="mt-16 grid gap-10 lg:grid-cols-[0.95fr_1fr] lg:items-start">
-            <div className="charge-story grid gap-8 lg:max-h-none">
-              {appStorySlides.map((slide, index) => (
-                <article
-                  key={slide.title}
-                  data-screen={slide.screen}
-                  className="app-story-slide charge-reveal rounded-lg border border-[#1F1F1F] bg-[#111111] p-7 lg:min-h-[38vh]"
-                >
-                  <p className="text-xs font-semibold text-[#00E5A8]">
-                    0{index + 1}
-                  </p>
-                  <h3 className="mt-5 text-[28px] font-semibold leading-tight text-white">
-                    {slide.title}
-                  </h3>
-                  <p className="mt-4 max-w-md text-base leading-7 text-[#A1A1A1]">
-                    {slide.copy}
-                  </p>
-                </article>
-              ))}
-              <PrimaryButton href={APP_LINK}>Try the app</PrimaryButton>
-            </div>
-            <div className="top-28 lg:sticky">
-              <PhoneMockup screen={activeScreen} />
+        <section className="border-b border-[#1F1F1F] bg-[#0B0B0B] py-28">
+          <div className="charge-container">
+            <SectionIntro
+              centered
+              eyebrow="Simple app experience"
+              title="Everything you need is inside the Zvolta app."
+              copy="Scroll through the core charging flow, from finding a charger to getting support."
+            />
+            <div className="mt-16 grid gap-10 lg:grid-cols-[0.95fr_1fr] lg:items-start">
+              <div className="grid gap-8">
+                {appStorySlides.map((slide, index) => (
+                  <article
+                    key={slide.title}
+                    data-screen={slide.screen}
+                    className="app-story-slide charge-reveal rounded-lg border border-[#1F1F1F] bg-[#111111] p-7 lg:min-h-[40vh]"
+                  >
+                    <p className="text-xs font-semibold text-[#00E5A8]">
+                      0{index + 1}
+                    </p>
+                    <h3 className="mt-5 text-[28px] font-semibold leading-tight text-white">
+                      {slide.title}
+                    </h3>
+                    <p className="mt-4 max-w-md text-base leading-7 text-[#A1A1A1]">
+                      {slide.copy}
+                    </p>
+                  </article>
+                ))}
+                <PrimaryButton href={APP_LINK}>Try the app</PrimaryButton>
+              </div>
+
+              <div
+                style={{ position: "sticky", top: "15vh", alignSelf: "start" }}
+                className="hidden lg:flex lg:justify-end"
+              >
+                <PhoneMockup screen={activeScreen} />
+              </div>
             </div>
           </div>
-        </PageSection>
+        </section>
 
         <PageSection>
           <div className="grid gap-14 lg:grid-cols-[0.85fr_1fr] lg:items-center">

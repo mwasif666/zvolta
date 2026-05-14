@@ -261,8 +261,8 @@ export default function IndexPage() {
                     Should Feel Easy
                   </h1>
                   <p className="text-base sm:text-lg md:text-xl 3xl:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed font-light mb-10 fade-in-up delay-100 px-4">
-                    And we build the tools that support people, places, and all
-                    the possibilities ahead.
+                    And we are building the charging network that enables the
+                    future of electric mobility in Pakistan.
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4 justify-center items-center w-full fade-in-up delay-200">
                     <SmartLink
@@ -329,9 +329,13 @@ export default function IndexPage() {
                             <h3 className="text-3xl md:text-4xl 3xl:text-6xl font-display font-bold mb-4 leading-tight">
                               Host A Charger
                             </h3>
-                            <p className="text-gray-300 text-sm md:text-base 3xl:text-xl leading-relaxed max-w-sm font-light opacity-90">
-                              Place a charger at your site, earn steady revenue,
-                              and support your ESG goals.
+                            <p className="text-gray-300 text-sm md:text-[15px] 3xl:text-xl leading-relaxed max-w-md font-light opacity-90">
+                              Place a fully automated charger at your site and
+                              earn steady revenue without human intervention.
+                              Whether you are a small business looking to earn
+                              extra revenue or a large organization taking
+                              visible climate action, Zvolta helps turn your
+                              location into a smart charging point.
                             </p>
                           </div>
                           <div className="flex justify-end pointer-events-auto">
@@ -437,9 +441,11 @@ export default function IndexPage() {
                             <h3 className="text-3xl md:text-4xl 3xl:text-6xl font-display font-bold mb-4 leading-tight">
                               Software for operators
                             </h3>
-                            <p className="text-gray-300 text-sm md:text-base 3xl:text-xl leading-relaxed max-w-sm font-light opacity-90">
-                              Open software that helps operators connect
-                              hardware and manage stations.
+                            <p className="text-gray-300 text-sm md:text-[15px] 3xl:text-xl leading-relaxed max-w-md font-light opacity-90">
+                              Have full control of your charging station with
+                              complete visibility. Set your own pricing, manage
+                              timings, and track every session from one clean
+                              dashboard.
                             </p>
                           </div>
                           <div className="flex justify-end pointer-events-auto">
@@ -447,7 +453,7 @@ export default function IndexPage() {
                               href="/software"
                               className="inline-flex items-center gap-2 px-8 py-3 bg-white text-black rounded-full font-bold text-sm 3xl:text-lg transition-transform duration-300 hover:scale-105 hover:bg-emerald-400 hover:text-white shadow-lg"
                             >
-                              Book a demo <i className="bi bi-arrow-right" />
+                              Book A Demo <i className="bi bi-arrow-right" />
                             </SmartLink>
                           </div>
                         </div>
@@ -463,8 +469,8 @@ export default function IndexPage() {
                 <div className="max-w-[1400px] 3xl:max-w-[2000px] mx-auto">
                   <h2 className="reveal-text w-full max-w-full text-2xl sm:text-3xl md:text-5xl 2xl:text-7xl font-display font-bold leading-[1.1] text-black mb-16 text-left">
                     We create practical tools for a world moving electric,
-                    building simple and reliable systems that help more people
-                    make the switch.
+                    building simple, reliable systems that make EV adoption
+                    easier for everyone.
                   </h2>
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 3xl:gap-8">
                     <div
@@ -480,12 +486,12 @@ export default function IndexPage() {
                         <div className="flex items-baseline gap-1">
                           <span
                             className="stat-number text-6xl 3xl:text-8xl text-white font-bold tracking-tighter"
-                            data-target={700}
+                            data-target={750}
                           >
                             0
                           </span>
                           <span className="stat-unit text-emerald-500 text-3xl 3xl:text-5xl font-bold ml-1">
-                            KWh
+                            kW
                           </span>
                         </div>
                       </div>
@@ -506,12 +512,12 @@ export default function IndexPage() {
                         <div className="flex items-baseline gap-1">
                           <span
                             className="stat-number text-6xl 3xl:text-8xl text-white font-bold tracking-tighter"
-                            data-target={770}
+                            data-target={820}
                           >
                             0
                           </span>
                           <span className="stat-unit text-emerald-500 text-3xl 3xl:text-5xl font-bold ml-1">
-                            Kg
+                            KG
                           </span>
                         </div>
                       </div>
@@ -558,12 +564,12 @@ export default function IndexPage() {
                         <div className="flex items-baseline gap-1">
                           <span
                             className="stat-number text-6xl 3xl:text-8xl text-white font-bold tracking-tighter"
-                            data-target={10}
+                            data-target={14}
                           >
                             0
                           </span>
                           <span className="stat-unit text-emerald-500 text-3xl 3xl:text-5xl font-bold ml-1">
-                            +
+                            Sites
                           </span>
                         </div>
                       </div>
@@ -729,8 +735,8 @@ export default function IndexPage() {
                             Plug In
                           </h3>
                           <p className="text-base 3xl:text-xl text-white leading-snug min-h-[4.2em]">
-                            Park, plug in, and start a session with a tap or by
-                            scanning the code.
+                            Park, top-up wallet, and start a session by
+                            scanning the QR code on screen.
                           </p>
                         </div>
                       </div>
@@ -948,17 +954,17 @@ export default function IndexPage() {
               </section>
               <section
                 id="app-section"
-                className="relative py-24 px-6 overflow-hidden bg-[#050505] text-white"
+                className="relative py-16 md:py-20 px-6 overflow-hidden bg-[#050505] text-white"
               >
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[60vw] bg-[#16a34a]/10 blur-[120px] rounded-full pointer-events-none z-0" />
                 <div className="relative z-10 max-w-7xl 3xl:max-w-[1800px] mx-auto flex flex-col items-center text-center">
-                  <div className="max-w-4xl mx-auto mb-8 app-content-animate">
-                    <h2 className="text-3xl md:text-5xl 3xl:text-7xl font-display font-bold tracking-tight mb-6">
-                      Everything you need <br />
-                      <span className="text-[#16a34a]">in one simple app.</span>
+                  <div className="max-w-5xl mx-auto mb-6 app-content-animate">
+                    <h2 className="text-4xl md:text-6xl 3xl:text-8xl font-display font-bold tracking-tight leading-[1.05]">
+                      One connected platform for seamless EV charging
+                      <span className="text-[#16a34a]"> management.</span>
                     </h2>
                   </div>
-                  <div className="relative p-1 bg-zinc-900/80 backdrop-blur-md rounded-full inline-flex items-center gap-1 border border-white/5 mb-12 shadow-2xl z-20">
+                  <div className="relative p-1 bg-zinc-900/80 backdrop-blur-md rounded-full inline-flex items-center gap-1 border border-white/5 mb-8 shadow-2xl z-20">
                     <div
                       id="app-tab-bg"
                       className="absolute left-1 top-1 h-[calc(100%-8px)] w-[calc(50%-4px)] bg-[#16a34a] rounded-full transition-all duration-300 ease-[cubic-bezier(0.2,0,0.2,1)] shadow-[0_0_20px_rgba(22,163,74,0.4)]"
@@ -1101,7 +1107,7 @@ export default function IndexPage() {
               </section>
               <section
                 id="bento-section"
-                className="py-24 px-4 md:px-8 bg-white text-zinc-900 overflow-hidden"
+                className="hidden"
               >
                 <div className="max-w-[1200px] 3xl:max-w-[1800px] mx-auto">
                   <div className="grid grid-cols-1 md:grid-cols-3 grid-rows-auto md:grid-rows-[minmax(350px,auto)_minmax(350px,auto)] 3xl:grid-rows-[minmax(500px,auto)_minmax(500px,auto)] gap-6 3xl:gap-10">
@@ -1416,7 +1422,7 @@ export default function IndexPage() {
               />
               <section
                 id="team-section"
-                className="relative w-full min-h-screen bg-[#e5e5e5] text-black flex flex-col justify-center z-20 py-24"
+                className="hidden"
               >
                 <div className="max-w-[1400px] w-full mx-auto px-6 relative flex flex-col justify-center">
                   <div className="text-center mb-16 shrink-0">

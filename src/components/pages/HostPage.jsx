@@ -5,17 +5,20 @@ import { SmartLink } from "../SmartLink";
 const chargers = [
   {
     title: "3kW Charger",
-    description: "Small spaces, low usage, EV bikes",
+    description:
+      "Best for small spaces and low usage. Works well for bikes and residential areas.",
     href: "/3kw-charger",
   },
   {
     title: "7kW Charger",
-    description: "Offices, apartments, daily use",
+    description:
+      "Good for longer dwell times, apartments, for EV cars. Works on single phase power.",
     href: "/7kw-charger",
   },
   {
     title: "22kW Charger",
-    description: "High traffic, commercial spaces",
+    description:
+      "Built for locations with shorter dwell times like malls, parking areas, and petrol stations.",
     href: "/22kw-charger",
   },
 ];
@@ -44,21 +47,17 @@ const bestFitLocations = [
   "Showrooms",
   "Malls and outlets",
   "Cafes and restaurants",
-  "Masjids, temples, and churches",
   "Residential and commercial properties",
 ];
 
 const installationOptions = [
   { title: "Vertical wall", type: "vertical" },
-  { title: "Horizontal wall", type: "horizontal" },
-  { title: "Square", type: "square" },
   { title: "Standing", type: "standing" },
-  { title: "Hanging", type: "hanging" },
 ];
 
 const safetyFeatures = [
   {
-    feature: "2 year warranty",
+    feature: "1 year warranty",
     description: "Local hardware support for every charger.",
   },
   {
@@ -91,9 +90,10 @@ const remoteControls = [
 ];
 
 const paymentSteps = [
-  { title: "Find", description: "Users find your charger in the Zvolta app." },
-  { title: "Plug", description: "They start the session at your location." },
-  { title: "Pay", description: "Payment is handled directly in the app." },
+  { title: "Find", description: "Users find your charger in the app." },
+  { title: "App", description: "Through the Zvolta app." },
+  { title: "Cashless", description: "No cash handling." },
+  { title: "Automatic", description: "No manual work." },
 ];
 
 const marketingPoints = [
@@ -475,14 +475,11 @@ export default function HostPage() {
                 Host a charger
               </h1>
               <p className="max-w-2xl text-base leading-7 text-[#A1A1A1]">
-                Earn steady income, bring more people in, and support your ESG
-                and sustainability goals from the space you already have.
+                For small businesses, earn more from your space. For large
+                organizations, support ESG goals with real action.
               </p>
               <div className="mt-9 flex flex-col gap-3 sm:flex-row">
                 <PrimaryButton href="/contact-us">Start hosting</PrimaryButton>
-                <SecondaryButton href="/contact-us">
-                  Get a free consultation
-                </SecondaryButton>
               </div>
             </Reveal>
 
@@ -638,7 +635,7 @@ export default function HostPage() {
             title="Clean mounting options for different spaces."
             copy="Wall, standing, and hanging setups keep the install practical."
           />
-          <div className="mt-12 grid gap-6 md:grid-cols-5">
+          <div className="mt-12 grid max-w-2xl gap-6 md:grid-cols-2">
             {installationOptions.map((option, index) => (
               <Reveal key={option.title} delay={index * 0.05}>
                 <div className="rounded-lg border border-[#1F1F1F] bg-[#111111] p-4">
@@ -692,7 +689,7 @@ export default function HostPage() {
           <SectionIntro
             centered
             eyebrow="Remote management"
-            title="Run everything from your phone."
+            title="Run everything from your device."
             copy="Track sessions, pricing, timings, and charger status without staff on site."
           />
           <div className="mt-14 grid gap-8 lg:grid-cols-[1fr_340px_1fr] lg:items-center">
@@ -736,10 +733,10 @@ export default function HostPage() {
         <PageSection>
           <SectionIntro
             eyebrow="Payments made simple"
-            title="Users find your charger, start charging, and pay directly."
-            copy="No cash handling. No manual work. The app handles the user flow."
+            title="Payments made simple."
+            copy="Users find your charger in the app and complete the flow through Zvolta."
           />
-          <div className="mt-12 grid gap-6 lg:grid-cols-3">
+          <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
             {paymentSteps.map((step, index) => (
               <Reveal key={step.title} delay={index * 0.08}>
                 <div className="relative min-h-64 rounded-lg border border-[#1F1F1F] bg-[#111111] p-8">
@@ -747,7 +744,11 @@ export default function HostPage() {
                     <span className="grid h-12 w-12 place-items-center rounded-lg border border-[#1F1F1F] bg-[#0B0B0B] text-[#00E5A8]">
                       <Icon
                         name={
-                          index === 0 ? "map" : index === 1 ? "plug" : "wallet"
+                          index === 0
+                            ? "map"
+                            : index === 1
+                              ? "plug"
+                              : "wallet"
                         }
                         className="h-5 w-5"
                       />
@@ -766,11 +767,17 @@ export default function HostPage() {
               </Reveal>
             ))}
           </div>
+          <SecondaryButton href="/host" className="mt-10">
+            Learn more
+          </SecondaryButton>
         </PageSection>
 
         <section className="border-b border-[#1F1F1F] bg-[#111111] py-24 md:py-32">
           <div className="host-container">
             <Reveal className="mx-auto max-w-5xl text-center">
+              <p className="mb-5 text-xs font-semibold uppercase text-[#00E5A8]">
+                Stay in control
+              </p>
               <div className="grid gap-4 text-[40px] font-semibold leading-[1.05] text-white md:text-[56px]">
                 <p>You set the price</p>
                 <p>You set the timings</p>

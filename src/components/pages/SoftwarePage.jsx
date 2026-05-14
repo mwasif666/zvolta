@@ -1288,7 +1288,7 @@ export default function SoftwarePage() {
           <SectionIntro
             eyebrow="Who this is for"
             title="Built for teams launching or managing EV charging."
-            copy="Use Zvolta software if you want to run smart chargers without building your own platform from scratch."
+            copy="For companies that want to manage EV chargers without building their own software from scratch."
           />
           <div className="software-stagger mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
             {audienceCards.map((card) => (

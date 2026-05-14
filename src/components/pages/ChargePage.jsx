@@ -268,6 +268,49 @@ function PageSection({ children, className = "", id }) {
   );
 }
 
+function ChargingWorksSection({ activeScreen, setActiveScreen }) {
+  return (
+    <PageSection>
+      <div className="grid gap-14 lg:grid-cols-[1fr_0.7fr] lg:items-center">
+        <div>
+          <SectionIntro
+            eyebrow="How charging works"
+            title="Open the app. Scan. Charge. Pay."
+            copy="The flow is simple for daily riders and first-time EV users."
+          />
+          <div className="charge-stagger mt-12 grid gap-5 md:grid-cols-2">
+            {chargingSteps.map((step, index) => (
+              <article
+                key={step.title}
+                className="rounded-lg border border-[#1F1F1F] bg-[#111111] p-6"
+                data-screen={step.screen}
+                onMouseEnter={() => setActiveScreen(step.screen)}
+                onFocus={() => setActiveScreen(step.screen)}
+              >
+                <p className="text-xs font-semibold text-[#00E5A8]">
+                  0{index + 1}
+                </p>
+                <h3 className="mt-5 text-[24px] font-semibold text-white">
+                  {step.title}
+                </h3>
+                <p className="mt-3 text-sm leading-6 text-[#A1A1A1]">
+                  {step.copy}
+                </p>
+              </article>
+            ))}
+          </div>
+          <PrimaryButton href={APP_LINK} className="mt-10">
+            Start charging
+          </PrimaryButton>
+        </div>
+        <div className="charge-reveal">
+          <PhoneMockup screen={activeScreen} />
+        </div>
+      </div>
+    </PageSection>
+  );
+}
+
 function AppScreen({ screen = "home" }) {
   if (screen === "map" || screen === "station") {
     return (
@@ -839,7 +882,7 @@ export default function ChargePage() {
                 </h1>
                 <p className="mt-6 max-w-2xl text-base leading-7 text-[#A1A1A1] md:text-lg">
                   Find nearby Zvolta stations, check availability, start
-                  charging from the app, and pay without any manual work.
+                  charging from the app, and pay online.
                 </p>
                 <div className="mt-9 flex flex-col gap-3 sm:flex-row">
                   <PrimaryButton href={APP_LINK}>
@@ -859,6 +902,11 @@ export default function ChargePage() {
               </div>
             </div>
           </section>
+
+          <ChargingWorksSection
+            activeScreen={activeScreen}
+            setActiveScreen={setActiveScreen}
+          />
 
           <section
             id="find-charger"
@@ -917,71 +965,6 @@ export default function ChargePage() {
           <PrimaryButton href={APP_LINK} className="mt-10">
             Download the app
           </PrimaryButton>
-        </PageSection>
-
-        <PageSection>
-          <div className="grid gap-14 lg:grid-cols-[1fr_0.7fr] lg:items-center">
-            <div>
-              <SectionIntro
-                eyebrow="How charging works"
-                title="Open the app. Scan. Charge. Pay."
-                copy="The flow is simple for daily riders and first-time EV users."
-              />
-              <div className="charge-stagger mt-12 grid gap-5 md:grid-cols-2">
-                {chargingSteps.map((step, index) => (
-                  <article
-                    key={step.title}
-                    className="rounded-lg border border-[#1F1F1F] bg-[#111111] p-6"
-                    data-screen={step.screen}
-                    onMouseEnter={() => setActiveScreen(step.screen)}
-                    onFocus={() => setActiveScreen(step.screen)}
-                  >
-                    <p className="text-xs font-semibold text-[#00E5A8]">
-                      0{index + 1}
-                    </p>
-                    <h3 className="mt-5 text-[24px] font-semibold text-white">
-                      {step.title}
-                    </h3>
-                    <p className="mt-3 text-sm leading-6 text-[#A1A1A1]">
-                      {step.copy}
-                    </p>
-                  </article>
-                ))}
-              </div>
-              <PrimaryButton href={APP_LINK} className="mt-10">
-                Start charging
-              </PrimaryButton>
-            </div>
-            <div className="charge-reveal">
-              <PhoneMockup screen={activeScreen} />
-            </div>
-          </div>
-        </PageSection>
-
-        <PageSection>
-          <div className="grid gap-14 lg:grid-cols-[0.75fr_1fr] lg:items-center">
-            <SectionIntro
-              eyebrow="See everything before you charge"
-              title="No guessing before you plug in."
-              copy="The app shows the details you need before you leave."
-            />
-            <div className="charge-stagger grid gap-4 sm:grid-cols-2">
-              {beforeChargeItems.map((item) => (
-                <div
-                  key={item}
-                  className="flex items-center gap-4 rounded-lg border border-[#1F1F1F] bg-[#111111] p-5"
-                >
-                  <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-[#0B0B0B] text-[#00E5A8]">
-                    <Icon name="check" className="h-4 w-4" />
-                  </span>
-                  <p className="text-base font-semibold text-white">{item}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-          <SecondaryButton href={MAP_LINK} className="mt-10">
-            Find a station
-          </SecondaryButton>
         </PageSection>
 
         <section className="border-b border-[#1F1F1F] bg-[#0B0B0B] py-28">
@@ -1092,39 +1075,6 @@ export default function ChargePage() {
         </div>
 
         <PageSection>
-          <div className="grid gap-14 lg:grid-cols-[0.8fr_1fr] lg:items-center">
-            <SectionIntro
-              eyebrow="Built for Pakistan"
-              title="Built for Pakistan's EV movement."
-              copy="Zvolta is an EV charging app in Pakistan designed for local vehicles, local roads, and local charging needs."
-            />
-            <div className="charge-reveal rounded-lg border border-[#1F1F1F] bg-[#111111] p-8">
-              <div className="relative min-h-[330px] overflow-hidden rounded-lg bg-[#0B0B0B] p-6">
-                <div className="absolute left-8 top-10 h-52 w-36 rounded-[45%_55%_52%_48%] border border-[#00E5A8]/40" />
-                <div className="absolute left-20 top-32 h-28 w-24 rounded-[55%_45%_48%_52%] border border-[#00E5A8]/30" />
-                <div className="absolute right-8 top-8 grid gap-3">
-                  {pakistanPoints.map((point) => (
-                    <div
-                      key={point}
-                      className="rounded-lg border border-[#1F1F1F] bg-[#111111] px-4 py-3 text-sm font-semibold text-white"
-                    >
-                      {point}
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <p className="mt-6 text-sm leading-6 text-[#A1A1A1]">
-                Search for EV charging stations near me and see Zvolta locations
-                as the network grows across key areas.
-              </p>
-            </div>
-          </div>
-          <SecondaryButton href={MAP_LINK} className="mt-10">
-            Find Zvolta stations
-          </SecondaryButton>
-        </PageSection>
-
-        <PageSection>
           <SectionIntro
             eyebrow="Better for daily travel"
             title="Charging that fits your routine."
@@ -1178,28 +1128,6 @@ export default function ChargePage() {
           <SecondaryButton href="/support" className="mt-10">
             Get support
           </SecondaryButton>
-        </PageSection>
-
-        <PageSection>
-          <SectionIntro
-            centered
-            eyebrow="Why use Zvolta"
-            title="One app for daily EV charging."
-            copy="Find EV chargers, scan QR codes, charge electric bikes and cars, and handle EV charging payments in one place."
-          />
-          <div className="charge-stagger mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-            {whyItems.map((item) => (
-              <div
-                key={item}
-                className="rounded-lg border border-[#1F1F1F] bg-[#111111] p-6 text-lg font-semibold text-white"
-              >
-                {item}
-              </div>
-            ))}
-          </div>
-          <div className="mt-10 text-center">
-            <PrimaryButton href={APP_LINK}>Download the app</PrimaryButton>
-          </div>
         </PageSection>
 
         <PageSection>

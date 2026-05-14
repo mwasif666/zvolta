@@ -17,17 +17,37 @@ function ScrollController() {
   const location = useLocation();
 
   useEffect(() => {
+    if ("scrollRestoration" in window.history) {
+      window.history.scrollRestoration = "manual";
+    }
+
+    const scrollToTop = () => {
+      window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+      window.ScrollTrigger?.refresh?.();
+    };
+
     if (location.hash) {
       const element = document.getElementById(location.hash.slice(1));
 
       if (element) {
         element.scrollIntoView();
+        window.ScrollTrigger?.refresh?.();
         return;
       }
     }
 
-    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
-  }, [location]);
+    scrollToTop();
+    const frame = window.requestAnimationFrame(scrollToTop);
+    const timers = [
+      window.setTimeout(scrollToTop, 80),
+      window.setTimeout(scrollToTop, 240),
+    ];
+
+    return () => {
+      window.cancelAnimationFrame(frame);
+      timers.forEach((timer) => window.clearTimeout(timer));
+    };
+  }, [location.pathname, location.search, location.hash]);
 
   return null;
 }

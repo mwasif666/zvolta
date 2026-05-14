@@ -309,11 +309,16 @@ function PhoneMini() {
           <div className="flex items-center justify-between">
             <div>
               <p className="text-[10px] text-zinc-400">Zvolta app</p>
-              <p className="text-base font-bold text-zinc-950">Nearby chargers</p>
+              <p className="text-base font-bold text-zinc-950">
+                Nearby chargers
+              </p>
             </div>
             <span className="h-9 w-9 rounded-full bg-[#00E5A8]" />
           </div>
-          <div className="mt-3 flex-1 rounded-2xl bg-[#E2EBDF] p-3" style={{ minHeight: 0 }}>
+          <div
+            className="mt-3 flex-1 rounded-2xl bg-[#E2EBDF] p-3"
+            style={{ minHeight: 0 }}
+          >
             <div className="relative h-full rounded-xl bg-[#D3E1D0]">
               <span className="absolute left-8 top-8 h-9 w-9 rounded-full bg-[#00E5A8]" />
               <span className="absolute bottom-6 right-8 h-7 w-7 rounded-full bg-[#00E5A8] opacity-60" />
@@ -563,42 +568,50 @@ export default function SoftwarePage() {
       });
 
       gsap.utils.toArray(".software-reveal").forEach((element) => {
-        gsap.from(element, {
-          opacity: 0,
-          y: 24,
-          duration: 0.72,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: element,
-            start: "top 82%",
+        ScrollTrigger.create({
+          trigger: element,
+          start: "top 84%",
+          once: true,
+          onEnter: () => {
+            gsap.fromTo(
+              element,
+              { opacity: 0, y: 24 },
+              {
+                opacity: 1,
+                y: 0,
+                duration: 0.72,
+                ease: "power3.out",
+                clearProps: "opacity,transform",
+              },
+            );
           },
         });
       });
 
       gsap.utils.toArray(".software-stagger").forEach((group) => {
-        gsap.from(group.children, {
-          opacity: 0,
-          y: 18,
-          duration: 0.65,
-          stagger: 0.07,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: group,
-            start: "top 82%",
+        ScrollTrigger.create({
+          trigger: group,
+          start: "top 84%",
+          once: true,
+          onEnter: () => {
+            gsap.fromTo(
+              group.children,
+              { opacity: 0, y: 18 },
+              {
+                opacity: 1,
+                y: 0,
+                duration: 0.65,
+                stagger: 0.07,
+                ease: "power3.out",
+                clearProps: "opacity,transform",
+              },
+            );
           },
         });
       });
 
       ScrollTrigger.matchMedia({
         "(min-width: 1024px)": () => {
-          ScrollTrigger.create({
-            trigger: ".software-smart-section",
-            start: "top top+=80",
-            end: "bottom bottom",
-            pin: ".software-smart-visual",
-            pinSpacing: false,
-          });
-
           gsap.utils.toArray(".software-smart-step").forEach((step) => {
             ScrollTrigger.create({
               trigger: step,
@@ -616,6 +629,8 @@ export default function SoftwarePage() {
           });
         },
       });
+
+      ScrollTrigger.refresh();
     }, pageRef);
 
     return () => ctx.revert();
@@ -629,7 +644,7 @@ export default function SoftwarePage() {
           color: #FFFFFF;
           letter-spacing: 0;
           max-width: 100vw;
-          overflow-x: hidden;
+          overflow-x: clip;
         }
 
         .software-container {
@@ -639,8 +654,23 @@ export default function SoftwarePage() {
         }
 
         .software-section {
+          position: relative;
+          z-index: 1;
           padding: 120px 0;
           border-bottom: 1px solid #1F1F1F;
+          background: #0B0B0B;
+        }
+
+        .software-smart-section {
+          position: relative;
+          z-index: 1;
+          overflow: clip;
+          background: #0B0B0B;
+        }
+
+        .software-smart-visual {
+          position: relative;
+          z-index: 1;
         }
 
         .software-story-scroll {
@@ -698,6 +728,16 @@ export default function SoftwarePage() {
 
           .software-section {
             padding: 84px 0;
+          }
+        }
+
+        @media (min-width: 1024px) {
+          .software-smart-visual {
+            position: sticky;
+            top: 112px;
+            align-self: start;
+            max-height: calc(100vh - 136px);
+            overflow: hidden;
           }
         }
       `}</style>
@@ -845,6 +885,14 @@ export default function SoftwarePage() {
                         <p className="mt-4 text-sm leading-6 text-[#A1A1A1]">
                           {smartState.copy}
                         </p>
+                        <div className="mt-5 grid grid-cols-3 gap-2 border-t border-[#00E5A8]/20 pt-4">
+                          {[["28", "Available"], ["12", "In use"], ["03", "Offline"]].map(([val, label]) => (
+                            <div key={label} className="rounded-lg bg-[#06130F] p-3 text-center">
+                              <p className="text-xl font-semibold text-white">{val}</p>
+                              <p className="mt-1 text-[10px] text-[#A1A1A1]">{label}</p>
+                            </div>
+                          ))}
+                        </div>
                       </div>
                       <div className="software-stagger mt-5 grid gap-3 sm:grid-cols-2">
                         {smartChips.map((chip) => (
@@ -857,9 +905,6 @@ export default function SoftwarePage() {
                         ))}
                       </div>
                     </div>
-                  </div>
-                  <div className="mt-6">
-                    <DashboardMockup compact />
                   </div>
                 </div>
               </div>

@@ -45,8 +45,77 @@
   .legacy-page-shell #dynamic-logo,
   .legacy-page-shell #dynamic-sidebar-btn,
   .legacy-page-shell #floating-dock-container,
+  .legacy-page-shell #custom-loader,
+  .legacy-page-shell #orion-loader,
   .legacy-page-shell #mobile-menu-overlay {
     display: none !important;
+  }
+
+  .site-route-loader {
+    pointer-events: auto;
+  }
+
+  .site-route-loader-content {
+    will-change: opacity, transform;
+  }
+
+  .site-route-loader-glow {
+    animation: site-route-loader-glow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  .site-route-loader-logo {
+    animation: site-route-loader-pulse 1.5s ease-in-out infinite alternate;
+    will-change: opacity, transform;
+  }
+
+  .site-route-loader-bar {
+    width: 18%;
+    transition:
+      width 0.62s cubic-bezier(0.16, 1, 0.3, 1),
+      background-color 0.18s ease,
+      box-shadow 0.18s ease;
+  }
+
+  .site-route-loader.is-loading .site-route-loader-bar {
+    width: 68%;
+  }
+
+  .site-route-loader.is-ready .site-route-loader-bar,
+  .site-route-loader.is-exiting .site-route-loader-bar {
+    width: 100%;
+  }
+
+  .site-route-loader.is-exiting .site-route-loader-bar {
+    background: #16a34a;
+    box-shadow: 0 0 30px #16a34a;
+  }
+
+  .site-route-loader.is-exiting .site-route-loader-bar-track,
+  .site-route-loader.is-exiting .site-route-loader-glow {
+    opacity: 0;
+    transition: opacity 0.18s ease;
+  }
+
+  .site-route-loader.is-exiting .site-route-loader-logo {
+    animation: site-route-loader-logo-out 0.48s cubic-bezier(0.95, 0.05, 0.795, 0.035)
+      forwards;
+  }
+
+  .site-route-loader.is-exiting .site-route-loader-content {
+    opacity: 0;
+    transition: opacity 0.16s ease 0.42s;
+  }
+
+  .site-route-loader.is-exiting .site-route-loader-blind-top {
+    transform-origin: top;
+    animation: site-route-loader-blind-top-out 0.42s cubic-bezier(0.77, 0, 0.175, 1)
+      0.3s forwards;
+  }
+
+  .site-route-loader.is-exiting .site-route-loader-blind-bottom {
+    transform-origin: bottom;
+    animation: site-route-loader-blind-bottom-out 0.42s
+      cubic-bezier(0.77, 0, 0.175, 1) 0.3s forwards;
   }
 
   .site-menu-overlay {
@@ -349,9 +418,71 @@
     }
   }
 
+  @keyframes site-route-loader-pulse {
+    from {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    to {
+      opacity: 0.8;
+      transform: scale(1.05);
+    }
+  }
+
+  @keyframes site-route-loader-glow {
+    0%,
+    100% {
+      opacity: 0.3;
+      transform: scale(0.8);
+    }
+
+    50% {
+      opacity: 0.8;
+      transform: scale(1.5);
+    }
+  }
+
+  @keyframes site-route-loader-logo-out {
+    0% {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    72% {
+      opacity: 1;
+      transform: scale(8);
+    }
+
+    100% {
+      opacity: 0;
+      transform: scale(20);
+    }
+  }
+
+  @keyframes site-route-loader-blind-top-out {
+    to {
+      transform: scaleY(0);
+    }
+  }
+
+  @keyframes site-route-loader-blind-bottom-out {
+    to {
+      transform: scaleY(0);
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .site-menu-toggle-bar {
       transition: none;
+    }
+
+    .site-route-loader-logo,
+    .site-route-loader-glow,
+    .site-route-loader.is-exiting .site-route-loader-logo,
+    .site-route-loader.is-exiting .site-route-loader-blind-top,
+    .site-route-loader.is-exiting .site-route-loader-blind-bottom {
+      animation: none;
     }
   }
 }

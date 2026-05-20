@@ -8,6 +8,8 @@ import { useScrollReveal } from "../lib/useScrollReveal";
 const HOMEPAGE_PATHS = new Set(["/", "/home"]);
 
 const MENU_CLOSE_DURATION_MS = 900;
+const SITE_LOADER_TOTAL_MS = 2800;
+const SITE_LOADER_EXIT_MS = 650;
 
 function isRouteActive(route, pathname) {
   const normalizedPathname = pathname.toLowerCase();
@@ -840,6 +842,105 @@ function SiteFooter() {
   );
 }
 
+function SiteRouteLoader({ pathname }) {
+  const [loaderState, setLoaderState] = useState({
+    isMounted: true,
+    isExiting: false,
+    phase: "initializing",
+    status: "INITIALIZING...",
+  });
+
+  useEffect(() => {
+    const timers = [];
+
+    setLoaderState({
+      isMounted: true,
+      isExiting: false,
+      phase: "initializing",
+      status: "INITIALIZING...",
+    });
+
+    timers.push(
+      window.setTimeout(() => {
+        setLoaderState((current) => ({
+          ...current,
+          phase: "loading",
+          status: "LOADING ASSETS...",
+        }));
+      }, 520),
+    );
+
+    timers.push(
+      window.setTimeout(() => {
+        setLoaderState((current) => ({
+          ...current,
+          phase: "ready",
+          status: "READY",
+        }));
+      }, SITE_LOADER_TOTAL_MS - SITE_LOADER_EXIT_MS - 120),
+    );
+
+    timers.push(
+      window.setTimeout(() => {
+        setLoaderState((current) => ({
+          ...current,
+          phase: "ready",
+          status: "READY",
+          isExiting: true,
+        }));
+      }, SITE_LOADER_TOTAL_MS - SITE_LOADER_EXIT_MS),
+    );
+
+    timers.push(
+      window.setTimeout(() => {
+        setLoaderState((current) => ({
+          ...current,
+          isMounted: false,
+        }));
+      }, SITE_LOADER_TOTAL_MS),
+    );
+
+    return () => {
+      timers.forEach((timer) => window.clearTimeout(timer));
+    };
+  }, [pathname]);
+
+  if (!loaderState.isMounted) {
+    return null;
+  }
+
+  return (
+    <div
+      className={`site-route-loader is-${loaderState.phase} fixed inset-0 z-[12000] flex flex-col items-center justify-center overflow-hidden bg-transparent ${
+        loaderState.isExiting ? "is-exiting" : ""
+      }`}
+      aria-hidden="true"
+    >
+      <div className="site-route-loader-blind site-route-loader-blind-top absolute left-0 top-0 h-[51%] w-full border-b border-white/5 bg-z-black" />
+      <div className="site-route-loader-blind site-route-loader-blind-bottom absolute bottom-0 left-0 h-[51%] w-full border-t border-white/5 bg-z-black" />
+      <div className="site-route-loader-content relative z-10 flex flex-col items-center">
+        <div className="site-route-loader-glow absolute inset-0 rounded-full bg-z-green/10 blur-[100px]" />
+        <div className="relative mb-10 flex h-24 w-24 items-center justify-center md:h-32 md:w-32">
+          <img
+            src="/img/symbol logo.png"
+            className="site-route-loader-logo h-full w-full object-contain drop-shadow-[0_0_30px_rgba(22,163,74,0.3)]"
+            alt=""
+            draggable="false"
+          />
+        </div>
+        <div className="site-route-loader-bar-track relative mb-4 h-[2px] w-64 overflow-hidden rounded-full bg-zinc-800">
+          <div className="site-route-loader-bar absolute left-0 top-0 h-full bg-white shadow-[0_0_15px_2px_rgba(255,255,255,0.8)]" />
+        </div>
+        <div className="h-6 overflow-hidden">
+          <div className="font-mono text-[10px] uppercase tracking-[0.4em] text-gray-500">
+            {loaderState.status}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export function SiteLayout({ children }) {
   const { pathname } = useLocation();
   const isHomepage = HOMEPAGE_PATHS.has(pathname.toLowerCase());
@@ -849,6 +950,7 @@ export function SiteLayout({ children }) {
 
   return (
     <>
+      <SiteRouteLoader pathname={pathname} />
       <SiteHeader />
       <main className="site-main">{children}</main>
       <SiteFooterHost />

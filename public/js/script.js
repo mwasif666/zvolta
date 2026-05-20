@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
   let scrollObserver;
   const LOADER_INIT_SECONDS = 2;
   const LOADER_READY_SECONDS = 1;
+  const LOADER_MAX_ASSET_WAIT_SECONDS = 1.2;
 
   // =========================================
   // GLOBAL UI ELEMENTS (Moved to top for scope access)
@@ -40,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function () {
   gsap.set(heroBg, { scale: 1.1 });
 
   // Idle Breathing Animation
-  gsap.to(loaderLogo, {
+  const loaderPulseTween = gsap.to(loaderLogo, {
     scale: 1.05,
     opacity: 0.8,
     duration: 1.5,
@@ -84,19 +85,21 @@ document.addEventListener("DOMContentLoaded", function () {
     resolve();
   });
 
-  const windowLoaded = new Promise((resolve) => {
-    if (document.readyState === "complete") {
-      resolve();
-    } else {
-      window.addEventListener("load", resolve);
-    }
-  });
-
-  Promise.all([criticalAssetsLoaded, windowLoaded]).catch(() => {});
+  const loaderReady = Promise.race([
+    criticalAssetsLoaded,
+    new Promise((resolve) =>
+      gsap.delayedCall(LOADER_MAX_ASSET_WAIT_SECONDS, resolve),
+    ),
+  ]).catch(() => {});
 
   // D. Execution Sequence
-  gsap.delayedCall(LOADER_INIT_SECONDS, () => {
+  Promise.all([
+    loaderReady,
+    new Promise((resolve) => gsap.delayedCall(LOADER_INIT_SECONDS, resolve)),
+  ]).then(() => {
     trickleTween.kill();
+    loaderPulseTween.kill();
+    gsap.set(loaderLogo, { scale: 1, opacity: 1, clearProps: "transform" });
 
     const tl = gsap.timeline({
       defaults: { ease: "power3.inOut" },
@@ -135,6 +138,7 @@ document.addEventListener("DOMContentLoaded", function () {
           duration: 0.45,
           ease: "expo.in",
           force3D: true,
+          overwrite: true,
         },
         LOADER_READY_SECONDS - 0.45,
       )

@@ -512,12 +512,11 @@ export const chargerSpecs = {
       "22kW EV Charger in Pakistan | Zvolta Smart AC Charger for Commercial Locations",
     seoDescription:
       "Install a Zvolta 22kW smart EV charger in Pakistan for malls, parking lots, restaurants, universities, hospitals, offices, commercial properties, and high traffic locations. Includes smart software, app control, free standard installation, built-in safety features, 2 year local warranty, and 0% installment options.",
-    heroTitle:
-      "22kW smart EV charger for commercial and high traffic locations",
+    heroTitle: "22kW smart EV charger for busy commercial sites",
     heroBody:
-      "The Zvolta 22kW charger is a safe and smart AC charger for places that need stronger charging and higher daily usage.",
+      "Install a Zvolta 22kW smart AC charger at locations where visitors, customers, staff, or fleet users park regularly.",
     heroSupport:
-      "It is a strong fit for malls, parking lots, restaurants, universities, hospitals, offices, commercial properties, and locations where many people park every day.",
+      "Use it privately, share it with selected users, or open it for public charging through the Zvolta app. Manage users, pricing, payments, timing, and usage from the app or dashboard.",
     heroBullets: [
       "0% interest installment plan available for 12 months",
       "Free standard installation included",

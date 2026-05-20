@@ -167,7 +167,7 @@ function PageSection({ children, className = "", id }) {
 
 function ChargingWorksSection({ activeScreen, setActiveScreen }) {
   return (
-    <PageSection>
+    <PageSection className="charge-stack-panel charge-stack-panel--works">
       <div className="grid gap-14 lg:grid-cols-[1fr_0.7fr] lg:items-center">
         <div>
           <SectionIntro
@@ -620,16 +620,22 @@ export default function ChargePage() {
 
         .charge-stack {
           position: relative;
+          isolation: isolate;
         }
 
         .charge-stack-panel {
           position: relative;
           min-height: 100vh;
           background: #0B0B0B;
+          z-index: var(--charge-stack-index, 1);
         }
 
         .charge-stack-panel--hero {
-          z-index: 1;
+          --charge-stack-index: 1;
+        }
+
+        .charge-stack-panel--works {
+          --charge-stack-index: 2;
         }
 
         .charge-phone {
@@ -686,14 +692,8 @@ export default function ChargePage() {
         @media (min-width: 1024px) {
           .charge-stack-panel {
             position: sticky;
-            top: -50px;
-            overflow: hidden;
-          }
-        }
-
-        @media (min-width: 1920px) {
-          .charge-stack-panel {
             top: 0;
+            overflow: hidden;
           }
         }
       `}</style>

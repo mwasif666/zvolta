@@ -57,7 +57,7 @@ function Sidebar({ currentSlug }) {
         <ul className="blog-detail__category-list">
           {[
             "Charging Network",
-            "EV Programs",
+            "Charging Investment",
             "Host Partners",
             "Software",
             "Driver Network",

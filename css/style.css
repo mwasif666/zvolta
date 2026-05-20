@@ -394,6 +394,79 @@ body {
     will-change: transform;
 }
 
+.app-visual-stage {
+    transition:
+        max-width 0.5s ease,
+        height 0.5s ease;
+}
+
+.app-phone-shell,
+.app-image-frame {
+    transition:
+        width 0.5s ease,
+        max-width 0.5s ease,
+        height 0.5s ease,
+        border-radius 0.5s ease,
+        box-shadow 0.5s ease,
+        border-color 0.5s ease;
+}
+
+.app-visual-stage.is-host-mode {
+    max-width: min(1400px, 100vw);
+    height: clamp(520px, 64vw, 760px);
+}
+
+.app-visual-stage.is-host-mode .app-phone-shell {
+    width: min(94%, 1240px) !important;
+    height: 100%;
+}
+
+.app-visual-stage.is-host-mode .app-image-frame {
+    background: transparent !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    overflow: visible !important;
+}
+
+.app-visual-stage.is-host-mode #app-screen-img {
+    position: relative !important;
+    inset: auto !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+}
+
+.app-visual-stage.is-host-mode #card-1 {
+    top: 9% !important;
+    left: 6% !important;
+    right: auto !important;
+}
+
+.app-visual-stage.is-host-mode #card-2 {
+    top: auto !important;
+    bottom: 16% !important;
+    left: 6% !important;
+    right: auto !important;
+}
+
+.app-visual-stage.is-host-mode #card-3 {
+    top: 14% !important;
+    right: 6% !important;
+    left: auto !important;
+}
+
+.app-visual-stage.is-host-mode #card-4 {
+    top: auto !important;
+    bottom: 21% !important;
+    right: 6% !important;
+    left: auto !important;
+}
+
+.app-visual-stage.is-host-mode .floating-card-base {
+    min-width: 250px;
+}
+
 .app-phone-animate:hover .phone-mockup {
     transform: scale(1.02) rotateX(2deg);
 }

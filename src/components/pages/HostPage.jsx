@@ -692,39 +692,34 @@ export default function HostPage() {
             title="Run everything from your device."
             copy="Track sessions, pricing, timings, and charger status without staff on site."
           />
-          <div className="mt-14 grid gap-8 lg:grid-cols-[1fr_340px_1fr] lg:items-center">
-            <div className="grid gap-5">
-              {remoteControls.slice(0, 2).map((control, index) => (
+
+          <div className="mt-14 grid items-center gap-8 lg:grid-cols-[1fr_1.4fr]">
+            <div className="grid gap-4">
+              {remoteControls.map((control, index) => (
                 <Reveal key={control} delay={index * 0.06}>
-                  <div className="rounded-lg border border-[#1F1F1F] bg-[#111111] p-6 text-xl font-semibold text-white">
-                    {control}
+                  <div className="flex items-center gap-4 rounded-xl border border-[#1F1F1F] bg-[#111111] p-6">
+                    <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-[#0B0B0B] text-[#00E5A8]">
+                      <Icon name="bolt" className="h-5 w-5" />
+                    </span>
+                    <p className="text-xl font-semibold text-white">
+                      {control}
+                    </p>
                   </div>
                 </Reveal>
               ))}
             </div>
 
-            <Reveal delay={0.1} className="mx-auto">
-              <div className="rounded-[32px] border border-[#1F1F1F] bg-[#111111] p-3">
-                <div className="overflow-hidden rounded-[24px] border border-[#1F1F1F] bg-black">
-                  <img
-                    src="/img/app-2.png"
-                    alt="Zvolta app dashboard"
-                    className="h-[610px] w-[296px] object-cover object-top"
-                  />
-                </div>
+            <Reveal delay={0.1}>
+              <div className="overflow-hidden rounded-2xl border border-[#1F1F1F]">
+                <img
+                  src="https://res.cloudinary.com/diywraupt/image/upload/v1778837244/4661725e-e5ca-4b5b-b3ed-5f38934a4d9e.png"
+                  alt="Zvolta app dashboard"
+                  className="h-[480px] w-full object-cover object-center lg:h-[520px]"
+                />
               </div>
             </Reveal>
-
-            <div className="grid gap-5">
-              {remoteControls.slice(2).map((control, index) => (
-                <Reveal key={control} delay={index * 0.06}>
-                  <div className="rounded-lg border border-[#1F1F1F] bg-[#111111] p-6 text-xl font-semibold text-white">
-                    {control}
-                  </div>
-                </Reveal>
-              ))}
-            </div>
           </div>
+
           <div className="mt-10 text-center">
             <SecondaryButton href="/software">See how it works</SecondaryButton>
           </div>
@@ -744,11 +739,7 @@ export default function HostPage() {
                     <span className="grid h-12 w-12 place-items-center rounded-lg border border-[#1F1F1F] bg-[#0B0B0B] text-[#00E5A8]">
                       <Icon
                         name={
-                          index === 0
-                            ? "map"
-                            : index === 1
-                              ? "plug"
-                              : "wallet"
+                          index === 0 ? "map" : index === 1 ? "plug" : "wallet"
                         }
                         className="h-5 w-5"
                       />
@@ -939,7 +930,10 @@ export default function HostPage() {
                   PKR {monthlyEarnings.toLocaleString("en-PK")}
                 </p>
               </div>
-              <SecondaryButton href="/roi-calculator" className="mt-6">
+              <SecondaryButton
+                href="/charging-partners#roi-calculator"
+                className="mt-6"
+              >
                 Try ROI calculator
               </SecondaryButton>
             </Reveal>

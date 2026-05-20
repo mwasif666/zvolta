@@ -89,7 +89,7 @@ export default function BecomeChargingPartnerPage() {
                     Charging Partners
                   </SmartLink>
                   <SmartLink
-                    href="/vehicles"
+                    href="/charge"
                     className="text-gray-700 hover:text-green-600 transition-colors"
                   >
                     Our Vehicles
@@ -163,7 +163,7 @@ export default function BecomeChargingPartnerPage() {
                   Charging Partners
                 </SmartLink>
                 <SmartLink
-                  href="/vehicles"
+                  href="/charge"
                   className="block py-2 px-3 text-base text-gray-700 rounded-md hover:bg-gray-100 hover:text-green-600"
                 >
                   Our Vehicles
@@ -554,7 +554,7 @@ export default function BecomeChargingPartnerPage() {
                       </li>
                       <li>
                         <SmartLink
-                          href="/invest"
+                          href="/charging-partners#roi-calculator"
                           className="hover:text-white transition-colors"
                         >
                           For Investors
@@ -575,7 +575,7 @@ export default function BecomeChargingPartnerPage() {
                     <ul className="mt-4 space-y-3">
                       <li>
                         <SmartLink
-                          href="/driver-network"
+                          href="/charge"
                           className="hover:text-white transition-colors"
                         >
                           Drivers
@@ -583,7 +583,7 @@ export default function BecomeChargingPartnerPage() {
                       </li>
                       <li>
                         <SmartLink
-                          href="/invest-form"
+                          href="/charging-partners#apply"
                           className="hover:text-white transition-colors"
                         >
                           Invest

@@ -2,7 +2,7 @@ const chargingPartnersPageData = {
   pageId: "charging-partners",
   routeFolder: "charging-partners",
   componentFile: "ChargingPartnersPage.jsx",
-  paths: ["/charging-partners"],
+  paths: ["/charging-partners", "/roi-calculator.html", "/roi-calculator"],
   meta: {
     title: "Become a ZVolta Charging Partner | Host an EV Charger",
     description: "Turn your location into an EV charging hub with ZVolta.",

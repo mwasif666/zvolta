@@ -314,7 +314,7 @@ export default function AppstorePage() {
                     </li>
                     <li>
                       <SmartLink
-                        href="/invest"
+                        href="/charging-partners#roi-calculator"
                         className="hover:text-emerald-400 transition-colors block py-1"
                       >
                         For Investors
@@ -322,7 +322,7 @@ export default function AppstorePage() {
                     </li>
                     <li>
                       <SmartLink
-                        href="/invest-form"
+                        href="/charging-partners#apply"
                         className="hover:text-emerald-400 transition-colors block py-1"
                       >
                         Site requirements
@@ -340,7 +340,7 @@ export default function AppstorePage() {
                 </div>
                 <div className="mt-8 pt-6 border-t border-white/10">
                   <SmartLink
-                    href="/invest-form"
+                    href="/charging-partners#apply"
                     className="flex items-center justify-between text-white font-bold group-hover:text-emerald-400 transition-colors"
                   >
                     Start hosting{" "}
@@ -351,12 +351,12 @@ export default function AppstorePage() {
               <div className="group p-8 md:p-12 hover:bg-white/5 transition-colors duration-300 flex flex-col h-full min-h-[300px]">
                 <div className="mb-auto">
                   <h3 className="text-xl md:text-2xl font-bold mb-6 text-white">
-                    Charge Your EV
+                    Charge your EV
                   </h3>
                   <ul className="space-y-4 text-zinc-400">
                     <li>
                       <SmartLink
-                        href="/driver-network"
+                        href="/charge"
                         className="hover:text-emerald-400 transition-colors block py-1"
                       >
                         Drivers Network
@@ -364,7 +364,7 @@ export default function AppstorePage() {
                     </li>
                     <li>
                       <SmartLink
-                        href="/driver-network"
+                        href="/charge"
                         className="hover:text-emerald-400 transition-colors block py-1"
                       >
                         Using the app
@@ -390,7 +390,7 @@ export default function AppstorePage() {
                 </div>
                 <div className="mt-8 pt-6 border-t border-white/10">
                   <SmartLink
-                    href="/driver-network"
+                    href="/charge"
                     className="flex items-center justify-between text-white font-bold group-hover:text-emerald-400 transition-colors"
                   >
                     Find A Station{" "}

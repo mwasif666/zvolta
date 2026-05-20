@@ -13,22 +13,16 @@ import chargingPartnersPageData from "./data/pages/charging-partners/pageData";
 import comingSoonPageData from "./data/pages/coming-soon/pageData";
 import contactUsPageData from "./data/pages/contact-us/pageData";
 import partnersPageData from "./data/pages/partners/pageData";
-import driverNetworkPageData from "./data/pages/driver-network/pageData";
 import homePageData from "./data/pages/home/pageData";
 import hostPageData from "./data/pages/host/pageData";
 import homepagePageData from "./data/pages/homepage/pageData";
-import investFormPageData from "./data/pages/invest-form/pageData";
-import investPageData from "./data/pages/invest/pageData";
-import loaderPageData from "./data/pages/loader/pageData";
 import mobilePageData from "./data/pages/mobile/pageData";
 import legalPageData from "./data/pages/legal/pageData";
-import roiCalculatorPageData from "./data/pages/roi-calculator/pageData";
 import softwarePageData from "./data/pages/software/pageData";
 import storiesPageData from "./data/pages/stories/pageData";
 import supportPageData from "./data/pages/support/pageData";
 import teamPageData from "./data/pages/team/pageData";
 import testingPageData from "./data/pages/testing/pageData";
-import vehiclesPageData from "./data/pages/vehicles/pageData";
 
 export const routeEntries = [
   {
@@ -122,12 +116,6 @@ export const routeEntries = [
     load: () => import("./pages/partners/index.jsx"),
   },
   {
-    pageId: driverNetworkPageData.pageId,
-    paths: driverNetworkPageData.paths,
-    meta: driverNetworkPageData.meta,
-    load: () => import("./pages/driver-network/index.jsx"),
-  },
-  {
     pageId: homePageData.pageId,
     paths: homePageData.paths,
     meta: homePageData.meta,
@@ -146,24 +134,6 @@ export const routeEntries = [
     load: () => import("./pages/homepage/index.jsx"),
   },
   {
-    pageId: investFormPageData.pageId,
-    paths: investFormPageData.paths,
-    meta: investFormPageData.meta,
-    load: () => import("./pages/invest-form/index.jsx"),
-  },
-  {
-    pageId: investPageData.pageId,
-    paths: investPageData.paths,
-    meta: investPageData.meta,
-    load: () => import("./pages/invest/index.jsx"),
-  },
-  {
-    pageId: loaderPageData.pageId,
-    paths: loaderPageData.paths,
-    meta: loaderPageData.meta,
-    load: () => import("./pages/loader/index.jsx"),
-  },
-  {
     pageId: mobilePageData.pageId,
     paths: mobilePageData.paths,
     meta: mobilePageData.meta,
@@ -174,12 +144,6 @@ export const routeEntries = [
     paths: legalPageData.paths,
     meta: legalPageData.meta,
     load: () => import("./pages/legal/index.jsx"),
-  },
-  {
-    pageId: roiCalculatorPageData.pageId,
-    paths: roiCalculatorPageData.paths,
-    meta: roiCalculatorPageData.meta,
-    load: () => import("./pages/roi-calculator/index.jsx"),
   },
   {
     pageId: softwarePageData.pageId,
@@ -210,12 +174,6 @@ export const routeEntries = [
     paths: testingPageData.paths,
     meta: testingPageData.meta,
     load: () => import("./pages/testing/index.jsx"),
-  },
-  {
-    pageId: vehiclesPageData.pageId,
-    paths: vehiclesPageData.paths,
-    meta: vehiclesPageData.meta,
-    load: () => import("./pages/vehicles/index.jsx"),
   },
 ];
 

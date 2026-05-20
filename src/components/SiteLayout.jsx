@@ -2,6 +2,10 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { getRouteByPageId } from "../routes";
+import { useSmoothScroll } from "../lib/useSmoothScroll";
+import { useScrollReveal } from "../lib/useScrollReveal";
+
+const HOMEPAGE_PATHS = new Set(["/", "/home"]);
 
 const MENU_CLOSE_DURATION_MS = 900;
 
@@ -123,10 +127,12 @@ function getIsSmoothFooterRoute(pathname) {
 }
 
 function SiteHeader() {
+  const [isHeaderVisible, setIsHeaderVisible] = useState(true);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isMenuMounted, setIsMenuMounted] = useState(false);
   const [isMenuClosing, setIsMenuClosing] = useState(false);
   const closeTimerRef = useRef(null);
+  const lastScrollYRef = useRef(0);
   const { pathname } = useLocation();
   const homeRoute = getRouteByPageId("index");
   const hostingRoute = getRouteByPageId("host");
@@ -237,8 +243,69 @@ function SiteHeader() {
   useEffect(() => {
     document.body.style.overflow = isMenuMounted ? "hidden" : "";
 
+    if (isMenuMounted) {
+      setIsHeaderVisible(true);
+    }
+
     return () => {
       document.body.style.overflow = "";
+    };
+  }, [isMenuMounted]);
+
+  useEffect(() => {
+    setIsHeaderVisible(true);
+    lastScrollYRef.current = window.scrollY;
+  }, [pathname]);
+
+  useEffect(() => {
+    const updateHeaderForScroll = (currentScrollY, scrollDelta) => {
+      if (currentScrollY <= 24 || isMenuMounted) {
+        setIsHeaderVisible(true);
+        lastScrollYRef.current = currentScrollY;
+        return;
+      }
+
+      if (Math.abs(scrollDelta) < 8) {
+        return;
+      }
+
+      setIsHeaderVisible(scrollDelta < 0);
+      lastScrollYRef.current = currentScrollY;
+    };
+
+    const handleScroll = () => {
+      const currentScrollY = Math.max(0, window.scrollY);
+      const scrollDelta = currentScrollY - lastScrollYRef.current;
+
+      updateHeaderForScroll(currentScrollY, scrollDelta);
+    };
+
+    const handleVirtualScroll = (event) => {
+      const currentScrollY = Math.max(0, event.detail?.scrollY ?? 0);
+      const scrollDelta = Number(event.detail?.delta ?? 0);
+
+      updateHeaderForScroll(currentScrollY, scrollDelta);
+    };
+
+    const handleWheelFallback = (event) => {
+      if (document.querySelector("#smooth-wrapper")) {
+        const currentScrollY = Math.max(
+          0,
+          lastScrollYRef.current + event.deltaY,
+        );
+        updateHeaderForScroll(currentScrollY, event.deltaY);
+        return;
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("zvolta:virtual-scroll", handleVirtualScroll);
+    window.addEventListener("wheel", handleWheelFallback, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("zvolta:virtual-scroll", handleVirtualScroll);
+      window.removeEventListener("wheel", handleWheelFallback);
     };
   }, [isMenuMounted]);
 
@@ -251,7 +318,14 @@ function SiteHeader() {
   return (
     <header className="site-header pointer-events-none fixed inset-x-0 top-0 z-[950]">
       <nav
-        className="pointer-events-auto fixed left-1/2 top-6 flex max-w-[calc(100vw-2rem)] -translate-x-1/2 items-center gap-1 rounded-full border border-white/10 bg-[#111]/90 px-2 py-1.5 shadow-2xl ring-1 ring-white/5 backdrop-blur-xl"
+        className="pointer-events-auto fixed left-1/2 top-6 flex max-w-[calc(100vw-2rem)] items-center gap-1 rounded-full border border-white/10 bg-[#111]/90 px-2 py-1.5 shadow-2xl ring-1 ring-white/5 backdrop-blur-xl transition-[transform,opacity] duration-500 ease-out"
+        style={{
+          transform: isHeaderVisible
+            ? "translate(-50%, 0)"
+            : "translate(-50%, -240%)",
+          opacity: isHeaderVisible ? 1 : 0,
+          pointerEvents: isHeaderVisible ? "auto" : "none",
+        }}
         aria-label="Main"
       >
         {homeRoute ? (
@@ -526,7 +600,7 @@ function SiteFooter() {
           <div className="group p-8 md:p-12 hover:bg-white/5 transition-colors duration-300 flex flex-col h-full min-h-[300px]">
             <div className="mb-auto">
               <h3 className="text-xl md:text-2xl font-bold mb-6 text-white">
-                Charge Your EV
+                Charge your EV
               </h3>
               <ul className="space-y-4 text-zinc-400">
                 <li>
@@ -534,7 +608,7 @@ function SiteFooter() {
                     to="/charge"
                     className="hover:text-emerald-400 transition-colors block py-1"
                   >
-                    Plan your charge
+                    Charge your EV
                   </Link>
                 </li>
                 <li>
@@ -568,7 +642,7 @@ function SiteFooter() {
                     to="/charge"
                     className="hover:text-emerald-400 transition-colors block py-1"
                   >
-                    Find A Station (CTA)
+                    Find a station
                   </Link>
                 </li>
               </ul>
@@ -578,7 +652,7 @@ function SiteFooter() {
                 to="/charge"
                 className="flex items-center justify-between text-white font-bold group-hover:text-emerald-400 transition-colors"
               >
-                Find A Station (CTA){" "}
+                Find a station{" "}
                 <i className="bi bi-arrow-right -rotate-45 group-hover:rotate-0 transition-transform duration-300" />
               </Link>
             </div>
@@ -647,23 +721,38 @@ function SiteFooter() {
         <div className="max-w-[1400px] mx-auto py-10 px-6 md:px-12">
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-y-8 gap-x-4 text-zinc-400 text-base font-medium">
             <div className="flex flex-col gap-2">
-              <Link to="/about-us" className="hover:text-white transition-colors">
+              <Link
+                to="/about-us"
+                className="hover:text-white transition-colors"
+              >
                 About
               </Link>
-              <Link to="/careers" className="hover:text-white transition-colors">
+              <Link
+                to="/careers"
+                className="hover:text-white transition-colors"
+              >
                 Careers
               </Link>
             </div>
             <div className="flex flex-col gap-2">
-              <Link to="/stories" className="hover:text-white transition-colors">
+              <Link
+                to="/stories"
+                className="hover:text-white transition-colors"
+              >
                 Stories
               </Link>
-              <Link to="/contact-us" className="hover:text-white transition-colors">
+              <Link
+                to="/contact-us"
+                className="hover:text-white transition-colors"
+              >
                 Contact
               </Link>
             </div>
             <div className="flex flex-col gap-2">
-              <Link to="/about-us" className="hover:text-white transition-colors">
+              <Link
+                to="/about-us"
+                className="hover:text-white transition-colors"
+              >
                 Sustainability
               </Link>
               <Link
@@ -691,7 +780,10 @@ function SiteFooter() {
               >
                 Terms of Service
               </Link>
-              <Link to="/coming-soon" className="hover:text-white transition-colors">
+              <Link
+                to="/coming-soon"
+                className="hover:text-white transition-colors"
+              >
                 Submit a Report
               </Link>
             </div>
@@ -742,13 +834,19 @@ function SiteFooter() {
           >
             <i className="bi bi-envelope text-xl" />
           </a>
-          </div>
+        </div>
       </div>
     </footer>
   );
 }
 
 export function SiteLayout({ children }) {
+  const { pathname } = useLocation();
+  const isHomepage = HOMEPAGE_PATHS.has(pathname.toLowerCase());
+
+  useSmoothScroll(!isHomepage);
+  useScrollReveal(!isHomepage, pathname);
+
   return (
     <>
       <SiteHeader />

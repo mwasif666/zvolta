@@ -4,7 +4,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SmartLink } from "../SmartLink";
 
 const APP_LINK = "/appstore";
-const MAP_LINK = "/driver-network";
+const MAP_LINK = "/charge";
 
 const vehicleTypes = [
   "EV bikes",
@@ -17,91 +17,20 @@ const vehicleTypes = [
 
 const chargingSteps = [
   {
-    title: "Open the app",
-    copy: "Find a charger near you or search by location.",
+    title: "Find a station",
+    copy: "Open Zvolta and pick an available charger near you.",
     screen: "map",
   },
   {
-    title: "Go to the station",
-    copy: "Check availability, pricing, and charger details before you arrive.",
-    screen: "station",
-  },
-  {
-    title: "Scan and start",
-    copy: "Scan the QR code on the charger and start your session from the app.",
+    title: "Scan the charger",
+    copy: "Scan the QR code and start your session.",
     screen: "scan",
   },
   {
-    title: "Track and pay",
-    copy: "See charging progress in real time and pay directly through the app.",
+    title: "Charge and pay",
+    copy: "Track the session and pay in the app.",
     screen: "session",
   },
-];
-
-const beforeChargeItems = [
-  "Charger location",
-  "Live availability",
-  "Charger capacity",
-  "Connector type",
-  "Pricing",
-  "Station details",
-];
-
-const appStorySlides = [
-  {
-    title: "Find chargers nearby",
-    copy: "See stations around you and choose the one that fits your route.",
-    screen: "map",
-  },
-  {
-    title: "Start with a QR scan",
-    copy: "Scan the code on the charger and begin your session from the app.",
-    screen: "scan",
-  },
-  {
-    title: "Track kWh in real time",
-    copy: "See how much energy your EV is using while it charges.",
-    screen: "session",
-  },
-  {
-    title: "View history",
-    copy: "Keep a record of your charging sessions and payments.",
-    screen: "history",
-  },
-  {
-    title: "Manage wallet",
-    copy: "Pay through the app and keep your balance in one place.",
-    screen: "wallet",
-  },
-  {
-    title: "Get support",
-    copy: "Report issues or get help when something does not work.",
-    screen: "support",
-  },
-];
-
-const paymentPoints = [
-  "No cash handling",
-  "No manual coordination",
-  "No unclear billing",
-  "No hidden steps",
-];
-
-const pakistanPoints = [
-  "Local charging infrastructure",
-  "AC chargers for daily use",
-  "Support for bikes, rickshaws, scooters, and cars",
-  "Reliable stations for local conditions",
-  "A growing network across key locations",
-];
-
-const routineItems = [
-  "Before work",
-  "At university",
-  "During errands",
-  "At restaurants",
-  "Near home",
-  "On the way",
 ];
 
 const supportCards = [
@@ -109,38 +38,6 @@ const supportCards = [
   "Payment support",
   "Booking support",
   "Station issue reporting",
-];
-
-const whyItems = [
-  "Find chargers near you",
-  "Check details before you arrive",
-  "Start with a QR scan",
-  "Pay through the app",
-  "Track every session",
-  "Use one app for your charging needs",
-];
-
-const storyCards = [
-  {
-    title: "How students are charging EV bikes between classes",
-    label: "Students",
-    image: "/img/zvolta-maidan.jpg",
-  },
-  {
-    title: "How delivery riders plan daily routes with Zvolta",
-    label: "Delivery",
-    image: "/img/Charge/Charge.png",
-  },
-  {
-    title: "How EV car users find reliable charging near them",
-    label: "Cars",
-    image: "/img/charging station location.png",
-  },
-  {
-    title: "How first-time EV users charge without confusion",
-    label: "First charge",
-    image: "/img/clean-volta.jpg",
-  },
 ];
 
 function Icon({ name, className = "h-5 w-5" }) {
@@ -274,11 +171,11 @@ function ChargingWorksSection({ activeScreen, setActiveScreen }) {
       <div className="grid gap-14 lg:grid-cols-[1fr_0.7fr] lg:items-center">
         <div>
           <SectionIntro
-            eyebrow="How charging works"
-            title="Open the app. Scan. Charge. Pay."
-            copy="The flow is simple for daily riders and first-time EV users."
+            eyebrow="How it works"
+            title="Three simple steps."
+            copy="Find a station, scan the charger, and pay in the app."
           />
-          <div className="charge-stagger mt-12 grid gap-5 md:grid-cols-2">
+          <div className="charge-stagger mt-12 grid gap-5 md:grid-cols-3">
             {chargingSteps.map((step, index) => (
               <article
                 key={step.title}
@@ -637,7 +534,6 @@ function PhoneMockup({ screen = "home", className = "" }) {
 
 export default function ChargePage() {
   const pageRef = useRef(null);
-  const routeLineRef = useRef(null);
   const [activeScreen, setActiveScreen] = useState("home");
 
   useEffect(() => {
@@ -695,50 +591,6 @@ export default function ChargePage() {
           },
         });
       });
-
-      gsap.from(".map-marker", {
-        scale: 0.5,
-        opacity: 0,
-        duration: 0.5,
-        stagger: 0.12,
-        ease: "back.out(1.4)",
-        scrollTrigger: {
-          trigger: ".charge-map-panel",
-          start: "top 72%",
-        },
-      });
-
-      if (routeLineRef.current) {
-        gsap.fromTo(
-          routeLineRef.current,
-          { scaleX: 0 },
-          {
-            scaleX: 1,
-            transformOrigin: "left center",
-            duration: 1,
-            ease: "power2.out",
-            scrollTrigger: {
-              trigger: routeLineRef.current,
-              start: "top 78%",
-            },
-          },
-        );
-      }
-
-      ScrollTrigger.matchMedia({
-        "(min-width: 1024px)": () => {
-          gsap.utils.toArray(".app-story-slide").forEach((slide) => {
-            ScrollTrigger.create({
-              trigger: slide,
-              start: "top center",
-              end: "bottom center",
-              onEnter: () => setActiveScreen(slide.dataset.screen || "home"),
-              onEnterBack: () =>
-                setActiveScreen(slide.dataset.screen || "home"),
-            });
-          });
-        },
-      });
     }, pageRef);
 
     return () => ctx.revert();
@@ -780,20 +632,6 @@ export default function ChargePage() {
           z-index: 1;
         }
 
-        .charge-stack-panel--find {
-          z-index: 2;
-          box-shadow: 0 -28px 80px rgba(0, 0, 0, 0.42);
-        }
-
-        .charge-stack-panel--pay {
-          z-index: 1;
-        }
-
-        .charge-stack-panel--bookings {
-          z-index: 2;
-          box-shadow: 0 -28px 80px rgba(0, 0, 0, 0.42);
-        }
-
         .charge-phone {
           width: min(330px, 82vw);
           margin-left: auto;
@@ -829,14 +667,6 @@ export default function ChargePage() {
           overflow: hidden;
           border-radius: 32px;
           padding: 46px 20px 74px;
-        }
-
-        .charge-story {
-          scrollbar-width: none;
-        }
-
-        .charge-story::-webkit-scrollbar {
-          display: none;
         }
 
         @media (max-width: 767px) {
@@ -878,11 +708,11 @@ export default function ChargePage() {
                   Zvolta charging
                 </p>
                 <h1 className="mt-5 text-[44px] font-semibold leading-[1.03] text-white md:text-[64px]">
-                  Charge your EV with less stress.
+                  Charge your EV.
                 </h1>
                 <p className="mt-6 max-w-2xl text-base leading-7 text-[#A1A1A1] md:text-lg">
-                  Find nearby Zvolta stations, check availability, start
-                  charging from the app, and pay online.
+                  Find a nearby Zvolta station, scan the charger, and pay in the
+                  app.
                 </p>
                 <div className="mt-9 flex flex-col gap-3 sm:flex-row">
                   <PrimaryButton href={APP_LINK}>
@@ -907,47 +737,13 @@ export default function ChargePage() {
             activeScreen={activeScreen}
             setActiveScreen={setActiveScreen}
           />
-
-          <section
-            id="find-charger"
-            className="charge-stack-panel charge-stack-panel--find border-b border-[#1F1F1F]"
-          >
-            <div className="charge-container">
-              <div className="grid min-h-screen lg:grid-cols-[1fr_1fr] lg:items-center">
-                <div className="py-28 lg:py-32">
-                  <SectionIntro
-                    eyebrow="Find a charger near you"
-                    title="Search around your location or along your route."
-                    copy="See station details before you go, so you know what to expect."
-                  />
-                  <div className="charge-stagger mt-8 grid gap-3 sm:grid-cols-2">
-                    {beforeChargeItems.slice(1).map((item) => (
-                      <div
-                        key={item}
-                        className="rounded-lg border border-[#1F1F1F] bg-[#111111] px-4 py-3 text-sm font-semibold text-white"
-                      >
-                        {item}
-                      </div>
-                    ))}
-                  </div>
-                  <PrimaryButton href={MAP_LINK} className="mt-9">
-                    Find nearby stations
-                  </PrimaryButton>
-                </div>
-
-                <div className="charge-map-panel charge-reveal hidden lg:flex lg:justify-end">
-                  <PhoneMockup screen="map" />
-                </div>
-              </div>
-            </div>
-          </section>
         </div>
 
         <PageSection>
           <SectionIntro
-            eyebrow="Built for every electric ride"
-            title="Built for the EVs people use every day."
-            copy="Whether you ride to work, university, home, or around the city, Zvolta helps you find charging when you need it."
+            eyebrow="Works for daily EVs"
+            title="For bikes, rickshaws, scooters, cars, and fleets."
+            copy="Use Zvolta when your EV needs a quick, simple charge."
           />
           <div className="charge-stagger mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {vehicleTypes.map((vehicle) => (
@@ -967,208 +763,12 @@ export default function ChargePage() {
           </PrimaryButton>
         </PageSection>
 
-        <section className="border-b border-[#1F1F1F] bg-[#0B0B0B] py-28">
-          <div className="charge-container">
-            <SectionIntro
-              centered
-              eyebrow="Simple app experience"
-              title="Everything you need is inside the Zvolta app."
-              copy="Scroll through the core charging flow, from finding a charger to getting support."
-            />
-            <div className="mt-16 grid gap-10 lg:grid-cols-[0.95fr_1fr] lg:items-start">
-              <div className="grid gap-8">
-                {appStorySlides.map((slide, index) => (
-                  <article
-                    key={slide.title}
-                    data-screen={slide.screen}
-                    className="app-story-slide charge-reveal rounded-lg border border-[#1F1F1F] bg-[#111111] p-7 lg:min-h-[40vh]"
-                  >
-                    <p className="text-xs font-semibold text-[#00E5A8]">
-                      0{index + 1}
-                    </p>
-                    <h3 className="mt-5 text-[28px] font-semibold leading-tight text-white">
-                      {slide.title}
-                    </h3>
-                    <p className="mt-4 max-w-md text-base leading-7 text-[#A1A1A1]">
-                      {slide.copy}
-                    </p>
-                  </article>
-                ))}
-                <PrimaryButton href={APP_LINK}>Try the app</PrimaryButton>
-              </div>
-
-              <div
-                style={{ position: "sticky", top: "15vh", alignSelf: "start" }}
-                className="hidden lg:flex lg:justify-end"
-              >
-                <PhoneMockup screen={activeScreen} />
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <div className="charge-stack">
-          <section className="charge-stack-panel charge-stack-panel--pay charge-section border-b border-[#1F1F1F]">
-            <div className="charge-container">
-              <div className="grid gap-14 lg:grid-cols-[0.85fr_1fr] lg:items-center">
-                <div>
-                  <SectionIntro
-                    eyebrow="Clear payments"
-                    title="Pay through the app and keep a full record."
-                    copy="You only pay for the charging session you use."
-                  />
-                  <div className="charge-stagger mt-8 grid gap-4 sm:grid-cols-2">
-                    {paymentPoints.map((point) => (
-                      <div
-                        key={point}
-                        className="rounded-lg border border-[#1F1F1F] bg-[#111111] p-5 text-base font-semibold text-white"
-                      >
-                        {point}
-                      </div>
-                    ))}
-                  </div>
-                  <PrimaryButton href={APP_LINK} className="mt-9">
-                    View payment options
-                  </PrimaryButton>
-                </div>
-                <div className="charge-reveal">
-                  <PhoneMockup screen="wallet" />
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <section className="charge-stack-panel charge-stack-panel--bookings charge-section border-b border-[#1F1F1F]">
-            <div className="charge-container">
-              <div className="grid gap-14 lg:grid-cols-[1fr_0.75fr] lg:items-center">
-                <div>
-                  <SectionIntro
-                    eyebrow="Bookings and session history"
-                    title="Your charging history stays in one place."
-                    copy="View active sessions, past sessions, payments, wallet history, and chargers you use often."
-                  />
-                  <div className="charge-stagger mt-8 grid gap-4 sm:grid-cols-2">
-                    {[
-                      "Active sessions",
-                      "Past sessions",
-                      "Payment history",
-                      "Saved chargers",
-                    ].map((item) => (
-                      <div
-                        key={item}
-                        className="rounded-lg border border-[#1F1F1F] bg-[#111111] p-5 text-base font-semibold text-white"
-                      >
-                        {item}
-                      </div>
-                    ))}
-                  </div>
-                  <PrimaryButton href={APP_LINK} className="mt-9">
-                    Manage your charging
-                  </PrimaryButton>
-                </div>
-                <div className="charge-reveal">
-                  <PhoneMockup screen="history" />
-                </div>
-              </div>
-            </div>
-          </section>
-        </div>
-
-        <PageSection>
-          <SectionIntro
-            eyebrow="Better for daily travel"
-            title="Charging that fits your routine."
-            copy="Use Zvolta before work, during errands, at university, while eating out, or when your EV is parked for some time."
-          />
-          <div className="charge-reveal mt-12 rounded-lg border border-[#1F1F1F] bg-[#111111] p-6 md:p-8">
-            <div className="relative grid gap-5 md:grid-cols-6">
-              <div
-                ref={routeLineRef}
-                className="absolute left-0 top-1/2 hidden h-px w-full bg-[#00E5A8]/45 md:block"
-              />
-              {routineItems.map((item) => (
-                <div
-                  key={item}
-                  className="relative z-10 rounded-lg border border-[#1F1F1F] bg-[#0B0B0B] p-5 text-sm font-semibold text-white"
-                >
-                  <span className="mb-5 grid h-8 w-8 place-items-center rounded-full bg-[#00E5A8] text-black">
-                    <Icon name="pin" className="h-4 w-4" />
-                  </span>
-                  {item}
-                </div>
-              ))}
-            </div>
-          </div>
-          <SecondaryButton href={MAP_LINK} className="mt-10">
-            Plan your route
-          </SecondaryButton>
-        </PageSection>
-
-        <PageSection>
-          <div className="grid gap-12 lg:grid-cols-[0.75fr_1fr]">
-            <SectionIntro
-              eyebrow="Help when you need it"
-              title="If something goes wrong, support is available."
-              copy="Get help with charging sessions, payments, bookings, and station issues."
-            />
-            <div className="charge-stagger grid gap-5 sm:grid-cols-2">
-              {supportCards.map((card) => (
-                <div
-                  key={card}
-                  className="rounded-lg border border-[#1F1F1F] bg-[#111111] p-6"
-                >
-                  <div className="mb-8 grid h-10 w-10 place-items-center rounded-lg bg-[#0B0B0B] text-[#00E5A8]">
-                    <Icon name="check" className="h-4 w-4" />
-                  </div>
-                  <h3 className="text-xl font-semibold text-white">{card}</h3>
-                </div>
-              ))}
-            </div>
-          </div>
-          <SecondaryButton href="/support" className="mt-10">
-            Get support
-          </SecondaryButton>
-        </PageSection>
-
-        <PageSection>
-          <SectionIntro
-            eyebrow="Real stories"
-            title="Real stories from people charging with Zvolta."
-            copy="Simple examples from students, delivery riders, EV car users, and first-time EV owners."
-          />
-          <div className="charge-story mt-12 flex snap-x gap-6 overflow-x-auto pb-4">
-            {storyCards.map((story) => (
-              <article
-                key={story.title}
-                className="charge-reveal w-[320px] shrink-0 snap-start overflow-hidden rounded-lg border border-[#1F1F1F] bg-[#111111] sm:w-[390px]"
-              >
-                <img
-                  src={story.image}
-                  alt=""
-                  className="h-56 w-full object-cover"
-                />
-                <div className="p-6">
-                  <p className="text-xs font-semibold uppercase text-[#00E5A8]">
-                    {story.label}
-                  </p>
-                  <h3 className="mt-4 text-[24px] font-semibold leading-tight text-white">
-                    {story.title}
-                  </h3>
-                </div>
-              </article>
-            ))}
-          </div>
-          <SecondaryButton href="/stories" className="mt-8">
-            Explore stories
-          </SecondaryButton>
-        </PageSection>
-
         <section className="relative overflow-hidden py-24 md:py-32">
           <div className="pointer-events-none absolute left-1/2 top-1/2 h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#00E5A8]/8 blur-[120px]" />
           <div className="charge-container relative grid gap-12 lg:grid-cols-[1fr_0.55fr] lg:items-center">
             <div className="charge-reveal max-w-3xl">
               <h2 className="text-[44px] font-semibold leading-[1.04] text-white md:text-[64px]">
-                Find. Charge. Pay. Move on.
+                Find. Scan. Charge.
               </h2>
               <p className="mt-6 max-w-xl text-base leading-7 text-[#A1A1A1]">
                 Download the Zvolta app and charge your EV with ease.

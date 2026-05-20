@@ -6,7 +6,7 @@ const topPosts = blogPosts.slice(1, 4);
 const listPosts = blogPosts.slice(1);
 const categories = [
   "Charging Network",
-  "EV Programs",
+  "Charging Investment",
   "Host Partners",
   "Software",
   "Driver Network",

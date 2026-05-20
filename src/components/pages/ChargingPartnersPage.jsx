@@ -1,6 +1,29 @@
-﻿import { SmartLink } from "../SmartLink";
+﻿import { useState } from "react";
+import { SmartLink } from "../SmartLink";
+
+import RoiCalculatorSection from "./RoiCalculatorSection";
+
+const faqItems = [
+  {
+    question: "Who takes care of maintenance?",
+    answer:
+      "We manage all maintenance and servicing tasks completely free of charge for the host.",
+  },
+  {
+    question: "How much can I earn?",
+    answer:
+      "Earnings vary based on location and usage, but we offer transparent profit-sharing models or fixed rent options.",
+  },
+  {
+    question: "Is it safe and legal?",
+    answer:
+      "Yes, we install government-approved, safety-tested chargers and handle all necessary permits.",
+  },
+];
 
 export default function ChargingPartnersPage() {
+  const [openFaqIndex, setOpenFaqIndex] = useState(null);
+
   return (
     <>
       <div>
@@ -178,8 +201,8 @@ export default function ChargingPartnersPage() {
                 </h1>
                 <p className="text-base sm:text-lg md:text-xl text-gray-300 max-w-xl mx-auto lg:mx-0 leading-relaxed font-light mb-10">
                   Transform your location into a revenue-generating EV hub. We
-                  install, manage, and maintain the chargersâ€”you simply
-                  provide the space.
+                  install, manage, and maintain the chargers. You simply provide
+                  the space.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                   <SmartLink
@@ -443,60 +466,45 @@ export default function ChargingPartnersPage() {
                 Questions?
               </h2>
               <div className="space-y-4">
-                <div
-                  className="bg-zinc-900 rounded-[1.5rem] border border-white/5 overflow-hidden transition-all duration-300 hover:border-white/10"
-                  data-inline-onclick="toggleAccordion(this)"
-                >
-                  <button className="w-full flex justify-between items-center p-6 text-left font-bold text-lg focus:outline-none">
-                    <span>Who takes care of maintenance?</span>
-                    <i className="bi bi-plus-lg text-emerald-500 text-2xl transition-transform duration-300" />
-                  </button>
-                  <div className="grid grid-rows-[0fr] accordion-content transition-all duration-300">
-                    <div className="overflow-hidden">
-                      <div className="p-6 pt-0 text-zinc-400 leading-relaxed">
-                        We manage all maintenance and servicing tasks completely
-                        free of charge for the host.
+                {faqItems.map((item, index) => {
+                  const isOpen = openFaqIndex === index;
+
+                  return (
+                    <div
+                      key={item.question}
+                      className="bg-zinc-900 rounded-[1.5rem] border border-white/5 overflow-hidden transition-all duration-300 hover:border-white/10"
+                    >
+                      <button
+                        type="button"
+                        className="w-full flex justify-between items-center p-6 text-left font-bold text-lg focus:outline-none"
+                        aria-expanded={isOpen}
+                        onClick={() => setOpenFaqIndex(isOpen ? null : index)}
+                      >
+                        <span>{item.question}</span>
+                        <i
+                          className={`bi bi-plus-lg text-2xl transition-all duration-300 ${
+                            isOpen ? "rotate-45 text-white" : "text-emerald-500"
+                          }`}
+                        />
+                      </button>
+                      <div
+                        className={`grid accordion-content transition-all duration-300 ${
+                          isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+                        }`}
+                      >
+                        <div className="overflow-hidden">
+                          <div className="p-6 pt-0 text-zinc-400 leading-relaxed">
+                            {item.answer}
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </div>
-                <div
-                  className="bg-zinc-900 rounded-[1.5rem] border border-white/5 overflow-hidden transition-all duration-300 hover:border-white/10"
-                  data-inline-onclick="toggleAccordion(this)"
-                >
-                  <button className="w-full flex justify-between items-center p-6 text-left font-bold text-lg focus:outline-none">
-                    <span>How much can I earn?</span>
-                    <i className="bi bi-plus-lg text-emerald-500 text-2xl transition-transform duration-300" />
-                  </button>
-                  <div className="grid grid-rows-[0fr] accordion-content transition-all duration-300">
-                    <div className="overflow-hidden">
-                      <div className="p-6 pt-0 text-zinc-400 leading-relaxed">
-                        Earnings vary based on location and usage, but we offer
-                        transparent profit-sharing models or fixed rent options.
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  className="bg-zinc-900 rounded-[1.5rem] border border-white/5 overflow-hidden transition-all duration-300 hover:border-white/10"
-                  data-inline-onclick="toggleAccordion(this)"
-                >
-                  <button className="w-full flex justify-between items-center p-6 text-left font-bold text-lg focus:outline-none">
-                    <span>Is it safe and legal?</span>
-                    <i className="bi bi-plus-lg text-emerald-500 text-2xl transition-transform duration-300" />
-                  </button>
-                  <div className="grid grid-rows-[0fr] accordion-content transition-all duration-300">
-                    <div className="overflow-hidden">
-                      <div className="p-6 pt-0 text-zinc-400 leading-relaxed">
-                        Yes, we install government-approved, safety-tested
-                        chargers and handle all necessary permits.
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                  );
+                })}
               </div>
             </div>
           </section>
+          <RoiCalculatorSection />
           <section
             id="apply"
             className="relative py-24 bg-zinc-900 border-t border-white/10 overflow-hidden text-white"
@@ -550,7 +558,7 @@ export default function ChargingPartnersPage() {
                         name="first-name"
                         required
                         className="w-full h-14 bg-zinc-900 border border-zinc-800 rounded-full px-6 text-white placeholder:text-zinc-700 focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500 transition-all"
-                        placeholder="John"
+                        placeholder="Ali"
                       />
                     </div>
                     <div className="group space-y-2">
@@ -562,7 +570,7 @@ export default function ChargingPartnersPage() {
                         name="last-name"
                         required
                         className="w-full h-14 bg-zinc-900 border border-zinc-800 rounded-full px-6 text-white placeholder:text-zinc-700 focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500 transition-all"
-                        placeholder="Doe"
+                        placeholder="Khan"
                       />
                     </div>
                   </div>
@@ -588,7 +596,7 @@ export default function ChargingPartnersPage() {
                         name="phone"
                         required
                         className="w-full h-14 bg-zinc-900 border border-zinc-800 rounded-full px-6 text-white placeholder:text-zinc-700 focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500 transition-all"
-                        placeholder="+92 300..."
+                        placeholder="+92 300 1234567"
                       />
                     </div>
                   </div>
@@ -799,7 +807,7 @@ export default function ChargingPartnersPage() {
               <div className="group p-8 md:p-12 hover:bg-white/5 transition-colors duration-300 flex flex-col h-full min-h-[300px]">
                 <div className="mb-auto">
                   <h3 className="text-xl md:text-2xl font-bold mb-6 text-white">
-                    Charge Your EV
+                    Charge your EV
                   </h3>
                   <ul className="space-y-4 text-zinc-400">
                     <li>

@@ -52,11 +52,36 @@ function ScrollController() {
   return null;
 }
 
+function PageLoaderFallback() {
+  return (
+    <div className="fixed inset-0 z-[10000] flex flex-col items-center justify-center bg-z-black">
+      <div className="absolute top-0 left-0 h-[51%] w-full border-b border-white/5 bg-z-black" />
+      <div className="absolute bottom-0 left-0 h-[51%] w-full border-t border-white/5 bg-z-black" />
+      <div className="relative z-10 flex flex-col items-center">
+        <div className="absolute inset-0 scale-0 rounded-full bg-z-green/10 blur-[100px] animate-pulse-slow" />
+        <div className="relative mb-10 flex h-24 w-24 items-center justify-center md:h-32 md:w-32">
+          <img
+            src="/img/symbol logo.png"
+            className="h-full w-full object-contain drop-shadow-[0_0_30px_rgba(22,163,74,0.3)]"
+            alt="ZVolta Loading"
+          />
+        </div>
+        <div className="relative mb-4 h-[2px] w-64 overflow-hidden rounded-full bg-zinc-800">
+          <div className="absolute left-0 top-0 h-full w-1/2 animate-pulse bg-white shadow-[0_0_15px_2px_rgba(255,255,255,0.8)]" />
+        </div>
+        <div className="font-mono text-[10px] uppercase tracking-[0.4em] text-gray-500">
+          INITIALIZING...
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function RoutedPage({ loadPage, pageId, meta }) {
   const PageComponent = useMemo(() => lazy(loadPage), [loadPage]);
 
   return (
-    <Suspense fallback={null}>
+    <Suspense fallback={<PageLoaderFallback />}>
       <MountedPage pageId={pageId} meta={meta} PageComponent={PageComponent} />
     </Suspense>
   );

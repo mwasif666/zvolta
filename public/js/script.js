@@ -1,6 +1,8 @@
 document.addEventListener("DOMContentLoaded", function () {
   gsap.registerPlugin(ScrollTrigger, Observer);
   let scrollObserver;
+  const LOADER_INIT_SECONDS = 2;
+  const LOADER_READY_SECONDS = 1;
 
   // =========================================
   // GLOBAL UI ELEMENTS (Moved to top for scope access)
@@ -50,7 +52,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // B. Continuous "Trickle" Progress (Never Freezes)
   const trickleTween = gsap.to(loaderBar, {
     width: "99%",
-    duration: 15,
+    duration: LOADER_INIT_SECONDS,
     ease: "expo.out",
     onUpdate: function () {
       const prog = this.progress();
@@ -90,8 +92,10 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
+  Promise.all([criticalAssetsLoaded, windowLoaded]).catch(() => {});
+
   // D. Execution Sequence
-  Promise.all([criticalAssetsLoaded, windowLoaded]).then(() => {
+  gsap.delayedCall(LOADER_INIT_SECONDS, () => {
     trickleTween.kill();
 
     const tl = gsap.timeline({
@@ -108,7 +112,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     tl.to(loaderBar, {
       width: "100%",
-      duration: 0.3,
+      duration: 0.12,
       ease: "power2.out",
       onStart: () => {
         if (loaderStatus) loaderStatus.innerText = "READY";
@@ -121,43 +125,48 @@ document.addEventListener("DOMContentLoaded", function () {
       })
       .to(
         [loaderBarContainer, loaderStatusContainer, loaderGlow],
-        { opacity: 0, duration: 0.2 },
-        "+=0.1",
+        { opacity: 0, duration: 0.15 },
+        LOADER_READY_SECONDS - 0.45,
       )
       .to(
         loaderLogo,
         {
           scale: 20,
-          duration: 0.6,
+          duration: 0.45,
           ease: "expo.in",
           force3D: true,
         },
-        "<",
+        LOADER_READY_SECONDS - 0.45,
       )
-      .to(loaderLogo, { opacity: 0, duration: 0.2 }, "-=0.2")
+      .to(loaderLogo, { opacity: 0, duration: 0.15 }, LOADER_READY_SECONDS - 0.2)
       .set(loaderContent, { opacity: 0 })
-      .to(blindTop, { scaleY: 0, duration: 0.8, ease: "power4.inOut" }, "-=0.3")
-      .to(blindBottom, { scaleY: 0, duration: 0.8, ease: "power4.inOut" }, "<")
+      .to(
+        blindTop,
+        { scaleY: 0, duration: 0.35, ease: "power4.inOut" },
+        LOADER_READY_SECONDS - 0.35,
+      )
+      .to(blindBottom, { scaleY: 0, duration: 0.35, ease: "power4.inOut" }, "<")
+      .set(loaderElement, { display: "none" }, LOADER_READY_SECONDS)
       .to(
         heroBg,
         {
           scale: 1,
-          duration: 1.5,
+          duration: LOADER_READY_SECONDS,
           ease: "power2.out",
         },
-        "-=0.6",
+        0,
       )
       .to(
         heroElements,
         {
           y: 0,
           opacity: 1,
-          duration: 0.8,
+          duration: 0.6,
           stagger: 0.1,
           ease: "out",
           clearProps: "transform",
         },
-        "-=1.1",
+        0.3,
       );
   });
 
@@ -307,6 +316,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
         targetScrollY += self.deltaY * speedFactor * directionMultiplier;
         targetScrollY = Math.max(0, Math.min(maxScroll, targetScrollY));
+
+        window.dispatchEvent(
+          new CustomEvent("zvolta:virtual-scroll", {
+            detail: {
+              delta: self.deltaY * speedFactor * directionMultiplier,
+              scrollY: targetScrollY,
+            },
+          }),
+        );
       },
       onPress: (self) => {
         targetScrollY = scrollY;
@@ -685,12 +703,13 @@ document.addEventListener("DOMContentLoaded", function () {
   const appTabs = document.querySelectorAll(".app-tab");
   const appTabBg = document.getElementById("app-tab-bg");
   const screenImg = document.getElementById("app-screen-img");
+  const appVisualStage = document.getElementById("app-visual-stage");
   const userScreenSrc =
     screenImg?.dataset.userSrc ||
     "https://res.cloudinary.com/diywraupt/image/upload/v1778335134/Gray_and_Black_Modern_Handphone_Mockup_Instagram_Story_5_iti1ef.png";
   const hostScreenSrc =
     screenImg?.dataset.hostSrc ||
-    "https://res.cloudinary.com/diywraupt/image/upload/v1778335192/Gray_and_Black_Modern_Handphone_Mockup_Instagram_Story_6_dw7l4e.png";
+    "https://res.cloudinary.com/diywraupt/image/upload/v1778837244/4661725e-e5ca-4b5b-b3ed-5f38934a4d9e.png";
 
   const appData = {
     user: [
@@ -757,6 +776,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         tl.add(() => {
           const newSrc = target === "user" ? userScreenSrc : hostScreenSrc;
+          appVisualStage?.classList.toggle("is-host-mode", target === "host");
           screenImg.src = newSrc;
           cards.forEach((card, i) => {
             card.querySelector(".card-title").innerText = data[i].title;
@@ -1389,6 +1409,14 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     }
 
+    const trigger = document.getElementById("dropdown-trigger");
+    const menu = document.getElementById("dropdown-menu");
+    const arrow = document.getElementById("dropdown-arrow");
+    const selectedText = document.getElementById("dropdown-selected-text");
+    const hiddenInput = document.getElementById("dropdown-hidden-input");
+    const helpInput = document.getElementById("dropdown-help-input");
+    const items = document.querySelectorAll(".dropdown-item");
+
     if (trigger && menu && arrow && selectedText && hiddenInput) {
       trigger.addEventListener("click", () => {
         const isOpen = !menu.classList.contains("opacity-0");
@@ -1416,8 +1444,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
           selectedText.innerText = text;
           selectedText.classList.remove("text-zinc-500");
-          selectedText.classList.add("text-zinc-900");
+          selectedText.classList.add("text-white");
           hiddenInput.value = value;
+          if (helpInput) helpInput.value = text.trim();
 
           menu.classList.add(
             "opacity-0",
@@ -1448,14 +1477,8 @@ document.addEventListener("DOMContentLoaded", function () {
   // =========================================
   const heroImg = document.getElementById("hero-bg-img");
   if (heroImg) {
-    const currentHour = new Date().getHours();
-    const dayImage = "img/Hero/Zv%20-%20Main%20Banner%20Day.png";
-    const nightImage = "img/Hero/Zv%20-%20Main%20Banner.png";
-    if (currentHour < 6 || currentHour >= 18) {
-      heroImg.src = nightImage;
-    } else {
-      heroImg.src = dayImage;
-    }
+    heroImg.src =
+      "https://res.cloudinary.com/diywraupt/image/upload/v1778829470/Day_New-clean_xksizj.png";
   }
 
   // =========================================

@@ -27,7 +27,7 @@ export const blogPosts = [
   {
     id: "ev-rickshaw-economics",
     slug: "ev-rickshaw-economics",
-    category: "EV Programs",
+    category: "Charging Investment",
     date: "April 12, 2026",
     readTime: "4 min read",
     author: "Mobility Desk",
@@ -39,7 +39,7 @@ export const blogPosts = [
     content: [
       "Electric rickshaws make the most sense when the full operating picture is considered: energy cost, maintenance, route consistency, charging access, and rider demand.",
       "For drivers, predictable charging and a managed vehicle program can reduce friction. For fleet operators, the benefit comes from clear utilization data and a support system that keeps vehicles on the road.",
-      "The strongest EV programs connect vehicle access with charging access. That pairing is what turns electric mobility from a one-time purchase into a working transport system.",
+      "The strongest charging investments connect vehicle demand with charging access. That pairing is what turns electric mobility from a one-time purchase into a working transport system.",
     ],
     points: [
       "Reduced fuel dependency",

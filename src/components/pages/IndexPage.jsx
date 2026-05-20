@@ -246,7 +246,7 @@ export default function IndexPage() {
               >
                 <img
                   id="hero-bg-img"
-                  src="https://res.cloudinary.com/dk4bqjm38/image/upload/v1770803382/Zv_-_Main_Banner_Day_tquqsm.png"
+                  src="https://res.cloudinary.com/diywraupt/image/upload/v1778829470/Day_New-clean_xksizj.png"
                   alt="ZVolta Background"
                   className="absolute inset-0 w-full h-full object-cover z-0 select-none pointer-events-none"
                   data-critical="true"
@@ -735,8 +735,8 @@ export default function IndexPage() {
                             Plug In
                           </h3>
                           <p className="text-base 3xl:text-xl text-white leading-snug min-h-[4.2em]">
-                            Park, top-up wallet, and start a session by
-                            scanning the QR code on screen.
+                            Park, top-up wallet, and start a session by scanning
+                            the QR code on screen.
                           </p>
                         </div>
                       </div>
@@ -959,7 +959,7 @@ export default function IndexPage() {
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[60vw] bg-[#16a34a]/10 blur-[120px] rounded-full pointer-events-none z-0" />
                 <div className="relative z-10 max-w-7xl 3xl:max-w-[1800px] mx-auto flex flex-col items-center text-center">
                   <div className="max-w-5xl mx-auto mb-6 app-content-animate">
-                    <h2 className="text-4xl md:text-6xl 3xl:text-8xl font-display font-bold tracking-tight leading-[1.05]">
+                    <h2 className="text-3xl md:text-5xl 3xl:text-6xl font-display font-bold tracking-tight leading-[1.05]">
                       One connected platform for seamless EV charging
                       <span className="text-[#16a34a]"> management.</span>
                     </h2>
@@ -982,7 +982,10 @@ export default function IndexPage() {
                       For Hosts
                     </button>
                   </div>
-                  <div className="relative w-full max-w-[1000px] 3xl:max-w-[1400px] h-[550px] md:h-[650px] 3xl:h-[850px] flex justify-center items-center perspective-1000">
+                  <div
+                    id="app-visual-stage"
+                    className="app-visual-stage relative w-full max-w-[1000px] 3xl:max-w-[1400px] h-[550px] md:h-[650px] 3xl:h-[850px] flex justify-center items-center perspective-1000"
+                  >
                     <div
                       id="card-1"
                       className="hidden md:block absolute top-[10%] left-[12%] z-30 floating-card"
@@ -1058,13 +1061,19 @@ export default function IndexPage() {
                         </div>
                       </div>
                     </div>
-                    <div className="relative w-[280px] md:w-[320px] 3xl:w-[420px] h-full transition-transform duration-700 ease-out will-change-transform z-20">
-                      <div className="phone-mockup h-full w-full shadow-2xl relative overflow-hidden">
+                    <div
+                      id="app-phone-shell"
+                      className="app-phone-shell relative w-[280px] md:w-[320px] 3xl:w-[420px] h-full transition-transform duration-700 ease-out will-change-transform z-20"
+                    >
+                      <div
+                        id="app-image-frame"
+                        className="app-image-frame phone-mockup h-full w-full shadow-2xl relative overflow-hidden"
+                      >
                         <img
                           id="app-screen-img"
                           src="https://res.cloudinary.com/diywraupt/image/upload/v1778335134/Gray_and_Black_Modern_Handphone_Mockup_Instagram_Story_5_iti1ef.png"
                           data-user-src="https://res.cloudinary.com/diywraupt/image/upload/v1778335134/Gray_and_Black_Modern_Handphone_Mockup_Instagram_Story_5_iti1ef.png"
-                          data-host-src="https://res.cloudinary.com/diywraupt/image/upload/v1778335192/Gray_and_Black_Modern_Handphone_Mockup_Instagram_Story_6_dw7l4e.png"
+                          data-host-src="https://res.cloudinary.com/diywraupt/image/upload/v1778837244/4661725e-e5ca-4b5b-b3ed-5f38934a4d9e.png"
                           className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500"
                           alt="App Screen"
                         />
@@ -1105,10 +1114,7 @@ export default function IndexPage() {
                   </div>
                 </div>
               </section>
-              <section
-                id="bento-section"
-                className="hidden"
-              >
+              <section id="bento-section" className="hidden">
                 <div className="max-w-[1200px] 3xl:max-w-[1800px] mx-auto">
                   <div className="grid grid-cols-1 md:grid-cols-3 grid-rows-auto md:grid-rows-[minmax(350px,auto)_minmax(350px,auto)] 3xl:grid-rows-[minmax(500px,auto)_minmax(500px,auto)] gap-6 3xl:gap-10">
                     <div className="md:col-span-2 bg-zinc-900 border border-zinc-800 rounded-[2.5rem] p-8 md:p-12 3xl:p-16 relative overflow-hidden group hover:border-emerald-500/50 hover:shadow-[0_0_40px_-10px_rgba(16,185,129,0.3)] transition-all duration-500 text-white">
@@ -1420,10 +1426,7 @@ export default function IndexPage() {
                     "\n    /* Custom Keyframes for the Team Marquee */\n    @keyframes marquee-up {\n        0% { transform: translateY(0); }\n        100% { transform: translateY(-50%); }\n    }\n    @keyframes marquee-down {\n        0% { transform: translateY(-50%); }\n        100% { transform: translateY(0); }\n    }\n    .animate-marquee-up {\n        animation: marquee-up 30s linear infinite;\n    }\n    .animate-marquee-down {\n        animation: marquee-down 30s linear infinite;\n    }\n    /* Hover state: Pause or Slow down */\n    .group\\/card:hover .animate-marquee-up,\n    .group\\/card:hover .animate-marquee-down {\n        animation-play-state: paused;\n    }\n",
                 }}
               />
-              <section
-                id="team-section"
-                className="hidden"
-              >
+              <section id="team-section" className="hidden">
                 <div className="max-w-[1400px] w-full mx-auto px-6 relative flex flex-col justify-center">
                   <div className="text-center mb-16 shrink-0">
                     <h2 className="text-3xl md:text-5xl 3xl:text-6xl font-display font-bold leading-tight max-w-7xl mx-auto text-zinc-900 tracking-tight">
@@ -1823,6 +1826,11 @@ export default function IndexPage() {
                             id="dropdown-hidden-input"
                             required
                           />
+                          <input
+                            type="hidden"
+                            name="How can we help"
+                            id="dropdown-help-input"
+                          />
                         </div>
                       </div>
                       <div className="group space-y-3">
@@ -1939,7 +1947,7 @@ export default function IndexPage() {
                     <div className="group p-8 md:p-12 hover:bg-white/5 transition-colors duration-300 flex flex-col h-full min-h-[300px]">
                       <div className="mb-auto">
                         <h3 className="text-xl md:text-2xl font-bold mb-6 text-white">
-                          Charge Your EV
+                          Charge your EV
                         </h3>
                         <ul className="space-y-4 text-zinc-400">
                           <li>

@@ -513,8 +513,8 @@ export default function ChargingPartnersPage() {
             <div className="max-w-[1400px] mx-auto px-6 grid lg:grid-cols-2 gap-16 relative z-10">
               <div className="flex flex-col justify-center">
                 <img
-                  src="img/LOGO-WHITE.png"
-                  alt="ZVolta"
+                  src="img/full_logowhite.png"
+                  alt="Zvolta"
                   className="h-10 w-auto object-contain object-left mb-10 opacity-80"
                 />
                 <h2 className="text-4xl md:text-6xl font-display font-bold mb-6">
@@ -522,7 +522,7 @@ export default function ChargingPartnersPage() {
                   <span className="text-emerald-500">Partner</span>.
                 </h2>
                 <p className="text-xl text-zinc-400 mb-10 leading-relaxed">
-                  Join ZVoltaâ€™s nationwide network. Fill out the form, and our
+                  Join the Zvolta nationwide network. Fill out the form, and our
                   team will get back to you to assess your site.
                 </p>
                 <ul className="space-y-4 text-zinc-300">
@@ -958,7 +958,7 @@ export default function ChargingPartnersPage() {
               />
               <div className="hidden md:block w-px h-6 bg-zinc-800" />
               <div className="text-zinc-500 text-sm flex gap-6">
-                <span>Â© 2025 ZVolta Inc.</span>
+                <span>&copy; 2025 Zvolta Inc.</span>
               </div>
             </div>
             <div className="flex gap-6">

@@ -183,7 +183,7 @@ export default function DriverNetworkPage() {
                   data-delay={100}
                 >
                   We've created a simple rent-and-earn model with zero
-                  downpayment, so you can focus on what matters: driving and
+                  down payment, so you can focus on what matters: driving and
                   earning.
                 </p>
                 <div
@@ -371,8 +371,8 @@ export default function DriverNetworkPage() {
                         />
                       </svg>
                       <div>
-                        <span className="font-bold">Zero Downpayment.</span>{" "}
-                        Save your self from initial up-front partial payment
+                        <span className="font-bold">Zero Down Payment.</span>{" "}
+                        Save yourself from the initial up-front partial payment
                       </div>
                     </li>
                     <li className="flex items-start">

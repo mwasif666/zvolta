@@ -46,7 +46,7 @@ export default function StoriesPage() {
             </h1>
           </div>
           <p className="max-w-2xl text-base leading-8 text-white/72 sm:text-lg">
-            This page is closer to Aivora's editorial and blog feel than the
+            This page is closer to ZVolta's editorial and blog feel than the
             other company pages. It sits between product and field narrative,
             showing how hosts, drivers, sites, and operators all shape the
             ZVolta story together.

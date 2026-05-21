@@ -82,7 +82,7 @@ export default function SupportPage() {
               </h1>
             </div>
             <p className="max-w-2xl text-base leading-8 text-white/72 sm:text-lg">
-              This page leans into the Aivora contact/support rhythm instead of
+              This page leans into the ZVolta contact/support rhythm instead of
               the same template shell. The goal is simple: drivers, hosts, and
               operators should know where to go and what kind of help they can
               expect.

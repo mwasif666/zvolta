@@ -341,7 +341,7 @@ export default function PolicyPage() {
                     to enter into binding contracts.
                   </p>
                   <p>
-                    1.2. You must hold a valid driver's licence (or equivalent)
+                    1.2. You must hold a valid driver's license (or equivalent)
                     and operate or own an electric vehicle compatible with our
                     Services.
                   </p>
@@ -385,7 +385,7 @@ export default function PolicyPage() {
                     2.2. You are responsible for safeguarding your login
                     credentials, and for all activities that occur under your
                     account. You must notify Zvolta immediately of any
-                    unauthorised use of your account or any other security
+                    unauthorized use of your account or any other security
                     breach.
                   </p>
                   <p>
@@ -427,7 +427,7 @@ export default function PolicyPage() {
                       or charging stations;
                     </li>
                     <li>
-                      attempts to gain unauthorised access to our systems or any
+                      attempts to gain unauthorized access to our systems or any
                       networks, servers or equipment connected thereto;
                     </li>
                     <li>

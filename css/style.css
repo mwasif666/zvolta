@@ -387,11 +387,40 @@ body {
 
 /* Phone Mockup */
 .phone-mockup {
+    box-sizing: border-box;
+    border: 1px solid #2A2A2A;
+    border-radius: 42px;
+    background: #050505;
+    padding: 12px;
     box-shadow:
-        0 0 0 2px #3f3f46, /* Outer bezel */
-        0 20px 50px -10px rgba(0,0,0,0.5); /* Deep shadow */
+        inset 0 0 0 2px rgba(255,255,255,0.04),
+        0 28px 80px rgba(0,0,0,0.42);
     transition: transform 0.5s ease;
     will-change: transform;
+}
+
+.phone-mockup #app-screen-img {
+    position: absolute !important;
+    inset: 12px !important;
+    width: calc(100% - 24px) !important;
+    height: calc(100% - 24px) !important;
+    border-radius: 32px;
+    object-fit: cover;
+    display: block;
+    background: #ffffff;
+}
+
+.app-phone-speaker {
+    position: absolute;
+    top: 21px;
+    left: 50%;
+    z-index: 4;
+    width: 78px;
+    height: 21px;
+    transform: translateX(-50%);
+    border-radius: 999px;
+    background: #050505;
+    pointer-events: none;
 }
 
 .app-visual-stage {
@@ -412,21 +441,26 @@ body {
 }
 
 .app-visual-stage.is-host-mode {
-    max-width: min(1400px, 100vw);
-    height: clamp(520px, 64vw, 760px);
+    max-width: min(1120px, 92vw);
+    height: clamp(360px, 44vw, 520px);
 }
 
 .app-visual-stage.is-host-mode .app-phone-shell {
-    width: min(94%, 1240px) !important;
+    width: min(92%, 1080px) !important;
     height: 100%;
 }
 
 .app-visual-stage.is-host-mode .app-image-frame {
     background: transparent !important;
     border: 0 !important;
+    padding: 0 !important;
     border-radius: 0 !important;
     box-shadow: none !important;
     overflow: visible !important;
+}
+
+.app-visual-stage.is-host-mode .app-phone-speaker {
+    display: none;
 }
 
 .app-visual-stage.is-host-mode #app-screen-img {
@@ -434,7 +468,7 @@ body {
     inset: auto !important;
     width: 100% !important;
     height: 100% !important;
-    object-fit: contain !important;
+    object-fit: cover !important;
 }
 
 .app-visual-stage.is-host-mode #card-1 {

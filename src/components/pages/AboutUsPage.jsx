@@ -62,7 +62,7 @@ function AboutColumn({ image, reverse = false }) {
           >
             <img
               src={item}
-              alt="Aivora inspired about visual"
+              alt="ZVolta about visual"
               className="h-40 w-full object-cover"
             />
           </div>
@@ -135,7 +135,7 @@ export default function AboutUsPage() {
                 <span className="text-white">About Us</span>
               </nav>
               <span className="mb-4 inline-flex rounded-full border border-emerald-500/30 bg-emerald-500/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.24em] text-emerald-300">
-                Aivora pattern, ZVolta purpose
+                ZVolta pattern, ZVolta purpose
               </span>
               <h1 className="max-w-4xl text-5xl font-medium leading-[0.95] tracking-[-0.06em] sm:text-6xl lg:text-7xl">
                 Building the practical
@@ -224,7 +224,7 @@ export default function AboutUsPage() {
                   We grow the network by staying close to the field.
                 </h2>
                 <p className="mt-4 text-base leading-8 text-white/70">
-                  The Aivora about page had a strong image-led rhythm. Here we
+                  The ZVolta story has a strong image-led rhythm. Here we
                   keep that spirit, but the story is fully ZVolta: access,
                   uptime, clarity, and support working together so electric
                   mobility feels more practical every month.

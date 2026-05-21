@@ -984,7 +984,7 @@ export default function HomePage() {
                   </div>
                   <div
                     id="app-visual-stage"
-                    className="app-visual-stage relative w-full max-w-[1000px] 3xl:max-w-[1400px] h-[550px] md:h-[650px] 3xl:h-[850px] flex justify-center items-center perspective-1000"
+                    className="app-visual-stage relative w-full max-w-[1000px] 3xl:max-w-[1400px] h-[490px] md:h-[570px] 3xl:h-[740px] flex justify-center items-center perspective-1000"
                   >
                     <div
                       id="card-1"
@@ -1063,20 +1063,21 @@ export default function HomePage() {
                     </div>
                     <div
                       id="app-phone-shell"
-                      className="app-phone-shell relative w-[280px] md:w-[320px] 3xl:w-[420px] h-full transition-transform duration-700 ease-out will-change-transform z-20"
+                      className="app-phone-shell relative w-[270px] md:w-[270px] 3xl:w-[360px] h-full transition-transform duration-700 ease-out will-change-transform z-20"
                     >
                       <div
                         id="app-image-frame"
-                        className="app-image-frame phone-mockup border-zinc-800 bg-zinc-950 border-[10px] rounded-[3rem] h-full w-full shadow-2xl relative overflow-hidden"
+                        className="app-image-frame phone-mockup h-full w-full shadow-2xl relative overflow-hidden"
                       >
                         <img
                           id="app-screen-img"
-                          src="https://res.cloudinary.com/diywraupt/image/upload/v1778335134/Gray_and_Black_Modern_Handphone_Mockup_Instagram_Story_5_iti1ef.png"
-                          data-user-src="https://res.cloudinary.com/diywraupt/image/upload/v1778335134/Gray_and_Black_Modern_Handphone_Mockup_Instagram_Story_5_iti1ef.png"
+                          src="https://res.cloudinary.com/diywraupt/image/upload/v1778762258/d60c7cfe-e7c3-40f4-a386-3082cbd21bbf.png"
+                          data-user-src="https://res.cloudinary.com/diywraupt/image/upload/v1778762258/d60c7cfe-e7c3-40f4-a386-3082cbd21bbf.png"
                           data-host-src="https://res.cloudinary.com/diywraupt/image/upload/v1778837244/4661725e-e5ca-4b5b-b3ed-5f38934a4d9e.png"
-                          className=""
+                          className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500"
                           alt="App Screen"
                         />
+                        <div className="app-phone-speaker" aria-hidden="true" />
                         <div />
                       </div>
                       <div id="app-phone-glow" className="" />

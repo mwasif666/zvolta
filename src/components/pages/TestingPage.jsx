@@ -109,7 +109,7 @@ export default function TestingPage() {
                     Smalltalk
                   </span>
                   <span className="text-sm font-semibold text-gray-500 cursor-pointer hover:text-white">
-                    Brainf...
+                    Brainfuck
                   </span>
                 </div>
                 <pre>

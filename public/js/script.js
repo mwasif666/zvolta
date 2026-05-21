@@ -408,9 +408,9 @@ document.addEventListener("DOMContentLoaded", function () {
   // =========================================
   const howSection = document.getElementById("how-it-works");
   if (howSection) {
-    const wordSlides = document.querySelectorAll(".dynamic-word");
-    const cardColumns = document.querySelectorAll(".card-column");
-    const btnGroups = document.querySelectorAll(".btn-group");
+    const wordSlides = howSection.querySelectorAll(".dynamic-word");
+    const cardColumns = howSection.querySelectorAll(".card-column");
+    const btnGroups = howSection.querySelectorAll(".btn-group");
     const progressBar = document.getElementById("scroll-progress-bar");
     const scrollIndicator = document.getElementById("how-scroll-indicator");
 

@@ -12,7 +12,7 @@ const faqItems = [
   {
     question: "How much can I earn?",
     answer:
-      "Earnings vary based on location and usage, but we offer transparent profit-sharing models or fixed rent options.",
+      "Earnings vary based on location and usage, with transparent fixed rent options available.",
   },
   {
     question: "Is it safe and legal?",

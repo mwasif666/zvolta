@@ -909,7 +909,7 @@ export default function IndexPage() {
                   </div>
                   <div className="flex flex-col md:flex-row items-center justify-center gap-4 z-20 w-full relative shrink-0 min-h-[120px]">
                     <div
-                      className="btn-group absolute top-0 flex justify-center gap-2 transition-all duration-300 opacity-100 w-full"
+                      className="btn-group absolute top-0 flex justify-center gap-2 opacity-100 w-full"
                       data-state={0}
                     >
                       <SmartLink
@@ -923,7 +923,7 @@ export default function IndexPage() {
                       </SmartLink>
                     </div>
                     <div
-                      className="btn-group absolute top-0 flex justify-center gap-2 transition-all duration-300 opacity-0 pointer-events-none w-full"
+                      className="btn-group absolute top-0 flex justify-center gap-2 opacity-0 pointer-events-none w-full"
                       data-state={1}
                     >
                       <SmartLink
@@ -937,7 +937,7 @@ export default function IndexPage() {
                       </SmartLink>
                     </div>
                     <div
-                      className="btn-group absolute top-0 flex justify-center gap-2 transition-all duration-300 opacity-0 pointer-events-none w-full"
+                      className="btn-group absolute top-0 flex justify-center gap-2 opacity-0 pointer-events-none w-full"
                       data-state={2}
                     >
                       <SmartLink

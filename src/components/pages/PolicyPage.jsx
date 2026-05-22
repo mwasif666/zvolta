@@ -4,9 +4,13 @@ export default function PolicyPage() {
   return (
     <>
       <style data-page-style="policy:1">{`/* --- Base Styles --- */
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: 'Questrial', sans-serif;
-            background-color: #F8FAFC; /* Lighter Slate */
+            background-color: #FFFFFF;
             color: #2a3b1e; /* Slate-800 */
             overflow-x: hidden;
             position: relative;
@@ -173,7 +177,7 @@ export default function PolicyPage() {
         .navbar-scrolled a.shimmer-effect {
             color: #ffffff !important;
         }`}</style>
-      <div>
+      <div className="bg-white text-[#2a3b1e]">
         <div className="gradient-blob-1" />
         <div className="gradient-blob-2" />
         <div className="gradient-blob-3" />

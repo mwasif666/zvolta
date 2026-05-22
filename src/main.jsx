@@ -21,19 +21,46 @@ function ScrollController() {
       window.history.scrollRestoration = "manual";
     }
 
-    const scrollToTop = () => {
-      window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+    const refreshScrollAnimations = () => {
       window.ScrollTrigger?.refresh?.();
     };
 
-    if (location.hash) {
-      const element = document.getElementById(location.hash.slice(1));
+    const scrollToTop = () => {
+      window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+      refreshScrollAnimations();
+    };
 
-      if (element) {
-        element.scrollIntoView();
-        window.ScrollTrigger?.refresh?.();
+    if (location.hash) {
+      const hashId = decodeURIComponent(location.hash.slice(1));
+      const scrollToHashTarget = () => {
+        const element = document.getElementById(hashId);
+
+        if (!element) {
+          return false;
+        }
+
+        const top = element.getBoundingClientRect().top + window.scrollY;
+        window.scrollTo({ top, left: 0, behavior: "smooth" });
+        refreshScrollAnimations();
+        return true;
+      };
+
+      if (scrollToHashTarget()) {
         return;
       }
+
+      const frame = window.requestAnimationFrame(scrollToHashTarget);
+      const timers = [
+        window.setTimeout(scrollToHashTarget, 80),
+        window.setTimeout(scrollToHashTarget, 240),
+        window.setTimeout(scrollToHashTarget, 600),
+        window.setTimeout(scrollToHashTarget, 1200),
+      ];
+
+      return () => {
+        window.cancelAnimationFrame(frame);
+        timers.forEach((timer) => window.clearTimeout(timer));
+      };
     }
 
     scrollToTop();
@@ -48,6 +75,71 @@ function ScrollController() {
       timers.forEach((timer) => window.clearTimeout(timer));
     };
   }, [location.pathname, location.search, location.hash]);
+
+  useEffect(() => {
+    const scrollToHash = (hash) => {
+      const hashId = decodeURIComponent(hash.replace(/^#/, ""));
+      const element = document.getElementById(hashId);
+
+      if (!element) {
+        return false;
+      }
+
+      const top = element.getBoundingClientRect().top + window.scrollY;
+      window.scrollTo({ top, left: 0, behavior: "smooth" });
+      window.ScrollTrigger?.refresh?.();
+      return true;
+    };
+
+    const handleSamePageHashClick = (event) => {
+      if (
+        event.defaultPrevented ||
+        event.button !== 0 ||
+        event.metaKey ||
+        event.ctrlKey ||
+        event.shiftKey ||
+        event.altKey
+      ) {
+        return;
+      }
+
+      const link = event.target.closest?.("a[href]");
+
+      if (!link || link.target || link.hasAttribute("download")) {
+        return;
+      }
+
+      const url = new URL(link.href, window.location.href);
+
+      if (
+        url.origin !== window.location.origin ||
+        !url.hash ||
+        url.pathname !== window.location.pathname ||
+        url.search !== window.location.search
+      ) {
+        return;
+      }
+
+      event.preventDefault();
+
+      const nextLocation = `${url.pathname}${url.search}${url.hash}`;
+      const currentLocation = `${window.location.pathname}${window.location.search}${window.location.hash}`;
+
+      if (nextLocation !== currentLocation) {
+        window.history.pushState({}, "", nextLocation);
+      }
+
+      if (!scrollToHash(url.hash)) {
+        window.setTimeout(() => scrollToHash(url.hash), 120);
+      }
+    };
+
+    document.addEventListener("click", handleSamePageHashClick, true);
+
+    return () => {
+      document.removeEventListener("click", handleSamePageHashClick, true);
+    };
+  }, []);
 
   return null;
 }

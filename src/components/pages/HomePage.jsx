@@ -2232,20 +2232,6 @@ export default function HomePage() {
                           href="/coming-soon"
                           className="hover:text-white transition-colors"
                         >
-                          Sustainability
-                        </SmartLink>
-                        <SmartLink
-                          href="/policy#privacy-policy"
-                          className="hover:text-white transition-colors"
-                        >
-                          Privacy Policy
-                        </SmartLink>
-                      </div>
-                      <div className="flex flex-col gap-2">
-                        <SmartLink
-                          href="/coming-soon"
-                          className="hover:text-white transition-colors"
-                        >
                           Team
                         </SmartLink>
                         <SmartLink
@@ -2260,13 +2246,27 @@ export default function HomePage() {
                           href="/policy#terms-and-conditions"
                           className="hover:text-white transition-colors"
                         >
-                          Terms of Service
+                          Terms and Conditions
                         </SmartLink>
                         <SmartLink
-                          href="/coming-soon"
+                          href="/policy#standard-service-policy"
                           className="hover:text-white transition-colors"
                         >
-                          Submit a Report
+                          Standard Service Policy
+                        </SmartLink>
+                      </div>
+                      <div className="flex flex-col gap-2">
+                        <SmartLink
+                          href="/policy#privacy-policy"
+                          className="hover:text-white transition-colors"
+                        >
+                          Privacy Policy
+                        </SmartLink>
+                        <SmartLink
+                          href="/policy#returns-policy"
+                          className="hover:text-white transition-colors"
+                        >
+                          Returns Policy
                         </SmartLink>
                       </div>
                     </div>

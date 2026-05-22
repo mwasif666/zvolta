@@ -751,20 +751,6 @@ function SiteFooter() {
               </Link>
             </div>
             <div className="flex flex-col gap-2">
-              <Link
-                to="/about-us"
-                className="hover:text-white transition-colors"
-              >
-                Sustainability
-              </Link>
-              <Link
-                to="/policy#privacy-policy"
-                className="hover:text-white transition-colors"
-              >
-                Privacy Policy
-              </Link>
-            </div>
-            <div className="flex flex-col gap-2">
               <Link to="/team" className="hover:text-white transition-colors">
                 Team
               </Link>
@@ -780,13 +766,27 @@ function SiteFooter() {
                 to="/policy#terms-and-conditions"
                 className="hover:text-white transition-colors"
               >
-                Terms of Service
+                Terms and Conditions
               </Link>
               <Link
-                to="/coming-soon"
+                to="/policy#standard-service-policy"
                 className="hover:text-white transition-colors"
               >
-                Submit a Report
+                Standard Service Policy
+              </Link>
+            </div>
+            <div className="flex flex-col gap-2">
+              <Link
+                to="/policy#privacy-policy"
+                className="hover:text-white transition-colors"
+              >
+                Privacy Policy
+              </Link>
+              <Link
+                to="/policy#returns-policy"
+                className="hover:text-white transition-colors"
+              >
+                Returns Policy
               </Link>
             </div>
           </div>
@@ -943,9 +943,11 @@ function SiteRouteLoader({ pathname }) {
 
 export function SiteLayout({ children }) {
   const { pathname } = useLocation();
-  const isHomepage = HOMEPAGE_PATHS.has(pathname.toLowerCase());
+  const normalizedPathname = pathname.toLowerCase();
+  const isHomepage = HOMEPAGE_PATHS.has(normalizedPathname);
+  const isPolicyPage = ["/policy", "/legal"].includes(normalizedPathname);
 
-  useSmoothScroll(!isHomepage);
+  useSmoothScroll(!isHomepage && !isPolicyPage);
   useScrollReveal(!isHomepage, pathname);
 
   return (

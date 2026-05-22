@@ -1,12 +1,12 @@
 const legalPageData = {
   pageId: "policy",
   routeFolder: "legal",
-  componentFile: "LegalPage.jsx",
+  componentFile: "PolicyPage.jsx",
   paths: ["/legal", "/policy"],
   meta: {
-    title: "Legal | ZVolta Policies And Terms",
+    title: "Policies | ZVolta",
     description:
-      "Review ZVolta's legal information covering terms, privacy, program responsibilities, and payment-related policy areas.",
+      "Review the Terms and Conditions, Privacy Policy, Returns Policy, and Standard Service Policy for Zvolta Private Limited.",
   },
 };
 

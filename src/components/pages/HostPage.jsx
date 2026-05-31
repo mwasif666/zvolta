@@ -1,5 +1,10 @@
 import { useMemo, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
+import { Navigation, Pagination } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 import { SmartLink } from "../SmartLink";
 
 const chargers = [
@@ -20,6 +25,66 @@ const chargers = [
     description:
       "Built for locations with shorter dwell times like malls, parking areas, and petrol stations.",
     href: "/22kw-charger",
+  },
+];
+
+const chargerOptionCards = [
+  {
+    title: "3kW Charger",
+    description: "Best for small spaces and low usage.",
+    href: "/3kw-charger",
+    features: ["Ideal for bikes & EVs", "Homes, shops & small offices"],
+    power: "3kW",
+    bestFor: "Low usage",
+    price: "Starts from 75k",
+  },
+  {
+    title: "7kW Charger",
+    description: "Perfect balance of speed and efficiency.",
+    href: "/7kw-charger",
+    features: [
+      "Ideal for cars & daily charging",
+      "Apartments, workplaces, commercial spaces",
+    ],
+    power: "7kW",
+    bestFor: "Medium usage",
+    price: "Available",
+    popular: true,
+  },
+  {
+    title: "22kW Charger",
+    description: "High power for high traffic locations.",
+    href: "/22kw-charger",
+    features: [
+      "Fast charging for more vehicles",
+      "Commercial, public & fleet use",
+    ],
+    power: "22kW",
+    bestFor: "High usage",
+    price: "Available",
+  },
+];
+
+const chargerOptionBenefits = [
+  {
+    icon: "bolt",
+    title: "Safe & reliable",
+    copy: "Built with advanced protection",
+  },
+  {
+    icon: "shield",
+    title: "Smart & efficient",
+    copy: "Optimize power & reduce costs",
+  },
+  {
+    icon: "tools",
+    title: "Easy installation",
+    copy: "Wall or pedestal mount options",
+  },
+  {
+    icon: "chart",
+    title: "Scalable solutions",
+    copy: "From small sites to high traffic areas",
   },
 ];
 
@@ -121,8 +186,21 @@ const hostWhoBenefits = [
 ];
 
 const installationOptions = [
-  { title: "Vertical wall", type: "vertical" },
-  { title: "Standing", type: "standing" },
+  {
+    title: "Vertical wall",
+    type: "vertical",
+    icon: "phone",
+    description:
+      "Sleek wall-mounted installation for a clean, space-saving setup.",
+    ideal: "Ideal for garages & indoor walls",
+  },
+  {
+    title: "Standing",
+    type: "standing",
+    icon: "plug",
+    description: "Freestanding installation for flexible placement anywhere.",
+    ideal: "Ideal for driveways & open areas",
+  },
 ];
 
 const safetyFeatures = [
@@ -187,11 +265,29 @@ const pricingPlans = [
 ];
 
 const partnerLogos = [
-  { src: "/img/Easypaisa.webp", alt: "Easypaisa" },
-  { src: "/img/biomas_energy.png", alt: "Biomas Energy" },
-  { src: "/img/blitz.png", alt: "Blitz" },
-  { src: "/img/Black-logo.webp", alt: "Zvolta partner" },
-  { src: "/img/full_Logoblack.png", alt: "Zvolta" },
+  {
+    src: "https://revoo-ev.com.pk/static/home/images/logofiamfz1-1.svg",
+    alt: "Revoo",
+  },
+  {
+    src: "https://vlektra.com/wp-content/uploads/2025/03/image-42-e1755686386806.png",
+    alt: "Vlektra",
+    invert: true,
+  },
+  {
+    src: "https://workhall.co/_next/image?url=%2Fimages%2Fwh.png&w=128&q=100",
+    alt: "Workhall",
+  },
+  {
+    src: "https://ecodost.com.pk/wp-content/uploads/2024/05/Ecodost-01.svg",
+    alt: "Ecodost",
+    invert: true,
+  },
+  {
+    src: "/img/Black-logo.webp",
+    alt: "Sazgar",
+    invert: true,
+  },
 ];
 
 const stories = [
@@ -264,6 +360,24 @@ const hostHowFooter = [
   { icon: "wallet", copy: "Payments made simple" },
   { icon: "wallet", copy: "Cashless" },
   { icon: "bolt", copy: "Automatic" },
+];
+
+const roiHighlights = [
+  {
+    icon: "bolt",
+    title: "Fast estimate",
+    copy: "See your potential monthly earnings in seconds.",
+  },
+  {
+    icon: "chart",
+    title: "Simple monthly model",
+    copy: "Based on price and typical usage per charger.",
+  },
+  {
+    icon: "shield",
+    title: "No commitment",
+    copy: "Explore your opportunity with zero obligation.",
+  },
 ];
 
 function Icon({ name, className = "h-5 w-5" }) {
@@ -454,6 +568,18 @@ function Icon({ name, className = "h-5 w-5" }) {
     );
   }
 
+  if (name === "chart") {
+    return (
+      <svg {...props}>
+        <path d="M4 19V9" />
+        <path d="M10 19V5" />
+        <path d="M16 19v-8" />
+        <path d="M22 19V3" />
+        <path d="M2 19h22" />
+      </svg>
+    );
+  }
+
   return (
     <svg {...props}>
       <circle cx="12" cy="12" r="9" />
@@ -602,6 +728,44 @@ function InstallationDiagram({ type }) {
   );
 }
 
+function InstallationVisual({ type }) {
+  return (
+    <div
+      className={`host-installation-visual host-installation-visual-${type}`}
+    >
+      <span className="host-installation-vignette" />
+      {type === "vertical" ? (
+        <>
+          <span className="host-installation-plant" />
+          <div className="host-installation-wall-charger">
+            <span className="host-installation-wall-light" />
+            <span className="host-installation-wall-mark">
+              <Icon name="bolt" className="h-3 w-3" />
+            </span>
+            <span className="host-installation-wall-cable" />
+          </div>
+        </>
+      ) : (
+        <>
+          <span className="host-installation-floor-glow" />
+          <span className="host-installation-pot" />
+          <div className="host-installation-stand-charger">
+            <span className="host-installation-stand-top" />
+            <span className="host-installation-stand-screen">
+              <Icon name="bolt" className="h-3 w-3" />
+            </span>
+            <span className="host-installation-stand-dot muted" />
+            <span className="host-installation-stand-dot active" />
+            <span className="host-installation-stand-cable" />
+          </div>
+          <span className="host-installation-pole" />
+          <span className="host-installation-base" />
+        </>
+      )}
+    </div>
+  );
+}
+
 export default function HostPage() {
   const [chargerCount, setChargerCount] = useState(2);
   const [unitPrice, setUnitPrice] = useState(120);
@@ -628,7 +792,7 @@ export default function HostPage() {
         }
 
         .host-container {
-          max-width: 1200px;
+          max-width: 1300px;
           margin: 0 auto;
           padding: 0 24px;
         }
@@ -678,6 +842,382 @@ export default function HostPage() {
           background: linear-gradient(to left, #0B0B0B, transparent);
         }
 
+        .host-partners-section {
+          position: relative;
+          overflow: hidden;
+          border-bottom: 1px solid #123327;
+          padding: 128px 0 112px;
+          background:
+            radial-gradient(circle at 86% 32%, rgba(0, 229, 168, 0.2), transparent 24%),
+            radial-gradient(circle at 58% 98%, rgba(0, 229, 168, 0.08), transparent 28%),
+            linear-gradient(115deg, #030403 0%, #06100d 50%, #020403 100%);
+          isolation: isolate;
+        }
+
+        .host-partners-section::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          z-index: -3;
+          background:
+            linear-gradient(90deg, rgba(0, 0, 0, 0.48), rgba(0, 0, 0, 0.12) 54%, rgba(0, 0, 0, 0.34)),
+            repeating-radial-gradient(circle at 34% 18%, rgba(255, 255, 255, 0.035) 0 1px, transparent 1px 4px);
+          opacity: 0.42;
+        }
+
+        .host-partners-section::after {
+          content: '';
+          position: absolute;
+          inset: auto 0 0;
+          z-index: -2;
+          height: 42%;
+          background: linear-gradient(0deg, rgba(0, 0, 0, 0.58), transparent);
+          pointer-events: none;
+        }
+
+        .host-partners-bolt {
+          position: absolute;
+          z-index: -1;
+          right: -80px;
+          top: -72px;
+          width: 520px;
+          height: 760px;
+          opacity: 0.56;
+          pointer-events: none;
+          filter:
+            drop-shadow(0 0 18px rgba(0, 229, 168, 0.75))
+            drop-shadow(0 0 54px rgba(0, 229, 168, 0.35));
+        }
+
+        .host-partners-bolt::before,
+        .host-partners-bolt::after {
+          content: '';
+          position: absolute;
+          inset: 0;
+          clip-path: polygon(58% 0, 96% 0, 70% 39%, 100% 39%, 32% 100%, 54% 52%, 22% 52%);
+        }
+
+        .host-partners-bolt::before {
+          background: linear-gradient(160deg, rgba(86, 255, 171, 0.95), rgba(0, 229, 168, 0.12));
+        }
+
+        .host-partners-bolt::after {
+          inset: 4px;
+          background: linear-gradient(115deg, #030403 0%, #06100d 55%, #020403 100%);
+          opacity: 0.92;
+        }
+
+        .host-partners-bolt-soft {
+          position: absolute;
+          right: 0;
+          top: 0;
+          z-index: -2;
+          width: 48vw;
+          height: 100%;
+          background:
+            radial-gradient(ellipse at 62% 50%, rgba(0, 229, 168, 0.22), transparent 46%),
+            linear-gradient(90deg, transparent, rgba(0, 229, 168, 0.08));
+          pointer-events: none;
+        }
+
+        .host-partners-intro {
+          max-width: 950px;
+        }
+
+        .host-partners-eyebrow {
+          display: flex;
+          align-items: center;
+          gap: 24px;
+          color: #58F59B;
+          font-size: 14px;
+          font-weight: 850;
+          line-height: 1;
+          text-transform: uppercase;
+        }
+
+        .host-partners-eyebrow::after {
+          content: '';
+          display: block;
+          width: 116px;
+          height: 1px;
+          background: linear-gradient(90deg, #58F59B, transparent);
+          box-shadow: 0 0 16px rgba(88, 245, 155, 0.85);
+        }
+
+        .host-partners-title {
+          margin-top: 44px;
+          max-width: 930px;
+          color: #FFFFFF;
+          font-size: clamp(44px, 4.25vw, 72px);
+          font-weight: 850;
+          line-height: 1.08;
+          letter-spacing: 0;
+          text-shadow: 0 14px 38px rgba(0, 0, 0, 0.48);
+        }
+
+        .host-partners-title span {
+          color: #58F59B;
+        }
+
+        .host-partners-copy {
+          margin-top: 24px;
+          max-width: 820px;
+          color: #C9CECB;
+          font-size: clamp(18px, 1.45vw, 26px);
+          line-height: 1.45;
+        }
+
+        .host-partner-logo-grid {
+          position: relative;
+          z-index: 1;
+          margin-top: 76px;
+          display: grid;
+          grid-template-columns: repeat(5, minmax(0, 1fr));
+          gap: 20px;
+        }
+
+        .host-partner-logo-card {
+          display: grid;
+          height: 168px;
+          place-items: center;
+          overflow: hidden;
+          border: 1px solid rgba(0, 229, 168, 0.35);
+          border-radius: 11px;
+          background:
+            radial-gradient(circle at 50% 0%, rgba(0, 229, 168, 0.14), transparent 42%),
+            rgba(3, 10, 9, 0.72);
+          padding: 34px;
+          box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.04),
+            0 24px 72px rgba(0, 0, 0, 0.24);
+          backdrop-filter: blur(16px);
+          transition:
+            border-color 0.25s ease,
+            transform 0.25s ease,
+            background 0.25s ease;
+        }
+
+        .host-partner-logo-card:hover {
+          border-color: rgba(88, 245, 155, 0.82);
+          background:
+            radial-gradient(circle at 50% 0%, rgba(0, 229, 168, 0.2), transparent 48%),
+            rgba(4, 14, 12, 0.82);
+          transform: translateY(-2px);
+        }
+
+        .host-partner-logo-card img {
+          max-height: 74px;
+          max-width: 100%;
+          object-fit: contain;
+          opacity: 0.88;
+          filter: grayscale(1) invert(1) brightness(1.75);
+        }
+
+        .host-partner-logo-card img.is-inverted {
+          filter: grayscale(1) invert(1) brightness(1.75);
+        }
+
+        .host-partners-action {
+          margin-top: 52px;
+        }
+
+        .host-partners-button {
+          min-height: 74px;
+          min-width: 290px;
+          justify-content: space-between;
+          border-color: rgba(88, 245, 155, 0.32);
+          border-radius: 11px;
+          background: rgba(3, 10, 9, 0.62);
+          padding: 0 32px;
+          color: #FFFFFF;
+          font-size: 20px;
+          backdrop-filter: blur(16px);
+        }
+
+        .host-partners-button:hover {
+          border-color: rgba(88, 245, 155, 0.8);
+          color: #58F59B;
+        }
+
+        .host-final-cta {
+          position: relative;
+          overflow: hidden;
+          --cta-frame-top: 31%;
+          --cta-frame-height: 45%;
+          --cta-frame-edge: clamp(158px, calc(24vw - 92px), 268px);
+          --cta-line-color: rgba(0, 255, 180, 0.45);
+          padding: 96px 0 104px;
+          background:
+            radial-gradient(circle at 0% 46%, rgba(0, 229, 168, 0.18), transparent 25%),
+            radial-gradient(circle at 100% 40%, rgba(0, 229, 168, 0.21), transparent 28%),
+            linear-gradient(180deg, #050606 0%, #020303 100%);
+          isolation: isolate;
+        }
+
+        .host-final-cta::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          z-index: -3;
+          background:
+            repeating-radial-gradient(circle at 35% 18%, rgba(255, 255, 255, 0.018) 0 1px, transparent 1px 5px),
+            linear-gradient(90deg, rgba(0, 0, 0, 0.24), transparent 50%, rgba(0, 0, 0, 0.22));
+          opacity: 0.3;
+        }
+
+        .host-final-cta::after {
+          content: '';
+          position: absolute;
+          inset: auto 0 0;
+          z-index: -2;
+          height: 28%;
+          background: linear-gradient(0deg, rgba(0, 0, 0, 0.62), transparent);
+          pointer-events: none;
+        }
+
+        .cta-line-left,
+        .cta-line-right,
+        .cta-bottom-line-left,
+        .cta-bottom-line-right {
+          position: absolute;
+          z-index: 0;
+          pointer-events: none;
+        }
+
+        .cta-line-left,
+        .cta-line-right {
+          top: var(--cta-frame-top);
+          height: var(--cta-frame-height);
+          width: clamp(250px, 24vw, 360px);
+          border: 1.5px solid var(--cta-line-color);
+          box-shadow:
+            0 0 20px rgba(0, 255, 180, 0.16),
+            inset 0 0 18px rgba(0, 255, 180, 0.08);
+        }
+
+        .cta-line-left {
+          left: -92px;
+          border-left: 0;
+          border-radius: 0 92px 92px 0;
+        }
+
+        .cta-line-right {
+          right: -92px;
+          border-right: 0;
+          border-radius: 92px 0 0 92px;
+        }
+
+        .cta-line-left::before,
+        .cta-line-right::before {
+          content: '';
+          position: absolute;
+          top: 50%;
+          height: 14px;
+          width: 14px;
+          border-radius: 999px;
+          background: #00E5A8;
+          box-shadow: 0 0 18px rgba(0, 229, 168, 0.95), 0 0 42px rgba(0, 229, 168, 0.45);
+        }
+
+        .cta-line-left::before {
+          right: -8px;
+        }
+
+        .cta-line-right::before {
+          left: -8px;
+        }
+
+        .cta-bottom-line-left,
+        .cta-bottom-line-right {
+          top: calc(var(--cta-frame-top) + var(--cta-frame-height));
+          height: 1.5px;
+          box-shadow: 0 0 18px rgba(0, 255, 180, 0.16);
+        }
+
+        .cta-bottom-line-left {
+          left: var(--cta-frame-edge);
+          right: calc(50% + 188px);
+          background: linear-gradient(90deg, var(--cta-line-color), rgba(0, 255, 180, 0.26), transparent);
+        }
+
+        .cta-bottom-line-right {
+          left: calc(50% + 188px);
+          right: var(--cta-frame-edge);
+          background: linear-gradient(90deg, transparent, rgba(0, 255, 180, 0.26), var(--cta-line-color));
+        }
+
+        .host-final-content {
+          position: relative;
+          z-index: 2;
+          max-width: 820px;
+          margin: 0 auto;
+          text-align: center;
+        }
+
+        .host-final-eyebrow {
+          display: grid;
+          justify-items: center;
+          gap: 16px;
+          color: #00E5A8;
+          font-size: 16px;
+          font-weight: 850;
+          letter-spacing: 0.38em;
+          line-height: 1;
+          text-transform: uppercase;
+        }
+
+        .host-final-eyebrow span {
+          display: grid;
+          width: 245px;
+          grid-template-columns: 1fr 32px 1fr;
+          align-items: center;
+          gap: 14px;
+          color: #00E5A8;
+        }
+
+        .host-final-eyebrow span::before,
+        .host-final-eyebrow span::after {
+          content: '';
+          height: 1px;
+          background: linear-gradient(90deg, transparent, rgba(0, 229, 168, 0.95));
+          box-shadow: 0 0 16px rgba(0, 229, 168, 0.8);
+        }
+
+        .host-final-eyebrow span::after {
+          background: linear-gradient(90deg, rgba(0, 229, 168, 0.95), transparent);
+        }
+
+        .host-final-title {
+          margin-top: 30px;
+          color: #FFFFFF;
+          font-size: clamp(44px, 3.9vw, 68px);
+          font-weight: 850;
+          line-height: 1.08;
+          letter-spacing: 0;
+          text-shadow: 0 14px 38px rgba(0, 0, 0, 0.55);
+        }
+
+        .host-final-copy {
+          margin: 26px auto 0;
+          max-width: 640px;
+          color: #C9CECB;
+          font-size: clamp(18px, 1.25vw, 23px);
+          line-height: 1.42;
+        }
+
+        .host-final-button {
+          min-height: 68px;
+          min-width: 300px;
+          margin-top: 40px;
+          border-radius: 12px;
+          background: #00E5A8;
+          color: #020303;
+          font-size: 21px;
+          box-shadow:
+            0 20px 58px rgba(0, 229, 168, 0.24),
+            inset 0 1px 0 rgba(255, 255, 255, 0.28);
+        }
+
         .host-stories {
           scrollbar-width: none;
         }
@@ -695,9 +1235,9 @@ export default function HostPage() {
         }
 
         .host-hero .host-container {
-          max-width: none;
-          padding-left: clamp(18px, 4.5vw, 80px);
-          padding-right: clamp(18px, 4.5vw, 80px);
+          max-width: 1300px;
+          padding-left: 24px;
+          padding-right: 24px;
         }
 
         .host-hero-bg {
@@ -1381,18 +1921,19 @@ export default function HostPage() {
         }
 
         .host-who-inner {
-          padding: 74px 0;
+          padding: 88px 0 74px;
         }
 
         .host-who-top {
           display: grid;
-          grid-template-columns: minmax(220px, 0.22fr) minmax(0, 0.78fr);
-          gap: 36px;
-          align-items: start;
+          grid-template-columns: minmax(400px, 0.42fr) minmax(0, 0.58fr);
+          gap: 30px;
+          align-items: center;
         }
 
         .host-who-copy {
           min-width: 0;
+          max-width: 500px;
         }
 
         .host-who-eyebrow {
@@ -1420,7 +1961,7 @@ export default function HostPage() {
         .host-who-title {
           margin-top: 28px;
           color: #FFFFFF;
-          font-size: clamp(30px, 2.4vw, 44px);
+          font-size: clamp(42px, 3.55vw, 58px);
           font-weight: 800;
           line-height: 1.1;
           letter-spacing: 0;
@@ -1432,22 +1973,89 @@ export default function HostPage() {
 
         .host-who-copy-text {
           margin-top: 22px;
-          max-width: 300px;
+          max-width: 390px;
           color: #BDBDBD;
-          font-size: 16px;
+          font-size: 18px;
           line-height: 1.5;
         }
 
         .host-who-cards {
+          position: relative;
+          min-width: 0;
+          padding: 0 48px 48px;
+        }
+
+        .host-who-slider {
+          overflow: hidden;
+          border-radius: 10px;
+        }
+
+        .host-who-slider .swiper-wrapper {
+          align-items: stretch;
+        }
+
+        .host-who-slider .swiper-slide {
+          height: auto;
+        }
+
+        .host-who-slider .swiper-pagination {
+          bottom: 2px;
+        }
+
+        .host-who-slider .swiper-pagination-bullet {
+          height: 12px;
+          width: 12px;
+          margin: 0 7px !important;
+          background: rgba(255, 255, 255, 0.35);
+          opacity: 1;
+        }
+
+        .host-who-slider .swiper-pagination-bullet-active {
+          background: #21D85A;
+          box-shadow: 0 0 16px rgba(33, 216, 90, 0.48);
+        }
+
+        .host-who-nav {
+          position: absolute;
+          top: calc(50% - 24px);
+          z-index: 5;
           display: grid;
-          grid-template-columns: repeat(6, minmax(0, 1fr));
-          gap: 12px;
+          height: 54px;
+          width: 54px;
+          place-items: center;
+          border: 0;
+          border-radius: 999px;
+          background: rgba(27, 30, 30, 0.9);
+          color: #21D85A;
+          box-shadow: 0 16px 36px rgba(0, 0, 0, 0.34);
+          cursor: pointer;
+          transition:
+            background 0.2s ease,
+            transform 0.2s ease;
+        }
+
+        .host-who-nav:hover {
+          background: rgba(38, 42, 42, 0.96);
+          transform: translateY(-1px);
+        }
+
+        .host-who-nav-prev {
+          left: 0;
+        }
+
+        .host-who-nav-next {
+          right: 0;
+        }
+
+        .host-who-nav-prev svg {
+          transform: rotate(180deg);
         }
 
         .host-who-card {
           position: relative;
           overflow: hidden;
-          min-height: 250px;
+          height: 360px;
+          min-height: 360px;
           border: 1px solid rgba(255, 255, 255, 0.12);
           border-radius: 8px;
           background: #111111;
@@ -1481,20 +2089,21 @@ export default function HostPage() {
 
         .host-who-card-content {
           display: flex;
-          min-height: 250px;
+          height: 100%;
+          min-height: 360px;
           flex-direction: column;
           align-items: center;
           justify-content: flex-end;
-          padding: 18px 12px 20px;
+          padding: 22px 18px 40px;
           text-align: center;
         }
 
         .host-who-card-title {
-          max-width: 150px;
+          max-width: 170px;
           color: #FFFFFF;
-          font-size: 15px;
+          font-size: 23px;
           font-weight: 800;
-          line-height: 1.2;
+          line-height: 1.12;
           text-shadow: 0 2px 9px rgba(0, 0, 0, 0.75);
         }
 
@@ -1508,11 +2117,11 @@ export default function HostPage() {
         }
 
         .host-who-strip {
-          margin-top: 26px;
+          margin-top: 24px;
           display: grid;
-          grid-template-columns: 170px minmax(220px, 1fr) 1px repeat(3, minmax(120px, 0.62fr)) minmax(150px, 0.75fr);
+          grid-template-columns: minmax(260px, 0.92fr) 1px repeat(3, minmax(120px, 0.58fr)) minmax(160px, 0.72fr);
           align-items: center;
-          gap: 22px;
+          gap: 26px;
           overflow: hidden;
           min-height: 150px;
           border: 1px solid rgba(255, 255, 255, 0.12);
@@ -1522,6 +2131,7 @@ export default function HostPage() {
             rgba(17, 17, 17, 0.76);
           box-shadow: inset 0 0 36px rgba(255, 255, 255, 0.03);
           backdrop-filter: blur(14px);
+          padding: 22px 22px 22px 38px;
         }
 
         .host-who-charger {
@@ -1537,6 +2147,7 @@ export default function HostPage() {
         }
 
         .host-who-strip-title {
+          align-self: center;
           color: #FFFFFF;
           font-size: clamp(26px, 2.1vw, 38px);
           font-weight: 800;
@@ -1585,7 +2196,6 @@ export default function HostPage() {
           display: grid;
           gap: 12px;
           justify-items: stretch;
-          padding-right: 16px;
         }
 
         .host-who-primary {
@@ -2029,6 +2639,325 @@ export default function HostPage() {
           max-width: 190px;
         }
 
+        .host-charger-options {
+          padding: 74px 0 86px;
+          background: #050706;
+        }
+
+        .host-charger-options .host-container {
+          padding-top: 0;
+          padding-bottom: 0;
+        }
+
+        .host-charger-panel {
+          border-color: transparent;
+          border-radius: 0;
+          padding: 68px 0 52px;
+          box-shadow: none;
+          overflow: visible;
+        }
+
+        .host-charger-bg {
+          top: 0;
+          right: 0;
+          height: 610px;
+          width: 100%;
+          clip-path: none;
+          object-position: center;
+          opacity: 0.58;
+        }
+
+        .host-charger-panel::before {
+          background:
+            linear-gradient(90deg, rgba(0, 0, 0, 0.98) 0%, rgba(0, 0, 0, 0.9) 42%, rgba(0, 0, 0, 0.5) 74%, rgba(0, 0, 0, 0.62) 100%),
+            linear-gradient(180deg, rgba(0, 0, 0, 0.16) 0%, rgba(0, 0, 0, 0.4) 42%, rgba(0, 0, 0, 0.9) 70%, rgba(0, 0, 0, 1) 100%);
+        }
+
+        .host-charger-panel-glow {
+          background:
+            radial-gradient(circle at 53% 52%, rgba(0, 229, 168, 0.14), transparent 24%),
+            radial-gradient(circle at 15% 12%, rgba(255, 255, 255, 0.06), transparent 20%);
+        }
+
+        .host-charger-header {
+          min-height: 360px;
+          height: auto;
+          max-width: 820px;
+          padding: 0;
+          justify-content: flex-start;
+        }
+
+        .host-charger-eyebrow {
+          gap: 10px;
+          border: 1px solid rgba(255, 255, 255, 0.16);
+          border-radius: 999px;
+          background: rgba(9, 12, 12, 0.58);
+          padding: 8px 14px;
+          color: #FFFFFF;
+          backdrop-filter: blur(14px);
+        }
+
+        .host-charger-eyebrow span {
+          height: 22px;
+          width: 22px;
+        }
+
+        .host-charger-title {
+          margin-top: 24px;
+          max-width: 790px;
+          font-size: clamp(46px, 4.35vw, 70px);
+          line-height: 1.04;
+        }
+
+        .host-charger-copy {
+          margin-top: 28px;
+          max-width: 620px;
+          color: #CFCFCF;
+          font-size: 20px;
+          line-height: 1.45;
+        }
+
+        .host-charger-grid {
+          margin-top: 38px;
+          gap: 22px;
+        }
+
+        .host-charger-card {
+          min-height: 0;
+          grid-template-columns: 1fr;
+          gap: 0;
+          border-color: rgba(255, 255, 255, 0.16);
+          border-radius: 10px;
+          background:
+            radial-gradient(circle at 50% 40%, rgba(0, 229, 168, 0.12), transparent 27%),
+            linear-gradient(145deg, rgba(18, 21, 21, 0.96), rgba(7, 8, 8, 0.98));
+          padding: 74px 24px 26px;
+          box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.04),
+            0 24px 58px rgba(0, 0, 0, 0.24);
+        }
+
+        .host-charger-card.is-popular {
+          border-color: rgba(0, 229, 168, 0.78);
+          box-shadow:
+            0 0 36px rgba(0, 229, 168, 0.12),
+            inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        }
+
+        .host-charger-index {
+          left: 24px;
+          top: 22px;
+          min-width: 36px;
+          height: 34px;
+          border-color: rgba(0, 229, 168, 0.52);
+          border-radius: 7px;
+          font-size: 16px;
+        }
+
+        .host-charger-popular {
+          position: absolute;
+          right: 24px;
+          top: 22px;
+          display: inline-flex;
+          min-height: 34px;
+          align-items: center;
+          border: 1px solid rgba(0, 229, 168, 0.32);
+          border-radius: 8px;
+          background: rgba(0, 229, 168, 0.1);
+          padding: 0 13px;
+          color: #00E5A8;
+          font-size: 13px;
+          font-weight: 800;
+          text-transform: uppercase;
+        }
+
+        .host-charger-card h3 {
+          margin: 0;
+          color: #FFFFFF;
+          font-size: 30px;
+          font-weight: 800;
+          line-height: 1.08;
+        }
+
+        .host-charger-card p {
+          margin-top: 14px;
+          max-width: 250px;
+          color: #CFCFCF;
+          font-size: 16px;
+          line-height: 1.45;
+        }
+
+        .host-charger-art {
+          min-height: 178px;
+          align-items: end;
+          border-right: 0;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+          padding: 14px 0 0;
+        }
+
+        .host-charger-art .host-product-visual {
+          transform: scale(1.26);
+          transform-origin: bottom center;
+        }
+
+        .host-charger-card.is-popular .host-charger-art .host-product-visual {
+          transform: scale(1.42);
+        }
+
+        .host-charger-feature-list {
+          display: grid;
+          gap: 14px;
+          margin-top: 22px;
+        }
+
+        .host-charger-feature {
+          display: flex;
+          align-items: flex-start;
+          gap: 12px;
+          color: #E1E1E1;
+          font-size: 16px;
+          line-height: 1.35;
+        }
+
+        .host-charger-check {
+          display: grid;
+          height: 20px;
+          width: 20px;
+          flex: 0 0 auto;
+          place-items: center;
+          border: 2px solid #00E5A8;
+          border-radius: 999px;
+          color: #00E5A8;
+        }
+
+        .host-charger-specs {
+          display: grid;
+          gap: 12px;
+          margin-top: 26px;
+          border: 1px solid rgba(255, 255, 255, 0.12);
+          border-radius: 7px;
+          background: rgba(8, 9, 9, 0.72);
+          padding: 14px 16px;
+        }
+
+        .host-charger-spec-row {
+          display: flex;
+          justify-content: space-between;
+          gap: 18px;
+          color: #FFFFFF;
+          font-size: 16px;
+          line-height: 1.3;
+        }
+
+        .host-charger-spec-row span:first-child {
+          color: #D4D4D4;
+        }
+
+        .host-charger-spec-row strong {
+          font-weight: 800;
+          text-align: right;
+        }
+
+        .host-charger-learn {
+          min-height: 46px;
+          margin-top: 16px;
+          border-color: rgba(0, 229, 168, 0.62);
+          color: #00E5A8;
+          font-size: 15px;
+        }
+
+        .host-charger-learn.is-primary {
+          border-color: #00E5A8;
+          background: #00E5A8;
+          color: #050706;
+        }
+
+        .host-charger-support-strip {
+          margin-top: 34px;
+          display: grid;
+          grid-template-columns: repeat(4, minmax(0, 1fr));
+          border: 1px solid rgba(255, 255, 255, 0.14);
+          border-radius: 10px;
+          background: rgba(13, 15, 15, 0.8);
+          backdrop-filter: blur(16px);
+        }
+
+        .host-charger-support-item {
+          display: grid;
+          min-height: 112px;
+          grid-template-columns: 60px 1fr;
+          align-items: center;
+          gap: 18px;
+          padding: 20px 26px;
+        }
+
+        .host-charger-support-item + .host-charger-support-item {
+          border-left: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        .host-charger-support-icon {
+          display: grid;
+          height: 58px;
+          width: 58px;
+          place-items: center;
+          border: 1px solid rgba(255, 255, 255, 0.15);
+          border-radius: 10px;
+          background: rgba(5, 6, 6, 0.6);
+          color: #00E5A8;
+        }
+
+        .host-charger-support-item h3 {
+          color: #FFFFFF;
+          font-size: 17px;
+          font-weight: 800;
+          line-height: 1.2;
+        }
+
+        .host-charger-support-item p {
+          margin-top: 5px;
+          color: #CFCFCF;
+          font-size: 15px;
+          line-height: 1.3;
+        }
+
+        .host-charger-quiz {
+          margin-top: 24px;
+          min-height: 116px;
+          border-radius: 10px;
+          padding: 24px 30px;
+          background: rgba(10, 12, 12, 0.82);
+        }
+
+        .host-charger-quiz-copy {
+          gap: 24px;
+          font-size: 24px;
+          font-weight: 800;
+        }
+
+        .host-charger-quiz-copy small {
+          display: block;
+          margin-top: 7px;
+          color: #CFCFCF;
+          font-size: 18px;
+          font-weight: 500;
+          line-height: 1.35;
+        }
+
+        .host-charger-quiz-mark {
+          height: 68px;
+          width: 68px;
+          font-size: 36px;
+        }
+
+        .host-charger-quiz-button {
+          min-height: 54px;
+          min-width: 290px;
+          border-color: #00E5A8;
+          background: #00E5A8;
+          color: #050706;
+          font-size: 16px;
+        }
+
         .host-why-section {
           position: relative;
           overflow: hidden;
@@ -2197,6 +3126,668 @@ export default function HostPage() {
           object-position: center;
         }
 
+        .host-installation-section {
+          position: relative;
+          overflow: hidden;
+          padding: 84px 0 70px;
+          background:
+            radial-gradient(circle at 13% 20%, rgba(0, 229, 168, 0.08), transparent 25%),
+            radial-gradient(circle at 88% 82%, rgba(0, 229, 168, 0.05), transparent 27%),
+            #080909;
+        }
+
+        .host-installation-intro {
+          max-width: 900px;
+        }
+
+        .host-installation-eyebrow {
+          margin-bottom: 20px;
+          color: #62F3A2;
+          font-size: 14px;
+          font-weight: 800;
+          line-height: 1;
+          text-transform: uppercase;
+        }
+
+        .host-installation-title {
+          color: #FFFFFF;
+          font-size: clamp(40px, 3.6vw, 56px);
+          font-weight: 800;
+          line-height: 1.06;
+          letter-spacing: 0;
+        }
+
+        .host-installation-title span {
+          color: #57E28D;
+        }
+
+        .host-installation-copy {
+          margin-top: 24px;
+          max-width: 680px;
+          color: #C7C7C7;
+          font-size: clamp(18px, 1.45vw, 24px);
+          line-height: 1.45;
+        }
+
+        .host-installation-grid {
+          margin-top: 58px;
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 24px;
+        }
+
+        .host-installation-card {
+          display: grid;
+          min-height: 360px;
+          grid-template-columns: 1.04fr 0.98fr;
+          overflow: hidden;
+          border: 1px solid rgba(255, 255, 255, 0.18);
+          border-radius: 10px;
+          background: linear-gradient(145deg, rgba(15, 17, 17, 0.98), rgba(5, 6, 6, 0.96));
+          box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.04),
+            0 28px 70px rgba(0, 0, 0, 0.26);
+        }
+
+        .host-installation-visual {
+          position: relative;
+          min-height: 360px;
+          overflow: hidden;
+          isolation: isolate;
+        }
+
+        .host-installation-visual::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          z-index: -3;
+        }
+
+        .host-installation-visual-vertical::before {
+          background:
+            radial-gradient(circle at 7% 78%, rgba(58, 148, 73, 0.24), transparent 21%),
+            linear-gradient(90deg, rgba(19, 24, 25, 0.92), rgba(38, 43, 44, 0.9)),
+            repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.035) 0 1px, transparent 1px 5px);
+        }
+
+        .host-installation-visual-standing::before {
+          background:
+            radial-gradient(circle at 54% 86%, rgba(0, 229, 168, 0.34), transparent 28%),
+            linear-gradient(180deg, #151b1b 0%, #0A0B0B 58%, #151817 100%);
+        }
+
+        .host-installation-vignette {
+          position: absolute;
+          inset: 0;
+          z-index: -1;
+          background:
+            linear-gradient(90deg, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.28)),
+            radial-gradient(circle at 50% 43%, transparent 0 28%, rgba(0, 0, 0, 0.34) 66%);
+          pointer-events: none;
+        }
+
+        .host-installation-content {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          min-width: 0;
+          padding: 34px 34px 34px 42px;
+        }
+
+        .host-installation-icon {
+          display: grid;
+          height: 58px;
+          width: 58px;
+          place-items: center;
+          border: 1px solid rgba(87, 226, 141, 0.2);
+          border-radius: 999px;
+          background: rgba(87, 226, 141, 0.11);
+          color: #57E28D;
+          box-shadow: 0 0 35px rgba(0, 229, 168, 0.11);
+        }
+
+        .host-installation-card-title {
+          margin-top: 30px;
+          color: #FFFFFF;
+          font-size: 28px;
+          font-weight: 800;
+          line-height: 1.08;
+        }
+
+        .host-installation-card-copy {
+          margin-top: 24px;
+          max-width: 260px;
+          color: #CFCFCF;
+          font-size: 18px;
+          line-height: 1.45;
+        }
+
+        .host-installation-rule {
+          margin: 24px 0 22px;
+          height: 1px;
+          width: 100%;
+          background: rgba(255, 255, 255, 0.11);
+        }
+
+        .host-installation-badge {
+          display: inline-flex;
+          min-height: 72px;
+          width: 100%;
+          align-items: center;
+          justify-content: center;
+          gap: 12px;
+          border: 1px solid rgba(87, 226, 141, 0.14);
+          border-radius: 10px;
+          background: linear-gradient(135deg, rgba(34, 188, 101, 0.18), rgba(16, 78, 47, 0.26));
+          color: #65F3A3;
+          font-size: 17px;
+          font-weight: 800;
+          line-height: 1.35;
+          text-align: center;
+        }
+
+        .host-installation-badge svg {
+          flex: 0 0 auto;
+        }
+
+        .host-installation-wall-charger {
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          width: 82px;
+          height: 182px;
+          transform: translate(-50%, -43%);
+          border: 1px solid rgba(255, 255, 255, 0.14);
+          border-radius: 9px;
+          background:
+            linear-gradient(150deg, rgba(255, 255, 255, 0.2), transparent 22%),
+            linear-gradient(180deg, #555D5D 0%, #171B1B 100%);
+          box-shadow:
+            0 24px 52px rgba(0, 0, 0, 0.58),
+            inset 9px 0 20px rgba(255, 255, 255, 0.05);
+        }
+
+        .host-installation-wall-light {
+          position: absolute;
+          left: 50%;
+          top: 38px;
+          width: 2px;
+          height: 82px;
+          transform: translateX(-50%);
+          border-radius: 999px;
+          background: #5AF397;
+          box-shadow: 0 0 16px rgba(90, 243, 151, 0.78);
+        }
+
+        .host-installation-wall-mark {
+          position: absolute;
+          left: 50%;
+          bottom: 22px;
+          display: grid;
+          height: 18px;
+          width: 18px;
+          place-items: center;
+          transform: translateX(-50%);
+          color: #E5E5E5;
+        }
+
+        .host-installation-wall-cable {
+          position: absolute;
+          left: calc(50% - 1px);
+          top: 100%;
+          width: 2px;
+          height: 92px;
+          background: linear-gradient(#0B0B0B, #050505);
+          box-shadow: 0 0 18px rgba(0, 0, 0, 0.6);
+        }
+
+        .host-installation-plant {
+          position: absolute;
+          left: -12px;
+          bottom: -14px;
+          width: 142px;
+          height: 172px;
+          opacity: 0.55;
+          background:
+            radial-gradient(ellipse at 20% 75%, rgba(61, 145, 54, 0.9) 0 9%, transparent 10%),
+            radial-gradient(ellipse at 38% 60%, rgba(55, 128, 51, 0.88) 0 10%, transparent 11%),
+            radial-gradient(ellipse at 56% 78%, rgba(44, 110, 45, 0.85) 0 8%, transparent 9%),
+            radial-gradient(ellipse at 28% 43%, rgba(44, 120, 45, 0.76) 0 9%, transparent 10%);
+          filter: blur(0.2px);
+        }
+
+        .host-installation-stand-charger {
+          position: absolute;
+          left: 50%;
+          top: 52px;
+          width: 76px;
+          height: 142px;
+          transform: translateX(-50%);
+          border: 2px solid rgba(149, 166, 180, 0.55);
+          border-radius: 15px;
+          background: linear-gradient(180deg, #293037, #070808 70%);
+          box-shadow:
+            0 16px 46px rgba(0, 0, 0, 0.62),
+            inset 0 0 20px rgba(255, 255, 255, 0.04);
+        }
+
+        .host-installation-stand-top {
+          position: absolute;
+          left: 0;
+          right: 0;
+          top: 36px;
+          height: 18px;
+          background: rgba(255, 255, 255, 0.1);
+        }
+
+        .host-installation-stand-screen {
+          position: absolute;
+          left: 0;
+          right: 0;
+          top: 54px;
+          display: grid;
+          height: 36px;
+          place-items: center;
+          color: #FFFFFF;
+          background: rgba(0, 0, 0, 0.22);
+        }
+
+        .host-installation-stand-dot {
+          position: absolute;
+          bottom: 26px;
+          height: 12px;
+          width: 12px;
+          border-radius: 999px;
+        }
+
+        .host-installation-stand-dot.muted {
+          left: 25px;
+          background: #222A2A;
+        }
+
+        .host-installation-stand-dot.active {
+          right: 22px;
+          background: #58E591;
+          box-shadow: 0 0 16px rgba(88, 229, 145, 0.65);
+        }
+
+        .host-installation-stand-cable {
+          position: absolute;
+          left: 100%;
+          top: 30px;
+          width: 28px;
+          height: 108px;
+          border-right: 3px solid #050606;
+          border-bottom: 3px solid #050606;
+          border-radius: 0 0 22px 0;
+          transform: translateX(14px);
+        }
+
+        .host-installation-pole {
+          position: absolute;
+          left: 50%;
+          top: 190px;
+          width: 26px;
+          height: 118px;
+          transform: translateX(-50%);
+          border-radius: 14px 14px 4px 4px;
+          background: linear-gradient(90deg, #050606, #1D2222 48%, #060707);
+          box-shadow: 0 8px 28px rgba(0, 0, 0, 0.62);
+        }
+
+        .host-installation-base {
+          position: absolute;
+          left: 50%;
+          bottom: 58px;
+          width: 104px;
+          height: 16px;
+          transform: translateX(-50%);
+          border-radius: 50% 50% 8px 8px;
+          background: linear-gradient(180deg, #252D2D, #050606);
+          box-shadow: 0 8px 22px rgba(0, 0, 0, 0.62);
+        }
+
+        .host-installation-floor-glow {
+          position: absolute;
+          left: 0;
+          right: 0;
+          bottom: 88px;
+          height: 12px;
+          background: linear-gradient(90deg, transparent, rgba(98, 243, 162, 0.82), transparent);
+          filter: blur(2px);
+        }
+
+        .host-installation-pot {
+          position: absolute;
+          right: 14px;
+          bottom: 93px;
+          width: 46px;
+          height: 78px;
+          opacity: 0.36;
+          background:
+            radial-gradient(ellipse at 55% 10%, #112718 0 24%, transparent 25%),
+            linear-gradient(86deg, transparent 0 22%, #07100A 22% 67%, transparent 67%);
+          filter: blur(0.4px);
+        }
+
+        .host-installation-cta {
+          margin-top: 28px;
+          display: flex;
+          min-height: 132px;
+          align-items: center;
+          justify-content: space-between;
+          gap: 30px;
+          border: 1px solid rgba(255, 255, 255, 0.15);
+          border-radius: 10px;
+          background:
+            linear-gradient(135deg, rgba(18, 22, 22, 0.96), rgba(7, 8, 8, 0.96)),
+            radial-gradient(circle at 10% 50%, rgba(0, 229, 168, 0.09), transparent 18%);
+          padding: 32px;
+        }
+
+        .host-installation-cta-copy {
+          display: flex;
+          min-width: 0;
+          align-items: center;
+          gap: 26px;
+        }
+
+        .host-installation-cta-icon {
+          display: grid;
+          height: 62px;
+          width: 62px;
+          flex: 0 0 auto;
+          place-items: center;
+          border-radius: 999px;
+          background: rgba(87, 226, 141, 0.12);
+          color: #57E28D;
+        }
+
+        .host-installation-cta h3 {
+          color: #FFFFFF;
+          font-size: 24px;
+          font-weight: 800;
+          line-height: 1.15;
+        }
+
+        .host-installation-cta p {
+          margin-top: 6px;
+          color: #C7C7C7;
+          font-size: 18px;
+          line-height: 1.45;
+        }
+
+        .host-installation-button {
+          min-height: 58px;
+          min-width: 280px;
+          border-radius: 8px;
+          background: #57E28D;
+          font-size: 17px;
+        }
+
+        .host-roi-section {
+          position: relative;
+          overflow: hidden;
+          padding: 110px 0 112px;
+          background:
+            radial-gradient(circle at 8% 88%, rgba(0, 229, 168, 0.16), transparent 26%),
+            radial-gradient(circle at 79% 24%, rgba(255, 255, 255, 0.055), transparent 28%),
+            linear-gradient(180deg, #060707 0%, #090A0A 100%);
+          isolation: isolate;
+        }
+
+        .host-roi-section::before {
+          content: '';
+          position: absolute;
+          left: -120px;
+          bottom: -330px;
+          width: 560px;
+          height: 560px;
+          border: 2px solid rgba(78, 226, 130, 0.7);
+          border-radius: 999px;
+          box-shadow:
+            0 0 42px rgba(78, 226, 130, 0.32),
+            inset 0 0 34px rgba(78, 226, 130, 0.12);
+          pointer-events: none;
+        }
+
+        .host-roi-section::after {
+          content: '';
+          position: absolute;
+          inset: 0;
+          z-index: -1;
+          background:
+            linear-gradient(90deg, rgba(0, 0, 0, 0.16), transparent 30%, rgba(0, 0, 0, 0.18)),
+            repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.025) 0 1px, transparent 1px 6px);
+          opacity: 0.5;
+          pointer-events: none;
+        }
+
+        .host-roi-section .host-container {
+          position: relative;
+          z-index: 1;
+        }
+
+        .host-roi-layout {
+          display: grid;
+          grid-template-columns: minmax(540px, 0.88fr) minmax(620px, 1.12fr);
+          gap: 66px;
+          align-items: center;
+        }
+
+        .host-roi-copy {
+          max-width: 560px;
+        }
+
+        .host-roi-eyebrow {
+          color: #00E5A8;
+          font-size: 14px;
+          font-weight: 800;
+          text-transform: uppercase;
+        }
+
+        .host-roi-title {
+          margin-top: 28px;
+          color: #FFFFFF;
+          font-size: clamp(46px, 3.9vw, 64px);
+          font-weight: 800;
+          line-height: 1.13;
+          letter-spacing: 0;
+        }
+
+        .host-roi-description {
+          margin-top: 24px;
+          max-width: 500px;
+          color: #C7C7C7;
+          font-size: 22px;
+          line-height: 1.55;
+        }
+
+        .host-roi-highlights {
+          margin-top: 44px;
+          display: grid;
+          gap: 12px;
+        }
+
+        .host-roi-highlight {
+          display: grid;
+          min-height: 92px;
+          grid-template-columns: 64px 1fr;
+          align-items: center;
+          gap: 22px;
+          border: 1px solid rgba(255, 255, 255, 0.14);
+          border-radius: 10px;
+          background:
+            linear-gradient(115deg, rgba(24, 28, 28, 0.82), rgba(9, 10, 10, 0.72)),
+            radial-gradient(circle at 12% 50%, rgba(0, 229, 168, 0.09), transparent 24%);
+          padding: 18px 24px;
+          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.035);
+          backdrop-filter: blur(16px);
+        }
+
+        .host-roi-highlight-icon {
+          display: grid;
+          height: 56px;
+          width: 56px;
+          place-items: center;
+          border-radius: 12px;
+          background: rgba(0, 229, 168, 0.1);
+          color: #57E28D;
+          box-shadow: inset 0 0 24px rgba(0, 229, 168, 0.04);
+        }
+
+        .host-roi-highlight h3 {
+          color: #FFFFFF;
+          font-size: 18px;
+          font-weight: 800;
+          line-height: 1.2;
+        }
+
+        .host-roi-highlight p {
+          margin-top: 6px;
+          color: #BDBDBD;
+          font-size: 16px;
+          line-height: 1.4;
+        }
+
+        .host-roi-calculator {
+          border: 1px solid rgba(255, 255, 255, 0.24);
+          border-radius: 18px;
+          background:
+            radial-gradient(circle at 75% 8%, rgba(255, 255, 255, 0.075), transparent 25%),
+            linear-gradient(145deg, rgba(22, 24, 24, 0.92), rgba(9, 10, 10, 0.96));
+          padding: 46px 52px;
+          box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.05),
+            0 26px 80px rgba(0, 0, 0, 0.34);
+          backdrop-filter: blur(18px);
+        }
+
+        .host-roi-fields {
+          display: grid;
+          gap: 30px;
+        }
+
+        .host-roi-field {
+          display: grid;
+          gap: 14px;
+        }
+
+        .host-roi-field span {
+          color: #FFFFFF;
+          font-size: 18px;
+          font-weight: 800;
+          line-height: 1.2;
+        }
+
+        .host-roi-input {
+          height: 58px;
+          width: 100%;
+          border: 1px solid rgba(255, 255, 255, 0.14);
+          border-radius: 9px;
+          background: rgba(4, 5, 5, 0.78);
+          padding: 0 22px;
+          color: #FFFFFF;
+          font-size: 22px;
+          font-weight: 650;
+          outline: none;
+          -webkit-appearance: none;
+          -moz-appearance: textfield;
+          appearance: textfield;
+          transition:
+            border-color 0.2s ease,
+            box-shadow 0.2s ease;
+        }
+
+        .host-roi-input::-webkit-outer-spin-button,
+        .host-roi-input::-webkit-inner-spin-button {
+          display: none;
+          margin: 0;
+          -webkit-appearance: none;
+          appearance: none;
+        }
+
+        .host-roi-input[type='number'] {
+          -webkit-appearance: none;
+          appearance: textfield;
+          -moz-appearance: textfield;
+        }
+
+        .host-roi-input:focus {
+          border-color: rgba(0, 229, 168, 0.75);
+          box-shadow: 0 0 0 3px rgba(0, 229, 168, 0.12);
+        }
+
+        .host-roi-result {
+          position: relative;
+          overflow: hidden;
+          margin-top: 34px;
+          border: 1px solid rgba(87, 226, 141, 0.75);
+          border-radius: 9px;
+          background:
+            radial-gradient(circle at 100% 12%, rgba(87, 226, 141, 0.26), transparent 24%),
+            linear-gradient(135deg, rgba(11, 16, 16, 0.96), rgba(24, 27, 27, 0.9));
+          padding: 30px 36px;
+          box-shadow:
+            0 0 38px rgba(0, 229, 168, 0.1),
+            inset 0 0 42px rgba(0, 229, 168, 0.05);
+        }
+
+        .host-roi-result::after {
+          content: '';
+          position: absolute;
+          right: 16px;
+          top: 18px;
+          width: 46px;
+          height: 1px;
+          transform: rotate(-45deg);
+          background: #57E28D;
+          box-shadow: 0 0 16px rgba(87, 226, 141, 0.85);
+        }
+
+        .host-roi-result-label {
+          color: #57E28D;
+          font-size: 18px;
+          font-weight: 800;
+          line-height: 1.2;
+        }
+
+        .host-roi-result-value {
+          margin-top: 18px;
+          color: #FFFFFF;
+          font-size: clamp(52px, 5vw, 76px);
+          font-weight: 900;
+          line-height: 0.95;
+          letter-spacing: 0;
+          text-shadow: 0 7px 22px rgba(0, 0, 0, 0.42);
+        }
+
+        .host-roi-button {
+          display: inline-flex;
+          min-height: 64px;
+          min-width: 250px;
+          align-items: center;
+          justify-content: center;
+          gap: 16px;
+          margin-top: 24px;
+          border: 1px solid #00E5A8;
+          border-radius: 9px;
+          background: rgba(0, 229, 168, 0.03);
+          color: #FFFFFF;
+          font-size: 18px;
+          font-weight: 800;
+          transition:
+            background 0.25s ease,
+            color 0.25s ease,
+            transform 0.25s ease;
+        }
+
+        .host-roi-button:hover {
+          background: rgba(0, 229, 168, 0.12);
+          color: #57E28D;
+          transform: translateY(-1px);
+        }
+
         @media (max-width: 767px) {
           .host-container {
             padding: 0 18px;
@@ -2206,9 +3797,317 @@ export default function HostPage() {
             padding: 84px 0;
           }
 
+          .host-installation-title {
+            font-size: 38px;
+          }
+
+          .host-installation-section {
+            padding: 72px 0 62px;
+          }
+
+          .host-installation-copy {
+            font-size: 17px;
+          }
+
+          .host-installation-grid {
+            margin-top: 38px;
+            grid-template-columns: 1fr;
+            gap: 18px;
+          }
+
+          .host-installation-card {
+            min-height: 0;
+            grid-template-columns: 1fr;
+          }
+
+          .host-installation-visual {
+            min-height: 260px;
+          }
+
+          .host-installation-content {
+            padding: 28px 22px 24px;
+          }
+
+          .host-installation-card-title {
+            margin-top: 22px;
+            font-size: 25px;
+          }
+
+          .host-installation-card-copy {
+            max-width: none;
+            font-size: 16px;
+          }
+
+          .host-installation-badge {
+            min-height: 64px;
+            padding: 12px 14px;
+            font-size: 15px;
+          }
+
+          .host-installation-wall-charger {
+            height: 158px;
+            width: 72px;
+            transform: translate(-50%, -47%);
+          }
+
+          .host-installation-wall-light {
+            height: 68px;
+          }
+
+          .host-installation-stand-charger {
+            top: 34px;
+          }
+
+          .host-installation-pole {
+            top: 172px;
+            height: 86px;
+          }
+
+          .host-installation-base {
+            bottom: 30px;
+          }
+
+          .host-installation-floor-glow {
+            bottom: 60px;
+          }
+
+          .host-installation-cta {
+            min-height: 0;
+            flex-direction: column;
+            align-items: stretch;
+            padding: 24px 20px;
+          }
+
+          .host-installation-cta-copy {
+            align-items: flex-start;
+            gap: 16px;
+          }
+
+          .host-installation-cta-icon {
+            height: 52px;
+            width: 52px;
+          }
+
+          .host-installation-cta h3 {
+            font-size: 21px;
+          }
+
+          .host-installation-cta p {
+            font-size: 15px;
+          }
+
+          .host-installation-button {
+            min-width: 0;
+            width: 100%;
+          }
+
+          .host-roi-section {
+            padding: 76px 0;
+          }
+
+          .host-roi-section::before {
+            left: -170px;
+            bottom: -260px;
+            width: 390px;
+            height: 390px;
+          }
+
+          .host-roi-layout {
+            grid-template-columns: 1fr;
+            gap: 36px;
+          }
+
+          .host-roi-title {
+            margin-top: 22px;
+            font-size: 39px;
+          }
+
+          .host-roi-description {
+            font-size: 17px;
+          }
+
+          .host-roi-highlights {
+            margin-top: 30px;
+          }
+
+          .host-roi-highlight {
+            min-height: 82px;
+            grid-template-columns: 54px 1fr;
+            gap: 16px;
+            padding: 16px;
+          }
+
+          .host-roi-highlight-icon {
+            height: 50px;
+            width: 50px;
+          }
+
+          .host-roi-highlight h3 {
+            font-size: 16px;
+          }
+
+          .host-roi-highlight p {
+            font-size: 14px;
+          }
+
+          .host-roi-calculator {
+            padding: 24px 18px;
+            border-radius: 12px;
+          }
+
+          .host-roi-fields {
+            gap: 22px;
+          }
+
+          .host-roi-field span {
+            font-size: 16px;
+          }
+
+          .host-roi-input {
+            height: 54px;
+            font-size: 19px;
+          }
+
+          .host-roi-result {
+            margin-top: 26px;
+            padding: 26px 20px;
+          }
+
+          .host-roi-result-value {
+            font-size: 42px;
+          }
+
+          .host-roi-button {
+            width: 100%;
+            min-width: 0;
+          }
+
           .host-logo-set {
             gap: 14px;
             padding-right: 14px;
+          }
+
+          .host-partners-section {
+            padding: 86px 0 76px;
+          }
+
+          .host-partners-bolt {
+            right: -170px;
+            top: 20px;
+            width: 330px;
+            height: 540px;
+            opacity: 0.42;
+          }
+
+          .host-partners-bolt-soft {
+            width: 80vw;
+            opacity: 0.82;
+          }
+
+          .host-partners-eyebrow {
+            gap: 16px;
+            font-size: 12px;
+          }
+
+          .host-partners-eyebrow::after {
+            width: 72px;
+          }
+
+          .host-partners-title {
+            margin-top: 32px;
+            font-size: 38px;
+            line-height: 1.08;
+          }
+
+          .host-partners-copy {
+            font-size: 17px;
+          }
+
+          .host-partner-logo-grid {
+            margin-top: 42px;
+            grid-template-columns: 1fr;
+            gap: 14px;
+          }
+
+          .host-partner-logo-card {
+            height: 132px;
+            padding: 28px;
+          }
+
+          .host-partner-logo-card img {
+            max-height: 62px;
+          }
+
+          .host-partners-action {
+            margin-top: 28px;
+          }
+
+          .host-partners-button {
+            min-height: 62px;
+            min-width: 0;
+            width: 100%;
+            padding: 0 22px;
+            font-size: 17px;
+          }
+
+          .host-final-cta {
+            --cta-frame-top: 35%;
+            --cta-frame-height: 34%;
+            padding: 74px 0 82px;
+          }
+
+          .cta-line-left,
+          .cta-line-right {
+            width: 118px;
+            opacity: 0.66;
+          }
+
+          .cta-line-left {
+            left: -82px;
+            border-radius: 0 46px 46px 0;
+          }
+
+          .cta-line-right {
+            right: -82px;
+            border-radius: 46px 0 0 46px;
+          }
+
+          .cta-bottom-line-left,
+          .cta-bottom-line-right {
+            display: none;
+          }
+
+          .host-final-content {
+            max-width: 100%;
+          }
+
+          .host-final-eyebrow {
+            font-size: 12px;
+            letter-spacing: 0.28em;
+          }
+
+          .host-final-eyebrow span {
+            width: 160px;
+            grid-template-columns: 1fr 24px 1fr;
+            gap: 10px;
+          }
+
+          .host-final-title {
+            margin-top: 26px;
+            font-size: 34px;
+          }
+
+          .host-final-copy {
+            margin-top: 20px;
+            font-size: 17px;
+          }
+
+          .host-final-button {
+            min-height: 58px;
+            min-width: 0;
+            width: min(100%, 280px);
+            margin-top: 28px;
+            font-size: 18px;
           }
 
           .host-hero {
@@ -2446,17 +4345,35 @@ export default function HostPage() {
             gap: 28px;
           }
 
+          .host-who-copy {
+            max-width: 100%;
+          }
+
+          .host-who-title {
+            font-size: 40px;
+          }
+
           .host-who-copy-text {
             max-width: 340px;
+            font-size: 17px;
           }
 
           .host-who-cards {
-            grid-template-columns: repeat(2, minmax(0, 1fr));
+            padding: 0 0 44px;
+          }
+
+          .host-who-nav {
+            display: none;
           }
 
           .host-who-card,
           .host-who-card-content {
-            min-height: 220px;
+            height: 330px;
+            min-height: 330px;
+          }
+
+          .host-who-card-title {
+            font-size: 22px;
           }
 
           .host-who-strip {
@@ -2465,17 +4382,9 @@ export default function HostPage() {
             padding: 20px;
           }
 
-          .host-who-charger {
-            height: 124px;
-          }
-
           .host-who-divider {
             height: 1px;
             width: 100%;
-          }
-
-          .host-who-actions {
-            padding-right: 0;
           }
 
           .host-charger-options {
@@ -2484,7 +4393,7 @@ export default function HostPage() {
 
           .host-charger-panel {
             border-radius: 18px;
-            padding: 30px 16px 14px;
+            padding: 32px 0 22px;
           }
 
           .host-charger-bg {
@@ -2497,49 +4406,55 @@ export default function HostPage() {
             padding: 0;
           }
 
+          .host-charger-title {
+            font-size: 38px;
+          }
+
+          .host-charger-copy {
+            font-size: 17px;
+          }
+
           .host-charger-grid {
             grid-template-columns: 1fr;
+            gap: 18px;
           }
 
           .host-charger-card {
             min-height: 0;
-            grid-template-columns: 0.62fr 1fr;
-            gap: 14px;
-            padding: 18px;
+            grid-template-columns: 1fr;
+            padding: 66px 20px 22px;
           }
 
           .host-charger-art {
-            min-height: 170px;
+            min-height: 210px;
           }
 
           .host-charger-card h3 {
-            margin-top: 32px;
-            font-size: 22px;
+            font-size: 26px;
           }
 
           .host-charger-card p,
-          .host-charger-meta-row {
+          .host-charger-feature,
+          .host-charger-spec-row {
             font-size: 14px;
           }
 
-          .host-charger-quiz,
-          .host-charger-finance,
-          .host-charger-benefits {
-            padding: 16px;
-          }
-
-          .host-charger-action-row {
+          .host-charger-support-strip {
             grid-template-columns: 1fr;
           }
 
-          .host-charger-action-row .host-charger-quiz,
-          .host-charger-action-row .host-charger-finance {
-            border-radius: 10px;
+          .host-charger-support-item {
+            min-height: 88px;
+            padding: 18px;
           }
 
-          .host-charger-action-row .host-charger-finance {
-            border-left: 1px solid rgba(255, 255, 255, 0.12);
-            border-top: 0;
+          .host-charger-support-item + .host-charger-support-item {
+            border-left: 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.12);
+          }
+
+          .host-charger-quiz {
+            padding: 20px;
           }
 
           .host-charger-quiz {
@@ -2552,20 +4467,19 @@ export default function HostPage() {
             font-size: 17px;
           }
 
+          .host-charger-quiz-copy small {
+            font-size: 14px;
+          }
+
+          .host-charger-quiz-mark {
+            height: 54px;
+            width: 54px;
+            font-size: 28px;
+          }
+
           .host-charger-quiz-button {
+            min-width: 0;
             width: 100%;
-          }
-
-          .host-charger-finance,
-          .host-charger-benefits {
-            grid-template-columns: 1fr;
-            gap: 14px;
-          }
-
-          .host-charger-finance-item,
-          .host-charger-benefit {
-            justify-content: flex-start;
-            border-left: 0 !important;
           }
 
           .host-why-section {
@@ -2674,103 +4588,107 @@ export default function HostPage() {
                   Charger options
                 </p>
                 <h2 className="host-charger-title">
-                  Match charging power to how people use your space
-                  <span>.</span>
+                  Match charging power to how people use{" "}
+                  <span>your space.</span>
                 </h2>
                 <p className="host-charger-copy">
-                  Start with the charger that fits your traffic and power
-                  supply.
+                  Choose the right charger for your traffic, power supply, and
+                  business goals.
                 </p>
               </Reveal>
 
               <div className="host-charger-grid">
-                {chargers.map((charger, index) => {
-                  const plan = pricingPlans[index];
+                {chargerOptionCards.map((charger, index) => {
                   return (
                     <Reveal key={charger.title} delay={index * 0.08}>
-                      <article className="host-charger-card">
+                      <article
+                        className={`host-charger-card ${
+                          charger.popular ? "is-popular" : ""
+                        }`}
+                      >
                         <span className="host-charger-index">
                           {String(index + 1).padStart(2, "0")}
                         </span>
-                        <div className="host-charger-art">
-                          <ChargerProductVisual variant={index} />
-                        </div>
+                        {charger.popular ? (
+                          <span className="host-charger-popular">Popular</span>
+                        ) : null}
                         <div>
                           <h3>{charger.title}</h3>
                           <p>{charger.description}</p>
-                          <div className="host-charger-divider" />
-                          <div className="host-charger-meta">
-                            <div className="host-charger-meta-row">
-                              <span className="host-charger-meta-icon">
-                                <Icon
-                                  name={index === 0 ? "wallet" : "check"}
-                                  className="h-5 w-5"
-                                />
-                              </span>
-                              {index === 0 ? (
-                                <span>
-                                  Starts from <strong>75k</strong>
-                                </span>
-                              ) : (
-                                <strong>Available</strong>
-                              )}
-                            </div>
-                            <div className="host-charger-meta-row">
-                              <span className="host-charger-meta-icon">
-                                <Icon
-                                  name={index === 2 ? "map" : "shield"}
-                                  className="h-5 w-5"
-                                />
-                              </span>
-                              <span>{plan.detail}</span>
-                            </div>
-                          </div>
-                          <SmartLink
-                            href={charger.href}
-                            className="host-charger-learn"
-                          >
-                            Learn more
-                            <Icon name="arrow" className="h-4 w-4" />
-                          </SmartLink>
                         </div>
+                        <div className="host-charger-art">
+                          <ChargerProductVisual variant={index} />
+                        </div>
+                        <div className="host-charger-feature-list">
+                          {charger.features.map((feature) => (
+                            <div className="host-charger-feature" key={feature}>
+                              <span className="host-charger-check">
+                                <Icon name="check" className="h-3 w-3" />
+                              </span>
+                              <span>{feature}</span>
+                            </div>
+                          ))}
+                        </div>
+                        <div className="host-charger-specs">
+                          <div className="host-charger-spec-row">
+                            <span>Power</span>
+                            <strong>{charger.power}</strong>
+                          </div>
+                          <div className="host-charger-spec-row">
+                            <span>Best for</span>
+                            <strong>{charger.bestFor}</strong>
+                          </div>
+                          <div className="host-charger-spec-row">
+                            <span>Price</span>
+                            <strong>{charger.price}</strong>
+                          </div>
+                        </div>
+                        <SmartLink
+                          href={charger.href}
+                          className={`host-charger-learn ${
+                            charger.popular ? "is-primary" : ""
+                          }`}
+                        >
+                          View details
+                          <Icon name="arrow" className="h-4 w-4" />
+                        </SmartLink>
                       </article>
                     </Reveal>
                   );
                 })}
               </div>
 
-              <Reveal className="host-charger-action-row">
+              <Reveal className="host-charger-support-strip">
+                {chargerOptionBenefits.map((item) => (
+                  <div className="host-charger-support-item" key={item.title}>
+                    <span className="host-charger-support-icon">
+                      <Icon name={item.icon} className="h-8 w-8" />
+                    </span>
+                    <span>
+                      <h3>{item.title}</h3>
+                      <p>{item.copy}</p>
+                    </span>
+                  </div>
+                ))}
+              </Reveal>
+
+              <Reveal>
                 <div className="host-charger-quiz">
                   <div className="host-charger-quiz-copy">
                     <span className="host-charger-quiz-mark">?</span>
-                    <span>Not sure which one fits your space?</span>
+                    <span>
+                      Not sure which charger fits your space?
+                      <small>
+                        Take our quick quiz and we'll recommend the best option.
+                      </small>
+                    </span>
                   </div>
-                  <SecondaryButton
+                  <PrimaryButton
                     href="/contact-us"
                     className="host-charger-quiz-button"
                   >
-                    Take the quiz
-                  </SecondaryButton>
-                </div>
-
-                <div className="host-charger-finance">
-                  <div className="host-charger-finance-item">
-                    <span className="host-charger-large-icon">
-                      <Icon name="plus" className="h-8 w-8" />
-                    </span>
-                    <span className="host-charger-finance-text">
-                      0% interest
-                    </span>
-                  </div>
-                  <div className="host-charger-finance-item">
-                    <span className="host-charger-large-icon">
-                      <Icon name="wallet" className="h-8 w-8" />
-                    </span>
-                    <span className="host-charger-finance-text">
-                      <span className="text-[#00E5A8]">12 month</span>{" "}
-                      installment plans available
-                    </span>
-                  </div>
+                    Find the right charger
+                  </PrimaryButton>
                 </div>
               </Reveal>
             </div>
@@ -2951,25 +4869,58 @@ export default function HostPage() {
                 </p>
               </Reveal>
 
-              <div className="host-who-cards">
-                {hostWhoCards.map((item, index) => (
-                  <Reveal key={item.title} delay={index * 0.035}>
-                    <article className="host-who-card">
-                      <img src={item.image} alt={item.title} />
-                      <div className="host-who-card-content">
-                        <h3 className="host-who-card-title">{item.title}</h3>
-                        <span className="host-who-card-line" />
-                      </div>
-                    </article>
-                  </Reveal>
-                ))}
-              </div>
+              <Reveal className="host-who-cards" delay={0.08}>
+                <button
+                  type="button"
+                  className="host-who-nav host-who-nav-prev"
+                  aria-label="Previous category"
+                >
+                  <Icon name="arrow" className="h-6 w-6" />
+                </button>
+                <Swiper
+                  modules={[Navigation, Pagination]}
+                  className="host-who-slider"
+                  slidesPerView={1}
+                  spaceBetween={18}
+                  navigation={{
+                    prevEl: ".host-who-nav-prev",
+                    nextEl: ".host-who-nav-next",
+                  }}
+                  pagination={{ clickable: true }}
+                  breakpoints={{
+                    640: {
+                      slidesPerView: 2,
+                      spaceBetween: 18,
+                    },
+                    1024: {
+                      slidesPerView: 3,
+                      spaceBetween: 20,
+                    },
+                  }}
+                >
+                  {hostWhoCards.map((item) => (
+                    <SwiperSlide key={item.title}>
+                      <article className="host-who-card">
+                        <img src={item.image} alt={item.title} />
+                        <div className="host-who-card-content">
+                          <h3 className="host-who-card-title">{item.title}</h3>
+                          <span className="host-who-card-line" />
+                        </div>
+                      </article>
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+                <button
+                  type="button"
+                  className="host-who-nav host-who-nav-next"
+                  aria-label="Next category"
+                >
+                  <Icon name="arrow" className="h-6 w-6" />
+                </button>
+              </Reveal>
             </div>
 
             <Reveal delay={0.12} className="host-who-strip">
-              <div className="host-who-charger">
-                <ChargerProductVisual variant={2} />
-              </div>
               <h3 className="host-who-strip-title">
                 You set the price.
                 <br />
@@ -2991,44 +4942,72 @@ export default function HostPage() {
                 <PrimaryButton href="/contact-us" className="host-who-primary">
                   Get started
                 </PrimaryButton>
-                <SmartLink href="/host" className="host-who-learn">
-                  Learn more
-                  <Icon name="arrow" className="h-4 w-4" />
-                </SmartLink>
               </div>
             </Reveal>
           </div>
         </section>
 
-        <PageSection>
-          <SectionIntro
-            eyebrow="Installation options"
-            title="Clean mounting options for different spaces."
-            copy="Wall, standing, and hanging setups keep the install practical."
-          />
-          <div className="mt-12 grid max-w-2xl gap-6 md:grid-cols-2">
+        <PageSection id="installation" className="host-installation-section">
+          <Reveal className="host-installation-intro">
+            <p className="host-installation-eyebrow">Installation options</p>
+            <h2 className="host-installation-title">
+              Clean mounting options
+              <br />
+              for <span>different spaces.</span>
+            </h2>
+            <p className="host-installation-copy">
+              Wall, standing, and hanging setups keep the install practical.
+            </p>
+          </Reveal>
+
+          <div className="host-installation-grid">
             {installationOptions.map((option, index) => (
               <Reveal key={option.title} delay={index * 0.05}>
-                <div className="rounded-lg border border-[#1F1F1F] bg-[#111111] p-4">
-                  <InstallationDiagram type={option.type} />
-                  <p className="mt-4 text-sm font-semibold text-white">
-                    {option.title}
-                  </p>
-                </div>
+                <article className="host-installation-card">
+                  <InstallationVisual type={option.type} />
+                  <div className="host-installation-content">
+                    <span className="host-installation-icon">
+                      <Icon name={option.icon} className="h-8 w-8" />
+                    </span>
+                    <h3 className="host-installation-card-title">
+                      {option.title}
+                    </h3>
+                    <p className="host-installation-card-copy">
+                      {option.description}
+                    </p>
+                    <span className="host-installation-rule" />
+                    <p className="host-installation-badge">
+                      <Icon name="check" className="h-5 w-5" />
+                      <span>{option.ideal}</span>
+                    </p>
+                  </div>
+                </article>
               </Reveal>
             ))}
           </div>
-          <Reveal className="mt-8 flex flex-col items-start justify-between gap-5 rounded-lg border border-[#1F1F1F] bg-[#111111] p-6 sm:flex-row sm:items-center">
-            <p className="text-lg font-semibold text-white">
-              Installation is free for all chargers
-            </p>
-            <PrimaryButton href="/contact-us">
+
+          <Reveal className="host-installation-cta">
+            <div className="host-installation-cta-copy">
+              <span className="host-installation-cta-icon">
+                <Icon name="tools" className="h-8 w-8" />
+              </span>
+              <span>
+                <h3>Installation is free for all chargers</h3>
+                <p>
+                  Our experts handle everything, so you can power up with ease.
+                </p>
+              </span>
+            </div>
+            <PrimaryButton
+              href="/contact-us"
+              className="host-installation-button"
+            >
               Book a site assessment
             </PrimaryButton>
           </Reveal>
         </PageSection>
 
-        <PageSection>
+        {/* <PageSection>
           <SectionIntro
             eyebrow="Safety and reliability"
             title="Built for everyday charging in local conditions."
@@ -3054,7 +5033,7 @@ export default function HostPage() {
           <SecondaryButton href="/charge" className="mt-10">
             View full specs
           </SecondaryButton>
-        </PageSection>
+        </PageSection> */}
 
         <section className="host-payments-section">
           <img
@@ -3114,7 +5093,7 @@ export default function HostPage() {
           </div>
         </section>
 
-        <section className="border-b border-[#1F1F1F] bg-[#111111] py-[120px] md:py-[132px]">
+        {/* <section className="border-b border-[#1F1F1F] bg-[#111111] py-[120px] md:py-[132px]">
           <div className="host-container grid gap-14 lg:grid-cols-[0.9fr_1fr] lg:items-center">
             <Reveal>
               <p className="mb-4 text-xs font-semibold uppercase text-[#00E5A8]">
@@ -3161,9 +5140,9 @@ export default function HostPage() {
               </div>
             </Reveal>
           </div>
-        </section>
+        </section> */}
 
-        <PageSection>
+        {/* <PageSection>
           <div className="grid gap-14 lg:grid-cols-[0.85fr_1fr] lg:items-center">
             <Reveal>
               <p className="mb-4 text-xs font-semibold uppercase text-[#00E5A8]">
@@ -3200,21 +5179,41 @@ export default function HostPage() {
               </div>
             </Reveal>
           </div>
-        </PageSection>
+        </PageSection> */}
 
-        <PageSection id="roi">
-          <div className="grid gap-12 lg:grid-cols-[0.8fr_1fr] lg:items-start">
-            <SectionIntro
-              eyebrow="Estimate your earnings"
-              title="See how much your site can earn."
-              copy="Adjust charger count, price, and usage to model a simple monthly estimate."
-            />
-            <Reveal className="rounded-lg border border-[#1F1F1F] bg-[#111111] p-6 md:p-8">
-              <div className="grid gap-5">
-                <label className="grid gap-3">
-                  <span className="text-sm font-semibold text-white">
-                    Number of chargers
-                  </span>
+        <PageSection id="roi" className="host-roi-section">
+          <div className="host-roi-layout">
+            <Reveal className="host-roi-copy">
+              <p className="host-roi-eyebrow">Estimate your earnings</p>
+              <h2 className="host-roi-title">
+                See how much
+                <br />
+                your site can earn.
+              </h2>
+              <p className="host-roi-description">
+                Adjust charger count, price, and usage to model a simple monthly
+                estimate.
+              </p>
+
+              <div className="host-roi-highlights">
+                {roiHighlights.map((item) => (
+                  <div className="host-roi-highlight" key={item.title}>
+                    <span className="host-roi-highlight-icon">
+                      <Icon name={item.icon} className="h-8 w-8" />
+                    </span>
+                    <span>
+                      <h3>{item.title}</h3>
+                      <p>{item.copy}</p>
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </Reveal>
+
+            <Reveal delay={0.08} className="host-roi-calculator">
+              <div className="host-roi-fields">
+                <label className="host-roi-field">
+                  <span>Number of chargers</span>
                   <input
                     type="number"
                     min="1"
@@ -3222,13 +5221,11 @@ export default function HostPage() {
                     onChange={(event) =>
                       setChargerCount(Number(event.target.value))
                     }
-                    className="h-12 rounded-lg border border-[#1F1F1F] bg-[#0B0B0B] px-4 text-white outline-none transition focus:border-[#00E5A8]"
+                    className="host-roi-input"
                   />
                 </label>
-                <label className="grid gap-3">
-                  <span className="text-sm font-semibold text-white">
-                    Price per unit
-                  </span>
+                <label className="host-roi-field">
+                  <span>Price per unit</span>
                   <input
                     type="number"
                     min="0"
@@ -3236,36 +5233,35 @@ export default function HostPage() {
                     onChange={(event) =>
                       setUnitPrice(Number(event.target.value))
                     }
-                    className="h-12 rounded-lg border border-[#1F1F1F] bg-[#0B0B0B] px-4 text-white outline-none transition focus:border-[#00E5A8]"
+                    className="host-roi-input"
                   />
                 </label>
-                <label className="grid gap-3">
-                  <span className="text-sm font-semibold text-white">
-                    Usage
-                  </span>
+                <label className="host-roi-field">
+                  <span>Usage</span>
                   <input
                     type="number"
                     min="0"
                     value={usage}
                     onChange={(event) => setUsage(Number(event.target.value))}
-                    className="h-12 rounded-lg border border-[#1F1F1F] bg-[#0B0B0B] px-4 text-white outline-none transition focus:border-[#00E5A8]"
+                    className="host-roi-input"
                   />
                 </label>
               </div>
-              <div className="mt-8 rounded-lg border border-[#1F1F1F] bg-[#0B0B0B] p-6">
-                <p className="text-sm font-semibold text-[#A1A1A1]">
-                  Monthly earnings
-                </p>
-                <p className="mt-4 text-[40px] font-semibold leading-none text-white md:text-[52px]">
+
+              <div className="host-roi-result">
+                <p className="host-roi-result-label">Monthly earnings</p>
+                <p className="host-roi-result-value">
                   PKR {monthlyEarnings.toLocaleString("en-PK")}
                 </p>
               </div>
-              <SecondaryButton
+
+              <SmartLink
                 href="/charging-partners#roi-calculator"
-                className="mt-6"
+                className="host-roi-button"
               >
                 Try ROI calculator
-              </SecondaryButton>
+                <Icon name="arrow" className="h-5 w-5" />
+              </SmartLink>
             </Reveal>
           </div>
         </PageSection>
@@ -3311,54 +5307,42 @@ export default function HostPage() {
           </SecondaryButton>
         </PageSection> */}
 
-        <section className="border-b border-[#1F1F1F] py-24 md:py-28">
+        <section className="host-partners-section">
+          <span className="host-partners-bolt" aria-hidden="true" />
+          <span className="host-partners-bolt-soft" aria-hidden="true" />
           <div className="host-container">
-            <SectionIntro
-              eyebrow="Already hosting"
-              title="Businesses use Zvolta chargers to earn and support sustainability."
-              copy="Partner sites get app visibility, cleaner customer service, and a practical ESG action."
-            />
+            <Reveal className="host-partners-intro">
+              <p className="host-partners-eyebrow">Already hosting</p>
+              <h2 className="host-partners-title">
+                Businesses use Zvolta chargers to earn and support
+                sustainability<span>.</span>
+              </h2>
+              <p className="host-partners-copy">
+                Partner sites get app visibility, cleaner customer service, and
+                a practical ESG action.
+              </p>
+            </Reveal>
 
-            <div className="host-logo-strip mt-12">
-              <motion.div
-                className="host-logo-track"
-                aria-label="Zvolta partner logos"
-                animate={{ x: ["0%", "-50%"] }}
-                transition={{
-                  duration: 40,
-                  ease: "linear",
-                  repeat: Infinity,
-                  repeatType: "loop",
-                }}
+            <Reveal className="host-partner-logo-grid" delay={0.08}>
+              {partnerLogos.map((logo) => (
+                <div className="host-partner-logo-card" key={logo.alt}>
+                  <img
+                    src={logo.src}
+                    alt={logo.alt}
+                    className={logo.invert ? "is-inverted" : ""}
+                  />
+                </div>
+              ))}
+            </Reveal>
+
+            <Reveal className="host-partners-action">
+              <SecondaryButton
+                href="/partners"
+                className="host-partners-button"
               >
-                {[0, 1].map((setIndex) => (
-                  <div
-                    key={setIndex}
-                    className="host-logo-set"
-                    aria-hidden={setIndex === 1 ? "true" : undefined}
-                  >
-                    {[...partnerLogos, ...partnerLogos].map((logo, index) => (
-                      <div
-                        key={`${logo.alt}-${setIndex}-${index}`}
-                        className="flex h-24 w-[220px] shrink-0 items-center justify-center rounded-lg border border-[#1F1F1F] bg-[#111111] px-8 grayscale transition duration-300 hover:border-[#00E5A8]/35 hover:grayscale-0 sm:w-[240px]"
-                      >
-                        <img
-                          src={logo.src}
-                          alt={setIndex === 0 ? logo.alt : ""}
-                          className="max-h-11 max-w-full object-contain opacity-65 invert"
-                        />
-                      </div>
-                    ))}
-                  </div>
-                ))}
-              </motion.div>
-            </div>
-
-            <div className="mt-10">
-              <SecondaryButton href="/partners">
                 Explore partners
               </SecondaryButton>
-            </div>
+            </Reveal>
           </div>
         </section>
 
@@ -3394,7 +5378,7 @@ export default function HostPage() {
           </SecondaryButton>
         </PageSection>
 
-        <PageSection>
+        {/* <PageSection>
           <div className="grid gap-12 lg:grid-cols-[0.8fr_1fr]">
             <SectionIntro
               eyebrow="Need help"
@@ -3452,15 +5436,31 @@ export default function HostPage() {
               </form>
             </Reveal>
           </div>
-        </PageSection>
+        </PageSection> */}
 
-        <section className="py-24 md:py-32">
+        <section className="host-final-cta">
+          <span className="cta-line-left" aria-hidden="true" />
+          <span className="cta-line-right" aria-hidden="true" />
+          {/* <span className="cta-bottom-line-left" aria-hidden="true" /> */}
+          {/* <span className="cta-bottom-line-right" aria-hidden="true" /> */}
           <div className="host-container">
-            <Reveal className="mx-auto max-w-3xl text-center">
-              <p className="text-[40px] font-semibold leading-[1.08] text-white md:text-[56px]">
-                Bring EV charging to your space
+            <Reveal className="host-final-content">
+              <p className="host-final-eyebrow">
+                Ready to start
+                <span>
+                  <Icon name="bolt" className="h-6 w-6" />
+                </span>
               </p>
-              <PrimaryButton href="/contact-us" className="mt-8">
+              <h2 className="host-final-title">
+                Bring EV charging
+                <br />
+                to your space
+              </h2>
+              <p className="host-final-copy">
+                Get set up with the right charger, installation support, and
+                hosting guidance.
+              </p>
+              <PrimaryButton href="/contact-us" className="host-final-button">
                 Start hosting
               </PrimaryButton>
             </Reveal>

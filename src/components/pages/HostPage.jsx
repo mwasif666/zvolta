@@ -1,5 +1,6 @@
-import { useMemo, useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+﻿import { useMemo, useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { IoClose } from "react-icons/io5";
 import { Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -33,21 +34,24 @@ const chargerOptionCards = [
     title: "3kW Charger",
     description: "Best for small spaces and low usage.",
     href: "/3kw-charger",
-    features: ["Ideal for bikes & EVs", "Homes, shops & small offices"],
+    features: [],
+    image:
+      "https://res.cloudinary.com/diywraupt/image/upload/v1780392810/3W_n39hdb.png",
     power: "3kW",
-    bestFor: "Low usage",
+    bestFor: "Two-Wheelers & Four-Wheelers",
+    location: "Homes, Shops & Small Offices",
     price: "Starts from 75k",
   },
   {
     title: "7kW Charger",
     description: "Perfect balance of speed and efficiency.",
     href: "/7kw-charger",
-    features: [
-      "Ideal for cars & daily charging",
-      "Apartments, workplaces, commercial spaces",
-    ],
+    features: [],
+    image:
+      "https://res.cloudinary.com/diywraupt/image/upload/v1780392810/7Watt22W_zdchgq.png",
     power: "7kW",
-    bestFor: "Medium usage",
+    bestFor: "Cars & Daily Charging",
+    location: "Apartments, Workplaces & Commercial Spaces",
     price: "Available",
     popular: true,
   },
@@ -55,12 +59,12 @@ const chargerOptionCards = [
     title: "22kW Charger",
     description: "High power for high traffic locations.",
     href: "/22kw-charger",
-    features: [
-      "Fast charging for more vehicles",
-      "Commercial, public & fleet use",
-    ],
+    features: [],
+    image:
+      "https://res.cloudinary.com/diywraupt/image/upload/v1780392810/7Watt22W_zdchgq.png",
     power: "22kW",
-    bestFor: "High usage",
+    bestFor: "High Traffic Charging",
+    location: "Commercial, Public & Fleet Use",
     price: "Available",
   },
 ];
@@ -137,33 +141,27 @@ const hostWhereLocations = [
 const hostWhoCards = [
   {
     title: "Business Owners",
-    image:
-      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=500&q=80",
+    image: "/img/small-chai-business.jpg",
   },
   {
     title: "Property Owners",
-    image:
-      "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=500&q=80",
+    image: "/img/home-owners.jpg",
   },
   {
     title: "Facility Managers",
-    image:
-      "https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?auto=format&fit=crop&w=500&q=80",
+    image: "/img/Host/02.png",
   },
   {
     title: "Parking Operators",
-    image:
-      "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?auto=format&fit=crop&w=500&q=80",
+    image: "/img/Host/locations.png",
   },
   {
     title: "Retail & Hospitality Spaces",
-    image:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=500&q=80",
+    image: "/img/Host/Host.png",
   },
   {
     title: "Commercial Building Owners",
-    image:
-      "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=500&q=80",
+    image: "/img/Host/03.jpg",
   },
 ];
 
@@ -190,6 +188,8 @@ const installationOptions = [
     title: "Vertical wall",
     type: "vertical",
     icon: "phone",
+    image:
+      "https://res.cloudinary.com/diywraupt/image/upload/v1780395125/wall_zhtkzy.png",
     description:
       "Sleek wall-mounted installation for a clean, space-saving setup.",
     ideal: "Ideal for garages & indoor walls",
@@ -198,6 +198,8 @@ const installationOptions = [
     title: "Standing",
     type: "standing",
     icon: "plug",
+    image:
+      "https://res.cloudinary.com/diywraupt/image/upload/v1780395124/stand_l17ao3.png",
     description: "Freestanding installation for flexible placement anywhere.",
     ideal: "Ideal for driveways & open areas",
   },
@@ -266,22 +268,20 @@ const pricingPlans = [
 
 const partnerLogos = [
   {
-    src: "https://revoo-ev.com.pk/static/home/images/logofiamfz1-1.svg",
+    src: "https://res.cloudinary.com/diywraupt/image/upload/v1780396433/9561e733-b02e-44dd-a261-d235b7198edf_removalai_preview_kzxmhz.png",
     alt: "Revoo",
   },
   {
-    src: "https://vlektra.com/wp-content/uploads/2025/03/image-42-e1755686386806.png",
+    src: "https://res.cloudinary.com/diywraupt/image/upload/v1780396432/b59ddd95-b377-4010-98d7-cf3759aae7cc_removalai_preview_caazbg.png",
     alt: "Vlektra",
-    invert: true,
   },
   {
     src: "https://workhall.co/_next/image?url=%2Fimages%2Fwh.png&w=128&q=100",
     alt: "Workhall",
   },
   {
-    src: "https://ecodost.com.pk/wp-content/uploads/2024/05/Ecodost-01.svg",
+    src: "https://res.cloudinary.com/diywraupt/image/upload/v1780396432/Ecodost-01_mg0utk.svg",
     alt: "Ecodost",
-    invert: true,
   },
   {
     src: "/img/Black-logo.webp",
@@ -610,6 +610,40 @@ function Reveal({ children, className = "", delay = 0, as = "div" }) {
   );
 }
 
+function ShutterExpand({ children, className = "" }) {
+  const reduceMotion = useReducedMotion();
+
+  return (
+    <motion.div
+      className={`host-shutter-panel ${className}`}
+      initial={{ height: 0, opacity: 0 }}
+      animate={{ height: "auto", opacity: 1 }}
+      exit={{ height: 0, opacity: 0 }}
+      transition={{
+        height: {
+          duration: reduceMotion ? 0.01 : 0.55,
+          ease: [0.22, 1, 0.36, 1],
+        },
+        opacity: {
+          duration: reduceMotion ? 0.01 : 0.18,
+        },
+      }}
+    >
+      <motion.div
+        initial={{ y: reduceMotion ? 0 : -18 }}
+        animate={{ y: 0 }}
+        exit={{ y: reduceMotion ? 0 : -12 }}
+        transition={{
+          duration: reduceMotion ? 0.01 : 0.45,
+          ease: [0.22, 1, 0.36, 1],
+        }}
+      >
+        {children}
+      </motion.div>
+    </motion.div>
+  );
+}
+
 function PageSection({ children, className = "", id }) {
   return (
     <section id={id} className={`host-section ${className}`}>
@@ -622,7 +656,7 @@ function SectionIntro({ eyebrow, title, copy, centered = false }) {
   return (
     <Reveal className={`${centered ? "mx-auto text-center" : ""} max-w-3xl`}>
       {eyebrow ? (
-        <p className="mb-4 text-xs font-semibold uppercase text-[#00E5A8]">
+        <p className="mb-4 text-xs font-semibold uppercase text-z-green">
           {eyebrow}
         </p>
       ) : null}
@@ -631,7 +665,7 @@ function SectionIntro({ eyebrow, title, copy, centered = false }) {
       </h2>
       {copy ? (
         <p
-          className={`${centered ? "mx-auto" : ""} mt-4 max-w-2xl text-base leading-7 text-[#A1A1A1]`}
+          className={`${centered ? "mx-auto" : ""} mt-4 max-w-2xl text-base leading-7 text-zinc-400`}
         >
           {copy}
         </p>
@@ -644,7 +678,7 @@ function PrimaryButton({ href = "/contact-us", children, className = "" }) {
   return (
     <SmartLink
       href={href}
-      className={`inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-[#00E5A8] px-5 py-3 text-sm font-semibold text-black transition duration-300 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-[#00E5A8]/45 ${className}`}
+      className={`inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-z-green px-5 py-3 text-sm font-semibold text-black transition duration-300 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-z-green/45 ${className}`}
     >
       {children}
       <Icon name="arrow" className="h-4 w-4" />
@@ -656,7 +690,7 @@ function SecondaryButton({ href = "/contact-us", children, className = "" }) {
   return (
     <SmartLink
       href={href}
-      className={`inline-flex min-h-12 items-center justify-center gap-2 rounded-lg border border-[#1F1F1F] bg-[#111111] px-5 py-3 text-sm font-semibold text-white transition duration-300 hover:scale-[1.02] hover:border-[#00E5A8]/50 focus:outline-none focus:ring-2 focus:ring-white/20 ${className}`}
+      className={`inline-flex min-h-12 items-center justify-center gap-2 rounded-lg border border-white/10 bg-zinc-900 px-5 py-3 text-sm font-semibold text-white transition duration-300 hover:scale-[1.02] hover:border-z-green/50 focus:outline-none focus:ring-2 focus:ring-white/20 ${className}`}
     >
       {children}
       <Icon name="arrow" className="h-4 w-4" />
@@ -669,13 +703,13 @@ function ChargerIllustration({ size = "large" }) {
 
   return (
     <div className={`${sizeClass} relative`}>
-      <div className="absolute inset-x-3 top-0 h-full rounded-lg border border-[#2A2A2A] bg-[#141414] shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]">
-        <div className="mx-auto mt-4 h-3 w-10 rounded-sm bg-[#232323]" />
-        <div className="mx-auto mt-4 h-12 w-10 rounded-md border border-[#2A2A2A] bg-[#0B0B0B]" />
-        <div className="absolute bottom-4 left-5 h-2 w-2 rounded-full bg-[#00E5A8]" />
-        <div className="absolute bottom-4 right-5 h-2 w-2 rounded-full bg-[#303030]" />
+      <div className="absolute inset-x-3 top-0 h-full rounded-lg border border-white/10 bg-zinc-900 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]">
+        <div className="mx-auto mt-4 h-3 w-10 rounded-sm bg-zinc-800" />
+        <div className="mx-auto mt-4 h-12 w-10 rounded-md border border-white/10 bg-z-black" />
+        <div className="absolute bottom-4 left-5 h-2 w-2 rounded-full bg-z-green" />
+        <div className="absolute bottom-4 right-5 h-2 w-2 rounded-full bg-zinc-700" />
       </div>
-      <div className="absolute bottom-8 right-0 h-12 w-10 rounded-br-full border-b border-r border-[#2A2A2A]" />
+      <div className="absolute bottom-8 right-0 h-12 w-10 rounded-br-full border-b border-r border-white/10" />
     </div>
   );
 }
@@ -695,73 +729,50 @@ function ChargerProductVisual({ variant = 0 }) {
 
 function InstallationDiagram({ type }) {
   return (
-    <div className="grid h-40 place-items-center rounded-lg border border-[#1F1F1F] bg-[#0B0B0B]">
+    <div className="grid h-40 place-items-center rounded-lg border border-white/10 bg-z-black">
       {type === "vertical" ? (
-        <div className="h-28 w-16 rounded-md border border-[#2A2A2A] bg-[#151515] p-2">
-          <div className="h-full w-5 rounded-sm bg-[#242424]" />
+        <div className="h-28 w-16 rounded-md border border-white/10 bg-zinc-900 p-2">
+          <div className="h-full w-5 rounded-sm bg-zinc-800" />
         </div>
       ) : null}
       {type === "horizontal" ? (
-        <div className="h-16 w-28 rounded-md border border-[#2A2A2A] bg-[#151515] p-2">
-          <div className="h-5 w-full rounded-sm bg-[#242424]" />
+        <div className="h-16 w-28 rounded-md border border-white/10 bg-zinc-900 p-2">
+          <div className="h-5 w-full rounded-sm bg-zinc-800" />
         </div>
       ) : null}
       {type === "square" ? (
-        <div className="grid h-24 w-24 place-items-center rounded-md border border-[#2A2A2A] bg-[#151515]">
-          <div className="h-9 w-9 rounded-sm bg-[#242424]" />
+        <div className="grid h-24 w-24 place-items-center rounded-md border border-white/10 bg-zinc-900">
+          <div className="h-9 w-9 rounded-sm bg-zinc-800" />
         </div>
       ) : null}
       {type === "standing" ? (
         <div className="flex flex-col items-center">
           <ChargerIllustration size="small" />
-          <div className="mt-2 h-1 w-20 rounded-full bg-[#2A2A2A]" />
+          <div className="mt-2 h-1 w-20 rounded-full bg-white/10" />
         </div>
       ) : null}
       {type === "hanging" ? (
         <div className="relative h-28 w-28">
-          <div className="absolute left-1/2 top-0 h-9 w-px bg-[#2A2A2A]" />
-          <div className="absolute left-1/2 top-9 h-16 w-12 -translate-x-1/2 rounded-md border border-[#2A2A2A] bg-[#151515]" />
-          <div className="absolute bottom-0 left-[58px] h-9 w-9 rounded-full border border-l-transparent border-t-transparent border-[#2A2A2A]" />
+          <div className="absolute left-1/2 top-0 h-9 w-px bg-white/10" />
+          <div className="absolute left-1/2 top-9 h-16 w-12 -translate-x-1/2 rounded-md border border-white/10 bg-zinc-900" />
+          <div className="absolute bottom-0 left-[58px] h-9 w-9 rounded-full border border-l-transparent border-t-transparent border-white/10" />
         </div>
       ) : null}
     </div>
   );
 }
 
-function InstallationVisual({ type }) {
+function InstallationVisual({ type, image, title }) {
   return (
     <div
       className={`host-installation-visual host-installation-visual-${type}`}
     >
       <span className="host-installation-vignette" />
-      {type === "vertical" ? (
-        <>
-          <span className="host-installation-plant" />
-          <div className="host-installation-wall-charger">
-            <span className="host-installation-wall-light" />
-            <span className="host-installation-wall-mark">
-              <Icon name="bolt" className="h-3 w-3" />
-            </span>
-            <span className="host-installation-wall-cable" />
-          </div>
-        </>
-      ) : (
-        <>
-          <span className="host-installation-floor-glow" />
-          <span className="host-installation-pot" />
-          <div className="host-installation-stand-charger">
-            <span className="host-installation-stand-top" />
-            <span className="host-installation-stand-screen">
-              <Icon name="bolt" className="h-3 w-3" />
-            </span>
-            <span className="host-installation-stand-dot muted" />
-            <span className="host-installation-stand-dot active" />
-            <span className="host-installation-stand-cable" />
-          </div>
-          <span className="host-installation-pole" />
-          <span className="host-installation-base" />
-        </>
-      )}
+      <img
+        src={image}
+        alt={`${title} installation`}
+        className="host-installation-image"
+      />
     </div>
   );
 }
@@ -770,6 +781,8 @@ export default function HostPage() {
   const [chargerCount, setChargerCount] = useState(2);
   const [unitPrice, setUnitPrice] = useState(120);
   const [usage, setUsage] = useState(8);
+  const [showRoiCalculator, setShowRoiCalculator] = useState(false);
+  const [showHostingSections, setShowHostingSections] = useState(false);
 
   const monthlyEarnings = useMemo(
     () => Math.max(0, chargerCount * unitPrice * usage * 30),
@@ -780,7 +793,7 @@ export default function HostPage() {
     <>
       <style data-page-style="host-page">{`
         .host-page {
-          background: #0B0B0B;
+          background: #0a0a0a;
           color: #FFFFFF;
           letter-spacing: 0;
           max-width: 100vw;
@@ -791,6 +804,12 @@ export default function HostPage() {
           box-sizing: border-box;
         }
 
+        .host-shutter-panel {
+          overflow: hidden;
+          transform-origin: top center;
+          will-change: height, clip-path, opacity;
+        }
+
         .host-container {
           max-width: 1300px;
           margin: 0 auto;
@@ -799,7 +818,7 @@ export default function HostPage() {
 
         .host-section {
           padding: 120px 0;
-          border-bottom: 1px solid #1F1F1F;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.10);
         }
 
         .host-logo-track {
@@ -834,12 +853,12 @@ export default function HostPage() {
 
         .host-logo-strip::before {
           left: 0;
-          background: linear-gradient(to right, #0B0B0B, transparent);
+          background: linear-gradient(to right, #0a0a0a, transparent);
         }
 
         .host-logo-strip::after {
           right: 0;
-          background: linear-gradient(to left, #0B0B0B, transparent);
+          background: linear-gradient(to left, #0a0a0a, transparent);
         }
 
         .host-partners-section {
@@ -848,8 +867,8 @@ export default function HostPage() {
           border-bottom: 1px solid #123327;
           padding: 128px 0 112px;
           background:
-            radial-gradient(circle at 86% 32%, rgba(0, 229, 168, 0.2), transparent 24%),
-            radial-gradient(circle at 58% 98%, rgba(0, 229, 168, 0.08), transparent 28%),
+            radial-gradient(circle at 86% 32%, rgba(22, 163, 74, 0.2), transparent 24%),
+            radial-gradient(circle at 58% 98%, rgba(22, 163, 74, 0.08), transparent 28%),
             linear-gradient(115deg, #030403 0%, #06100d 50%, #020403 100%);
           isolation: isolate;
         }
@@ -885,8 +904,8 @@ export default function HostPage() {
           opacity: 0.56;
           pointer-events: none;
           filter:
-            drop-shadow(0 0 18px rgba(0, 229, 168, 0.75))
-            drop-shadow(0 0 54px rgba(0, 229, 168, 0.35));
+            drop-shadow(0 0 18px rgba(22, 163, 74, 0.75))
+            drop-shadow(0 0 54px rgba(22, 163, 74, 0.35));
         }
 
         .host-partners-bolt::before,
@@ -898,7 +917,7 @@ export default function HostPage() {
         }
 
         .host-partners-bolt::before {
-          background: linear-gradient(160deg, rgba(86, 255, 171, 0.95), rgba(0, 229, 168, 0.12));
+          background: linear-gradient(160deg, rgba(22, 163, 74, 0.95), rgba(22, 163, 74, 0.12));
         }
 
         .host-partners-bolt::after {
@@ -915,8 +934,8 @@ export default function HostPage() {
           width: 48vw;
           height: 100%;
           background:
-            radial-gradient(ellipse at 62% 50%, rgba(0, 229, 168, 0.22), transparent 46%),
-            linear-gradient(90deg, transparent, rgba(0, 229, 168, 0.08));
+            radial-gradient(ellipse at 62% 50%, rgba(22, 163, 74, 0.22), transparent 46%),
+            linear-gradient(90deg, transparent, rgba(22, 163, 74, 0.08));
           pointer-events: none;
         }
 
@@ -928,7 +947,7 @@ export default function HostPage() {
           display: flex;
           align-items: center;
           gap: 24px;
-          color: #58F59B;
+          color: #16a34a;
           font-size: 14px;
           font-weight: 850;
           line-height: 1;
@@ -940,8 +959,8 @@ export default function HostPage() {
           display: block;
           width: 116px;
           height: 1px;
-          background: linear-gradient(90deg, #58F59B, transparent);
-          box-shadow: 0 0 16px rgba(88, 245, 155, 0.85);
+          background: linear-gradient(90deg, #16a34a, transparent);
+          box-shadow: 0 0 16px rgba(22, 163, 74, 0.85);
         }
 
         .host-partners-title {
@@ -956,13 +975,13 @@ export default function HostPage() {
         }
 
         .host-partners-title span {
-          color: #58F59B;
+          color: #16a34a;
         }
 
         .host-partners-copy {
           margin-top: 24px;
           max-width: 820px;
-          color: #C9CECB;
+          color: #a1a1aa;
           font-size: clamp(18px, 1.45vw, 26px);
           line-height: 1.45;
         }
@@ -981,10 +1000,10 @@ export default function HostPage() {
           height: 168px;
           place-items: center;
           overflow: hidden;
-          border: 1px solid rgba(0, 229, 168, 0.35);
+          border: 1px solid rgba(22, 163, 74, 0.35);
           border-radius: 11px;
           background:
-            radial-gradient(circle at 50% 0%, rgba(0, 229, 168, 0.14), transparent 42%),
+            radial-gradient(circle at 50% 0%, rgba(22, 163, 74, 0.14), transparent 42%),
             rgba(3, 10, 9, 0.72);
           padding: 34px;
           box-shadow:
@@ -998,9 +1017,9 @@ export default function HostPage() {
         }
 
         .host-partner-logo-card:hover {
-          border-color: rgba(88, 245, 155, 0.82);
+          border-color: rgba(22, 163, 74, 0.82);
           background:
-            radial-gradient(circle at 50% 0%, rgba(0, 229, 168, 0.2), transparent 48%),
+            radial-gradient(circle at 50% 0%, rgba(22, 163, 74, 0.2), transparent 48%),
             rgba(4, 14, 12, 0.82);
           transform: translateY(-2px);
         }
@@ -1010,7 +1029,7 @@ export default function HostPage() {
           max-width: 100%;
           object-fit: contain;
           opacity: 0.88;
-          filter: grayscale(1) invert(1) brightness(1.75);
+          filter: none;
         }
 
         .host-partner-logo-card img.is-inverted {
@@ -1025,7 +1044,7 @@ export default function HostPage() {
           min-height: 74px;
           min-width: 290px;
           justify-content: space-between;
-          border-color: rgba(88, 245, 155, 0.32);
+          border-color: rgba(22, 163, 74, 0.32);
           border-radius: 11px;
           background: rgba(3, 10, 9, 0.62);
           padding: 0 32px;
@@ -1035,8 +1054,8 @@ export default function HostPage() {
         }
 
         .host-partners-button:hover {
-          border-color: rgba(88, 245, 155, 0.8);
-          color: #58F59B;
+          border-color: rgba(22, 163, 74, 0.8);
+          color: #16a34a;
         }
 
         .host-final-cta {
@@ -1045,11 +1064,11 @@ export default function HostPage() {
           --cta-frame-top: 31%;
           --cta-frame-height: 45%;
           --cta-frame-edge: clamp(158px, calc(24vw - 92px), 268px);
-          --cta-line-color: rgba(0, 255, 180, 0.45);
+          --cta-line-color: rgba(22, 163, 74, 0.45);
           padding: 96px 0 104px;
           background:
-            radial-gradient(circle at 0% 46%, rgba(0, 229, 168, 0.18), transparent 25%),
-            radial-gradient(circle at 100% 40%, rgba(0, 229, 168, 0.21), transparent 28%),
+            radial-gradient(circle at 0% 46%, rgba(22, 163, 74, 0.18), transparent 25%),
+            radial-gradient(circle at 100% 40%, rgba(22, 163, 74, 0.21), transparent 28%),
             linear-gradient(180deg, #050606 0%, #020303 100%);
           isolation: isolate;
         }
@@ -1091,8 +1110,8 @@ export default function HostPage() {
           width: clamp(250px, 24vw, 360px);
           border: 1.5px solid var(--cta-line-color);
           box-shadow:
-            0 0 20px rgba(0, 255, 180, 0.16),
-            inset 0 0 18px rgba(0, 255, 180, 0.08);
+            0 0 20px rgba(22, 163, 74, 0.16),
+            inset 0 0 18px rgba(22, 163, 74, 0.08);
         }
 
         .cta-line-left {
@@ -1115,8 +1134,8 @@ export default function HostPage() {
           height: 14px;
           width: 14px;
           border-radius: 999px;
-          background: #00E5A8;
-          box-shadow: 0 0 18px rgba(0, 229, 168, 0.95), 0 0 42px rgba(0, 229, 168, 0.45);
+          background: #16a34a;
+          box-shadow: 0 0 18px rgba(22, 163, 74, 0.95), 0 0 42px rgba(22, 163, 74, 0.45);
         }
 
         .cta-line-left::before {
@@ -1131,19 +1150,19 @@ export default function HostPage() {
         .cta-bottom-line-right {
           top: calc(var(--cta-frame-top) + var(--cta-frame-height));
           height: 1.5px;
-          box-shadow: 0 0 18px rgba(0, 255, 180, 0.16);
+          box-shadow: 0 0 18px rgba(22, 163, 74, 0.16);
         }
 
         .cta-bottom-line-left {
           left: var(--cta-frame-edge);
           right: calc(50% + 188px);
-          background: linear-gradient(90deg, var(--cta-line-color), rgba(0, 255, 180, 0.26), transparent);
+          background: linear-gradient(90deg, var(--cta-line-color), rgba(22, 163, 74, 0.26), transparent);
         }
 
         .cta-bottom-line-right {
           left: calc(50% + 188px);
           right: var(--cta-frame-edge);
-          background: linear-gradient(90deg, transparent, rgba(0, 255, 180, 0.26), var(--cta-line-color));
+          background: linear-gradient(90deg, transparent, rgba(22, 163, 74, 0.26), var(--cta-line-color));
         }
 
         .host-final-content {
@@ -1158,7 +1177,7 @@ export default function HostPage() {
           display: grid;
           justify-items: center;
           gap: 16px;
-          color: #00E5A8;
+          color: #16a34a;
           font-size: 16px;
           font-weight: 850;
           letter-spacing: 0.38em;
@@ -1172,19 +1191,19 @@ export default function HostPage() {
           grid-template-columns: 1fr 32px 1fr;
           align-items: center;
           gap: 14px;
-          color: #00E5A8;
+          color: #16a34a;
         }
 
         .host-final-eyebrow span::before,
         .host-final-eyebrow span::after {
           content: '';
           height: 1px;
-          background: linear-gradient(90deg, transparent, rgba(0, 229, 168, 0.95));
-          box-shadow: 0 0 16px rgba(0, 229, 168, 0.8);
+          background: linear-gradient(90deg, transparent, rgba(22, 163, 74, 0.95));
+          box-shadow: 0 0 16px rgba(22, 163, 74, 0.8);
         }
 
         .host-final-eyebrow span::after {
-          background: linear-gradient(90deg, rgba(0, 229, 168, 0.95), transparent);
+          background: linear-gradient(90deg, rgba(22, 163, 74, 0.95), transparent);
         }
 
         .host-final-title {
@@ -1200,7 +1219,7 @@ export default function HostPage() {
         .host-final-copy {
           margin: 26px auto 0;
           max-width: 640px;
-          color: #C9CECB;
+          color: #a1a1aa;
           font-size: clamp(18px, 1.25vw, 23px);
           line-height: 1.42;
         }
@@ -1210,11 +1229,11 @@ export default function HostPage() {
           min-width: 300px;
           margin-top: 40px;
           border-radius: 12px;
-          background: #00E5A8;
+          background: #16a34a;
           color: #020303;
           font-size: 21px;
           box-shadow:
-            0 20px 58px rgba(0, 229, 168, 0.24),
+            0 20px 58px rgba(22, 163, 74, 0.24),
             inset 0 1px 0 rgba(255, 255, 255, 0.28);
         }
 
@@ -1230,7 +1249,7 @@ export default function HostPage() {
           position: relative;
           min-height: 100vh;
           overflow: hidden;
-          border-bottom: 1px solid #1F1F1F;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.10);
           isolation: isolate;
         }
 
@@ -1265,7 +1284,7 @@ export default function HostPage() {
           position: absolute;
           inset: 0;
           z-index: -1;
-          background: radial-gradient(circle at 22% 50%, rgba(0, 229, 168, 0.11), transparent 30%);
+          background: radial-gradient(circle at 22% 50%, rgba(22, 163, 74, 0.11), transparent 30%);
           opacity: 0.7;
         }
 
@@ -1287,7 +1306,7 @@ export default function HostPage() {
           border-radius: 999px;
           background: rgba(17, 17, 17, 0.7);
           padding: 8px 13px;
-          color: #BDBDBD;
+          color: #a1a1aa;
           font-size: 13px;
           font-weight: 600;
           backdrop-filter: blur(16px);
@@ -1305,13 +1324,13 @@ export default function HostPage() {
 
         .host-hero-title span {
           display: block;
-          color: #21D85A;
+          color: #16a34a;
         }
 
         .host-hero-copy {
           margin-top: 24px;
           max-width: 620px;
-          color: #C7C7C7;
+          color: #a1a1aa;
           font-size: clamp(17px, 1.25vw, 21px);
           line-height: 1.45;
           font-weight: 500;
@@ -1323,8 +1342,8 @@ export default function HostPage() {
           border-radius: 10px;
           padding: 15px 28px;
           font-size: 18px;
-          background: #21D85A;
-          box-shadow: 0 16px 40px rgba(33, 216, 90, 0.25);
+          background: #16a34a;
+          box-shadow: 0 16px 40px rgba(22, 163, 74, 0.25);
         }
 
         .host-hero-feature-strip {
@@ -1368,16 +1387,16 @@ export default function HostPage() {
           width: 48px;
           flex: 0 0 auto;
           place-items: center;
-          border: 1px solid rgba(33, 216, 90, 0.42);
+          border: 1px solid rgba(22, 163, 74, 0.42);
           border-radius: 999px;
-          background: rgba(33, 216, 90, 0.08);
-          color: #21D85A;
+          background: rgba(22, 163, 74, 0.08);
+          color: #16a34a;
         }
 
         .host-payments-section {
           position: relative;
           overflow: hidden;
-          border-bottom: 1px solid #1F1F1F;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.10);
           min-height: 780px;
           padding: 128px 0 118px;
           isolation: isolate;
@@ -1408,7 +1427,7 @@ export default function HostPage() {
           position: absolute;
           inset: 0;
           z-index: -1;
-          background: radial-gradient(circle at 25% 80%, rgba(0, 229, 168, 0.1), transparent 28%);
+          background: radial-gradient(circle at 25% 80%, rgba(22, 163, 74, 0.1), transparent 28%);
         }
 
         .host-payments-content {
@@ -1425,13 +1444,13 @@ export default function HostPage() {
         }
 
         .host-payments-title span {
-          color: #00E5A8;
+          color: #16a34a;
         }
 
         .host-payments-copy {
           margin-top: 26px;
           max-width: 520px;
-          color: #C7C7C7;
+          color: #a1a1aa;
           font-size: clamp(18px, 1.45vw, 24px);
           line-height: 1.55;
         }
@@ -1476,18 +1495,18 @@ export default function HostPage() {
           width: 72px;
           flex: 0 0 auto;
           place-items: center;
-          border: 1px solid rgba(0, 229, 168, 0.26);
+          border: 1px solid rgba(22, 163, 74, 0.26);
           border-radius: 999px;
-          background: rgba(0, 229, 168, 0.06);
-          color: #00E5A8;
-          box-shadow: inset 0 0 30px rgba(0, 229, 168, 0.05);
+          background: rgba(22, 163, 74, 0.06);
+          color: #16a34a;
+          box-shadow: inset 0 0 30px rgba(22, 163, 74, 0.05);
         }
 
         .host-payment-number {
           display: flex;
           align-items: center;
           gap: 12px;
-          color: #00E5A8;
+          color: #16a34a;
           font-size: 18px;
           font-weight: 800;
         }
@@ -1495,14 +1514,14 @@ export default function HostPage() {
         .host-payment-line {
           height: 1px;
           width: 48px;
-          background: linear-gradient(90deg, transparent, rgba(0, 229, 168, 0.7));
+          background: linear-gradient(90deg, transparent, rgba(22, 163, 74, 0.7));
         }
 
         .host-payment-dot {
           height: 5px;
           width: 5px;
           border-radius: 999px;
-          background: #00E5A8;
+          background: #16a34a;
         }
 
         .host-payment-card h3 {
@@ -1515,7 +1534,7 @@ export default function HostPage() {
 
         .host-payment-card p {
           margin-top: 22px;
-          color: #C7C7C7;
+          color: #a1a1aa;
           font-size: 18px;
           line-height: 1.55;
         }
@@ -1524,21 +1543,21 @@ export default function HostPage() {
           margin-top: 48px;
           min-height: 70px;
           min-width: 220px;
-          border-color: rgba(0, 229, 168, 0.55);
+          border-color: rgba(22, 163, 74, 0.55);
           border-radius: 999px;
           background: rgba(10, 10, 10, 0.56);
           box-shadow:
-            inset 0 0 26px rgba(0, 229, 168, 0.08),
-            0 0 30px rgba(0, 229, 168, 0.14);
+            inset 0 0 26px rgba(22, 163, 74, 0.08),
+            0 0 30px rgba(22, 163, 74, 0.14);
           backdrop-filter: blur(12px);
         }
 
         .host-how-section {
           position: relative;
           overflow: hidden;
-          border-block: 1px solid #1F1F1F;
+          border-block: 1px solid rgba(255, 255, 255, 0.10);
           background:
-            radial-gradient(circle at 66% 62%, rgba(0, 229, 168, 0.12), transparent 26%),
+            radial-gradient(circle at 66% 62%, rgba(22, 163, 74, 0.12), transparent 26%),
             linear-gradient(90deg, #050505 0%, #050505 38%, #080A09 100%);
           isolation: isolate;
         }
@@ -1550,7 +1569,7 @@ export default function HostPage() {
           z-index: -1;
           background:
             linear-gradient(90deg, rgba(0, 0, 0, 0.98) 0%, rgba(0, 0, 0, 0.92) 31%, rgba(0, 0, 0, 0.34) 72%, rgba(0, 0, 0, 0.72) 100%),
-            radial-gradient(circle at 87% 82%, rgba(0, 229, 168, 0.13), transparent 24%);
+            radial-gradient(circle at 87% 82%, rgba(22, 163, 74, 0.13), transparent 24%);
         }
 
         .host-how-inner {
@@ -1575,7 +1594,7 @@ export default function HostPage() {
           display: inline-flex;
           align-items: center;
           gap: 14px;
-          color: #21D85A;
+          color: #16a34a;
           font-size: 18px;
           font-weight: 800;
           text-transform: uppercase;
@@ -1586,10 +1605,10 @@ export default function HostPage() {
           height: 42px;
           min-width: 42px;
           place-items: center;
-          border: 1px solid rgba(33, 216, 90, 0.82);
+          border: 1px solid rgba(22, 163, 74, 0.82);
           border-radius: 6px;
-          background: rgba(33, 216, 90, 0.08);
-          box-shadow: inset 0 0 20px rgba(33, 216, 90, 0.08);
+          background: rgba(22, 163, 74, 0.08);
+          box-shadow: inset 0 0 20px rgba(22, 163, 74, 0.08);
         }
 
         .host-how-title {
@@ -1603,13 +1622,13 @@ export default function HostPage() {
         }
 
         .host-how-title span {
-          color: #21D85A;
+          color: #16a34a;
         }
 
         .host-how-description {
           margin-top: 18px;
           max-width: 330px;
-          color: #BDBDBD;
+          color: #a1a1aa;
           font-size: clamp(16px, 1.16vw, 21px);
           line-height: 1.42;
         }
@@ -1638,8 +1657,8 @@ export default function HostPage() {
           border: 1px solid rgba(255, 255, 255, 0.12);
           border-radius: 5px;
           background: rgba(18, 18, 18, 0.8);
-          color: #21D85A;
-          box-shadow: inset 0 0 24px rgba(33, 216, 90, 0.05);
+          color: #16a34a;
+          box-shadow: inset 0 0 24px rgba(22, 163, 74, 0.05);
         }
 
         .host-how-card h3 {
@@ -1651,7 +1670,7 @@ export default function HostPage() {
 
         .host-how-card p {
           margin-top: 5px;
-          color: #BDBDBD;
+          color: #a1a1aa;
           font-size: 12px;
           font-weight: 600;
           line-height: 1.25;
@@ -1739,15 +1758,58 @@ export default function HostPage() {
         }
 
         .host-how-footer-icon {
-          color: #21D85A;
+          color: #16a34a;
+        }
+
+        .host-how-payment-cards {
+          position: relative;
+          z-index: 3;
+          padding-bottom: 72px;
+        }
+
+        .host-how-payment-cards .host-payment-cards {
+          margin-top: 0;
+          max-width: none;
+          gap: 20px;
+        }
+
+        .host-how-payment-cards .host-payment-card {
+          min-height: 260px;
+          background:
+            linear-gradient(115deg, rgba(24, 24, 24, 0.82), rgba(12, 12, 12, 0.86)),
+            radial-gradient(circle at 88% 12%, rgba(22, 163, 74, 0.16), transparent 28%);
+          padding: 24px;
+        }
+
+        .host-how-payment-cards .host-payment-icon {
+          height: 58px;
+          width: 58px;
+        }
+
+        .host-how-payment-cards .host-payment-number {
+          font-size: 17px;
+        }
+
+        .host-how-payment-cards .host-payment-line {
+          width: 36px;
+        }
+
+        .host-how-payment-cards .host-payment-card h3 {
+          font-size: 25px;
+        }
+
+        .host-how-payment-cards .host-payment-card p {
+          margin-top: 16px;
+          font-size: 16px;
+          line-height: 1.45;
         }
 
         .host-where-section {
           position: relative;
           overflow: hidden;
-          border-bottom: 1px solid #1F1F1F;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.10);
           background:
-            radial-gradient(circle at 76% 48%, rgba(0, 229, 168, 0.1), transparent 28%),
+            radial-gradient(circle at 76% 48%, rgba(22, 163, 74, 0.1), transparent 28%),
             #050505;
         }
 
@@ -1771,7 +1833,7 @@ export default function HostPage() {
           width: max-content;
           align-items: center;
           gap: 14px;
-          color: #21D85A;
+          color: #16a34a;
           font-size: 18px;
           font-weight: 800;
           text-transform: uppercase;
@@ -1782,10 +1844,10 @@ export default function HostPage() {
           height: 42px;
           min-width: 42px;
           place-items: center;
-          border: 1px solid rgba(33, 216, 90, 0.82);
+          border: 1px solid rgba(22, 163, 74, 0.82);
           border-radius: 6px;
-          background: rgba(33, 216, 90, 0.08);
-          box-shadow: inset 0 0 20px rgba(33, 216, 90, 0.08);
+          background: rgba(22, 163, 74, 0.08);
+          box-shadow: inset 0 0 20px rgba(22, 163, 74, 0.08);
         }
 
         .host-where-title {
@@ -1801,7 +1863,7 @@ export default function HostPage() {
         .host-where-copy-text {
           margin-top: 24px;
           max-width: 340px;
-          color: #BDBDBD;
+          color: #a1a1aa;
           font-size: 18px;
           line-height: 1.38;
         }
@@ -1837,7 +1899,7 @@ export default function HostPage() {
           min-height: 0;
           border: 1px solid rgba(255, 255, 255, 0.1);
           border-radius: 8px;
-          background: #111111;
+          background: #18181b;
           isolation: isolate;
         }
 
@@ -1900,7 +1962,7 @@ export default function HostPage() {
           min-height: 0;
           border: 1px solid rgba(255, 255, 255, 0.1);
           border-radius: 8px;
-          background: #0B0B0B;
+          background: #0a0a0a;
         }
 
         .host-where-map img {
@@ -1914,9 +1976,9 @@ export default function HostPage() {
         .host-who-section {
           position: relative;
           overflow: hidden;
-          border-bottom: 1px solid #1F1F1F;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.10);
           background:
-            radial-gradient(circle at 34% 90%, rgba(0, 229, 168, 0.08), transparent 24%),
+            radial-gradient(circle at 34% 90%, rgba(22, 163, 74, 0.08), transparent 24%),
             #050505;
         }
 
@@ -1941,7 +2003,7 @@ export default function HostPage() {
           width: max-content;
           align-items: center;
           gap: 14px;
-          color: #21D85A;
+          color: #16a34a;
           font-size: 18px;
           font-weight: 800;
           text-transform: uppercase;
@@ -1952,10 +2014,10 @@ export default function HostPage() {
           height: 42px;
           min-width: 42px;
           place-items: center;
-          border: 1px solid rgba(33, 216, 90, 0.82);
+          border: 1px solid rgba(22, 163, 74, 0.82);
           border-radius: 6px;
-          background: rgba(33, 216, 90, 0.08);
-          box-shadow: inset 0 0 20px rgba(33, 216, 90, 0.08);
+          background: rgba(22, 163, 74, 0.08);
+          box-shadow: inset 0 0 20px rgba(22, 163, 74, 0.08);
         }
 
         .host-who-title {
@@ -1968,13 +2030,13 @@ export default function HostPage() {
         }
 
         .host-who-title span {
-          color: #21D85A;
+          color: #16a34a;
         }
 
         .host-who-copy-text {
           margin-top: 22px;
           max-width: 390px;
-          color: #BDBDBD;
+          color: #a1a1aa;
           font-size: 18px;
           line-height: 1.5;
         }
@@ -1986,6 +2048,9 @@ export default function HostPage() {
         }
 
         .host-who-slider {
+          width: 620px;
+          max-width: 100%;
+          margin: 0 auto;
           overflow: hidden;
           border-radius: 10px;
         }
@@ -1995,6 +2060,7 @@ export default function HostPage() {
         }
 
         .host-who-slider .swiper-slide {
+          width: 300px;
           height: auto;
         }
 
@@ -2011,8 +2077,8 @@ export default function HostPage() {
         }
 
         .host-who-slider .swiper-pagination-bullet-active {
-          background: #21D85A;
-          box-shadow: 0 0 16px rgba(33, 216, 90, 0.48);
+          background: #16a34a;
+          box-shadow: 0 0 16px rgba(22, 163, 74, 0.48);
         }
 
         .host-who-nav {
@@ -2026,7 +2092,7 @@ export default function HostPage() {
           border: 0;
           border-radius: 999px;
           background: rgba(27, 30, 30, 0.9);
-          color: #21D85A;
+          color: #16a34a;
           box-shadow: 0 16px 36px rgba(0, 0, 0, 0.34);
           cursor: pointer;
           transition:
@@ -2054,11 +2120,12 @@ export default function HostPage() {
         .host-who-card {
           position: relative;
           overflow: hidden;
+          width: 300px;
           height: 360px;
           min-height: 360px;
           border: 1px solid rgba(255, 255, 255, 0.12);
           border-radius: 8px;
-          background: #111111;
+          background: #18181b;
           isolation: isolate;
         }
 
@@ -2080,7 +2147,7 @@ export default function HostPage() {
           z-index: -1;
           background:
             linear-gradient(180deg, rgba(0, 0, 0, 0.08) 0%, rgba(0, 0, 0, 0.1) 38%, rgba(0, 0, 0, 0.88) 100%),
-            radial-gradient(circle at 50% 85%, rgba(0, 229, 168, 0.12), transparent 42%);
+            radial-gradient(circle at 50% 85%, rgba(22, 163, 74, 0.12), transparent 42%);
         }
 
         .host-who-card:hover img {
@@ -2112,8 +2179,8 @@ export default function HostPage() {
           height: 2px;
           width: 40px;
           border-radius: 999px;
-          background: #21D85A;
-          box-shadow: 0 0 12px rgba(33, 216, 90, 0.55);
+          background: #16a34a;
+          box-shadow: 0 0 12px rgba(22, 163, 74, 0.55);
         }
 
         .host-who-strip {
@@ -2139,7 +2206,7 @@ export default function HostPage() {
           height: 150px;
           place-items: center;
           align-self: stretch;
-          background: radial-gradient(circle at 42% 62%, rgba(0, 229, 168, 0.12), transparent 48%);
+          background: radial-gradient(circle at 42% 62%, rgba(22, 163, 74, 0.12), transparent 48%);
         }
 
         .host-who-charger .host-product-visual {
@@ -2174,8 +2241,8 @@ export default function HostPage() {
           width: 54px;
           place-items: center;
           border-radius: 999px;
-          background: rgba(33, 216, 90, 0.1);
-          color: #21D85A;
+          background: rgba(22, 163, 74, 0.1);
+          color: #16a34a;
         }
 
         .host-who-benefit h4 {
@@ -2186,7 +2253,7 @@ export default function HostPage() {
         }
 
         .host-who-benefit p {
-          color: #BDBDBD;
+          color: #a1a1aa;
           font-size: 12px;
           font-weight: 600;
           line-height: 1.25;
@@ -2209,27 +2276,27 @@ export default function HostPage() {
           align-items: center;
           justify-content: center;
           gap: 10px;
-          color: #21D85A;
+          color: #16a34a;
           font-size: 14px;
           font-weight: 800;
         }
 
         .host-charger-options {
           padding: 86px 0;
-          border-bottom: 1px solid #1F1F1F;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.10);
           background:
-            radial-gradient(circle at 50% 0%, rgba(0, 229, 168, 0.09), transparent 34%),
+            radial-gradient(circle at 50% 0%, rgba(22, 163, 74, 0.09), transparent 34%),
             #050706;
         }
 
         .host-charger-panel {
           position: relative;
           overflow: hidden;
-          border: 1px solid rgba(0, 229, 168, 0.24);
+          border: 1px solid rgba(22, 163, 74, 0.24);
           border-radius: 26px;
           padding: 34px 26px 16px;
           box-shadow:
-            inset 0 0 45px rgba(0, 229, 168, 0.05),
+            inset 0 0 45px rgba(22, 163, 74, 0.05),
             0 24px 80px rgba(0, 0, 0, 0.38);
           isolation: isolate;
         }
@@ -2261,7 +2328,7 @@ export default function HostPage() {
           inset: 0;
           z-index: -1;
           pointer-events: none;
-          background: radial-gradient(circle at 38% 60%, rgba(0, 229, 168, 0.08), transparent 30%);
+          background: radial-gradient(circle at 38% 60%, rgba(22, 163, 74, 0.08), transparent 30%);
         }
 
         .host-charger-header {
@@ -2279,7 +2346,7 @@ export default function HostPage() {
           display: inline-flex;
           align-items: center;
           gap: 10px;
-          color: #00E5A8;
+          color: #16a34a;
           font-size: 13px;
           font-weight: 800;
           text-transform: uppercase;
@@ -2290,9 +2357,9 @@ export default function HostPage() {
           height: 26px;
           width: 26px;
           place-items: center;
-          border: 1px solid rgba(0, 229, 168, 0.38);
+          border: 1px solid rgba(22, 163, 74, 0.38);
           border-radius: 999px;
-          background: rgba(0, 229, 168, 0.08);
+          background: rgba(22, 163, 74, 0.08);
         }
 
         .host-charger-title {
@@ -2306,13 +2373,13 @@ export default function HostPage() {
         }
 
         .host-charger-title span {
-          color: #00E5A8;
+          color: #16a34a;
         }
 
         .host-charger-copy {
           margin-top: 16px;
           max-width: 360px;
-          color: #C7C7C7;
+          color: #a1a1aa;
           font-size: 16px;
           line-height: 1.35;
         }
@@ -2324,17 +2391,22 @@ export default function HostPage() {
           gap: 12px;
         }
 
+        .host-charger-grid > * {
+          height: 100%;
+        }
+
         .host-charger-card {
           position: relative;
           display: grid;
+          height: 100%;
           min-height: 252px;
           grid-template-columns: 0.72fr 1fr;
           gap: 16px;
-          border: 1px solid rgba(0, 229, 168, 0.25);
+          border: 1px solid rgba(22, 163, 74, 0.25);
           border-radius: 12px;
           background: rgba(3, 14, 13, 0.76);
           padding: 20px 18px 18px;
-          box-shadow: inset 0 0 34px rgba(0, 229, 168, 0.05);
+          box-shadow: inset 0 0 34px rgba(22, 163, 74, 0.05);
           backdrop-filter: blur(16px);
         }
 
@@ -2346,10 +2418,10 @@ export default function HostPage() {
           min-width: 30px;
           height: 24px;
           place-items: center;
-          border: 1px solid rgba(0, 229, 168, 0.28);
+          border: 1px solid rgba(22, 163, 74, 0.28);
           border-radius: 8px;
-          background: rgba(0, 229, 168, 0.1);
-          color: #00E5A8;
+          background: rgba(22, 163, 74, 0.1);
+          color: #16a34a;
           font-size: 13px;
           font-weight: 800;
         }
@@ -2360,7 +2432,16 @@ export default function HostPage() {
           align-items: center;
           justify-content: center;
           padding-top: 18px;
-          border-right: 1px solid rgba(255, 255, 255, 0.08);
+          
+        }
+
+        .host-charger-image {
+          display: block;
+          width: min(118px, 78%);
+          height: 138px;
+          object-fit: contain;
+          object-position: center bottom;
+          filter: drop-shadow(0 20px 34px rgba(22, 163, 74, 0.2));
         }
 
         .host-charger-card h3 {
@@ -2373,7 +2454,7 @@ export default function HostPage() {
 
         .host-charger-card p {
           margin-top: 10px;
-          color: #D0D0D0;
+          color: #a1a1aa;
           font-size: 13px;
           line-height: 1.38;
         }
@@ -2381,7 +2462,7 @@ export default function HostPage() {
         .host-charger-divider {
           margin: 12px 0 11px;
           height: 1px;
-          background: linear-gradient(90deg, rgba(0, 229, 168, 0.36), transparent);
+          background: linear-gradient(90deg, rgba(22, 163, 74, 0.36), transparent);
         }
 
         .host-charger-meta {
@@ -2393,14 +2474,14 @@ export default function HostPage() {
           display: flex;
           align-items: center;
           gap: 10px;
-          color: #D8D8D8;
+          color: #a1a1aa;
           font-size: 13px;
           line-height: 1.35;
         }
 
         .host-charger-meta-row strong,
         .host-charger-meta-row em {
-          color: #00E5A8;
+          color: #16a34a;
           font-style: normal;
           font-weight: 800;
         }
@@ -2411,7 +2492,7 @@ export default function HostPage() {
           width: 18px;
           flex: 0 0 auto;
           place-items: center;
-          color: #00E5A8;
+          color: #16a34a;
         }
 
         .host-charger-learn {
@@ -2421,9 +2502,9 @@ export default function HostPage() {
           justify-content: center;
           gap: 14px;
           margin-top: 14px;
-          border: 1px solid rgba(0, 229, 168, 0.38);
+          border: 1px solid rgba(22, 163, 74, 0.38);
           border-radius: 9px;
-          background: rgba(0, 229, 168, 0.04);
+          background: rgba(22, 163, 74, 0.04);
           color: #FFFFFF;
           font-size: 14px;
           font-weight: 800;
@@ -2434,8 +2515,8 @@ export default function HostPage() {
         }
 
         .host-charger-learn:hover {
-          border-color: rgba(0, 229, 168, 0.78);
-          color: #00E5A8;
+          border-color: rgba(22, 163, 74, 0.78);
+          color: #16a34a;
           transform: translateY(-1px);
         }
 
@@ -2451,7 +2532,7 @@ export default function HostPage() {
           position: absolute;
           inset: 28px 8px 6px;
           border-radius: 999px;
-          background: rgba(0, 229, 168, 0.25);
+          background: rgba(22, 163, 74, 0.25);
           filter: blur(18px);
         }
 
@@ -2487,8 +2568,8 @@ export default function HostPage() {
           height: 42px;
           width: 2px;
           border-radius: 999px;
-          background: #00E5A8;
-          box-shadow: 0 0 14px rgba(0, 229, 168, 0.8);
+          background: #16a34a;
+          box-shadow: 0 0 14px rgba(22, 163, 74, 0.8);
         }
 
         .host-product-ring {
@@ -2497,9 +2578,9 @@ export default function HostPage() {
           display: flex;
           height: 19px;
           width: 19px;
-          border: 3px solid #00E5A8;
+          border: 3px solid #16a34a;
           border-radius: 999px;
-          box-shadow: 0 0 15px rgba(0, 229, 168, 0.65);
+          box-shadow: 0 0 15px rgba(22, 163, 74, 0.65);
         }
 
         .host-product-dot {
@@ -2508,7 +2589,7 @@ export default function HostPage() {
           height: 4px;
           width: 4px;
           border-radius: 999px;
-          background: #00E5A8;
+          background: #16a34a;
         }
 
         .host-charger-quiz,
@@ -2559,18 +2640,18 @@ export default function HostPage() {
           height: 54px;
           width: 54px;
           place-items: center;
-          border: 2px solid #00E5A8;
+          border: 2px solid #16a34a;
           border-radius: 999px;
-          color: #00E5A8;
+          color: #16a34a;
           font-size: 30px;
         }
 
         .host-charger-quiz-button {
           min-height: 46px;
           min-width: 220px;
-          border-color: #00E5A8;
-          background: rgba(0, 229, 168, 0.05);
-          color: #00E5A8;
+          border-color: #16a34a;
+          background: rgba(22, 163, 74, 0.05);
+          color: #16a34a;
         }
 
         .host-charger-finance {
@@ -2630,7 +2711,7 @@ export default function HostPage() {
           width: 40px;
           flex: 0 0 auto;
           place-items: center;
-          color: #00E5A8;
+          color: #16a34a;
         }
 
         .host-charger-finance-text {
@@ -2675,7 +2756,7 @@ export default function HostPage() {
 
         .host-charger-panel-glow {
           background:
-            radial-gradient(circle at 53% 52%, rgba(0, 229, 168, 0.14), transparent 24%),
+            radial-gradient(circle at 53% 52%, rgba(22, 163, 74, 0.14), transparent 24%),
             radial-gradient(circle at 15% 12%, rgba(255, 255, 255, 0.06), transparent 20%);
         }
 
@@ -2712,7 +2793,7 @@ export default function HostPage() {
         .host-charger-copy {
           margin-top: 28px;
           max-width: 620px;
-          color: #CFCFCF;
+          color: #a1a1aa;
           font-size: 20px;
           line-height: 1.45;
         }
@@ -2722,14 +2803,20 @@ export default function HostPage() {
           gap: 22px;
         }
 
+        .host-charger-grid > * {
+          height: 100%;
+        }
+
         .host-charger-card {
-          min-height: 0;
-          grid-template-columns: 1fr;
+          display: flex;
+          height: 100%;
+          min-height: 742px;
+          flex-direction: column;
           gap: 0;
           border-color: rgba(255, 255, 255, 0.16);
           border-radius: 10px;
           background:
-            radial-gradient(circle at 50% 40%, rgba(0, 229, 168, 0.12), transparent 27%),
+            radial-gradient(circle at 50% 40%, rgba(22, 163, 74, 0.12), transparent 27%),
             linear-gradient(145deg, rgba(18, 21, 21, 0.96), rgba(7, 8, 8, 0.98));
           padding: 74px 24px 26px;
           box-shadow:
@@ -2738,9 +2825,9 @@ export default function HostPage() {
         }
 
         .host-charger-card.is-popular {
-          border-color: rgba(0, 229, 168, 0.78);
+          border-color: rgba(22, 163, 74, 0.78);
           box-shadow:
-            0 0 36px rgba(0, 229, 168, 0.12),
+            0 0 36px rgba(22, 163, 74, 0.12),
             inset 0 1px 0 rgba(255, 255, 255, 0.05);
         }
 
@@ -2749,7 +2836,7 @@ export default function HostPage() {
           top: 22px;
           min-width: 36px;
           height: 34px;
-          border-color: rgba(0, 229, 168, 0.52);
+          border-color: rgba(22, 163, 74, 0.52);
           border-radius: 7px;
           font-size: 16px;
         }
@@ -2761,11 +2848,11 @@ export default function HostPage() {
           display: inline-flex;
           min-height: 34px;
           align-items: center;
-          border: 1px solid rgba(0, 229, 168, 0.32);
+          border: 1px solid rgba(22, 163, 74, 0.32);
           border-radius: 8px;
-          background: rgba(0, 229, 168, 0.1);
+          background: rgba(22, 163, 74, 0.1);
           padding: 0 13px;
-          color: #00E5A8;
+          color: #16a34a;
           font-size: 13px;
           font-weight: 800;
           text-transform: uppercase;
@@ -2779,20 +2866,34 @@ export default function HostPage() {
           line-height: 1.08;
         }
 
+        .host-charger-card > div:first-of-type {
+          min-height: 118px;
+        }
+
         .host-charger-card p {
           margin-top: 14px;
           max-width: 250px;
-          color: #CFCFCF;
+          color: #a1a1aa;
           font-size: 16px;
           line-height: 1.45;
         }
 
         .host-charger-art {
-          min-height: 178px;
+          height: 216px;
+          min-height: 216px;
           align-items: end;
           border-right: 0;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+   
           padding: 14px 0 0;
+        }
+
+        .host-charger-image {
+          display: block;
+          width: 168px;
+          height: 188px;
+          object-fit: contain;
+          object-position: center bottom;
+          filter: drop-shadow(0 22px 38px rgba(22, 163, 74, 0.22));
         }
 
         .host-charger-art .host-product-visual {
@@ -2810,11 +2911,15 @@ export default function HostPage() {
           margin-top: 22px;
         }
 
+        .host-charger-feature-list:empty {
+          display: none;
+        }
+
         .host-charger-feature {
           display: flex;
           align-items: flex-start;
           gap: 12px;
-          color: #E1E1E1;
+          color: #d4d4d8;
           font-size: 16px;
           line-height: 1.35;
         }
@@ -2825,15 +2930,17 @@ export default function HostPage() {
           width: 20px;
           flex: 0 0 auto;
           place-items: center;
-          border: 2px solid #00E5A8;
+          border: 2px solid #16a34a;
           border-radius: 999px;
-          color: #00E5A8;
+          color: #16a34a;
         }
 
         .host-charger-specs {
           display: grid;
           gap: 12px;
-          margin-top: 26px;
+          min-height: 186px;
+          align-content: center;
+          margin-top: auto;
           border: 1px solid rgba(255, 255, 255, 0.12);
           border-radius: 7px;
           background: rgba(8, 9, 9, 0.72);
@@ -2850,10 +2957,11 @@ export default function HostPage() {
         }
 
         .host-charger-spec-row span:first-child {
-          color: #D4D4D4;
+          color: #a1a1aa;
         }
 
         .host-charger-spec-row strong {
+          max-width: 260px;
           font-weight: 800;
           text-align: right;
         }
@@ -2861,14 +2969,14 @@ export default function HostPage() {
         .host-charger-learn {
           min-height: 46px;
           margin-top: 16px;
-          border-color: rgba(0, 229, 168, 0.62);
-          color: #00E5A8;
+          border-color: rgba(22, 163, 74, 0.62);
+          color: #16a34a;
           font-size: 15px;
         }
 
         .host-charger-learn.is-primary {
-          border-color: #00E5A8;
-          background: #00E5A8;
+          border-color: #16a34a;
+          background: #16a34a;
           color: #050706;
         }
 
@@ -2903,7 +3011,7 @@ export default function HostPage() {
           border: 1px solid rgba(255, 255, 255, 0.15);
           border-radius: 10px;
           background: rgba(5, 6, 6, 0.6);
-          color: #00E5A8;
+          color: #16a34a;
         }
 
         .host-charger-support-item h3 {
@@ -2915,7 +3023,7 @@ export default function HostPage() {
 
         .host-charger-support-item p {
           margin-top: 5px;
-          color: #CFCFCF;
+          color: #a1a1aa;
           font-size: 15px;
           line-height: 1.3;
         }
@@ -2937,7 +3045,7 @@ export default function HostPage() {
         .host-charger-quiz-copy small {
           display: block;
           margin-top: 7px;
-          color: #CFCFCF;
+          color: #a1a1aa;
           font-size: 18px;
           font-weight: 500;
           line-height: 1.35;
@@ -2952,8 +3060,8 @@ export default function HostPage() {
         .host-charger-quiz-button {
           min-height: 54px;
           min-width: 290px;
-          border-color: #00E5A8;
-          background: #00E5A8;
+          border-color: #16a34a;
+          background: #16a34a;
           color: #050706;
           font-size: 16px;
         }
@@ -2961,9 +3069,9 @@ export default function HostPage() {
         .host-why-section {
           position: relative;
           overflow: hidden;
-          border-bottom: 1px solid #1F1F1F;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.10);
           background:
-            radial-gradient(circle at 18% 78%, rgba(0, 229, 168, 0.08), transparent 26%),
+            radial-gradient(circle at 18% 78%, rgba(22, 163, 74, 0.08), transparent 26%),
             #050706;
           isolation: isolate;
         }
@@ -2985,7 +3093,7 @@ export default function HostPage() {
           display: inline-flex;
           align-items: center;
           gap: 14px;
-          color: #21D85A;
+          color: #16a34a;
           font-size: 20px;
           font-weight: 800;
           text-transform: uppercase;
@@ -2996,9 +3104,9 @@ export default function HostPage() {
           height: 42px;
           min-width: 42px;
           place-items: center;
-          border: 2px solid rgba(33, 216, 90, 0.5);
+          border: 2px solid rgba(22, 163, 74, 0.5);
           border-radius: 8px;
-          background: rgba(33, 216, 90, 0.08);
+          background: rgba(22, 163, 74, 0.08);
           font-size: 18px;
         }
 
@@ -3013,13 +3121,13 @@ export default function HostPage() {
         }
 
         .host-why-title span {
-          color: #21D85A;
+          color: #16a34a;
         }
 
         .host-why-copy {
           margin-top: 26px;
           max-width: 540px;
-          color: #C7C7C7;
+          color: #a1a1aa;
           font-size: 20px;
           line-height: 1.55;
         }
@@ -3051,7 +3159,7 @@ export default function HostPage() {
           border: 1px solid rgba(255, 255, 255, 0.12);
           border-radius: 8px;
           background: rgba(17, 17, 17, 0.72);
-          color: #21D85A;
+          color: #16a34a;
           box-shadow: inset 0 0 26px rgba(255, 255, 255, 0.03);
           backdrop-filter: blur(14px);
         }
@@ -3088,7 +3196,64 @@ export default function HostPage() {
           width: 42px;
           flex: 0 0 auto;
           place-items: center;
-          color: #21D85A;
+          color: #16a34a;
+        }
+
+        .host-expand-actions {
+          margin-top: 28px;
+          display: flex;
+          flex-wrap: wrap;
+          gap: 14px;
+        }
+
+        .host-expand-button {
+          display: inline-flex;
+          min-height: 54px;
+          align-items: center;
+          justify-content: center;
+          gap: 12px;
+          border: 1px solid rgba(22, 163, 74, 0.55);
+          border-radius: 8px;
+          background: rgba(22, 163, 74, 0.08);
+          padding: 0 24px;
+          color: #FFFFFF;
+          font-size: 16px;
+          font-weight: 800;
+          transition:
+            background 0.24s ease,
+            border-color 0.24s ease,
+            transform 0.24s ease;
+        }
+
+        .host-expand-button:hover {
+          border-color: rgba(22, 163, 74, 0.85);
+          background: rgba(22, 163, 74, 0.14);
+          transform: translateY(-1px);
+        }
+
+        .host-collapse-button {
+          position: absolute;
+          right: 24px;
+          top: 24px;
+          z-index: 6;
+          display: grid;
+          height: 48px;
+          width: 48px;
+          place-items: center;
+          border: 1px solid rgba(22, 163, 74, 0.5);
+          border-radius: 999px;
+          background: rgba(10, 12, 12, 0.74);
+          color: #16a34a;
+          box-shadow: 0 16px 36px rgba(0, 0, 0, 0.28);
+          backdrop-filter: blur(12px);
+          transition:
+            background 0.24s ease,
+            transform 0.24s ease;
+        }
+
+        .host-collapse-button:hover {
+          background: rgba(22, 163, 74, 0.12);
+          transform: translateY(-1px);
         }
 
         .host-why-visual {
@@ -3101,9 +3266,9 @@ export default function HostPage() {
           min-height: 620px;
           border: 1px solid rgba(255, 255, 255, 0.12);
           border-radius: 18px;
-          background: #0B0B0B;
+          background: #0a0a0a;
           box-shadow:
-            inset 0 0 60px rgba(0, 229, 168, 0.06),
+            inset 0 0 60px rgba(22, 163, 74, 0.06),
             0 26px 80px rgba(0, 0, 0, 0.34);
         }
 
@@ -3131,8 +3296,8 @@ export default function HostPage() {
           overflow: hidden;
           padding: 84px 0 70px;
           background:
-            radial-gradient(circle at 13% 20%, rgba(0, 229, 168, 0.08), transparent 25%),
-            radial-gradient(circle at 88% 82%, rgba(0, 229, 168, 0.05), transparent 27%),
+            radial-gradient(circle at 13% 20%, rgba(22, 163, 74, 0.08), transparent 25%),
+            radial-gradient(circle at 88% 82%, rgba(22, 163, 74, 0.05), transparent 27%),
             #080909;
         }
 
@@ -3142,7 +3307,7 @@ export default function HostPage() {
 
         .host-installation-eyebrow {
           margin-bottom: 20px;
-          color: #62F3A2;
+          color: #16a34a;
           font-size: 14px;
           font-weight: 800;
           line-height: 1;
@@ -3158,13 +3323,13 @@ export default function HostPage() {
         }
 
         .host-installation-title span {
-          color: #57E28D;
+          color: #16a34a;
         }
 
         .host-installation-copy {
           margin-top: 24px;
           max-width: 680px;
-          color: #C7C7C7;
+          color: #a1a1aa;
           font-size: clamp(18px, 1.45vw, 24px);
           line-height: 1.45;
         }
@@ -3191,9 +3356,12 @@ export default function HostPage() {
 
         .host-installation-visual {
           position: relative;
+          display: grid;
+          place-items: center;
           min-height: 360px;
           overflow: hidden;
           isolation: isolate;
+          padding: 34px;
         }
 
         .host-installation-visual::before {
@@ -3212,7 +3380,7 @@ export default function HostPage() {
 
         .host-installation-visual-standing::before {
           background:
-            radial-gradient(circle at 54% 86%, rgba(0, 229, 168, 0.34), transparent 28%),
+            radial-gradient(circle at 54% 86%, rgba(22, 163, 74, 0.34), transparent 28%),
             linear-gradient(180deg, #151b1b 0%, #0A0B0B 58%, #151817 100%);
         }
 
@@ -3224,6 +3392,18 @@ export default function HostPage() {
             linear-gradient(90deg, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.28)),
             radial-gradient(circle at 50% 43%, transparent 0 28%, rgba(0, 0, 0, 0.34) 66%);
           pointer-events: none;
+        }
+
+        .host-installation-image {
+          position: relative;
+          z-index: 1;
+          display: block;
+          width: 100%;
+          max-width: 340px;
+          height: 310px;
+          object-fit: contain;
+          object-position: center;
+          filter: drop-shadow(0 26px 48px rgba(0, 0, 0, 0.5));
         }
 
         .host-installation-content {
@@ -3239,11 +3419,11 @@ export default function HostPage() {
           height: 58px;
           width: 58px;
           place-items: center;
-          border: 1px solid rgba(87, 226, 141, 0.2);
+          border: 1px solid rgba(22, 163, 74, 0.2);
           border-radius: 999px;
-          background: rgba(87, 226, 141, 0.11);
-          color: #57E28D;
-          box-shadow: 0 0 35px rgba(0, 229, 168, 0.11);
+          background: rgba(22, 163, 74, 0.11);
+          color: #16a34a;
+          box-shadow: 0 0 35px rgba(22, 163, 74, 0.11);
         }
 
         .host-installation-card-title {
@@ -3257,7 +3437,7 @@ export default function HostPage() {
         .host-installation-card-copy {
           margin-top: 24px;
           max-width: 260px;
-          color: #CFCFCF;
+          color: #a1a1aa;
           font-size: 18px;
           line-height: 1.45;
         }
@@ -3276,10 +3456,10 @@ export default function HostPage() {
           align-items: center;
           justify-content: center;
           gap: 12px;
-          border: 1px solid rgba(87, 226, 141, 0.14);
+          border: 1px solid rgba(22, 163, 74, 0.14);
           border-radius: 10px;
-          background: linear-gradient(135deg, rgba(34, 188, 101, 0.18), rgba(16, 78, 47, 0.26));
-          color: #65F3A3;
+          background: linear-gradient(135deg, rgba(22, 163, 74, 0.18), rgba(22, 80, 38, 0.26));
+          color: #16a34a;
           font-size: 17px;
           font-weight: 800;
           line-height: 1.35;
@@ -3315,8 +3495,8 @@ export default function HostPage() {
           height: 82px;
           transform: translateX(-50%);
           border-radius: 999px;
-          background: #5AF397;
-          box-shadow: 0 0 16px rgba(90, 243, 151, 0.78);
+          background: #16a34a;
+          box-shadow: 0 0 16px rgba(22, 163, 74, 0.78);
         }
 
         .host-installation-wall-mark {
@@ -3328,7 +3508,7 @@ export default function HostPage() {
           width: 18px;
           place-items: center;
           transform: translateX(-50%);
-          color: #E5E5E5;
+          color: #d4d4d8;
         }
 
         .host-installation-wall-cable {
@@ -3337,7 +3517,7 @@ export default function HostPage() {
           top: 100%;
           width: 2px;
           height: 92px;
-          background: linear-gradient(#0B0B0B, #050505);
+          background: linear-gradient(#0a0a0a, #050505);
           box-shadow: 0 0 18px rgba(0, 0, 0, 0.6);
         }
 
@@ -3407,8 +3587,8 @@ export default function HostPage() {
 
         .host-installation-stand-dot.active {
           right: 22px;
-          background: #58E591;
-          box-shadow: 0 0 16px rgba(88, 229, 145, 0.65);
+          background: #16a34a;
+          box-shadow: 0 0 16px rgba(22, 163, 74, 0.65);
         }
 
         .host-installation-stand-cable {
@@ -3453,7 +3633,7 @@ export default function HostPage() {
           right: 0;
           bottom: 88px;
           height: 12px;
-          background: linear-gradient(90deg, transparent, rgba(98, 243, 162, 0.82), transparent);
+          background: linear-gradient(90deg, transparent, rgba(22, 163, 74, 0.82), transparent);
           filter: blur(2px);
         }
 
@@ -3481,7 +3661,7 @@ export default function HostPage() {
           border-radius: 10px;
           background:
             linear-gradient(135deg, rgba(18, 22, 22, 0.96), rgba(7, 8, 8, 0.96)),
-            radial-gradient(circle at 10% 50%, rgba(0, 229, 168, 0.09), transparent 18%);
+            radial-gradient(circle at 10% 50%, rgba(22, 163, 74, 0.09), transparent 18%);
           padding: 32px;
         }
 
@@ -3499,8 +3679,8 @@ export default function HostPage() {
           flex: 0 0 auto;
           place-items: center;
           border-radius: 999px;
-          background: rgba(87, 226, 141, 0.12);
-          color: #57E28D;
+          background: rgba(22, 163, 74, 0.12);
+          color: #16a34a;
         }
 
         .host-installation-cta h3 {
@@ -3512,7 +3692,7 @@ export default function HostPage() {
 
         .host-installation-cta p {
           margin-top: 6px;
-          color: #C7C7C7;
+          color: #a1a1aa;
           font-size: 18px;
           line-height: 1.45;
         }
@@ -3521,7 +3701,7 @@ export default function HostPage() {
           min-height: 58px;
           min-width: 280px;
           border-radius: 8px;
-          background: #57E28D;
+          background: #16a34a;
           font-size: 17px;
         }
 
@@ -3530,7 +3710,7 @@ export default function HostPage() {
           overflow: hidden;
           padding: 110px 0 112px;
           background:
-            radial-gradient(circle at 8% 88%, rgba(0, 229, 168, 0.16), transparent 26%),
+            radial-gradient(circle at 8% 88%, rgba(22, 163, 74, 0.16), transparent 26%),
             radial-gradient(circle at 79% 24%, rgba(255, 255, 255, 0.055), transparent 28%),
             linear-gradient(180deg, #060707 0%, #090A0A 100%);
           isolation: isolate;
@@ -3543,11 +3723,11 @@ export default function HostPage() {
           bottom: -330px;
           width: 560px;
           height: 560px;
-          border: 2px solid rgba(78, 226, 130, 0.7);
+          border: 2px solid rgba(22, 163, 74, 0.7);
           border-radius: 999px;
           box-shadow:
-            0 0 42px rgba(78, 226, 130, 0.32),
-            inset 0 0 34px rgba(78, 226, 130, 0.12);
+            0 0 42px rgba(22, 163, 74, 0.32),
+            inset 0 0 34px rgba(22, 163, 74, 0.12);
           pointer-events: none;
         }
 
@@ -3580,7 +3760,7 @@ export default function HostPage() {
         }
 
         .host-roi-eyebrow {
-          color: #00E5A8;
+          color: #16a34a;
           font-size: 14px;
           font-weight: 800;
           text-transform: uppercase;
@@ -3598,7 +3778,7 @@ export default function HostPage() {
         .host-roi-description {
           margin-top: 24px;
           max-width: 500px;
-          color: #C7C7C7;
+          color: #a1a1aa;
           font-size: 22px;
           line-height: 1.55;
         }
@@ -3619,7 +3799,7 @@ export default function HostPage() {
           border-radius: 10px;
           background:
             linear-gradient(115deg, rgba(24, 28, 28, 0.82), rgba(9, 10, 10, 0.72)),
-            radial-gradient(circle at 12% 50%, rgba(0, 229, 168, 0.09), transparent 24%);
+            radial-gradient(circle at 12% 50%, rgba(22, 163, 74, 0.09), transparent 24%);
           padding: 18px 24px;
           box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.035);
           backdrop-filter: blur(16px);
@@ -3631,9 +3811,9 @@ export default function HostPage() {
           width: 56px;
           place-items: center;
           border-radius: 12px;
-          background: rgba(0, 229, 168, 0.1);
-          color: #57E28D;
-          box-shadow: inset 0 0 24px rgba(0, 229, 168, 0.04);
+          background: rgba(22, 163, 74, 0.1);
+          color: #16a34a;
+          box-shadow: inset 0 0 24px rgba(22, 163, 74, 0.04);
         }
 
         .host-roi-highlight h3 {
@@ -3645,7 +3825,7 @@ export default function HostPage() {
 
         .host-roi-highlight p {
           margin-top: 6px;
-          color: #BDBDBD;
+          color: #a1a1aa;
           font-size: 16px;
           line-height: 1.4;
         }
@@ -3714,23 +3894,23 @@ export default function HostPage() {
         }
 
         .host-roi-input:focus {
-          border-color: rgba(0, 229, 168, 0.75);
-          box-shadow: 0 0 0 3px rgba(0, 229, 168, 0.12);
+          border-color: rgba(22, 163, 74, 0.75);
+          box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.12);
         }
 
         .host-roi-result {
           position: relative;
           overflow: hidden;
           margin-top: 34px;
-          border: 1px solid rgba(87, 226, 141, 0.75);
+          border: 1px solid rgba(22, 163, 74, 0.75);
           border-radius: 9px;
           background:
-            radial-gradient(circle at 100% 12%, rgba(87, 226, 141, 0.26), transparent 24%),
+            radial-gradient(circle at 100% 12%, rgba(22, 163, 74, 0.26), transparent 24%),
             linear-gradient(135deg, rgba(11, 16, 16, 0.96), rgba(24, 27, 27, 0.9));
           padding: 30px 36px;
           box-shadow:
-            0 0 38px rgba(0, 229, 168, 0.1),
-            inset 0 0 42px rgba(0, 229, 168, 0.05);
+            0 0 38px rgba(22, 163, 74, 0.1),
+            inset 0 0 42px rgba(22, 163, 74, 0.05);
         }
 
         .host-roi-result::after {
@@ -3741,12 +3921,12 @@ export default function HostPage() {
           width: 46px;
           height: 1px;
           transform: rotate(-45deg);
-          background: #57E28D;
-          box-shadow: 0 0 16px rgba(87, 226, 141, 0.85);
+          background: #16a34a;
+          box-shadow: 0 0 16px rgba(22, 163, 74, 0.85);
         }
 
         .host-roi-result-label {
-          color: #57E28D;
+          color: #16a34a;
           font-size: 18px;
           font-weight: 800;
           line-height: 1.2;
@@ -3767,12 +3947,13 @@ export default function HostPage() {
           min-height: 64px;
           min-width: 250px;
           align-items: center;
-          justify-content: center;
+          justify-content: space-between;
           gap: 16px;
           margin-top: 24px;
-          border: 1px solid #00E5A8;
+          padding: 0 24px 0 32px;
+          border: 1px solid #16a34a;
           border-radius: 9px;
-          background: rgba(0, 229, 168, 0.03);
+          background: rgba(22, 163, 74, 0.03);
           color: #FFFFFF;
           font-size: 18px;
           font-weight: 800;
@@ -3783,9 +3964,14 @@ export default function HostPage() {
         }
 
         .host-roi-button:hover {
-          background: rgba(0, 229, 168, 0.12);
-          color: #57E28D;
+          background: rgba(22, 163, 74, 0.12);
+          color: #16a34a;
           transform: translateY(-1px);
+        }
+
+        .host-roi-button svg {
+          margin-left: auto;
+          flex: 0 0 auto;
         }
 
         @media (max-width: 767px) {
@@ -4227,6 +4413,18 @@ export default function HostPage() {
             font-size: 16px;
           }
 
+          .host-how-payment-cards {
+            padding-bottom: 42px;
+          }
+
+          .host-how-payment-cards .host-payment-cards {
+            margin-top: 0;
+          }
+
+          .host-how-payment-cards .host-payment-card {
+            min-height: 220px;
+          }
+
           .host-payments-button {
             min-height: 58px;
             min-width: 190px;
@@ -4366,8 +4564,13 @@ export default function HostPage() {
             display: none;
           }
 
+          .host-who-slider .swiper-slide {
+            width: min(300px, calc(100vw - 40px));
+          }
+
           .host-who-card,
           .host-who-card-content {
+            width: min(300px, calc(100vw - 40px));
             height: 330px;
             min-height: 330px;
           }
@@ -4427,6 +4630,10 @@ export default function HostPage() {
 
           .host-charger-art {
             min-height: 210px;
+          }
+
+          .host-charger-specs {
+            min-height: 0;
           }
 
           .host-charger-card h3 {
@@ -4537,7 +4744,7 @@ export default function HostPage() {
           <div className="host-container host-hero-content">
             <div>
               <span className="host-hero-kicker">
-                <Icon name="bolt" className="h-4 w-4 text-[#21D85A]" />
+                <Icon name="bolt" className="h-4 w-4 text-z-green" />
                 Host partner program
               </span>
               <h1 className="host-hero-title">
@@ -4562,7 +4769,7 @@ export default function HostPage() {
                   <Icon name={item.icon} className="h-6 w-6" />
                 </span>
                 <span className="min-w-0 text-[15px] font-semibold leading-5 text-white">
-                  <span className="block text-[#BDBDBD]">{item.title}</span>
+                  <span className="block text-zinc-400">{item.title}</span>
                   <span className="block">{item.description}</span>
                 </span>
               </div>
@@ -4617,7 +4824,11 @@ export default function HostPage() {
                           <p>{charger.description}</p>
                         </div>
                         <div className="host-charger-art">
-                          <ChargerProductVisual variant={index} />
+                          <img
+                            src={charger.image}
+                            alt={`${charger.title} product`}
+                            className="host-charger-image"
+                          />
                         </div>
                         <div className="host-charger-feature-list">
                           {charger.features.map((feature) => (
@@ -4637,6 +4848,10 @@ export default function HostPage() {
                           <div className="host-charger-spec-row">
                             <span>Best for</span>
                             <strong>{charger.bestFor}</strong>
+                          </div>
+                          <div className="host-charger-spec-row">
+                            <span>Location</span>
+                            <strong>{charger.location}</strong>
                           </div>
                           <div className="host-charger-spec-row">
                             <span>Price</span>
@@ -4732,12 +4947,25 @@ export default function HostPage() {
                   </div>
                 ))}
               </div>
+
+              {!showRoiCalculator ? (
+                <div className="host-expand-actions">
+                  <button
+                    type="button"
+                    className="host-expand-button"
+                    onClick={() => setShowRoiCalculator(true)}
+                  >
+                    Show ROI calculator
+                    <Icon name="arrow" className="h-4 w-4" />
+                  </button>
+                </div>
+              ) : null}
             </Reveal>
 
             <Reveal delay={0.08} className="host-why-visual">
               <div className="host-why-image-wrap">
                 <img
-                  src="/img/Host/03.png"
+                  src="https://res.cloudinary.com/diywraupt/image/upload/v1780393382/web_1_cwxatn.jpg"
                   alt="Zvolta host charging location"
                   className="host-why-image"
                 />
@@ -4745,6 +4973,109 @@ export default function HostPage() {
             </Reveal>
           </div>
         </section>
+
+        <AnimatePresence initial={false}>
+          {showRoiCalculator ? (
+            <ShutterExpand key="roi-calculator">
+              <section id="roi" className="host-section host-roi-section">
+                <button
+                  type="button"
+                  className="host-collapse-button"
+                  aria-label="Collapse ROI calculator"
+                  onClick={() => setShowRoiCalculator(false)}
+                >
+                  <IoClose className="h-6 w-6" aria-hidden="true" />
+                </button>
+                <div className="host-container">
+                  <div className="host-roi-layout">
+                    <Reveal className="host-roi-copy">
+                      <p className="host-roi-eyebrow">Estimate your earnings</p>
+                      <h2 className="host-roi-title">
+                        See how much
+                        <br />
+                        your site can earn.
+                      </h2>
+                      <p className="host-roi-description">
+                        Adjust charger count, price, and usage to model a simple
+                        monthly estimate.
+                      </p>
+
+                      <div className="host-roi-highlights">
+                        {roiHighlights.map((item) => (
+                          <div className="host-roi-highlight" key={item.title}>
+                            <span className="host-roi-highlight-icon">
+                              <Icon name={item.icon} className="h-8 w-8" />
+                            </span>
+                            <span>
+                              <h3>{item.title}</h3>
+                              <p>{item.copy}</p>
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    </Reveal>
+
+                    <Reveal delay={0.08} className="host-roi-calculator">
+                      <div className="host-roi-fields">
+                        <label className="host-roi-field">
+                          <span>Number of chargers</span>
+                          <input
+                            type="number"
+                            min="1"
+                            value={chargerCount}
+                            onChange={(event) =>
+                              setChargerCount(Number(event.target.value))
+                            }
+                            className="host-roi-input"
+                          />
+                        </label>
+                        <label className="host-roi-field">
+                          <span>Price per unit</span>
+                          <input
+                            type="number"
+                            min="0"
+                            value={unitPrice}
+                            onChange={(event) =>
+                              setUnitPrice(Number(event.target.value))
+                            }
+                            className="host-roi-input"
+                          />
+                        </label>
+                        <label className="host-roi-field">
+                          <span>Usage</span>
+                          <input
+                            type="number"
+                            min="0"
+                            value={usage}
+                            onChange={(event) =>
+                              setUsage(Number(event.target.value))
+                            }
+                            className="host-roi-input"
+                          />
+                        </label>
+                      </div>
+
+                      <div className="host-roi-result">
+                        <p className="host-roi-result-label">Monthly earnings</p>
+                        <p className="host-roi-result-value">
+                          PKR {monthlyEarnings.toLocaleString("en-PK")}
+                        </p>
+                      </div>
+
+                      <SmartLink
+                        href="/charging-partners#roi-calculator"
+                        className="host-roi-button"
+                      >
+                        Try ROI calculator
+                        <Icon name="arrow" className="h-5 w-5" />
+                      </SmartLink>
+                    </Reveal>
+                  </div>
+                </div>
+              </section>
+            </ShutterExpand>
+          ) : null}
+        </AnimatePresence>
 
         <section className="host-how-section">
           <div className="host-container host-how-inner">
@@ -4802,6 +5133,40 @@ export default function HostPage() {
                   />
                   <span>{item.copy}</span>
                 </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="host-container host-how-payment-cards">
+            <div className="host-payment-cards">
+              {paymentSteps.map((step, index) => (
+                <Reveal key={step.title} delay={index * 0.08}>
+                  <article className="host-payment-card">
+                    <div className="host-payment-card-top">
+                      <span className="host-payment-icon">
+                        <Icon
+                          name={
+                            index === 0
+                              ? "map"
+                              : index === 1
+                                ? "plug"
+                                : index === 2
+                                  ? "wallet"
+                                  : "bolt"
+                          }
+                          className="h-8 w-8"
+                        />
+                      </span>
+                      <span className="host-payment-number">
+                        <span className="host-payment-line" />
+                        <span className="host-payment-dot" />
+                        <span>{String(index + 1).padStart(2, "0")}</span>
+                      </span>
+                    </div>
+                    <h3>{step.title}</h3>
+                    <p>{step.description}</p>
+                  </article>
+                </Reveal>
               ))}
             </div>
           </div>
@@ -4880,7 +5245,7 @@ export default function HostPage() {
                 <Swiper
                   modules={[Navigation, Pagination]}
                   className="host-who-slider"
-                  slidesPerView={1}
+                  slidesPerView="auto"
                   spaceBetween={18}
                   navigation={{
                     prevEl: ".host-who-nav-prev",
@@ -4889,11 +5254,11 @@ export default function HostPage() {
                   pagination={{ clickable: true }}
                   breakpoints={{
                     640: {
-                      slidesPerView: 2,
+                      slidesPerView: "auto",
                       spaceBetween: 18,
                     },
                     1024: {
-                      slidesPerView: 3,
+                      slidesPerView: "auto",
                       spaceBetween: 20,
                     },
                   }}
@@ -4942,10 +5307,105 @@ export default function HostPage() {
                 <PrimaryButton href="/contact-us" className="host-who-primary">
                   Get started
                 </PrimaryButton>
+                {!showHostingSections ? (
+                  <button
+                    type="button"
+                    className="host-expand-button"
+                    onClick={() => setShowHostingSections(true)}
+                  >
+                    View host stories
+                    <Icon name="arrow" className="h-4 w-4" />
+                  </button>
+                ) : null}
               </div>
             </Reveal>
           </div>
         </section>
+
+        <AnimatePresence initial={false}>
+          {showHostingSections ? (
+            <ShutterExpand key="hosting-sections">
+              <section className="host-partners-section">
+                <button
+                  type="button"
+                  className="host-collapse-button"
+                  aria-label="Collapse host stories"
+                  onClick={() => setShowHostingSections(false)}
+                >
+                  <IoClose className="h-6 w-6" aria-hidden="true" />
+                </button>
+                <span className="host-partners-bolt" aria-hidden="true" />
+                <span className="host-partners-bolt-soft" aria-hidden="true" />
+                <div className="host-container">
+                  <Reveal className="host-partners-intro">
+                    <p className="host-partners-eyebrow">Already hosting</p>
+                    <h2 className="host-partners-title">
+                      Businesses use Zvolta chargers to earn and support
+                      sustainability<span>.</span>
+                    </h2>
+                    <p className="host-partners-copy">
+                      Partner sites get app visibility, cleaner customer
+                      service, and a practical ESG action.
+                    </p>
+                  </Reveal>
+
+                  <Reveal className="host-partner-logo-grid" delay={0.08}>
+                    {partnerLogos.map((logo) => (
+                      <div className="host-partner-logo-card" key={logo.alt}>
+                        <img
+                          src={logo.src}
+                          alt={logo.alt}
+                          className={logo.invert ? "is-inverted" : ""}
+                        />
+                      </div>
+                    ))}
+                  </Reveal>
+
+                  <Reveal className="host-partners-action">
+                    <SecondaryButton
+                      href="/partners"
+                      className="host-partners-button"
+                    >
+                      Explore partners
+                    </SecondaryButton>
+                  </Reveal>
+                </div>
+              </section>
+
+              <PageSection>
+                <SectionIntro
+                  eyebrow="Real stories"
+                  title="How hosts use charging to create site value."
+                  copy="Practical examples from workspaces, restaurants, and sustainability-led businesses."
+                />
+                <div className="host-stories mt-12 flex snap-x gap-6 overflow-x-auto pb-4">
+                  {stories.map((story, index) => (
+                    <Reveal key={story.title} delay={index * 0.05}>
+                      <article className="w-[320px] shrink-0 snap-start overflow-hidden rounded-lg border border-white/10 bg-zinc-900 sm:w-[390px]">
+                        <img
+                          src={story.image}
+                          alt=""
+                          className="h-56 w-full object-cover"
+                        />
+                        <div className="p-6">
+                          <p className="text-xs font-semibold uppercase text-z-green">
+                            {story.category}
+                          </p>
+                          <h3 className="mt-4 text-[24px] font-semibold leading-tight text-white">
+                            {story.title}
+                          </h3>
+                        </div>
+                      </article>
+                    </Reveal>
+                  ))}
+                </div>
+                <SecondaryButton href="/stories" className="mt-8">
+                  Explore stories
+                </SecondaryButton>
+              </PageSection>
+            </ShutterExpand>
+          ) : null}
+        </AnimatePresence>
 
         <PageSection id="installation" className="host-installation-section">
           <Reveal className="host-installation-intro">
@@ -4964,7 +5424,11 @@ export default function HostPage() {
             {installationOptions.map((option, index) => (
               <Reveal key={option.title} delay={index * 0.05}>
                 <article className="host-installation-card">
-                  <InstallationVisual type={option.type} />
+                  <InstallationVisual
+                    type={option.type}
+                    image={option.image}
+                    title={option.title}
+                  />
                   <div className="host-installation-content">
                     <span className="host-installation-icon">
                       <Icon name={option.icon} className="h-8 w-8" />
@@ -4975,11 +5439,11 @@ export default function HostPage() {
                     <p className="host-installation-card-copy">
                       {option.description}
                     </p>
-                    <span className="host-installation-rule" />
+                    {/* <span className="host-installation-rule" />
                     <p className="host-installation-badge">
                       <Icon name="check" className="h-5 w-5" />
                       <span>{option.ideal}</span>
-                    </p>
+                    </p> */}
                   </div>
                 </article>
               </Reveal>
@@ -5016,14 +5480,14 @@ export default function HostPage() {
           <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
             {safetyFeatures.map((item, index) => (
               <Reveal key={item.feature} delay={index * 0.05}>
-                <div className="h-full rounded-lg border border-[#1F1F1F] bg-[#111111] p-6">
-                  <div className="mb-8 grid h-10 w-10 place-items-center rounded-lg bg-[#0B0B0B] text-[#00E5A8]">
+                <div className="h-full rounded-lg border border-white/10 bg-zinc-900 p-6">
+                  <div className="mb-8 grid h-10 w-10 place-items-center rounded-lg bg-z-black text-z-green">
                     <Icon name="bolt" className="h-5 w-5" />
                   </div>
                   <h3 className="text-xl font-semibold text-white">
                     {item.feature}
                   </h3>
-                  <p className="mt-3 text-sm leading-6 text-[#A1A1A1]">
+                  <p className="mt-3 text-sm leading-6 text-zinc-400">
                     {item.description}
                   </p>
                 </div>
@@ -5035,68 +5499,10 @@ export default function HostPage() {
           </SecondaryButton>
         </PageSection> */}
 
-        <section className="host-payments-section">
-          <img
-            src="/img/Host/Pricing Section.png"
-            alt="Zvolta charger payment flow at a host location"
-            className="host-payments-bg"
-          />
-          <div className="host-container">
-            <Reveal className="host-payments-content">
-              <p className="mb-6 text-sm font-bold uppercase text-[#00E5A8]">
-                Payments made simple
-              </p>
-              <h2 className="host-payments-title">
-                Payments made simple<span>.</span>
-              </h2>
-              <p className="host-payments-copy">
-                Users find your charger in the app and complete the flow through
-                Zvolta.
-              </p>
-            </Reveal>
-
-            <div className="host-payment-cards">
-              {paymentSteps.map((step, index) => (
-                <Reveal key={step.title} delay={index * 0.08}>
-                  <article className="host-payment-card">
-                    <div className="host-payment-card-top">
-                      <span className="host-payment-icon">
-                        <Icon
-                          name={
-                            index === 0
-                              ? "map"
-                              : index === 1
-                                ? "plug"
-                                : index === 2
-                                  ? "wallet"
-                                  : "bolt"
-                          }
-                          className="h-8 w-8"
-                        />
-                      </span>
-                      <span className="host-payment-number">
-                        <span className="host-payment-line" />
-                        <span className="host-payment-dot" />
-                        <span>{String(index + 1).padStart(2, "0")}</span>
-                      </span>
-                    </div>
-                    <h3>{step.title}</h3>
-                    <p>{step.description}</p>
-                  </article>
-                </Reveal>
-              ))}
-            </div>
-
-            <SecondaryButton href="/host" className="host-payments-button">
-              Learn more
-            </SecondaryButton>
-          </div>
-        </section>
-
-        {/* <section className="border-b border-[#1F1F1F] bg-[#111111] py-[120px] md:py-[132px]">
+        {/* <section className="border-b border-white/10 bg-zinc-900 py-[120px] md:py-[132px]">
           <div className="host-container grid gap-14 lg:grid-cols-[0.9fr_1fr] lg:items-center">
             <Reveal>
-              <p className="mb-4 text-xs font-semibold uppercase text-[#00E5A8]">
+              <p className="mb-4 text-xs font-semibold uppercase text-z-green">
                 Marketing and visibility
               </p>
               <h2 className="text-[32px] font-semibold leading-[1.12] text-white md:text-[36px]">
@@ -5105,7 +5511,7 @@ export default function HostPage() {
               <div className="mt-8 grid gap-4">
                 {marketingPoints.map((point) => (
                   <div key={point} className="flex items-center gap-4">
-                    <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg border border-[#1F1F1F] bg-[#0B0B0B] text-[#00E5A8]">
+                    <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg border border-white/10 bg-z-black text-z-green">
                       <Icon name="check" className="h-4 w-4" />
                     </span>
                     <p className="text-base font-medium text-white">{point}</p>
@@ -5118,22 +5524,22 @@ export default function HostPage() {
             </Reveal>
 
             <Reveal delay={0.1}>
-              <div className="rounded-lg border border-[#1F1F1F] bg-[#0B0B0B] p-8">
+              <div className="rounded-lg border border-white/10 bg-z-black p-8">
                 <div className="flex items-center justify-between gap-6">
                   <img
                     src="/img/full_logowhite.png"
                     alt="Zvolta"
                     className="h-9 w-auto"
                   />
-                  <span className="rounded-lg border border-[#1F1F1F] px-3 py-2 text-xs font-semibold uppercase text-[#00E5A8]">
+                  <span className="rounded-lg border border-white/10 px-3 py-2 text-xs font-semibold uppercase text-z-green">
                     Partner badge
                   </span>
                 </div>
-                <div className="my-12 h-px bg-[#1F1F1F]" />
+                <div className="my-12 h-px bg-white/10" />
                 <p className="max-w-md text-[34px] font-semibold leading-[1.08] text-white md:text-[44px]">
                   Zvolta Clean Energy Partner
                 </p>
-                <p className="mt-6 max-w-sm text-base leading-7 text-[#A1A1A1]">
+                <p className="mt-6 max-w-sm text-base leading-7 text-zinc-400">
                   Show visitors that your space supports clean energy and EV
                   adoption.
                 </p>
@@ -5145,7 +5551,7 @@ export default function HostPage() {
         {/* <PageSection>
           <div className="grid gap-14 lg:grid-cols-[0.85fr_1fr] lg:items-center">
             <Reveal>
-              <p className="mb-4 text-xs font-semibold uppercase text-[#00E5A8]">
+              <p className="mb-4 text-xs font-semibold uppercase text-z-green">
                 Add more as you grow
               </p>
               <h2 className="text-[32px] font-semibold leading-[1.12] text-white md:text-[36px]">
@@ -5161,15 +5567,15 @@ export default function HostPage() {
             </Reveal>
 
             <Reveal delay={0.1}>
-              <div className="rounded-lg border border-[#1F1F1F] bg-[#111111] p-8">
+              <div className="rounded-lg border border-white/10 bg-zinc-900 p-8">
                 <div className="flex flex-col items-center gap-8 sm:flex-row sm:justify-center">
                   <div className="flex flex-col items-center gap-4">
                     <ChargerIllustration />
-                    <p className="text-sm font-semibold text-[#A1A1A1]">
+                    <p className="text-sm font-semibold text-zinc-400">
                       1 charger
                     </p>
                   </div>
-                  <Icon name="arrow" className="h-8 w-8 text-[#A1A1A1]" />
+                  <Icon name="arrow" className="h-8 w-8 text-zinc-400" />
                   <div className="flex items-end gap-4">
                     <ChargerIllustration size="small" />
                     <ChargerIllustration />
@@ -5181,91 +5587,6 @@ export default function HostPage() {
           </div>
         </PageSection> */}
 
-        <PageSection id="roi" className="host-roi-section">
-          <div className="host-roi-layout">
-            <Reveal className="host-roi-copy">
-              <p className="host-roi-eyebrow">Estimate your earnings</p>
-              <h2 className="host-roi-title">
-                See how much
-                <br />
-                your site can earn.
-              </h2>
-              <p className="host-roi-description">
-                Adjust charger count, price, and usage to model a simple monthly
-                estimate.
-              </p>
-
-              <div className="host-roi-highlights">
-                {roiHighlights.map((item) => (
-                  <div className="host-roi-highlight" key={item.title}>
-                    <span className="host-roi-highlight-icon">
-                      <Icon name={item.icon} className="h-8 w-8" />
-                    </span>
-                    <span>
-                      <h3>{item.title}</h3>
-                      <p>{item.copy}</p>
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </Reveal>
-
-            <Reveal delay={0.08} className="host-roi-calculator">
-              <div className="host-roi-fields">
-                <label className="host-roi-field">
-                  <span>Number of chargers</span>
-                  <input
-                    type="number"
-                    min="1"
-                    value={chargerCount}
-                    onChange={(event) =>
-                      setChargerCount(Number(event.target.value))
-                    }
-                    className="host-roi-input"
-                  />
-                </label>
-                <label className="host-roi-field">
-                  <span>Price per unit</span>
-                  <input
-                    type="number"
-                    min="0"
-                    value={unitPrice}
-                    onChange={(event) =>
-                      setUnitPrice(Number(event.target.value))
-                    }
-                    className="host-roi-input"
-                  />
-                </label>
-                <label className="host-roi-field">
-                  <span>Usage</span>
-                  <input
-                    type="number"
-                    min="0"
-                    value={usage}
-                    onChange={(event) => setUsage(Number(event.target.value))}
-                    className="host-roi-input"
-                  />
-                </label>
-              </div>
-
-              <div className="host-roi-result">
-                <p className="host-roi-result-label">Monthly earnings</p>
-                <p className="host-roi-result-value">
-                  PKR {monthlyEarnings.toLocaleString("en-PK")}
-                </p>
-              </div>
-
-              <SmartLink
-                href="/charging-partners#roi-calculator"
-                className="host-roi-button"
-              >
-                Try ROI calculator
-                <Icon name="arrow" className="h-5 w-5" />
-              </SmartLink>
-            </Reveal>
-          </div>
-        </PageSection>
-
         {/* <PageSection id="pricing">
           <SectionIntro
             eyebrow="Pricing"
@@ -5275,19 +5596,19 @@ export default function HostPage() {
           <div className="mt-12 grid gap-8 lg:grid-cols-3">
             {pricingPlans.map((plan, index) => (
               <Reveal key={plan.title} delay={index * 0.08}>
-                <div className="group flex h-full flex-col rounded-lg border border-[#1F1F1F] bg-[#111111] p-8">
+                <div className="group flex h-full flex-col rounded-lg border border-white/10 bg-zinc-900 p-8">
                   <h3 className="text-[36px] font-semibold leading-none text-white">
                     {plan.title}
                   </h3>
                   <p className="mt-6 text-xl font-semibold text-white">
                     {plan.price}
                   </p>
-                  <p className="mt-3 text-base leading-7 text-[#A1A1A1]">
+                  <p className="mt-3 text-base leading-7 text-zinc-400">
                     {plan.detail}
                   </p>
                   <SmartLink
                     href={plan.href}
-                    className="mt-auto inline-flex items-center gap-2 pt-8 text-sm font-semibold text-white transition-colors group-hover:text-[#00E5A8]"
+                    className="mt-auto inline-flex items-center gap-2 pt-8 text-sm font-semibold text-white transition-colors group-hover:text-z-green"
                   >
                     Learn more
                     <Icon name="arrow" className="h-4 w-4" />
@@ -5296,7 +5617,7 @@ export default function HostPage() {
               </Reveal>
             ))}
           </div>
-          <Reveal className="mt-10 grid gap-4 rounded-lg border border-[#1F1F1F] bg-[#111111] p-6 sm:grid-cols-2">
+          <Reveal className="mt-10 grid gap-4 rounded-lg border border-white/10 bg-zinc-900 p-6 sm:grid-cols-2">
             <p className="text-xl font-semibold text-white">0% interest</p>
             <p className="text-right text-xl font-semibold text-white">
               12 month installment plans available
@@ -5307,77 +5628,6 @@ export default function HostPage() {
           </SecondaryButton>
         </PageSection> */}
 
-        <section className="host-partners-section">
-          <span className="host-partners-bolt" aria-hidden="true" />
-          <span className="host-partners-bolt-soft" aria-hidden="true" />
-          <div className="host-container">
-            <Reveal className="host-partners-intro">
-              <p className="host-partners-eyebrow">Already hosting</p>
-              <h2 className="host-partners-title">
-                Businesses use Zvolta chargers to earn and support
-                sustainability<span>.</span>
-              </h2>
-              <p className="host-partners-copy">
-                Partner sites get app visibility, cleaner customer service, and
-                a practical ESG action.
-              </p>
-            </Reveal>
-
-            <Reveal className="host-partner-logo-grid" delay={0.08}>
-              {partnerLogos.map((logo) => (
-                <div className="host-partner-logo-card" key={logo.alt}>
-                  <img
-                    src={logo.src}
-                    alt={logo.alt}
-                    className={logo.invert ? "is-inverted" : ""}
-                  />
-                </div>
-              ))}
-            </Reveal>
-
-            <Reveal className="host-partners-action">
-              <SecondaryButton
-                href="/partners"
-                className="host-partners-button"
-              >
-                Explore partners
-              </SecondaryButton>
-            </Reveal>
-          </div>
-        </section>
-
-        <PageSection>
-          <SectionIntro
-            eyebrow="Real stories"
-            title="How hosts use charging to create site value."
-            copy="Practical examples from workspaces, restaurants, and sustainability-led businesses."
-          />
-          <div className="host-stories mt-12 flex snap-x gap-6 overflow-x-auto pb-4">
-            {stories.map((story, index) => (
-              <Reveal key={story.title} delay={index * 0.05}>
-                <article className="w-[320px] shrink-0 snap-start overflow-hidden rounded-lg border border-[#1F1F1F] bg-[#111111] sm:w-[390px]">
-                  <img
-                    src={story.image}
-                    alt=""
-                    className="h-56 w-full object-cover"
-                  />
-                  <div className="p-6">
-                    <p className="text-xs font-semibold uppercase text-[#00E5A8]">
-                      {story.category}
-                    </p>
-                    <h3 className="mt-4 text-[24px] font-semibold leading-tight text-white">
-                      {story.title}
-                    </h3>
-                  </div>
-                </article>
-              </Reveal>
-            ))}
-          </div>
-          <SecondaryButton href="/stories" className="mt-8">
-            Explore stories
-          </SecondaryButton>
-        </PageSection>
-
         {/* <PageSection>
           <div className="grid gap-12 lg:grid-cols-[0.8fr_1fr]">
             <SectionIntro
@@ -5387,14 +5637,14 @@ export default function HostPage() {
             />
             <Reveal>
               <form
-                className="grid gap-5 rounded-lg border border-[#1F1F1F] bg-[#111111] p-6 md:p-8"
+                className="grid gap-5 rounded-lg border border-white/10 bg-zinc-900 p-6 md:p-8"
                 onSubmit={(event) => event.preventDefault()}
               >
                 <label className="grid gap-3">
                   <span className="text-sm font-semibold text-white">Name</span>
                   <input
                     type="text"
-                    className="h-12 rounded-lg border border-[#1F1F1F] bg-[#0B0B0B] px-4 text-white outline-none transition focus:border-[#00E5A8]"
+                    className="h-12 rounded-lg border border-white/10 bg-z-black px-4 text-white outline-none transition focus:border-z-green"
                   />
                 </label>
                 <label className="grid gap-3">
@@ -5403,12 +5653,12 @@ export default function HostPage() {
                   </span>
                   <input
                     type="email"
-                    className="h-12 rounded-lg border border-[#1F1F1F] bg-[#0B0B0B] px-4 text-white outline-none transition focus:border-[#00E5A8]"
+                    className="h-12 rounded-lg border border-white/10 bg-z-black px-4 text-white outline-none transition focus:border-z-green"
                   />
                 </label>
                 <label className="grid gap-3">
                   <span className="text-sm font-semibold text-white">Type</span>
-                  <select className="h-12 rounded-lg border border-[#1F1F1F] bg-[#0B0B0B] px-4 text-white outline-none transition focus:border-[#00E5A8]">
+                  <select className="h-12 rounded-lg border border-white/10 bg-z-black px-4 text-white outline-none transition focus:border-z-green">
                     <option>Apartment building</option>
                     <option>Office or coworking</option>
                     <option>Restaurant or cafe</option>
@@ -5423,12 +5673,12 @@ export default function HostPage() {
                   </span>
                   <textarea
                     rows="5"
-                    className="rounded-lg border border-[#1F1F1F] bg-[#0B0B0B] px-4 py-3 text-white outline-none transition focus:border-[#00E5A8]"
+                    className="rounded-lg border border-white/10 bg-z-black px-4 py-3 text-white outline-none transition focus:border-z-green"
                   />
                 </label>
                 <button
                   type="submit"
-                  className="inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-[#00E5A8] px-5 py-3 text-sm font-semibold text-black transition duration-300 hover:scale-[1.02]"
+                  className="inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-z-green px-5 py-3 text-sm font-semibold text-black transition duration-300 hover:scale-[1.02]"
                 >
                   Get a free consultation
                   <Icon name="arrow" className="h-4 w-4" />

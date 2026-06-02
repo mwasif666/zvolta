@@ -36,7 +36,7 @@ const chargerOptionCards = [
     href: "/3kw-charger",
     features: [],
     image:
-      "https://res.cloudinary.com/diywraupt/image/upload/v1780392810/3W_n39hdb.png",
+      "https://res.cloudinary.com/diywraupt/image/upload/v1780392810/7Watt22W_zdchgq.png",
     imageSize: "small",
     power: "Upto 3kW",
     bestFor: "Two-Wheelers & Four-Wheelers",
@@ -49,7 +49,7 @@ const chargerOptionCards = [
     href: "/7kw-charger",
     features: [],
     image:
-      "https://res.cloudinary.com/diywraupt/image/upload/v1780392810/7Watt22W_zdchgq.png",
+      "https://res.cloudinary.com/diywraupt/image/upload/v1780392810/3W_n39hdb.png",
     imageSize: "large",
     power: "Upto 7kW",
     bestFor: "Cars & Daily Charging",
@@ -63,7 +63,7 @@ const chargerOptionCards = [
     href: "/22kw-charger",
     features: [],
     image:
-      "https://res.cloudinary.com/diywraupt/image/upload/v1780392810/7Watt22W_zdchgq.png",
+      "https://res.cloudinary.com/diywraupt/image/upload/v1780392810/3W_n39hdb.png",
     imageSize: "large",
     power: "Upto 22kW",
     bestFor: "High Traffic Charging",

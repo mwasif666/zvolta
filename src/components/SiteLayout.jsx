@@ -549,7 +549,7 @@ function SiteFooter() {
               <ul className="space-y-4 text-zinc-400">
                 <li>
                   <Link
-                    to="/host"
+                    to="/host#how"
                     className="hover:text-emerald-400 transition-colors block py-1"
                   >
                     How it works
@@ -557,7 +557,7 @@ function SiteFooter() {
                 </li>
                 <li>
                   <Link
-                    to="/host"
+                    to="/host#chargers"
                     className="hover:text-emerald-400 transition-colors block py-1"
                   >
                     Pricing and plans
@@ -565,7 +565,7 @@ function SiteFooter() {
                 </li>
                 <li>
                   <Link
-                    to="/host"
+                    to="/host#requirements"
                     className="hover:text-emerald-400 transition-colors block py-1"
                   >
                     Site requirements
@@ -581,7 +581,7 @@ function SiteFooter() {
                 </li>
                 <li>
                   <Link
-                    to="/host"
+                    to="/host#start-hosting"
                     className="hover:text-emerald-400 transition-colors block py-1"
                   >
                     Start hosting (CTA)
@@ -591,7 +591,7 @@ function SiteFooter() {
             </div>
             <div className="mt-8 pt-6 border-t border-white/10">
               <Link
-                to="/host"
+                to="/host#start-hosting"
                 className="flex items-center justify-between text-white font-bold group-hover:text-emerald-400 transition-colors"
               >
                 Start hosting (CTA){" "}

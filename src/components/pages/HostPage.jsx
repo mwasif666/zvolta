@@ -37,7 +37,8 @@ const chargerOptionCards = [
     features: [],
     image:
       "https://res.cloudinary.com/diywraupt/image/upload/v1780392810/3W_n39hdb.png",
-    power: "3kW",
+    imageSize: "small",
+    power: "Upto 3kW",
     bestFor: "Two-Wheelers & Four-Wheelers",
     location: "Homes, Shops & Small Offices",
     price: "Starts from 75k",
@@ -49,10 +50,11 @@ const chargerOptionCards = [
     features: [],
     image:
       "https://res.cloudinary.com/diywraupt/image/upload/v1780392810/7Watt22W_zdchgq.png",
-    power: "7kW",
+    imageSize: "large",
+    power: "Upto 7kW",
     bestFor: "Cars & Daily Charging",
     location: "Apartments, Workplaces & Commercial Spaces",
-    price: "Available",
+    price: "199,999",
     popular: true,
   },
   {
@@ -62,10 +64,11 @@ const chargerOptionCards = [
     features: [],
     image:
       "https://res.cloudinary.com/diywraupt/image/upload/v1780392810/7Watt22W_zdchgq.png",
-    power: "22kW",
+    imageSize: "large",
+    power: "Upto 22kW",
     bestFor: "High Traffic Charging",
     location: "Commercial, Public & Fleet Use",
-    price: "Available",
+    price: "249,999",
   },
 ];
 
@@ -777,12 +780,88 @@ function InstallationVisual({ type, image, title }) {
   );
 }
 
+function InstallationOptionsSection({ onCollapse }) {
+  return (
+    <section id="installation" className="host-section host-installation-section">
+      {onCollapse ? (
+        <button
+          type="button"
+          className="host-collapse-button"
+          aria-label="Collapse installation options"
+          onClick={onCollapse}
+        >
+          <IoClose className="h-6 w-6" aria-hidden="true" />
+        </button>
+      ) : null}
+      <div className="host-container">
+        <Reveal className="host-installation-intro">
+          <p className="host-installation-eyebrow">Installation options</p>
+          <h2 className="host-installation-title">
+            Clean mounting options
+            <br />
+            for <span>different spaces.</span>
+          </h2>
+          <p className="host-installation-copy">
+            Wall, standing, and hanging setups keep the install practical.
+          </p>
+        </Reveal>
+
+        <div className="host-installation-grid">
+          {installationOptions.map((option, index) => (
+            <Reveal key={option.title} delay={index * 0.05}>
+              <article className="host-installation-card">
+                <InstallationVisual
+                  type={option.type}
+                  image={option.image}
+                  title={option.title}
+                />
+                <div className="host-installation-content">
+                  <span className="host-installation-icon">
+                    <Icon name={option.icon} className="h-8 w-8" />
+                  </span>
+                  <h3 className="host-installation-card-title">
+                    {option.title}
+                  </h3>
+                  <p className="host-installation-card-copy">
+                    {option.description}
+                  </p>
+                </div>
+              </article>
+            </Reveal>
+          ))}
+        </div>
+
+        <Reveal className="host-installation-cta">
+          <div className="host-installation-cta-copy">
+            <span className="host-installation-cta-icon">
+              <Icon name="tools" className="h-8 w-8" />
+            </span>
+            <span>
+              <h3>Installation is free for all chargers</h3>
+              <p>
+                Our experts handle everything, so you can power up with ease.
+              </p>
+            </span>
+          </div>
+          <PrimaryButton
+            href="/contact-us"
+            className="host-installation-button"
+          >
+            Book a site assessment
+          </PrimaryButton>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
 export default function HostPage() {
   const [chargerCount, setChargerCount] = useState(2);
   const [unitPrice, setUnitPrice] = useState(120);
   const [usage, setUsage] = useState(8);
   const [showRoiCalculator, setShowRoiCalculator] = useState(false);
   const [showHostingSections, setShowHostingSections] = useState(false);
+  const [showInstallationOptions, setShowInstallationOptions] = useState(false);
 
   const monthlyEarnings = useMemo(
     () => Math.max(0, chargerCount * unitPrice * usage * 30),
@@ -2896,6 +2975,16 @@ export default function HostPage() {
           filter: drop-shadow(0 22px 38px rgba(22, 163, 74, 0.22));
         }
 
+        .host-charger-image.is-small {
+          width: 148px;
+          height: 178px;
+        }
+
+        .host-charger-image.is-large {
+          width: 198px;
+          height: 198px;
+        }
+
         .host-charger-art .host-product-visual {
           transform: scale(1.26);
           transform-origin: bottom center;
@@ -4827,7 +4916,11 @@ export default function HostPage() {
                           <img
                             src={charger.image}
                             alt={`${charger.title} product`}
-                            className="host-charger-image"
+                            className={`host-charger-image ${
+                              charger.imageSize === "large"
+                                ? "is-large"
+                                : "is-small"
+                            }`}
                           />
                         </div>
                         <div className="host-charger-feature-list">
@@ -4905,12 +4998,34 @@ export default function HostPage() {
                     Find the right charger
                   </PrimaryButton>
                 </div>
+                {!showInstallationOptions ? (
+                  <div className="host-expand-actions host-installation-expand-actions">
+                    <button
+                      type="button"
+                      className="host-expand-button"
+                      onClick={() => setShowInstallationOptions(true)}
+                    >
+                      Show installation options
+                      <Icon name="arrow" className="h-4 w-4" />
+                    </button>
+                  </div>
+                ) : null}
               </Reveal>
             </div>
           </div>
         </section>
 
-        <section className="host-why-section">
+        <AnimatePresence initial={false}>
+          {showInstallationOptions ? (
+            <ShutterExpand key="installation-options">
+              <InstallationOptionsSection
+                onCollapse={() => setShowInstallationOptions(false)}
+              />
+            </ShutterExpand>
+          ) : null}
+        </AnimatePresence>
+
+        <section id="why" className="host-why-section">
           <div className="host-container host-why-layout">
             <Reveal className="host-why-content">
               <p className="host-why-eyebrow">
@@ -5077,7 +5192,7 @@ export default function HostPage() {
           ) : null}
         </AnimatePresence>
 
-        <section className="host-how-section">
+        <section id="how" className="host-how-section">
           <div className="host-container host-how-inner">
             <Reveal className="host-how-copy">
               <p className="host-how-eyebrow">
@@ -5172,7 +5287,7 @@ export default function HostPage() {
           </div>
         </section>
 
-        <section className="host-where-section">
+        <section id="requirements" className="host-where-section">
           <div className="host-container host-where-inner">
             <Reveal className="host-where-copy">
               <p className="host-where-eyebrow">
@@ -5217,7 +5332,7 @@ export default function HostPage() {
           </div>
         </section>
 
-        <section className="host-who-section">
+        <section id="who" className="host-who-section">
           <div className="host-container host-who-inner">
             <div className="host-who-top">
               <Reveal className="host-who-copy">
@@ -5406,70 +5521,6 @@ export default function HostPage() {
             </ShutterExpand>
           ) : null}
         </AnimatePresence>
-
-        <PageSection id="installation" className="host-installation-section">
-          <Reveal className="host-installation-intro">
-            <p className="host-installation-eyebrow">Installation options</p>
-            <h2 className="host-installation-title">
-              Clean mounting options
-              <br />
-              for <span>different spaces.</span>
-            </h2>
-            <p className="host-installation-copy">
-              Wall, standing, and hanging setups keep the install practical.
-            </p>
-          </Reveal>
-
-          <div className="host-installation-grid">
-            {installationOptions.map((option, index) => (
-              <Reveal key={option.title} delay={index * 0.05}>
-                <article className="host-installation-card">
-                  <InstallationVisual
-                    type={option.type}
-                    image={option.image}
-                    title={option.title}
-                  />
-                  <div className="host-installation-content">
-                    <span className="host-installation-icon">
-                      <Icon name={option.icon} className="h-8 w-8" />
-                    </span>
-                    <h3 className="host-installation-card-title">
-                      {option.title}
-                    </h3>
-                    <p className="host-installation-card-copy">
-                      {option.description}
-                    </p>
-                    {/* <span className="host-installation-rule" />
-                    <p className="host-installation-badge">
-                      <Icon name="check" className="h-5 w-5" />
-                      <span>{option.ideal}</span>
-                    </p> */}
-                  </div>
-                </article>
-              </Reveal>
-            ))}
-          </div>
-
-          <Reveal className="host-installation-cta">
-            <div className="host-installation-cta-copy">
-              <span className="host-installation-cta-icon">
-                <Icon name="tools" className="h-8 w-8" />
-              </span>
-              <span>
-                <h3>Installation is free for all chargers</h3>
-                <p>
-                  Our experts handle everything, so you can power up with ease.
-                </p>
-              </span>
-            </div>
-            <PrimaryButton
-              href="/contact-us"
-              className="host-installation-button"
-            >
-              Book a site assessment
-            </PrimaryButton>
-          </Reveal>
-        </PageSection>
 
         {/* <PageSection>
           <SectionIntro
@@ -5688,7 +5739,7 @@ export default function HostPage() {
           </div>
         </PageSection> */}
 
-        <section className="host-final-cta">
+        <section id="start-hosting" className="host-final-cta">
           <span className="cta-line-left" aria-hidden="true" />
           <span className="cta-line-right" aria-hidden="true" />
           {/* <span className="cta-bottom-line-left" aria-hidden="true" /> */}

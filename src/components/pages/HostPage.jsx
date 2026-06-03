@@ -108,36 +108,392 @@ const hostWhereLocations = [
     icon: "building",
     image:
       "https://images.unsplash.com/photo-1460317442991-0ec209397118?auto=format&fit=crop&w=600&q=80",
+    problems: {
+      title: "Uncontrolled Charging Chaos",
+      footer: "Unmanaged charging = Fire Risk + Disputes + Expense",
+      footerIcon: "flame",
+      items: [
+        {
+          icon: "tools",
+          title: "High Cost",
+          copy: "Residents pay PKR 25k-80k+ for individual wiring.",
+        },
+        {
+          icon: "alert",
+          title: "Fire Risk",
+          copy: "Unmanaged wiring creates a serious safety hazard.",
+        },
+        {
+          icon: "receipt",
+          title: "Billing Disputes",
+          copy: "Power theft from common areas raises the shared electricity bill.",
+        },
+        {
+          icon: "no-account",
+          title: "Zero Accountability",
+          copy: "No tracking, no billing, and no cost recovery.",
+        },
+      ],
+    },
+    benefits: {
+      title: "Managed EV Charging",
+      footer: "No Cables. No Fights. Total Control.",
+      footerIcon: "plug-check",
+      items: [
+        {
+          icon: "plug-check",
+          title: "No Rewiring",
+          copy: "Residents charge via the central pod; zero unit-to-parking wiring needed.",
+        },
+        {
+          icon: "meter",
+          title: "Accurate Metering",
+          copy: "Digital tracking ensures every kWh is billed to the correct user.",
+        },
+        {
+          icon: "lock",
+          title: "Guaranteed Safety",
+          copy: "Built-in overload, surge, and fire protection.",
+        },
+        {
+          icon: "stairs",
+          title: "Modular & Scalable",
+          copy: "Start small with one pod; expand capacity easily.",
+        },
+        {
+          icon: "dollar",
+          title: "Higher Building Value",
+          copy: "EV-ready buildings attract premium tenants and sell faster.",
+        },
+      ],
+    },
   },
   {
     title: "Offices",
     icon: "briefcase",
     image:
       "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=600&q=80",
+    problems: {
+      title: "Workplace Charging Gaps",
+      footer: "No charging = Missed savings + Lower adoption + Weak ESG proof",
+      footerIcon: "alert",
+      items: [
+        {
+          icon: "users",
+          title: "Employee Charging Gap",
+          copy: "Employees want to switch to EVs but lack workplace charging access.",
+        },
+        {
+          icon: "wallet",
+          title: "Missed Cost Savings",
+          copy: "Daily fuel costs remain high for teams and staff.",
+        },
+        {
+          icon: "parking",
+          title: "Parking Friction",
+          copy: "Unmanaged charging creates confusion around access and usage.",
+        },
+        {
+          icon: "chart",
+          title: "No ESG Visibility",
+          copy: "Companies can't track clean mobility impact properly.",
+        },
+      ],
+    },
+    benefits: {
+      title: "EV-Ready Workplace",
+      footer: "Better Commutes. Happier Teams. Measurable ESG.",
+      footerIcon: "chart",
+      items: [
+        {
+          icon: "users",
+          title: "Employee EV Support",
+          copy: "Give teams a practical charging benefit at work.",
+        },
+        {
+          icon: "wallet",
+          title: "Lower Commute Costs",
+          copy: "Free or discounted charging can reduce daily fuel expense.",
+        },
+        {
+          icon: "shield",
+          title: "Smart Access Control",
+          copy: "Decide who charges, when they charge, and how much they pay.",
+        },
+        {
+          icon: "chart",
+          title: "ESG Reporting",
+          copy: "Track usage, energy, and clean mobility impact.",
+        },
+        {
+          icon: "briefcase",
+          title: "Stronger Employer Brand",
+          copy: "Position the workplace as modern, responsible, and EV-ready.",
+        },
+      ],
+    },
   },
   {
     title: "Restaurants",
     icon: "utensils",
     image:
       "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=600&q=80",
+    problems: {
+      title: "Missed Footfall Opportunity",
+      footer:
+        "No charging = Less dwell time + Missed customers + Missed revenue",
+      footerIcon: "alert",
+      items: [
+        {
+          icon: "clock",
+          title: "Short Dwell Time",
+          copy: "Customers leave quickly when there's no reason to stay longer.",
+        },
+        {
+          icon: "users",
+          title: "Lost EV Customers",
+          copy: "EV users choose places where they can charge while they eat.",
+        },
+        {
+          icon: "wallet",
+          title: "No Added Revenue",
+          copy: "Parking space sits idle instead of becoming a paid service.",
+        },
+        {
+          icon: "leaf",
+          title: "Low Green Differentiation",
+          copy: "The location misses a simple way to look modern and sustainable.",
+        },
+      ],
+    },
+    benefits: {
+      title: "Charging That Grows Visits",
+      footer: "Serve Food. Charge EVs. Grow Footfall.",
+      footerIcon: "plug-check",
+      items: [
+        {
+          icon: "clock",
+          title: "Increase Dwell Time",
+          copy: "Customers can charge while dining, encouraging longer visits.",
+        },
+        {
+          icon: "pin",
+          title: "Attract EV Users",
+          copy: "Bring in riders and drivers actively looking for charging spots.",
+        },
+        {
+          icon: "wallet",
+          title: "Generate Revenue",
+          copy: "Every charging session can create a new income stream.",
+        },
+        {
+          icon: "star",
+          title: "Branded Experience",
+          copy: "Turn your location into a visible clean-energy destination.",
+        },
+        {
+          icon: "map",
+          title: "Compact Setup",
+          copy: "Small charger footprint works well for tight commercial spaces.",
+        },
+      ],
+    },
   },
   {
     title: "Universities",
     icon: "graduation",
     image:
       "https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=600&q=80",
+    problems: {
+      title: "Campus Charging Pressure",
+      footer: "No charging = Missed adoption + Parking stress + Weak ESG proof",
+      footerIcon: "alert",
+      items: [
+        {
+          icon: "bolt",
+          title: "Growing EV Demand",
+          copy: "More students and faculty are switching to electric bikes and cars.",
+        },
+        {
+          icon: "parking",
+          title: "Campus Parking Chaos",
+          copy: "Unstructured charging can create disorder in parking areas.",
+        },
+        {
+          icon: "leaf",
+          title: "Weak ESG Proof",
+          copy: "Sustainability claims are hard to show without measurable action.",
+        },
+        {
+          icon: "graduation",
+          title: "Missed Campus Amenity",
+          copy: "Students and staff lose access to a practical daily benefit.",
+        },
+      ],
+    },
+    benefits: {
+      title: "Smarter Campus Charging",
+      footer: "Cleaner Campus. Smarter Parking. Stronger Reputation.",
+      footerIcon: "chart",
+      items: [
+        {
+          icon: "users",
+          title: "Student & Faculty Adoption",
+          copy: "Support EV users with reliable on-campus charging.",
+        },
+        {
+          icon: "parking",
+          title: "Structured Parking Zones",
+          copy: "Create organized EV charging areas inside the campus.",
+        },
+        {
+          icon: "graduation",
+          title: "Academic Reputation",
+          copy: "Build a stronger sustainability story for rankings and PR.",
+        },
+        {
+          icon: "chart",
+          title: "Measurable Impact",
+          copy: "Track energy usage and clean mobility data.",
+        },
+        {
+          icon: "shield",
+          title: "Future-Ready Campus",
+          copy: "Position the university as a clean-energy leader.",
+        },
+      ],
+    },
   },
   {
     title: "Hospitals",
     icon: "hospital",
     image:
       "https://images.unsplash.com/photo-1586773860418-d37222d8fce3?auto=format&fit=crop&w=600&q=80",
+    problems: {
+      title: "Critical Parking Pressure",
+      footer:
+        "No charging = Staff inconvenience + Parking pressure + Missed trust",
+      footerIcon: "alert",
+      items: [
+        {
+          icon: "clock",
+          title: "Long Staff Shifts",
+          copy: "Doctors, nurses, and staff often need reliable charging during extended hours.",
+        },
+        {
+          icon: "parking",
+          title: "Parking Pressure",
+          copy: "Hospital parking is already busy and difficult to manage.",
+        },
+        {
+          icon: "plug",
+          title: "No Charging Support",
+          copy: "Staff and visitors have limited access to EV charging on-site.",
+        },
+        {
+          icon: "leaf",
+          title: "Weak Public ESG Action",
+          copy: "Sustainability efforts need visible, practical proof.",
+        },
+      ],
+    },
+    benefits: {
+      title: "Reliable Site Charging",
+      footer: "Support Staff. Organize Parking. Build Trust.",
+      footerIcon: "plug-check",
+      items: [
+        {
+          icon: "hospital",
+          title: "Support for Doctors & Staff",
+          copy: "Provide critical charging support for long-shift workers.",
+        },
+        {
+          icon: "parking",
+          title: "Structured Parking",
+          copy: "Designated EV zones improve order and movement inside the campus.",
+        },
+        {
+          icon: "pin",
+          title: "Visitor Convenience",
+          copy: "Patients and visitors get a practical charging option.",
+        },
+        {
+          icon: "shield",
+          title: "Public Trust",
+          copy: "Show visible commitment to clean energy and better infrastructure.",
+        },
+        {
+          icon: "chart",
+          title: "ESG & Healthcare Reputation",
+          copy: "Strengthen the hospital's sustainability and innovation image.",
+        },
+      ],
+    },
   },
   {
     title: "Parking Lots",
     icon: "parking",
     image:
       "https://images.unsplash.com/photo-1506521781263-d8422e82f27a?auto=format&fit=crop&w=600&q=80",
+    problems: {
+      title: "Idle Space, Missed Revenue",
+      footer: "Empty infrastructure = Missed revenue + Low EV value",
+      footerIcon: "alert",
+      items: [
+        {
+          icon: "parking",
+          title: "Idle Parking Space",
+          copy: "Parking areas earn only from parking, not from added services.",
+        },
+        {
+          icon: "pin",
+          title: "Low Destination Value",
+          copy: "Users don't choose the location if charging is unavailable.",
+        },
+        {
+          icon: "wallet",
+          title: "No Revenue Tracking",
+          copy: "Charging cannot be monetized without proper metering.",
+        },
+        {
+          icon: "alert",
+          title: "Poor EV Readiness",
+          copy: "The space feels outdated as EV adoption grows.",
+        },
+      ],
+    },
+    benefits: {
+      title: "Smart Charging Hub",
+      footer: "Same Space. New Revenue. Smarter Parking.",
+      footerIcon: "plug-check",
+      items: [
+        {
+          icon: "plug-check",
+          title: "Turn Parking Into Charging Hubs",
+          copy: "Convert existing spaces into smart EV charging points.",
+        },
+        {
+          icon: "wallet",
+          title: "Generate New Revenue",
+          copy: "Every session creates an additional income stream.",
+        },
+        {
+          icon: "pin",
+          title: "Attract EV Users",
+          copy: "Bring in drivers and riders looking for reliable charging spots.",
+        },
+        {
+          icon: "chart",
+          title: "Real-Time Tracking",
+          copy: "Monitor sessions, units consumed, and revenue.",
+        },
+        {
+          icon: "parking",
+          title: "Future-Ready Asset",
+          copy: "Make the property more valuable and EV-friendly.",
+        },
+      ],
+    },
   },
 ];
 
@@ -450,12 +806,145 @@ function Icon({ name, className = "h-5 w-5" }) {
     );
   }
 
+  if (name === "plug-check") {
+    return (
+      <svg {...props}>
+        <path d="M8 2v6" />
+        <path d="M16 2v6" />
+        <path d="M6 8h12v4a6 6 0 0 1-12 0V8Z" />
+        <path d="M12 18v4" />
+        <path d="m15.5 17.5 2 2 4-4" />
+      </svg>
+    );
+  }
+
   if (name === "wallet") {
     return (
       <svg {...props}>
         <path d="M4 7h16v12H4a2 2 0 0 1-2-2V5a2 2 0 0 0 2 2Z" />
         <path d="M18 11h4v4h-4a2 2 0 0 1 0-4Z" />
         <path d="M4 7l12-4v4" />
+      </svg>
+    );
+  }
+
+  if (name === "dollar") {
+    return (
+      <svg {...props}>
+        <path d="M12 2v20" />
+        <path d="M17 6.5c-1.1-.9-2.7-1.4-4.4-1.4-2.4 0-4.2 1.1-4.2 2.8 0 4.2 9.2 2 9.2 6.4 0 1.9-1.9 3.2-4.7 3.2-2 0-3.8-.6-5.1-1.7" />
+      </svg>
+    );
+  }
+
+  if (name === "users") {
+    return (
+      <svg {...props}>
+        <path d="M16 20v-1.6a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4V20" />
+        <circle cx="9.5" cy="7.5" r="3.5" />
+        <path d="M22 20v-1.6a4 4 0 0 0-3-3.9" />
+        <path d="M16 4.4a3.5 3.5 0 0 1 0 6.8" />
+      </svg>
+    );
+  }
+
+  if (name === "alert") {
+    return (
+      <svg {...props}>
+        <path d="M12 3 22 20H2L12 3Z" />
+        <path d="M12 9v4.5" />
+        <path d="M12 17h.01" />
+      </svg>
+    );
+  }
+
+  if (name === "receipt") {
+    return (
+      <svg {...props}>
+        <path d="M6 3h12v18l-2-1.2-2 1.2-2-1.2-2 1.2-2-1.2L6 21V3Z" />
+        <path d="M9 8h6" />
+        <path d="M9 12h6" />
+        <path d="M9 16h4" />
+      </svg>
+    );
+  }
+
+  if (name === "no-account") {
+    return (
+      <svg {...props}>
+        <path d="M8.5 10a3.5 3.5 0 1 1 7 0" />
+        <path d="M4.5 20a7.5 7.5 0 0 1 15 0" />
+        <path d="m8 8 8 8" />
+        <path d="m16 8-8 8" />
+      </svg>
+    );
+  }
+
+  if (name === "meter") {
+    return (
+      <svg {...props}>
+        <path d="M4 14a8 8 0 1 1 16 0" />
+        <path d="M6.5 19h11" />
+        <path d="m12 14 4-5" />
+        <path d="M8 14h.01" />
+        <path d="M16 14h.01" />
+      </svg>
+    );
+  }
+
+  if (name === "lock") {
+    return (
+      <svg {...props}>
+        <rect x="5" y="10" width="14" height="11" rx="2" />
+        <path d="M8 10V7a4 4 0 0 1 8 0v3" />
+      </svg>
+    );
+  }
+
+  if (name === "stairs") {
+    return (
+      <svg {...props}>
+        <path d="M4 18h4v-4h4v-4h4V6h4" />
+        <path d="M4 22h16" />
+      </svg>
+    );
+  }
+
+  if (name === "clock") {
+    return (
+      <svg {...props}>
+        <circle cx="12" cy="12" r="9" />
+        <path d="M12 7v5l3 2" />
+      </svg>
+    );
+  }
+
+  if (name === "leaf") {
+    return (
+      <svg {...props}>
+        <path d="M4 14c7-10 14-10 17-10-1 9-5 16-13 16a5 5 0 0 1-4-6Z" />
+        <path d="M4 20c3-5 7-8 12-10" />
+      </svg>
+    );
+  }
+
+  if (name === "star") {
+    return (
+      <svg {...props}>
+        <path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-2.9-5.6 2.9 1.1-6.2L3 9.6l6.2-.9L12 3Z" />
+      </svg>
+    );
+  }
+
+  if (name === "flame") {
+    return (
+      <svg
+        className={className}
+        viewBox="0 0 24 24"
+        fill="currentColor"
+        aria-hidden="true"
+      >
+        <path d="M12.7 2.4c.5 3.1-.9 4.9-2.6 6.8-1.5 1.7-3.2 3.6-3.2 6.2a5.1 5.1 0 0 0 5.2 5.2 5.5 5.5 0 0 0 5.7-5.7c0-3.4-1.9-6.1-5.1-12.5Zm-.5 15.7a2.5 2.5 0 0 1-2.6-2.5c0-1.2.8-2.1 1.7-3.1.7-.8 1.4-1.6 1.6-2.8 1.4 2.5 2 4 2 5.5a2.6 2.6 0 0 1-2.7 2.9Z" />
       </svg>
     );
   }
@@ -782,7 +1271,10 @@ function InstallationVisual({ type, image, title }) {
 
 function InstallationOptionsSection({ onCollapse }) {
   return (
-    <section id="installation" className="host-section host-installation-section">
+    <section
+      id="installation"
+      className="host-section host-installation-section"
+    >
       {onCollapse ? (
         <button
           type="button"
@@ -862,11 +1354,16 @@ export default function HostPage() {
   const [showRoiCalculator, setShowRoiCalculator] = useState(false);
   const [showHostingSections, setShowHostingSections] = useState(false);
   const [showInstallationOptions, setShowInstallationOptions] = useState(false);
+  const [activeWhereIndex, setActiveWhereIndex] = useState(0);
+  const [wherePanelMode, setWherePanelMode] = useState("benefits");
 
   const monthlyEarnings = useMemo(
     () => Math.max(0, chargerCount * unitPrice * usage * 30),
     [chargerCount, unitPrice, usage],
   );
+  const activeWhereLocation =
+    hostWhereLocations[activeWhereIndex] ?? hostWhereLocations[0];
+  const activeWherePanel = activeWhereLocation[wherePanelMode];
 
   return (
     <>
@@ -874,6 +1371,10 @@ export default function HostPage() {
         .host-page {
           background: #0a0a0a;
           color: #FFFFFF;
+          --host-desktop-frame-width: 1300px;
+          --host-desktop-frame-height: 800px;
+          --host-desktop-frame-pad-x: 24px;
+          --host-desktop-frame-pad-y: 88px;
           letter-spacing: 0;
           max-width: 100vw;
           overflow-x: hidden;
@@ -1634,6 +2135,7 @@ export default function HostPage() {
         .host-how-section {
           position: relative;
           overflow: hidden;
+          min-height: var(--host-desktop-frame-height);
           border-block: 1px solid rgba(255, 255, 255, 0.10);
           background:
             radial-gradient(circle at 66% 62%, rgba(22, 163, 74, 0.12), transparent 26%),
@@ -1651,14 +2153,22 @@ export default function HostPage() {
             radial-gradient(circle at 87% 82%, rgba(22, 163, 74, 0.13), transparent 24%);
         }
 
+        .host-how-section .host-container,
+        .host-where-section .host-container {
+          width: min(var(--host-desktop-frame-width), 100vw);
+          max-width: none;
+          padding-inline: var(--host-desktop-frame-pad-x);
+        }
+
         .host-how-inner {
           position: relative;
           display: grid;
-          min-height: 520px;
+          height: var(--host-desktop-frame-height);
+          min-height: var(--host-desktop-frame-height);
           grid-template-columns: minmax(280px, 0.36fr) minmax(0, 0.64fr);
           gap: 34px;
           align-items: center;
-          padding-block: 44px 34px;
+          padding-block: var(--host-desktop-frame-pad-y);
         }
 
         .host-how-copy {
@@ -1694,7 +2204,7 @@ export default function HostPage() {
           margin-top: 36px;
           max-width: 430px;
           color: #FFFFFF;
-          font-size: clamp(34px, 3.2vw, 58px);
+          font-size: 58px;
           font-weight: 800;
           line-height: 1.04;
           letter-spacing: 0;
@@ -1708,7 +2218,7 @@ export default function HostPage() {
           margin-top: 18px;
           max-width: 330px;
           color: #a1a1aa;
-          font-size: clamp(16px, 1.16vw, 21px);
+          font-size: 21px;
           line-height: 1.42;
         }
 
@@ -1801,7 +2311,7 @@ export default function HostPage() {
           position: absolute;
           left: 35%;
           right: 2.5%;
-          bottom: 24px;
+          bottom: var(--host-desktop-frame-pad-y);
           z-index: 4;
           display: grid;
           grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1886,25 +2396,35 @@ export default function HostPage() {
         .host-where-section {
           position: relative;
           overflow: hidden;
+          min-height: var(--host-desktop-frame-height);
           border-bottom: 1px solid rgba(255, 255, 255, 0.10);
           background:
-            radial-gradient(circle at 76% 48%, rgba(22, 163, 74, 0.1), transparent 28%),
+            radial-gradient(circle at 72% 46%, rgba(22, 163, 74, 0.12), transparent 26%),
+            radial-gradient(circle at 36% 50%, rgba(22, 163, 74, 0.06), transparent 24%),
             #050505;
         }
 
         .host-where-inner {
           display: grid;
-          grid-template-columns: minmax(240px, 0.28fr) minmax(430px, 0.46fr) minmax(250px, 0.26fr);
-          gap: 24px;
-          align-items: center;
-          padding: 76px 0;
+          height: var(--host-desktop-frame-height);
+          min-height: var(--host-desktop-frame-height);
+          grid-template-columns: minmax(0, 760px) 450px;
+          grid-template-rows: auto auto;
+          gap: 26px 42px;
+          align-items: start;
+          align-content: center;
+          justify-content: space-between;
+          padding-block: var(--host-desktop-frame-pad-y);
         }
 
         .host-where-copy {
           display: flex;
+          grid-column: 1;
+          grid-row: 1;
           min-width: 0;
           flex-direction: column;
-          justify-content: center;
+          justify-content: flex-start;
+          align-self: start;
         }
 
         .host-where-eyebrow {
@@ -1930,38 +2450,41 @@ export default function HostPage() {
         }
 
         .host-where-title {
-          margin-top: 34px;
-          max-width: 360px;
+          margin-top: 28px;
+          max-width: 720px;
           color: #FFFFFF;
-          font-size: clamp(34px, 2.8vw, 52px);
-          font-weight: 800;
+          font-size: 44px;
+          font-weight: 850;
           line-height: 1.08;
           letter-spacing: 0;
         }
 
         .host-where-copy-text {
-          margin-top: 24px;
-          max-width: 340px;
+          margin-top: 20px;
+          max-width: 520px;
           color: #a1a1aa;
-          font-size: 18px;
+          font-size: 16px;
           line-height: 1.38;
         }
 
         .host-where-button {
-          margin-top: 34px;
+          margin-top: 28px;
           width: max-content;
-          min-height: 58px;
+          min-height: 52px;
           border-radius: 7px;
           padding-inline: 24px;
-          font-size: 16px;
+          font-size: 15px;
         }
 
         .host-where-grid {
           display: grid;
+          grid-column: 1;
+          grid-row: 2;
           min-width: 0;
+          max-width: 760px;
           grid-template-columns: repeat(3, minmax(0, 1fr));
-          grid-template-rows: repeat(2, 170px);
-          align-self: center;
+          grid-template-rows: repeat(2, 136px);
+          align-self: start;
           align-content: center;
           gap: 12px;
         }
@@ -1972,14 +2495,24 @@ export default function HostPage() {
         }
 
         .host-where-card {
+          appearance: none;
           position: relative;
           overflow: hidden;
           height: 100%;
           min-height: 0;
+          width: 100%;
+          padding: 0;
           border: 1px solid rgba(255, 255, 255, 0.1);
           border-radius: 8px;
           background: #18181b;
+          color: inherit;
+          cursor: pointer;
           isolation: isolate;
+          text-align: inherit;
+          transition:
+            border-color 0.25s ease,
+            box-shadow 0.25s ease,
+            transform 0.25s ease;
         }
 
         .host-where-card img {
@@ -2002,8 +2535,55 @@ export default function HostPage() {
             radial-gradient(circle at 50% 78%, rgba(0, 0, 0, 0.28), transparent 42%);
         }
 
-        .host-where-card:hover img {
+        .host-where-card:hover,
+        .host-where-card:focus-visible {
+          border-color: rgba(48, 230, 93, 0.7);
+          outline: 0;
+          transform: translateY(-2px);
+        }
+
+        .host-where-card:hover img,
+        .host-where-card:focus-visible img {
           transform: scale(1.06);
+        }
+
+        .host-where-card.is-active {
+          border-color: #30e65d;
+          box-shadow:
+            0 0 0 1px rgba(48, 230, 93, 0.42),
+            0 0 32px rgba(48, 230, 93, 0.36),
+            inset 0 0 40px rgba(48, 230, 93, 0.11);
+        }
+
+        .host-where-card.is-active::after {
+          background:
+            linear-gradient(180deg, rgba(30, 210, 77, 0.38), rgba(8, 63, 27, 0.72)),
+            linear-gradient(180deg, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.82));
+        }
+
+        .host-where-active-check {
+          position: absolute;
+          top: 10px;
+          right: 10px;
+          z-index: 2;
+          display: grid;
+          height: 28px;
+          width: 28px;
+          place-items: center;
+          border-radius: 999px;
+          background: #34ee55;
+          color: #FFFFFF;
+          opacity: 0;
+          transform: scale(0.8);
+          transition:
+            opacity 0.2s ease,
+            transform 0.2s ease;
+          box-shadow: 0 0 24px rgba(52, 238, 85, 0.52);
+        }
+
+        .host-where-card.is-active .host-where-active-check {
+          opacity: 1;
+          transform: scale(1);
         }
 
         .host-where-card-content {
@@ -2014,7 +2594,7 @@ export default function HostPage() {
           align-items: center;
           justify-content: flex-end;
           gap: 10px;
-          padding: 18px 12px 16px;
+          padding: 16px 10px 14px;
           text-align: center;
         }
 
@@ -2026,30 +2606,208 @@ export default function HostPage() {
 
         .host-where-card-title {
           color: #FFFFFF;
-          font-size: 16px;
+          font-size: 14px;
           font-weight: 800;
           line-height: 1.12;
           text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
         }
 
-        .host-where-map {
+        .host-where-panel {
           position: relative;
-          align-self: start;
+          grid-column: 2;
+          grid-row: 1 / span 2;
           min-width: 0;
+          width: 450px;
           overflow: hidden;
-          height: 352px;
-          min-height: 0;
-          border: 1px solid rgba(255, 255, 255, 0.1);
-          border-radius: 8px;
-          background: #0a0a0a;
+          align-self: center;
+          border: 1px solid rgba(255, 255, 255, 0.14);
+          border-radius: 16px;
+          background:
+            linear-gradient(145deg, rgba(24, 24, 27, 0.92), rgba(7, 7, 9, 0.96)),
+            #080808;
+          padding: 20px;
+          box-shadow:
+            0 22px 58px rgba(0, 0, 0, 0.46),
+            inset 0 1px 0 rgba(255, 255, 255, 0.06);
         }
 
-        .host-where-map img {
-          display: block;
-          height: 100%;
-          width: 100%;
-          object-fit: cover;
-          object-position: center;
+        .host-where-panel::before {
+          content: '';
+          position: absolute;
+          inset: -40% -15% auto 34%;
+          height: 300px;
+          background: radial-gradient(circle, rgba(22, 163, 74, 0.16), transparent 66%);
+          pointer-events: none;
+        }
+
+        .host-where-panel-content {
+          position: relative;
+          z-index: 1;
+        }
+
+        .host-where-panel-location {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          color: #FFFFFF;
+          font-size: 18px;
+          font-weight: 850;
+          line-height: 1;
+        }
+
+        .host-where-panel-location-icon {
+          display: grid;
+          color: #16a34a;
+        }
+
+        .host-where-tabs {
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 0;
+          margin-top: 18px;
+          overflow: hidden;
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          border-radius: 6px;
+          background: rgba(5, 5, 5, 0.72);
+        }
+
+        .host-where-tab {
+          display: inline-flex;
+          min-width: 0;
+          min-height: 38px;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+          border: 0;
+          background: transparent;
+          color: rgba(255, 255, 255, 0.66);
+          font-size: 12px;
+          font-weight: 800;
+          cursor: pointer;
+          transition:
+            background 0.2s ease,
+            color 0.2s ease,
+            box-shadow 0.2s ease;
+        }
+
+        .host-where-tab + .host-where-tab {
+          border-left: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .host-where-tab:hover,
+        .host-where-tab:focus-visible {
+          color: #FFFFFF;
+          outline: 0;
+        }
+
+        .host-where-tab.is-active {
+          background: linear-gradient(180deg, rgba(48, 230, 93, 0.48), rgba(22, 163, 74, 0.5));
+          color: #FFFFFF;
+          box-shadow: inset 0 0 0 1px rgba(48, 230, 93, 0.5);
+        }
+
+        .host-where-panel-title {
+          margin-top: 22px;
+          color: #FFFFFF;
+          font-size: 25px;
+          font-weight: 850;
+          line-height: 1.12;
+          letter-spacing: 0;
+        }
+
+        .host-where-panel-list {
+          margin-top: 12px;
+        }
+
+        .host-where-panel-item {
+          display: grid;
+          min-width: 0;
+          grid-template-columns: 44px 1fr;
+          gap: 12px;
+          align-items: center;
+          padding: 9px 0;
+        }
+
+        .host-where-panel-item + .host-where-panel-item {
+          border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .host-where-panel-item-icon {
+          display: grid;
+          height: 38px;
+          width: 38px;
+          place-items: center;
+          border-radius: 7px;
+        }
+
+        .host-where-panel.is-problems .host-where-panel-item-icon {
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          background: rgba(6, 6, 8, 0.74);
+          color: #ff3b30;
+        }
+
+        .host-where-panel.is-benefits .host-where-panel-item-icon {
+          background: transparent;
+          color: #39ff38;
+        }
+
+        .host-where-panel-item h4 {
+          color: #FFFFFF;
+          font-size: 14px;
+          font-weight: 850;
+          line-height: 1.12;
+        }
+
+        .host-where-panel-item p {
+          margin-top: 3px;
+          color: #c4c4cc;
+          font-size: 12px;
+          line-height: 1.28;
+        }
+
+        .host-where-panel-footer {
+          display: flex;
+          min-height: 52px;
+          align-items: center;
+          justify-content: center;
+          gap: 10px;
+          margin-top: 12px;
+          border: 1px solid;
+          border-radius: 7px;
+          padding: 10px 14px;
+          text-align: center;
+          font-size: 13px;
+          font-weight: 900;
+          line-height: 1.2;
+        }
+
+        .host-where-panel.is-problems .host-where-panel-footer {
+          border-color: rgba(255, 59, 48, 0.86);
+          background: rgba(255, 59, 48, 0.03);
+          color: #ff3b30;
+        }
+
+        .host-where-panel.is-benefits .host-where-panel-footer {
+          border-color: rgba(22, 163, 74, 0.86);
+          background: rgba(22, 163, 74, 0.04);
+          color: #16a34a;
+        }
+
+        .host-where-panel-footer svg {
+          height: 22px;
+          flex: 0 0 auto;
+          width: 22px;
+        }
+
+        .host-where-panel-location-icon svg,
+        .host-where-panel-item-icon svg {
+          height: 22px;
+          width: 22px;
+        }
+
+        .host-where-tab svg {
+          height: 16px;
+          width: 16px;
         }
 
         .host-who-section {
@@ -4063,7 +4821,46 @@ export default function HostPage() {
           flex: 0 0 auto;
         }
 
+        @media (max-width: 1180px) {
+          .host-where-section {
+            min-height: auto;
+          }
+
+          .host-how-section .host-container,
+          .host-where-section .host-container {
+            width: auto;
+            max-width: 1300px;
+            padding-inline: 24px;
+          }
+
+          .host-where-inner {
+            grid-template-columns: 1fr;
+            grid-template-rows: auto;
+            gap: 28px;
+            height: auto;
+            min-height: auto;
+          }
+
+          .host-where-copy,
+          .host-where-grid,
+          .host-where-panel {
+            grid-column: auto;
+            grid-row: auto;
+          }
+
+          .host-where-panel {
+            width: 100%;
+            max-width: 760px;
+            justify-self: center;
+          }
+        }
+
         @media (max-width: 767px) {
+          .host-how-section,
+          .host-where-section {
+            min-height: auto;
+          }
+
           .host-container {
             padding: 0 18px;
           }
@@ -4521,8 +5318,9 @@ export default function HostPage() {
 
           .host-how-inner {
             display: block;
+            height: auto;
             min-height: auto;
-            padding-block: 66px 34px;
+            padding-block: 64px;
           }
 
           .host-how-copy {
@@ -4535,10 +5333,12 @@ export default function HostPage() {
 
           .host-how-title {
             margin-top: 28px;
+            font-size: 39px;
           }
 
           .host-how-description {
             max-width: 320px;
+            font-size: 17px;
           }
 
           .host-how-card-grid {
@@ -4592,10 +5392,19 @@ export default function HostPage() {
             height: 1px;
           }
 
+          .host-how-section .host-container,
+          .host-where-section .host-container {
+            width: auto;
+            max-width: 1300px;
+            padding-inline: 18px;
+          }
+
           .host-where-inner {
             grid-template-columns: 1fr;
             gap: 22px;
-            padding: 66px 0;
+            height: auto;
+            min-height: auto;
+            padding-block: 64px;
           }
 
           .host-where-title,
@@ -4618,9 +5427,45 @@ export default function HostPage() {
             min-height: 0;
           }
 
-          .host-where-map {
-            height: 300px;
-            min-height: 0;
+          .host-where-panel {
+            grid-column: auto;
+            max-width: none;
+            width: 100%;
+            padding: 20px 16px;
+            border-radius: 12px;
+          }
+
+          .host-where-tabs {
+            margin-top: 20px;
+          }
+
+          .host-where-panel-title {
+            margin-top: 24px;
+            font-size: 25px;
+          }
+
+          .host-where-panel-item {
+            grid-template-columns: 48px 1fr;
+            gap: 12px;
+            padding: 12px 0;
+          }
+
+          .host-where-panel-item-icon {
+            height: 42px;
+            width: 42px;
+          }
+
+          .host-where-panel-item h4 {
+            font-size: 15px;
+          }
+
+          .host-where-panel-item p {
+            font-size: 14px;
+          }
+
+          .host-where-panel-footer {
+            min-height: 50px;
+            font-size: 14px;
           }
 
           .host-who-inner {
@@ -5171,7 +6016,9 @@ export default function HostPage() {
                       </div>
 
                       <div className="host-roi-result">
-                        <p className="host-roi-result-label">Monthly earnings</p>
+                        <p className="host-roi-result-label">
+                          Monthly earnings
+                        </p>
                         <p className="host-roi-result-value">
                           PKR {monthlyEarnings.toLocaleString("en-PK")}
                         </p>
@@ -5252,7 +6099,7 @@ export default function HostPage() {
             </div>
           </div>
 
-          <div className="host-container host-how-payment-cards">
+          {/* <div className="host-container host-how-payment-cards">
             <div className="host-payment-cards">
               {paymentSteps.map((step, index) => (
                 <Reveal key={step.title} delay={index * 0.08}>
@@ -5284,7 +6131,7 @@ export default function HostPage() {
                 </Reveal>
               ))}
             </div>
-          </div>
+          </div> */}
         </section>
 
         <section id="requirements" className="host-where-section">
@@ -5297,19 +6144,32 @@ export default function HostPage() {
               <h2 className="host-where-title">
                 Built for places where people already stop.
               </h2>
-              <p className="host-where-copy-text">
+              {/* <p className="host-where-copy-text">
                 High dwell time. Clear access. Everyday footfall.
-              </p>
-              <PrimaryButton href="/charge" className="host-where-button">
+              </p> */}
+              {/* <PrimaryButton href="/charge" className="host-where-button">
                 See charger map
-              </PrimaryButton>
+              </PrimaryButton> */}
             </Reveal>
 
             <div className="host-where-grid">
               {hostWhereLocations.map((location, index) => (
                 <Reveal key={location.title} delay={index * 0.035}>
-                  <article className="host-where-card">
+                  <button
+                    type="button"
+                    className={`host-where-card ${
+                      activeWhereIndex === index ? "is-active" : ""
+                    }`}
+                    aria-pressed={activeWhereIndex === index}
+                    onClick={() => setActiveWhereIndex(index)}
+                  >
                     <img src={location.image} alt={location.title} />
+                    <span
+                      className="host-where-active-check"
+                      aria-hidden="true"
+                    >
+                      <Icon name="check" className="h-5 w-5" />
+                    </span>
                     <div className="host-where-card-content">
                       <span className="host-where-card-icon">
                         <Icon name={location.icon} className="h-9 w-9" />
@@ -5318,16 +6178,80 @@ export default function HostPage() {
                         {location.title}
                       </h3>
                     </div>
-                  </article>
+                  </button>
                 </Reveal>
               ))}
             </div>
 
-            <Reveal delay={0.12} className="host-where-map">
-              <img
-                src="/img/Host/locations.png"
-                alt="Zvolta charging locations map"
-              />
+            <Reveal
+              delay={0.12}
+              className={`host-where-panel is-${wherePanelMode}`}
+            >
+              <div className="host-where-panel-content">
+                <div className="host-where-panel-location">
+                  <span className="host-where-panel-location-icon">
+                    <Icon name={activeWhereLocation.icon} className="h-7 w-7" />
+                  </span>
+                  <h3>{activeWhereLocation.title}</h3>
+                </div>
+
+                <div className="host-where-tabs" role="tablist">
+                  {["problems", "benefits"].map((mode) => (
+                    <button
+                      type="button"
+                      key={mode}
+                      role="tab"
+                      aria-selected={wherePanelMode === mode}
+                      className={`host-where-tab ${
+                        wherePanelMode === mode ? "is-active" : ""
+                      }`}
+                      onClick={() => setWherePanelMode(mode)}
+                    >
+                      <Icon
+                        name={mode === "problems" ? "alert" : "chart"}
+                        className="h-4 w-4"
+                      />
+                      <span>
+                        {mode === "problems" ? "Problems" : "Benefits"}
+                      </span>
+                    </button>
+                  ))}
+                </div>
+
+                <AnimatePresence mode="wait" initial={false}>
+                  <motion.div
+                    key={`${activeWhereLocation.title}-${wherePanelMode}`}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -8 }}
+                    transition={{ duration: 0.2, ease: "easeOut" }}
+                  >
+                    <h3 className="host-where-panel-title">
+                      {activeWherePanel.title}
+                    </h3>
+                    <div className="host-where-panel-list">
+                      {activeWherePanel.items.map((item) => (
+                        <div className="host-where-panel-item" key={item.title}>
+                          <span className="host-where-panel-item-icon">
+                            <Icon name={item.icon} className="h-7 w-7" />
+                          </span>
+                          <span>
+                            <h4>{item.title}</h4>
+                            <p>{item.copy}</p>
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="host-where-panel-footer">
+                      <Icon
+                        name={activeWherePanel.footerIcon}
+                        className="h-7 w-7"
+                      />
+                      <span>{activeWherePanel.footer}</span>
+                    </div>
+                  </motion.div>
+                </AnimatePresence>
+              </div>
             </Reveal>
           </div>
         </section>

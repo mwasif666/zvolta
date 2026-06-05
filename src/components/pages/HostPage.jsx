@@ -6,6 +6,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import RotatingText from "../RotatingText";
 import { SmartLink } from "../SmartLink";
 
 const chargers = [
@@ -35,10 +36,13 @@ const chargerOptionCards = [
     description: "Best for small spaces and low usage.",
     href: "/3kw-charger",
     features: [],
+    image:
+      "https://res.cloudinary.com/diywraupt/image/upload/v1780392810/7Watt22W_zdchgq.png",
+    imageSize: "large",
     power: "Upto 3kW",
     bestFor: "Two-Wheelers & Four-Wheelers",
     location: "Homes, Shops & Small Offices",
-    price: "Starts from 75k",
+    price: "74,999 PKR",
   },
   {
     title: "7kW Charger",
@@ -539,6 +543,8 @@ const hostWhoBenefits = [
   },
 ];
 
+const hostRotatingWords = ["price.", "timings.", "access.", "earnings."];
+
 const installationOptions = [
   {
     title: "Vertical wall",
@@ -604,7 +610,7 @@ const marketingPoints = [
 const pricingPlans = [
   {
     title: "3kW",
-    price: "Starts from 75k",
+    price: "74,999 PKR",
     detail: "Small sites and EV bikes",
     href: "/3kw-charger",
   },
@@ -3118,6 +3124,36 @@ export default function HostPage() {
           font-weight: 800;
           line-height: 1.18;
           letter-spacing: 0;
+        }
+
+        .host-rotating-text {
+          display: inline-flex;
+          width: max-content;
+          min-width: 5.2ch;
+          align-items: center;
+          flex-wrap: nowrap;
+          overflow: hidden;
+          background: #16a34a;
+          color: #FFFFFF;
+          border-radius: 8px;
+          padding: 0.05em 0.22em 0.1em;
+          line-height: 1;
+          white-space: nowrap;
+          vertical-align: bottom;
+        }
+
+        .host-rotating-text .text-rotate,
+        .host-rotating-text .text-rotate-word {
+          flex-wrap: nowrap;
+        }
+
+        .host-rotating-text .text-rotate-element {
+          color: #FFFFFF;
+        }
+
+        .host-rotating-text-split {
+          overflow: hidden;
+          padding-bottom: 0.04em;
         }
 
         .host-who-divider {
@@ -6405,9 +6441,23 @@ export default function HostPage() {
 
             <Reveal delay={0.12} className="host-who-strip">
               <h3 className="host-who-strip-title">
-                You set the price.
+                You set the
                 <br />
-                You set the timings.
+                <RotatingText
+                  texts={hostRotatingWords}
+                  mainClassName="host-rotating-text"
+                  staggerFrom="last"
+                  initial={{ y: "100%" }}
+                  animate={{ y: 0 }}
+                  exit={{ y: "-120%" }}
+                  staggerDuration={0.025}
+                  splitLevelClassName="host-rotating-text-split"
+                  transition={{ type: "spring", damping: 30, stiffness: 400 }}
+                  rotationInterval={2000}
+                  splitBy="characters"
+                  auto
+                  loop
+                />
               </h3>
               <span className="host-who-divider" />
               {hostWhoBenefits.map((item) => (
@@ -6645,7 +6695,7 @@ export default function HostPage() {
           <SectionIntro
             eyebrow="Pricing"
             title="Simple charger options with flexible payments."
-            copy="3kW starts from 75k. 7kW and 22kW are available after site review."
+            copy="3kW starts from 74,999 PKR. 7kW and 22kW are available after site review."
           />
           <div className="mt-12 grid gap-8 lg:grid-cols-3">
             {pricingPlans.map((plan, index) => (

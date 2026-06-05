@@ -1,6 +1,9 @@
 import { Fragment, useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { IoClose } from "react-icons/io5";
 import { SmartLink } from "../SmartLink";
 import { chargerSpecCommon } from "../../data/chargerSpecs";
+import RotatingText from "../RotatingText";
 
 const CONTACT_LINK = "/contact-us";
 
@@ -169,6 +172,35 @@ function Icon({ name = "check", className = "h-5 w-5" }) {
       <svg {...props}>
         <path d="M12 2v20" />
         <path d="M17 6.5c-1.1-.9-2.7-1.4-4.4-1.4-2.4 0-4.2 1.1-4.2 2.8 0 4.2 9.2 2 9.2 6.4 0 1.9-1.9 3.2-4.7 3.2-2 0-3.8-.6-5.1-1.7" />
+      </svg>
+    );
+  }
+
+  if (name === "wallet") {
+    return (
+      <svg {...props}>
+        <path d="M19 7V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7a2 2 0 0 0-2-2H7" />
+        <path d="M16 14h.01" />
+      </svg>
+    );
+  }
+
+  if (name === "access") {
+    return (
+      <svg {...props}>
+        <path d="M12 3 20 6v6c0 5-3.4 8-8 9-4.6-1-8-4-8-9V6l8-3Z" />
+        <path d="M9 12h6" />
+        <path d="M12 9v6" />
+      </svg>
+    );
+  }
+
+  if (name === "map") {
+    return (
+      <svg {...props}>
+        <path d="m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3V6Z" />
+        <path d="M9 3v15" />
+        <path d="M15 6v15" />
       </svg>
     );
   }
@@ -343,6 +375,57 @@ const environmentTabs = [
   },
 ];
 
+const hostRotatingWords = ["price.", "timings.", "access.", "earnings."];
+
+const hostWhoBenefits = [
+  { icon: "shield", title: "More value", copy: "for your visitors" },
+  { icon: "briefcase", title: "Extra income", copy: "for your business" },
+  { icon: "shield", title: "Future ready", copy: "service" },
+];
+
+const chargerPartnerLogos = [
+  {
+    src: "https://res.cloudinary.com/diywraupt/image/upload/v1780396433/9561e733-b02e-44dd-a261-d235b7198edf_removalai_preview_kzxmhz.png",
+    alt: "Revoo",
+  },
+  {
+    src: "https://res.cloudinary.com/diywraupt/image/upload/v1780396432/b59ddd95-b377-4010-98d7-cf3759aae7cc_removalai_preview_caazbg.png",
+    alt: "Vlektra",
+  },
+  {
+    src: "https://workhall.co/_next/image?url=%2Fimages%2Fwh.png&w=128&q=100",
+    alt: "Workhall",
+  },
+  {
+    src: "https://res.cloudinary.com/diywraupt/image/upload/v1780396432/Ecodost-01_mg0utk.svg",
+    alt: "Ecodost",
+  },
+  { src: "/img/Black-logo.webp", alt: "Sazgar", invert: true },
+];
+
+const chargerStories = [
+  {
+    title: "Coworking spaces using chargers as a USP",
+    category: "Workspace",
+    image: "/img/Host/03.png",
+  },
+  {
+    title: "Restaurants increasing customer time",
+    category: "Hospitality",
+    image: "/img/Host/Host.png",
+  },
+  {
+    title: "Businesses earning passive income",
+    category: "Revenue",
+    image: "/img/Host/02.png",
+  },
+  {
+    title: "Brands working toward sustainability goals",
+    category: "ESG",
+    image: "/img/clean-volta.jpg",
+  },
+];
+
 function PrimaryButton({ href = CONTACT_LINK, children, className = "" }) {
   return (
     <SmartLink
@@ -483,6 +566,27 @@ function EnvironmentSection() {
         </p>
       </div>
 
+      <div className="charger-env-use-cases">
+        {/* <p className="three-eyebrow">Use Cases</p>
+        <h2 className="three-section-title">
+          Where the 3kW charger works best
+        </h2> */}
+        <div className="three-audience-grid">
+          {threeKwUseCases.map(([icon, title, copy]) => (
+            <article
+              className="three-info-card three-audience-card"
+              key={title}
+            >
+              <span className="three-card-icon">
+                <Icon name={icon} className="h-9 w-9" />
+              </span>
+              <h3>{title}</h3>
+              <p>{copy}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+
       <div className="charger-env-tabs" role="tablist" aria-label="Use types">
         {environmentTabs.map((tab) => (
           <button
@@ -567,6 +671,19 @@ const threeKwQuickDetails = [
   ["wifi", "Connectivity", "Smart software included"],
 ];
 
+const threeKwHowFeatures = [
+  ["bolt", "Track usage", "Real-time charging and session history"],
+  ["wrench", "Set pricing", "Update your price anytime"],
+  ["access", "Open / close access", "Control availability remotely"],
+  ["map", "No staff needed", "Everything runs automatically"],
+];
+
+const threeKwHowStrip = [
+  ["wallet", "Payments made simple"],
+  ["wallet", "Cashless"],
+  ["bolt", "Automatic"],
+];
+
 const threeKwAudienceCards = [
   ["home", "Homeowners", "Ideal for overnight daily charging at home."],
   [
@@ -612,19 +729,56 @@ const decisionPricingItems = [
 ];
 
 const decisionSpecs = [
-  ["Charging Power", "3kW"],
-  ["Application", "Homes, bikes, smaller EVs"],
-  ["Mounting", "Wall-mounted"],
-  ["Software", "Smart monitoring included"],
-  ["Safety", "Essential built-in protections"],
-  ["Expansion", "Additional chargers can be added later"],
+  ["Capacity - Input voltage", "1 Phase, 230V AC"],
+  ["Capacity - Frequency", "50 Hz"],
+  ["Capacity - Rated Output Power/current", "3.3KVA/16A"],
+  ["Output - AC output voltage", "1 phase, 230V AC"],
+  ["Output - Frequency", "50 Hz"],
+  ["Output - Socket", "UNIV (A,B,C,D,F,G)"],
+  ["Product Dimensions - Length", "380mm"],
+  ["Product Dimensions - Height", "260mm"],
+  ["Product Dimensions - Depth", "130mm"],
+  ["Protection & Security - Ingress Protection", "IP54"],
+  ["Protection & Security - Tempered Detection", "Yes"],
+  ["Protection & Security - Vandalism Protection", "Yes"],
+  ["Protection & Security - Overload Protection", "Yes"],
+  ["Protection & Security - RCD (30 A) AC", "Yes"],
+  ["Protection & Security - Over voltage Protection", "Yes"],
+  ["Connectivity - Wifi", "Yes"],
+  ["Connectivity - GSM", "Yes"],
+  ["Connectivity - LED Indication", "Yes"],
+  ["Connectivity - LCD Display", "Yes"],
+  ["Other - Schedulable and auto cut off", "Yes"],
+  ["Other - Material", "MS"],
+  ["Other - Authentication method", "Application"],
+  ["Environmental Specifications - Operating temperature", "10°C to +60°C"],
+  ["Environmental Specifications - Humidity", "upto 95%"],
+  ["Power Connection - Red", "Live"],
+  ["Power Connection - Blue", "Neutral"],
+  ["Power Connection - Yellow/Green", "Earth/Ground"],
 ];
 
 const decisionSetupSteps = [
-  ["chat", "Share your requirement"],
-  ["file", "Site review and recommendation"],
-  ["wrench", "Installation and setup"],
-  ["bolt", "Start charging"],
+  [
+    "file",
+    "Share Your Requirement",
+    "Tell us your needs and charging preferences.",
+  ],
+  [
+    "shield",
+    "Site Review & Recommendation",
+    "We analyze your site and provide the best solution for you.",
+  ],
+  [
+    "wrench",
+    "Installation & Setup",
+    "Our team installs and configures everything on-site.",
+  ],
+  [
+    "bolt",
+    "Start Charging",
+    "Your charger is ready to use. Plug in and power up!",
+  ],
 ];
 
 const threeKwUseCases = [
@@ -671,6 +825,18 @@ const threeKwFaqs = [
   ],
 ];
 
+const threeHeroBenefits = [
+  ["shield", "Built-in Safety", "Overload & short circuit protection"],
+  ["wifi", "Smart Connectivity", "Monitor and control from anywhere"],
+  ["leaf", "Energy Efficient", "Optimized for low power consumption"],
+  ["bolt", "Universal Switch", "Charge anything"],
+  [
+    "shield",
+    "100% Made in Pakistan",
+    "Quality you can trust. Built for our future.",
+  ],
+];
+
 function ThreeKwHero() {
   return (
     <section className="three-hero">
@@ -696,23 +862,7 @@ function ThreeKwHero() {
             </SecondaryButton>
           </div>
           <div className="three-hero-benefits">
-            {[
-              [
-                "shield",
-                "Built-in Safety",
-                "Overload & short circuit protection",
-              ],
-              [
-                "wifi",
-                "Smart Connectivity",
-                "Monitor and control from anywhere",
-              ],
-              [
-                "leaf",
-                "Energy Efficient",
-                "Optimized for low power consumption",
-              ],
-            ].map(([icon, title, copy]) => (
+            {threeHeroBenefits.map(([icon, title, copy]) => (
               <div className="three-hero-benefit" key={title}>
                 <Icon name={icon} className="h-6 w-6" />
                 <div>
@@ -752,6 +902,60 @@ function ThreeKwQuickSection() {
           ))}
         </div>
 
+        <div className="three-how-panel">
+          <div className="three-how-copy">
+            {/* <div className="three-how-kicker">
+              <span>02</span>
+              <strong>How</strong>
+            </div> */}
+            <h2>
+              Run everything from your <span>device.</span>
+            </h2>
+            <p>Manage, monitor and earn without being on-site.</p>
+
+            <div className="three-how-feature-grid">
+              {threeKwHowFeatures.map(([icon, title, copy]) => (
+                <article className="three-how-feature" key={title}>
+                  <span>
+                    <Icon name={icon} className="h-8 w-8" />
+                  </span>
+                  <div>
+                    <h3>{title}</h3>
+                    <p>{copy}</p>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+
+          <div className="three-how-visual" aria-hidden="true">
+            <img
+              className="three-how-phone"
+              src="/img/Host/mobile.png"
+              alt=""
+            />
+            <img
+              className="three-how-laptop"
+              src="/img/Host/laptop.png"
+              alt=""
+            />
+            <img
+              className="three-how-payment"
+              src="/img/Host/payment.png"
+              alt=""
+            />
+          </div>
+
+          <div className="three-how-strip">
+            {threeKwHowStrip.map(([icon, label]) => (
+              <div key={label}>
+                <Icon name={icon} className="h-7 w-7" />
+                <strong>{label}</strong>
+              </div>
+            ))}
+          </div>
+        </div>
+
         <div className="three-subsection">
           <p className="three-eyebrow">Who should use this charger?</p>
           <h2 className="three-section-title">
@@ -778,6 +982,12 @@ function ThreeKwQuickSection() {
 }
 
 function DecisionSection() {
+  const specsMiddle = Math.ceil(decisionSpecs.length / 2);
+  const specColumns = [
+    decisionSpecs.slice(0, specsMiddle),
+    decisionSpecs.slice(specsMiddle),
+  ];
+
   return (
     <section className="three-section three-decision-section">
       <div className="three-container">
@@ -817,9 +1027,13 @@ function DecisionSection() {
               <Icon name="dollar" className="h-10 w-10" />
             </span>
             <h3>Pricing</h3>
+            <div className="three-price">
+              <span>PKR</span>
+              <strong>74,999</strong>
+            </div>
             <p>
-              Pricing depends on site needs, cable run, and installation
-              conditions.
+              Includes charger hardware, smart software, and standard
+              installation support.
             </p>
             <div className="three-check-list">
               {decisionPricingItems.map((item) => (
@@ -834,33 +1048,51 @@ function DecisionSection() {
             </PrimaryButton>
           </article>
 
-          <article className="three-panel">
-            <div className="three-panel-title-row">
+          <article className="three-panel three-spec-panel">
+            <div className="three-panel-title-row three-spec-title-row">
               <Icon name="file" className="h-9 w-9" />
               <h3>Technical Specs</h3>
             </div>
-            <div className="three-spec-list">
-              {decisionSpecs.map(([label, value]) => (
-                <div key={label}>
-                  <span>{label}</span>
-                  <strong>{value}</strong>
+
+            <div className="three-spec-columns">
+              {specColumns.map((column, columnIndex) => (
+                <div
+                  className="three-spec-list"
+                  key={`spec-column-${columnIndex}`}
+                >
+                  {column.map(([label, value], index) => (
+                    <div
+                      key={label}
+                      className={
+                        columnIndex === 0 && index === 0 ? "is-highlight" : ""
+                      }
+                    >
+                      <span>{label}</span>
+                      <strong>{value}</strong>
+                    </div>
+                  ))}
                 </div>
               ))}
             </div>
           </article>
 
-          <article className="three-panel">
-            <div className="three-panel-title-row">
+          <article className="three-panel three-setup-panel">
+            <div className="three-panel-title-row three-setup-title-row">
+              <span />
               <Icon name="gear" className="h-9 w-9" />
               <h3>How Setup Works</h3>
+              <span />
             </div>
             <div className="three-setup-list">
-              {decisionSetupSteps.map(([icon, text], index) => (
-                <div className="three-setup-step" key={text}>
+              {decisionSetupSteps.map(([icon, title, copy], index) => (
+                <div className="three-setup-step" key={title}>
                   <span className="three-step-number">{index + 1}</span>
-                  <div>
+                  <span className="three-setup-icon">
                     <Icon name={icon} className="h-8 w-8" />
-                    <p>{text}</p>
+                  </span>
+                  <div>
+                    <h4>{title}</h4>
+                    <p>{copy}</p>
                   </div>
                 </div>
               ))}
@@ -886,29 +1118,6 @@ function UseCasesRecommendationFaq() {
 
   return (
     <>
-      <section className="three-section">
-        <div className="three-container">
-          <p className="three-eyebrow">Use Cases</p>
-          <h2 className="three-section-title">
-            Where the 3kW charger works best
-          </h2>
-          <div className="three-audience-grid">
-            {threeKwUseCases.map(([icon, title, copy]) => (
-              <article
-                className="three-info-card three-audience-card"
-                key={title}
-              >
-                <span className="three-card-icon">
-                  <Icon name={icon} className="h-9 w-9" />
-                </span>
-                <h3>{title}</h3>
-                <p>{copy}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <section className="three-section three-recommendation-section">
         <div className="three-container three-recommendation-grid">
           <div>
@@ -951,9 +1160,27 @@ function UseCasesRecommendationFaq() {
                   >
                     <span>
                       {isOpen ? (
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" className="h-3.5 w-3.5"><path d="M5 12h14"/></svg>
+                        <svg
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth={2.5}
+                          strokeLinecap="round"
+                          className="h-3.5 w-3.5"
+                        >
+                          <path d="M5 12h14" />
+                        </svg>
                       ) : (
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" className="h-3.5 w-3.5"><path d="M12 5v14M5 12h14"/></svg>
+                        <svg
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth={2.5}
+                          strokeLinecap="round"
+                          className="h-3.5 w-3.5"
+                        >
+                          <path d="M12 5v14M5 12h14" />
+                        </svg>
                       )}
                     </span>
                     <strong>{question}</strong>
@@ -969,7 +1196,7 @@ function UseCasesRecommendationFaq() {
 
           {/* <div className="three-final-cta">
             <img
-              src="/img/3kw-charger/smart-3kw-charger.png"
+              src="https://res.cloudinary.com/diywraupt/image/upload/v1780392810/7Watt22W_zdchgq.png"
               alt="3kW smart charger"
             />
             <div>
@@ -993,7 +1220,58 @@ function UseCasesRecommendationFaq() {
   );
 }
 
+function Reveal({ children, className = "", delay = 0 }) {
+  const reduceMotion = useReducedMotion();
+  return (
+    <motion.div
+      className={className}
+      initial={{ opacity: 0, y: reduceMotion ? 0 : 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.22 }}
+      transition={{
+        duration: reduceMotion ? 0.01 : 0.7,
+        delay: reduceMotion ? 0 : delay,
+        ease: [0.22, 1, 0.36, 1],
+      }}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+function ShutterExpand({ children }) {
+  const reduceMotion = useReducedMotion();
+  return (
+    <motion.div
+      style={{ overflow: "hidden", transformOrigin: "top center" }}
+      initial={{ height: 0, opacity: 0 }}
+      animate={{ height: "auto", opacity: 1 }}
+      exit={{ height: 0, opacity: 0 }}
+      transition={{
+        height: {
+          duration: reduceMotion ? 0.01 : 0.55,
+          ease: [0.22, 1, 0.36, 1],
+        },
+        opacity: { duration: reduceMotion ? 0.01 : 0.18 },
+      }}
+    >
+      <motion.div
+        initial={{ y: reduceMotion ? 0 : -18 }}
+        animate={{ y: 0 }}
+        exit={{ y: reduceMotion ? 0 : -12 }}
+        transition={{
+          duration: reduceMotion ? 0.01 : 0.45,
+          ease: [0.22, 1, 0.36, 1],
+        }}
+      >
+        {children}
+      </motion.div>
+    </motion.div>
+  );
+}
+
 function ThreeKwChargerPage() {
+  const [showHostingSections, setShowHostingSections] = useState(false);
   return (
     <>
       <style data-page-style="charger-spec:3kw-redesign">{`
@@ -1007,7 +1285,7 @@ function ThreeKwChargerPage() {
 
         .three-container,
         .charger-environments-section .charger-container {
-          max-width: 1210px;
+          max-width: 1300px;
           margin: 0 auto;
           padding: 0 24px;
         }
@@ -1092,29 +1370,57 @@ function ThreeKwChargerPage() {
 
         .three-hero-benefits {
           display: grid;
-          margin-top: 54px;
-          grid-template-columns: repeat(3, minmax(0, 1fr));
-          gap: 30px;
+          margin-top: 52px;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 16px;
         }
 
         .three-hero-benefit {
           display: grid;
-          grid-template-columns: 30px 1fr;
-          gap: 12px;
+          min-height: 112px;
+          grid-template-columns: 58px minmax(0, 1fr);
+          align-items: center;
+          gap: 14px;
+          overflow: hidden;
+          border: 1px solid rgba(255, 255, 255, 0.12);
+          border-radius: 12px;
+          background:
+            radial-gradient(circle at 15% 50%, rgba(22, 163, 74, 0.12), transparent 28%),
+            linear-gradient(145deg, rgba(13, 17, 17, 0.94), rgba(5, 6, 6, 0.96));
+          padding: 18px;
           color: #16a34a;
+          box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.04),
+            0 18px 54px rgba(0, 0, 0, 0.24);
+        }
+
+        .three-hero-benefit > svg {
+          height: 54px;
+          width: 54px;
+          border: 1px solid rgba(22, 163, 74, 0.28);
+          border-radius: 999px;
+          background: rgba(22, 163, 74, 0.06);
+          padding: 15px;
+          color: #16a34a;
+          filter: drop-shadow(0 0 16px rgba(22, 163, 74, 0.28));
         }
 
         .three-hero-benefit h3 {
           color: #FFFFFF;
-          font-size: 14px;
-          font-weight: 800;
+          font-size: 18px;
+          font-weight: 900;
+          line-height: 1.12;
         }
 
         .three-hero-benefit p {
           margin-top: 8px;
           color: #C7C7C7;
-          font-size: 13px;
-          line-height: 1.5;
+          font-size: 14px;
+          line-height: 1.35;
+        }
+
+        .three-hero-benefit:last-child {
+          grid-column: 1 / -1;
         }
 
         .three-product-card {
@@ -1252,6 +1558,223 @@ function ThreeKwChargerPage() {
           font-weight: 500;
         }
 
+        .three-how-panel {
+          position: relative;
+          display: grid;
+          height: 800px;
+          min-height: 800px;
+          margin-top: 46px;
+          grid-template-columns: minmax(280px, 0.36fr) minmax(0, 0.64fr);
+          gap: 34px;
+          align-items: center;
+          overflow: hidden;
+          border: 1px solid rgba(255, 255, 255, 0.12);
+          border-radius: 18px;
+          background:
+            radial-gradient(circle at 66% 62%, rgba(22, 163, 74, 0.12), transparent 26%),
+            linear-gradient(90deg, #050505 0%, #050505 38%, #080A09 100%);
+          padding: 88px 24px;
+          isolation: isolate;
+        }
+
+        .three-how-panel::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          z-index: -1;
+          background:
+            linear-gradient(90deg, rgba(0, 0, 0, 0.98) 0%, rgba(0, 0, 0, 0.92) 31%, rgba(0, 0, 0, 0.34) 72%, rgba(0, 0, 0, 0.72) 100%),
+            radial-gradient(circle at 87% 82%, rgba(22, 163, 74, 0.13), transparent 24%);
+        }
+
+        .three-how-copy {
+          position: relative;
+          z-index: 3;
+          width: 100%;
+          max-width: 430px;
+          min-width: 0;
+        }
+
+        .three-how-kicker {
+          display: inline-flex;
+          align-items: center;
+          gap: 14px;
+          color: #16a34a;
+          font-size: 18px;
+          font-weight: 800;
+          text-transform: uppercase;
+        }
+
+        .three-how-kicker span {
+          display: grid;
+          height: 42px;
+          min-width: 42px;
+          place-items: center;
+          border: 1px solid rgba(22, 163, 74, 0.82);
+          border-radius: 6px;
+          background: rgba(22, 163, 74, 0.08);
+          box-shadow: inset 0 0 20px rgba(22, 163, 74, 0.08);
+        }
+
+        .three-how-kicker strong {
+          font: inherit;
+          letter-spacing: 0;
+        }
+
+        .three-how-copy h2 {
+          margin-top: 36px;
+          max-width: 430px;
+          color: #FFFFFF;
+          font-size: 58px;
+          font-weight: 800;
+          line-height: 1.04;
+          letter-spacing: 0;
+        }
+
+        .three-how-copy h2 span {
+          color: #16a34a;
+        }
+
+        .three-how-copy > p {
+          margin-top: 18px;
+          max-width: 330px;
+          color: #a1a1aa;
+          font-size: 21px;
+          line-height: 1.42;
+        }
+
+        .three-how-feature-grid {
+          display: grid;
+          max-width: 430px;
+          margin-top: 36px;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 24px 22px;
+        }
+
+        .three-how-feature {
+          display: grid;
+          min-width: 0;
+          grid-template-columns: 50px 1fr;
+          align-items: center;
+          gap: 12px;
+        }
+
+        .three-how-feature > span {
+          display: grid;
+          height: 50px;
+          width: 50px;
+          place-items: center;
+          border: 1px solid rgba(255, 255, 255, 0.12);
+          border-radius: 5px;
+          background: rgba(18, 18, 18, 0.8);
+          color: #16a34a;
+          box-shadow: inset 0 0 24px rgba(22, 163, 74, 0.05);
+        }
+
+        .three-how-feature h3 {
+          color: #FFFFFF;
+          font-size: 15px;
+          font-weight: 800;
+          line-height: 1.1;
+        }
+
+        .three-how-feature p {
+          margin-top: 5px;
+          color: #a1a1aa;
+          font-size: 12px;
+          font-weight: 600;
+          line-height: 1.25;
+        }
+
+        .three-how-visual {
+          position: relative;
+          z-index: 2;
+          min-height: 450px;
+        }
+
+        .three-how-visual img {
+          position: absolute;
+          display: block;
+          object-fit: contain;
+          filter: drop-shadow(0 22px 38px rgba(0, 0, 0, 0.45));
+          user-select: none;
+          pointer-events: none;
+        }
+
+        .three-how-phone {
+          left: 2%;
+          bottom: 56px;
+          z-index: 2;
+          width: 24%;
+          max-height: 390px;
+          object-position: center bottom;
+        }
+
+        .three-how-laptop {
+          left: 18%;
+          top: 7%;
+          z-index: 1;
+          width: 68%;
+          max-height: 320px;
+          object-position: center;
+        }
+
+        .three-how-payment {
+          right: 4%;
+          bottom: 46px;
+          z-index: 3;
+          width: 18%;
+          max-height: 390px;
+          object-position: center bottom;
+        }
+
+        .three-how-strip {
+          position: absolute;
+          left: 35%;
+          right: 2.5%;
+          bottom: 88px;
+          z-index: 4;
+          display: grid;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          overflow: hidden;
+          border: 1px solid rgba(255, 255, 255, 0.14);
+          border-radius: 8px;
+          background: rgba(18, 18, 18, 0.76);
+          box-shadow: 0 18px 50px rgba(0, 0, 0, 0.32);
+          backdrop-filter: blur(16px);
+        }
+
+        .three-how-strip div {
+          position: relative;
+          display: flex;
+          min-height: 62px;
+          align-items: center;
+          justify-content: center;
+          gap: 14px;
+          padding: 13px 18px;
+          color: #FFFFFF;
+          font-size: 14px;
+          font-weight: 800;
+        }
+
+        .three-how-strip svg {
+          color: #16a34a;
+        }
+
+        .three-how-divider {
+          display: none;
+        }
+
+        .three-how-strip div + div::before {
+          content: '';
+          position: absolute;
+          left: 0;
+          top: 14px;
+          bottom: 14px;
+          width: 1px;
+          background: rgba(255, 255, 255, 0.18);
+        }
+
         .charger-eyebrow {
           margin-bottom: 18px;
           color: #16a34a;
@@ -1283,6 +1806,10 @@ function ThreeKwChargerPage() {
           color: #C7C7C7;
           font-size: 21px;
           line-height: 1.45;
+        }
+
+        .charger-env-use-cases {
+          margin-top: 64px;
         }
 
         .charger-env-tabs {
@@ -1472,7 +1999,7 @@ function ThreeKwChargerPage() {
           content: '';
           display: block;
           aspect-ratio: 0.74;
-          background: url('/img/3kw-charger/smart-3kw-charger.png') center / cover;
+          background: url('https://res.cloudinary.com/diywraupt/image/upload/v1780392810/7Watt22W_zdchgq.png') center / cover;
           border-radius: 20px;
         }
 
@@ -1494,6 +2021,19 @@ function ThreeKwChargerPage() {
         .three-panel h3 {
           font-size: 29px;
           font-weight: 900;
+        }
+
+        .three-spec-panel,
+        .three-setup-panel {
+          grid-column: 1 / -1;
+        }
+
+        .three-spec-panel {
+          border-color: rgba(22, 163, 74, 0.78);
+          background:
+            radial-gradient(circle at 48% 12%, rgba(255, 255, 255, 0.04), transparent 24%),
+            linear-gradient(145deg, rgba(15, 18, 19, 0.92), rgba(4, 5, 6, 0.96));
+          padding: 46px 42px 34px;
         }
 
         .three-compare-panel {
@@ -1534,10 +2074,32 @@ function ThreeKwChargerPage() {
         }
 
         .three-pricing-panel p {
-          margin-top: 28px;
+          margin-top: 18px;
           color: #C7C7C7;
           font-size: 20px;
           line-height: 1.45;
+        }
+
+        .three-price {
+          display: flex;
+          align-items: baseline;
+          gap: 10px;
+          margin-top: 22px;
+          color: #FFFFFF;
+        }
+
+        .three-price span {
+          color: #16a34a;
+          font-size: 18px;
+          font-weight: 800;
+          letter-spacing: 0;
+        }
+
+        .three-price strong {
+          font-size: clamp(42px, 5vw, 64px);
+          font-weight: 900;
+          line-height: 0.95;
+          letter-spacing: 0;
         }
 
         .three-check-list {
@@ -1576,78 +2138,191 @@ function ThreeKwChargerPage() {
           gap: 20px;
         }
 
+        .three-spec-title-row {
+          align-items: flex-start;
+        }
+
+        .three-spec-title-row svg {
+          height: 52px;
+          width: 52px;
+        }
+
+        .three-spec-title-row h3 {
+          position: relative;
+          padding-bottom: 22px;
+        }
+
+        .three-spec-title-row h3::after {
+          content: '';
+          position: absolute;
+          left: 0;
+          bottom: 0;
+          height: 3px;
+          width: 56px;
+          background: #16a34a;
+        }
+
+        .three-spec-columns {
+          display: grid;
+          margin-top: 30px;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 42px;
+        }
+
         .three-spec-list {
           display: grid;
-          margin-top: 26px;
         }
 
         .three-spec-list div {
           display: grid;
-          grid-template-columns: 0.85fr 1.15fr;
-          border-top: 1px solid rgba(255, 255, 255, 0.13);
-          color: #D6D6D6;
-          font-size: 18px;
+          grid-template-columns: minmax(0, 1.35fr) minmax(140px, 0.85fr);
+          align-items: center;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.13);
+          color: #E8E8E8;
+          font-size: 15px;
         }
 
         .three-spec-list span,
         .three-spec-list strong {
-          padding: 14px 0;
+          min-height: 32px;
+          padding: 7px 0;
+        }
+
+        .three-spec-list span {
+          position: relative;
+          padding-left: 22px;
+        }
+
+        .three-spec-list span::before {
+          content: '';
+          position: absolute;
+          left: 4px;
+          top: 50%;
+          height: 6px;
+          width: 6px;
+          transform: translateY(-50%);
+          border-radius: 999px;
+          background: #16a34a;
         }
 
         .three-spec-list strong {
           border-left: 1px solid rgba(255, 255, 255, 0.13);
-          padding-left: 24px;
+          padding-left: 30px;
           color: #FFFFFF;
-          font-weight: 500;
+          font-weight: 800;
         }
 
-        .three-spec-list div:first-child strong {
+        .three-spec-list div.is-highlight strong {
           color: #16a34a;
           font-weight: 900;
+        }
+
+        .three-setup-panel {
+          padding: 30px 38px 24px;
+          background:
+            radial-gradient(circle at 50% 20%, rgba(255, 255, 255, 0.04), transparent 26%),
+            linear-gradient(145deg, rgba(15, 18, 19, 0.9), rgba(5, 6, 7, 0.96));
+        }
+
+        .three-setup-title-row {
+          justify-content: center;
+          gap: 24px;
+        }
+
+        .three-setup-title-row > span {
+          height: 2px;
+          width: 42px;
+          background: #16a34a;
+        }
+
+        .three-setup-title-row svg {
+          height: 42px;
+          width: 42px;
         }
 
         .three-setup-list {
+          position: relative;
           display: grid;
-          margin-top: 26px;
-          gap: 14px;
+          margin-top: 36px;
+          grid-template-columns: repeat(4, minmax(0, 1fr));
+          gap: 34px;
+        }
+
+        .three-setup-list::before {
+          content: '';
+          position: absolute;
+          left: 24px;
+          right: 8%;
+          top: 38px;
+          border-top: 2px dashed rgba(22, 163, 74, 0.85);
         }
 
         .three-setup-step {
+          position: relative;
           display: grid;
-          grid-template-columns: 56px 1fr;
-          align-items: center;
-          gap: 18px;
+          justify-items: center;
+          padding-top: 54px;
+          text-align: center;
         }
 
         .three-step-number {
+          position: absolute;
+          top: 18px;
+          left: 0;
+          z-index: 2;
           display: grid;
-          height: 52px;
-          width: 52px;
+          height: 40px;
+          width: 40px;
           place-items: center;
-          border: 1px solid #16a34a;
+          border: 2px solid #16a34a;
           border-radius: 999px;
+          background: #07120d;
           color: #16a34a;
-          font-size: 22px;
+          font-size: 18px;
           font-weight: 900;
         }
 
+        .three-setup-icon {
+          position: absolute;
+          top: -2px;
+          left: 50%;
+          z-index: 2;
+          display: grid;
+          height: 86px;
+          width: 86px;
+          transform: translateX(-50%);
+          place-items: center;
+          border: 2px solid rgba(255, 255, 255, 0.14);
+          border-radius: 999px;
+          background: rgba(18, 18, 18, 0.92);
+          color: #16a34a;
+        }
+
         .three-setup-step > div {
-          display: flex;
-          min-height: 88px;
-          align-items: center;
-          gap: 24px;
+          width: 100%;
+          min-height: 146px;
           border: 1px solid rgba(255, 255, 255, 0.13);
           border-radius: 12px;
-          padding: 20px 24px;
+          padding: 50px 28px 22px;
+          background: rgba(10, 12, 13, 0.72);
         }
 
         .three-setup-step svg {
           color: #16a34a;
         }
 
+        .three-setup-step h4 {
+          color: #FFFFFF;
+          font-size: 17px;
+          font-weight: 900;
+          line-height: 1.2;
+        }
+
         .three-setup-step p {
+          margin-top: 12px;
           color: #D6D6D6;
-          font-size: 21px;
+          font-size: 15px;
+          line-height: 1.45;
         }
 
         .three-reliability-strip {
@@ -1822,6 +2497,236 @@ function ThreeKwChargerPage() {
           font-size: 20px;
         }
 
+        .host-who-section-wrap {
+          padding: 0 24px 80px;
+          max-width: 1300px;
+          margin: 0 auto;
+        }
+
+        .host-who-strip {
+          margin-top: 0;
+          display: grid;
+          grid-template-columns: minmax(260px, 0.92fr) 1px repeat(3, minmax(120px, 0.58fr)) minmax(160px, 0.72fr);
+          align-items: center;
+          gap: 26px;
+          overflow: hidden;
+          min-height: 150px;
+          border: 1px solid rgba(255, 255, 255, 0.12);
+          border-radius: 16px;
+          background: linear-gradient(90deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02)), rgba(17, 17, 17, 0.76);
+          box-shadow: inset 0 0 36px rgba(255, 255, 255, 0.03);
+          backdrop-filter: blur(14px);
+          padding: 22px 22px 22px 38px;
+        }
+
+        .host-who-strip-title {
+          align-self: center;
+          color: #FFFFFF;
+          font-size: clamp(26px, 2.1vw, 38px);
+          font-weight: 800;
+          line-height: 1.18;
+          letter-spacing: 0;
+        }
+
+        .host-rotating-text {
+          display: inline-flex;
+          width: max-content;
+          min-width: 5.2ch;
+          align-items: center;
+          flex-wrap: nowrap;
+          overflow: hidden;
+          background: #16a34a;
+          color: #FFFFFF;
+          border-radius: 8px;
+          padding: 0.05em 0.22em 0.1em;
+          line-height: 1;
+          white-space: nowrap;
+          vertical-align: bottom;
+        }
+
+        .host-rotating-text .text-rotate,
+        .host-rotating-text .text-rotate-word { flex-wrap: nowrap; }
+
+        .host-rotating-text .text-rotate-element { color: #FFFFFF; }
+
+        .host-rotating-text-split {
+          overflow: hidden;
+          padding-bottom: 0.04em;
+        }
+
+        .host-who-divider {
+          height: 78px;
+          width: 1px;
+          background: rgba(255, 255, 255, 0.14);
+        }
+
+        .host-who-benefit {
+          display: grid;
+          justify-items: center;
+          gap: 10px;
+          text-align: center;
+        }
+
+        .host-who-benefit-icon {
+          display: grid;
+          height: 54px;
+          width: 54px;
+          place-items: center;
+          border-radius: 999px;
+          background: rgba(22, 163, 74, 0.1);
+          color: #16a34a;
+        }
+
+        .host-who-benefit h4 { color: #FFFFFF; font-size: 14px; font-weight: 800; line-height: 1.1; }
+        .host-who-benefit p { color: #a1a1aa; font-size: 12px; font-weight: 600; line-height: 1.25; }
+
+        .host-who-actions { display: grid; gap: 12px; justify-items: stretch; }
+
+        .host-who-primary { min-height: 56px; border-radius: 7px; font-size: 16px; }
+
+        .host-expand-button {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          gap: 10px;
+          min-height: 48px;
+          border: 1px solid rgba(255, 255, 255, 0.12);
+          border-radius: 7px;
+          background: transparent;
+          color: #FFFFFF;
+          font-size: 14px;
+          font-weight: 700;
+          cursor: pointer;
+          transition: border-color 0.2s, color 0.2s;
+          padding: 0 16px;
+        }
+
+        .host-expand-button:hover { border-color: #16a34a; color: #16a34a; }
+
+        .host-collapse-button {
+          position: absolute;
+          top: 20px;
+          right: 20px;
+          display: grid;
+          height: 36px;
+          width: 36px;
+          place-items: center;
+          border: 1px solid rgba(255, 255, 255, 0.14);
+          border-radius: 999px;
+          background: rgba(20, 20, 20, 0.72);
+          color: #FFFFFF;
+          cursor: pointer;
+          z-index: 10;
+          transition: border-color 0.2s;
+        }
+
+        .host-collapse-button:hover { border-color: #16a34a; }
+
+        .host-partners-section {
+          position: relative;
+          overflow: hidden;
+          border-top: 1px solid #123327;
+          padding: 96px 0 80px;
+          background: radial-gradient(circle at 86% 32%, rgba(22, 163, 74, 0.2), transparent 24%), linear-gradient(115deg, #030403 0%, #06100d 50%, #020403 100%);
+        }
+
+        .host-partners-bolt {
+          position: absolute;
+          z-index: -1;
+          right: -80px;
+          top: -72px;
+          width: 520px;
+          height: 760px;
+          opacity: 0.56;
+          pointer-events: none;
+          filter: drop-shadow(0 0 18px rgba(22, 163, 74, 0.75)) drop-shadow(0 0 54px rgba(22, 163, 74, 0.35));
+        }
+
+        .host-partners-bolt::before, .host-partners-bolt::after {
+          content: '';
+          position: absolute;
+          inset: 0;
+          clip-path: polygon(58% 0, 96% 0, 70% 39%, 100% 39%, 32% 100%, 54% 52%, 22% 52%);
+        }
+
+        .host-partners-bolt::before { background: linear-gradient(160deg, rgba(22, 163, 74, 0.95), rgba(22, 163, 74, 0.12)); }
+        .host-partners-bolt::after { inset: 4px; background: linear-gradient(115deg, #030403 0%, #06100d 55%, #020403 100%); opacity: 0.92; }
+
+        .host-partners-bolt-soft {
+          position: absolute;
+          right: 0;
+          top: 0;
+          z-index: -2;
+          width: 48vw;
+          height: 100%;
+          background: radial-gradient(ellipse at 62% 50%, rgba(22, 163, 74, 0.22), transparent 46%), linear-gradient(90deg, transparent, rgba(22, 163, 74, 0.08));
+          pointer-events: none;
+        }
+
+        .host-partners-eyebrow {
+          color: #16a34a;
+          font-size: 14px;
+          font-weight: 850;
+          text-transform: uppercase;
+          margin-bottom: 28px;
+        }
+
+        .host-partners-title {
+          color: #FFFFFF;
+          font-size: clamp(36px, 3.5vw, 58px);
+          font-weight: 850;
+          line-height: 1.08;
+        }
+
+        .host-partners-title span { color: #16a34a; }
+
+        .host-partners-copy {
+          margin-top: 20px;
+          color: #a1a1aa;
+          font-size: clamp(17px, 1.35vw, 22px);
+          line-height: 1.45;
+        }
+
+        .host-partner-logo-grid {
+          margin-top: 56px;
+          display: grid;
+          grid-template-columns: repeat(5, minmax(0, 1fr));
+          gap: 16px;
+        }
+
+        .host-partner-logo-card {
+          display: grid;
+          height: 140px;
+          place-items: center;
+          border: 1px solid rgba(22, 163, 74, 0.35);
+          border-radius: 11px;
+          background: radial-gradient(circle at 50% 0%, rgba(22, 163, 74, 0.14), transparent 42%), rgba(3, 10, 9, 0.72);
+          padding: 28px;
+          transition: border-color 0.25s, transform 0.25s;
+        }
+
+        .host-partner-logo-card:hover { border-color: rgba(22, 163, 74, 0.82); transform: translateY(-2px); }
+
+        .host-partner-logo-card img { max-height: 60px; max-width: 100%; object-fit: contain; opacity: 0.88; }
+        .host-partner-logo-card img.is-inverted { filter: grayscale(1) invert(1) brightness(1.75); }
+
+        .host-partners-action { margin-top: 40px; }
+
+        .host-stories-section {
+          padding: 80px 0;
+          border-top: 1px solid rgba(255, 255, 255, 0.10);
+          background: #050606;
+        }
+
+        .host-stories-container {
+          max-width: 1300px;
+          margin: 0 auto;
+          padding: 0 24px;
+        }
+
+        .host-stories { scrollbar-width: none; }
+        .host-stories::-webkit-scrollbar { display: none; }
+
         @media (max-width: 980px) {
           .three-hero-grid,
           .three-decision-grid,
@@ -1869,13 +2774,129 @@ function ThreeKwChargerPage() {
           .three-hero-benefits,
           .three-quick-grid,
           .three-audience-grid,
+          .three-how-feature-grid,
           .charger-env-tabs,
           .three-recommendation-card {
             grid-template-columns: 1fr;
           }
 
+          .three-hero-benefit {
+            min-height: auto;
+            grid-template-columns: 54px minmax(0, 1fr);
+            gap: 14px;
+            padding: 18px;
+          }
+
+          .three-hero-benefit > svg {
+            height: 50px;
+            width: 50px;
+            padding: 14px;
+          }
+
+          .three-hero-benefit h3 {
+            font-size: 18px;
+          }
+
+          .three-hero-benefit p {
+            margin-top: 8px;
+            font-size: 14px;
+          }
+
           .three-info-card {
             min-height: 220px;
+          }
+
+          .three-how-panel {
+            display: block;
+            height: auto;
+            min-height: auto;
+            margin-top: 34px;
+            border-radius: 14px;
+            padding: 64px 18px;
+          }
+
+          .three-how-copy {
+            max-width: 100%;
+          }
+
+          .three-how-kicker {
+            font-size: 16px;
+          }
+
+          .three-how-kicker span {
+            height: 38px;
+            min-width: 38px;
+            font-size: 16px;
+          }
+
+          .three-how-copy h2 {
+            margin-top: 28px;
+            font-size: 39px;
+          }
+
+          .three-how-copy > p {
+            max-width: 320px;
+            font-size: 17px;
+          }
+
+          .three-how-feature-grid {
+            grid-template-columns: 1fr;
+            gap: 16px;
+          }
+
+          .three-how-feature {
+            grid-template-columns: 48px minmax(0, 1fr);
+          }
+
+          .three-how-feature > span {
+            height: 46px;
+            width: 46px;
+          }
+
+          .three-how-visual {
+            margin-top: 42px;
+            min-height: 360px;
+          }
+
+          .three-how-phone {
+            left: -10px;
+            bottom: 42px;
+            width: 32%;
+            max-height: 260px;
+          }
+
+          .three-how-laptop {
+            left: 16%;
+            top: 20px;
+            width: 82%;
+            max-height: 210px;
+          }
+
+          .three-how-payment {
+            right: 4px;
+            bottom: 44px;
+            width: 26%;
+            max-height: 250px;
+          }
+
+          .three-how-strip {
+            position: relative;
+            left: auto;
+            right: auto;
+            bottom: auto;
+            margin-top: 16px;
+            grid-template-columns: 1fr;
+          }
+
+          .three-how-strip div {
+            min-height: 56px;
+            justify-content: flex-start;
+          }
+
+          .three-how-strip div + div::before {
+            inset: 0 auto auto 18px;
+            width: calc(100% - 36px);
+            height: 1px;
           }
 
           .charger-env-tab {
@@ -1916,6 +2937,63 @@ function ThreeKwChargerPage() {
             display: none;
           }
 
+          .three-spec-panel,
+          .three-setup-panel {
+            padding: 24px;
+          }
+
+          .three-spec-columns {
+            grid-template-columns: 1fr;
+            gap: 0;
+          }
+
+          .three-spec-list div {
+            grid-template-columns: 1fr;
+          }
+
+          .three-spec-list strong {
+            border-left: 0;
+            padding-left: 22px;
+            padding-top: 0;
+          }
+
+          .three-setup-title-row {
+            gap: 14px;
+          }
+
+          .three-setup-title-row > span {
+            width: 28px;
+          }
+
+          .three-setup-list {
+            grid-template-columns: 1fr;
+            gap: 22px;
+          }
+
+          .three-setup-list::before {
+            display: none;
+          }
+
+          .three-setup-step {
+            padding-top: 44px;
+          }
+
+          .three-step-number {
+            left: 0;
+            top: 10px;
+          }
+
+          .three-setup-icon {
+            left: 50%;
+            height: 72px;
+            width: 72px;
+          }
+
+          .three-setup-step > div {
+            min-height: auto;
+            padding: 48px 20px 22px;
+          }
+
           .three-reliability-strip {
             grid-template-columns: 1fr;
           }
@@ -1928,6 +3006,22 @@ function ThreeKwChargerPage() {
           .three-final-cta {
             padding: 24px;
           }
+
+          .host-who-strip {
+            grid-template-columns: 1fr;
+            gap: 18px;
+            padding: 20px;
+          }
+
+          .host-who-divider { display: none; }
+
+          .host-who-strip-title {
+            font-size: 28px;
+          }
+
+          .host-partner-logo-grid {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+          }
         }
       `}</style>
 
@@ -1937,6 +3031,137 @@ function ThreeKwChargerPage() {
         <EnvironmentSection />
         <DecisionSection />
         <UseCasesRecommendationFaq />
+
+        <div className="host-who-section-wrap">
+          <Reveal className="host-who-strip">
+            <h3 className="host-who-strip-title">
+              You set the
+              <br />
+              <RotatingText
+                texts={hostRotatingWords}
+                mainClassName="host-rotating-text"
+                staggerFrom="last"
+                initial={{ y: "100%" }}
+                animate={{ y: 0 }}
+                exit={{ y: "-120%" }}
+                staggerDuration={0.025}
+                splitLevelClassName="host-rotating-text-split"
+                transition={{ type: "spring", damping: 30, stiffness: 400 }}
+                rotationInterval={2000}
+                splitBy="characters"
+                auto
+                loop
+              />
+            </h3>
+            <span className="host-who-divider" />
+            {hostWhoBenefits.map((item) => (
+              <div className="host-who-benefit" key={item.title}>
+                <span className="host-who-benefit-icon">
+                  <Icon name={item.icon} className="h-6 w-6" />
+                </span>
+                <span>
+                  <h4>{item.title}</h4>
+                  <p>{item.copy}</p>
+                </span>
+              </div>
+            ))}
+            <div className="host-who-actions">
+              <PrimaryButton href="/contact-us" className="host-who-primary">
+                Get started
+              </PrimaryButton>
+              {!showHostingSections ? (
+                <button
+                  type="button"
+                  className="host-expand-button"
+                  onClick={() => setShowHostingSections(true)}
+                >
+                  View host stories
+                  <Icon name="arrow" className="h-4 w-4" />
+                </button>
+              ) : null}
+            </div>
+          </Reveal>
+        </div>
+
+        <AnimatePresence initial={false}>
+          {showHostingSections ? (
+            <ShutterExpand key="hosting-sections">
+              <section className="host-partners-section">
+                <button
+                  type="button"
+                  className="host-collapse-button"
+                  aria-label="Collapse host stories"
+                  onClick={() => setShowHostingSections(false)}
+                >
+                  <IoClose className="h-6 w-6" aria-hidden="true" />
+                </button>
+                <span className="host-partners-bolt" aria-hidden="true" />
+                <span className="host-partners-bolt-soft" aria-hidden="true" />
+                <div className="host-stories-container">
+                  <Reveal>
+                    <p className="host-partners-eyebrow">Already hosting</p>
+                    <h2 className="host-partners-title">
+                      Businesses use Zvolta chargers to earn and support
+                      sustainability<span>.</span>
+                    </h2>
+                    <p className="host-partners-copy">
+                      Partner sites get app visibility, cleaner customer service, and a practical ESG action.
+                    </p>
+                  </Reveal>
+                  <Reveal className="host-partner-logo-grid" delay={0.08}>
+                    {chargerPartnerLogos.map((logo) => (
+                      <div className="host-partner-logo-card" key={logo.alt}>
+                        <img
+                          src={logo.src}
+                          alt={logo.alt}
+                          className={logo.invert ? "is-inverted" : ""}
+                        />
+                      </div>
+                    ))}
+                  </Reveal>
+                  <Reveal className="host-partners-action">
+                    <SmartLink
+                      href="/host"
+                      className="inline-flex min-h-12 items-center justify-center gap-2 rounded-lg border border-white/10 bg-[#111111] px-5 py-3 text-sm font-semibold text-white transition duration-300 hover:scale-[1.02] hover:border-[#16a34a]/50"
+                    >
+                      Explore hosting
+                      <Icon name="arrow" className="h-4 w-4" />
+                    </SmartLink>
+                  </Reveal>
+                </div>
+              </section>
+
+              <section className="host-stories-section">
+                <div className="host-stories-container">
+                  <p className="mb-2 text-xs font-semibold uppercase text-[#16a34a]">Real stories</p>
+                  <h2 className="text-[32px] font-semibold leading-tight text-white md:text-[36px]">
+                    How hosts use charging to create site value.
+                  </h2>
+                  <div className="host-stories mt-10 flex snap-x gap-6 overflow-x-auto pb-4">
+                    {chargerStories.map((story, index) => (
+                      <Reveal key={story.title} delay={index * 0.05}>
+                        <article className="w-[300px] shrink-0 snap-start overflow-hidden rounded-lg border border-white/10 bg-zinc-900 sm:w-[370px]">
+                          <img src={story.image} alt="" className="h-52 w-full object-cover" />
+                          <div className="p-6">
+                            <p className="text-xs font-semibold uppercase text-[#16a34a]">{story.category}</p>
+                            <h3 className="mt-3 text-[22px] font-semibold leading-tight text-white">{story.title}</h3>
+                          </div>
+                        </article>
+                      </Reveal>
+                    ))}
+                  </div>
+                  <SmartLink
+                    href="/host"
+                    className="mt-8 inline-flex min-h-12 items-center justify-center gap-2 rounded-lg border border-white/10 bg-[#111111] px-5 py-3 text-sm font-semibold text-white transition duration-300 hover:scale-[1.02] hover:border-[#16a34a]/50"
+                  >
+                    Explore stories
+                    <Icon name="arrow" className="h-4 w-4" />
+                  </SmartLink>
+                </div>
+              </section>
+            </ShutterExpand>
+          ) : null}
+        </AnimatePresence>
       </div>
     </>
   );

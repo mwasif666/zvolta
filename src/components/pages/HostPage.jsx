@@ -35,9 +35,6 @@ const chargerOptionCards = [
     description: "Best for small spaces and low usage.",
     href: "/3kw-charger",
     features: [],
-    image:
-      "https://res.cloudinary.com/diywraupt/image/upload/v1780392810/7Watt22W_zdchgq.png",
-    imageSize: "small",
     power: "Upto 3kW",
     bestFor: "Two-Wheelers & Four-Wheelers",
     location: "Homes, Shops & Small Offices",
@@ -678,6 +675,7 @@ const heroHighlights = [
   { icon: "phone", title: "App and", description: "dashboard" },
   { icon: "bolt", title: "Set price", description: "and timings" },
   { icon: "shield", title: "Local", description: "support" },
+  { icon: "flag", title: "100% Made in", description: "Pakistan" },
 ];
 
 const whyHostCards = [
@@ -764,6 +762,15 @@ function Icon({ name, className = "h-5 w-5" }) {
     return (
       <svg {...props}>
         <path d="m5 12 4 4L19 6" />
+      </svg>
+    );
+  }
+
+  if (name === "flag") {
+    return (
+      <svg {...props}>
+        <path d="M5 21V4" />
+        <path d="M5 5.5c2.8-1.4 5.2-1.4 8 0 2.1 1 3.8.9 6-.3v9.1c-2.2 1.2-3.9 1.3-6 .3-2.8-1.4-5.2-1.4-8 0" />
       </svg>
     );
   }
@@ -1929,26 +1936,29 @@ export default function HostPage() {
         .host-hero-feature-strip {
           position: absolute;
           left: 50%;
-          bottom: 30px;
+          bottom: 42px;
           display: grid;
-          width: min(960px, calc(100vw - 48px));
-          grid-template-columns: repeat(5, minmax(0, 1fr));
+          width: min(1780px, calc(100vw - 128px));
+          grid-template-columns: repeat(6, minmax(0, 1fr));
           transform: translateX(-50%);
           overflow: hidden;
           border: 1px solid rgba(255, 255, 255, 0.14);
           border-radius: 8px;
-          background: rgba(24, 24, 24, 0.76);
-          box-shadow: 0 18px 55px rgba(0, 0, 0, 0.32);
-          backdrop-filter: blur(18px);
+          background:
+            linear-gradient(180deg, rgba(34, 34, 34, 0.82), rgba(18, 18, 18, 0.82));
+          box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.08),
+            0 18px 55px rgba(0, 0, 0, 0.34);
+          backdrop-filter: blur(16px);
         }
 
         .host-hero-feature {
           position: relative;
           display: flex;
-          min-height: 82px;
+          min-height: 84px;
           align-items: center;
-          gap: 14px;
-          padding: 17px 22px;
+          gap: 16px;
+          padding: 18px 24px;
         }
 
         .host-hero-feature + .host-hero-feature::before {
@@ -1967,10 +1977,61 @@ export default function HostPage() {
           width: 48px;
           flex: 0 0 auto;
           place-items: center;
-          border: 1px solid rgba(22, 163, 74, 0.42);
+          border: 1px solid rgba(22, 163, 74, 0.38);
           border-radius: 999px;
-          background: rgba(22, 163, 74, 0.08);
+          background: rgba(22, 163, 74, 0.12);
           color: #16a34a;
+        }
+
+        .host-hero-feature-text {
+          min-width: 0;
+          color: #FFFFFF;
+          font-size: 16px;
+          font-weight: 700;
+          line-height: 1.24;
+          white-space: nowrap;
+        }
+
+        .host-hero-feature-text span {
+          display: block;
+          white-space: nowrap;
+        }
+
+        .host-hero-feature-text span:first-child {
+          color: #a1a1aa;
+          font-size: 14px;
+          font-weight: 650;
+        }
+
+        @media (max-width: 1500px) {
+          .host-hero-feature-strip {
+            width: calc(100vw - 64px);
+          }
+
+          .host-hero-feature {
+            gap: 10px;
+            padding: 16px 12px;
+          }
+
+          .host-hero-icon {
+            height: 40px;
+            width: 40px;
+          }
+
+          .host-hero-feature-icon svg,
+          .host-hero-icon svg {
+            height: 21px;
+            width: 21px;
+          }
+
+          .host-hero-feature-text {
+            font-size: 14px;
+            line-height: 1.18;
+          }
+
+          .host-hero-feature-text span:first-child {
+            font-size: 13px;
+          }
         }
 
         .host-payments-section {
@@ -4822,6 +4883,19 @@ export default function HostPage() {
         }
 
         @media (max-width: 1180px) {
+          .host-hero-feature-strip {
+            width: min(900px, calc(100vw - 48px));
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+          }
+
+          .host-hero-feature:nth-child(4)::before {
+            display: none;
+          }
+
+          .host-hero-feature:nth-child(n + 4) {
+            border-top: 1px solid rgba(255, 255, 255, 0.14);
+          }
+
           .host-where-section {
             min-height: auto;
           }
@@ -5230,6 +5304,10 @@ export default function HostPage() {
             display: none;
           }
 
+          .host-hero-feature:nth-child(n + 4) {
+            border-top: 0;
+          }
+
           .host-hero-feature:nth-child(odd)::after {
             content: '';
             position: absolute;
@@ -5244,11 +5322,6 @@ export default function HostPage() {
             border-top: 1px solid rgba(255, 255, 255, 0.14);
           }
 
-          .host-hero-feature:last-child {
-            grid-column: span 2;
-            justify-content: center;
-          }
-
           .host-hero-feature:last-child::after {
             display: none;
           }
@@ -5258,9 +5331,13 @@ export default function HostPage() {
             width: 40px;
           }
 
-          .host-hero-feature .min-w-0 {
-            font-size: 14px;
-            line-height: 1.22;
+          .host-hero-feature-text {
+            font-size: 13px;
+            line-height: 1.2;
+          }
+
+          .host-hero-feature-text span:first-child {
+            font-size: 12px;
           }
 
           .host-payments-section {
@@ -5702,9 +5779,9 @@ export default function HostPage() {
                 <span className="host-hero-icon">
                   <Icon name={item.icon} className="h-6 w-6" />
                 </span>
-                <span className="min-w-0 text-[15px] font-semibold leading-5 text-white">
-                  <span className="block text-zinc-400">{item.title}</span>
-                  <span className="block">{item.description}</span>
+                <span className="host-hero-feature-text">
+                  <span>{item.title}</span>
+                  <span>{item.description}</span>
                 </span>
               </div>
             ))}
@@ -5757,17 +5834,19 @@ export default function HostPage() {
                           <h3>{charger.title}</h3>
                           <p>{charger.description}</p>
                         </div>
-                        <div className="host-charger-art">
-                          <img
-                            src={charger.image}
-                            alt={`${charger.title} product`}
-                            className={`host-charger-image ${
-                              charger.imageSize === "large"
-                                ? "is-large"
-                                : "is-small"
-                            }`}
-                          />
-                        </div>
+                        {charger.image ? (
+                          <div className="host-charger-art">
+                            <img
+                              src={charger.image}
+                              alt={`${charger.title} product`}
+                              className={`host-charger-image ${
+                                charger.imageSize === "large"
+                                  ? "is-large"
+                                  : "is-small"
+                              }`}
+                            />
+                          </div>
+                        ) : null}
                         <div className="host-charger-feature-list">
                           {charger.features.map((feature) => (
                             <div className="host-charger-feature" key={feature}>
@@ -6212,7 +6291,7 @@ export default function HostPage() {
                         className="h-4 w-4"
                       />
                       <span>
-                        {mode === "problems" ? "Problems" : "Benefits"}
+                        {mode === "problems" ? "Problems" : "Solutions"}
                       </span>
                     </button>
                   ))}

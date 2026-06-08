@@ -111,13 +111,15 @@ function Icon({ name, size = 24, className = "" }) {
 
 function GooglePlayMark() {
   return (
-    <svg
-      viewBox="0 0 40 44"
-      className="appstore-play-icon"
-      aria-hidden="true"
-    >
-      <path fill="#34A853" d="M2.3 1.5 24 22 2.3 42.5A4 4 0 0 1 0 38.9V5.1a4 4 0 0 1 2.3-3.6Z" />
-      <path fill="#FBBC04" d="m24 22 6.2-5.9 7.5 4.3a2 2 0 0 1 0 3.2l-7.5 4.3L24 22Z" />
+    <svg viewBox="0 0 40 44" className="appstore-play-icon" aria-hidden="true">
+      <path
+        fill="#34A853"
+        d="M2.3 1.5 24 22 2.3 42.5A4 4 0 0 1 0 38.9V5.1a4 4 0 0 1 2.3-3.6Z"
+      />
+      <path
+        fill="#FBBC04"
+        d="m24 22 6.2-5.9 7.5 4.3a2 2 0 0 1 0 3.2l-7.5 4.3L24 22Z"
+      />
       <path fill="#4285F4" d="M2.3 1.5 30.2 16.1 24 22 2.3 1.5Z" />
       <path fill="#EA4335" d="M2.3 42.5 24 22l6.2 5.9L2.3 42.5Z" />
     </svg>
@@ -615,8 +617,8 @@ export default function AppstorePage() {
               <span>Is Almost Here.</span>
             </h1>
             <p className="appstore-copy">
-              Smarter charging. Seamless experience. Everything you need, in
-              one powerful app.
+              Smart charging. Seamless experience. Everything you need, in one
+              powerful app.
             </p>
 
             <div className="appstore-actions">

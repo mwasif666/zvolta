@@ -1346,7 +1346,7 @@ export default function SoftwarePage() {
         <section className="software-smart-section border-b border-[#1F1F1F] py-[120px]">
           <div className="software-container">
             <SectionIntro
-              eyebrow="Make any charger smarter"
+              eyebrow="Make any charger Smart"
               title="A normal charger only gives power."
               copy="With Zvolta software, it can connect to the app, start sessions with QR, handle payments, show live status, and send data to a dashboard. This is smart EV charger software for real charging operations."
             />

@@ -311,6 +311,11 @@ const environmentTabs = [
     points: ["Controlled access", "Session visibility", "Easy expansion"],
     accordions: [
       [
+        "Automated Payment via Zvolta App",
+        "Users pay cashlessly through the Zvolta app no cash handling needed.",
+        "wallet",
+      ],
+      [
         "Smart Software Included",
         "Monitor charging activity, track usage, and manage multiple users from one connected system.",
         "phone",
@@ -346,6 +351,11 @@ const environmentTabs = [
     cardTitle: "Best for visitor and light public use",
     points: ["Simple access", "Monitored usage", "Supported setup"],
     accordions: [
+      [
+        "Automated Payment via Zvolta App",
+        "Users pay cashlessly through the Zvolta app no cash handling needed.",
+        "wallet",
+      ],
       [
         "Smart Software Included",
         "Keep visibility on charging sessions, usage patterns, and charger activity without needing a complex system.",
@@ -707,6 +717,12 @@ const decisionComparisonRows = [
   ],
   ["wifi", "Software", "Smart software included", "Varies by supplier"],
   [
+    "wallet",
+    "Payment Platform",
+    "Included with Zvolta Platform",
+    "Not Included",
+  ],
+  [
     "headset",
     "Support",
     "Local guidance and follow-up",
@@ -827,7 +843,7 @@ const threeKwFaqs = [
 
 const threeHeroBenefits = [
   ["shield", "Built-in Safety", "Overload & short circuit protection"],
-  ["wifi", "Smart Connectivity", "Monitor and control from anywhere"],
+  ["wallet", "Automated Payments", "Cashless payments via Zvolta platform"],
   ["leaf", "Energy Efficient", "Optimized for low power consumption"],
   ["bolt", "Universal Switch", "Charge anything"],
   [
@@ -844,7 +860,7 @@ function ThreeKwHero() {
         <div className="three-hero-copy">
           <p className="three-pill">
             <Icon name="bolt" className="h-4 w-4" />
-            3kW Power. Smarter Charging.
+            3kW Power. Smart Charging.
           </p>
           <h1>3kW Smart EV Charger</h1>
           <p className="three-hero-text">
@@ -1023,9 +1039,6 @@ function DecisionSection() {
           </article>
 
           <article className="three-panel three-pricing-panel">
-            <span className="three-card-icon">
-              <Icon name="dollar" className="h-10 w-10" />
-            </span>
             <h3>Pricing</h3>
             <div className="three-price">
               <span>PKR</span>
@@ -1097,6 +1110,9 @@ function DecisionSection() {
                 </div>
               ))}
             </div>
+            <p className="three-setup-tagline">
+              <span>From intent to earning in just 7 days.</span>
+            </p>
           </article>
         </div>
 
@@ -1106,7 +1122,7 @@ function DecisionSection() {
             Designed for everyday reliability. Built locally. Supported locally.
           </p>
           <span />
-          <strong>3kW Power. Smarter Charging.</strong>
+          <strong>3kW Power. Smart Charging.</strong>
         </div>
       </div>
     </section>
@@ -2318,6 +2334,29 @@ function ThreeKwChargerPage() {
           line-height: 1.2;
         }
 
+        .three-setup-tagline {
+          margin-top: 28px;
+          text-align: center;
+          font-size: 18px;
+          font-weight: 700;
+          color: #16a34a;
+          letter-spacing: 0.01em;
+        }
+
+        .three-setup-tagline span {
+          background: linear-gradient(90deg, #16a34a, #30e65d);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+        }
+
+        .three-setup-tagline-asterisk {
+          font-size: 13px;
+          vertical-align: super;
+          -webkit-text-fill-color: #16a34a;
+          color: #16a34a;
+        }
+
         .three-setup-step p {
           margin-top: 12px;
           color: #D6D6D6;
@@ -3105,7 +3144,8 @@ function ThreeKwChargerPage() {
                       sustainability<span>.</span>
                     </h2>
                     <p className="host-partners-copy">
-                      Partner sites get app visibility, cleaner customer service, and a practical ESG action.
+                      Partner sites get app visibility, cleaner customer
+                      service, and a practical ESG action.
                     </p>
                   </Reveal>
                   <Reveal className="host-partner-logo-grid" delay={0.08}>
@@ -3133,7 +3173,9 @@ function ThreeKwChargerPage() {
 
               <section className="host-stories-section">
                 <div className="host-stories-container">
-                  <p className="mb-2 text-xs font-semibold uppercase text-[#16a34a]">Real stories</p>
+                  <p className="mb-2 text-xs font-semibold uppercase text-[#16a34a]">
+                    Real stories
+                  </p>
                   <h2 className="text-[32px] font-semibold leading-tight text-white md:text-[36px]">
                     How hosts use charging to create site value.
                   </h2>
@@ -3141,10 +3183,18 @@ function ThreeKwChargerPage() {
                     {chargerStories.map((story, index) => (
                       <Reveal key={story.title} delay={index * 0.05}>
                         <article className="w-[300px] shrink-0 snap-start overflow-hidden rounded-lg border border-white/10 bg-zinc-900 sm:w-[370px]">
-                          <img src={story.image} alt="" className="h-52 w-full object-cover" />
+                          <img
+                            src={story.image}
+                            alt=""
+                            className="h-52 w-full object-cover"
+                          />
                           <div className="p-6">
-                            <p className="text-xs font-semibold uppercase text-[#16a34a]">{story.category}</p>
-                            <h3 className="mt-3 text-[22px] font-semibold leading-tight text-white">{story.title}</h3>
+                            <p className="text-xs font-semibold uppercase text-[#16a34a]">
+                              {story.category}
+                            </p>
+                            <h3 className="mt-3 text-[22px] font-semibold leading-tight text-white">
+                              {story.title}
+                            </h3>
                           </div>
                         </article>
                       </Reveal>

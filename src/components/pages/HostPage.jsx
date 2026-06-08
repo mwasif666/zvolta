@@ -42,7 +42,7 @@ const chargerOptionCards = [
     power: "Upto 3kW",
     bestFor: "Two-Wheelers & Four-Wheelers",
     location: "Homes, Shops & Small Offices",
-    price: "74,999 PKR",
+    price: "PKR 74,999",
   },
   {
     title: "7kW Charger",
@@ -55,7 +55,7 @@ const chargerOptionCards = [
     power: "Upto 7kW",
     bestFor: "Cars & Daily Charging",
     location: "Apartments, Workplaces & Commercial Spaces",
-    price: "199,999",
+    price: "PKR 199,999",
     popular: true,
   },
   {
@@ -69,7 +69,7 @@ const chargerOptionCards = [
     power: "Upto 22kW",
     bestFor: "High Traffic Charging",
     location: "Commercial, Public & Fleet Use",
-    price: "249,999",
+    price: "PKR 249,999",
   },
 ];
 
@@ -333,8 +333,8 @@ const hostWhereLocations = [
       ],
     },
     benefits: {
-      title: "Smarter Campus Charging",
-      footer: "Cleaner Campus. Smarter Parking. Stronger Reputation.",
+      title: "Smart Campus Charging",
+      footer: "Cleaner Campus. Smart Parking. Stronger Reputation.",
       footerIcon: "chart",
       items: [
         {
@@ -465,7 +465,7 @@ const hostWhereLocations = [
     },
     benefits: {
       title: "Smart Charging Hub",
-      footer: "Same Space. New Revenue. Smarter Parking.",
+      footer: "Same Space. New Revenue. Smart Parking.",
       footerIcon: "plug-check",
       items: [
         {
@@ -545,6 +545,8 @@ const hostWhoBenefits = [
 
 const hostRotatingWords = ["price.", "timings.", "access.", "earnings."];
 
+const hostHeroRotatingWords = ["charger.", "income.", "network.", "future."];
+
 const installationOptions = [
   {
     title: "Vertical wall",
@@ -610,7 +612,7 @@ const marketingPoints = [
 const pricingPlans = [
   {
     title: "3kW",
-    price: "74,999 PKR",
+    price: "PKR 74,999",
     detail: "Small sites and EV bikes",
     href: "/3kw-charger",
   },
@@ -1918,6 +1920,33 @@ export default function HostPage() {
         .host-hero-title span {
           display: block;
           color: #16a34a;
+        }
+
+        .host-hero-title .host-rotating-text {
+          display: inline-flex !important;
+          font-size: inherit;
+          margin-top: 0.06em;
+        }
+
+        .host-hero-title .host-rotating-text span {
+          display: inline !important;
+        }
+
+        .host-hero-title .host-rotating-text .text-rotate {
+          display: inline-flex !important;
+          flex-wrap: nowrap;
+        }
+
+        .host-hero-title .host-rotating-text .text-rotate-word {
+          display: inline-flex !important;
+        }
+
+        .host-hero-title .host-rotating-text .text-rotate-element {
+          display: inline-block !important;
+        }
+
+        .host-hero-title .host-rotating-text .text-rotate-sr-only {
+          display: none !important;
         }
 
         .host-hero-copy {
@@ -5795,7 +5824,23 @@ export default function HostPage() {
                 Host partner program
               </span>
               <h1 className="host-hero-title">
-                Host a <span>charger</span>
+                Host a
+                <br />
+                <RotatingText
+                  texts={hostHeroRotatingWords}
+                  mainClassName="host-rotating-text"
+                  staggerFrom="last"
+                  initial={{ y: "100%" }}
+                  animate={{ y: 0 }}
+                  exit={{ y: "-120%" }}
+                  staggerDuration={0.025}
+                  splitLevelClassName="host-rotating-text-split"
+                  transition={{ type: "spring", damping: 30, stiffness: 400 }}
+                  rotationInterval={2500}
+                  splitBy="characters"
+                  auto
+                  loop
+                />
               </h1>
               <p className="host-hero-copy">
                 For small businesses, earn more from your space. For large

@@ -534,11 +534,6 @@ function SiteFooterHost() {
 function SiteFooter() {
   return (
     <footer className="site-footer bg-black text-white pt-24 pb-12 border-t border-white/10 relative overflow-hidden">
-      <div className="max-w-[1400px] mx-auto px-6 mb-20 text-center">
-        <h2 className="text-3xl md:text-5xl 3xl:text-7xl font-display font-bold tracking-tight mb-4 md:whitespace-nowrap">
-          Together, lets move electric forward
-        </h2>
-      </div>
       <div className="border-t border-white/10 bg-black">
         <div className="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-white/10">
           <div className="group p-8 md:p-12 hover:bg-white/5 transition-colors duration-300 flex flex-col h-full min-h-[300px]">

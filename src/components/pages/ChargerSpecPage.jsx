@@ -36,6 +36,23 @@ function Icon({ name = "check", className = "h-5 w-5" }) {
     );
   }
 
+  if (name === "droplet") {
+    return (
+      <svg {...props}>
+        <path d="M12 2.5 6.5 9a7 7 0 1 0 11 0L12 2.5Z" />
+        <path d="M8.5 14.5a3.5 3.5 0 0 0 3 3" />
+      </svg>
+    );
+  }
+
+  if (name === "phase") {
+    return (
+      <svg {...props}>
+        <path d="M2 12c2.5 0 2.5-6 5-6s2.5 12 5 12 2.5-6 5-6 2.5 6 3 6" />
+      </svg>
+    );
+  }
+
   if (name === "home") {
     return (
       <svg {...props}>
@@ -561,6 +578,8 @@ function ChargerVisual({ power }) {
 function EnvironmentSection() {
   const [activeTabId, setActiveTabId] = useState(environmentTabs[0].id);
   const [openIndex, setOpenIndex] = useState(0);
+  const [showAudienceCards, setShowAudienceCards] = useState(false);
+  const [showUseCases, setShowUseCases] = useState(false);
   const activeTab =
     environmentTabs.find((tab) => tab.id === activeTabId) ?? environmentTabs[0];
 
@@ -574,27 +593,6 @@ function EnvironmentSection() {
           public-facing space, the 3kW charger stays simple, safe, and ready to
           grow with you.
         </p>
-      </div>
-
-      <div className="charger-env-use-cases">
-        {/* <p className="three-eyebrow">Use Cases</p>
-        <h2 className="three-section-title">
-          Where the 3kW charger works best
-        </h2> */}
-        <div className="three-audience-grid">
-          {threeKwUseCases.map(([icon, title, copy]) => (
-            <article
-              className="three-info-card three-audience-card"
-              key={title}
-            >
-              <span className="three-card-icon">
-                <Icon name={icon} className="h-9 w-9" />
-              </span>
-              <h3>{title}</h3>
-              <p>{copy}</p>
-            </article>
-          ))}
-        </div>
       </div>
 
       <div className="charger-env-tabs" role="tablist" aria-label="Use types">
@@ -670,6 +668,101 @@ function EnvironmentSection() {
           </div>
         </aside>
       </div>
+
+      {!showAudienceCards || !showUseCases ? (
+        <div className="charger-expand-actions">
+          {!showAudienceCards ? (
+            <button
+              type="button"
+              className="charger-expand-button"
+              onClick={() => setShowAudienceCards(true)}
+            >
+              Who should use this charger?
+              <Icon name="arrow" className="h-4 w-4" />
+            </button>
+          ) : null}
+          {!showUseCases ? (
+            <button
+              type="button"
+              className="charger-expand-button"
+              onClick={() => setShowUseCases(true)}
+            >
+              View use cases
+              <Icon name="arrow" className="h-4 w-4" />
+            </button>
+          ) : null}
+        </div>
+      ) : null}
+
+      <AnimatePresence initial={false}>
+        {showAudienceCards ? (
+          <ShutterExpand key="charger-audience">
+            <div className="charger-expand-section">
+              <button
+                type="button"
+                className="charger-collapse-button"
+                aria-label="Collapse charger audience"
+                onClick={() => setShowAudienceCards(false)}
+              >
+                <IoClose className="h-5 w-5" aria-hidden="true" />
+              </button>
+              <p className="three-eyebrow">Who should use this charger?</p>
+              <h2 className="three-section-title">
+                Perfect for everyday charging needs
+              </h2>
+              <div className="three-audience-grid">
+                {threeKwAudienceCards.map(([icon, title, copy]) => (
+                  <article
+                    className="three-info-card three-audience-card"
+                    key={title}
+                  >
+                    <span className="three-card-icon">
+                      <Icon name={icon} className="h-9 w-9" />
+                    </span>
+                    <h3>{title}</h3>
+                    <p>{copy}</p>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </ShutterExpand>
+        ) : null}
+      </AnimatePresence>
+
+      <AnimatePresence initial={false}>
+        {showUseCases ? (
+          <ShutterExpand key="charger-use-cases">
+            <div className="charger-expand-section charger-env-use-cases">
+              <button
+                type="button"
+                className="charger-collapse-button"
+                aria-label="Collapse charger use cases"
+                onClick={() => setShowUseCases(false)}
+              >
+                <IoClose className="h-5 w-5" aria-hidden="true" />
+              </button>
+              <p className="three-eyebrow">Use cases</p>
+              <h2 className="three-section-title">
+                Where the 3kW charger works best
+              </h2>
+              <div className="three-audience-grid">
+                {threeKwUseCases.map(([icon, title, copy]) => (
+                  <article
+                    className="three-info-card three-audience-card"
+                    key={title}
+                  >
+                    <span className="three-card-icon">
+                      <Icon name={icon} className="h-9 w-9" />
+                    </span>
+                    <h3>{title}</h3>
+                    <p>{copy}</p>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </ShutterExpand>
+        ) : null}
+      </AnimatePresence>
     </Section>
   );
 }
@@ -845,12 +938,17 @@ const threeHeroBenefits = [
   ["shield", "Built-in Safety", "Overload & short circuit protection"],
   ["wallet", "Automated Payments", "Cashless payments via Zvolta platform"],
   ["leaf", "Energy Efficient", "Optimized for low power consumption"],
-  ["bolt", "Universal Switch", "Charge anything"],
   [
-    "shield",
-    "100% Made in Pakistan",
-    "Quality you can trust. Built for our future.",
+    "bolt",
+    "Universal Charging Point",
+    "Charge two-wheeler, three-wheeler and four-wheeler",
   ],
+  [
+    "droplet",
+    "IP54 Water and Splash Proof",
+    "Protected against water & splashes",
+  ],
+  ["phase", "Single Phase", "Standard single-phase power supply"],
 ];
 
 function ThreeKwHero() {
@@ -860,13 +958,22 @@ function ThreeKwHero() {
         <div className="three-hero-copy">
           <p className="three-pill">
             <Icon name="bolt" className="h-4 w-4" />
-            3kW Power. Smart Charging.
+            3kW Power. Smart Charger.
           </p>
           <h1>3kW Smart EV Charger</h1>
           <p className="three-hero-text">
             A compact, connected charger built for homes, bikes, and smaller
             spaces.
           </p>
+          <div className="three-hero-made">
+            <span className="three-hero-made-chip">
+              <Icon name="shield" className="h-5 w-5" />
+            </span>
+            <span className="three-hero-made-text">
+              <strong>100% Made in Pakistan</strong>
+              <span>Engineered &amp; built locally</span>
+            </span>
+          </div>
           <div className="three-hero-actions">
             <PrimaryButton className="three-primary">
               <Icon name="calendar" className="h-5 w-5" />
@@ -877,23 +984,25 @@ function ThreeKwHero() {
               Talk to an Expert
             </SecondaryButton>
           </div>
-          <div className="three-hero-benefits">
-            {threeHeroBenefits.map(([icon, title, copy]) => (
-              <div className="three-hero-benefit" key={title}>
-                <Icon name={icon} className="h-6 w-6" />
-                <div>
-                  <h3>{title}</h3>
-                  <p>{copy}</p>
-                </div>
-              </div>
-            ))}
-          </div>
         </div>
         <div className="three-product-card">
           <img
-            src="https://res.cloudinary.com/diywraupt/image/upload/v1780392810/7Watt22W_zdchgq.png"
+            src="https://res.cloudinary.com/diywraupt/image/upload/v1781277709/3KW_f8dgww.png"
             alt="3kW smart EV charger"
           />
+        </div>
+      </div>
+      <div className="three-container three-hero-features">
+        <div className="three-hero-benefits">
+          {threeHeroBenefits.map(([icon, title, copy]) => (
+            <div className="three-hero-benefit" key={title}>
+              <Icon name={icon} className="h-6 w-6" />
+              <div>
+                <h3>{title}</h3>
+                <p>{copy}</p>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>
@@ -972,26 +1081,6 @@ function ThreeKwQuickSection() {
           </div>
         </div>
 
-        <div className="three-subsection">
-          <p className="three-eyebrow">Who should use this charger?</p>
-          <h2 className="three-section-title">
-            Perfect for everyday charging needs
-          </h2>
-          <div className="three-audience-grid">
-            {threeKwAudienceCards.map(([icon, title, copy]) => (
-              <article
-                className="three-info-card three-audience-card"
-                key={title}
-              >
-                <span className="three-card-icon">
-                  <Icon name={icon} className="h-9 w-9" />
-                </span>
-                <h3>{title}</h3>
-                <p>{copy}</p>
-              </article>
-            ))}
-          </div>
-        </div>
       </div>
     </section>
   );
@@ -1114,15 +1203,6 @@ function DecisionSection() {
               <span>From intent to earning in just 7 days.</span>
             </p>
           </article>
-        </div>
-
-        <div className="three-reliability-strip">
-          <Icon name="shield" className="h-8 w-8" />
-          <p>
-            Designed for everyday reliability. Built locally. Supported locally.
-          </p>
-          <span />
-          <strong>3kW Power. Smart Charging.</strong>
         </div>
       </div>
     </section>
@@ -1286,6 +1366,158 @@ function ShutterExpand({ children }) {
   );
 }
 
+function ThreeKwHostWhoBlock({
+  showHostingSections,
+  onShowHostingSections,
+  onHideHostingSections,
+}) {
+  return (
+    <>
+      <div className="host-who-section-wrap">
+        <Reveal className="host-who-strip">
+          <h3 className="host-who-strip-title">
+            You set the
+            <br />
+            <RotatingText
+              texts={hostRotatingWords}
+              mainClassName="host-rotating-text"
+              staggerFrom="last"
+              initial={{ y: "100%" }}
+              animate={{ y: 0 }}
+              exit={{ y: "-120%" }}
+              staggerDuration={0.025}
+              splitLevelClassName="host-rotating-text-split"
+              transition={{ type: "spring", damping: 30, stiffness: 400 }}
+              rotationInterval={2000}
+              splitBy="characters"
+              auto
+              loop
+            />
+          </h3>
+          <span className="host-who-divider" />
+          {hostWhoBenefits.map((item) => (
+            <div className="host-who-benefit" key={item.title}>
+              <span className="host-who-benefit-icon">
+                <Icon name={item.icon} className="h-6 w-6" />
+              </span>
+              <span>
+                <h4>{item.title}</h4>
+                <p>{item.copy}</p>
+              </span>
+            </div>
+          ))}
+          <div className="host-who-actions">
+            <PrimaryButton href="/contact-us" className="host-who-primary">
+              Get started
+            </PrimaryButton>
+            {!showHostingSections ? (
+              <button
+                type="button"
+                className="host-expand-button"
+                onClick={onShowHostingSections}
+              >
+                View host stories
+                <Icon name="arrow" className="h-4 w-4" />
+              </button>
+            ) : null}
+          </div>
+        </Reveal>
+      </div>
+
+      <AnimatePresence initial={false}>
+        {showHostingSections ? (
+          <ShutterExpand key="hosting-sections">
+            <section className="host-partners-section">
+              <button
+                type="button"
+                className="host-collapse-button"
+                aria-label="Collapse host stories"
+                onClick={onHideHostingSections}
+              >
+                <IoClose className="h-6 w-6" aria-hidden="true" />
+              </button>
+              <span className="host-partners-bolt" aria-hidden="true" />
+              <span className="host-partners-bolt-soft" aria-hidden="true" />
+              <div className="host-stories-container">
+                <Reveal>
+                  <p className="host-partners-eyebrow">Already hosting</p>
+                  <h2 className="host-partners-title">
+                    Businesses use Zvolta chargers to earn and support
+                    sustainability<span>.</span>
+                  </h2>
+                  <p className="host-partners-copy">
+                    Partner sites get app visibility, cleaner customer service,
+                    and a practical ESG action.
+                  </p>
+                </Reveal>
+                <Reveal className="host-partner-logo-grid" delay={0.08}>
+                  {chargerPartnerLogos.map((logo) => (
+                    <div className="host-partner-logo-card" key={logo.alt}>
+                      <img
+                        src={logo.src}
+                        alt={logo.alt}
+                        className={logo.invert ? "is-inverted" : ""}
+                      />
+                    </div>
+                  ))}
+                </Reveal>
+                <Reveal className="host-partners-action">
+                  <SmartLink
+                    href="/host"
+                    className="inline-flex min-h-12 items-center justify-center gap-2 rounded-lg border border-white/10 bg-[#111111] px-5 py-3 text-sm font-semibold text-white transition duration-300 hover:scale-[1.02] hover:border-[#16a34a]/50"
+                  >
+                    Explore hosting
+                    <Icon name="arrow" className="h-4 w-4" />
+                  </SmartLink>
+                </Reveal>
+              </div>
+            </section>
+
+            <section className="host-stories-section">
+              <div className="host-stories-container">
+                <p className="mb-2 text-xs font-semibold uppercase text-[#16a34a]">
+                  Real stories
+                </p>
+                <h2 className="text-[32px] font-semibold leading-tight text-white md:text-[36px]">
+                  How hosts use charging to create site value.
+                </h2>
+                <div className="host-stories mt-10 flex snap-x gap-6 overflow-x-auto pb-4">
+                  {chargerStories.map((story, index) => (
+                    <Reveal key={story.title} delay={index * 0.05}>
+                      <article className="w-[300px] shrink-0 snap-start overflow-hidden rounded-lg border border-white/10 bg-zinc-900 sm:w-[370px]">
+                        <img
+                          src={story.image}
+                          alt=""
+                          className="h-52 w-full object-cover"
+                        />
+                        <div className="p-6">
+                          <p className="text-xs font-semibold uppercase text-[#16a34a]">
+                            {story.category}
+                          </p>
+                          <h3 className="mt-3 text-[22px] font-semibold leading-tight text-white">
+                            {story.title}
+                          </h3>
+                        </div>
+                      </article>
+                    </Reveal>
+                  ))}
+                </div>
+                <SmartLink
+                  href="/host"
+                  className="mt-8 inline-flex min-h-12 items-center justify-center gap-2 rounded-lg border border-white/10 bg-[#111111] px-5 py-3 text-sm font-semibold text-white transition duration-300 hover:scale-[1.02] hover:border-[#16a34a]/50"
+                >
+                  Explore stories
+                  <Icon name="arrow" className="h-4 w-4" />
+                </SmartLink>
+              </div>
+            </section>
+          </ShutterExpand>
+        ) : null}
+      </AnimatePresence>
+    </>
+  );
+}
+
 function ThreeKwChargerPage() {
   const [showHostingSections, setShowHostingSections] = useState(false);
   return (
@@ -1323,8 +1555,7 @@ function ThreeKwChargerPage() {
 
         .three-hero-grid {
           display: grid;
-          min-height: 700px;
-          grid-template-columns: minmax(0, 1fr) minmax(420px, 0.85fr);
+          grid-template-columns: minmax(0, 1fr) minmax(420px, 0.9fr);
           align-items: center;
           gap: 72px;
         }
@@ -1364,6 +1595,56 @@ function ThreeKwChargerPage() {
           margin-top: 28px;
         }
 
+        .three-hero-made {
+          display: inline-flex;
+          align-items: center;
+          gap: 14px;
+          margin-top: 26px;
+          padding: 10px 20px 10px 12px;
+          border: 1px solid rgba(22, 163, 74, 0.35);
+          border-radius: 999px;
+          background:
+            radial-gradient(circle at 0% 50%, rgba(22, 163, 74, 0.18), transparent 60%),
+            rgba(7, 10, 9, 0.7);
+          box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.05),
+            0 12px 34px rgba(22, 163, 74, 0.12);
+        }
+
+        .three-hero-made-chip {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          height: 38px;
+          width: 38px;
+          flex-shrink: 0;
+          border-radius: 999px;
+          background: rgba(22, 163, 74, 0.16);
+          color: #22c55e;
+          filter: drop-shadow(0 0 12px rgba(22, 163, 74, 0.4));
+        }
+
+        .three-hero-made-text {
+          display: flex;
+          flex-direction: column;
+          line-height: 1.25;
+        }
+
+        .three-hero-made-text strong {
+          color: #FFFFFF;
+          font-size: 15px;
+          font-weight: 900;
+          letter-spacing: 0.01em;
+        }
+
+        .three-hero-made-text > span {
+          color: #16a34a;
+          font-size: 12.5px;
+          font-weight: 700;
+          letter-spacing: 0.06em;
+          text-transform: uppercase;
+        }
+
         .three-hero-actions {
           display: flex;
           flex-wrap: wrap;
@@ -1384,11 +1665,14 @@ function ThreeKwChargerPage() {
           order: -1;
         }
 
+        .three-hero-features {
+          margin-top: 64px;
+        }
+
         .three-hero-benefits {
           display: grid;
-          margin-top: 52px;
-          grid-template-columns: repeat(2, minmax(0, 1fr));
-          gap: 16px;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: 18px;
         }
 
         .three-hero-benefit {
@@ -1435,23 +1719,17 @@ function ThreeKwChargerPage() {
           line-height: 1.35;
         }
 
-        .three-hero-benefit:last-child {
-          grid-column: 1 / -1;
-        }
-
         .three-product-card {
-          overflow: hidden;
-          border: 1px solid rgba(255, 255, 255, 0.16);
-          border-radius: 24px;
-          background: linear-gradient(145deg, rgba(25, 27, 28, 0.94), rgba(6, 7, 8, 0.96));
-          box-shadow: 0 34px 90px rgba(0, 0, 0, 0.44);
+          display: flex;
+          align-items: center;
+          justify-content: center;
         }
 
         .three-product-card img {
           display: block;
           width: 100%;
-          aspect-ratio: 0.72;
-          object-fit: cover;
+          height: auto;
+          object-fit: contain;
         }
 
         .three-section {
@@ -1826,6 +2104,83 @@ function ThreeKwChargerPage() {
 
         .charger-env-use-cases {
           margin-top: 64px;
+        }
+
+        .charger-expand-actions {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 14px;
+          margin-top: 40px;
+        }
+
+        .charger-expand-button {
+          display: inline-flex;
+          min-height: 54px;
+          align-items: center;
+          justify-content: center;
+          gap: 12px;
+          border: 1px solid rgba(22, 163, 74, 0.55);
+          border-radius: 8px;
+          background: rgba(22, 163, 74, 0.08);
+          padding: 0 24px;
+          color: #FFFFFF;
+          font-size: 16px;
+          font-weight: 800;
+          cursor: pointer;
+          transition:
+            background 0.24s ease,
+            border-color 0.24s ease,
+            transform 0.24s ease;
+        }
+
+        .charger-expand-button:hover {
+          border-color: rgba(22, 163, 74, 0.85);
+          background: rgba(22, 163, 74, 0.14);
+          transform: translateY(-1px);
+        }
+
+        .charger-expand-section {
+          position: relative;
+          margin-top: 30px;
+          padding-top: 12px;
+        }
+
+        .charger-expand-section.charger-env-use-cases {
+          margin-top: 30px;
+        }
+
+        .charger-expand-section .three-section-title {
+          max-width: 780px;
+        }
+
+        .charger-expand-section .three-audience-grid {
+          margin-top: 34px;
+        }
+
+        .charger-collapse-button {
+          position: absolute;
+          right: 0;
+          top: 0;
+          z-index: 6;
+          display: grid;
+          height: 46px;
+          width: 46px;
+          place-items: center;
+          border: 1px solid rgba(22, 163, 74, 0.5);
+          border-radius: 999px;
+          background: rgba(10, 12, 12, 0.74);
+          color: #16a34a;
+          cursor: pointer;
+          box-shadow: 0 16px 36px rgba(0, 0, 0, 0.28);
+          backdrop-filter: blur(12px);
+          transition:
+            background 0.24s ease,
+            transform 0.24s ease;
+        }
+
+        .charger-collapse-button:hover {
+          background: rgba(22, 163, 74, 0.12);
+          transform: translateY(-1px);
         }
 
         .charger-env-tabs {
@@ -2364,33 +2719,6 @@ function ThreeKwChargerPage() {
           line-height: 1.45;
         }
 
-        .three-reliability-strip {
-          display: grid;
-          margin-top: 30px;
-          grid-template-columns: 54px minmax(0, 1fr) 1px auto;
-          align-items: center;
-          gap: 28px;
-          border: 1px solid rgba(255, 255, 255, 0.14);
-          border-radius: 14px;
-          background: rgba(14, 16, 17, 0.78);
-          padding: 28px 34px;
-        }
-
-        .three-reliability-strip svg,
-        .three-reliability-strip strong {
-          color: #16a34a;
-        }
-
-        .three-reliability-strip p,
-        .three-reliability-strip strong {
-          font-size: 20px;
-        }
-
-        .three-reliability-strip span {
-          height: 42px;
-          background: rgba(255, 255, 255, 0.34);
-        }
-
         .three-recommendation-grid {
           display: grid;
           grid-template-columns: minmax(0, 1fr) minmax(420px, 0.95fr);
@@ -2776,12 +3104,18 @@ function ThreeKwChargerPage() {
           }
 
           .three-quick-grid,
-          .three-audience-grid {
+          .three-audience-grid,
+          .three-hero-benefits {
             grid-template-columns: 1fr 1fr;
+          }
+
+          .three-hero-features {
+            margin-top: 48px;
           }
 
           .three-product-card {
             max-width: 520px;
+            margin: 0 auto;
           }
         }
 
@@ -2843,6 +3177,32 @@ function ThreeKwChargerPage() {
 
           .three-info-card {
             min-height: 220px;
+          }
+
+          .charger-expand-actions {
+            display: grid;
+            gap: 12px;
+          }
+
+          .charger-expand-button {
+            width: 100%;
+            min-height: 52px;
+            padding: 0 18px;
+          }
+
+          .charger-expand-section {
+            padding-top: 8px;
+          }
+
+          .charger-collapse-button {
+            right: 0;
+            top: -2px;
+            height: 40px;
+            width: 40px;
+          }
+
+          .charger-expand-section .three-section-title {
+            padding-right: 42px;
           }
 
           .three-how-panel {
@@ -3033,15 +3393,6 @@ function ThreeKwChargerPage() {
             padding: 48px 20px 22px;
           }
 
-          .three-reliability-strip {
-            grid-template-columns: 1fr;
-          }
-
-          .three-reliability-strip span {
-            width: 100%;
-            height: 1px;
-          }
-
           .three-final-cta {
             padding: 24px;
           }
@@ -3070,148 +3421,11 @@ function ThreeKwChargerPage() {
         <EnvironmentSection />
         <DecisionSection />
         <UseCasesRecommendationFaq />
-
-        <div className="host-who-section-wrap">
-          <Reveal className="host-who-strip">
-            <h3 className="host-who-strip-title">
-              You set the
-              <br />
-              <RotatingText
-                texts={hostRotatingWords}
-                mainClassName="host-rotating-text"
-                staggerFrom="last"
-                initial={{ y: "100%" }}
-                animate={{ y: 0 }}
-                exit={{ y: "-120%" }}
-                staggerDuration={0.025}
-                splitLevelClassName="host-rotating-text-split"
-                transition={{ type: "spring", damping: 30, stiffness: 400 }}
-                rotationInterval={2000}
-                splitBy="characters"
-                auto
-                loop
-              />
-            </h3>
-            <span className="host-who-divider" />
-            {hostWhoBenefits.map((item) => (
-              <div className="host-who-benefit" key={item.title}>
-                <span className="host-who-benefit-icon">
-                  <Icon name={item.icon} className="h-6 w-6" />
-                </span>
-                <span>
-                  <h4>{item.title}</h4>
-                  <p>{item.copy}</p>
-                </span>
-              </div>
-            ))}
-            <div className="host-who-actions">
-              <PrimaryButton href="/contact-us" className="host-who-primary">
-                Get started
-              </PrimaryButton>
-              {!showHostingSections ? (
-                <button
-                  type="button"
-                  className="host-expand-button"
-                  onClick={() => setShowHostingSections(true)}
-                >
-                  View host stories
-                  <Icon name="arrow" className="h-4 w-4" />
-                </button>
-              ) : null}
-            </div>
-          </Reveal>
-        </div>
-
-        <AnimatePresence initial={false}>
-          {showHostingSections ? (
-            <ShutterExpand key="hosting-sections">
-              <section className="host-partners-section">
-                <button
-                  type="button"
-                  className="host-collapse-button"
-                  aria-label="Collapse host stories"
-                  onClick={() => setShowHostingSections(false)}
-                >
-                  <IoClose className="h-6 w-6" aria-hidden="true" />
-                </button>
-                <span className="host-partners-bolt" aria-hidden="true" />
-                <span className="host-partners-bolt-soft" aria-hidden="true" />
-                <div className="host-stories-container">
-                  <Reveal>
-                    <p className="host-partners-eyebrow">Already hosting</p>
-                    <h2 className="host-partners-title">
-                      Businesses use Zvolta chargers to earn and support
-                      sustainability<span>.</span>
-                    </h2>
-                    <p className="host-partners-copy">
-                      Partner sites get app visibility, cleaner customer
-                      service, and a practical ESG action.
-                    </p>
-                  </Reveal>
-                  <Reveal className="host-partner-logo-grid" delay={0.08}>
-                    {chargerPartnerLogos.map((logo) => (
-                      <div className="host-partner-logo-card" key={logo.alt}>
-                        <img
-                          src={logo.src}
-                          alt={logo.alt}
-                          className={logo.invert ? "is-inverted" : ""}
-                        />
-                      </div>
-                    ))}
-                  </Reveal>
-                  <Reveal className="host-partners-action">
-                    <SmartLink
-                      href="/host"
-                      className="inline-flex min-h-12 items-center justify-center gap-2 rounded-lg border border-white/10 bg-[#111111] px-5 py-3 text-sm font-semibold text-white transition duration-300 hover:scale-[1.02] hover:border-[#16a34a]/50"
-                    >
-                      Explore hosting
-                      <Icon name="arrow" className="h-4 w-4" />
-                    </SmartLink>
-                  </Reveal>
-                </div>
-              </section>
-
-              <section className="host-stories-section">
-                <div className="host-stories-container">
-                  <p className="mb-2 text-xs font-semibold uppercase text-[#16a34a]">
-                    Real stories
-                  </p>
-                  <h2 className="text-[32px] font-semibold leading-tight text-white md:text-[36px]">
-                    How hosts use charging to create site value.
-                  </h2>
-                  <div className="host-stories mt-10 flex snap-x gap-6 overflow-x-auto pb-4">
-                    {chargerStories.map((story, index) => (
-                      <Reveal key={story.title} delay={index * 0.05}>
-                        <article className="w-[300px] shrink-0 snap-start overflow-hidden rounded-lg border border-white/10 bg-zinc-900 sm:w-[370px]">
-                          <img
-                            src={story.image}
-                            alt=""
-                            className="h-52 w-full object-cover"
-                          />
-                          <div className="p-6">
-                            <p className="text-xs font-semibold uppercase text-[#16a34a]">
-                              {story.category}
-                            </p>
-                            <h3 className="mt-3 text-[22px] font-semibold leading-tight text-white">
-                              {story.title}
-                            </h3>
-                          </div>
-                        </article>
-                      </Reveal>
-                    ))}
-                  </div>
-                  <SmartLink
-                    href="/host"
-                    className="mt-8 inline-flex min-h-12 items-center justify-center gap-2 rounded-lg border border-white/10 bg-[#111111] px-5 py-3 text-sm font-semibold text-white transition duration-300 hover:scale-[1.02] hover:border-[#16a34a]/50"
-                  >
-                    Explore stories
-                    <Icon name="arrow" className="h-4 w-4" />
-                  </SmartLink>
-                </div>
-              </section>
-            </ShutterExpand>
-          ) : null}
-        </AnimatePresence>
+        <ThreeKwHostWhoBlock
+          showHostingSections={showHostingSections}
+          onShowHostingSections={() => setShowHostingSections(true)}
+          onHideHostingSections={() => setShowHostingSections(false)}
+        />
       </div>
     </>
   );

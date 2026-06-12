@@ -545,8 +545,6 @@ const hostWhoBenefits = [
 
 const hostRotatingWords = ["price.", "timings.", "access.", "earnings."];
 
-const hostHeroRotatingWords = ["charger.", "income.", "network.", "future."];
-
 const installationOptions = [
   {
     title: "Vertical wall",
@@ -745,6 +743,25 @@ const roiHighlights = [
   },
 ];
 
+const youtubeReels = [
+  {
+    id: "593J_FRoru4",
+    title: "This is us. Not announcing anything yet",
+  },
+  {
+    id: "avV8EaQIlsw",
+    title: "We're now live at IBA main campus",
+  },
+  {
+    id: "CJuGPOKuTpU",
+    title: "How to sign up on ZVolta app",
+  },
+  {
+    id: "O1g0jwy7oLY",
+    title: "Low battery ko bhool jao, Zvolta is here",
+  },
+];
+
 function Icon({ name, className = "h-5 w-5" }) {
   const props = {
     className,
@@ -770,6 +787,14 @@ function Icon({ name, className = "h-5 w-5" }) {
     return (
       <svg {...props}>
         <path d="m5 12 4 4L19 6" />
+      </svg>
+    );
+  }
+
+  if (name === "play") {
+    return (
+      <svg {...props} fill="currentColor" stroke="none">
+        <path d="M9 7.2v9.6L17 12 9 7.2Z" />
       </svg>
     );
   }
@@ -1362,6 +1387,72 @@ function InstallationOptionsSection({ onCollapse }) {
   );
 }
 
+function HostYoutubeReelsSection() {
+  return (
+    <section className="host-youtube-reels-section">
+      <span
+        className="host-reels-glow host-reels-glow-left"
+        aria-hidden="true"
+      />
+      <span
+        className="host-reels-glow host-reels-glow-right"
+        aria-hidden="true"
+      />
+      <div className="host-container">
+        <Reveal className="host-youtube-reels-intro">
+          <h2>Zvolta reels from the road</h2>
+          <p>
+            Short videos from our YouTube channel showing app flows, live sites,
+            and EV charging moments.
+          </p>
+        </Reveal>
+
+        <Reveal className="host-youtube-reels-label" delay={0.06}>
+          <span aria-hidden="true" />
+          <strong>
+            <span className="host-youtube-reels-icon">
+              <Icon name="play" className="h-5 w-5" />
+            </span>
+            YouTube Reels
+          </strong>
+          <span aria-hidden="true" />
+        </Reveal>
+
+        <div className="host-youtube-reels-grid">
+          {youtubeReels.map((reel, index) => (
+            <Reveal
+              as="article"
+              className="host-youtube-reel-card"
+              delay={0.08 + index * 0.04}
+              key={reel.id}
+            >
+              <iframe
+                src={`https://www.youtube.com/embed/${reel.id}?rel=0&modestbranding=1&playsinline=1`}
+                title={reel.title}
+                loading="lazy"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+              />
+            </Reveal>
+          ))}
+        </div>
+
+        <Reveal className="host-youtube-reels-action" delay={0.12}>
+          <SmartLink
+            href="https://www.youtube.com/@zvoltaPK"
+            target="_blank"
+            className="host-youtube-reels-button"
+          >
+            See more
+            <Icon name="arrow" className="h-5 w-5" />
+          </SmartLink>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
 export default function HostPage() {
   const [chargerCount, setChargerCount] = useState(2);
   const [unitPrice, setUnitPrice] = useState(120);
@@ -1830,6 +1921,192 @@ export default function HostPage() {
           box-shadow:
             0 20px 58px rgba(22, 163, 74, 0.24),
             inset 0 1px 0 rgba(255, 255, 255, 0.28);
+        }
+
+        .host-youtube-reels-section {
+          position: relative;
+          overflow: hidden;
+          padding: 96px 0 104px;
+          border-top: 1px solid rgba(22, 163, 74, 0.22);
+          background:
+            radial-gradient(circle at 50% 0%, rgba(22, 163, 74, 0.2), transparent 34%),
+            radial-gradient(circle at 8% 58%, rgba(22, 163, 74, 0.16), transparent 30%),
+            radial-gradient(circle at 92% 54%, rgba(22, 163, 74, 0.15), transparent 30%),
+            linear-gradient(180deg, #050606 0%, #020303 100%);
+          isolation: isolate;
+        }
+
+        .host-youtube-reels-section::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          z-index: -2;
+          background:
+            linear-gradient(90deg, rgba(0, 0, 0, 0.28), transparent 48%, rgba(0, 0, 0, 0.3)),
+            repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.018) 0 1px, transparent 1px 96px);
+          opacity: 0.72;
+        }
+
+        .host-reels-glow {
+          position: absolute;
+          z-index: -1;
+          top: 28%;
+          height: 340px;
+          width: 340px;
+          border-radius: 999px;
+          background: rgba(22, 163, 74, 0.15);
+          filter: blur(72px);
+          pointer-events: none;
+        }
+
+        .host-reels-glow-left {
+          left: -120px;
+        }
+
+        .host-reels-glow-right {
+          right: -120px;
+        }
+
+        .host-youtube-reels-intro {
+          max-width: 940px;
+          margin: 0 auto;
+          text-align: center;
+        }
+
+        .host-youtube-reels-intro h2 {
+          color: #FFFFFF;
+          font-size: clamp(46px, 5vw, 86px);
+          font-weight: 900;
+          line-height: 1.05;
+          letter-spacing: 0;
+          text-shadow: 0 16px 42px rgba(0, 0, 0, 0.55);
+        }
+
+        .host-youtube-reels-intro p {
+          margin: 22px auto 0;
+          max-width: 760px;
+          color: #a1a1aa;
+          font-size: clamp(18px, 1.45vw, 26px);
+          line-height: 1.35;
+        }
+
+        .host-youtube-reels-label {
+          display: grid;
+          max-width: 560px;
+          grid-template-columns: minmax(72px, 1fr) auto minmax(72px, 1fr);
+          align-items: center;
+          gap: 28px;
+          margin: 66px auto 34px;
+          color: #FFFFFF;
+        }
+
+        .host-youtube-reels-label > span {
+          height: 3px;
+          border-radius: 999px;
+          background: linear-gradient(90deg, transparent, #16a34a);
+          box-shadow: 0 0 18px rgba(22, 163, 74, 0.82);
+        }
+
+        .host-youtube-reels-label > span:last-child {
+          background: linear-gradient(90deg, #16a34a, transparent);
+        }
+
+        .host-youtube-reels-label strong {
+          display: inline-flex;
+          align-items: center;
+          gap: 14px;
+          color: #FFFFFF;
+          font-size: 25px;
+          font-weight: 850;
+          line-height: 1;
+          white-space: nowrap;
+        }
+
+        .host-youtube-reels-icon {
+          display: grid;
+          height: 30px;
+          width: 38px;
+          place-items: center;
+          border: 1px solid rgba(22, 163, 74, 0.95);
+          border-radius: 8px;
+          color: #16a34a;
+          box-shadow:
+            0 0 16px rgba(22, 163, 74, 0.58),
+            inset 0 0 12px rgba(22, 163, 74, 0.18);
+        }
+
+        .host-youtube-reels-grid {
+          display: grid;
+          grid-template-columns: repeat(4, minmax(0, 1fr));
+          gap: 32px;
+        }
+
+        .host-youtube-reel-card {
+          position: relative;
+          overflow: hidden;
+          aspect-ratio: 9 / 16;
+          border: 1.5px solid rgba(22, 163, 74, 0.72);
+          border-radius: 20px;
+          background: rgba(3, 10, 9, 0.72);
+          box-shadow:
+            0 0 0 1px rgba(22, 163, 74, 0.16),
+            0 0 26px rgba(22, 163, 74, 0.24),
+            0 24px 70px rgba(0, 0, 0, 0.48);
+        }
+
+        .host-youtube-reel-card::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          z-index: 1;
+          pointer-events: none;
+          background:
+            linear-gradient(180deg, rgba(255, 255, 255, 0.08), transparent 16%),
+            linear-gradient(0deg, rgba(0, 0, 0, 0.22), transparent 34%);
+        }
+
+        .host-youtube-reel-card iframe {
+          display: block;
+          width: 100%;
+          height: 100%;
+          border: 0;
+        }
+
+        .host-youtube-reels-action {
+          display: flex;
+          justify-content: center;
+          margin-top: 46px;
+        }
+
+        .host-youtube-reels-button {
+          display: inline-flex;
+          min-height: 62px;
+          min-width: 210px;
+          align-items: center;
+          justify-content: center;
+          gap: 12px;
+          border: 1px solid rgba(22, 163, 74, 0.52);
+          border-radius: 10px;
+          background: rgba(22, 163, 74, 0.1);
+          padding: 0 28px;
+          color: #FFFFFF;
+          font-size: 18px;
+          font-weight: 850;
+          box-shadow:
+            0 18px 44px rgba(0, 0, 0, 0.28),
+            inset 0 1px 0 rgba(255, 255, 255, 0.06);
+          transition:
+            background 0.24s ease,
+            border-color 0.24s ease,
+            color 0.24s ease,
+            transform 0.24s ease;
+        }
+
+        .host-youtube-reels-button:hover {
+          border-color: rgba(22, 163, 74, 0.88);
+          background: rgba(22, 163, 74, 0.16);
+          color: #16a34a;
+          transform: translateY(-1px);
         }
 
         .host-stories {
@@ -4992,6 +5269,11 @@ export default function HostPage() {
             max-width: 760px;
             justify-self: center;
           }
+
+          .host-youtube-reels-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 24px;
+          }
         }
 
         @media (max-width: 767px) {
@@ -5319,6 +5601,64 @@ export default function HostPage() {
             width: min(100%, 280px);
             margin-top: 28px;
             font-size: 18px;
+          }
+
+          .host-youtube-reels-section {
+            padding: 72px 0 80px;
+          }
+
+          .host-youtube-reels-intro h2 {
+            font-size: 38px;
+          }
+
+          .host-youtube-reels-intro p {
+            font-size: 17px;
+          }
+
+          .host-youtube-reels-label {
+            grid-template-columns: minmax(32px, 1fr) auto minmax(32px, 1fr);
+            gap: 14px;
+            margin: 42px auto 26px;
+          }
+
+          .host-youtube-reels-label strong {
+            gap: 10px;
+            font-size: 18px;
+          }
+
+          .host-youtube-reels-icon {
+            height: 28px;
+            width: 34px;
+          }
+
+          .host-youtube-reels-grid {
+            display: flex;
+            gap: 18px;
+            overflow-x: auto;
+            padding: 2px 2px 18px;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none;
+          }
+
+          .host-youtube-reels-grid::-webkit-scrollbar {
+            display: none;
+          }
+
+          .host-youtube-reel-card {
+            width: min(76vw, 320px);
+            flex: 0 0 auto;
+            scroll-snap-align: center;
+          }
+
+          .host-youtube-reels-action {
+            margin-top: 30px;
+          }
+
+          .host-youtube-reels-button {
+            min-height: 56px;
+            min-width: 0;
+            width: min(100%, 260px);
+            font-size: 17px;
           }
 
           .host-hero {
@@ -5824,23 +6164,7 @@ export default function HostPage() {
                 Host partner program
               </span>
               <h1 className="host-hero-title">
-                Host a
-                <br />
-                <RotatingText
-                  texts={hostHeroRotatingWords}
-                  mainClassName="host-rotating-text"
-                  staggerFrom="last"
-                  initial={{ y: "100%" }}
-                  animate={{ y: 0 }}
-                  exit={{ y: "-120%" }}
-                  staggerDuration={0.025}
-                  splitLevelClassName="host-rotating-text-split"
-                  transition={{ type: "spring", damping: 30, stiffness: 400 }}
-                  rotationInterval={2500}
-                  splitBy="characters"
-                  auto
-                  loop
-                />
+                Host a <span>charger</span>
               </h1>
               <p className="host-hero-copy">
                 For small businesses, earn more from your space. For large
@@ -6865,6 +7189,8 @@ export default function HostPage() {
             </Reveal>
           </div>
         </section>
+
+        <HostYoutubeReelsSection />
       </div>
     </>
   );

@@ -12,11 +12,17 @@ export function useSmoothScroll(enabled) {
       smoothWheel: true,
     });
 
+    window.__zvoltaLenis = lenis;
+
     const onRaf = (time) => lenis.raf(time * 1000);
     gsap.ticker.add(onRaf);
     gsap.ticker.lagSmoothing(0);
 
     return () => {
+      if (window.__zvoltaLenis === lenis) {
+        window.__zvoltaLenis = null;
+      }
+
       gsap.ticker.remove(onRaf);
       lenis.destroy();
     };

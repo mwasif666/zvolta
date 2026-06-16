@@ -6,21 +6,27 @@ const assetBase = "/img/aivora-contact";
 const contactCards = [
   {
     title: "Karachi, Pakistan",
-    phone: "+92 310 444 6529",
-    email: "support@zvolta.com",
+    description: "Head office and local EV charging operations",
     image: "/img/zvolta-1.jpg",
+    ctaLabel: "View location",
+    ctaHref: "https://maps.google.com/?q=ZVolta+Karachi",
   },
   {
-    title: "Partnership Desk",
-    phone: "+92 310 444 6529",
-    email: "support@zvolta.com",
+    title: "Host a Charger",
+    description:
+      "Bring ZVolta charging to your office, campus, restaurant, apartment, hospital or public site",
     image: "/img/zvolta-2.jpg",
+    ctaLabel: "Become a host",
+    ctaHref: "/become-charging-partner",
   },
   {
     title: "Customer Support",
+    description: "",
     phone: "+92 310 444 6529",
     email: "support@zvolta.com",
     image: "/img/charging-post.jpg",
+    ctaLabel: "Contact support",
+    ctaHref: "/support",
   },
 ];
 
@@ -264,9 +270,18 @@ export default function ContactUsPage() {
           display: block;
           margin: 30px 0 22px;
           color: #ffffff;
-          font-size: 16px;
-          font-weight: 500;
+          font-size: clamp(22px, 2.4vw, 28px);
+          font-weight: 600;
           letter-spacing: -0.02em;
+        }
+
+        .contact-page__info-description {
+          margin: 0 0 22px;
+          color: rgba(255, 255, 255, 0.62);
+          font-size: 14px;
+          font-weight: 400;
+          line-height: 1.5;
+          letter-spacing: -0.01em;
         }
 
         .contact-page__info-link {
@@ -647,23 +662,32 @@ export default function ContactUsPage() {
                     </span>
                   </div> */}
                   <span className="contact-page__info-title">{card.title}</span>
+                  {card.description ? (
+                    <p className="contact-page__info-description">
+                      {card.description}
+                    </p>
+                  ) : null}
+                  {card.phone ? (
+                    <SmartLink
+                      href={`tel:${card.phone.replace(/\s+/g, "")}`}
+                      className="contact-page__info-link"
+                    >
+                      {card.phone}
+                    </SmartLink>
+                  ) : null}
+                  {card.email ? (
+                    <SmartLink
+                      href={`mailto:${card.email}`}
+                      className="contact-page__info-link"
+                    >
+                      {card.email}
+                    </SmartLink>
+                  ) : null}
                   <SmartLink
-                    href={`tel:${card.phone.replace(/\s+/g, "")}`}
-                    className="contact-page__info-link"
-                  >
-                    {card.phone}
-                  </SmartLink>
-                  <SmartLink
-                    href={`mailto:${card.email}`}
-                    className="contact-page__info-link"
-                  >
-                    {card.email}
-                  </SmartLink>
-                  <SmartLink
-                    href="#contact-form"
+                    href={card.ctaHref ?? "#contact-form"}
                     className="contact-page__mini-button"
                   >
-                    View location
+                    {card.ctaLabel ?? "View location"}
                   </SmartLink>
                 </article>
               ))}

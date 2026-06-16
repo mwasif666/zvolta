@@ -568,6 +568,30 @@ function SiteFooter() {
                 </li>
                 <li>
                   <Link
+                    to="/3kw-charger"
+                    className="hover:text-emerald-400 transition-colors block py-1"
+                  >
+                    3kW Charger
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/7kw-charger"
+                    className="hover:text-emerald-400 transition-colors block py-1"
+                  >
+                    7kW Charger
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/22kw-charger"
+                    className="hover:text-emerald-400 transition-colors block py-1"
+                  >
+                    22kW Charger
+                  </Link>
+                </li>
+                <li>
+                  <Link
                     to="/support"
                     className="hover:text-emerald-400 transition-colors block py-1"
                   >
@@ -579,7 +603,7 @@ function SiteFooter() {
                     to="/host#start-hosting"
                     className="hover:text-emerald-400 transition-colors block py-1"
                   >
-                    Start hosting (CTA)
+                    Start hosting
                   </Link>
                 </li>
               </ul>
@@ -589,7 +613,7 @@ function SiteFooter() {
                 to="/host#start-hosting"
                 className="flex items-center justify-between text-white font-bold group-hover:text-emerald-400 transition-colors"
               >
-                Start hosting (CTA){" "}
+                Start hosting{" "}
                 <i className="bi bi-arrow-right -rotate-45 group-hover:rotate-0 transition-transform duration-300" />
               </Link>
             </div>
@@ -697,7 +721,7 @@ function SiteFooter() {
                     to="/contact-us"
                     className="hover:text-emerald-400 transition-colors block py-1"
                   >
-                    Book a demo (CTA)
+                    Book a demo
                   </Link>
                 </li>
               </ul>
@@ -707,7 +731,7 @@ function SiteFooter() {
                 to="/contact-us"
                 className="flex items-center justify-between text-white font-bold group-hover:text-emerald-400 transition-colors"
               >
-                Book a demo (CTA){" "}
+                Book a demo{" "}
                 <i className="bi bi-arrow-right -rotate-45 group-hover:rotate-0 transition-transform duration-300" />
               </Link>
             </div>
@@ -796,7 +820,7 @@ function SiteFooter() {
           />
           <div className="hidden md:block w-px h-6 bg-zinc-800" />
           <div className="text-zinc-500 text-sm flex gap-6">
-            <span>Zvolta &copy; 2025 -</span>
+            <span>Copyright &copy; 2026 Zvolta. All rights reserved.</span>
           </div>
         </div>
         <div className="flex gap-6">

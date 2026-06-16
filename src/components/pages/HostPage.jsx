@@ -2245,6 +2245,52 @@ export default function HostPage() {
           box-shadow: 0 16px 40px rgba(22, 163, 74, 0.25);
         }
 
+        .host-hero-earn {
+          margin-top: 28px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 24px;
+          width:fit-content;
+          padding: 24px 28px;
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          border-radius: 18px;
+          background:
+            radial-gradient(120% 120% at 0% 100%, rgba(22, 163, 74, 0.22), transparent 60%),
+            linear-gradient(180deg, rgba(28, 30, 30, 0.82), rgba(16, 18, 18, 0.82));
+          box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.06),
+            0 22px 50px rgba(0, 0, 0, 0.38);
+          backdrop-filter: blur(18px);
+        }
+
+        .host-hero-earn-text {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          flex-wrap: nowrap;
+          gap: 12px;
+          color: #ffffff;
+          font-size: clamp(24px, 2.2vw, 32px);
+          font-weight: 800;
+          line-height: 1.05;
+          letter-spacing: -0.01em;
+          white-space: nowrap;
+        }
+
+        .host-hero-earn-icon {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+          width: 64px;
+          height: 64px;
+          border-radius: 999px;
+          border: 1px solid rgba(22, 163, 74, 0.45);
+          background: rgba(22, 163, 74, 0.12);
+          color: #16a34a;
+        }
+
         .host-hero-feature-strip {
           position: absolute;
           left: 50%;
@@ -6170,6 +6216,27 @@ export default function HostPage() {
                 For small businesses, earn more from your space. For large
                 organizations, support ESG goals with real action.
               </p>
+
+              <div className="host-hero-earn">
+                <div className="host-hero-earn-text">
+                  <span>You set the</span>
+                  <RotatingText
+                    texts={hostRotatingWords}
+                    mainClassName="host-rotating-text"
+                    staggerFrom="last"
+                    initial={{ y: "100%" }}
+                    animate={{ y: 0 }}
+                    exit={{ y: "-120%" }}
+                    staggerDuration={0.025}
+                    splitLevelClassName="host-rotating-text-split"
+                    transition={{ type: "spring", damping: 30, stiffness: 400 }}
+                    rotationInterval={2000}
+                    splitBy="characters"
+                    auto
+                    loop
+                  />
+                </div>
+              </div>
               <div className="mt-10 flex flex-col gap-3 sm:flex-row">
                 <PrimaryButton href="/contact-us" className="host-hero-cta">
                   Start hosting

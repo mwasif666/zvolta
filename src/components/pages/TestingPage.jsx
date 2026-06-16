@@ -247,26 +247,6 @@ export default function TestingPage() {
               small to mid-size businesses build something bigger.
             </p>
           </section>
-          <footer className="bg-zinc-900/50 border-t border-zinc-800 p-8">
-            <div className="max-w-7xl mx-auto flex flex-wrap justify-center md:justify-around gap-x-10 gap-y-6 text-gray-400">
-              <div className="flex items-center gap-3 text-sm">
-                <span className="text-lg text-white">⚲</span>
-                <p>Click, connect, and unlock capital</p>
-              </div>
-              <div className="flex items-center gap-3 text-sm">
-                <span className="text-lg text-white">🔖</span>
-                <p>One flat fee with no hidden interest</p>
-              </div>
-              <div className="flex items-center gap-3 text-sm">
-                <span className="text-lg text-white">⇆</span>
-                <p>Automatic payments that flex with sales</p>
-              </div>
-              <div className="flex items-center gap-3 text-sm">
-                <span className="text-lg text-white">⚡</span>
-                <p>Frictionless payouts in just days</p>
-              </div>
-            </div>
-          </footer>
         </div>{" "}
       </div>
     </>

@@ -25,8 +25,18 @@ function ScrollController() {
       window.ScrollTrigger?.refresh?.();
     };
 
+    const scrollToPosition = (top, behavior = "smooth") => {
+      if (window.__zvoltaLenis) {
+        window.__zvoltaLenis.scrollTo(top, {
+          immediate: behavior === "auto",
+        });
+      }
+
+      window.scrollTo({ top, left: 0, behavior });
+    };
+
     const scrollToTop = () => {
-      window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+      scrollToPosition(0, "auto");
       refreshScrollAnimations();
     };
 
@@ -40,7 +50,7 @@ function ScrollController() {
         }
 
         const top = element.getBoundingClientRect().top + window.scrollY;
-        window.scrollTo({ top, left: 0, behavior: "smooth" });
+        scrollToPosition(top);
         refreshScrollAnimations();
         return true;
       };
@@ -86,6 +96,10 @@ function ScrollController() {
       }
 
       const top = element.getBoundingClientRect().top + window.scrollY;
+      if (window.__zvoltaLenis) {
+        window.__zvoltaLenis.scrollTo(top);
+      }
+
       window.scrollTo({ top, left: 0, behavior: "smooth" });
       window.ScrollTrigger?.refresh?.();
       return true;
@@ -127,10 +141,14 @@ function ScrollController() {
 
       if (nextLocation !== currentLocation) {
         window.history.pushState({}, "", nextLocation);
+        window.dispatchEvent(new Event("popstate"));
       }
 
       if (!scrollToHash(url.hash)) {
+        window.requestAnimationFrame(() => scrollToHash(url.hash));
         window.setTimeout(() => scrollToHash(url.hash), 120);
+        window.setTimeout(() => scrollToHash(url.hash), 360);
+        window.setTimeout(() => scrollToHash(url.hash), 800);
       }
     };
 

@@ -575,13 +575,14 @@ function ChargerVisual({ power }) {
   );
 }
 
-function EnvironmentSection() {
+function EnvironmentSection({ spec }) {
   const [activeTabId, setActiveTabId] = useState(environmentTabs[0].id);
   const [openIndex, setOpenIndex] = useState(0);
   const [showAudienceCards, setShowAudienceCards] = useState(false);
   const [showUseCases, setShowUseCases] = useState(false);
   const activeTab =
     environmentTabs.find((tab) => tab.id === activeTabId) ?? environmentTabs[0];
+  const audienceCards = getChargerAudienceCards(spec);
 
   return (
     <Section className="charger-environments-section">
@@ -590,7 +591,7 @@ function EnvironmentSection() {
         <h2>One charger. Multiple environments.</h2>
         <p>
           Whether you are charging at home, in a shared parking area, or in a
-          public-facing space, the 3kW charger stays simple, safe, and ready to
+          public-facing space, the {spec.power} charger stays simple, safe, and ready to
           grow with you.
         </p>
       </div>
@@ -711,7 +712,7 @@ function EnvironmentSection() {
                 Perfect for everyday charging needs
               </h2>
               <div className="three-audience-grid">
-                {threeKwAudienceCards.map(([icon, title, copy]) => (
+                {audienceCards.map(([icon, title, copy]) => (
                   <article
                     className="three-info-card three-audience-card"
                     key={title}
@@ -741,23 +742,45 @@ function EnvironmentSection() {
               >
                 <IoClose className="h-5 w-5" aria-hidden="true" />
               </button>
-              <p className="three-eyebrow">Use cases</p>
-              <h2 className="three-section-title">
-                Where the 3kW charger works best
-              </h2>
-              <div className="three-audience-grid">
-                {threeKwUseCases.map(([icon, title, copy]) => (
-                  <article
-                    className="three-info-card three-audience-card"
-                    key={title}
-                  >
-                    <span className="three-card-icon">
-                      <Icon name={icon} className="h-9 w-9" />
-                    </span>
-                    <h3>{title}</h3>
-                    <p>{copy}</p>
-                  </article>
-                ))}
+              <div className="charger-host-stories-panel">
+                <p className="mb-2 text-xs font-semibold uppercase text-[#16a34a]">
+                  Real stories
+                </p>
+                <h2 className="text-[32px] font-semibold leading-tight text-white md:text-[36px]">
+                  How hosts use charging to create site value.
+                </h2>
+                <p className="mt-5 max-w-3xl text-base leading-7 text-zinc-400">
+                  Practical examples from workspaces, restaurants, and
+                  sustainability-led businesses.
+                </p>
+                <div className="host-stories mt-12 flex snap-x gap-6 overflow-x-auto pb-4">
+                  {chargerStories.map((story, index) => (
+                    <Reveal key={story.title} delay={index * 0.05}>
+                      <article className="w-[320px] shrink-0 snap-start overflow-hidden rounded-lg border border-white/10 bg-zinc-900 sm:w-[390px]">
+                        <img
+                          src={story.image}
+                          alt=""
+                          className="h-56 w-full object-cover"
+                        />
+                        <div className="p-6">
+                          <p className="text-xs font-semibold uppercase text-[#16a34a]">
+                            {story.category}
+                          </p>
+                          <h3 className="mt-4 text-[24px] font-semibold leading-tight text-white">
+                            {story.title}
+                          </h3>
+                        </div>
+                      </article>
+                    </Reveal>
+                  ))}
+                </div>
+                <SmartLink
+                  href="/stories"
+                  className="mt-8 inline-flex min-h-12 items-center justify-center gap-2 rounded-lg border border-white/10 bg-[#111111] px-5 py-3 text-sm font-semibold text-white transition duration-300 hover:scale-[1.02] hover:border-[#16a34a]/50"
+                >
+                  Explore stories
+                  <Icon name="arrow" className="h-4 w-4" />
+                </SmartLink>
               </div>
             </div>
           </ShutterExpand>
@@ -800,6 +823,66 @@ const threeKwAudienceCards = [
     "Works well for staff, visitors, or light commercial use.",
   ],
 ];
+
+const chargerHeroImages = {
+  "3kW":
+    "https://res.cloudinary.com/diywraupt/image/upload/v1781277709/3KW_f8dgww.png",
+  "7kW":
+    "https://res.cloudinary.com/diywraupt/image/upload/v1781277794/7KW_22KW_net99f.png",
+  "22kW":
+    "https://res.cloudinary.com/diywraupt/image/upload/v1781277794/7KW_22KW_net99f.png",
+};
+
+const chargerAudienceIcons = ["home", "building", "briefcase"];
+
+function getSpecDetail(spec, label) {
+  return spec.quickDetails.find(([key]) => key === label)?.[1];
+}
+
+function getChargerHeroBenefits(spec) {
+  const bestFor = getSpecDetail(spec, "Best for") ?? spec.bestFor?.[0];
+  const powerSupport =
+    getSpecDetail(spec, "Power support") ??
+    (spec.power === "22kW" ? "Site assessment required" : "Single phase");
+
+  return [
+    ["shield", "Built-in Safety", "Protection included as standard"],
+    ["wallet", "Automated Payments", "Cashless payments via Zvolta platform"],
+    ["wifi", "Smart Software", "App and dashboard included"],
+    ["bolt", `${spec.power} Charging`, "Smart AC charging for daily use"],
+    ["droplet", "Protected Hardware", "Built for local site conditions"],
+    ["phase", powerSupport, bestFor],
+  ];
+}
+
+function getChargerQuickDetails(spec) {
+  return [
+    ["bolt", "Charging Power", spec.power],
+    ["home", "Best For", getSpecDetail(spec, "Best for") ?? spec.bestFor[0]],
+    [
+      "wrench",
+      "Installation",
+      getSpecDetail(spec, "Installation") ?? "Free standard installation",
+    ],
+    [
+      "wifi",
+      "Connectivity",
+      getSpecDetail(spec, "Software") ?? "Smart software included",
+    ],
+  ];
+}
+
+function getChargerAudienceCards(spec) {
+  if (spec.power === "3kW") {
+    return threeKwAudienceCards;
+  }
+
+  return spec.goodFor.slice(0, 3).map(([title, copy], index) => [
+    chargerAudienceIcons[index] ?? "check",
+    title,
+    copy,
+  ]);
+}
 
 const decisionComparisonRows = [
   [
@@ -890,31 +973,6 @@ const decisionSetupSteps = [
   ],
 ];
 
-const threeKwUseCases = [
-  [
-    "home",
-    "Home Charging",
-    "Ideal for overnight charging in homes and personal parking spaces.",
-  ],
-  [
-    "building",
-    "Shared Parking",
-    "A practical option for apartments, small buildings, and controlled shared bays.",
-  ],
-  [
-    "briefcase",
-    "Small Commercial Use",
-    "Suitable for offices, retail spaces, and low-demand visitor charging.",
-  ],
-];
-
-const recommendationItems = [
-  "Compact setup",
-  "Smart software",
-  "Free installation support",
-  "Expandable later",
-];
-
 const threeKwFaqs = [
   [
     "Who is this charger best for?",
@@ -951,20 +1009,20 @@ const threeHeroBenefits = [
   ["phase", "Single Phase", "Standard single-phase power supply"],
 ];
 
-function ThreeKwHero() {
+function ThreeKwHero({ spec }) {
+  const heroBenefits = getChargerHeroBenefits(spec);
+  const heroImage = chargerHeroImages[spec.power] ?? chargerHeroImages["3kW"];
+
   return (
     <section className="three-hero">
       <div className="three-container three-hero-grid">
         <div className="three-hero-copy">
           <p className="three-pill">
             <Icon name="bolt" className="h-4 w-4" />
-            3kW Power. Smart Charger.
+            {spec.power} Power. Smart Charger.
           </p>
-          <h1>3kW Smart EV Charger</h1>
-          <p className="three-hero-text">
-            A compact, connected charger built for homes, bikes, and smaller
-            spaces.
-          </p>
+          <h1>{spec.power} Smart EV Charger</h1>
+          <p className="three-hero-text">{spec.heroBody}</p>
           <div className="three-hero-made">
             <span className="three-hero-made-chip">
               <Icon name="shield" className="h-5 w-5" />
@@ -987,14 +1045,14 @@ function ThreeKwHero() {
         </div>
         <div className="three-product-card">
           <img
-            src="https://res.cloudinary.com/diywraupt/image/upload/v1781277709/3KW_f8dgww.png"
-            alt="3kW smart EV charger"
+            src={heroImage}
+            alt={`${spec.power} smart EV charger`}
           />
         </div>
       </div>
       <div className="three-container three-hero-features">
         <div className="three-hero-benefits">
-          {threeHeroBenefits.map(([icon, title, copy]) => (
+          {heroBenefits.map(([icon, title, copy]) => (
             <div className="three-hero-benefit" key={title}>
               <Icon name={icon} className="h-6 w-6" />
               <div>
@@ -1009,14 +1067,16 @@ function ThreeKwHero() {
   );
 }
 
-function ThreeKwQuickSection() {
+function ThreeKwQuickSection({ spec }) {
+  const quickDetails = getChargerQuickDetails(spec);
+
   return (
     <section className="three-section">
       <div className="three-container">
         <p className="three-eyebrow">Quick Details</p>
         <h2 className="three-section-title">Everything you need to know</h2>
         <div className="three-quick-grid">
-          {threeKwQuickDetails.map(([icon, label, value]) => (
+          {quickDetails.map(([icon, label, value]) => (
             <article className="three-info-card" key={label}>
               <span className="three-card-icon">
                 <Icon name={icon} className="h-8 w-8" />
@@ -1086,12 +1146,18 @@ function ThreeKwQuickSection() {
   );
 }
 
-function DecisionSection() {
-  const specsMiddle = Math.ceil(decisionSpecs.length / 2);
+function DecisionSection({ spec }) {
+  const decisionSpecRows = spec.technicalSpecs ?? decisionSpecs;
+  const specsMiddle = Math.ceil(decisionSpecRows.length / 2);
   const specColumns = [
-    decisionSpecs.slice(0, specsMiddle),
-    decisionSpecs.slice(specsMiddle),
+    decisionSpecRows.slice(0, specsMiddle),
+    decisionSpecRows.slice(specsMiddle),
   ];
+  const priceRow = spec.pricing?.[0];
+  const priceValue = priceRow?.[1] ?? "Contact Zvolta";
+  const pricingItems = (spec.pricing ?? [])
+    .slice(1, 5)
+    .map(([item]) => item);
 
   return (
     <section className="three-section three-decision-section">
@@ -1102,7 +1168,7 @@ function DecisionSection() {
         </h2>
         <p className="three-section-copy">
           Compare the value, review the specs, understand the setup, and see how
-          the 3kW charger fits your space.
+          the {spec.power} charger fits your space.
         </p>
 
         <div className="three-decision-grid">
@@ -1110,7 +1176,7 @@ function DecisionSection() {
             <h3>Comparison with imported chargers</h3>
             <div className="three-compare-table">
               <div />
-              <strong>This 3kW charger</strong>
+              <strong>This {spec.power} charger</strong>
               <strong>Typical imported chargers</strong>
               {decisionComparisonRows.map(
                 ([icon, label, current, imported]) => (
@@ -1130,15 +1196,15 @@ function DecisionSection() {
           <article className="three-panel three-pricing-panel">
             <h3>Pricing</h3>
             <div className="three-price">
-              <span>PKR</span>
-              <strong>74,999</strong>
+              {priceValue.startsWith("PKR") ? <span>PKR</span> : null}
+              <strong>{priceValue.replace(/^PKR\s*/i, "")}</strong>
             </div>
             <p>
               Includes charger hardware, smart software, and standard
               installation support.
             </p>
             <div className="three-check-list">
-              {decisionPricingItems.map((item) => (
+              {(pricingItems.length ? pricingItems : decisionPricingItems).map((item) => (
                 <div key={item}>
                   <Icon name="check" className="h-5 w-5" />
                   <span>{item}</span>
@@ -1209,40 +1275,18 @@ function DecisionSection() {
   );
 }
 
-function UseCasesRecommendationFaq() {
+function UseCasesRecommendationFaq({ spec }) {
   const [openFaq, setOpenFaq] = useState(0);
+  const faqs = spec.faqs?.length ? spec.faqs.slice(0, 8) : threeKwFaqs;
 
   return (
     <>
-      <section className="three-section three-recommendation-section">
-        <div className="three-container three-recommendation-grid">
-          <div>
-            <p className="three-eyebrow">Recommendation</p>
-            <h2 className="three-section-title">Our recommendation</h2>
-            <p className="three-section-copy">
-              Choose the 3kW charger if you want a compact, connected charging
-              solution for everyday use. It is especially suitable for homes,
-              lighter charging demand, and locations where simplicity matters
-              more than high-speed output.
-            </p>
-          </div>
-          <div className="three-recommendation-card">
-            {recommendationItems.map((item) => (
-              <div key={item}>
-                <Icon name="check" className="h-5 w-5" />
-                <span>{item}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <section className="three-section">
         <div className="three-container">
           <p className="three-eyebrow">FAQs</p>
           <h2 className="three-section-title">Frequently asked questions</h2>
           <div className="three-faq-list">
-            {threeKwFaqs.map(([question, answer], index) => {
+            {faqs.map(([question, answer], index) => {
               const isOpen = openFaq === index;
 
               return (
@@ -1518,11 +1562,11 @@ function ThreeKwHostWhoBlock({
   );
 }
 
-function ThreeKwChargerPage() {
+function ThreeKwChargerPage({ spec }) {
   const [showHostingSections, setShowHostingSections] = useState(false);
   return (
     <>
-      <style data-page-style="charger-spec:3kw-redesign">{`
+      <style data-page-style={`charger-spec:${spec.pageId}-redesign`}>{`
         .three-page {
           background: #050606;
           color: #FFFFFF;
@@ -3416,11 +3460,11 @@ function ThreeKwChargerPage() {
       `}</style>
 
       <div className="three-page font-sans">
-        <ThreeKwHero />
-        <ThreeKwQuickSection />
-        <EnvironmentSection />
-        <DecisionSection />
-        <UseCasesRecommendationFaq />
+        <ThreeKwHero spec={spec} />
+        <ThreeKwQuickSection spec={spec} />
+        <EnvironmentSection spec={spec} />
+        <DecisionSection spec={spec} />
+        <UseCasesRecommendationFaq spec={spec} />
         <ThreeKwHostWhoBlock
           showHostingSections={showHostingSections}
           onShowHostingSections={() => setShowHostingSections(true)}
@@ -3499,8 +3543,8 @@ function LeadForm({ spec }) {
 export default function ChargerSpecPage({ spec }) {
   const common = chargerSpecCommon;
 
-  if (spec.power === "3kW") {
-    return <ThreeKwChargerPage />;
+  if (["3kW", "7kW", "22kW"].includes(spec.power)) {
+    return <ThreeKwChargerPage spec={spec} />;
   }
 
   return (

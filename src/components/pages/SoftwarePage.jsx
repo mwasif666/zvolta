@@ -276,7 +276,7 @@ function PrimaryButton({ href = DEMO_LINK, children, className = "" }) {
   return (
     <SmartLink
       href={href}
-      className={`inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-[#00E5A8] px-5 py-3 text-sm font-semibold text-black transition duration-300 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-[#00E5A8]/45 ${className}`}
+      className={`inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-[#16a34a] px-5 py-3 text-sm font-semibold text-black transition duration-300 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-[#16a34a]/45 ${className}`}
     >
       {children}
       <Icon name="arrow" className="h-4 w-4" />
@@ -288,7 +288,7 @@ function SecondaryButton({ href = CONTACT_LINK, children, className = "" }) {
   return (
     <SmartLink
       href={href}
-      className={`inline-flex min-h-12 items-center justify-center gap-2 rounded-lg border border-[#1F1F1F] bg-[#111111] px-5 py-3 text-sm font-semibold text-white transition duration-300 hover:scale-[1.02] hover:border-[#00E5A8]/50 focus:outline-none focus:ring-2 focus:ring-white/20 ${className}`}
+      className={`inline-flex min-h-12 items-center justify-center gap-2 rounded-lg border border-[#1F1F1F] bg-[#111111] px-5 py-3 text-sm font-semibold text-white transition duration-300 hover:scale-[1.02] hover:border-[#16a34a]/50 focus:outline-none focus:ring-2 focus:ring-white/20 ${className}`}
     >
       {children}
       <Icon name="arrow" className="h-4 w-4" />
@@ -302,7 +302,7 @@ function SectionIntro({ eyebrow, title, copy, centered = false }) {
       className={`software-reveal ${centered ? "mx-auto text-center" : ""} max-w-3xl`}
     >
       {eyebrow ? (
-        <p className="mb-4 text-xs font-semibold uppercase text-[#00E5A8]">
+        <p className="mb-4 text-xs font-semibold uppercase text-[#16a34a]">
           {eyebrow}
         </p>
       ) : null}
@@ -332,12 +332,12 @@ function ChargerMini({ active = false }) {
   return (
     <div className="relative mx-auto h-36 w-24">
       <div
-        className={`absolute inset-x-4 top-0 h-full rounded-lg border bg-[#141414] ${active ? "border-[#00E5A8]/55" : "border-[#2A2A2A]"}`}
+        className={`absolute inset-x-4 top-0 h-full rounded-lg border bg-[#141414] ${active ? "border-[#16a34a]/55" : "border-[#2A2A2A]"}`}
       >
         <div className="mx-auto mt-4 h-3 w-10 rounded-sm bg-[#232323]" />
         <div className="mx-auto mt-4 h-12 w-10 rounded-md border border-[#2A2A2A] bg-[#0B0B0B]" />
         <div
-          className={`absolute bottom-4 left-5 h-2 w-2 rounded-full ${active ? "bg-[#00E5A8]" : "bg-[#303030]"}`}
+          className={`absolute bottom-4 left-5 h-2 w-2 rounded-full ${active ? "bg-[#16a34a]" : "bg-[#303030]"}`}
         />
         <div className="absolute bottom-4 right-5 h-2 w-2 rounded-full bg-[#303030]" />
       </div>
@@ -377,7 +377,7 @@ function PhoneMini() {
 
 function DashboardMockup({ variant = "operator", compact = false }) {
   const status = [
-    ["Available", "28", "#00E5A8"],
+    ["Available", "28", "#16a34a"],
     ["In use", "12", "#FFFFFF"],
     ["Offline", "03", "#A1A1A1"],
   ];
@@ -388,7 +388,7 @@ function DashboardMockup({ variant = "operator", compact = false }) {
     >
       <div className="flex items-center justify-between gap-4 border-b border-[#1F1F1F] pb-4">
         <div>
-          <p className="text-xs font-semibold uppercase text-[#00E5A8]">
+          <p className="text-xs font-semibold uppercase text-[#16a34a]">
             {variant === "host"
               ? "Host dashboard"
               : variant === "enterprise"
@@ -400,7 +400,7 @@ function DashboardMockup({ variant = "operator", compact = false }) {
           </p>
         </div>
         <div className="hidden gap-2 sm:flex">
-          <span className="h-3 w-3 rounded-full bg-[#00E5A8]" />
+          <span className="h-3 w-3 rounded-full bg-[#16a34a]" />
           <span className="h-3 w-3 rounded-full bg-white/35" />
           <span className="h-3 w-3 rounded-full bg-white/15" />
         </div>
@@ -441,7 +441,7 @@ function DashboardMockup({ variant = "operator", compact = false }) {
                       {index + 2} chargers online
                     </p>
                   </div>
-                  <span className="rounded-full bg-[#00E5A8]/12 px-3 py-1 text-xs font-semibold text-[#00E5A8]">
+                  <span className="rounded-full bg-[#16a34a]/12 px-3 py-1 text-xs font-semibold text-[#16a34a]">
                     OK
                   </span>
                 </div>
@@ -464,7 +464,7 @@ function DashboardMockup({ variant = "operator", compact = false }) {
             {[42, 68, 52, 88, 76, 94].map((height, index) => (
               <span
                 key={height}
-                className={`flex-1 rounded-t-md ${index === 5 ? "bg-[#00E5A8]" : "bg-white/16"}`}
+                className={`flex-1 rounded-t-md ${index === 5 ? "bg-[#16a34a]" : "bg-white/16"}`}
                 style={{ height: `${height}%` }}
               />
             ))}
@@ -486,8 +486,8 @@ function ProductNetworkVisual() {
           </p>
         </div>
         <div className="grid gap-4">
-          <div className="rounded-lg border border-[#00E5A8]/35 bg-[#00E5A8]/10 p-5">
-            <p className="text-xs font-semibold uppercase text-[#00E5A8]">
+          <div className="rounded-lg border border-[#16a34a]/35 bg-[#16a34a]/10 p-5">
+            <p className="text-xs font-semibold uppercase text-[#16a34a]">
               Zvolta software layer
             </p>
             <p className="mt-2 text-2xl font-semibold text-white">
@@ -500,14 +500,14 @@ function ProductNetworkVisual() {
                 key={item}
                 className="rounded-lg border border-[#1F1F1F] bg-[#0B0B0B] p-4"
               >
-                <Icon name="node" className="h-5 w-5 text-[#00E5A8]" />
+                <Icon name="node" className="h-5 w-5 text-[#16a34a]" />
                 <p className="mt-4 text-sm font-semibold text-white">{item}</p>
               </div>
             ))}
           </div>
         </div>
       </div>
-      <div className="software-line absolute left-[30%] top-[34%] hidden h-px w-[12%] bg-[#00E5A8]/60 md:block" />
+      <div className="software-line absolute left-[30%] top-[34%] hidden h-px w-[12%] bg-[#16a34a]/60 md:block" />
     </div>
   );
 }
@@ -524,7 +524,7 @@ function Diagram({ nodes }) {
           {index < nodes.length - 1 ? (
             <Icon
               name="arrow"
-              className="absolute -right-5 top-1/2 hidden h-5 w-5 -translate-y-1/2 text-[#00E5A8] md:block"
+              className="absolute -right-5 top-1/2 hidden h-5 w-5 -translate-y-1/2 text-[#16a34a] md:block"
             />
           ) : null}
         </div>
@@ -541,7 +541,7 @@ function ComparisonColumn({ title, items, positive = false }) {
         {items.map((item) => (
           <div key={item} className="flex items-center gap-3">
             <span
-              className={`grid h-7 w-7 shrink-0 place-items-center rounded-md ${positive ? "bg-[#00E5A8] text-black" : "bg-[#0B0B0B] text-[#A1A1A1]"}`}
+              className={`grid h-7 w-7 shrink-0 place-items-center rounded-md ${positive ? "bg-[#16a34a] text-black" : "bg-[#0B0B0B] text-[#A1A1A1]"}`}
             >
               <Icon name="check" className="h-4 w-4" />
             </span>
@@ -568,7 +568,7 @@ function RangeField({
       <span className="mb-3 flex items-center justify-between gap-4 text-sm font-semibold text-white">
         <span>{label}</span>
         <span
-          className={accent === "blue" ? "text-[#63A8FF]" : "text-[#00E5A8]"}
+          className={accent === "blue" ? "text-[#16a34a]" : "text-[#16a34a]"}
         >
           {suffix || value}
         </span>
@@ -632,8 +632,8 @@ function ProjectionChart({ data, formatValue }) {
             x2="0"
             y2="1"
           >
-            <stop offset="0%" stopColor="#00E5A8" stopOpacity="0.28" />
-            <stop offset="100%" stopColor="#00E5A8" stopOpacity="0" />
+            <stop offset="0%" stopColor="#16a34a" stopOpacity="0.28" />
+            <stop offset="100%" stopColor="#16a34a" stopOpacity="0" />
           </linearGradient>
         </defs>
         {[0.25, 0.5, 0.75].map((ratio) => {
@@ -662,7 +662,7 @@ function ProjectionChart({ data, formatValue }) {
         <path
           d={linePath}
           fill="none"
-          stroke="#00E5A8"
+          stroke="#16a34a"
           strokeWidth="4"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -673,7 +673,7 @@ function ProjectionChart({ data, formatValue }) {
             cx={xFor(index)}
             cy={yFor(point.cashFlow)}
             r={index % 2 === 0 ? 4 : 0}
-            fill="#00E5A8"
+            fill="#16a34a"
           />
         ))}
         {ticks.map((tick) => (
@@ -761,7 +761,7 @@ function ModularRoiCalculator() {
       <div className="software-container">
         <div className="grid gap-10">
           <div className="software-reveal mx-auto max-w-5xl text-center">
-            <p className="mb-4 text-xs font-semibold uppercase text-[#00E5A8]">
+            <p className="mb-4 text-xs font-semibold uppercase text-[#16a34a]">
               Estimate your earnings
             </p>
             <h2 className="text-[38px] font-semibold leading-[1.08] text-white md:text-[48px] lg:whitespace-nowrap">
@@ -791,7 +791,7 @@ function ModularRoiCalculator() {
                 key={label}
                 className="rounded-lg border border-[#1F1F1F] bg-[#111111] p-6"
               >
-                <div className="mb-5 grid h-10 w-10 place-items-center rounded-lg bg-[#0B0B0B] text-[#00E5A8]">
+                <div className="mb-5 grid h-10 w-10 place-items-center rounded-lg bg-[#0B0B0B] text-[#16a34a]">
                   <Icon name={icon} className="h-5 w-5" />
                 </div>
                 <p className="text-xs font-semibold uppercase text-[#A1A1A1]">
@@ -809,7 +809,7 @@ function ModularRoiCalculator() {
               <div className="grid gap-5">
                 <div className="rounded-lg border border-[#1F1F1F] bg-[#0B0B0B] p-5">
                   <div className="mb-5 flex items-center gap-3 border-b border-[#1F1F1F] pb-4">
-                    <Icon name="chart" className="h-5 w-5 text-[#00E5A8]" />
+                    <Icon name="chart" className="h-5 w-5 text-[#16a34a]" />
                     <h3 className="text-lg font-semibold text-white">
                       Base setup
                     </h3>
@@ -847,7 +847,7 @@ function ModularRoiCalculator() {
 
                 <div className="rounded-lg border border-[#1F1F1F] bg-[#0B0B0B] p-5">
                   <div className="mb-5 flex items-center gap-3 border-b border-[#1F1F1F] pb-4">
-                    <Icon name="layers" className="h-5 w-5 text-[#63A8FF]" />
+                    <Icon name="layers" className="h-5 w-5 text-[#16a34a]" />
                     <h3 className="text-lg font-semibold text-white">
                       Modular expansion
                     </h3>
@@ -860,8 +860,8 @@ function ModularRoiCalculator() {
                         onClick={() => setAdditionalChargers(value)}
                         className={`min-h-11 rounded-lg border px-3 text-sm font-semibold transition duration-300 ${
                           additionalChargers === value
-                            ? "border-[#63A8FF] bg-[#63A8FF] text-black"
-                            : "border-[#1F1F1F] bg-[#111111] text-white hover:border-[#63A8FF]/70"
+                            ? "border-[#16a34a] bg-[#16a34a] text-black"
+                            : "border-[#1F1F1F] bg-[#111111] text-white hover:border-[#16a34a]/70"
                         }`}
                       >
                         {value === 0 ? "None" : `${value} units`}
@@ -898,14 +898,14 @@ function ModularRoiCalculator() {
                   ) : null}
                 </div>
 
-                <div className="rounded-lg border border-[#00E5A8]/30 bg-[#06130F] p-5">
-                  <p className="text-xs font-semibold uppercase text-[#00E5A8]">
+                <div className="rounded-lg border border-[#16a34a]/30 bg-[#06130F] p-5">
+                  <p className="text-xs font-semibold uppercase text-[#16a34a]">
                     Total investment
                   </p>
                   <p className="mt-2 text-3xl font-semibold text-white">
                     {formatPKR(results.totalCapEx)}
                   </p>
-                  <div className="mt-4 grid gap-2 border-t border-[#00E5A8]/15 pt-4 text-xs">
+                  <div className="mt-4 grid gap-2 border-t border-[#16a34a]/15 pt-4 text-xs">
                     <div className="flex justify-between gap-4 text-[#A1A1A1]">
                       <span>Base unit</span>
                       <span className="text-white">
@@ -915,7 +915,7 @@ function ModularRoiCalculator() {
                     {additionalChargers > 0 ? (
                       <div className="flex justify-between gap-4 text-[#A1A1A1]">
                         <span>{additionalChargers} add-ons</span>
-                        <span className="text-[#63A8FF]">
+                        <span className="text-[#16a34a]">
                           +{formatPKR((additionalChargers / 2) * costPerPair)}
                         </span>
                       </div>
@@ -963,7 +963,7 @@ function ModularRoiCalculator() {
                     {additionalChargers >= 2 ? (
                       <div className="flex items-center justify-between gap-4 border-t border-[#1F1F1F] pt-4">
                         <span className="text-[#A1A1A1]">Expansion set A</span>
-                        <span className="font-semibold text-[#63A8FF]">
+                        <span className="font-semibold text-[#16a34a]">
                           {formatPKR(results.expansionARevenue)} / yr
                         </span>
                       </div>
@@ -971,7 +971,7 @@ function ModularRoiCalculator() {
                     {additionalChargers >= 4 ? (
                       <div className="flex items-center justify-between gap-4 border-t border-[#1F1F1F] pt-4">
                         <span className="text-[#A1A1A1]">Expansion set B</span>
-                        <span className="font-semibold text-[#63A8FF]">
+                        <span className="font-semibold text-[#16a34a]">
                           {formatPKR(results.expansionBRevenue)} / yr
                         </span>
                       </div>
@@ -1153,7 +1153,7 @@ export default function SoftwarePage() {
           border-radius: 999px;
           background: #1F1F1F;
           cursor: pointer;
-          accent-color: #00E5A8;
+          accent-color: #16a34a;
         }
 
         .software-roi-range::-webkit-slider-thumb {
@@ -1162,8 +1162,8 @@ export default function SoftwarePage() {
           appearance: none;
           border-radius: 999px;
           border: 3px solid #0B0B0B;
-          background: #00E5A8;
-          box-shadow: 0 0 0 1px rgba(0, 229, 168, 0.45);
+          background: #16a34a;
+          box-shadow: 0 0 0 1px rgba(22, 163, 74, 0.45);
         }
 
         .software-roi-range::-moz-range-thumb {
@@ -1171,22 +1171,22 @@ export default function SoftwarePage() {
           height: 18px;
           border: 3px solid #0B0B0B;
           border-radius: 999px;
-          background: #00E5A8;
-          box-shadow: 0 0 0 1px rgba(0, 229, 168, 0.45);
+          background: #16a34a;
+          box-shadow: 0 0 0 1px rgba(22, 163, 74, 0.45);
         }
 
         .software-roi-range-blue {
-          accent-color: #63A8FF;
+          accent-color: #16a34a;
         }
 
         .software-roi-range-blue::-webkit-slider-thumb {
-          background: #63A8FF;
-          box-shadow: 0 0 0 1px rgba(99, 168, 255, 0.45);
+          background: #16a34a;
+          box-shadow: 0 0 0 1px rgba(22, 163, 74, 0.45);
         }
 
         .software-roi-range-blue::-moz-range-thumb {
-          background: #63A8FF;
-          box-shadow: 0 0 0 1px rgba(99, 168, 255, 0.45);
+          background: #16a34a;
+          box-shadow: 0 0 0 1px rgba(22, 163, 74, 0.45);
         }
 
         .software-phone {
@@ -1252,10 +1252,10 @@ export default function SoftwarePage() {
 
       <div ref={pageRef} className="software-page font-sans">
         <section className="relative overflow-hidden border-b border-[#1F1F1F] pt-32 md:pt-40">
-          <div className="pointer-events-none absolute left-1/2 top-20 h-[560px] w-[560px] -translate-x-1/2 rounded-full bg-[#00E5A8]/8 blur-[120px]" />
+          <div className="pointer-events-none absolute left-1/2 top-20 h-[560px] w-[560px] -translate-x-1/2 rounded-full bg-[#16a34a]/8 blur-[120px]" />
           <div className="software-container relative grid min-h-[calc(100vh-80px)] gap-16 pb-24 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
             <div className="software-hero-copy max-w-3xl">
-              <p className="text-xs font-semibold uppercase text-[#00E5A8]">
+              <p className="text-xs font-semibold uppercase text-[#16a34a]">
                 Software for operators
               </p>
               <h1 className="mt-5 text-[42px] font-semibold leading-[1.03] text-white md:text-[62px]">
@@ -1294,9 +1294,9 @@ export default function SoftwarePage() {
             {audienceCards.map((card) => (
               <article
                 key={card.title}
-                className="rounded-lg border border-[#1F1F1F] bg-[#111111] p-6 transition duration-300 hover:scale-[1.02] hover:border-[#00E5A8]/45"
+                className="rounded-lg border border-[#1F1F1F] bg-[#111111] p-6 transition duration-300 hover:scale-[1.02] hover:border-[#16a34a]/45"
               >
-                <div className="mb-10 grid h-10 w-10 place-items-center rounded-lg bg-[#0B0B0B] text-[#00E5A8]">
+                <div className="mb-10 grid h-10 w-10 place-items-center rounded-lg bg-[#0B0B0B] text-[#16a34a]">
                   <Icon name="node" className="h-5 w-5" />
                 </div>
                 <h3 className="text-xl font-semibold text-white">
@@ -1325,7 +1325,7 @@ export default function SoftwarePage() {
                 key={title}
                 className={`rounded-lg border border-[#1F1F1F] bg-[#111111] p-6 ${index < 2 ? "lg:col-span-2" : ""}`}
               >
-                <div className="mb-8 grid h-10 w-10 place-items-center rounded-lg bg-[#0B0B0B] text-[#00E5A8]">
+                <div className="mb-8 grid h-10 w-10 place-items-center rounded-lg bg-[#0B0B0B] text-[#16a34a]">
                   <Icon
                     name={index === 0 ? "bolt" : "check"}
                     className="h-5 w-5"
@@ -1359,7 +1359,7 @@ export default function SoftwarePage() {
                     onMouseEnter={() => setSmartState(step)}
                     className="software-smart-step rounded-lg border border-[#1F1F1F] bg-[#111111] p-6 lg:min-h-[220px]"
                   >
-                    <p className="text-xs font-semibold text-[#00E5A8]">
+                    <p className="text-xs font-semibold text-[#16a34a]">
                       0{index + 1}
                     </p>
                     <h3 className="mt-5 text-[24px] font-semibold text-white">
@@ -1383,8 +1383,8 @@ export default function SoftwarePage() {
                       </p>
                     </div>
                     <div>
-                      <div className="rounded-lg border border-[#00E5A8]/35 bg-[#00E5A8]/10 p-5">
-                        <p className="text-xs font-semibold uppercase text-[#00E5A8]">
+                      <div className="rounded-lg border border-[#16a34a]/35 bg-[#16a34a]/10 p-5">
+                        <p className="text-xs font-semibold uppercase text-[#16a34a]">
                           Active software state
                         </p>
                         <p className="mt-3 text-3xl font-semibold leading-tight text-white">
@@ -1393,7 +1393,7 @@ export default function SoftwarePage() {
                         <p className="mt-4 text-sm leading-6 text-[#A1A1A1]">
                           {smartState.copy}
                         </p>
-                        <div className="mt-5 grid grid-cols-3 gap-2 border-t border-[#00E5A8]/20 pt-4">
+                        <div className="mt-5 grid grid-cols-3 gap-2 border-t border-[#16a34a]/20 pt-4">
                           {[
                             ["28", "Available"],
                             ["12", "In use"],
@@ -1579,7 +1579,7 @@ export default function SoftwarePage() {
           />
           <div className="software-stagger mt-12 grid gap-8 lg:grid-cols-2">
             <article className="rounded-lg border border-[#1F1F1F] bg-[#111111] p-8">
-              <p className="text-xs font-semibold uppercase text-[#00E5A8]">
+              <p className="text-xs font-semibold uppercase text-[#16a34a]">
                 Zvolta powered
               </p>
               <h3 className="mt-5 text-[32px] font-semibold text-white">
@@ -1587,7 +1587,7 @@ export default function SoftwarePage() {
               </h3>
             </article>
             <article className="rounded-lg border border-[#1F1F1F] bg-[#111111] p-8">
-              <p className="text-xs font-semibold uppercase text-[#00E5A8]">
+              <p className="text-xs font-semibold uppercase text-[#16a34a]">
                 Your own brand
               </p>
               <h3 className="mt-5 text-[32px] font-semibold text-white">
@@ -1611,7 +1611,7 @@ export default function SoftwarePage() {
             />
             <div className="software-reveal rounded-lg border border-[#1F1F1F] bg-[#111111] p-8">
               <div className="grid place-items-center gap-4">
-                <div className="rounded-lg border border-[#00E5A8]/35 bg-[#00E5A8]/10 px-6 py-4 text-center text-lg font-semibold text-white">
+                <div className="rounded-lg border border-[#16a34a]/35 bg-[#16a34a]/10 px-6 py-4 text-center text-lg font-semibold text-white">
                   Zvolta
                 </div>
                 <div className="software-stagger grid w-full gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -1728,7 +1728,7 @@ export default function SoftwarePage() {
                 key={title}
                 className="grid gap-5 rounded-lg border border-[#1F1F1F] bg-[#111111] p-6 md:grid-cols-[110px_1fr]"
               >
-                <p className="text-sm font-semibold text-[#00E5A8]">
+                <p className="text-sm font-semibold text-[#16a34a]">
                   Step {index + 1}
                 </p>
                 <div>
@@ -1779,7 +1779,7 @@ export default function SoftwarePage() {
                 key={story}
                 className="software-reveal w-[320px] shrink-0 snap-start rounded-lg border border-[#1F1F1F] bg-[#111111] p-6 sm:w-[390px]"
               >
-                <p className="text-xs font-semibold uppercase text-[#00E5A8]">
+                <p className="text-xs font-semibold uppercase text-[#16a34a]">
                   Story 0{index + 1}
                 </p>
                 <h3 className="mt-5 text-[24px] font-semibold leading-tight text-white">
@@ -1812,7 +1812,7 @@ export default function SoftwarePage() {
         </PageSection>
 
         <section className="relative overflow-hidden py-24 md:py-32">
-          <div className="pointer-events-none absolute left-1/2 top-1/2 h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#00E5A8]/8 blur-[120px]" />
+          <div className="pointer-events-none absolute left-1/2 top-1/2 h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#16a34a]/8 blur-[120px]" />
           <div className="software-container relative">
             <div className="software-reveal mx-auto max-w-4xl text-center">
               <h2 className="text-[40px] font-semibold leading-[1.04] text-white md:text-[56px]">
@@ -1844,7 +1844,7 @@ function FeaturePill({ children }) {
 function FeatureCard({ title }) {
   return (
     <div className="rounded-lg border border-[#1F1F1F] bg-[#111111] p-5">
-      <div className="mb-8 grid h-9 w-9 place-items-center rounded-lg bg-[#0B0B0B] text-[#00E5A8]">
+      <div className="mb-8 grid h-9 w-9 place-items-center rounded-lg bg-[#0B0B0B] text-[#16a34a]">
         <Icon name="check" className="h-4 w-4" />
       </div>
       <p className="text-base font-semibold text-white">{title}</p>

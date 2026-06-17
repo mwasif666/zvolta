@@ -113,7 +113,7 @@ function PrimaryButton({ href = APP_LINK, children, className = "" }) {
   return (
     <SmartLink
       href={href}
-      className={`inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-[#00E5A8] px-5 py-3 text-sm font-semibold text-black transition duration-300 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-[#00E5A8]/45 ${className}`}
+      className={`inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-[#16a34a] px-5 py-3 text-sm font-semibold text-black transition duration-300 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-[#16a34a]/45 ${className}`}
     >
       {children}
       <Icon name="arrow" className="h-4 w-4" />
@@ -125,7 +125,7 @@ function SecondaryButton({ href = MAP_LINK, children, className = "" }) {
   return (
     <SmartLink
       href={href}
-      className={`inline-flex min-h-12 items-center justify-center gap-2 rounded-lg border border-[#1F1F1F] bg-[#111111] px-5 py-3 text-sm font-semibold text-white transition duration-300 hover:scale-[1.02] hover:border-[#00E5A8]/50 focus:outline-none focus:ring-2 focus:ring-white/20 ${className}`}
+      className={`inline-flex min-h-12 items-center justify-center gap-2 rounded-lg border border-[#1F1F1F] bg-[#111111] px-5 py-3 text-sm font-semibold text-white transition duration-300 hover:scale-[1.02] hover:border-[#16a34a]/50 focus:outline-none focus:ring-2 focus:ring-white/20 ${className}`}
     >
       {children}
       <Icon name="arrow" className="h-4 w-4" />
@@ -139,7 +139,7 @@ function SectionIntro({ eyebrow, title, copy, centered = false }) {
       className={`charge-reveal ${centered ? "mx-auto text-center" : ""} max-w-3xl`}
     >
       {eyebrow ? (
-        <p className="mb-4 text-xs font-semibold uppercase text-[#00E5A8]">
+        <p className="mb-4 text-xs font-semibold uppercase text-[#16a34a]">
           {eyebrow}
         </p>
       ) : null}
@@ -184,7 +184,7 @@ function ChargingWorksSection({ activeScreen, setActiveScreen }) {
                 onMouseEnter={() => setActiveScreen(step.screen)}
                 onFocus={() => setActiveScreen(step.screen)}
               >
-                <p className="text-xs font-semibold text-[#00E5A8]">
+                <p className="text-xs font-semibold text-[#16a34a]">
                   0{index + 1}
                 </p>
                 <h3 className="mt-5 text-[24px] font-semibold text-white">
@@ -225,7 +225,7 @@ function AppScreen({ screen = "home" }) {
           ].map(([position, label]) => (
             <div
               key={label}
-              className={`map-marker absolute ${position} grid h-11 w-11 place-items-center rounded-full bg-[#00E5A8] text-[11px] font-bold text-black shadow-lg`}
+              className={`map-marker absolute ${position} grid h-11 w-11 place-items-center rounded-full bg-[#16a34a] text-[11px] font-bold text-black shadow-lg`}
             >
               {label}
             </div>
@@ -237,7 +237,7 @@ function AppScreen({ screen = "home" }) {
               <p className="text-sm font-bold text-zinc-950">Gulberg Station</p>
               <p className="mt-1 text-xs text-zinc-500">2 chargers available</p>
             </div>
-            <span className="rounded-full bg-[#E8FFF8] px-3 py-1 text-xs font-bold text-[#007A59]">
+            <span className="rounded-full bg-[#dcfce7] px-3 py-1 text-xs font-bold text-[#16a34a]">
               Open
             </span>
           </div>
@@ -269,7 +269,7 @@ function AppScreen({ screen = "home" }) {
         <p className="mt-6 text-center text-sm text-white/70">
           Scan the QR code on the charger to start.
         </p>
-        <button className="mt-8 h-12 rounded-2xl bg-[#00E5A8] text-sm font-bold text-black">
+        <button className="mt-8 h-12 rounded-2xl bg-[#16a34a] text-sm font-bold text-black">
           Start session
         </button>
         <AppNav active="scan" dark />
@@ -285,7 +285,7 @@ function AppScreen({ screen = "home" }) {
           <p className="text-xs text-white/50">Charging now</p>
           <p className="mt-2 text-3xl font-semibold">4.8 kWh</p>
           <div className="mt-5 h-3 overflow-hidden rounded-full bg-white/10">
-            <div className="h-full w-[68%] rounded-full bg-[#00E5A8]" />
+            <div className="h-full w-[68%] rounded-full bg-[#16a34a]" />
           </div>
           <div className="mt-5 grid grid-cols-2 gap-3 text-sm">
             <div className="rounded-2xl bg-white/10 p-3">
@@ -298,7 +298,7 @@ function AppScreen({ screen = "home" }) {
             </div>
           </div>
         </div>
-        <button className="mt-6 h-12 rounded-2xl bg-[#00E5A8] text-sm font-bold text-black">
+        <button className="mt-6 h-12 rounded-2xl bg-[#16a34a] text-sm font-bold text-black">
           Pay in app
         </button>
         <AppNav active="charge" />
@@ -314,7 +314,7 @@ function AppScreen({ screen = "home" }) {
           <p className="text-sm text-white/55">Wallet balance</p>
           <p className="mt-3 text-4xl font-semibold">PKR 2,400</p>
           <div className="mt-6 flex gap-3">
-            <span className="rounded-full bg-[#00E5A8] px-4 py-2 text-xs font-bold text-black">
+            <span className="rounded-full bg-[#16a34a] px-4 py-2 text-xs font-bold text-black">
               Top up
             </span>
             <span className="rounded-full bg-white/10 px-4 py-2 text-xs font-bold">
@@ -402,7 +402,7 @@ function AppScreen({ screen = "home" }) {
     <div className="app-screen bg-white">
       <AppTop title="Zvolta" />
       <div className="mt-5 rounded-[28px] bg-[#06130F] p-5 text-white">
-        <p className="text-xs uppercase text-[#00E5A8]">Ready to charge</p>
+        <p className="text-xs uppercase text-[#16a34a]">Ready to charge</p>
         <p className="mt-4 text-3xl font-semibold leading-tight">
           Find nearby Zvolta stations.
         </p>
@@ -436,7 +436,7 @@ function AppTop({ title, dark = false }) {
         <p className="text-xl font-semibold">{title}</p>
       </div>
       <div
-        className={`h-10 w-10 rounded-full ${dark ? "bg-white/10" : "bg-[#00E5A8]"}`}
+        className={`h-10 w-10 rounded-full ${dark ? "bg-white/10" : "bg-[#16a34a]"}`}
       />
     </div>
   );
@@ -512,7 +512,7 @@ function AppNav({ active, dark = false }) {
       {items.map((item) => (
         <span
           key={item}
-          className={`flex h-8 items-center justify-center rounded-xl ${active === item ? "bg-[#00E5A8] text-black" : "text-white/40"}`}
+          className={`flex h-8 items-center justify-center rounded-xl ${active === item ? "bg-[#16a34a] text-black" : "text-white/40"}`}
         >
           {NAV_ICONS[item]}
         </span>
@@ -701,10 +701,10 @@ export default function ChargePage() {
       <div ref={pageRef} className="charge-page font-sans">
         <div className="charge-stack">
           <section className="charge-stack-panel charge-stack-panel--hero relative overflow-hidden border-b border-[#1F1F1F] pt-32 md:pt-40">
-            <div className="pointer-events-none absolute left-1/2 top-20 h-[560px] w-[560px] -translate-x-1/2 rounded-full bg-[#00E5A8]/8 blur-[120px]" />
+            <div className="pointer-events-none absolute left-1/2 top-20 h-[560px] w-[560px] -translate-x-1/2 rounded-full bg-[#16a34a]/8 blur-[120px]" />
             <div className="charge-container relative grid min-h-[calc(100vh-80px)] gap-16 pb-24 lg:grid-cols-[1fr_0.78fr] lg:items-center">
               <div className="charge-hero-copy max-w-3xl">
-                <p className="text-xs font-semibold uppercase text-[#00E5A8]">
+                <p className="text-xs font-semibold uppercase text-[#16a34a]">
                   Zvolta charging
                 </p>
                 <h1 className="mt-5 text-[44px] font-semibold leading-[1.03] text-white md:text-[64px]">
@@ -749,9 +749,9 @@ export default function ChargePage() {
             {vehicleTypes.map((vehicle) => (
               <div
                 key={vehicle}
-                className="group rounded-lg border border-[#1F1F1F] bg-[#111111] p-6 transition duration-300 hover:scale-[1.02] hover:border-[#00E5A8]/45"
+                className="group rounded-lg border border-[#1F1F1F] bg-[#111111] p-6 transition duration-300 hover:scale-[1.02] hover:border-[#16a34a]/45"
               >
-                <div className="mb-10 grid h-10 w-10 place-items-center rounded-lg bg-[#0B0B0B] text-[#00E5A8]">
+                <div className="mb-10 grid h-10 w-10 place-items-center rounded-lg bg-[#0B0B0B] text-[#16a34a]">
                   <Icon name="check" className="h-4 w-4" />
                 </div>
                 <h3 className="text-xl font-semibold text-white">{vehicle}</h3>
@@ -764,7 +764,7 @@ export default function ChargePage() {
         </PageSection>
 
         <section className="relative overflow-hidden py-24 md:py-32">
-          <div className="pointer-events-none absolute left-1/2 top-1/2 h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#00E5A8]/8 blur-[120px]" />
+          <div className="pointer-events-none absolute left-1/2 top-1/2 h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#16a34a]/8 blur-[120px]" />
           <div className="charge-container relative grid gap-12 lg:grid-cols-[1fr_0.55fr] lg:items-center">
             <div className="charge-reveal max-w-3xl">
               <h2 className="text-[44px] font-semibold leading-[1.04] text-white md:text-[64px]">

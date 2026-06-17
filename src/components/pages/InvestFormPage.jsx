@@ -13,7 +13,7 @@ export default function InvestFormPage() {
       background-position: center;
     }
     .animated-gradient-text {
-      background-image: linear-gradient(90deg, #10b981, #22d3ee, #10b981);
+      background-image: linear-gradient(90deg, #16a34a, #ffffff, #16a34a);
       background-size: 200% auto;
       background-clip: text;
       -webkit-background-clip: text;
@@ -56,9 +56,9 @@ export default function InvestFormPage() {
         text-align: center;
     }
     input[type="radio"].investor-type:checked + label {
-        background-color: #10b981; /* green-500 */
+        background-color: #16a34a; /* green-500 */
         color: white;
-        border-color: #10b981;
+        border-color: #16a34a;
     }
     input[type="radio"]#individual + label {
         border-top-left-radius: 0.375rem;

@@ -185,7 +185,7 @@ export default function BlogsPage() {
           align-items: center;
           padding: 150px 0 100px;
           background-image:
-            radial-gradient(circle at 50% 42%, rgba(0, 255, 151, 0.16), transparent 32rem),
+            radial-gradient(circle at 50% 42%, rgba(22, 163, 74, 0.16), transparent 32rem),
             linear-gradient(180deg, rgba(0, 5, 4, 0.58), rgba(0, 5, 4, 0.94)),
             url("/img/zvolta-3.jpg");
           background-position: center, center, center 46%;
@@ -272,7 +272,7 @@ export default function BlogsPage() {
           overflow: hidden;
           border-radius: 10px;
           background:
-            linear-gradient(145deg, rgba(255, 255, 255, 0.055), rgba(16, 185, 129, 0.06)),
+            linear-gradient(145deg, rgba(255, 255, 255, 0.055), rgba(22, 163, 74, 0.06)),
             #070a0b;
           box-shadow: 0 18px 46px rgba(0, 0, 0, 0.32);
         }
@@ -287,7 +287,7 @@ export default function BlogsPage() {
           z-index: -1;
           padding: 1px;
           border-radius: inherit;
-          background: linear-gradient(146deg, rgba(16, 185, 129, 0.7), rgba(255, 255, 255, 0.16) 24%, rgba(255, 255, 255, 0.06) 62%, rgba(16, 185, 129, 0.38));
+          background: linear-gradient(146deg, rgba(22, 163, 74, 0.7), rgba(255, 255, 255, 0.16) 24%, rgba(255, 255, 255, 0.06) 62%, rgba(22, 163, 74, 0.38));
           -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
           -webkit-mask-composite: xor;
           mask-composite: exclude;

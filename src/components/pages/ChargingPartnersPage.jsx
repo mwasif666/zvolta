@@ -1,5 +1,7 @@
 ﻿import { useState } from "react";
 import { SmartLink } from "../SmartLink";
+import { useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import RoiCalculatorSection from "./RoiCalculatorSection";
 
@@ -23,6 +25,20 @@ const faqItems = [
 
 export default function ChargingPartnersPage() {
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const roiPaths = new Set([
+      "/roi",
+      "/roi-calculator",
+      "/roi-calculator.html",
+    ]);
+
+    if (roiPaths.has(location.pathname.toLowerCase()) && !location.hash) {
+      navigate("/charging-partners#roi-calculator", { replace: true });
+    }
+  }, [location.hash, location.pathname, navigate]);
 
   return (
     <>
@@ -93,7 +109,7 @@ export default function ChargingPartnersPage() {
           <div className="absolute inset-0 w-full h-[100dvh] overflow-y-auto overflow-x-hidden no-scrollbar">
             <div className="w-full min-h-full max-w-[1600px] mx-auto p-4 pt-24 md:p-6 lg:p-10 grid grid-cols-1 lg:grid-cols-12 gap-4 pb-24">
               <div className="menu-card lg:col-span-5 bg-black rounded-[2.5rem] p-8 md:p-12 flex flex-col justify-between relative overflow-hidden group min-h-[500px] opacity-0 translate-y-[50px]">
-                <div className="absolute top-8 right-8 w-32 h-32 opacity-20 bg-[radial-gradient(#10b981_2px,transparent_2px)] [background-size:8px_8px] rounded-full pointer-events-none" />
+                <div className="absolute top-8 right-8 w-32 h-32 opacity-20 bg-[radial-gradient(#16a34a_2px,transparent_2px)] [background-size:8px_8px] rounded-full pointer-events-none" />
                 <nav className="flex flex-col gap-4 mt-4 relative z-10">
                   <SmartLink
                     href="/"
@@ -229,7 +245,7 @@ export default function ChargingPartnersPage() {
                   <img
                     src="img/ev-charging-station-blue.png"
                     alt="ZVolta Charger"
-                    className="w-auto h-full max-h-[600px] object-contain drop-shadow-[0_20px_50px_rgba(16,185,129,0.15)]"
+                    className="w-auto h-full max-h-[600px] object-contain drop-shadow-[0_20px_50px_rgba(22, 163, 74,0.15)]"
                     data-critical="true"
                   />
                 </div>

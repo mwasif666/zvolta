@@ -3,6 +3,141 @@
 @tailwind utilities;
 
 @layer utilities {
+  .text-emerald-50,
+  .text-emerald-100,
+  .text-emerald-200,
+  .text-emerald-300,
+  .text-emerald-400,
+  .text-emerald-500,
+  .text-emerald-600,
+  .text-emerald-700,
+  .text-emerald-800,
+  .text-green-300,
+  .text-green-400,
+  .text-green-500,
+  .text-green-600,
+  .text-green-700,
+  .text-lime-300,
+  .text-lime-400,
+  .text-lime-500,
+  .text-lime-600,
+  .text-yellow-300,
+  .text-yellow-400 {
+    color: #16a34a;
+  }
+
+  .bg-emerald-400,
+  .bg-emerald-500,
+  .bg-emerald-600,
+  .bg-green-600,
+  .bg-green-700,
+  .bg-lime-400,
+  .bg-lime-500,
+  .bg-yellow-400 {
+    background-color: #16a34a;
+  }
+
+  .border-emerald-400,
+  .border-emerald-500,
+  .border-green-600,
+  .border-lime-500 {
+    border-color: #16a34a;
+  }
+
+  .from-emerald-50,
+  .from-emerald-900,
+  .from-emerald-950,
+  .from-green-400,
+  .from-green-600,
+  .from-lime-400,
+  .from-lime-500,
+  .from-lime-900,
+  .from-yellow-300,
+  .from-yellow-400 {
+    --tw-gradient-from: #16a34a var(--tw-gradient-from-position);
+    --tw-gradient-to: rgb(22 163 74 / 0) var(--tw-gradient-to-position);
+    --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+  }
+
+  .via-emerald-900,
+  .via-green-400,
+  .via-green-600,
+  .via-lime-900,
+  .via-yellow-300 {
+    --tw-gradient-to: rgb(22 163 74 / 0) var(--tw-gradient-to-position);
+    --tw-gradient-stops:
+      var(--tw-gradient-from),
+      #16a34a var(--tw-gradient-via-position),
+      var(--tw-gradient-to);
+  }
+
+  .to-emerald-900,
+  .to-green-400,
+  .to-green-600,
+  .to-lime-400,
+  .to-lime-500 {
+    --tw-gradient-to: #16a34a var(--tw-gradient-to-position);
+  }
+
+  .hover\:text-emerald-200:hover,
+  .hover\:text-emerald-300:hover,
+  .hover\:text-emerald-400:hover,
+  .hover\:text-emerald-500:hover,
+  .hover\:text-emerald-600:hover,
+  .hover\:text-emerald-800:hover,
+  .hover\:text-green-600:hover,
+  .hover\:text-lime-400:hover {
+    color: #16a34a;
+  }
+
+  .hover\:bg-emerald-400:hover,
+  .hover\:bg-emerald-500:hover,
+  .hover\:bg-emerald-600:hover,
+  .hover\:bg-green-700:hover,
+  .hover\:bg-lime-500:hover {
+    background-color: #16a34a;
+  }
+
+  .hover\:border-emerald-400:hover,
+  .hover\:border-emerald-500:hover,
+  .hover\:border-lime-500:hover {
+    border-color: #16a34a;
+  }
+
+  .group:hover .group-hover\:text-emerald-50,
+  .group:hover .group-hover\:text-emerald-300,
+  .group:hover .group-hover\:text-emerald-400,
+  .group:hover .group-hover\:text-emerald-500,
+  .group:hover .group-hover\:text-lime-400,
+  .group:hover .group-hover\:text-lime-500,
+  .group:hover .group-hover\:text-yellow-400,
+  .group\/link:hover .group-hover\/link\:text-emerald-300,
+  .group\/partner:hover .group-hover\/partner\:text-emerald-500 {
+    color: #16a34a;
+  }
+
+  .group:hover .group-hover\:bg-emerald-500,
+  .group:hover .group-hover\:bg-emerald-600,
+  .group:hover .group-hover\:bg-lime-500,
+  .group\/explore:hover .group-hover\/explore\:bg-emerald-600,
+  .group\/partner:hover .group-hover\/partner\:bg-emerald-600 {
+    background-color: #16a34a;
+  }
+
+  .group:hover .group-hover\:border-emerald-500,
+  .group:hover .group-hover\:border-lime-500,
+  .group\/partner:hover .group-hover\/partner\:border-emerald-600 {
+    border-color: #16a34a;
+  }
+
+  .focus\:border-emerald-500:focus {
+    border-color: #16a34a;
+  }
+
+  .group:focus-within .group-focus-within\:text-emerald-400 {
+    color: #16a34a;
+  }
+
   .scroll-reveal {
     opacity: 0;
     transform: translateY(48px);

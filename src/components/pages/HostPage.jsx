@@ -4669,7 +4669,7 @@ export default function HostPage() {
 
         .host-installation-visual-vertical::before {
           background:
-            radial-gradient(circle at 7% 78%, rgba(58, 148, 73, 0.24), transparent 21%),
+            radial-gradient(circle at 7% 78%, rgba(22, 163, 74, 0.24), transparent 21%),
             linear-gradient(90deg, rgba(19, 24, 25, 0.92), rgba(38, 43, 44, 0.9)),
             repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.035) 0 1px, transparent 1px 5px);
         }
@@ -4825,10 +4825,10 @@ export default function HostPage() {
           height: 172px;
           opacity: 0.55;
           background:
-            radial-gradient(ellipse at 20% 75%, rgba(61, 145, 54, 0.9) 0 9%, transparent 10%),
-            radial-gradient(ellipse at 38% 60%, rgba(55, 128, 51, 0.88) 0 10%, transparent 11%),
-            radial-gradient(ellipse at 56% 78%, rgba(44, 110, 45, 0.85) 0 8%, transparent 9%),
-            radial-gradient(ellipse at 28% 43%, rgba(44, 120, 45, 0.76) 0 9%, transparent 10%);
+            radial-gradient(ellipse at 20% 75%, rgba(22, 163, 74, 0.9) 0 9%, transparent 10%),
+            radial-gradient(ellipse at 38% 60%, rgba(22, 163, 74, 0.88) 0 10%, transparent 11%),
+            radial-gradient(ellipse at 56% 78%, rgba(22, 163, 74, 0.85) 0 8%, transparent 9%),
+            radial-gradient(ellipse at 28% 43%, rgba(22, 163, 74, 0.76) 0 9%, transparent 10%);
           filter: blur(0.2px);
         }
 

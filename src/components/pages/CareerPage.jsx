@@ -179,7 +179,7 @@ export default function CareerPage() {
           align-items: center;
           padding: 150px 0 100px;
           background-image:
-            radial-gradient(circle at 50% 42%, rgba(0, 255, 151, 0.16), transparent 32rem),
+            radial-gradient(circle at 50% 42%, rgba(22, 163, 74, 0.16), transparent 32rem),
             linear-gradient(180deg, rgba(0, 5, 4, 0.58), rgba(0, 5, 4, 0.94)),
             url("/img/zvolta-3.jpg");
           background-size: cover;

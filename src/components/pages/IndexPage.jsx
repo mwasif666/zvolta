@@ -68,7 +68,7 @@ export default function IndexPage() {
           <div className="absolute inset-0 w-full h-[100dvh] overflow-y-auto overflow-x-hidden no-scrollbar">
             <div className="w-full min-h-full max-w-[1600px] mx-auto p-4 pt-24 md:p-6 lg:p-10 grid grid-cols-1 lg:grid-cols-12 gap-4 pb-24">
               <div className="menu-card lg:col-span-5 bg-black rounded-[2.5rem] p-8 md:p-12 flex flex-col justify-between relative overflow-hidden group min-h-[500px] opacity-0 translate-y-[50px]">
-                <div className="absolute top-8 right-8 w-32 h-32 opacity-20 bg-[radial-gradient(#10b981_2px,transparent_2px)] [background-size:8px_8px] rounded-full pointer-events-none" />
+                <div className="absolute top-8 right-8 w-32 h-32 opacity-20 bg-[radial-gradient(#16a34a_2px,transparent_2px)] [background-size:8px_8px] rounded-full pointer-events-none" />
                 <nav className="flex flex-col gap-4 mt-4 relative z-10">
                   <SmartLink
                     href="#hero-section"
@@ -612,7 +612,7 @@ export default function IndexPage() {
                           Charging
                         </span>
                         <span
-                          className="dynamic-word col-start-1 row-start-1 block text-[#1a4031] font-bold"
+                          className="dynamic-word col-start-1 row-start-1 block text-[#16a34a] font-bold"
                           data-state={2}
                         >
                           Software
@@ -1118,7 +1118,7 @@ export default function IndexPage() {
               <section id="bento-section" className="hidden">
                 <div className="max-w-[1200px] 3xl:max-w-[1800px] mx-auto">
                   <div className="grid grid-cols-1 md:grid-cols-3 grid-rows-auto md:grid-rows-[minmax(350px,auto)_minmax(350px,auto)] 3xl:grid-rows-[minmax(500px,auto)_minmax(500px,auto)] gap-6 3xl:gap-10">
-                    <div className="md:col-span-2 bg-zinc-900 border border-zinc-800 rounded-[2.5rem] p-8 md:p-12 3xl:p-16 relative overflow-hidden group hover:border-emerald-500/50 hover:shadow-[0_0_40px_-10px_rgba(16,185,129,0.3)] transition-all duration-500 text-white">
+                    <div className="md:col-span-2 bg-zinc-900 border border-zinc-800 rounded-[2.5rem] p-8 md:p-12 3xl:p-16 relative overflow-hidden group hover:border-emerald-500/50 hover:shadow-[0_0_40px_-10px_rgba(22, 163, 74,0.3)] transition-all duration-500 text-white">
                       <div className="relative z-10 flex flex-col h-full justify-between">
                         <div>
                           <h2 className="text-3xl md:text-5xl 3xl:text-7xl font-display font-bold mb-6 tracking-tight text-white group-hover:text-emerald-50 transition-colors duration-300">
@@ -1180,12 +1180,12 @@ export default function IndexPage() {
                         <div className="w-full h-full transition-transform duration-500 group-hover:scale-110 origin-bottom">
                           <svg
                             viewBox="0 0 100 50"
-                            className="w-full h-full overflow-visible drop-shadow-[0_0_10px_rgba(16,185,129,0.3)]"
+                            className="w-full h-full overflow-visible drop-shadow-[0_0_10px_rgba(22, 163, 74,0.3)]"
                           >
                             <path
                               d="M0,40 C20,40 25,20 40,30 C55,40 60,10 80,15 C90,18 95,5 100,0"
                               fill="none"
-                              stroke="#10b981"
+                              stroke="#16a34a"
                               strokeWidth={3}
                               strokeLinecap="round"
                               className="transition-all duration-500 group-hover:stroke-[4px]"
@@ -1204,7 +1204,7 @@ export default function IndexPage() {
                                 y1={0}
                                 y2={1}
                               >
-                                <stop offset="0%" stopColor="#10b981" />
+                                <stop offset="0%" stopColor="#16a34a" />
                                 <stop offset="100%" stopColor="transparent" />
                               </linearGradient>
                             </defs>
@@ -1212,7 +1212,7 @@ export default function IndexPage() {
                               cx={100}
                               cy={0}
                               r={4}
-                              fill="#10b981"
+                              fill="#16a34a"
                               stroke="#050505"
                               strokeWidth={2}
                               className="group-hover:r-[6px] transition-all duration-300"
@@ -1236,7 +1236,7 @@ export default function IndexPage() {
                       </div>
                       <div className="flex items-end justify-between h-40 3xl:h-60 gap-2 mt-auto">
                         <div className="w-full bg-zinc-800 rounded-t-sm h-[40%] group-hover:h-[55%] group-hover:bg-zinc-700 transition-all duration-500 ease-out delay-0" />
-                        <div className="w-full bg-lime-500 rounded-t-sm h-[80%] group-hover:h-[95%] group-hover:shadow-[0_0_20px_rgba(132,204,22,0.6)] transition-all duration-500 ease-out delay-75" />
+                        <div className="w-full bg-lime-500 rounded-t-sm h-[80%] group-hover:h-[95%] group-hover:shadow-[0_0_20px_rgba(22,163,74,0.6)] transition-all duration-500 ease-out delay-75" />
                         <div className="w-full bg-zinc-800 rounded-t-sm h-[50%] group-hover:h-[60%] group-hover:bg-zinc-700 transition-all duration-500 ease-out delay-100" />
                         <div className="w-full bg-zinc-800 rounded-t-sm h-[30%] group-hover:h-[45%] group-hover:bg-zinc-700 transition-all duration-500 ease-out delay-150" />
                         <div className="w-full bg-lime-500/50 rounded-t-sm h-[65%] group-hover:h-[75%] transition-all duration-500 ease-out delay-200" />
@@ -1855,7 +1855,7 @@ export default function IndexPage() {
                         <button
                           type="submit"
                           id="contact-submit-btn"
-                          className="group relative px-12 py-5 bg-white text-black rounded-full font-bold text-lg transition-all duration-300 hover:bg-emerald-500 hover:text-white hover:scale-[1.02] hover:shadow-[0_0_30px_-5px_rgba(16,185,129,0.4)] w-full md:w-auto min-w-[240px] overflow-hidden"
+                          className="group relative px-12 py-5 bg-white text-black rounded-full font-bold text-lg transition-all duration-300 hover:bg-emerald-500 hover:text-white hover:scale-[1.02] hover:shadow-[0_0_30px_-5px_rgba(22, 163, 74,0.4)] w-full md:w-auto min-w-[240px] overflow-hidden"
                         >
                           <span
                             id="btn-text"

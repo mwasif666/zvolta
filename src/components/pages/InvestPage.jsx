@@ -124,7 +124,7 @@ export default function InvestPage() {
           <div className="absolute inset-0 w-full h-[100dvh] overflow-y-auto overflow-x-hidden no-scrollbar">
             <div className="w-full min-h-full max-w-[1600px] mx-auto p-4 pt-24 md:p-6 lg:p-10 grid grid-cols-1 lg:grid-cols-12 gap-4 pb-24">
               <div className="menu-card lg:col-span-5 bg-black rounded-[2.5rem] p-8 md:p-12 flex flex-col justify-between relative overflow-hidden group min-h-[500px] opacity-0 translate-y-[50px]">
-                <div className="absolute top-8 right-8 w-32 h-32 opacity-20 bg-[radial-gradient(#10b981_2px,transparent_2px)] [background-size:8px_8px] rounded-full pointer-events-none" />
+                <div className="absolute top-8 right-8 w-32 h-32 opacity-20 bg-[radial-gradient(#16a34a_2px,transparent_2px)] [background-size:8px_8px] rounded-full pointer-events-none" />
                 <nav className="flex flex-col gap-4 mt-4 relative z-10">
                   <SmartLink
                     href="/"

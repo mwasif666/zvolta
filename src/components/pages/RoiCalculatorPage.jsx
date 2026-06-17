@@ -22,7 +22,7 @@ export default function RoiCalculatorPage() {
             left: 0;
             right: 0;
             bottom: 0;
-            background: radial-gradient(ellipse at top, rgba(16, 185, 129, 0.15) 0%, transparent 60%);
+            background: radial-gradient(ellipse at top, rgba(22, 163, 74, 0.15) 0%, transparent 60%);
             pointer-events: none;
             z-index: 0;
         }
@@ -47,7 +47,7 @@ export default function RoiCalculatorPage() {
             font-size: 2.5rem;
             margin-bottom: 10px;
             font-weight: 700;
-            background: linear-gradient(135deg, #10b981 0%, #ffffff 100%);
+            background: linear-gradient(135deg, #16a34a 0%, #ffffff 100%);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
@@ -85,9 +85,9 @@ export default function RoiCalculatorPage() {
 
         .tab-btn.active {
             background: white;
-            color: #10b981;
-            border-color: #10b981;
-            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+            color: #16a34a;
+            border-color: #16a34a;
+            box-shadow: 0 8px 25px rgba(22, 163, 74, 0.4);
         }
 
         .tab-content {
@@ -109,7 +109,7 @@ export default function RoiCalculatorPage() {
             padding: 20px;
             border-radius: 10px;
             margin-bottom: 15px;
-            border-left: 4px solid #10b981;
+            border-left: 4px solid #16a34a;
             position: relative;
         }
 
@@ -122,7 +122,7 @@ export default function RoiCalculatorPage() {
 
         .charger-module-title {
             font-weight: 600;
-            color: #10b981;
+            color: #16a34a;
             font-size: 1rem;
         }
 
@@ -145,8 +145,8 @@ export default function RoiCalculatorPage() {
             width: 100%;
             padding: 12px;
             background: white;
-            color: #10b981;
-            border: 2px dashed #10b981;
+            color: #16a34a;
+            border: 2px dashed #16a34a;
             border-radius: 10px;
             font-size: 1rem;
             font-weight: 600;
@@ -157,8 +157,8 @@ export default function RoiCalculatorPage() {
 
         .add-charger-btn:hover {
             background: #f0fdf4;
-            border-color: #059669;
-            color: #059669;
+            border-color: #16a34a;
+            color: #16a34a;
         }
 
         .input-row {
@@ -178,8 +178,8 @@ export default function RoiCalculatorPage() {
             background: white;
             border-radius: 15px;
             padding: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 0 0 1px rgba(16, 185, 129, 0.1);
-            border: 1px solid rgba(16, 185, 129, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 0 0 1px rgba(22, 163, 74, 0.1);
+            border: 1px solid rgba(22, 163, 74, 0.1);
         }
 
         .card-header {
@@ -188,7 +188,7 @@ export default function RoiCalculatorPage() {
             color: #333;
             margin-bottom: 25px;
             padding-bottom: 15px;
-            border-bottom: 3px solid #10b981;
+            border-bottom: 3px solid #16a34a;
         }
 
         .input-group {
@@ -213,7 +213,7 @@ export default function RoiCalculatorPage() {
             position: absolute;
             left: 15px;
             font-weight: 600;
-            color: #10b981;
+            color: #16a34a;
             font-size: 1.1rem;
         }
 
@@ -228,14 +228,14 @@ export default function RoiCalculatorPage() {
 
         .input-group input:focus {
             outline: none;
-            border-color: #10b981;
-            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+            border-color: #16a34a;
+            box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.1);
         }
 
         .calculate-btn {
             width: 100%;
             padding: 18px;
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            background: linear-gradient(135deg, #16a34a 0%, #16a34a 100%);
             color: white;
             border: none;
             border-radius: 10px;
@@ -247,7 +247,7 @@ export default function RoiCalculatorPage() {
 
         .calculate-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(16, 185, 129, 0.5);
+            box-shadow: 0 5px 20px rgba(22, 163, 74, 0.5);
         }
 
         .calculate-btn:active {
@@ -285,7 +285,7 @@ export default function RoiCalculatorPage() {
         .result-value {
             font-size: 2rem;
             font-weight: 700;
-            color: #10b981;
+            color: #16a34a;
             margin-bottom: 5px;
         }
 
@@ -296,7 +296,7 @@ export default function RoiCalculatorPage() {
 
         .highlight-card {
             grid-column: 1 / -1;
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            background: linear-gradient(135deg, #16a34a 0%, #16a34a 100%);
             color: white;
             text-align: center;
             padding: 30px;
@@ -337,7 +337,7 @@ export default function RoiCalculatorPage() {
             margin-bottom: 10px;
             background: white;
             border-radius: 8px;
-            border-left: 4px solid #10b981;
+            border-left: 4px solid #16a34a;
         }
 
         .breakdown-item span:first-child {
@@ -347,7 +347,7 @@ export default function RoiCalculatorPage() {
 
         .breakdown-item span:last-child {
             font-weight: 700;
-            color: #10b981;
+            color: #16a34a;
         }
 
         .full-width-card {
@@ -365,7 +365,7 @@ export default function RoiCalculatorPage() {
 
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, #10b981 0%, #059669 100%);
+            background: linear-gradient(90deg, #16a34a 0%, #16a34a 100%);
             transition: width 0.5s ease;
             display: flex;
             align-items: center;
@@ -379,7 +379,7 @@ export default function RoiCalculatorPage() {
             background: #f0fdf4;
             padding: 20px;
             border-radius: 10px;
-            border-left: 4px solid #10b981;
+            border-left: 4px solid #16a34a;
             margin-top: 20px;
         }
 
@@ -732,7 +732,7 @@ export default function RoiCalculatorPage() {
                       cx={50}
                       cy={50}
                       r={40}
-                      stroke="#10b981"
+                      stroke="#16a34a"
                       strokeWidth={3}
                       fill="none"
                     />
@@ -741,7 +741,7 @@ export default function RoiCalculatorPage() {
                       y={60}
                       fontSize={35}
                       textAnchor="middle"
-                      fill="#10b981"
+                      fill="#16a34a"
                     >
                       Rs
                     </text>
@@ -1072,7 +1072,7 @@ export default function RoiCalculatorPage() {
                     cx={50}
                     cy={50}
                     r={40}
-                    stroke="#10b981"
+                    stroke="#16a34a"
                     strokeWidth={3}
                     fill="none"
                   />
@@ -1081,7 +1081,7 @@ export default function RoiCalculatorPage() {
                     y={60}
                     fontSize={35}
                     textAnchor="middle"
-                    fill="#10b981"
+                    fill="#16a34a"
                   >
                     Rs
                   </text>

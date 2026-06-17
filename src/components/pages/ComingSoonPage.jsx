@@ -96,7 +96,7 @@ export default function ComingSoonPage() {
           <div className="absolute inset-0 w-full h-[100dvh] overflow-y-auto overflow-x-hidden no-scrollbar">
             <div className="w-full min-h-full max-w-[1600px] mx-auto p-4 pt-24 md:p-6 lg:p-10 grid grid-cols-1 lg:grid-cols-12 gap-4 pb-24">
               <div className="menu-card lg:col-span-5 bg-black rounded-[2.5rem] p-8 md:p-12 flex flex-col justify-between relative overflow-hidden group min-h-[500px] opacity-0 translate-y-[50px]">
-                <div className="absolute top-8 right-8 w-32 h-32 opacity-20 bg-[radial-gradient(#10b981_2px,transparent_2px)] [background-size:8px_8px] rounded-full pointer-events-none" />
+                <div className="absolute top-8 right-8 w-32 h-32 opacity-20 bg-[radial-gradient(#16a34a_2px,transparent_2px)] [background-size:8px_8px] rounded-full pointer-events-none" />
                 <nav className="flex flex-col gap-4 mt-4 relative z-10">
                   <SmartLink
                     href="/#hero-section"
@@ -184,7 +184,7 @@ export default function ComingSoonPage() {
         <div className="fixed top-[-20%] left-[-20%] w-[120vw] h-[120vw] bg-emerald-500/10 blur-[100px] rounded-full pointer-events-none z-0 animate-pulse-slow" />
         <div className="fixed bottom-[-10%] right-[-10%] w-[100vw] h-[100vw] bg-lime-500/5 blur-[120px] rounded-full pointer-events-none z-0" />
         <main className="relative z-10 w-full min-h-screen flex flex-col items-center justify-center px-6 pt-24 pb-24 text-center">
-          <div className="mb-8 w-24 h-24 rounded-full bg-zinc-900 border border-emerald-500/30 flex items-center justify-center shadow-[0_0_40px_rgba(16,185,129,0.15)] animate-pulse-slow opacity-0 translate-y-4 reveal-element">
+          <div className="mb-8 w-24 h-24 rounded-full bg-zinc-900 border border-emerald-500/30 flex items-center justify-center shadow-[0_0_40px_rgba(22, 163, 74,0.15)] animate-pulse-slow opacity-0 translate-y-4 reveal-element">
             <i className="bi bi-cone-striped text-4xl text-emerald-500" />
           </div>
           <h1
@@ -205,7 +205,7 @@ export default function ComingSoonPage() {
           </p>
           <SmartLink
             href="/"
-            className="group relative px-8 py-4 bg-zinc-900 text-white rounded-full font-bold text-lg border border-zinc-700 hover:border-emerald-500 transition-all duration-300 opacity-0 translate-y-4 reveal-element hover:bg-emerald-600 hover:text-black hover:shadow-[0_0_30px_rgba(16,185,129,0.4)]"
+            className="group relative px-8 py-4 bg-zinc-900 text-white rounded-full font-bold text-lg border border-zinc-700 hover:border-emerald-500 transition-all duration-300 opacity-0 translate-y-4 reveal-element hover:bg-emerald-600 hover:text-black hover:shadow-[0_0_30px_rgba(22, 163, 74,0.4)]"
             style={{ transitionDelay: "0.3s" }}
           >
             <span className="relative z-10 flex items-center gap-2">

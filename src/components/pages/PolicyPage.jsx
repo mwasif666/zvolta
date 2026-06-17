@@ -153,7 +153,7 @@ export default function PolicyPage() {
         }
 
         .accordion-content-inner a:hover {
-            color: #22C55E; /* Equivalent to text-green-500 */
+            color: #16a34a; /* Equivalent to text-green-500 */
         }
 
 

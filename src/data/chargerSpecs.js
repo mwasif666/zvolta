@@ -406,7 +406,7 @@ export const chargerSpecs = {
     goodFor: [
       [
         "Good for home users",
-        "Use the 7kW charger for your own EV car, bike, or scooter. You can track your charging and manage everything from the app.",
+        "Use the 7kW charger for your Electric car. You can track your charging and manage everything from the app.",
         "Get a home setup",
       ],
       [
@@ -443,7 +443,7 @@ export const chargerSpecs = {
     faqs: [
       [
         "What is a 7kW EV charger?",
-        "A 7kW EV charger is an AC charger for daily EV charging. It is stronger than a 3kW charger and works well for homes, offices, apartments, cafes, and regular use locations.",
+        "A 7kW EV charger is an AC charger with a CCS Type 2 charging gun, designed for daily use.",
       ],
       [
         "Is the 7kW charger good for EV cars?",
@@ -537,7 +537,7 @@ export const chargerSpecs = {
     quickDetails: [
       [
         "Best for",
-        "Malls, parking lots, restaurants, universities, hospitals, offices, commercial sites",
+        "Fleet depots & petrol stations",
       ],
       ["Charger type", "Smart AC charger"],
       ["Power", "22kW"],
@@ -668,7 +668,7 @@ export const chargerSpecs = {
     faqs: [
       [
         "What is a 22kW EV charger?",
-        "A 22kW EV charger is a stronger AC charger for regular and higher usage EV charging. It is good for commercial locations, public parking, malls, universities, hospitals, offices, and busy sites.",
+        "A 22kW EV charger is a stronger AC charger with a CCS Type 2 charging gun.",
       ],
       [
         "Is the 22kW charger good for public charging?",

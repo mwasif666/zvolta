@@ -118,13 +118,13 @@ body {
 
 /* --- STRICTLY GREEN VARIANTS --- */
 /* 1. Hosting: Pure Emerald (The Brand Standard) */
-.btn-glow.hosting { --btn-color: #10b981; }
+.btn-glow.hosting { --btn-color: #16a34a; }
 
 /* 2. Charging: Electric Lime (High Energy) */
-.btn-glow.charging { --btn-color: #84cc16; }
+.btn-glow.charging { --btn-color: #16a34a; }
 
 /* 3. Software: Deep Forest/Sage (Sophisticated Tech) */
-.btn-glow.software { --btn-color: #3f6212; }
+.btn-glow.software { --btn-color: #16a34a; }
 
 
 /* =========================================
@@ -163,7 +163,7 @@ body {
    EXISTING STYLES (Keep these)
    ========================================= */
 /* Ensure the .dynamic-word colors match the new palette */
-.text-gold { color: #d97706; } /* Amber-600 */
+.text-gold { color: #16a34a; }
 /* =========================================
    4. LOADER & PERFORMANCE
    ========================================= */
@@ -673,8 +673,8 @@ body {
     /* Strong Emerald to Transparent Gradient */
     background: radial-gradient(
         ellipse at top,
-        rgba(16, 185, 129, 0.4) 0%,
-        rgba(16, 185, 129, 0.05) 50%,
+        rgba(22, 163, 74, 0.4) 0%,
+        rgba(22, 163, 74, 0.05) 50%,
         rgba(0, 0, 0, 0) 70%
     );
     pointer-events: none;
@@ -683,7 +683,7 @@ body {
 
 /* The Text Gradient (Green Top -> White Bottom) */
 .footer-heading-gradient {
-    background: linear-gradient(200deg, #10b981 0%, #ffffff 85%);
+    background: linear-gradient(200deg, #16a34a 0%, #ffffff 85%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -823,7 +823,7 @@ body {
     content: '\F128'; /* Bootstrap "arrow-down" unicode */
     font-family: 'bootstrap-icons';
     font-size: 2.5rem;
-    color: #10b981; /* Emerald Green */
+    color: #16a34a;
     text-shadow: 0 4px 12px rgba(0,0,0,0.5); /* Shadow for visibility on white */
     animation: bounceArrow 1.5s infinite;
 }

@@ -392,7 +392,7 @@ function SiteHeader() {
           <div className="site-menu-shell h-[100dvh] overflow-y-auto overflow-x-hidden p-4 pt-16 sm:p-6 sm:pt-16 lg:p-10 lg:pt-14">
             <div className="mx-auto grid min-h-full w-full max-w-[1820px] grid-cols-1 gap-4 lg:grid-cols-12">
               <div className="site-menu-panel relative flex min-h-[500px] flex-col justify-between overflow-hidden rounded-[2rem] bg-black p-8 sm:p-10 lg:col-span-5">
-                <div className="pointer-events-none absolute right-8 top-8 h-32 w-32 rounded-full bg-[radial-gradient(#10b981_2px,transparent_2px)] opacity-20 [background-size:8px_8px]" />
+                <div className="pointer-events-none absolute right-8 top-8 h-32 w-32 rounded-full bg-[radial-gradient(#16a34a_2px,transparent_2px)] opacity-20 [background-size:8px_8px]" />
                 <nav className="relative z-10 mt-4 flex flex-col gap-4">
                   {menuLinks.map((route, index) => (
                     <div

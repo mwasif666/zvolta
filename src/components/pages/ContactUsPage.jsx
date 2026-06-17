@@ -26,7 +26,7 @@ const contactCards = [
     email: "support@zvolta.com",
     image: "/img/charging-post.jpg",
     ctaLabel: "Contact support",
-    ctaHref: "/support",
+    ctaHref: "#contact-form",
   },
 ];
 
@@ -98,16 +98,16 @@ export default function ContactUsPage() {
       <style data-page-style="contact-us:1">{`
         .contact-page {
           --contact-bg: #000504;
-          --contact-primary: #10b981;
-          --contact-primary-bright: #00f08a;
+          --contact-primary: #16a34a;
+          --contact-primary-bright: #16a34a;
           --contact-secondary: #020403;
           --contact-muted: #b2b3b7;
           --contact-panel: rgba(255, 255, 255, 0.05);
-          --contact-border: rgba(16, 185, 129, 0.28);
+          --contact-border: rgba(22, 163, 74, 0.28);
           min-height: 100vh;
           overflow: hidden;
           background:
-            radial-gradient(circle at 18% 14%, rgba(16, 185, 129, 0.2), transparent 30rem),
+            radial-gradient(circle at 18% 14%, rgba(22, 163, 74, 0.2), transparent 30rem),
             radial-gradient(circle at 86% 42%, rgba(255, 255, 255, 0.08), transparent 30rem),
             var(--contact-bg);
           color: #ffffff;
@@ -129,9 +129,9 @@ export default function ContactUsPage() {
           align-items: center;
           padding: 150px 0 100px;
           background-image:
-            radial-gradient(circle at 50% 42%, rgba(0, 255, 151, 0.16), transparent 32rem),
+            radial-gradient(circle at 50% 42%, rgba(22, 163, 74, 0.16), transparent 32rem),
             linear-gradient(180deg, rgba(0, 5, 4, 0.58), rgba(0, 5, 4, 0.94)),
-            url("/img/zvolta-3.jpg");
+            url("https://res.cloudinary.com/diywraupt/image/upload/v1781698246/contactus-banner_wxdxv8.png");
           background-position: center, center, center 46%;
           background-size: cover;
           text-align: center;
@@ -209,7 +209,7 @@ export default function ContactUsPage() {
           text-align: center;
           border-radius: 10px;
           background:
-            linear-gradient(145deg, rgba(255, 255, 255, 0.055), rgba(16, 185, 129, 0.06)),
+            linear-gradient(145deg, rgba(255, 255, 255, 0.055), rgba(22, 163, 74, 0.06)),
             #070a0b;
           box-shadow: 0 18px 46px rgba(0, 0, 0, 0.32);
           backdrop-filter: blur(40px);
@@ -230,7 +230,7 @@ export default function ContactUsPage() {
           z-index: -1;
           padding: 1px;
           border-radius: inherit;
-          background: linear-gradient(146deg, rgba(16, 185, 129, 0.72), rgba(255, 255, 255, 0.16) 22%, rgba(255, 255, 255, 0.06) 62%, rgba(16, 185, 129, 0.42));
+          background: linear-gradient(146deg, rgba(22, 163, 74, 0.72), rgba(255, 255, 255, 0.16) 22%, rgba(255, 255, 255, 0.06) 62%, rgba(22, 163, 74, 0.42));
           -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
           -webkit-mask-composite: xor;
           mask-composite: exclude;
@@ -335,7 +335,7 @@ export default function ContactUsPage() {
           padding: 20px;
           border-radius: 10px;
           background-image:
-            linear-gradient(135deg, rgba(0, 5, 4, 0.94), rgba(2, 38, 25, 0.9) 52%, rgba(16, 185, 129, 0.72)),
+            linear-gradient(135deg, rgba(0, 5, 4, 0.94), rgba(2, 38, 25, 0.9) 52%, rgba(22, 163, 74, 0.72)),
             url("${assetBase}/contact-bg02.png");
           background-position: center;
           background-size: cover;
@@ -416,9 +416,9 @@ export default function ContactUsPage() {
 
         .contact-page__field input:focus,
         .contact-page__field textarea:focus {
-          border-color: rgba(0, 255, 151, 0.85);
+          border-color: rgba(22, 163, 74, 0.85);
           background: rgba(0, 0, 0, 0.48);
-          box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.16);
+          box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.16);
         }
 
         .contact-page__field label {
@@ -490,8 +490,8 @@ export default function ContactUsPage() {
         }
 
         .contact-page__status--success {
-          border: 1px solid rgba(0, 255, 151, 0.35);
-          background: rgba(0, 255, 151, 0.12);
+          border: 1px solid rgba(22, 163, 74, 0.35);
+          background: rgba(22, 163, 74, 0.12);
           color: #dfffee;
         }
 
@@ -575,7 +575,7 @@ export default function ContactUsPage() {
           overflow: hidden;
           border-radius: 0 10px 10px 0;
           background:
-            radial-gradient(circle at 50% 40%, rgba(16, 185, 129, 0.16), transparent 24rem),
+            radial-gradient(circle at 50% 40%, rgba(22, 163, 74, 0.16), transparent 24rem),
             #020403;
         }
 

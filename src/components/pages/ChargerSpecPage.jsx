@@ -329,7 +329,7 @@ const environmentTabs = [
     accordions: [
       [
         "Automated Payment via Zvolta App",
-        "Users pay cashlessly through the Zvolta app no cash handling needed.",
+        "Users pay cashlessly through the Zvolta app. No cash handling required.",
         "wallet",
       ],
       [
@@ -370,7 +370,7 @@ const environmentTabs = [
     accordions: [
       [
         "Automated Payment via Zvolta App",
-        "Users pay cashlessly through the Zvolta app no cash handling needed.",
+        "Users pay cashlessly through the Zvolta app. No cash handling required.",
         "wallet",
       ],
       [
@@ -1664,7 +1664,7 @@ function ThreeKwChargerPage({ spec }) {
           flex-shrink: 0;
           border-radius: 999px;
           background: rgba(22, 163, 74, 0.16);
-          color: #22c55e;
+          color: #16a34a;
           filter: drop-shadow(0 0 12px rgba(22, 163, 74, 0.4));
         }
 

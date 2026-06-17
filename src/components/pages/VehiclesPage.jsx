@@ -32,7 +32,7 @@ export default function VehiclesPage() {
             height: 700px;
             background: radial-gradient(
                 ellipse 100% 50% at 50% 0%,
-                rgba(34, 197, 94, 0.15),
+                rgba(22, 163, 74, 0.15),
                 transparent 80%
             );
             pointer-events: none;
@@ -62,18 +62,18 @@ export default function VehiclesPage() {
             right: 0;
             width: 50%;
             height: 100%;
-            background: radial-gradient(circle at top right, rgba(34, 197, 94, 0.15), transparent 70%);
+            background: radial-gradient(circle at top right, rgba(22, 163, 74, 0.15), transparent 70%);
             transition: all 0.5s ease;
         }
 
         .hero-feature-card:hover {
-            border-color: #22c55e;
+            border-color: #16a34a;
             transform: translateY(-5px);
             box-shadow: 0 10px 30px -5px rgba(0,0,0,0.3);
         }
 
         .hero-feature-card:hover:before {
-            background: radial-gradient(circle at top right, rgba(34, 197, 94, 0.25), transparent 70%);
+            background: radial-gradient(circle at top right, rgba(22, 163, 74, 0.25), transparent 70%);
             transform: scale(1.5);
         }
 
@@ -144,7 +144,7 @@ export default function VehiclesPage() {
           <div className="absolute inset-0 w-full h-[100dvh] overflow-y-auto overflow-x-hidden no-scrollbar">
             <div className="w-full min-h-full max-w-[1600px] mx-auto p-4 pt-24 md:p-6 lg:p-10 grid grid-cols-1 lg:grid-cols-12 gap-4 pb-24">
               <div className="menu-card lg:col-span-5 bg-black rounded-[2.5rem] p-8 md:p-12 flex flex-col justify-between relative overflow-hidden group min-h-[500px] opacity-0 translate-y-[50px]">
-                <div className="absolute top-8 right-8 w-32 h-32 opacity-20 bg-[radial-gradient(#10b981_2px,transparent_2px)] [background-size:8px_8px] rounded-full pointer-events-none" />
+                <div className="absolute top-8 right-8 w-32 h-32 opacity-20 bg-[radial-gradient(#16a34a_2px,transparent_2px)] [background-size:8px_8px] rounded-full pointer-events-none" />
                 <nav className="flex flex-col gap-4 mt-4 relative z-10">
                   <SmartLink
                     href="/"

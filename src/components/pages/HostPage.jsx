@@ -8,6 +8,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import RotatingText from "../RotatingText";
 import { SmartLink } from "../SmartLink";
+import YoutubeReelsSection from "./YoutubeReelsSection";
 
 const chargers = [
   {
@@ -743,25 +744,6 @@ const roiHighlights = [
   },
 ];
 
-const youtubeReels = [
-  {
-    id: "593J_FRoru4",
-    title: "This is us. Not announcing anything yet",
-  },
-  {
-    id: "avV8EaQIlsw",
-    title: "We're now live at IBA main campus",
-  },
-  {
-    id: "CJuGPOKuTpU",
-    title: "How to sign up on ZVolta app",
-  },
-  {
-    id: "O1g0jwy7oLY",
-    title: "Low battery ko bhool jao, Zvolta is here",
-  },
-];
-
 function Icon({ name, className = "h-5 w-5" }) {
   const props = {
     className,
@@ -1381,72 +1363,6 @@ function InstallationOptionsSection({ onCollapse }) {
           >
             Book a site assessment
           </PrimaryButton>
-        </Reveal>
-      </div>
-    </section>
-  );
-}
-
-function HostYoutubeReelsSection() {
-  return (
-    <section className="host-youtube-reels-section">
-      <span
-        className="host-reels-glow host-reels-glow-left"
-        aria-hidden="true"
-      />
-      <span
-        className="host-reels-glow host-reels-glow-right"
-        aria-hidden="true"
-      />
-      <div className="host-container">
-        <Reveal className="host-youtube-reels-intro">
-          <h2>Zvolta reels from the road</h2>
-          <p>
-            Short videos from our YouTube channel showing app flows, live sites,
-            and EV charging moments.
-          </p>
-        </Reveal>
-
-        <Reveal className="host-youtube-reels-label" delay={0.06}>
-          <span aria-hidden="true" />
-          <strong>
-            <span className="host-youtube-reels-icon">
-              <Icon name="play" className="h-5 w-5" />
-            </span>
-            YouTube Reels
-          </strong>
-          <span aria-hidden="true" />
-        </Reveal>
-
-        <div className="host-youtube-reels-grid">
-          {youtubeReels.map((reel, index) => (
-            <Reveal
-              as="article"
-              className="host-youtube-reel-card"
-              delay={0.08 + index * 0.04}
-              key={reel.id}
-            >
-              <iframe
-                src={`https://www.youtube.com/embed/${reel.id}?rel=0&modestbranding=1&playsinline=1`}
-                title={reel.title}
-                loading="lazy"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerPolicy="strict-origin-when-cross-origin"
-                allowFullScreen
-              />
-            </Reveal>
-          ))}
-        </div>
-
-        <Reveal className="host-youtube-reels-action" delay={0.12}>
-          <SmartLink
-            href="https://www.youtube.com/@zvoltaPK"
-            target="_blank"
-            className="host-youtube-reels-button"
-          >
-            See more
-            <Icon name="arrow" className="h-5 w-5" />
-          </SmartLink>
         </Reveal>
       </div>
     </section>
@@ -6576,7 +6492,7 @@ export default function HostPage() {
                       </div>
 
                       <SmartLink
-                        href="/charging-partners#roi-calculator"
+                        href="/roi-calculator"
                         className="host-roi-button"
                       >
                         Try ROI calculator
@@ -7257,7 +7173,7 @@ export default function HostPage() {
           </div>
         </section>
 
-        <HostYoutubeReelsSection />
+        <YoutubeReelsSection />
       </div>
     </>
   );

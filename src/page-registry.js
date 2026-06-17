@@ -12,6 +12,7 @@ import twentyTwoKwChargerPageData from "./data/pages/22kw-charger/pageData";
 import chargingPartnersPageData from "./data/pages/charging-partners/pageData";
 import comingSoonPageData from "./data/pages/coming-soon/pageData";
 import contactUsPageData from "./data/pages/contact-us/pageData";
+import roiCalculatorPageData from "./data/pages/roi-calculator/pageData";
 import partnersPageData from "./data/pages/partners/pageData";
 import homePageData from "./data/pages/home/pageData";
 import hostPageData from "./data/pages/host/pageData";
@@ -108,6 +109,12 @@ export const routeEntries = [
     paths: contactUsPageData.paths,
     meta: contactUsPageData.meta,
     load: () => import("./pages/contact-us/index.jsx"),
+  },
+  {
+    pageId: roiCalculatorPageData.pageId,
+    paths: roiCalculatorPageData.paths,
+    meta: roiCalculatorPageData.meta,
+    load: () => import("./pages/roi-calculator/index.jsx"),
   },
   {
     pageId: partnersPageData.pageId,

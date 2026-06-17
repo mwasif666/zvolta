@@ -680,7 +680,7 @@ export const chargerSpecs = {
       ],
       [
         "Can I install it at a commercial site?",
-        "Yes. It is made for commercial spaces, parking lots, offices, malls, restaurants, hospitals, universities, and similar locations.",
+        "22kW is best for fleet depots & petrol stations.",
       ],
       [
         "Can I earn from this charger?",

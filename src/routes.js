@@ -24,6 +24,7 @@ const routeLabels = {
   mobile: "Mobile App",
   partners: "Partners",
   policy: "Legal",
+  "roi-calculator": "ROI Calculator",
   software: "Software",
   stories: "Stories",
   support: "Support",
@@ -50,7 +51,7 @@ const primaryNavigationPageIds = [
   "contact-us",
 ];
 
-const hiddenNavigationPageIds = new Set(["404"]);
+const hiddenNavigationPageIds = new Set(["404", "roi-calculator"]);
 
 function labelFromPageId(pageId) {
   return (

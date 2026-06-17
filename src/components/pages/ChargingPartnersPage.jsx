@@ -1,7 +1,5 @@
 ﻿import { useState } from "react";
 import { SmartLink } from "../SmartLink";
-import { useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
 
 import RoiCalculatorSection from "./RoiCalculatorSection";
 
@@ -25,20 +23,6 @@ const faqItems = [
 
 export default function ChargingPartnersPage() {
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
-  const location = useLocation();
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const roiPaths = new Set([
-      "/roi",
-      "/roi-calculator",
-      "/roi-calculator.html",
-    ]);
-
-    if (roiPaths.has(location.pathname.toLowerCase()) && !location.hash) {
-      navigate("/charging-partners#roi-calculator", { replace: true });
-    }
-  }, [location.hash, location.pathname, navigate]);
 
   return (
     <>

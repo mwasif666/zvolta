@@ -291,8 +291,12 @@ function createRuntimeTracker() {
   return { finalize, restorePatches, cleanup };
 }
 
-export function useLegacyPageRuntime(pageId) {
+export function useLegacyPageRuntime(pageId, enabled = true) {
   useEffect(() => {
+    if (!enabled) {
+      return undefined;
+    }
+
     let cancelled = false;
 
     ensureGsapGlobals();
@@ -322,5 +326,5 @@ export function useLegacyPageRuntime(pageId) {
       cleanupInlineHandlers();
       runtimeTracker.cleanup();
     };
-  }, [pageId]);
+  }, [enabled, pageId]);
 }

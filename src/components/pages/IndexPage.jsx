@@ -1,4 +1,5 @@
 ﻿import { SmartLink } from "../SmartLink";
+import YoutubeReelsSection from "./YoutubeReelsSection";
 
 export default function IndexPage() {
   return (
@@ -582,7 +583,7 @@ export default function IndexPage() {
               </section>
               <section
                 id="how-it-works"
-                className="relative bg-zinc-50 text-black overflow-hidden py-10 -mt-px"
+                className="hidden relative bg-zinc-50 text-black overflow-hidden py-10 -mt-px"
               >
                 <div className="absolute inset-x-0 top-0 h-[4px] bg-zinc-50 z-[60] pointer-events-none" />
                 <div className="absolute right-6 top-1/2 -translate-y-1/2 h-[200px] 3xl:h-[400px] w-[4px] bg-gray-200 rounded-full z-50 hidden md:block overflow-hidden">
@@ -1903,6 +1904,7 @@ export default function IndexPage() {
                   </div>
                 </div>
               </section>
+              <YoutubeReelsSection />
             </main>
           </div>
         </div>

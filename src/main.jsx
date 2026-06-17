@@ -177,7 +177,7 @@ function RoutedPage({ loadPage, pageId, meta }) {
 }
 
 function MountedPage({ pageId, meta, PageComponent }) {
-  useLegacyPageRuntime(pageId);
+  useLegacyPageRuntime(pageId, meta?.disableLegacyRuntime !== true);
 
   useEffect(() => {
     document.documentElement.dataset.page = pageId;

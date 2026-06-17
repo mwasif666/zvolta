@@ -979,7 +979,7 @@ function ModularRoiCalculator() {
                   </div>
                 </div>
                 {/* 
-                <SecondaryButton href="/charging-partners#roi-calculator" className="w-fit">
+                <SecondaryButton href="/roi-calculator" className="w-fit">
                   Open full ROI calculator
                 </SecondaryButton> */}
               </div>

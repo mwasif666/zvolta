@@ -578,11 +578,12 @@ function ChargerVisual({ power }) {
 function EnvironmentSection({ spec }) {
   const [activeTabId, setActiveTabId] = useState(environmentTabs[0].id);
   const [openIndex, setOpenIndex] = useState(0);
-  const [showAudienceCards, setShowAudienceCards] = useState(false);
-  const [showUseCases, setShowUseCases] = useState(false);
+  const [activeExpandPanel, setActiveExpandPanel] = useState(null);
   const activeTab =
     environmentTabs.find((tab) => tab.id === activeTabId) ?? environmentTabs[0];
   const audienceCards = getChargerAudienceCards(spec);
+  const showAudienceCards = activeExpandPanel === "audience";
+  const showUseCases = activeExpandPanel === "use-cases";
 
   return (
     <Section className="charger-environments-section">
@@ -670,43 +671,33 @@ function EnvironmentSection({ spec }) {
         </aside>
       </div>
 
-      {!showAudienceCards || !showUseCases ? (
-        <div className="charger-expand-actions">
-          {!showAudienceCards ? (
-            <button
-              type="button"
-              className="charger-expand-button"
-              onClick={() => setShowAudienceCards(true)}
-            >
-              Who should use this charger?
-              <Icon name="arrow" className="h-4 w-4" />
-            </button>
-          ) : null}
-          {!showUseCases ? (
-            <button
-              type="button"
-              className="charger-expand-button"
-              onClick={() => setShowUseCases(true)}
-            >
-              View use cases
-              <Icon name="arrow" className="h-4 w-4" />
-            </button>
-          ) : null}
-        </div>
-      ) : null}
+      <div className="charger-expand-actions">
+        <button
+          type="button"
+          className={`charger-expand-button ${
+            showAudienceCards ? "is-active" : ""
+          }`}
+          aria-expanded={showAudienceCards}
+          onClick={() => setActiveExpandPanel("audience")}
+        >
+          Who should use this charger?
+          <Icon name="arrow" className="h-4 w-4" />
+        </button>
+        <button
+          type="button"
+          className={`charger-expand-button ${showUseCases ? "is-active" : ""}`}
+          aria-expanded={showUseCases}
+          onClick={() => setActiveExpandPanel("use-cases")}
+        >
+          View use cases
+          <Icon name="arrow" className="h-4 w-4" />
+        </button>
+      </div>
 
       <AnimatePresence initial={false}>
         {showAudienceCards ? (
           <ShutterExpand key="charger-audience">
             <div className="charger-expand-section">
-              <button
-                type="button"
-                className="charger-collapse-button"
-                aria-label="Collapse charger audience"
-                onClick={() => setShowAudienceCards(false)}
-              >
-                <IoClose className="h-5 w-5" aria-hidden="true" />
-              </button>
               <p className="three-eyebrow">Who should use this charger?</p>
               <h2 className="three-section-title">
                 Perfect for everyday charging needs
@@ -734,14 +725,6 @@ function EnvironmentSection({ spec }) {
         {showUseCases ? (
           <ShutterExpand key="charger-use-cases">
             <div className="charger-expand-section charger-env-use-cases">
-              <button
-                type="button"
-                className="charger-collapse-button"
-                aria-label="Collapse charger use cases"
-                onClick={() => setShowUseCases(false)}
-              >
-                <IoClose className="h-5 w-5" aria-hidden="true" />
-              </button>
               <div className="charger-host-stories-panel">
                 <p className="mb-2 text-xs font-semibold uppercase text-[#16a34a]">
                   Real stories
@@ -2183,6 +2166,19 @@ function ThreeKwChargerPage({ spec }) {
           transform: translateY(-1px);
         }
 
+        .charger-expand-button.is-active {
+          border-color: rgba(22, 163, 74, 0.95);
+          background: rgba(22, 163, 74, 0.2);
+          color: #16a34a;
+          box-shadow:
+            0 0 0 1px rgba(22, 163, 74, 0.16),
+            0 18px 42px rgba(22, 163, 74, 0.14);
+        }
+
+        .charger-expand-button.is-active svg {
+          transform: rotate(90deg);
+        }
+
         .charger-expand-section {
           position: relative;
           margin-top: 30px;
@@ -3243,10 +3239,6 @@ function ThreeKwChargerPage({ spec }) {
             top: -2px;
             height: 40px;
             width: 40px;
-          }
-
-          .charger-expand-section .three-section-title {
-            padding-right: 42px;
           }
 
           .three-how-panel {

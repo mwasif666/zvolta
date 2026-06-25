@@ -5,6 +5,7 @@ import { SmartLink } from "../SmartLink";
 
 const APP_LINK = "/appstore";
 const MAP_LINK = "/charge";
+const HERO_APP_IMAGE = "/img/app-2.png";
 
 const vehicleTypes = [
   "EV bikes",
@@ -38,6 +39,54 @@ const supportCards = [
   "Payment support",
   "Booking support",
   "Station issue reporting",
+];
+
+const networkStations = [
+  { name: "Workhall", top: "26%", left: "9%", side: "right" },
+  { name: "IBA University", top: "29%", left: "45%", side: "right" },
+  { name: "Byco Gulshan", top: "27%", left: "66%", side: "left" },
+  { name: "Ignite Sports Pavilion", top: "44%", left: "61%", side: "left" },
+  { name: "Vlektra", top: "69%", left: "44%", side: "right" },
+  { name: "Revoo", top: "87%", left: "70%", side: "left" },
+];
+
+const networkStats = [
+  { icon: "bolt", value: "13+", label: "Installed Chargers" },
+  { icon: "chart", value: "1,500+", label: "Charging Sessions" },
+  { icon: "user", value: "200+", label: "Organic Signups" },
+];
+
+const howItWorksSteps = [
+  {
+    n: 1,
+    visual: "map",
+    title: "Find Charger",
+    copy: "Find nearby Zvolta chargers on the map.",
+  },
+  {
+    n: 2,
+    visual: "book",
+    title: "Book Slot",
+    copy: "Check availability and reserve your preferred slot.",
+  },
+  {
+    n: 3,
+    visual: "qr",
+    title: "Scan QR",
+    copy: "Scan the QR code at the charger using the app.",
+  },
+  {
+    n: 4,
+    visual: "charge",
+    title: "Start Charging",
+    copy: "Plug in your vehicle and start the charging session.",
+  },
+  {
+    n: 5,
+    visual: "wallet",
+    title: "Pay Through Wallet",
+    copy: "Pay securely through your Zvolta wallet.",
+  },
 ];
 
 function Icon({ name, className = "h-5 w-5" }) {
@@ -81,6 +130,68 @@ function Icon({ name, className = "h-5 w-5" }) {
     );
   }
 
+  if (name === "download") {
+    return (
+      <svg {...props}>
+        <path d="M12 3v12" />
+        <path d="m7 11 5 5 5-5" />
+        <path d="M4 21h16" />
+      </svg>
+    );
+  }
+
+  if (name === "bolt") {
+    return (
+      <svg {...props} fill="currentColor" stroke="none">
+        <path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z" />
+      </svg>
+    );
+  }
+
+  if (name === "bell") {
+    return (
+      <svg {...props}>
+        <path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9" />
+        <path d="M13.7 21a2 2 0 0 1-3.4 0" />
+      </svg>
+    );
+  }
+
+  if (name === "menu") {
+    return (
+      <svg {...props}>
+        <path d="M4 6h16" />
+        <path d="M4 12h16" />
+        <path d="M4 18h16" />
+      </svg>
+    );
+  }
+
+  if (name === "search") {
+    return (
+      <svg {...props}>
+        <circle cx="11" cy="11" r="7" />
+        <path d="m21 21-4.3-4.3" />
+      </svg>
+    );
+  }
+
+  if (name === "sliders") {
+    return (
+      <svg {...props}>
+        <path d="M4 6h10" />
+        <path d="M18 6h2" />
+        <path d="M4 12h4" />
+        <path d="M12 12h8" />
+        <path d="M4 18h12" />
+        <path d="M20 18h0" />
+        <circle cx="16" cy="6" r="2" />
+        <circle cx="10" cy="12" r="2" />
+        <circle cx="18" cy="18" r="2" />
+      </svg>
+    );
+  }
+
   if (name === "pin") {
     return (
       <svg {...props}>
@@ -96,6 +207,77 @@ function Icon({ name, className = "h-5 w-5" }) {
         <path d="M4 7h16v12H4a2 2 0 0 1-2-2V5a2 2 0 0 0 2 2Z" />
         <path d="M18 11h4v4h-4a2 2 0 0 1 0-4Z" />
         <path d="M4 7l12-4v4" />
+      </svg>
+    );
+  }
+
+  if (name === "chart") {
+    return (
+      <svg {...props}>
+        <path d="M6 20V10" />
+        <path d="M12 20V4" />
+        <path d="M18 20v-6" />
+      </svg>
+    );
+  }
+
+  if (name === "user") {
+    return (
+      <svg {...props}>
+        <circle cx="12" cy="8" r="4" />
+        <path d="M5 21a7 7 0 0 1 14 0" />
+      </svg>
+    );
+  }
+
+  if (name === "shield") {
+    return (
+      <svg {...props}>
+        <path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6l7-3Z" />
+        <path d="m9 12 2 2 4-4" />
+      </svg>
+    );
+  }
+
+  if (name === "check-circle") {
+    return (
+      <svg {...props}>
+        <circle cx="12" cy="12" r="9" />
+        <path d="m8.5 12 2.5 2.5 4.5-5" />
+      </svg>
+    );
+  }
+
+  if (name === "activity") {
+    return (
+      <svg {...props}>
+        <path d="M3 12h4l3 8 4-16 3 8h4" />
+      </svg>
+    );
+  }
+
+  if (name === "calendar") {
+    return (
+      <svg {...props}>
+        <rect x="3" y="4.5" width="18" height="16.5" rx="2" />
+        <path d="M16 2.5v4M8 2.5v4M3 9.5h18" />
+      </svg>
+    );
+  }
+
+  if (name === "clock") {
+    return (
+      <svg {...props}>
+        <circle cx="12" cy="12" r="9" />
+        <path d="M12 7.5V12l3 2" />
+      </svg>
+    );
+  }
+
+  if (name === "chevron") {
+    return (
+      <svg {...props}>
+        <path d="m9 6 6 6-6 6" />
       </svg>
     );
   }
@@ -532,9 +714,784 @@ function PhoneMockup({ screen = "home", className = "" }) {
   );
 }
 
+function HeroDownloadButton({ href = APP_LINK, children, className = "" }) {
+  return (
+    <SmartLink
+      href={href}
+      className={`inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-[#16a34a] px-6 py-3.5 text-base font-semibold text-white shadow-[0_12px_30px_rgba(22,163,74,0.28)] transition duration-300 hover:scale-[1.02] hover:bg-[#15893f] focus:outline-none focus:ring-2 focus:ring-[#16a34a]/40 ${className}`}
+    >
+      <Icon name="download" className="h-5 w-5" />
+      {children}
+    </SmartLink>
+  );
+}
+
+function HeroFindButton({ href = MAP_LINK, children, className = "" }) {
+  return (
+    <SmartLink
+      href={href}
+      className={`inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-[#16a34a]/60 bg-white px-6 py-3.5 text-base font-semibold text-[#16a34a] transition duration-300 hover:scale-[1.02] hover:bg-[#16a34a]/5 focus:outline-none focus:ring-2 focus:ring-[#16a34a]/30 ${className}`}
+    >
+      <Icon name="pin" className="h-5 w-5" />
+      {children}
+    </SmartLink>
+  );
+}
+
+function HeroAppPhone() {
+  return (
+    <div className="chl-phone">
+      <span className="chl-phone-notch" aria-hidden="true" />
+      <div className="chl-screen chl-screen--image">
+        <img src={HERO_APP_IMAGE} alt="Zvolta app home screen" />
+      </div>
+    </div>
+  );
+}
+
+function HeroVisual() {
+  return (
+    <div className="chl-visual">
+      <HeroAppPhone />
+
+      <div className="chl-card chl-card--session">
+        <span className="chl-card-bolt">
+          <Icon name="bolt" className="h-4 w-4" />
+        </span>
+        <p className="chl-card-title">Session Active</p>
+        <p className="chl-card-label">Charging</p>
+        <p className="chl-card-value">32%</p>
+        <span className="chl-progress">
+          <span className="chl-progress-fill" />
+        </span>
+      </div>
+
+      <div className="chl-card chl-card--wallet">
+        <div className="chl-wallet-head">
+          <span className="chl-card-bolt">
+            <Icon name="wallet" className="h-4 w-4" />
+          </span>
+          <p className="chl-card-title">Wallet Connected</p>
+        </div>
+        <p className="chl-card-label">Balance</p>
+        <p className="chl-card-value">₹1,250.00</p>
+      </div>
+
+      <div className="chl-card chl-card--nearby">
+        <p className="chl-card-title">Nearby Chargers</p>
+        {[
+          ["Zvolta Green Park", "2/4 available • DC Fast", "0.2 km"],
+          ["Zvolta City Mall", "3/4 available • AC", "1.1 km"],
+        ].map(([name, meta, distance]) => (
+          <div className="chl-nearby-row" key={name}>
+            <span className="chl-nearby-bolt">
+              <Icon name="bolt" className="h-3.5 w-3.5" />
+            </span>
+            <span className="chl-nearby-text">
+              <strong>{name}</strong>
+              <span>{meta}</span>
+            </span>
+            <span className="chl-nearby-distance">{distance}</span>
+          </div>
+        ))}
+        <SmartLink href={MAP_LINK} className="chl-nearby-link">
+          View all chargers
+          <Icon name="arrow" className="h-4 w-4" />
+        </SmartLink>
+      </div>
+    </div>
+  );
+}
+
+function HowItWorksVisual({ visual }) {
+  if (visual === "map") {
+    return (
+      <div className="hiw-visual">
+        <div className="hiw-map">
+          {[
+            "left-[16%] top-[20%]",
+            "right-[16%] top-[20%]",
+            "left-[16%] bottom-[18%]",
+            "right-[16%] bottom-[18%]",
+          ].map((position) => (
+            <span key={position} className={`hiw-map-pin ${position}`}>
+              <Icon name="bolt" className="h-3 w-3" />
+            </span>
+          ))}
+          <span className="hiw-map-dot" />
+        </div>
+      </div>
+    );
+  }
+
+  if (visual === "book") {
+    return (
+      <div className="hiw-visual">
+        <div className="hiw-book">
+          <div className="hiw-book-head">
+            <span className="hiw-book-name">Zvolta Green Park</span>
+            <span className="hiw-book-avail">Available</span>
+          </div>
+          <div className="hiw-book-row">
+            <span className="hiw-book-fast">
+              <Icon name="bolt" className="h-3.5 w-3.5" />
+              DC Fast
+            </span>
+            <span className="hiw-book-kw">
+              120 kW
+              <small>Max power</small>
+            </span>
+          </div>
+          <span className="hiw-book-btn">Book Slot</span>
+        </div>
+      </div>
+    );
+  }
+
+  if (visual === "qr") {
+    return (
+      <div className="hiw-visual">
+        <div className="hiw-qr-card">
+          <span className="hiw-qr-brand">
+            <Icon name="bolt" className="h-3.5 w-3.5" />
+            zvolta
+          </span>
+          <span className="hiw-qr">
+            {Array.from({ length: 25 }).map((_, index) => (
+              <span
+                key={index}
+                className={
+                  [0, 1, 3, 5, 6, 9, 11, 12, 13, 15, 18, 19, 21, 23, 24].includes(
+                    index,
+                  )
+                    ? "is-on"
+                    : ""
+                }
+              />
+            ))}
+          </span>
+        </div>
+      </div>
+    );
+  }
+
+  if (visual === "charge") {
+    return (
+      <div className="hiw-visual">
+        <img
+          src="/img/charging station.png"
+          alt="Zvolta EV charger"
+          className="hiw-charger-img"
+          loading="lazy"
+        />
+      </div>
+    );
+  }
+
+  return (
+    <div className="hiw-visual">
+      <div className="hiw-wallet">
+        <div className="hiw-wallet-head">
+          <span className="hiw-wallet-icon">
+            <Icon name="wallet" className="h-4 w-4" />
+          </span>
+          <span className="hiw-wallet-title">Wallet</span>
+        </div>
+        <p className="hiw-wallet-label">Balance</p>
+        <div className="hiw-wallet-row">
+          <span className="hiw-wallet-value">&#8377;1,250.00</span>
+          <Icon name="arrow" className="h-4 w-4 text-[#16a34a]" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function HowItWorksSection() {
+  return (
+    <section className="hiw-section">
+      <div className="charge-container">
+        <div className="charge-reveal mx-auto max-w-2xl text-center">
+          <p className="inline-flex items-center gap-2 rounded-full bg-[#16a34a]/10 px-4 py-2 text-sm font-semibold text-[#16a34a]">
+            <Icon name="bolt" className="h-4 w-4" />
+            Simple EV charging
+          </p>
+          <h2 className="mt-6 text-[44px] font-extrabold leading-[1.05] tracking-tight text-zinc-900 md:text-[64px]">
+            How It Works
+          </h2>
+          <p className="mx-auto mt-5 max-w-xl text-lg leading-8 text-zinc-500">
+            From finding a charger to paying digitally, everything happens in a
+            few simple steps.
+          </p>
+        </div>
+
+        <div className="charge-stagger hiw-grid mt-14">
+          {howItWorksSteps.map((step) => (
+            <article key={step.title} className="hiw-card">
+              <span className="hiw-num">{step.n}</span>
+              <HowItWorksVisual visual={step.visual} />
+              <div className="hiw-text">
+                <h3 className="hiw-title">{step.title}</h3>
+                <p className="hiw-copy">{step.copy}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <div className="charge-reveal mt-14 flex justify-center">
+          <HeroDownloadButton href={APP_LINK}>Download App</HeroDownloadButton>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function NetworkMapSection() {
+  return (
+    <PageSection id="network-map">
+      <div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
+        <div className="charge-reveal">
+          <p className="inline-flex items-center gap-2 rounded-full border border-[#16a34a]/30 bg-[#16a34a]/10 px-4 py-2 text-xs font-semibold uppercase tracking-wide text-[#16a34a]">
+            <Icon name="bolt" className="h-4 w-4" />
+            Network Map
+          </p>
+          <h2 className="mt-7 text-[40px] font-semibold leading-[1.08] text-white md:text-[52px]">
+            Growing EV
+            <br />
+            Charging Network
+          </h2>
+          <p className="mt-6 max-w-md text-base leading-7 text-[#A1A1A1]">
+            Zvolta&rsquo;s network is expanding across Karachi, making clean
+            mobility more accessible every day.
+          </p>
+        </div>
+
+        <div className="charge-reveal charge-map-card">
+          <img
+            src="/img/Host/locations.png"
+            alt="Map of Zvolta charging stations across Karachi"
+            className="charge-map-img"
+            loading="lazy"
+          />
+          <div className="charge-map-overlay" />
+          {networkStations.map((station) => (
+            <div
+              key={station.name}
+              className={`charge-map-pin charge-map-pin--${station.side}`}
+              style={{ top: station.top, left: station.left }}
+            >
+              <span className="charge-map-marker">
+                <Icon name="bolt" className="h-3.5 w-3.5" />
+              </span>
+              <span className="charge-map-label">{station.name}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="charge-stagger mt-12 grid gap-5 sm:grid-cols-3">
+        {networkStats.map((stat) => (
+          <div
+            key={stat.label}
+            className="flex items-center gap-4 rounded-2xl border border-[#1F1F1F] bg-[#111111] p-6"
+          >
+            <span className="grid h-14 w-14 flex-shrink-0 place-items-center rounded-full bg-[#16a34a]/10 text-[#16a34a]">
+              <Icon name={stat.icon} className="h-6 w-6" />
+            </span>
+            <div>
+              <p className="text-[34px] font-bold leading-none text-[#16a34a]">
+                {stat.value}
+              </p>
+              <p className="mt-2 text-sm text-[#A1A1A1]">{stat.label}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </PageSection>
+  );
+}
+
+const whyChooseFeatures = [
+  {
+    icon: "pin",
+    title: "Nearby Locations",
+    copy: "Find Zvolta chargers near you in seconds. More locations, more convenience.",
+  },
+  {
+    icon: "receipt",
+    title: "Transparent Pricing",
+    copy: "Know what you pay, always. Clear pricing with no hidden fees or surprises.",
+  },
+  {
+    icon: "shield",
+    title: "Safe Charging",
+    copy: "Advanced safety features and real-time monitoring for total peace of mind.",
+  },
+  {
+    icon: "vehicles",
+    title: "Built for Bikes & Cars",
+    copy: "Whether you ride a bike or drive a car, Zvolta has you covered.",
+  },
+];
+
+function WhyIcon({ name }) {
+  const stroke = {
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: 1.6,
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+    className: "h-9 w-9",
+    "aria-hidden": "true",
+  };
+
+  if (name === "pin") {
+    return (
+      <svg {...stroke}>
+        <path d="M12 21s6-5.4 6-11A6 6 0 1 0 6 10c0 5.6 6 11 6 11Z" />
+        <circle cx="12" cy="10" r="2.3" />
+      </svg>
+    );
+  }
+
+  if (name === "receipt") {
+    return (
+      <svg {...stroke}>
+        <path d="M6 3h12v18l-2.2-1.4-2 1.4-2-1.4-2 1.4L6 21V3Z" />
+        <path d="M13.3 9c-.3-.7-1-1-1.7-1-.9 0-1.6.6-1.6 1.3 0 .8.7 1.2 1.6 1.2s1.6.5 1.6 1.3-.7 1.3-1.6 1.3c-.8 0-1.4-.3-1.7-1" />
+        <path d="M12 6.8V8M12 13.6v1.2" />
+      </svg>
+    );
+  }
+
+  if (name === "shield") {
+    return (
+      <svg viewBox="0 0 24 24" className="h-9 w-9" aria-hidden="true">
+        <path
+          fill="#16a34a"
+          d="M12 2.4l7.3 3v5.3c0 4.8-3.1 8.5-7.3 10.4-4.2-1.9-7.3-5.6-7.3-10.4V5.4l7.3-3Z"
+        />
+        <path
+          fill="#ffffff"
+          d="M12.8 7 8.6 13h2.7l-.7 3.7 4.2-5.8h-2.7l.7-3.9Z"
+        />
+      </svg>
+    );
+  }
+
+  return (
+    <svg {...stroke}>
+      <path d="M2.5 14l1.1-2.9A1.8 1.8 0 0 1 5.3 10h3.4a1.8 1.8 0 0 1 1.5.8L11.6 13" />
+      <path d="M2.5 14v1.3h.9" />
+      <path d="M6.6 15.3h1.7" />
+      <circle cx="5" cy="15.4" r="1.5" />
+      <circle cx="9.6" cy="15.4" r="1.5" />
+      <circle cx="16.4" cy="15.2" r="2.3" />
+      <circle cx="21" cy="15.2" r="2.3" />
+      <path d="M14.6 15.2l1.8-3h2.3l1.3 3" />
+      <path d="M16.4 12.2h2.3" />
+    </svg>
+  );
+}
+
+function WhyChooseSection() {
+  return (
+    <section className="wcz-section">
+      <div className="charge-container">
+        <div className="charge-reveal mx-auto max-w-3xl text-center">
+          <p className="inline-flex items-center gap-2 rounded-full bg-[#16a34a]/10 px-4 py-2 text-sm font-semibold text-[#16a34a]">
+            <Icon name="bolt" className="h-4 w-4" />
+            Built for Everyday Convenience
+          </p>
+          <h2 className="mt-7 text-[44px] font-extrabold leading-[1.05] tracking-tight text-zinc-900 md:text-[60px]">
+            Why Users Choose Zvolta
+          </h2>
+          <p className="mx-auto mt-5 max-w-xl text-lg leading-8 text-zinc-500">
+            Smart charging that fits your lifestyle with reliability,
+            transparency, and peace of mind.
+          </p>
+        </div>
+
+        <div className="charge-stagger wcz-grid mt-14">
+          {whyChooseFeatures.map((feature) => (
+            <article key={feature.title} className="wcz-card">
+              <span className="wcz-icon">
+                <WhyIcon name={feature.icon} />
+              </span>
+              <h3 className="wcz-title">{feature.title}</h3>
+              <span className="wcz-rule" />
+              <p className="wcz-copy">{feature.copy}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+const whereToChargePlaces = [
+  {
+    icon: "briefcase",
+    title: "Offices",
+    copy: "Charge while you work and stay productive.",
+  },
+  {
+    icon: "cap",
+    title: "Universities",
+    copy: "Power your education and your drive.",
+  },
+  {
+    icon: "fuel",
+    title: "Petrol Pumps",
+    copy: "Top up your charge while you fill up.",
+  },
+  {
+    icon: "coffee",
+    title: "Cafés",
+    copy: "Enjoy your coffee while your car charges.",
+  },
+  {
+    icon: "building",
+    title: "Apartments",
+    copy: "Reliable charging right at your doorstep.",
+  },
+  {
+    icon: "dumbbell",
+    title: "Sports Facilities",
+    copy: "Stay active while your EV powers up.",
+  },
+  {
+    icon: "bag",
+    title: "Retail & Parking",
+    copy: "Shop, park, and charge—all in one stop.",
+  },
+  {
+    icon: "group",
+    title: "Community Spaces",
+    copy: "Accessible charging for everyone, every day.",
+  },
+];
+
+function WhereIcon({ name }) {
+  const props = {
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: 1.7,
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+    className: "h-6 w-6",
+    "aria-hidden": "true",
+  };
+
+  if (name === "briefcase") {
+    return (
+      <svg {...props}>
+        <rect x="3" y="7" width="18" height="13" rx="2" />
+        <path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+        <path d="M3 12h18" />
+      </svg>
+    );
+  }
+
+  if (name === "cap") {
+    return (
+      <svg {...props}>
+        <path d="M12 4 2 9l10 5 10-5-10-5Z" />
+        <path d="M6 11v4c0 1 2.7 2.5 6 2.5s6-1.5 6-2.5v-4" />
+        <path d="M22 9v5" />
+      </svg>
+    );
+  }
+
+  if (name === "fuel") {
+    return (
+      <svg {...props}>
+        <path d="M4 21V5a2 2 0 0 1 2-2h5a2 2 0 0 1 2 2v16" />
+        <path d="M3 21h11" />
+        <rect x="6" y="6" width="5" height="4" rx="1" />
+        <path d="M13 8h3l2.5 2.5V16a1.5 1.5 0 0 0 3 0V11" />
+      </svg>
+    );
+  }
+
+  if (name === "coffee") {
+    return (
+      <svg {...props}>
+        <path d="M5 8h12v5a5 5 0 0 1-5 5h-2a5 5 0 0 1-5-5V8Z" />
+        <path d="M17 9h2a2.5 2.5 0 0 1 0 5h-2" />
+        <path d="M8 2.5c0 1-1 1.5-1 2.5M11.5 2.5c0 1-1 1.5-1 2.5" />
+      </svg>
+    );
+  }
+
+  if (name === "building") {
+    return (
+      <svg {...props}>
+        <path d="M4 21V6a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v15" />
+        <path d="M12 21V10a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v11" />
+        <path d="M7 8.5h2M7 12.5h2M7 16.5h2M15 13h2M15 17h2" />
+        <path d="M3 21h18" />
+      </svg>
+    );
+  }
+
+  if (name === "dumbbell") {
+    return (
+      <svg {...props}>
+        <path d="M4 9.5v5M7 7.5v9M17 7.5v9M20 9.5v5" />
+        <path d="M7 12h10" />
+      </svg>
+    );
+  }
+
+  if (name === "bag") {
+    return (
+      <svg {...props}>
+        <path d="M6 8h12l-1 12H7L6 8Z" />
+        <path d="M9 8V6a3 3 0 0 1 6 0v2" />
+      </svg>
+    );
+  }
+
+  return (
+    <svg {...props}>
+      <circle cx="9" cy="8" r="3" />
+      <path d="M3.5 19.5a5.5 5.5 0 0 1 11 0" />
+      <path d="M16 5.5a3 3 0 0 1 0 5" />
+      <path d="M17.5 13.5a5.5 5.5 0 0 1 3 5" />
+    </svg>
+  );
+}
+
+const appExperienceFeatures = [
+  {
+    icon: "bolt",
+    title: "Live Availability",
+    copy: "See real-time charger status around you.",
+  },
+  {
+    icon: "wallet",
+    title: "Wallet Payments",
+    copy: "Secure, fast and hassle-free payments.",
+  },
+  {
+    icon: "activity",
+    title: "Session Tracking",
+    copy: "Monitor your charging in real time.",
+  },
+  {
+    icon: "calendar",
+    title: "Slot Booking",
+    copy: "Reserve your charger in advance.",
+  },
+  {
+    icon: "clock",
+    title: "Charging History",
+    copy: "View past sessions and energy usage.",
+  },
+];
+
+const appExperienceSlides = [
+  "https://res.cloudinary.com/diywraupt/image/upload/v1778335134/Gray_and_Black_Modern_Handphone_Mockup_Instagram_Story_5_iti1ef.png",
+  "https://res.cloudinary.com/diywraupt/image/upload/v1778335192/Gray_and_Black_Modern_Handphone_Mockup_Instagram_Story_6_dw7l4e.png",
+];
+
+function AppExperienceSection() {
+  const [activeSlide, setActiveSlide] = useState(0);
+
+  useEffect(() => {
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+
+    if (reduceMotion) {
+      return undefined;
+    }
+
+    const timer = setInterval(() => {
+      setActiveSlide((current) => (current + 1) % appExperienceSlides.length);
+    }, 3500);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <section className="aex-section">
+      <div className="charge-container">
+        <div className="grid gap-14 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
+          <div className="charge-reveal">
+            <p className="inline-flex items-center gap-2 rounded-full border border-[#16a34a]/30 bg-[#16a34a]/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-[#16a34a]">
+              <Icon name="bolt" className="h-4 w-4" />
+              App Experience
+            </p>
+            <h2 className="mt-7 text-[40px] font-extrabold leading-[1.05] tracking-tight text-white md:text-[54px]">
+              Everything You Need in the App
+            </h2>
+            <p className="mt-6 max-w-md text-lg leading-8 text-[#A1A1A1]">
+              The Zvolta app puts complete control of your charging experience in
+              your hands.
+            </p>
+
+            <div className="aex-list">
+              <span className="aex-rail" aria-hidden="true" />
+              {appExperienceFeatures.map((feature) => (
+                <div key={feature.title} className="aex-item">
+                  <span className="aex-dot" aria-hidden="true" />
+                  <div className="aex-card">
+                    <span className="aex-icon">
+                      <Icon name={feature.icon} className="h-5 w-5" />
+                    </span>
+                    <div className="aex-card-text">
+                      <h3>{feature.title}</h3>
+                      <p>{feature.copy}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="charge-reveal aex-slider">
+            {appExperienceSlides.map((src, index) => (
+              <img
+                key={src}
+                src={src}
+                alt={`Zvolta app screen ${index + 1}`}
+                className={`aex-slide ${index === activeSlide ? "is-active" : ""}`}
+                loading="lazy"
+              />
+            ))}
+            <div className="aex-dots">
+              {appExperienceSlides.map((src, index) => (
+                <button
+                  key={src}
+                  type="button"
+                  aria-label={`Show app screen ${index + 1}`}
+                  className={`aex-dot-btn ${index === activeSlide ? "is-active" : ""}`}
+                  onClick={() => setActiveSlide(index)}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className="charge-reveal aex-trustbar">
+          <span className="aex-trust-icon">
+            <Icon name="shield" className="h-5 w-5" />
+          </span>
+          <strong className="aex-trust-title">
+            Secure. Reliable. Built for every EV driver.
+          </strong>
+          <span className="aex-trust-divider" aria-hidden="true" />
+          <span className="aex-trust-note">
+            Trusted by hundreds of EV drivers across Karachi.
+          </span>
+          <HeroDownloadButton href={APP_LINK} className="aex-trust-cta">
+            Download App
+          </HeroDownloadButton>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function WhereToChargeSection() {
+  return (
+    <section className="wtc-section">
+      <div className="wtc-glow wtc-glow--left" aria-hidden="true" />
+      <div className="wtc-glow wtc-glow--right" aria-hidden="true" />
+      <div className="charge-container relative">
+        <div className="charge-reveal mx-auto max-w-3xl text-center">
+          <p className="inline-flex items-center gap-2 rounded-full border border-[#16a34a]/30 bg-[#16a34a]/10 px-4 py-2 text-sm font-semibold text-[#16a34a]">
+            <Icon name="bolt" className="h-4 w-4" />
+            Where You Can Charge
+          </p>
+          <h2 className="mt-7 text-[40px] font-extrabold leading-[1.06] tracking-tight text-white md:text-[56px]">
+            Charging Where Your Day Already Takes You
+          </h2>
+          <p className="mx-auto mt-6 max-w-xl text-lg leading-8 text-[#A1A1A1]">
+            Zvolta chargers are placed at the places you visit every day—so
+            charging fits right into your routine.
+          </p>
+        </div>
+
+        <div className="charge-stagger wtc-grid mt-14">
+          {whereToChargePlaces.map((place) => (
+            <article key={place.title} className="wtc-card">
+              <span className="wtc-icon">
+                <WhereIcon name={place.icon} />
+              </span>
+              <h3 className="wtc-title">{place.title}</h3>
+              <span className="wtc-rule" />
+              <p className="wtc-copy">{place.copy}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ReadyToChargeSection() {
+  return (
+    <section className="rcs-section">
+      <div className="charge-container grid items-center gap-12 lg:grid-cols-2">
+        <div className="charge-reveal">
+          <p className="inline-flex items-center gap-2 rounded-full border border-[#16a34a]/30 bg-[#16a34a]/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-[#16a34a]">
+            <Icon name="bolt" className="h-4 w-4" />
+            Charge Anywhere
+          </p>
+          <h2 className="mt-8 text-[44px] font-extrabold leading-[1.05] tracking-tight text-white sm:text-[58px] md:text-[64px]">
+            Ready to
+            <br />
+            Charge Smarter?
+          </h2>
+          <p className="mt-6 max-w-md text-lg leading-8 text-[#A1A1A1]">
+            Download the Zvolta app and access charging across our growing
+            network.
+          </p>
+          <div className="mt-10">
+            <HeroDownloadButton href={APP_LINK}>Download App</HeroDownloadButton>
+          </div>
+          <div className="rcs-badges">
+            <span>
+              <Icon name="shield" className="h-5 w-5 text-[#16a34a]" />
+              Secure.
+            </span>
+            <span>
+              <Icon name="bolt" className="h-5 w-5 text-[#16a34a]" />
+              Fast.
+            </span>
+            <span>
+              <Icon name="check-circle" className="h-5 w-5 text-[#16a34a]" />
+              Reliable.
+            </span>
+          </div>
+        </div>
+
+        <div className="charge-reveal rcs-visual">
+          <div className="rcs-rings" aria-hidden="true">
+            <span />
+            <span />
+            <span />
+            <span />
+          </div>
+          <img
+            src="https://res.cloudinary.com/diywraupt/image/upload/v1780395124/stand_l17ao3.png"
+            alt="Zvolta EV wall charger"
+            className="rcs-img"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export default function ChargePage() {
   const pageRef = useRef(null);
-  const [activeScreen, setActiveScreen] = useState("home");
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -623,6 +1580,924 @@ export default function ChargePage() {
           isolation: isolate;
         }
 
+        .charge-map-card {
+          position: relative;
+          overflow: hidden;
+          border-radius: 24px;
+          border: 1px solid #1F1F1F;
+          background: #050505;
+          aspect-ratio: 16 / 10;
+          box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+        }
+
+        .charge-map-img {
+          position: absolute;
+          inset: 0;
+          height: 100%;
+          width: 100%;
+          object-fit: cover;
+        }
+
+        .charge-map-overlay {
+          position: absolute;
+          inset: 0;
+          background:
+            radial-gradient(circle at 50% 45%, transparent 35%, rgba(5, 5, 5, 0.35)),
+            linear-gradient(180deg, rgba(5, 5, 5, 0.15), rgba(5, 5, 5, 0.45));
+        }
+
+        .charge-map-pin {
+          position: absolute;
+          z-index: 2;
+          height: 0;
+          width: 0;
+        }
+
+        .charge-map-marker {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          display: grid;
+          place-items: center;
+          height: 30px;
+          width: 30px;
+          transform: translate(-50%, 0) rotate(-45deg);
+          border-radius: 50% 50% 50% 0;
+          background: #22c55e;
+          color: #ffffff;
+          box-shadow: 0 0 16px rgba(34, 197, 94, 0.7);
+        }
+
+        .charge-map-marker svg {
+          transform: rotate(45deg);
+        }
+
+        .charge-map-label {
+          position: absolute;
+          bottom: 6px;
+          white-space: nowrap;
+          border-radius: 8px;
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          background: rgba(10, 10, 10, 0.72);
+          backdrop-filter: blur(6px);
+          padding: 5px 10px;
+          font-size: 12px;
+          font-weight: 600;
+          color: #ffffff;
+        }
+
+        .charge-map-pin--right .charge-map-label {
+          left: 22px;
+        }
+
+        .charge-map-pin--left .charge-map-label {
+          right: 22px;
+        }
+
+        .hiw-section {
+          background: #F7F8F6;
+          color: #0f172a;
+          padding: 120px 0;
+          border-bottom: 1px solid #1F1F1F;
+        }
+
+        .hiw-grid {
+          display: grid;
+          gap: 24px;
+          grid-template-columns: 1fr;
+        }
+
+        @media (min-width: 640px) {
+          .hiw-grid {
+            grid-template-columns: repeat(2, 1fr);
+          }
+        }
+
+        @media (min-width: 1024px) {
+          .hiw-grid {
+            grid-template-columns: repeat(5, 1fr);
+            gap: 22px;
+          }
+        }
+
+        .hiw-card {
+          position: relative;
+          display: flex;
+          flex-direction: column;
+          border-radius: 20px;
+          border: 1px solid rgba(2, 6, 23, 0.05);
+          background: #ffffff;
+          padding: 38px 18px 26px;
+          text-align: center;
+          box-shadow: 0 16px 40px rgba(2, 6, 23, 0.06);
+        }
+
+        .hiw-num {
+          position: absolute;
+          top: -16px;
+          left: 22px;
+          display: grid;
+          place-items: center;
+          height: 32px;
+          width: 32px;
+          border-radius: 50%;
+          background: #16a34a;
+          color: #ffffff;
+          font-size: 14px;
+          font-weight: 700;
+          box-shadow: 0 6px 16px rgba(22, 163, 74, 0.35);
+        }
+
+        @media (min-width: 1024px) {
+          .hiw-card:not(:first-child)::before {
+            content: "";
+            position: absolute;
+            top: 143px;
+            left: -23px;
+            width: 24px;
+            border-top: 2px dashed rgba(22, 163, 74, 0.45);
+          }
+        }
+
+        .hiw-visual {
+          position: relative;
+          flex: 0 0 210px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 210px;
+          margin-bottom: 20px;
+        }
+
+        .hiw-text {
+          display: flex;
+          flex: 1 1 auto;
+          flex-direction: column;
+          align-items: center;
+          justify-content: flex-start;
+        }
+
+        .hiw-title {
+          font-size: 19px;
+          font-weight: 700;
+          color: #0f172a;
+        }
+
+        .hiw-copy {
+          margin: 10px auto 0;
+          max-width: 220px;
+          font-size: 14px;
+          line-height: 1.55;
+          color: #64748b;
+        }
+
+        .hiw-map {
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+          border-radius: 16px;
+          background:
+            linear-gradient(90deg, rgba(15, 23, 42, 0.05) 1px, transparent 1px),
+            linear-gradient(rgba(15, 23, 42, 0.05) 1px, transparent 1px),
+            #eef1ec;
+          background-size: 34px 34px, 34px 34px, auto;
+        }
+
+        .hiw-map-pin {
+          position: absolute;
+          display: grid;
+          place-items: center;
+          height: 26px;
+          width: 26px;
+          border-radius: 50% 50% 50% 0;
+          transform: rotate(-45deg);
+          background: #16a34a;
+          color: #ffffff;
+          box-shadow: 0 6px 14px rgba(22, 163, 74, 0.3);
+        }
+
+        .hiw-map-pin svg {
+          transform: rotate(45deg);
+        }
+
+        .hiw-map-dot {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          height: 16px;
+          width: 16px;
+          transform: translate(-50%, -50%);
+          border-radius: 50%;
+          background: #2563eb;
+          border: 3px solid #ffffff;
+          box-shadow: 0 0 0 6px rgba(37, 99, 235, 0.18);
+        }
+
+        .hiw-book {
+          width: 100%;
+          border-radius: 16px;
+          border: 1px solid rgba(2, 6, 23, 0.07);
+          background: #ffffff;
+          padding: 16px;
+          box-shadow: 0 12px 30px rgba(2, 6, 23, 0.08);
+        }
+
+        .hiw-book-head {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 8px;
+        }
+
+        .hiw-book-name {
+          font-size: 13px;
+          font-weight: 700;
+          color: #0f172a;
+        }
+
+        .hiw-book-avail {
+          flex-shrink: 0;
+          border-radius: 999px;
+          background: #dcfce7;
+          padding: 3px 9px;
+          font-size: 10px;
+          font-weight: 700;
+          color: #16a34a;
+        }
+
+        .hiw-book-row {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-top: 12px;
+        }
+
+        .hiw-book-fast {
+          display: inline-flex;
+          align-items: center;
+          gap: 4px;
+          font-size: 12px;
+          font-weight: 600;
+          color: #16a34a;
+        }
+
+        .hiw-book-kw {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-end;
+          font-size: 14px;
+          font-weight: 700;
+          color: #0f172a;
+        }
+
+        .hiw-book-kw small {
+          font-size: 10px;
+          font-weight: 500;
+          color: #94a3b8;
+        }
+
+        .hiw-book-btn {
+          display: block;
+          margin-top: 14px;
+          border-radius: 10px;
+          background: #16a34a;
+          padding: 9px;
+          font-size: 13px;
+          font-weight: 700;
+          color: #ffffff;
+        }
+
+        .hiw-qr-card {
+          width: 100%;
+          border-radius: 16px;
+          border: 1px solid rgba(2, 6, 23, 0.07);
+          background: #ffffff;
+          padding: 16px;
+          box-shadow: 0 12px 30px rgba(2, 6, 23, 0.08);
+        }
+
+        .hiw-qr-brand {
+          display: inline-flex;
+          align-items: center;
+          gap: 4px;
+          font-size: 14px;
+          font-weight: 800;
+          color: #0f172a;
+        }
+
+        .hiw-qr-brand svg {
+          color: #16a34a;
+        }
+
+        .hiw-qr {
+          position: relative;
+          display: grid;
+          grid-template-columns: repeat(5, 1fr);
+          gap: 4px;
+          margin: 12px auto 0;
+          width: 100px;
+          padding: 9px;
+        }
+
+        .hiw-qr::before,
+        .hiw-qr::after {
+          content: "";
+          position: absolute;
+          height: 14px;
+          width: 14px;
+          border: 2px solid #16a34a;
+        }
+
+        .hiw-qr::before {
+          top: 0;
+          left: 0;
+          border-right: none;
+          border-bottom: none;
+        }
+
+        .hiw-qr::after {
+          bottom: 0;
+          right: 0;
+          border-left: none;
+          border-top: none;
+        }
+
+        .hiw-qr span {
+          aspect-ratio: 1;
+          border-radius: 2px;
+          background: transparent;
+        }
+
+        .hiw-qr span.is-on {
+          background: #0f172a;
+        }
+
+        .hiw-charger-img {
+          max-height: 100%;
+          width: auto;
+          object-fit: contain;
+        }
+
+        .hiw-wallet {
+          width: 100%;
+          border-radius: 16px;
+          border: 1px solid rgba(2, 6, 23, 0.07);
+          background: #ffffff;
+          padding: 18px;
+          box-shadow: 0 12px 30px rgba(2, 6, 23, 0.08);
+        }
+
+        .hiw-wallet-head {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+        }
+
+        .hiw-wallet-icon {
+          display: grid;
+          place-items: center;
+          height: 34px;
+          width: 34px;
+          border-radius: 10px;
+          background: #16a34a;
+          color: #ffffff;
+        }
+
+        .hiw-wallet-title {
+          font-size: 14px;
+          font-weight: 700;
+          color: #0f172a;
+        }
+
+        .hiw-wallet-label {
+          margin-top: 16px;
+          font-size: 12px;
+          color: #94a3b8;
+        }
+
+        .hiw-wallet-row {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-top: 2px;
+        }
+
+        .hiw-wallet-value {
+          font-size: 20px;
+          font-weight: 800;
+          color: #0f172a;
+        }
+
+        @media (max-width: 767px) {
+          .hiw-section {
+            padding: 84px 0;
+          }
+        }
+
+        .rcs-section {
+          position: relative;
+          overflow: hidden;
+          padding: 120px 0;
+          background:
+            radial-gradient(circle at 78% 50%, rgba(22, 163, 74, 0.12), transparent 45%),
+            #0B0B0B;
+          border-bottom: 1px solid #1F1F1F;
+        }
+
+        .rcs-badges {
+          display: flex;
+          flex-wrap: wrap;
+          align-items: center;
+          gap: 28px;
+          margin-top: 36px;
+        }
+
+        .rcs-badges span {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          font-size: 16px;
+          font-weight: 600;
+          color: #E5E7EB;
+        }
+
+        .rcs-visual {
+          position: relative;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          min-height: 420px;
+        }
+
+        .rcs-rings {
+          position: absolute;
+          inset: 0;
+          display: grid;
+          place-items: center;
+          z-index: 0;
+        }
+
+        .rcs-rings::after {
+          content: "";
+          position: absolute;
+          height: 360px;
+          width: 360px;
+          border-radius: 50%;
+          background: radial-gradient(circle, rgba(22, 163, 74, 0.35), transparent 62%);
+          filter: blur(20px);
+        }
+
+        .rcs-rings span {
+          position: absolute;
+          border-radius: 50%;
+          border: 1px solid rgba(34, 197, 94, 0.18);
+        }
+
+        .rcs-rings span:nth-child(1) {
+          height: 300px;
+          width: 300px;
+        }
+
+        .rcs-rings span:nth-child(2) {
+          height: 440px;
+          width: 440px;
+          border-color: rgba(34, 197, 94, 0.13);
+        }
+
+        .rcs-rings span:nth-child(3) {
+          height: 580px;
+          width: 580px;
+          border-color: rgba(34, 197, 94, 0.09);
+        }
+
+        .rcs-rings span:nth-child(4) {
+          height: 720px;
+          width: 720px;
+          border-color: rgba(34, 197, 94, 0.05);
+        }
+
+        .rcs-img {
+          position: relative;
+          z-index: 1;
+          max-height: 560px;
+          width: auto;
+          max-width: 100%;
+          object-fit: contain;
+          filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.5));
+        }
+
+        @media (max-width: 1023px) {
+          .rcs-visual {
+            min-height: 360px;
+          }
+
+          .rcs-img {
+            max-height: 440px;
+          }
+        }
+
+        @media (max-width: 767px) {
+          .rcs-section {
+            padding: 84px 0;
+          }
+        }
+
+        .wcz-section {
+          background: #F7F8F6;
+          color: #0f172a;
+          padding: 120px 0;
+          border-bottom: 1px solid #1F1F1F;
+        }
+
+        .wcz-grid {
+          display: grid;
+          gap: 24px;
+          grid-template-columns: 1fr;
+        }
+
+        @media (min-width: 640px) {
+          .wcz-grid {
+            grid-template-columns: repeat(2, 1fr);
+          }
+        }
+
+        @media (min-width: 1024px) {
+          .wcz-grid {
+            grid-template-columns: repeat(4, 1fr);
+          }
+        }
+
+        .wcz-card {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          border-radius: 20px;
+          border: 1px solid rgba(2, 6, 23, 0.05);
+          background: #ffffff;
+          padding: 40px 24px;
+          text-align: center;
+          box-shadow: 0 16px 40px rgba(2, 6, 23, 0.06);
+        }
+
+        .wcz-icon {
+          display: grid;
+          place-items: center;
+          height: 84px;
+          width: 84px;
+          border-radius: 50%;
+          background: rgba(22, 163, 74, 0.1);
+          color: #16a34a;
+          margin-bottom: 26px;
+        }
+
+        .wcz-title {
+          font-size: 20px;
+          font-weight: 700;
+          color: #0f172a;
+        }
+
+        .wcz-rule {
+          display: block;
+          height: 3px;
+          width: 26px;
+          border-radius: 999px;
+          background: #16a34a;
+          margin: 14px 0 16px;
+        }
+
+        .wcz-copy {
+          max-width: 240px;
+          font-size: 14px;
+          line-height: 1.6;
+          color: #64748b;
+        }
+
+        @media (max-width: 767px) {
+          .wcz-section {
+            padding: 84px 0;
+          }
+        }
+
+        .wtc-section {
+          position: relative;
+          overflow: hidden;
+          padding: 120px 0;
+          background: #0B0B0B;
+          border-bottom: 1px solid #1F1F1F;
+        }
+
+        .wtc-glow {
+          position: absolute;
+          top: 0;
+          height: 560px;
+          width: 560px;
+          border-radius: 50%;
+          background: radial-gradient(circle, rgba(22, 163, 74, 0.12), transparent 60%);
+          pointer-events: none;
+        }
+
+        .wtc-glow--left {
+          left: -220px;
+        }
+
+        .wtc-glow--right {
+          right: -220px;
+        }
+
+        .wtc-grid {
+          display: grid;
+          gap: 22px;
+          grid-template-columns: 1fr;
+        }
+
+        @media (min-width: 640px) {
+          .wtc-grid {
+            grid-template-columns: repeat(2, 1fr);
+          }
+        }
+
+        @media (min-width: 1024px) {
+          .wtc-grid {
+            grid-template-columns: repeat(4, 1fr);
+          }
+        }
+
+        .wtc-card {
+          position: relative;
+          overflow: hidden;
+          border-radius: 16px;
+          border: 1px solid rgba(255, 255, 255, 0.07);
+          background:
+            radial-gradient(circle at 0% 0%, rgba(22, 163, 74, 0.08), transparent 45%),
+            #0E0F0E;
+          padding: 24px;
+          transition: border-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .wtc-card:hover {
+          transform: translateY(-3px);
+          border-color: rgba(22, 163, 74, 0.4);
+        }
+
+        .wtc-icon {
+          display: grid;
+          place-items: center;
+          height: 52px;
+          width: 52px;
+          border-radius: 14px;
+          border: 1px solid rgba(22, 163, 74, 0.3);
+          background: rgba(22, 163, 74, 0.08);
+          color: #22c55e;
+          margin-bottom: 30px;
+        }
+
+        .wtc-title {
+          font-size: 20px;
+          font-weight: 700;
+          color: #ffffff;
+        }
+
+        .wtc-rule {
+          display: block;
+          height: 3px;
+          width: 26px;
+          border-radius: 999px;
+          background: #16a34a;
+          margin: 14px 0 16px;
+        }
+
+        .wtc-copy {
+          max-width: 220px;
+          font-size: 14px;
+          line-height: 1.6;
+          color: #A1A1A1;
+        }
+
+        @media (max-width: 767px) {
+          .wtc-section {
+            padding: 84px 0;
+          }
+        }
+
+        .aex-section {
+          position: relative;
+          overflow: hidden;
+          padding: 120px 0;
+          background:
+            radial-gradient(circle at 70% 20%, rgba(22, 163, 74, 0.1), transparent 45%),
+            #0B0B0B;
+          border-bottom: 1px solid #1F1F1F;
+        }
+
+        .aex-list {
+          position: relative;
+          margin-top: 40px;
+          display: flex;
+          flex-direction: column;
+          gap: 14px;
+        }
+
+        .aex-rail {
+          position: absolute;
+          left: 4px;
+          top: 24px;
+          bottom: 24px;
+          width: 2px;
+          background: rgba(22, 163, 74, 0.18);
+        }
+
+        .aex-item {
+          position: relative;
+          display: flex;
+          align-items: center;
+          gap: 18px;
+        }
+
+        .aex-dot {
+          flex-shrink: 0;
+          height: 10px;
+          width: 10px;
+          border-radius: 50%;
+          background: #16a34a;
+          box-shadow: 0 0 10px rgba(22, 163, 74, 0.7);
+          z-index: 1;
+        }
+
+        .aex-card {
+          flex: 1;
+          display: flex;
+          align-items: center;
+          gap: 16px;
+          border-radius: 14px;
+          border: 1px solid rgba(255, 255, 255, 0.07);
+          background: #0E0F0E;
+          padding: 15px 18px;
+          transition: border-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .aex-card:hover {
+          border-color: rgba(22, 163, 74, 0.4);
+          transform: translateX(2px);
+        }
+
+        .aex-icon {
+          display: grid;
+          place-items: center;
+          height: 46px;
+          width: 46px;
+          flex-shrink: 0;
+          border-radius: 12px;
+          background: rgba(22, 163, 74, 0.1);
+          color: #22c55e;
+        }
+
+        .aex-card-text {
+          flex: 1;
+          min-width: 0;
+        }
+
+        .aex-card-text h3 {
+          font-size: 17px;
+          font-weight: 700;
+          color: #ffffff;
+        }
+
+        .aex-card-text p {
+          margin-top: 3px;
+          font-size: 13.5px;
+          color: #A1A1A1;
+        }
+
+        .aex-chevron {
+          flex-shrink: 0;
+          color: #16a34a;
+        }
+
+        .aex-slider {
+          position: relative;
+          aspect-ratio: 4 / 5;
+        }
+
+        .aex-slide {
+          position: absolute;
+          inset: 0;
+          height: 100%;
+          width: 100%;
+          object-fit: contain;
+          opacity: 0;
+          transition: opacity 0.8s ease;
+        }
+
+        .aex-slide.is-active {
+          opacity: 1;
+        }
+
+        .aex-dots {
+          position: absolute;
+          bottom: -4px;
+          left: 50%;
+          transform: translateX(-50%);
+          display: flex;
+          gap: 8px;
+          z-index: 2;
+        }
+
+        .aex-dot-btn {
+          height: 8px;
+          width: 8px;
+          padding: 0;
+          border: none;
+          border-radius: 999px;
+          background: rgba(255, 255, 255, 0.25);
+          cursor: pointer;
+          transition: width 0.3s ease, background 0.3s ease;
+        }
+
+        .aex-dot-btn.is-active {
+          width: 22px;
+          background: #16a34a;
+        }
+
+        .aex-trustbar {
+          display: flex;
+          flex-wrap: wrap;
+          align-items: center;
+          gap: 18px 24px;
+          margin-top: 64px;
+          border-radius: 16px;
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          background: #0E0F0E;
+          padding: 22px 28px;
+        }
+
+        .aex-trust-icon {
+          display: grid;
+          place-items: center;
+          height: 46px;
+          width: 46px;
+          flex-shrink: 0;
+          border-radius: 12px;
+          border: 1px solid rgba(22, 163, 74, 0.3);
+          background: rgba(22, 163, 74, 0.08);
+          color: #22c55e;
+        }
+
+        .aex-trust-title {
+          font-size: 18px;
+          font-weight: 700;
+          color: #ffffff;
+        }
+
+        .aex-trust-divider {
+          height: 28px;
+          width: 1px;
+          background: rgba(255, 255, 255, 0.12);
+        }
+
+        .aex-trust-note {
+          font-size: 15px;
+          color: #8A8A8A;
+        }
+
+        .aex-trust-cta {
+          margin-left: auto;
+        }
+
+        @media (max-width: 1023px) {
+          .aex-slider {
+            aspect-ratio: 3 / 4;
+            max-width: 520px;
+            margin: 0 auto;
+          }
+        }
+
+        @media (max-width: 767px) {
+          .aex-section {
+            padding: 84px 0;
+          }
+
+          .aex-trust-divider {
+            display: none;
+          }
+
+          .aex-trust-cta {
+            margin-left: 0;
+            width: 100%;
+          }
+        }
+
+        @media (max-width: 560px) {
+          .charge-map-label {
+            font-size: 10px;
+            padding: 3px 7px;
+          }
+
+          .charge-map-marker {
+            height: 24px;
+            width: 24px;
+          }
+        }
+
         .charge-stack-panel {
           position: relative;
           min-height: 100vh;
@@ -632,6 +2507,263 @@ export default function ChargePage() {
 
         .charge-stack-panel--hero {
           --charge-stack-index: 1;
+        }
+
+        .charge-hero-light {
+          background:
+            radial-gradient(circle at 78% 30%, rgba(22, 163, 74, 0.10), transparent 42%),
+            linear-gradient(180deg, #FFFFFF, #F3F8F2);
+          border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+        }
+
+        .charge-hero-visual {
+          position: relative;
+          display: flex;
+          justify-content: center;
+        }
+
+        @media (min-width: 1024px) {
+          .charge-hero-visual {
+            justify-content: flex-end;
+            padding-right: 40px;
+          }
+        }
+
+        .chl-visual {
+          position: relative;
+          width: min(540px, 100%);
+          aspect-ratio: 5 / 5.1;
+        }
+
+        .chl-phone {
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          z-index: 2;
+          width: 268px;
+          transform: translate(-50%, -50%);
+          padding: 11px;
+          border-radius: 44px;
+          background: #0b0d10;
+          box-shadow:
+            0 40px 90px rgba(15, 23, 42, 0.28),
+            inset 0 0 0 2px rgba(255, 255, 255, 0.06);
+        }
+
+        .chl-phone-notch {
+          position: absolute;
+          top: 18px;
+          left: 50%;
+          z-index: 3;
+          width: 84px;
+          height: 22px;
+          transform: translateX(-50%);
+          border-radius: 999px;
+          background: #0b0d10;
+        }
+
+        .chl-screen {
+          position: relative;
+          overflow: hidden;
+          border-radius: 33px;
+          background: #ffffff;
+          padding: 30px 16px 16px;
+        }
+
+        .chl-screen--image {
+          padding: 0;
+        }
+
+        .chl-screen--image img {
+          display: block;
+          width: 100%;
+          height: auto;
+        }
+
+        .chl-card {
+          position: absolute;
+          z-index: 4;
+          border-radius: 18px;
+          background: #ffffff;
+          padding: 16px;
+          box-shadow: 0 22px 48px rgba(15, 23, 42, 0.16);
+        }
+
+        .chl-card-bolt {
+          display: inline-grid;
+          place-items: center;
+          height: 34px;
+          width: 34px;
+          border-radius: 12px;
+          background: #16a34a;
+          color: #ffffff;
+        }
+
+        .chl-card-title {
+          font-size: 13px;
+          font-weight: 800;
+          color: #0f172a;
+        }
+
+        .chl-card-label {
+          margin-top: 2px;
+          font-size: 11px;
+          color: #94a3b8;
+        }
+
+        .chl-card-value {
+          font-size: 18px;
+          font-weight: 800;
+          color: #0f172a;
+        }
+
+        .chl-card--session {
+          left: -6%;
+          top: 8%;
+          width: 150px;
+        }
+
+        .chl-card--session .chl-card-title {
+          margin-top: 12px;
+        }
+
+        .chl-progress {
+          display: block;
+          margin-top: 8px;
+          height: 6px;
+          width: 100%;
+          border-radius: 999px;
+          background: #e8f0e6;
+        }
+
+        .chl-progress-fill {
+          display: block;
+          height: 100%;
+          width: 32%;
+          border-radius: 999px;
+          background: #16a34a;
+        }
+
+        .chl-card--wallet {
+          left: -8%;
+          bottom: 10%;
+          width: 188px;
+        }
+
+        .chl-wallet-head {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          margin-bottom: 12px;
+        }
+
+        .chl-card--nearby {
+          right: -10%;
+          bottom: 2%;
+          width: 230px;
+        }
+
+        .chl-nearby-row {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          margin-top: 14px;
+        }
+
+        .chl-nearby-bolt {
+          display: inline-grid;
+          place-items: center;
+          height: 30px;
+          width: 30px;
+          flex-shrink: 0;
+          border-radius: 10px;
+          background: rgba(22, 163, 74, 0.12);
+          color: #16a34a;
+        }
+
+        .chl-nearby-text {
+          display: flex;
+          min-width: 0;
+          flex: 1;
+          flex-direction: column;
+        }
+
+        .chl-nearby-text strong {
+          font-size: 12px;
+          font-weight: 700;
+          color: #0f172a;
+        }
+
+        .chl-nearby-text span {
+          font-size: 10px;
+          color: #94a3b8;
+        }
+
+        .chl-nearby-distance {
+          font-size: 11px;
+          font-weight: 600;
+          color: #64748b;
+        }
+
+        .chl-nearby-link {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          margin-top: 16px;
+          font-size: 12px;
+          font-weight: 700;
+          color: #16a34a;
+        }
+
+        @media (max-width: 1023px) {
+          .chl-visual {
+            width: min(500px, 100%);
+          }
+
+          .chl-card--session {
+            left: 0;
+          }
+
+          .chl-card--wallet {
+            left: -2%;
+          }
+
+          .chl-card--nearby {
+            right: -4%;
+          }
+        }
+
+        @media (max-width: 560px) {
+          .chl-visual {
+            width: 100%;
+            aspect-ratio: auto;
+            display: flex;
+            justify-content: center;
+            padding: 12px 0 40px;
+          }
+
+          .chl-phone {
+            position: relative;
+            left: auto;
+            top: auto;
+            transform: none;
+          }
+
+          .chl-card--session {
+            top: 0;
+            left: -8px;
+          }
+
+          .chl-card--wallet {
+            bottom: 60px;
+            left: -12px;
+          }
+
+          .chl-card--nearby {
+            right: -8px;
+            bottom: 0;
+            width: 200px;
+          }
         }
 
         .charge-stack-panel--works {
@@ -699,92 +2831,46 @@ export default function ChargePage() {
       `}</style>
 
       <div ref={pageRef} className="charge-page font-sans">
-        <div className="charge-stack">
-          <section className="charge-stack-panel charge-stack-panel--hero relative overflow-hidden border-b border-[#1F1F1F] pt-32 md:pt-40">
-            <div className="pointer-events-none absolute left-1/2 top-20 h-[560px] w-[560px] -translate-x-1/2 rounded-full bg-[#16a34a]/8 blur-[120px]" />
-            <div className="charge-container relative grid min-h-[calc(100vh-80px)] gap-16 pb-24 lg:grid-cols-[1fr_0.78fr] lg:items-center">
-              <div className="charge-hero-copy max-w-3xl">
-                <p className="text-xs font-semibold uppercase text-[#16a34a]">
-                  Zvolta charging
+        <section className="charge-hero-light relative overflow-hidden pt-32 pb-20 md:pt-36 md:pb-28">
+          <div className="pointer-events-none absolute right-0 top-0 h-[680px] w-[680px] translate-x-1/4 rounded-full bg-[#16a34a]/10 blur-[130px]" />
+          <div className="charge-container relative grid items-center gap-12 lg:grid-cols-2">
+              <div className="charge-hero-copy max-w-2xl">
+                <p className="inline-flex items-center gap-2 rounded-full bg-[#16a34a]/10 px-4 py-2 text-sm font-semibold text-[#16a34a]">
+                  <Icon name="bolt" className="h-4 w-4" />
+                  Simple EV charging
                 </p>
-                <h1 className="mt-5 text-[44px] font-semibold leading-[1.03] text-white md:text-[64px]">
-                  Charge your EV.
+                <h1 className="mt-7 text-[44px] font-extrabold leading-[1.02] tracking-tight text-zinc-900 sm:text-[58px] md:text-[72px]">
+                  Charge Anywhere Your Day Takes You
                 </h1>
-                <p className="mt-6 max-w-2xl text-base leading-7 text-[#A1A1A1] md:text-lg">
-                  Find a nearby Zvolta station, scan the charger, and pay in the
-                  app.
+                <p className="mt-6 max-w-md text-lg leading-8 text-zinc-500">
+                  Find nearby Zvolta chargers and start charging through the app
+                  in minutes.
                 </p>
-                <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-                  <PrimaryButton href={APP_LINK}>
-                    Download the app
-                  </PrimaryButton>
-                  <SecondaryButton href={MAP_LINK}>
-                    Find a station
-                  </SecondaryButton>
+                <div className="mt-10 flex flex-col gap-4 sm:flex-row">
+                  <HeroDownloadButton href={APP_LINK}>
+                    Download App
+                  </HeroDownloadButton>
+                  <HeroFindButton href={MAP_LINK}>Find Charger</HeroFindButton>
                 </div>
-                <p className="mt-6 text-sm leading-6 text-[#A1A1A1]">
-                  Built for EV bikes, scooters, rickshaws, and cars in Pakistan.
-                </p>
               </div>
 
-              <div className="charge-phone-hero flex justify-end">
-                <PhoneMockup screen="home" />
-              </div>
-            </div>
-          </section>
-
-          <ChargingWorksSection
-            activeScreen={activeScreen}
-            setActiveScreen={setActiveScreen}
-          />
-        </div>
-
-        <PageSection>
-          <SectionIntro
-            eyebrow="Works for daily EVs"
-            title="For bikes, rickshaws, scooters, cars, and fleets."
-            copy="Use Zvolta when your EV needs a quick, simple charge."
-          />
-          <div className="charge-stagger mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {vehicleTypes.map((vehicle) => (
-              <div
-                key={vehicle}
-                className="group rounded-lg border border-[#1F1F1F] bg-[#111111] p-6 transition duration-300 hover:scale-[1.02] hover:border-[#16a34a]/45"
-              >
-                <div className="mb-10 grid h-10 w-10 place-items-center rounded-lg bg-[#0B0B0B] text-[#16a34a]">
-                  <Icon name="check" className="h-4 w-4" />
-                </div>
-                <h3 className="text-xl font-semibold text-white">{vehicle}</h3>
-              </div>
-            ))}
-          </div>
-          <PrimaryButton href={APP_LINK} className="mt-10">
-            Download the app
-          </PrimaryButton>
-        </PageSection>
-
-        <section className="relative overflow-hidden py-24 md:py-32">
-          <div className="pointer-events-none absolute left-1/2 top-1/2 h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#16a34a]/8 blur-[120px]" />
-          <div className="charge-container relative grid gap-12 lg:grid-cols-[1fr_0.55fr] lg:items-center">
-            <div className="charge-reveal max-w-3xl">
-              <h2 className="text-[44px] font-semibold leading-[1.04] text-white md:text-[64px]">
-                Find. Scan. Charge.
-              </h2>
-              <p className="mt-6 max-w-xl text-base leading-7 text-[#A1A1A1]">
-                Download the Zvolta app and charge your EV with ease.
-              </p>
-              <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-                <PrimaryButton href={APP_LINK}>Download the app</PrimaryButton>
-                <SecondaryButton href={MAP_LINK}>
-                  Find a station
-                </SecondaryButton>
-              </div>
-            </div>
-            <div className="charge-reveal hidden lg:block">
-              <PhoneMockup screen="home" />
+            <div className="charge-hero-visual">
+              <HeroVisual />
             </div>
           </div>
         </section>
+
+        <NetworkMapSection />
+
+        <HowItWorksSection />
+
+        <ReadyToChargeSection />
+
+        <WhyChooseSection />
+
+        <WhereToChargeSection />
+
+        <AppExperienceSection />
       </div>
     </>
   );

@@ -1,23 +1,9 @@
 document.addEventListener('DOMContentLoaded', (event) => {
 
     // 1. Register GSAP Plugins
-    gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
+    gsap.registerPlugin(ScrollTrigger);
 
-    // 2. Create ScrollSmoother
-    let smoother = ScrollSmoother.create({
-        wrapper: '#smooth-wrapper',
-        content: '#smooth-content',
-
-        smooth: 2,               // 2 seconds to "catch up" to the native scroll
-        effects: true,           // Enables data-speed/data-lag
-        smoothTouch: 0.1,        // Shorter smoothing on touch devices
-
-        // --- ADDED BASED ON YOUR EXAMPLE ---
-        normalizeScroll: true    // Normalizes scroll behavior across devices
-        // -------------------------------
-    });
-
-    // 3. Setup Horizontal Scroll Animation
+    // 2. Setup Horizontal Scroll Animation
 
     const horizontalSection = document.querySelector('.horizontal-scroll-container');
     const panelsContainer = document.querySelector('.panels-container');

@@ -3,7 +3,7 @@ import { SmartLink } from "../SmartLink";
 export default function DriverNetworkPage() {
   return (
     <>
-      <style data-page-style="driver-network:1">{`html { scroll-behavior: smooth; }
+      <style data-page-style="driver-network:1">{`html { scroll-behavior: auto; }
 
         .steps-container::before {
             content: ''; position: absolute; top: 56px; left: 10%; right: 10%; height: 2px;

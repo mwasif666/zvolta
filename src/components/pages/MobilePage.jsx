@@ -170,7 +170,7 @@ export default function MobilePage() {
             </button>
             <div
               id="screenshot-container"
-              className="carousel-mask w-full overflow-x-auto no-scrollbar flex gap-6 px-16 snap-x snap-mandatory scroll-smooth pb-4"
+              className="carousel-mask w-full overflow-x-auto no-scrollbar flex gap-6 px-16 snap-x snap-mandatory pb-4"
             >
               <div className="snap-center shrink-0">
                 <img

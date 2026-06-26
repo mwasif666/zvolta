@@ -25,13 +25,7 @@ function ScrollController() {
       window.ScrollTrigger?.refresh?.();
     };
 
-    const scrollToPosition = (top, behavior = "smooth") => {
-      if (window.__zvoltaLenis) {
-        window.__zvoltaLenis.scrollTo(top, {
-          immediate: behavior === "auto",
-        });
-      }
-
+    const scrollToPosition = (top, behavior = "auto") => {
       window.scrollTo({ top, left: 0, behavior });
     };
 
@@ -96,11 +90,7 @@ function ScrollController() {
       }
 
       const top = element.getBoundingClientRect().top + window.scrollY;
-      if (window.__zvoltaLenis) {
-        window.__zvoltaLenis.scrollTo(top);
-      }
-
-      window.scrollTo({ top, left: 0, behavior: "smooth" });
+      window.scrollTo({ top, left: 0, behavior: "auto" });
       window.ScrollTrigger?.refresh?.();
       return true;
     };

@@ -2,7 +2,6 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { getRouteByPageId } from "../routes";
-import { useSmoothScroll } from "../lib/useSmoothScroll";
 import { useScrollReveal } from "../lib/useScrollReveal";
 
 const HOMEPAGE_PATHS = new Set(["/", "/home"]);
@@ -967,7 +966,6 @@ export function SiteLayout({ children }) {
   const isPolicyPage = ["/policy", "/legal"].includes(normalizedPathname);
   const usesPageReveal = normalizedPathname === "/charge";
 
-  useSmoothScroll(!isHomepage && !isPolicyPage);
   useScrollReveal(!isHomepage && !usesPageReveal, pathname);
 
   return (

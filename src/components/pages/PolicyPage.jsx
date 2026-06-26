@@ -5,7 +5,7 @@ export default function PolicyPage() {
     <>
       <style data-page-style="policy:1">{`/* --- Base Styles --- */
         html {
-            scroll-behavior: smooth;
+            scroll-behavior: auto;
         }
 
         body {

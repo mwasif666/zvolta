@@ -5,7 +5,7 @@
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
 
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
   scroll-padding-top: 20px;
 }
 
@@ -23,19 +23,18 @@ body {
    2. VIRTUAL SCROLL (GSAP)
    ========================================= */
 #smooth-wrapper {
-  position: fixed;
-  top: 0;
-  left: 0;
+  position: relative;
   width: 100%;
-  height: 100%;
-  overflow: hidden;
+  min-height: 100%;
+  overflow: visible;
   z-index: 1;
-  touch-action: none; /* Prevents native scroll interference */
+  touch-action: auto;
 }
 
 #smooth-content {
   width: 100%;
-  will-change: transform;
+  transform: none !important;
+  will-change: auto;
 }
 
 /* Custom Scrollbar */

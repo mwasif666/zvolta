@@ -965,9 +965,10 @@ export function SiteLayout({ children }) {
   const normalizedPathname = pathname.toLowerCase();
   const isHomepage = HOMEPAGE_PATHS.has(normalizedPathname);
   const isPolicyPage = ["/policy", "/legal"].includes(normalizedPathname);
+  const usesPageReveal = normalizedPathname === "/charge";
 
   useSmoothScroll(!isHomepage && !isPolicyPage);
-  useScrollReveal(!isHomepage, pathname);
+  useScrollReveal(!isHomepage && !usesPageReveal, pathname);
 
   return (
     <>

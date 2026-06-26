@@ -1496,6 +1496,13 @@ export default function ChargePage() {
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
 
+    const refreshTimers = [];
+    const refreshScrollTriggers = () => ScrollTrigger.refresh();
+    const scheduleRefresh = (delay) => {
+      const timer = window.setTimeout(refreshScrollTriggers, delay);
+      refreshTimers.push(timer);
+    };
+
     const reduceMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     ).matches;
@@ -1513,7 +1520,7 @@ export default function ChargePage() {
         ease: "power3.out",
       });
 
-      gsap.from(".charge-phone-hero", {
+      gsap.from(".chl-visual", {
         opacity: 0,
         y: 32,
         scale: 0.96,
@@ -1523,34 +1530,57 @@ export default function ChargePage() {
       });
 
       gsap.utils.toArray(".charge-reveal").forEach((element) => {
-        gsap.from(element, {
-          opacity: 0,
-          y: 24,
-          duration: 0.72,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: element,
-            start: "top 82%",
+        gsap.fromTo(
+          element,
+          { opacity: 0, y: 24 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.72,
+            ease: "power3.out",
+            immediateRender: false,
+            scrollTrigger: {
+              trigger: element,
+              start: "top 82%",
+              once: true,
+            },
           },
-        });
+        );
       });
 
       gsap.utils.toArray(".charge-stagger").forEach((group) => {
-        gsap.from(group.children, {
-          opacity: 0,
-          y: 18,
-          duration: 0.65,
-          stagger: 0.08,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: group,
-            start: "top 82%",
+        gsap.fromTo(
+          group.children,
+          { opacity: 0, y: 18 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.65,
+            stagger: 0.08,
+            ease: "power3.out",
+            immediateRender: false,
+            scrollTrigger: {
+              trigger: group,
+              start: "top 82%",
+              once: true,
+            },
           },
-        });
+        );
       });
     }, pageRef);
 
-    return () => ctx.revert();
+    window.requestAnimationFrame(refreshScrollTriggers);
+    scheduleRefresh(80);
+    scheduleRefresh(320);
+    scheduleRefresh(900);
+    scheduleRefresh(1800);
+    window.addEventListener("load", refreshScrollTriggers, { once: true });
+
+    return () => {
+      window.removeEventListener("load", refreshScrollTriggers);
+      refreshTimers.forEach((timer) => window.clearTimeout(timer));
+      ctx.revert();
+    };
   }, []);
 
   return (

@@ -7,6 +7,7 @@ const chargePageData = {
     title: "Zvolta EV Charging App in Pakistan | Find, Charge and Pay",
     description:
       "Find nearby EV charging stations in Pakistan, check availability, scan QR codes, charge your EV, and pay through the Zvolta app.",
+    disableLegacyRuntime: true,
   },
 };
 

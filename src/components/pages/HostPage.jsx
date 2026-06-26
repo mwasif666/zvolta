@@ -2732,11 +2732,11 @@ export default function HostPage() {
           position: relative;
           overflow: hidden;
           min-height: var(--host-desktop-frame-height);
-          border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+          border-bottom: 1px solid #E5E7EB;
           background:
-            radial-gradient(circle at 72% 46%, rgba(22, 163, 74, 0.12), transparent 26%),
-            radial-gradient(circle at 36% 50%, rgba(22, 163, 74, 0.06), transparent 24%),
-            #050505;
+            radial-gradient(circle at 72% 46%, rgba(22, 163, 74, 0.08), transparent 28%),
+            radial-gradient(circle at 36% 50%, rgba(22, 163, 74, 0.05), transparent 25%),
+            #FFFFFF;
         }
 
         .host-where-inner {
@@ -2778,16 +2778,16 @@ export default function HostPage() {
           height: 42px;
           min-width: 42px;
           place-items: center;
-          border: 1px solid rgba(22, 163, 74, 0.82);
+          border: 1px solid rgba(22, 163, 74, 0.34);
           border-radius: 6px;
-          background: rgba(22, 163, 74, 0.08);
-          box-shadow: inset 0 0 20px rgba(22, 163, 74, 0.08);
+          background: rgba(22, 163, 74, 0.10);
+          box-shadow: inset 0 0 20px rgba(22, 163, 74, 0.06);
         }
 
         .host-where-title {
           margin-top: 28px;
           max-width: 720px;
-          color: #FFFFFF;
+          color: #0B0B0B;
           font-size: 44px;
           font-weight: 850;
           line-height: 1.08;
@@ -2797,7 +2797,7 @@ export default function HostPage() {
         .host-where-copy-text {
           margin-top: 20px;
           max-width: 520px;
-          color: #a1a1aa;
+          color: #4B5563;
           font-size: 16px;
           line-height: 1.38;
         }
@@ -2837,9 +2837,9 @@ export default function HostPage() {
           min-height: 0;
           width: 100%;
           padding: 0;
-          border: 1px solid rgba(255, 255, 255, 0.1);
+          border: 1px solid #E5E7EB;
           border-radius: 8px;
-          background: #18181b;
+          background: #F8FAF9;
           color: inherit;
           cursor: pointer;
           isolation: isolate;
@@ -2866,15 +2866,16 @@ export default function HostPage() {
           inset: 0;
           z-index: -1;
           background:
-            linear-gradient(180deg, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.82)),
-            radial-gradient(circle at 50% 78%, rgba(0, 0, 0, 0.28), transparent 42%);
+            linear-gradient(180deg, rgba(0, 0, 0, 0.02), rgba(0, 0, 0, 0.72)),
+            radial-gradient(circle at 50% 78%, rgba(0, 0, 0, 0.2), transparent 42%);
         }
 
         .host-where-card:hover,
         .host-where-card:focus-visible {
-          border-color: rgba(48, 230, 93, 0.7);
+          border-color: rgba(22, 163, 74, 0.55);
           outline: 0;
           transform: translateY(-2px);
+          box-shadow: 0 16px 36px rgba(17, 24, 39, 0.12);
         }
 
         .host-where-card:hover img,
@@ -2883,17 +2884,16 @@ export default function HostPage() {
         }
 
         .host-where-card.is-active {
-          border-color: #30e65d;
+          border-color: #16a34a;
           box-shadow:
-            0 0 0 1px rgba(48, 230, 93, 0.42),
-            0 0 32px rgba(48, 230, 93, 0.36),
-            inset 0 0 40px rgba(48, 230, 93, 0.11);
+            0 0 0 1px rgba(22, 163, 74, 0.22),
+            0 18px 44px rgba(22, 163, 74, 0.18);
         }
 
         .host-where-card.is-active::after {
           background:
-            linear-gradient(180deg, rgba(30, 210, 77, 0.38), rgba(8, 63, 27, 0.72)),
-            linear-gradient(180deg, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.82));
+            linear-gradient(180deg, rgba(22, 163, 74, 0.18), rgba(8, 63, 27, 0.62)),
+            linear-gradient(180deg, rgba(0, 0, 0, 0.02), rgba(0, 0, 0, 0.7));
         }
 
         .host-where-active-check {
@@ -2906,14 +2906,14 @@ export default function HostPage() {
           width: 28px;
           place-items: center;
           border-radius: 999px;
-          background: #34ee55;
+          background: #16a34a;
           color: #FFFFFF;
           opacity: 0;
           transform: scale(0.8);
           transition:
             opacity 0.2s ease,
             transform 0.2s ease;
-          box-shadow: 0 0 24px rgba(52, 238, 85, 0.52);
+          box-shadow: 0 12px 24px rgba(22, 163, 74, 0.32);
         }
 
         .host-where-card.is-active .host-where-active-check {
@@ -2955,15 +2955,11 @@ export default function HostPage() {
           width: 450px;
           overflow: hidden;
           align-self: center;
-          border: 1px solid rgba(255, 255, 255, 0.14);
+          border: 1px solid #E5E7EB;
           border-radius: 16px;
-          background:
-            linear-gradient(145deg, rgba(24, 24, 27, 0.92), rgba(7, 7, 9, 0.96)),
-            #080808;
+          background: #FFFFFF;
           padding: 20px;
-          box-shadow:
-            0 22px 58px rgba(0, 0, 0, 0.46),
-            inset 0 1px 0 rgba(255, 255, 255, 0.06);
+          box-shadow: 0 22px 58px rgba(17, 24, 39, 0.12);
         }
 
         .host-where-panel::before {
@@ -2971,7 +2967,7 @@ export default function HostPage() {
           position: absolute;
           inset: -40% -15% auto 34%;
           height: 300px;
-          background: radial-gradient(circle, rgba(22, 163, 74, 0.16), transparent 66%);
+          background: radial-gradient(circle, rgba(22, 163, 74, 0.10), transparent 66%);
           pointer-events: none;
         }
 
@@ -2984,7 +2980,7 @@ export default function HostPage() {
           display: flex;
           align-items: center;
           gap: 12px;
-          color: #FFFFFF;
+          color: #0B0B0B;
           font-size: 18px;
           font-weight: 850;
           line-height: 1;
@@ -3001,9 +2997,9 @@ export default function HostPage() {
           gap: 0;
           margin-top: 18px;
           overflow: hidden;
-          border: 1px solid rgba(255, 255, 255, 0.1);
+          border: 1px solid #E5E7EB;
           border-radius: 6px;
-          background: rgba(5, 5, 5, 0.72);
+          background: #F8FAF9;
         }
 
         .host-where-tab {
@@ -3015,7 +3011,7 @@ export default function HostPage() {
           gap: 8px;
           border: 0;
           background: transparent;
-          color: rgba(255, 255, 255, 0.66);
+          color: #6B7280;
           font-size: 12px;
           font-weight: 800;
           cursor: pointer;
@@ -3026,24 +3022,24 @@ export default function HostPage() {
         }
 
         .host-where-tab + .host-where-tab {
-          border-left: 1px solid rgba(255, 255, 255, 0.08);
+          border-left: 1px solid #E5E7EB;
         }
 
         .host-where-tab:hover,
         .host-where-tab:focus-visible {
-          color: #FFFFFF;
+          color: #0B0B0B;
           outline: 0;
         }
 
         .host-where-tab.is-active {
-          background: linear-gradient(180deg, rgba(48, 230, 93, 0.48), rgba(22, 163, 74, 0.5));
+          background: #16a34a;
           color: #FFFFFF;
-          box-shadow: inset 0 0 0 1px rgba(48, 230, 93, 0.5);
+          box-shadow: inset 0 0 0 1px rgba(22, 163, 74, 0.3);
         }
 
         .host-where-panel-title {
           margin-top: 22px;
-          color: #FFFFFF;
+          color: #0B0B0B;
           font-size: 25px;
           font-weight: 850;
           line-height: 1.12;
@@ -3064,7 +3060,7 @@ export default function HostPage() {
         }
 
         .host-where-panel-item + .host-where-panel-item {
-          border-top: 1px solid rgba(255, 255, 255, 0.08);
+          border-top: 1px solid #E5E7EB;
         }
 
         .host-where-panel-item-icon {
@@ -3076,18 +3072,18 @@ export default function HostPage() {
         }
 
         .host-where-panel.is-problems .host-where-panel-item-icon {
-          border: 1px solid rgba(255, 255, 255, 0.1);
-          background: rgba(6, 6, 8, 0.74);
-          color: #ff3b30;
+          border: 1px solid rgba(220, 38, 38, 0.16);
+          background: rgba(220, 38, 38, 0.08);
+          color: #dc2626;
         }
 
         .host-where-panel.is-benefits .host-where-panel-item-icon {
-          background: transparent;
-          color: #39ff38;
+          background: rgba(22, 163, 74, 0.10);
+          color: #16a34a;
         }
 
         .host-where-panel-item h4 {
-          color: #FFFFFF;
+          color: #111827;
           font-size: 14px;
           font-weight: 850;
           line-height: 1.12;
@@ -3095,7 +3091,7 @@ export default function HostPage() {
 
         .host-where-panel-item p {
           margin-top: 3px;
-          color: #c4c4cc;
+          color: #6B7280;
           font-size: 12px;
           line-height: 1.28;
         }
@@ -3117,14 +3113,14 @@ export default function HostPage() {
         }
 
         .host-where-panel.is-problems .host-where-panel-footer {
-          border-color: rgba(255, 59, 48, 0.86);
-          background: rgba(255, 59, 48, 0.03);
-          color: #ff3b30;
+          border-color: rgba(220, 38, 38, 0.28);
+          background: rgba(220, 38, 38, 0.06);
+          color: #dc2626;
         }
 
         .host-where-panel.is-benefits .host-where-panel-footer {
-          border-color: rgba(22, 163, 74, 0.86);
-          background: rgba(22, 163, 74, 0.04);
+          border-color: rgba(22, 163, 74, 0.28);
+          background: rgba(22, 163, 74, 0.08);
           color: #16a34a;
         }
 
@@ -4281,10 +4277,10 @@ export default function HostPage() {
         .host-why-section {
           position: relative;
           overflow: hidden;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+          border-bottom: 1px solid #E5E7EB;
           background:
-            radial-gradient(circle at 18% 78%, rgba(22, 163, 74, 0.08), transparent 26%),
-            #050706;
+            radial-gradient(circle at 18% 78%, rgba(22, 163, 74, 0.08), transparent 28%),
+            #FFFFFF;
           isolation: isolate;
         }
 
@@ -4316,16 +4312,16 @@ export default function HostPage() {
           height: 42px;
           min-width: 42px;
           place-items: center;
-          border: 2px solid rgba(22, 163, 74, 0.5);
+          border: 2px solid rgba(22, 163, 74, 0.28);
           border-radius: 8px;
-          background: rgba(22, 163, 74, 0.08);
+          background: rgba(22, 163, 74, 0.10);
           font-size: 18px;
         }
 
         .host-why-title {
           margin-top: 32px;
           max-width: 560px;
-          color: #FFFFFF;
+          color: #0B0B0B;
           font-size: clamp(42px, 4.25vw, 66px);
           font-weight: 800;
           line-height: 1.08;
@@ -4339,7 +4335,7 @@ export default function HostPage() {
         .host-why-copy {
           margin-top: 26px;
           max-width: 540px;
-          color: #a1a1aa;
+          color: #4B5563;
           font-size: 20px;
           line-height: 1.55;
         }
@@ -4357,7 +4353,7 @@ export default function HostPage() {
           grid-template-columns: 82px 1fr;
           align-items: center;
           gap: 18px;
-          color: #FFFFFF;
+          color: #111827;
           font-size: 18px;
           font-weight: 700;
           line-height: 1.35;
@@ -4368,12 +4364,11 @@ export default function HostPage() {
           height: 82px;
           width: 82px;
           place-items: center;
-          border: 1px solid rgba(255, 255, 255, 0.12);
+          border: 1px solid #E5E7EB;
           border-radius: 8px;
-          background: rgba(17, 17, 17, 0.72);
+          background: #F8FAF9;
           color: #16a34a;
-          box-shadow: inset 0 0 26px rgba(255, 255, 255, 0.03);
-          backdrop-filter: blur(14px);
+          box-shadow: 0 10px 30px rgba(17, 24, 39, 0.06);
         }
 
         .host-why-control {
@@ -4381,10 +4376,10 @@ export default function HostPage() {
           display: grid;
           max-width: 100%;
           grid-template-columns: repeat(2, minmax(0, 1fr));
-          border: 1px solid rgba(255, 255, 255, 0.12);
+          border: 1px solid #E5E7EB;
           border-radius: 8px;
-          background: rgba(17, 17, 17, 0.72);
-          backdrop-filter: blur(14px);
+          background: #F8FAF9;
+          box-shadow: 0 14px 44px rgba(17, 24, 39, 0.06);
         }
 
         .host-why-control-item {
@@ -4393,13 +4388,13 @@ export default function HostPage() {
           align-items: center;
           gap: 20px;
           padding: 16px 28px;
-          color: #FFFFFF;
+          color: #111827;
           font-size: 18px;
           font-weight: 700;
         }
 
         .host-why-control-item + .host-why-control-item {
-          border-left: 1px solid rgba(255, 255, 255, 0.16);
+          border-left: 1px solid #E5E7EB;
         }
 
         .host-why-control-icon {
@@ -4443,6 +4438,10 @@ export default function HostPage() {
           transform: translateY(-1px);
         }
 
+        .host-why-section .host-expand-button {
+          color: #0B0B0B;
+        }
+
         .host-collapse-button {
           position: absolute;
           right: 24px;
@@ -4476,21 +4475,17 @@ export default function HostPage() {
           position: relative;
           overflow: hidden;
           min-height: 620px;
-          border: 1px solid rgba(255, 255, 255, 0.12);
+          border: 1px solid #E5E7EB;
           border-radius: 18px;
-          background: #0a0a0a;
-          box-shadow:
-            inset 0 0 60px rgba(22, 163, 74, 0.06),
-            0 26px 80px rgba(0, 0, 0, 0.34);
+          background: #F8FAF9;
+          box-shadow: 0 22px 70px rgba(17, 24, 39, 0.12);
         }
 
         .host-why-image-wrap::after {
           content: '';
           position: absolute;
           inset: 0;
-          background:
-            linear-gradient(90deg, rgba(0, 0, 0, 0.34), transparent 38%),
-            linear-gradient(180deg, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.48));
+          background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(17, 24, 39, 0.16));
           pointer-events: none;
         }
 
@@ -6101,7 +6096,7 @@ export default function HostPage() {
 
           .host-why-control-item + .host-why-control-item {
             border-left: 0;
-            border-top: 1px solid rgba(255, 255, 255, 0.16);
+            border-top: 1px solid #E5E7EB;
           }
 
           .host-why-image-wrap,

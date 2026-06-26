@@ -54,13 +54,13 @@ export default function YoutubeReelsSection() {
         .host-youtube-reels-section {
           position: relative;
           overflow: hidden;
-          padding: 76px 0 88px;
-          border-top: 1px solid rgba(22, 163, 74, 0.22);
+          padding: 82px 0 96px;
+          border-block: 1px solid #E5E7EB;
           background:
-            radial-gradient(circle at 50% 0%, rgba(22, 163, 74, 0.2), transparent 34%),
-            radial-gradient(circle at 8% 58%, rgba(22, 163, 74, 0.16), transparent 30%),
-            radial-gradient(circle at 92% 54%, rgba(22, 163, 74, 0.15), transparent 30%),
-            linear-gradient(180deg, #050606 0%, #020303 100%);
+            radial-gradient(circle at 50% 0%, rgba(22, 163, 74, 0.10), transparent 34%),
+            radial-gradient(circle at 8% 58%, rgba(22, 163, 74, 0.07), transparent 30%),
+            radial-gradient(circle at 92% 54%, rgba(22, 163, 74, 0.07), transparent 30%),
+            #FFFFFF;
           isolation: isolate;
         }
 
@@ -70,9 +70,9 @@ export default function YoutubeReelsSection() {
           inset: 0;
           z-index: -2;
           background:
-            linear-gradient(90deg, rgba(0, 0, 0, 0.28), transparent 48%, rgba(0, 0, 0, 0.3)),
-            repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.018) 0 1px, transparent 1px 96px);
-          opacity: 0.72;
+            linear-gradient(90deg, rgba(248, 250, 249, 0.82), transparent 48%, rgba(248, 250, 249, 0.82)),
+            repeating-linear-gradient(90deg, rgba(17, 24, 39, 0.035) 0 1px, transparent 1px 96px);
+          opacity: 0.62;
         }
 
         .host-reels-glow {
@@ -82,7 +82,7 @@ export default function YoutubeReelsSection() {
           height: 340px;
           width: 340px;
           border-radius: 999px;
-          background: rgba(22, 163, 74, 0.15);
+          background: rgba(22, 163, 74, 0.10);
           filter: blur(72px);
           pointer-events: none;
         }
@@ -100,59 +100,63 @@ export default function YoutubeReelsSection() {
           margin: 0 auto;
         }
 
+        .host-youtube-reels-header {
+          display: block;
+          margin-bottom: 34px;
+          text-align: center;
+        }
+
         .host-youtube-reels-intro {
-          max-width: 760px;
+          max-width: 720px;
           margin: 0 auto;
           text-align: center;
         }
 
         .host-youtube-reels-intro h2 {
-          color: #ffffff;
-          font-size: clamp(30px, 3.2vw, 52px);
+          color: #0B0B0B;
+          font-size: clamp(34px, 4vw, 64px);
           font-weight: 900;
-          line-height: 1.08;
+          line-height: 0.98;
           letter-spacing: 0;
-          text-shadow: 0 16px 42px rgba(0, 0, 0, 0.55);
+          text-shadow: none;
         }
 
         .host-youtube-reels-intro p {
-          margin: 16px auto 0;
+          margin: 18px auto 0;
           max-width: 680px;
-          color: #a1a1aa;
+          color: #4B5563;
           font-size: clamp(15px, 1.15vw, 19px);
-          line-height: 1.45;
+          line-height: 1.55;
         }
 
         .host-youtube-reels-label {
-          display: grid;
-          max-width: 460px;
-          grid-template-columns: minmax(48px, 1fr) auto minmax(48px, 1fr);
+          display: flex;
+          width: max-content;
+          max-width: 100%;
           align-items: center;
-          gap: 20px;
-          margin: 42px auto 30px;
-          color: #ffffff;
+          justify-content: flex-end;
+          margin: 0;
+          color: #0B0B0B;
         }
 
         .host-youtube-reels-label > span {
-          height: 3px;
-          border-radius: 999px;
-          background: linear-gradient(90deg, transparent, #16a34a);
-          box-shadow: 0 0 18px rgba(22, 163, 74, 0.82);
-        }
-
-        .host-youtube-reels-label > span:last-child {
-          background: linear-gradient(90deg, #16a34a, transparent);
+          display: none;
         }
 
         .host-youtube-reels-label strong {
           display: inline-flex;
           align-items: center;
           gap: 12px;
-          color: #ffffff;
+          color: #111827;
           font-size: 18px;
           font-weight: 850;
           line-height: 1;
           white-space: nowrap;
+          border: 1px solid #E5E7EB;
+          border-radius: 14px;
+          background: #FFFFFF;
+          padding: 12px 18px 12px 12px;
+          box-shadow: 0 18px 44px rgba(17, 24, 39, 0.08);
         }
 
         .host-youtube-reels-icon {
@@ -160,31 +164,33 @@ export default function YoutubeReelsSection() {
           height: 28px;
           width: 36px;
           place-items: center;
-          border: 1px solid rgba(22, 163, 74, 0.95);
-          border-radius: 8px;
+          border: 1px solid rgba(22, 163, 74, 0.28);
+          border-radius: 10px;
           color: #16a34a;
-          box-shadow:
-            0 0 16px rgba(22, 163, 74, 0.58),
-            inset 0 0 12px rgba(22, 163, 74, 0.18);
+          background: rgba(22, 163, 74, 0.08);
         }
 
         .host-youtube-reels-grid {
           display: grid;
           grid-template-columns: repeat(4, minmax(0, 1fr));
-          gap: 28px;
+          gap: 24px;
+          align-items: start;
         }
 
         .host-youtube-reel-card {
           position: relative;
           overflow: hidden;
           aspect-ratio: 9 / 16;
-          border: 1.5px solid rgba(22, 163, 74, 0.72);
-          border-radius: 20px;
-          background: rgba(3, 10, 9, 0.72);
+          border: 1px solid #E5E7EB;
+          border-radius: 18px;
+          background: #F8FAF9;
           box-shadow:
-            0 0 0 1px rgba(22, 163, 74, 0.16),
-            0 0 26px rgba(22, 163, 74, 0.24),
-            0 24px 70px rgba(0, 0, 0, 0.48);
+            0 1px 0 rgba(255, 255, 255, 0.85),
+            0 18px 48px rgba(17, 24, 39, 0.12);
+          transition:
+            border-color 0.24s ease,
+            box-shadow 0.24s ease,
+            transform 0.24s ease;
         }
 
         .host-youtube-reel-card::before {
@@ -194,8 +200,16 @@ export default function YoutubeReelsSection() {
           z-index: 1;
           pointer-events: none;
           background:
-            linear-gradient(180deg, rgba(255, 255, 255, 0.08), transparent 16%),
-            linear-gradient(0deg, rgba(0, 0, 0, 0.22), transparent 34%);
+            linear-gradient(180deg, rgba(255, 255, 255, 0.10), transparent 16%),
+            linear-gradient(0deg, rgba(0, 0, 0, 0.12), transparent 34%);
+        }
+
+        .host-youtube-reel-card:hover {
+          border-color: rgba(22, 163, 74, 0.45);
+          box-shadow:
+            0 1px 0 rgba(255, 255, 255, 0.95),
+            0 24px 56px rgba(17, 24, 39, 0.16);
+          transform: translateY(-4px);
         }
 
         .host-youtube-reel-card iframe {
@@ -218,16 +232,14 @@ export default function YoutubeReelsSection() {
           align-items: center;
           justify-content: center;
           gap: 12px;
-          border: 1px solid rgba(22, 163, 74, 0.52);
+          border: 1px solid #16a34a;
           border-radius: 10px;
-          background: rgba(22, 163, 74, 0.1);
+          background: #16a34a;
           padding: 0 24px;
-          color: #ffffff;
+          color: #FFFFFF;
           font-size: 16px;
           font-weight: 850;
-          box-shadow:
-            0 18px 44px rgba(0, 0, 0, 0.28),
-            inset 0 1px 0 rgba(255, 255, 255, 0.06);
+          box-shadow: 0 16px 34px rgba(22, 163, 74, 0.22);
           transition:
             background 0.24s ease,
             border-color 0.24s ease,
@@ -236,13 +248,17 @@ export default function YoutubeReelsSection() {
         }
 
         .host-youtube-reels-button:hover {
-          border-color: rgba(22, 163, 74, 0.88);
-          background: rgba(22, 163, 74, 0.16);
-          color: #16a34a;
+          border-color: #0f8a3f;
+          background: #0f8a3f;
+          color: #FFFFFF;
           transform: translateY(-1px);
         }
 
         @media (max-width: 1100px) {
+          .host-youtube-reels-header {
+            display: block;
+          }
+
           .host-youtube-reels-grid {
             grid-template-columns: repeat(2, minmax(0, 1fr));
           }
@@ -255,6 +271,14 @@ export default function YoutubeReelsSection() {
 
           .host-container {
             width: min(100% - 28px, 1240px);
+          }
+
+          .host-youtube-reels-header {
+            margin-bottom: 28px;
+          }
+
+          .host-youtube-reels-intro {
+            text-align: center;
           }
 
           .host-youtube-reels-grid {
@@ -272,8 +296,13 @@ export default function YoutubeReelsSection() {
           }
 
           .host-youtube-reels-label {
-            gap: 12px;
-            margin-top: 34px;
+            width: 100%;
+            justify-content: flex-start;
+          }
+
+          .host-youtube-reels-label strong {
+            width: 100%;
+            justify-content: center;
           }
         }
       `}</style>
@@ -286,23 +315,14 @@ export default function YoutubeReelsSection() {
         aria-hidden="true"
       />
       <div className="host-container">
-        <div className="host-youtube-reels-intro">
-          <h2>Zvolta reels from the road</h2>
-          <p>
-            Short videos from our YouTube channel showing app flows, live sites,
-            and EV charging moments.
-          </p>
-        </div>
-
-        <div className="host-youtube-reels-label">
-          <span aria-hidden="true" />
-          <strong>
-            <span className="host-youtube-reels-icon">
-              <ReelsIcon name="play" className="h-5 w-5" />
-            </span>
-            YouTube Reels
-          </strong>
-          <span aria-hidden="true" />
+        <div className="host-youtube-reels-header">
+          <div className="host-youtube-reels-intro">
+            <h2>Zvolta reels from the road</h2>
+            <p>
+              Short videos from our YouTube channel showing app flows, live
+              sites, and EV charging moments.
+            </p>
+          </div>
         </div>
 
         <div className="host-youtube-reels-grid">

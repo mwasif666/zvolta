@@ -341,7 +341,7 @@ function SectionIntro({ eyebrow, title, copy, centered = false }) {
 
 function PageSection({ children, className = "", id }) {
   return (
-    <section id={id} className={`charge-section ${className}`}>
+    <section id={id} className={`charge-section ${className}`} data-no-reveal>
       <div className="charge-container">{children}</div>
     </section>
   );
@@ -909,7 +909,7 @@ function HowItWorksVisual({ visual }) {
 
 function HowItWorksSection() {
   return (
-    <section className="hiw-section">
+    <section className="hiw-section" data-no-reveal>
       <div className="charge-container">
         <div className="charge-reveal mx-auto max-w-2xl text-center">
           <p className="inline-flex items-center gap-2 rounded-full bg-[#16a34a]/10 px-4 py-2 text-sm font-semibold text-[#16a34a]">
@@ -1097,7 +1097,7 @@ function WhyIcon({ name }) {
 
 function WhyChooseSection() {
   return (
-    <section className="wcz-section">
+    <section className="wcz-section" data-no-reveal>
       <div className="charge-container">
         <div className="charge-reveal mx-auto max-w-3xl text-center">
           <p className="inline-flex items-center gap-2 rounded-full bg-[#16a34a]/10 px-4 py-2 text-sm font-semibold text-[#16a34a]">
@@ -1318,7 +1318,7 @@ function AppExperienceSection() {
   }, []);
 
   return (
-    <section className="aex-section">
+    <section className="aex-section" data-no-reveal>
       <div className="charge-container">
         <div className="grid gap-14 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
           <div className="charge-reveal">
@@ -1399,7 +1399,7 @@ function AppExperienceSection() {
 
 function WhereToChargeSection() {
   return (
-    <section className="wtc-section">
+    <section className="wtc-section" data-no-reveal>
       <div className="wtc-glow wtc-glow--left" aria-hidden="true" />
       <div className="wtc-glow wtc-glow--right" aria-hidden="true" />
       <div className="charge-container relative">
@@ -1436,7 +1436,7 @@ function WhereToChargeSection() {
 
 function ReadyToChargeSection() {
   return (
-    <section className="rcs-section">
+    <section className="rcs-section" data-no-reveal>
       <div className="charge-container grid items-center gap-12 lg:grid-cols-2">
         <div className="charge-reveal">
           <p className="inline-flex items-center gap-2 rounded-full border border-[#16a34a]/30 bg-[#16a34a]/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-[#16a34a]">
@@ -2831,7 +2831,10 @@ export default function ChargePage() {
       `}</style>
 
       <div ref={pageRef} className="charge-page font-sans">
-        <section className="charge-hero-light relative overflow-hidden pt-32 pb-20 md:pt-36 md:pb-28">
+        <section
+          className="charge-hero-light relative overflow-hidden pt-32 pb-20 md:pt-36 md:pb-28"
+          data-no-reveal
+        >
           <div className="pointer-events-none absolute right-0 top-0 h-[680px] w-[680px] translate-x-1/4 rounded-full bg-[#16a34a]/10 blur-[130px]" />
           <div className="charge-container relative grid items-center gap-12 lg:grid-cols-2">
               <div className="charge-hero-copy max-w-2xl">

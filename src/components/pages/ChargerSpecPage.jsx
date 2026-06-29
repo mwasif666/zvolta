@@ -678,7 +678,11 @@ function EnvironmentSection({ spec }) {
             showAudienceCards ? "is-active" : ""
           }`}
           aria-expanded={showAudienceCards}
-          onClick={() => setActiveExpandPanel("audience")}
+          onClick={() =>
+            setActiveExpandPanel((prev) =>
+              prev === "audience" ? null : "audience"
+            )
+          }
         >
           Who should use this charger?
           <Icon name="arrow" className="h-4 w-4" />
@@ -687,7 +691,11 @@ function EnvironmentSection({ spec }) {
           type="button"
           className={`charger-expand-button ${showUseCases ? "is-active" : ""}`}
           aria-expanded={showUseCases}
-          onClick={() => setActiveExpandPanel("use-cases")}
+          onClick={() =>
+            setActiveExpandPanel((prev) =>
+              prev === "use-cases" ? null : "use-cases"
+            )
+          }
         >
           View use cases
           <Icon name="arrow" className="h-4 w-4" />

@@ -65,27 +65,27 @@ const howItWorksSteps = [
   },
   {
     n: 2,
+    visual: "wallet",
+    title: "TopUp Wallet",
+    copy: "Add money to your Zvolta wallet before charging.",
+  },
+  {
+    n: 3,
     visual: "book",
     title: "Book Slot",
     copy: "Check availability and reserve your preferred slot.",
   },
   {
-    n: 3,
+    n: 4,
     visual: "qr",
     title: "Scan QR",
     copy: "Scan the QR code at the charger using the app.",
   },
   {
-    n: 4,
+    n: 5,
     visual: "charge",
     title: "Start Charging",
     copy: "Plug in your vehicle and start the charging session.",
-  },
-  {
-    n: 5,
-    visual: "wallet",
-    title: "Pay Through Wallet",
-    copy: "Pay securely through your Zvolta wallet.",
   },
 ];
 
@@ -774,14 +774,14 @@ function HeroVisual() {
           <p className="chl-card-title">Wallet Connected</p>
         </div>
         <p className="chl-card-label">Balance</p>
-        <p className="chl-card-value">₹1,250.00</p>
+        <p className="chl-card-value">Rs 1,250.00</p>
       </div>
 
       <div className="chl-card chl-card--nearby">
         <p className="chl-card-title">Nearby Chargers</p>
         {[
-          ["Zvolta Green Park", "2/4 available • DC Fast", "0.2 km"],
-          ["Zvolta City Mall", "3/4 available • AC", "1.1 km"],
+          ["Zvolta Lucky One Mall", "2/4 available • AC", "2.1 km"],
+          ["Zvolta Dolmen Mall Clifton", "3/4 available • DC Fast", "4.6 km"],
         ].map(([name, meta, distance]) => (
           <div className="chl-nearby-row" key={name}>
             <span className="chl-nearby-bolt">
@@ -829,16 +829,16 @@ function HowItWorksVisual({ visual }) {
       <div className="hiw-visual">
         <div className="hiw-book">
           <div className="hiw-book-head">
-            <span className="hiw-book-name">Zvolta Green Park</span>
+            <span className="hiw-book-name">Zvolta Workhall</span>
             <span className="hiw-book-avail">Available</span>
           </div>
           <div className="hiw-book-row">
             <span className="hiw-book-fast">
               <Icon name="bolt" className="h-3.5 w-3.5" />
-              DC Fast
+              AC Charger
             </span>
             <span className="hiw-book-kw">
-              120 kW
+              7 kW
               <small>Max power</small>
             </span>
           </div>
@@ -878,12 +878,19 @@ function HowItWorksVisual({ visual }) {
   if (visual === "charge") {
     return (
       <div className="hiw-visual">
-        <img
-          src="/img/charging station.png"
-          alt="Zvolta EV charger"
-          className="hiw-charger-img"
-          loading="lazy"
-        />
+        <div className="hiw-charge">
+          <span className="hiw-charge-brand">
+            <Icon name="bolt" className="h-3.5 w-3.5" />
+            Charging
+          </span>
+          <div className="hiw-charge-ring">
+            <span className="hiw-charge-pct">65%</span>
+          </div>
+          <div className="hiw-charge-meta">
+            <span className="hiw-charge-kwh">32.4 kWh</span>
+            <span className="hiw-charge-time">18 min left</span>
+          </div>
+        </div>
       </div>
     );
   }
@@ -899,7 +906,7 @@ function HowItWorksVisual({ visual }) {
         </div>
         <p className="hiw-wallet-label">Balance</p>
         <div className="hiw-wallet-row">
-          <span className="hiw-wallet-value">&#8377;1,250.00</span>
+          <span className="hiw-wallet-value">Rs 1,250.00</span>
           <Icon name="arrow" className="h-4 w-4 text-[#16a34a]" />
         </div>
       </div>
@@ -1409,11 +1416,10 @@ function WhereToChargeSection() {
             Where You Can Charge
           </p>
           <h2 className="mt-7 text-[40px] font-extrabold leading-[1.06] tracking-tight text-white md:text-[56px]">
-            Charging Where Your Day Already Takes You
+            Charge Where You Park
           </h2>
           <p className="mx-auto mt-6 max-w-xl text-lg leading-8 text-[#A1A1A1]">
-            Zvolta chargers are placed at the places you visit every day—so
-            charging fits right into your routine.
+            Designed to fit your lifestyle.
           </p>
         </div>
 
@@ -1462,7 +1468,7 @@ function ReadyToChargeSection() {
             </span>
             <span>
               <Icon name="bolt" className="h-5 w-5 text-[#16a34a]" />
-              Fast.
+              Convenient.
             </span>
             <span>
               <Icon name="check-circle" className="h-5 w-5 text-[#16a34a]" />
@@ -1826,10 +1832,10 @@ export default function ChargePage() {
         .hiw-book {
           width: 100%;
           border-radius: 16px;
-          border: 1px solid rgba(2, 6, 23, 0.07);
-          background: #ffffff;
+          border: none;
+          background: transparent;
           padding: 16px;
-          box-shadow: 0 12px 30px rgba(2, 6, 23, 0.08);
+          box-shadow: none;
         }
 
         .hiw-book-head {
@@ -1900,10 +1906,10 @@ export default function ChargePage() {
         .hiw-qr-card {
           width: 100%;
           border-radius: 16px;
-          border: 1px solid rgba(2, 6, 23, 0.07);
-          background: #ffffff;
+          border: none;
+          background: transparent;
           padding: 16px;
-          box-shadow: 0 12px 30px rgba(2, 6, 23, 0.08);
+          box-shadow: none;
         }
 
         .hiw-qr-brand {
@@ -1962,19 +1968,81 @@ export default function ChargePage() {
           background: #0f172a;
         }
 
-        .hiw-charger-img {
-          max-height: 100%;
-          width: auto;
-          object-fit: contain;
+        .hiw-charge {
+          display: flex;
+          width: 100%;
+          flex-direction: column;
+          align-items: center;
+          gap: 14px;
+          padding: 16px;
+        }
+
+        .hiw-charge-brand {
+          display: inline-flex;
+          align-items: center;
+          gap: 4px;
+          font-size: 13px;
+          font-weight: 700;
+          color: #0f172a;
+        }
+
+        .hiw-charge-brand svg {
+          color: #16a34a;
+        }
+
+        .hiw-charge-ring {
+          position: relative;
+          display: grid;
+          place-items: center;
+          height: 96px;
+          width: 96px;
+          border-radius: 50%;
+          background: conic-gradient(
+            #16a34a 0% 65%,
+            rgba(2, 6, 23, 0.08) 65% 100%
+          );
+        }
+
+        .hiw-charge-ring::before {
+          content: "";
+          position: absolute;
+          inset: 11px;
+          border-radius: 50%;
+          background: #ffffff;
+        }
+
+        .hiw-charge-pct {
+          position: relative;
+          font-size: 22px;
+          font-weight: 800;
+          color: #0f172a;
+        }
+
+        .hiw-charge-meta {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+        }
+
+        .hiw-charge-kwh {
+          font-size: 13px;
+          font-weight: 700;
+          color: #16a34a;
+        }
+
+        .hiw-charge-time {
+          font-size: 12px;
+          font-weight: 500;
+          color: #94a3b8;
         }
 
         .hiw-wallet {
           width: 100%;
           border-radius: 16px;
-          border: 1px solid rgba(2, 6, 23, 0.07);
-          background: #ffffff;
+          border: none;
+          background: transparent;
           padding: 18px;
-          box-shadow: 0 12px 30px rgba(2, 6, 23, 0.08);
+          box-shadow: none;
         }
 
         .hiw-wallet-head {

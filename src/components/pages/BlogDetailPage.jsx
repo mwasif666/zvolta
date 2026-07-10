@@ -1,6 +1,10 @@
 import { useParams } from "react-router-dom";
 import { SmartLink } from "../SmartLink";
-import { blogPosts, getBlogPostBySlug } from "../../data/pages/blogs/blogPosts";
+import {
+  blogCategories,
+  blogPosts,
+  getBlogPostBySlug,
+} from "../../data/pages/blogs/blogPosts";
 
 function ArrowIcon() {
   return (
@@ -29,6 +33,65 @@ function ArrowIcon() {
   );
 }
 
+function ArticleBody({ blocks = [] }) {
+  const elements = [];
+
+  for (let index = 0; index < blocks.length; index += 1) {
+    const block = blocks[index];
+
+    if (block.type === "bullet" || block.type === "numbered") {
+      const listType = block.type;
+      const items = [];
+
+      while (blocks[index]?.type === listType) {
+        items.push(blocks[index].text);
+        index += 1;
+      }
+
+      index -= 1;
+      const ListTag = listType === "bullet" ? "ul" : "ol";
+      elements.push(
+        <ListTag
+          className="blog-detail__body-list"
+          key={`${listType}-${index}`}
+        >
+          {items.map((item) => (
+            <li key={item}>{item}</li>
+          ))}
+        </ListTag>,
+      );
+      continue;
+    }
+
+    if (block.type === "heading") {
+      elements.push(<h3 key={`${block.type}-${index}`}>{block.text}</h3>);
+      continue;
+    }
+
+    if (block.type === "quote") {
+      elements.push(
+        <blockquote key={`${block.type}-${index}`}>{block.text}</blockquote>,
+      );
+      continue;
+    }
+
+    if (block.type === "divider") {
+      elements.push(
+        <div
+          className="blog-detail__divider"
+          aria-hidden="true"
+          key={`${block.type}-${index}`}
+        />,
+      );
+      continue;
+    }
+
+    elements.push(<p key={`${block.type}-${index}`}>{block.text}</p>);
+  }
+
+  return elements;
+}
+
 function Sidebar({ currentSlug }) {
   const relatedPosts = blogPosts
     .filter((post) => post.slug !== currentSlug)
@@ -55,13 +118,7 @@ function Sidebar({ currentSlug }) {
       <div className="blog-detail__widget">
         <h3>Categories</h3>
         <ul className="blog-detail__category-list">
-          {[
-            "Charging Network",
-            "Charging Investment",
-            "Host Partners",
-            "Software",
-            "Driver Network",
-          ].map((category) => (
+          {blogCategories.map((category) => (
             <li key={category}>
               <SmartLink href="/blogs">
                 <span>{category}</span>
@@ -302,6 +359,40 @@ export default function BlogDetailPage() {
 
         .blog-detail__article p + p {
           margin-top: 24px;
+        }
+
+        .blog-detail__article blockquote {
+          margin: 30px 0;
+          border-left: 4px solid var(--blog-primary);
+          border-radius: 0 10px 10px 0;
+          background: rgba(16, 240, 138, 0.08);
+          color: #ffffff;
+          padding: 22px 24px;
+          font-size: clamp(20px, 3vw, 30px);
+          font-weight: 680;
+          line-height: 1.35;
+          letter-spacing: -0.03em;
+        }
+
+        .blog-detail__body-list {
+          display: grid;
+          gap: 12px;
+          margin: 26px 0;
+          padding-left: 24px;
+          color: rgba(255, 255, 255, 0.8);
+          font-size: 17px;
+          line-height: 1.6;
+        }
+
+        .blog-detail__body-list li::marker {
+          color: var(--blog-primary);
+          font-weight: 900;
+        }
+
+        .blog-detail__divider {
+          height: 1px;
+          margin: 38px 0;
+          background: linear-gradient(90deg, transparent, rgba(16, 240, 138, 0.45), transparent);
         }
 
         .blog-detail__split {
@@ -690,39 +781,7 @@ export default function BlogDetailPage() {
                 </div>
 
                 <h2>{post.title}</h2>
-                <p>{post.excerpt}</p>
-
-                <div className="blog-detail__audio">
-                  <span>Play</span>
-                  <span>4:32</span>
-                  <span>Listen to this article</span>
-                </div>
-
-                <h3>What this means for the network</h3>
-                {post.content.slice(0, 2).map((paragraph) => (
-                  <p key={paragraph}>{paragraph}</p>
-                ))}
-
-                <div className="blog-detail__split">
-                  <div className="blog-detail__inline-image">
-                    <img src="/img/zvolta-1.jpg" alt="ZVolta field vehicle" />
-                  </div>
-                  <div className="blog-detail__inline-image">
-                    <img
-                      src="/img/charging-post.jpg"
-                      alt="ZVolta charging setup"
-                    />
-                  </div>
-                </div>
-
-                <p>{post.content[2]}</p>
-
-                <h3>Key takeaways</h3>
-                <ul className="blog-detail__points">
-                  {post.points.map((point) => (
-                    <li key={point}>{point}</li>
-                  ))}
-                </ul>
+                <ArticleBody blocks={post.bodyBlocks} />
 
                 <div className="blog-detail__author">
                   <div className="blog-detail__author-mark">Z</div>

@@ -45,6 +45,13 @@ export default {
       },
       animation: {
         'spin-slow': 'spin 6s linear infinite',
+        marquee: 'marquee 22s linear infinite',
+      },
+      keyframes: {
+        marquee: {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-50%)' },
+        },
       },
     },
   },

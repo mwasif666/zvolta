@@ -1,17 +1,13 @@
 import { SmartLink } from "../SmartLink";
-import { blogPosts } from "../../data/pages/blogs/blogPosts";
+import {
+  blogCategories,
+  blogPosts,
+  blogTags,
+} from "../../data/pages/blogs/blogPosts";
 
 const featuredPost = blogPosts[0];
 const topPosts = blogPosts.slice(1, 4);
 const listPosts = blogPosts.slice(1);
-const categories = [
-  "Charging Network",
-  "Charging Investment",
-  "Host Partners",
-  "Software",
-  "Driver Network",
-];
-
 function ArrowIcon() {
   return (
     <span className="blog-page__button-icon" aria-hidden="true">
@@ -118,7 +114,7 @@ function BlogSidebar() {
       <div className="blog-page__widget">
         <h3>Categories</h3>
         <ul className="blog-page__category-list">
-          {categories.map((category) => (
+          {blogCategories.map((category) => (
             <li key={category}>
               <SmartLink href="/blogs">
                 <span>{category}</span>
@@ -137,13 +133,11 @@ function BlogSidebar() {
       <div className="blog-page__widget">
         <h3>Tags</h3>
         <div className="blog-page__tags">
-          {["EV Charging", "Drivers", "Fleet", "Hosts", "Software"].map(
-            (tag) => (
-              <SmartLink href="/blogs" key={tag}>
-                {tag}
-              </SmartLink>
-            ),
-          )}
+          {blogTags.map((tag) => (
+            <SmartLink href="/blogs" key={tag}>
+              {tag}
+            </SmartLink>
+          ))}
         </div>
       </div>
     </aside>
@@ -803,17 +797,6 @@ export default function BlogsPage() {
                     <BlogCard post={post} key={post.id} />
                   ))}
                 </div>
-                <ul className="blog-page__pagination" aria-label="Pagination">
-                  <li>
-                    <SmartLink href="/blogs">1</SmartLink>
-                  </li>
-                  <li className="is-active">
-                    <SmartLink href="/blogs">2</SmartLink>
-                  </li>
-                  <li>
-                    <SmartLink href="/blogs">3</SmartLink>
-                  </li>
-                </ul>
               </div>
 
               <BlogSidebar />

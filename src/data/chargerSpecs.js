@@ -192,7 +192,11 @@ export const chargerSpecs = {
       ["MBO protection", "Included", "Often charged separately"],
       ["Overvoltage protection", "Included", "Often charged separately"],
       ["Standard installation", "Free", "Usually charged separately"],
-      ["Earthing", "Charged only if needed", "Often charged separately or unclear"],
+      [
+        "Earthing",
+        "Charged only if needed",
+        "Often charged separately or unclear",
+      ],
       ["Warranty", "1 year local warranty", "Often limited or unclear"],
       ["Local support", "Included", "Often limited"],
     ],
@@ -535,10 +539,7 @@ export const chargerSpecs = {
       "Best for high usage locations",
     ],
     quickDetails: [
-      [
-        "Best for",
-        "Fleet depots & petrol stations",
-      ],
+      ["Best for", "Fleet depots & petrol stations"],
       ["Charger type", "Smart AC charger"],
       ["Power", "22kW"],
       ["Power support", "Site assessment required"],

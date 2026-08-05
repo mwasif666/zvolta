@@ -652,6 +652,7 @@ export default function IndexPage() {
                       >
                         <img
                           src="img/Grids/02.png"
+                          alt=""
                           className="absolute inset-0 w-full h-full object-cover opacity-90 transition-transform duration-700 group-hover:scale-105"
                           style={{ objectPosition: "0% 50%" }}
                         />
@@ -676,6 +677,7 @@ export default function IndexPage() {
                       >
                         <img
                           src="img/Grids/03.png"
+                          alt=""
                           className="absolute inset-0 w-full h-full object-cover opacity-90 transition-transform duration-700 group-hover:scale-105"
                           style={{ objectPosition: "0% 50%" }}
                         />
@@ -699,6 +701,7 @@ export default function IndexPage() {
                       <div className="sleek-card-layer bg-white" data-state={0}>
                         <img
                           src="img/Grids/05.png"
+                          alt=""
                           className="absolute inset-0 w-full h-full object-cover"
                           style={{ objectPosition: "33.33% 50%" }}
                         />
@@ -723,6 +726,7 @@ export default function IndexPage() {
                       >
                         <img
                           src="img/Grids/02.png"
+                          alt=""
                           className="absolute inset-0 w-full h-full object-cover opacity-80"
                           style={{ objectPosition: "33.33% 50%" }}
                         />
@@ -747,6 +751,7 @@ export default function IndexPage() {
                       >
                         <img
                           src="img/Grids/03.png"
+                          alt=""
                           className="absolute inset-0 w-full h-full object-cover opacity-80"
                           style={{ objectPosition: "33.33% 50%" }}
                         />
@@ -770,6 +775,7 @@ export default function IndexPage() {
                       <div className="sleek-card-layer bg-white" data-state={0}>
                         <img
                           src="img/Grids/05.png"
+                          alt=""
                           className="absolute inset-0 w-full h-full object-cover"
                           style={{ objectPosition: "66.66% 50%" }}
                         />
@@ -794,6 +800,7 @@ export default function IndexPage() {
                       >
                         <img
                           src="img/Grids/02.png"
+                          alt=""
                           className="absolute inset-0 w-full h-full object-cover opacity-80"
                           style={{ objectPosition: "66.66% 50%" }}
                         />
@@ -818,6 +825,7 @@ export default function IndexPage() {
                       >
                         <img
                           src="img/Grids/03.png"
+                          alt=""
                           className="absolute inset-0 w-full h-full object-cover opacity-80"
                           style={{ objectPosition: "66.66% 50%" }}
                         />
@@ -841,6 +849,7 @@ export default function IndexPage() {
                       <div className="sleek-card-layer bg-white" data-state={0}>
                         <img
                           src="img/Grids/05.png"
+                          alt=""
                           className="absolute inset-0 w-full h-full object-cover"
                           style={{ objectPosition: "100% 50%" }}
                         />
@@ -865,6 +874,7 @@ export default function IndexPage() {
                       >
                         <img
                           src="img/Grids/02.png"
+                          alt=""
                           className="absolute inset-0 w-full h-full object-cover opacity-80"
                           style={{ objectPosition: "100% 50%" }}
                         />
@@ -888,6 +898,7 @@ export default function IndexPage() {
                       >
                         <img
                           src="img/Grids/03.png"
+                          alt=""
                           className="absolute inset-0 w-full h-full object-cover opacity-80"
                           style={{ objectPosition: "100% 50%" }}
                         />

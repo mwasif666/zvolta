@@ -26,14 +26,14 @@ export default function ChargingPartnersPage() {
 
   return (
     <>
-      <div>
+      <div className="overflow-x-hidden">
         <SmartLink
           id="dynamic-logo"
           href="/"
           className="fixed top-6 left-6 z-[900] w-12 h-12 rounded-full bg-zinc-900/90 backdrop-blur-md border border-white/10 flex items-center justify-center shadow-xl transition-all duration-500 hover:scale-105"
           style={{ opacity: 1, pointerEvents: "auto" }}
         >
-          <img src="img/symbol logo.png" alt="ZVolta" className="h-6 w-auto" />
+          <img src="/img/symbol logo.png" alt="ZVolta" className="h-6 w-auto" />
         </SmartLink>
         <button
           id="dynamic-sidebar-btn"
@@ -149,7 +149,7 @@ export default function ChargingPartnersPage() {
             />
             <div className="relative mb-10 w-24 h-24 md:w-32 md:h-32 flex items-center justify-center">
               <img
-                src="img/symbol logo.png"
+                src="/img/symbol logo.png"
                 id="loader-logo"
                 className="w-full h-full object-contain drop-shadow-[0_0_30px_rgba(22,163,74,0.3)] will-change-transform"
                 alt="ZVolta Loading"
@@ -227,7 +227,7 @@ export default function ChargingPartnersPage() {
                 />
                 <div className="relative z-10 w-full h-full flex items-center justify-center transition-transform duration-500 group-hover:scale-105 group-hover:rotate-1 animate-float-slow">
                   <img
-                    src="img/ev-charging-station-blue.png"
+                    src="/img/ev-charging-station-blue.png"
                     alt="ZVolta Charger"
                     className="w-auto h-full max-h-[600px] object-contain drop-shadow-[0_20px_50px_rgba(22, 163, 74,0.15)]"
                     data-critical="true"
@@ -314,7 +314,7 @@ export default function ChargingPartnersPage() {
                 <div className="grid lg:grid-cols-2 gap-12 items-center">
                   <div className="relative rounded-[2.5rem] overflow-hidden aspect-[16/9] group border border-white/5 shadow-2xl">
                     <img
-                      src="img/small-chai-business.jpg"
+                      src="/img/small-chai-business.jpg"
                       alt="Retail"
                       className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                     />
@@ -337,7 +337,7 @@ export default function ChargingPartnersPage() {
                 <div className="grid lg:grid-cols-2 gap-12 items-center">
                   <div className="lg:order-2 relative rounded-[2.5rem] overflow-hidden aspect-[16/9] group border border-white/5 shadow-2xl">
                     <img
-                      src="img/home-owners.jpg"
+                      src="/img/home-owners.jpg"
                       alt="Home"
                       className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                     />
@@ -452,7 +452,7 @@ export default function ChargingPartnersPage() {
                 <div className="relative group perspective-1000">
                   <div className="absolute inset-0 bg-emerald-500/20 blur-[80px] rounded-full pointer-events-none animate-pulse-slow" />
                   <img
-                    src="img/zvolta-maidan.jpg"
+                    src="/img/zvolta-maidan.jpg"
                     alt="ZVolta Location"
                     className="relative z-10 rounded-[2.5rem] border border-white/10 shadow-2xl rotate-2 group-hover:rotate-0 group-hover:scale-105 transition-all duration-500 w-full object-cover"
                   />
@@ -509,11 +509,11 @@ export default function ChargingPartnersPage() {
             id="apply"
             className="relative py-24 bg-zinc-900 border-t border-white/10 overflow-hidden text-white"
           >
-            <div className="absolute inset-0 bg-[url('img/twisty-gradient-2-comp.jpg')] bg-cover bg-center opacity-10" />
+            <div className="absolute inset-0 bg-[url('/img/twisty-gradient-2-comp.jpg')] bg-cover bg-center opacity-10" />
             <div className="max-w-[1400px] mx-auto px-6 grid lg:grid-cols-2 gap-16 relative z-10">
               <div className="flex flex-col justify-center">
                 <img
-                  src="img/full_logowhite.png"
+                  src="/img/full_logowhite.png"
                   alt="Zvolta"
                   className="h-10 w-auto object-contain object-left mb-10 opacity-80"
                 />
@@ -621,9 +621,10 @@ export default function ChargingPartnersPage() {
                         <select
                           name="property-type"
                           required
+                          defaultValue=""
                           className="w-full h-14 bg-zinc-900 border border-zinc-800 rounded-full px-6 text-white appearance-none focus:border-emerald-500 focus:outline-none cursor-pointer"
                         >
-                          <option value disabled selected>
+                          <option value="" disabled>
                             Select...
                           </option>
                           <option>Home</option>
@@ -643,9 +644,10 @@ export default function ChargingPartnersPage() {
                         <select
                           name="location"
                           required
+                          defaultValue=""
                           className="w-full h-14 bg-zinc-900 border border-zinc-800 rounded-full px-6 text-white appearance-none focus:border-emerald-500 focus:outline-none cursor-pointer"
                         >
-                          <option value disabled selected>
+                          <option value="" disabled>
                             Select...
                           </option>
                           <option>Karachi</option>

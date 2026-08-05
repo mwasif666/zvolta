@@ -592,8 +592,8 @@ function EnvironmentSection({ spec }) {
         <h2>One charger. Multiple environments.</h2>
         <p>
           Whether you are charging at home, in a shared parking area, or in a
-          public-facing space, the {spec.power} charger stays simple, safe, and ready to
-          grow with you.
+          public-facing space, the {spec.power} charger stays simple, safe, and
+          ready to grow with you.
         </p>
       </div>
 
@@ -680,7 +680,7 @@ function EnvironmentSection({ spec }) {
           aria-expanded={showAudienceCards}
           onClick={() =>
             setActiveExpandPanel((prev) =>
-              prev === "audience" ? null : "audience"
+              prev === "audience" ? null : "audience",
             )
           }
         >
@@ -693,7 +693,7 @@ function EnvironmentSection({ spec }) {
           aria-expanded={showUseCases}
           onClick={() =>
             setActiveExpandPanel((prev) =>
-              prev === "use-cases" ? null : "use-cases"
+              prev === "use-cases" ? null : "use-cases",
             )
           }
         >
@@ -868,11 +868,13 @@ function getChargerAudienceCards(spec) {
     return threeKwAudienceCards;
   }
 
-  return spec.goodFor.slice(0, 3).map(([title, copy], index) => [
-    chargerAudienceIcons[index] ?? "check",
-    title,
-    copy,
-  ]);
+  return spec.goodFor
+    .slice(0, 3)
+    .map(([title, copy], index) => [
+      chargerAudienceIcons[index] ?? "check",
+      title,
+      copy,
+    ]);
 }
 
 const decisionComparisonRows = [
@@ -1035,10 +1037,7 @@ function ThreeKwHero({ spec }) {
           </div>
         </div>
         <div className="three-product-card">
-          <img
-            src={heroImage}
-            alt={`${spec.power} smart EV charger`}
-          />
+          <img src={heroImage} alt={`${spec.power} smart EV charger`} />
         </div>
       </div>
       <div className="three-container three-hero-features">
@@ -1131,7 +1130,6 @@ function ThreeKwQuickSection({ spec }) {
             ))}
           </div>
         </div>
-
       </div>
     </section>
   );
@@ -1146,9 +1144,7 @@ function DecisionSection({ spec }) {
   ];
   const priceRow = spec.pricing?.[0];
   const priceValue = priceRow?.[1] ?? "Contact Zvolta";
-  const pricingItems = (spec.pricing ?? [])
-    .slice(1, 5)
-    .map(([item]) => item);
+  const pricingItems = (spec.pricing ?? []).slice(1, 5).map(([item]) => item);
 
   return (
     <section className="three-section three-decision-section">
@@ -1195,12 +1191,14 @@ function DecisionSection({ spec }) {
               installation support.
             </p>
             <div className="three-check-list">
-              {(pricingItems.length ? pricingItems : decisionPricingItems).map((item) => (
-                <div key={item}>
-                  <Icon name="check" className="h-5 w-5" />
-                  <span>{item}</span>
-                </div>
-              ))}
+              {(pricingItems.length ? pricingItems : decisionPricingItems).map(
+                (item) => (
+                  <div key={item}>
+                    <Icon name="check" className="h-5 w-5" />
+                    <span>{item}</span>
+                  </div>
+                ),
+              )}
             </div>
             <PrimaryButton className="three-primary three-full-button">
               Request a Quote

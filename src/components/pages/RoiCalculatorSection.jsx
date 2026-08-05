@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { calculateRoi } from "../../features/roi/lib/calculateRoi";
 
 const CHARGER_OPTIONS = {
   "3.3kw": {
@@ -62,37 +63,15 @@ export default function RoiCalculatorSection() {
   const option = CHARGER_OPTIONS[activeCharger];
 
   const results = useMemo(() => {
-    const totalInvestment = baseCost + moduleCost * moduleUsages.length;
-    const totalChargers = 1 + moduleUsages.length * option.moduleSize;
-    const moduleHours = moduleUsages.reduce(
-      (sum, hours) => sum + hours * option.moduleSize,
-      0,
-    );
-    const totalHoursPerDay = baseUsage + moduleHours;
-    const annualUnits = totalHoursPerDay * avgConsumption * 365;
-    const annualRevenue = annualUnits * marginPerUnit;
-    const monthlyRevenue = annualRevenue / 12;
-    const dailyRevenue = annualRevenue / 365;
-    const paybackMonths =
-      annualRevenue > 0 ? (totalInvestment / annualRevenue) * 12 : 0;
-    const annualRoi =
-      totalInvestment > 0 ? (annualRevenue / totalInvestment) * 100 : 0;
-    const fiveYearRevenue = annualRevenue * 5;
-
-    return {
-      annualRevenue,
-      annualRoi,
-      annualUnits,
-      breakEvenUnits: marginPerUnit > 0 ? totalInvestment / marginPerUnit : 0,
-      dailyRevenue,
-      fiveYearProfit: fiveYearRevenue - totalInvestment,
-      fiveYearRevenue,
-      monthlyRevenue,
-      paybackMonths,
-      threeYearRevenue: annualRevenue * 3,
-      totalChargers,
-      totalInvestment,
-    };
+    return calculateRoi({
+      avgConsumption,
+      baseCost,
+      baseUsage,
+      marginPerUnit,
+      moduleCost,
+      moduleSize: option.moduleSize,
+      moduleUsages,
+    });
   }, [
     avgConsumption,
     baseCost,
@@ -145,9 +124,9 @@ export default function RoiCalculatorSection() {
           <div className="mb-4 inline-flex rounded-full border border-emerald-500/30 bg-emerald-500/10 px-4 py-2 text-xs font-bold uppercase tracking-widest text-emerald-400">
             Investment Calculator
           </div>
-          <h2 className="text-4xl font-display font-bold tracking-tight md:text-6xl">
+          <h1 className="text-4xl font-display font-bold tracking-tight md:text-6xl">
             Invest in EV Charging Stations.
-          </h2>
+          </h1>
           <p className="mt-5 text-lg leading-8 text-zinc-400">
             Estimate charger investment, yearly usage, payback period, and
             projected revenue for a ZVolta charging station.

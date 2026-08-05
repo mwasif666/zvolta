@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useLayoutEffect } from "react";
 import { legacyPageScripts } from "../generated/legacy-scripts";
 import { ensureGsapGlobals } from "./gsap-globals";
 
@@ -22,8 +22,29 @@ function attachInlineDomHandlers() {
       }
 
       const listener = (event) => {
-        const handler = new Function("event", handlerCode);
-        return handler.call(element, event);
+        if (handlerCode.includes("location.reload()")) {
+          window.location.reload();
+          return;
+        }
+
+        if (handlerCode.includes("error-message")) {
+          document.getElementById("error-message")?.classList.add("hidden");
+          return;
+        }
+
+        if (eventName === "error") {
+          const fallbackSource = handlerCode.match(
+            /this\.src=['"]([^'"]+)/,
+          )?.[1];
+
+          if (
+            fallbackSource &&
+            element.getAttribute("src") !== fallbackSource
+          ) {
+            element.removeEventListener(eventName, listener);
+            element.setAttribute("src", fallbackSource);
+          }
+        }
       };
 
       element.addEventListener(eventName, listener);
@@ -37,8 +58,11 @@ function attachInlineDomHandlers() {
 }
 
 async function evaluateScript(sourceCode, sourceLabel) {
-  const runner = new Function(`${sourceCode}\n//# sourceURL=${sourceLabel}`);
-  runner.call(globalThis);
+  const script = document.createElement("script");
+  script.dataset.legacyRuntime = sourceLabel;
+  script.textContent = `(function () {\n${sourceCode}\n})();\n//# sourceURL=${sourceLabel}`;
+  document.head.appendChild(script);
+  script.remove();
 }
 
 async function getExternalScriptSource(externalScript) {
@@ -241,6 +265,10 @@ function createRuntimeTracker() {
   };
 
   const cleanup = () => {
+    // Scripts can create timelines in promises or delayed callbacks. Capture a
+    // final snapshot at unmount so those animations cannot leak into the next
+    // client-side route.
+    finalize();
     restorePatches();
 
     tickerCallbacks.forEach((callback) => {
@@ -292,7 +320,7 @@ function createRuntimeTracker() {
 }
 
 export function useLegacyPageRuntime(pageId, enabled = true) {
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!enabled) {
       return undefined;
     }
@@ -315,7 +343,14 @@ export function useLegacyPageRuntime(pageId, enabled = true) {
         dispatchLegacyLifecycleEvents();
       } finally {
         runtimeTracker.finalize();
-        runtimeTracker.restorePatches();
+        window.requestAnimationFrame(() => {
+          if (!cancelled) {
+            globalThis.ScrollTrigger?.refresh?.();
+            window.dispatchEvent(
+              new CustomEvent("zvolta:page-ready", { detail: { pageId } }),
+            );
+          }
+        });
       }
     };
 

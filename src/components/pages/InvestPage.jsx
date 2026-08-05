@@ -26,7 +26,7 @@ export default function InvestPage() {
             />
             <div className="relative mb-10 w-24 h-24 md:w-32 md:h-32 flex items-center justify-center">
               <img
-                src="img/symbol logo.png"
+                src="/img/symbol logo.png"
                 id="loader-logo"
                 className="w-full h-full object-contain drop-shadow-[0_0_30px_rgba(22,163,74,0.3)]"
                 alt="ZVolta"
@@ -59,7 +59,7 @@ export default function InvestPage() {
           href="/"
           className="fixed top-6 left-6 z-[900] w-12 h-12 rounded-full bg-white/90 backdrop-blur-md border border-zinc-200 flex items-center justify-center shadow-xl transition-all duration-500 hover:scale-105"
         >
-          <img src="img/symbol logo.png" alt="ZVolta" className="h-6 w-auto" />
+          <img src="/img/symbol logo.png" alt="ZVolta" className="h-6 w-auto" />
         </SmartLink>
         <button
           id="dynamic-sidebar-btn"
@@ -219,7 +219,7 @@ export default function InvestPage() {
                   <div className="md:w-1/2 relative w-full h-full flex items-center justify-center">
                     <div className="relative w-full aspect-[4/3] rounded-[3rem] overflow-hidden border border-zinc-200 shadow-2xl shadow-zinc-200/50 group">
                       <img
-                        src="img/zvolta-1.jpg"
+                        src="/img/zvolta-1.jpg"
                         alt="Modern EV Rickshaw"
                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                         data-inline-onerror="this.onerror=null;this.src='https://fastly.restofworld.org/uploads/2025/02/2025-P0124-Mehboob-41-scaled.jpg?width=1200&dpr=2';"
@@ -282,7 +282,7 @@ export default function InvestPage() {
               <section className="py-24 bg-black text-white relative overflow-hidden">
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-20">
                   <img
-                    src="img/symbol-doublearrow-green.png"
+                    src="/img/symbol-doublearrow-green.png"
                     alt="Arrow"
                     className="w-48 h-48 animate-pulse-slow"
                   />

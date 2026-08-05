@@ -4,8 +4,9 @@ const notFoundPageData = {
   componentFile: "NotFoundPage.jsx",
   paths: ["/404"],
   meta: {
-    title: "Page Not Found",
-    description: "",
+    title: "Page Not Found | ZVolta",
+    description: "The requested ZVolta page could not be found.",
+    noIndex: true,
   },
 };
 

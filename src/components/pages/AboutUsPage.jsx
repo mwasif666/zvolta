@@ -224,10 +224,10 @@ export default function AboutUsPage() {
                   We grow the network by staying close to the field.
                 </h2>
                 <p className="mt-4 text-base leading-8 text-white/70">
-                  The ZVolta story has a strong image-led rhythm. Here we
-                  keep that spirit, but the story is fully ZVolta: access,
-                  uptime, clarity, and support working together so electric
-                  mobility feels more practical every month.
+                  The ZVolta story has a strong image-led rhythm. Here we keep
+                  that spirit, but the story is fully ZVolta: access, uptime,
+                  clarity, and support working together so electric mobility
+                  feels more practical every month.
                 </p>
               </div>
             </div>

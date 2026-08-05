@@ -127,5 +127,5 @@ const legacyBlogPosts = [
 export const blogPosts = [...notionBlogPosts, ...legacyBlogPosts];
 
 export function getBlogPostBySlug(slug) {
-  return blogPosts.find((post) => post.slug === slug) ?? blogPosts[0];
+  return blogPosts.find((post) => post.slug === slug);
 }

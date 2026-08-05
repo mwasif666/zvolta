@@ -1,4 +1,4 @@
-import { chargerSpecs } from "../../chargerSpecs";
+import { chargerSpecs } from "../../chargerSpecs.js";
 
 const spec = chargerSpecs["3kw"];
 

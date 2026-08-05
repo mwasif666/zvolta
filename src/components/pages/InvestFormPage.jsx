@@ -8,7 +8,7 @@ export default function InvestFormPage() {
     }
     .form-container-bg {
       /* A more subtle, professional gradient for the background */
-      background-image: url('img/twisty-gradient.jpg');
+      background-image: url('/img/twisty-gradient.jpg');
       background-size: cover;
       background-position: center;
     }
@@ -88,7 +88,7 @@ export default function InvestFormPage() {
         >
           <div className="orion-loader-logo">
             <img
-              src="img/zvolta-loader.gif"
+              src="/img/zvolta-loader.gif"
               alt="Loading ZVolta..."
               draggable="false"
             />
@@ -105,7 +105,7 @@ export default function InvestFormPage() {
                     aria-label="ZVolta Home"
                   >
                     <img
-                      src="img/full_Logoblack.png"
+                      src="/img/full_Logoblack.png"
                       alt="ZVolta Full Logo"
                       className="navbar-logo"
                     />

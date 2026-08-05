@@ -4,46 +4,38 @@ import { SmartLink } from "../SmartLink";
 const legalCards = [
   {
     title: "Terms and responsibilities",
-    copy:
-      "What ZVolta services expect from users, hosts, and partners, and where responsibilities sit in active programs.",
+    copy: "What ZVolta services expect from users, hosts, and partners, and where responsibilities sit in active programs.",
   },
   {
     title: "Privacy and data use",
-    copy:
-      "How service, contact, and operational information may be used to run support, compliance, and product workflows.",
+    copy: "How service, contact, and operational information may be used to run support, compliance, and product workflows.",
   },
   {
     title: "Payments and refunds",
-    copy:
-      "The commercial side of charging, program participation, and how disputes or correction requests should be handled.",
+    copy: "The commercial side of charging, program participation, and how disputes or correction requests should be handled.",
   },
   {
     title: "Program-specific rules",
-    copy:
-      "Additional conditions that may apply to partner sites, managed programs, or service types with extra operational detail.",
+    copy: "Additional conditions that may apply to partner sites, managed programs, or service types with extra operational detail.",
   },
 ];
 
 const sections = [
   {
     title: "Using ZVolta services",
-    body:
-      "ZVolta's legal framework is there to set expectations clearly. That includes appropriate service use, accurate information where onboarding depends on it, and responsible use of network access and support channels.",
+    body: "ZVolta's legal framework is there to set expectations clearly. That includes appropriate service use, accurate information where onboarding depends on it, and responsible use of network access and support channels.",
   },
   {
     title: "How we handle information",
-    body:
-      "We use service and contact data to operate the network, support users, improve reliability, and meet compliance-related obligations where they apply. If your question is specifically about privacy, the contact route is the right place to start.",
+    body: "We use service and contact data to operate the network, support users, improve reliability, and meet compliance-related obligations where they apply. If your question is specifically about privacy, the contact route is the right place to start.",
   },
   {
     title: "Commercial clarity and disputes",
-    body:
-      "Where payments or service fees are involved, the aim is to keep pricing scope and issue handling understandable. If something needs review or correction, the request should include enough detail for the right team to assess it quickly.",
+    body: "Where payments or service fees are involved, the aim is to keep pricing scope and issue handling understandable. If something needs review or correction, the request should include enough detail for the right team to assess it quickly.",
   },
   {
     title: "Partner or program-specific conditions",
-    body:
-      "Some offerings, especially those involving charging sites, hardware, or managed EV programs, can depend on more specific terms. This page is the clearer overview; deeper operational details are handled through the related workflow.",
+    body: "Some offerings, especially those involving charging sites, hardware, or managed EV programs, can depend on more specific terms. This page is the clearer overview; deeper operational details are handled through the related workflow.",
   },
 ];
 
@@ -63,7 +55,10 @@ export default function LegalPage() {
         <div className="relative mx-auto grid w-full max-w-7xl gap-10 px-4 pb-20 sm:px-6 lg:grid-cols-[0.96fr_1.04fr] lg:items-end lg:px-8">
           <div>
             <nav className="mb-5 flex items-center gap-3 text-sm font-semibold text-white/70">
-              <SmartLink href="/" className="transition-colors hover:text-emerald-400">
+              <SmartLink
+                href="/"
+                className="transition-colors hover:text-emerald-400"
+              >
                 Home
               </SmartLink>
               <span>/</span>
@@ -134,7 +129,10 @@ export default function LegalPage() {
             </ul>
             <div className="mt-8 rounded-[1.5rem] border border-white/10 bg-white/[0.04] p-5 text-sm leading-7 text-white/70">
               If your question is active and operational, the{" "}
-              <SmartLink href="/support" className="text-emerald-300 hover:text-emerald-200">
+              <SmartLink
+                href="/support"
+                className="text-emerald-300 hover:text-emerald-200"
+              >
                 support page
               </SmartLink>{" "}
               may get you to the right lane faster.
@@ -185,7 +183,8 @@ export default function LegalPage() {
                 Privacy or data-use concerns.
               </li>
               <li className="border-l-2 border-emerald-400/40 pl-4">
-                Clarification on responsibilities inside a program or partner setup.
+                Clarification on responsibilities inside a program or partner
+                setup.
               </li>
               <li className="border-l-2 border-emerald-400/40 pl-4">
                 Payment, refund, or policy interpretation questions.

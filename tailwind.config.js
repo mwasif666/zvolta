@@ -1,4 +1,4 @@
-const brandGreen = '#16a34a';
+const brandGreen = "#16a34a";
 const brandGreenScale = {
   50: brandGreen,
   100: brandGreen,
@@ -15,42 +15,42 @@ const brandGreenScale = {
 
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ['./src/**/*.{js,jsx,ts,tsx}'],
+  content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     screens: {
-      sm: '640px',
-      md: '768px',
-      lg: '1024px',
-      xl: '1280px',
-      '2xl': '1536px',
-      '3xl': '1920px',
+      sm: "640px",
+      md: "768px",
+      lg: "1024px",
+      xl: "1280px",
+      "2xl": "1536px",
+      "3xl": "1920px",
     },
     extend: {
       fontFamily: {
-        sans: ['Inter Tight', 'Questrial', 'Inter', 'sans-serif'],
-        display: ['Inter Tight', 'Questrial', 'sans-serif'],
-        mono: ['JetBrains Mono', 'monospace'],
+        sans: ["Inter Tight", "Questrial", "Inter", "sans-serif"],
+        display: ["Inter Tight", "Questrial", "sans-serif"],
+        mono: ["JetBrains Mono", "monospace"],
       },
       colors: {
-        'z-black': '#0a0a0a',
-        'z-gray': '#f4f4f5',
-        'z-green': brandGreen,
+        "z-black": "#0a0a0a",
+        "z-gray": "#f4f4f5",
+        "z-green": brandGreen,
         emerald: brandGreenScale,
         green: brandGreenScale,
         lime: brandGreenScale,
         yellow: brandGreenScale,
       },
       borderRadius: {
-        '4xl': '2.5rem',
+        "4xl": "2.5rem",
       },
       animation: {
-        'spin-slow': 'spin 6s linear infinite',
-        marquee: 'marquee 22s linear infinite',
+        "spin-slow": "spin 6s linear infinite",
+        marquee: "marquee 22s linear infinite",
       },
       keyframes: {
         marquee: {
-          '0%': { transform: 'translateX(0)' },
-          '100%': { transform: 'translateX(-50%)' },
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-50%)" },
         },
       },
     },

@@ -39,7 +39,7 @@ export default function DriverNetworkPage() {
         <div id="orion-loader">
           <div className="orion-loader-logo">
             <img
-              src="img/zvolta-loader.gif"
+              src="/img/zvolta-loader.gif"
               alt="Loading..."
               draggable="false"
             />
@@ -62,7 +62,7 @@ export default function DriverNetworkPage() {
                     aria-label="ZVolta Home"
                   >
                     <img
-                      src="img/full_Logoblack.png"
+                      src="/img/full_Logoblack.png"
                       alt="ZVolta Full Logo"
                       className="navbar-logo"
                     />
@@ -182,8 +182,8 @@ export default function DriverNetworkPage() {
                   data-load-animate
                   data-delay={100}
                 >
-                  We've created a simple rent-and-earn model with zero
-                  down payment, so you can focus on what matters: driving and
+                  We've created a simple rent-and-earn model with zero down
+                  payment, so you can focus on what matters: driving and
                   earning.
                 </p>
                 <div
@@ -222,10 +222,10 @@ export default function DriverNetworkPage() {
             </div>
             <div
               className="order-first lg:order-last h-64 lg:h-auto bg-cover bg-center"
-              style={{ backgroundImage: 'url("img/zvolta-5.jpg")' }}
+              style={{ backgroundImage: 'url("/img/zvolta-5.jpg")' }}
             >
               <img
-                src="img/zvolta-5.jpg"
+                src="/img/zvolta-5.jpg"
                 alt="Electric rickshaw parked on a street"
                 className="sr-only"
               />
@@ -436,7 +436,7 @@ export default function DriverNetworkPage() {
                   data-delay={200}
                 >
                   <img
-                    src="img/zvolta-9.png"
+                    src="/img/zvolta-9.png"
                     alt="Happy ZVolta driver with an electric rickshaw"
                     className="rounded-xl shadow-2xl object-cover w-full h-full"
                     data-inline-onerror="this.onerror=null;this.src='https://placehold.co/800x600/E0E0E0/BDBDBD?text=Image+Not+Found';"

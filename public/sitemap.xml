@@ -1,94 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-
-  <url>
-    <loc>https://www.zvolta.com/</loc>
-    <lastmod>2025-08-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-  </url>
-
-  <url>
-    <loc>https://www.zvolta.com/about-us</loc>
-    <lastmod>2026-05-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://www.zvolta.com/team</loc>
-    <lastmod>2026-05-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://www.zvolta.com/partners</loc>
-    <lastmod>2026-05-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://www.zvolta.com/stories</loc>
-    <lastmod>2026-05-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://www.zvolta.com/support</loc>
-    <lastmod>2026-05-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://www.zvolta.com/legal</loc>
-    <lastmod>2026-05-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://www.zvolta.com/charging-partners</loc>
-    <lastmod>2025-08-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://www.zvolta.com/3kw-charger</loc>
-    <lastmod>2026-05-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://www.zvolta.com/7kw-charger</loc>
-    <lastmod>2026-05-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://www.zvolta.com/22kw-charger</loc>
-    <lastmod>2026-05-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://www.zvolta.com/careers</loc>
-    <lastmod>2026-04-30</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://www.zvolta.com/policy</loc>
-    <lastmod>2026-05-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
+  <url><loc>https://zvolta.com/vehicles</loc></url>
+  <url><loc>https://zvolta.com/team</loc></url>
+  <url><loc>https://zvolta.com/support</loc></url>
+  <url><loc>https://zvolta.com/stories</loc></url>
+  <url><loc>https://zvolta.com/software</loc></url>
+  <url><loc>https://zvolta.com/roi-calculator</loc></url>
+  <url><loc>https://zvolta.com/partners</loc></url>
+  <url><loc>https://zvolta.com/mobile</loc></url>
+  <url><loc>https://zvolta.com/legal</loc></url>
+  <url><loc>https://zvolta.com/invest-form</loc></url>
+  <url><loc>https://zvolta.com/invest</loc></url>
+  <url><loc>https://zvolta.com/host</loc></url>
+  <url><loc>https://zvolta.com/</loc></url>
+  <url><loc>https://zvolta.com/driver-network</loc></url>
+  <url><loc>https://zvolta.com/contact-us</loc></url>
+  <url><loc>https://zvolta.com/coming-soon</loc></url>
+  <url><loc>https://zvolta.com/charging-partners</loc></url>
+  <url><loc>https://zvolta.com/charge</loc></url>
+  <url><loc>https://zvolta.com/careers</loc></url>
+  <url><loc>https://zvolta.com/blogs</loc></url>
+  <url><loc>https://zvolta.com/blog-details</loc></url>
+  <url><loc>https://zvolta.com/become-charging-partner</loc></url>
+  <url><loc>https://zvolta.com/appstore</loc></url>
+  <url><loc>https://zvolta.com/about-us</loc></url>
+  <url><loc>https://zvolta.com/7kw-charger</loc></url>
+  <url><loc>https://zvolta.com/3kw-charger</loc></url>
+  <url><loc>https://zvolta.com/22kw-charger</loc></url>
+  <url><loc>https://zvolta.com/blogs/coworking-ev-charging-usp</loc></url>
+  <url><loc>https://zvolta.com/blogs/fuel-station-charging-footfall</loc></url>
+  <url><loc>https://zvolta.com/blogs/ev-driver-week-range-anxiety</loc></url>
+  <url><loc>https://zvolta.com/blogs/my-parents-said-yes-ev-bike</loc></url>
+  <url><loc>https://zvolta.com/blogs/evs-can-break-the-monopoly</loc></url>
+  <url><loc>https://zvolta.com/blogs/showroom-charging-closes-deals</loc></url>
+  <url><loc>https://zvolta.com/blogs/charging-network-growth</loc></url>
+  <url><loc>https://zvolta.com/blogs/ev-rickshaw-economics</loc></url>
+  <url><loc>https://zvolta.com/blogs/charging-partner-sites</loc></url>
+  <url><loc>https://zvolta.com/blogs/software-for-operators</loc></url>
+  <url><loc>https://zvolta.com/blogs/driver-network-support</loc></url>
 </urlset>

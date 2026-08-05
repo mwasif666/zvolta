@@ -85,7 +85,7 @@ export default function VehiclesPage() {
           href="/"
           className="fixed top-6 left-6 z-[900] w-12 h-12 rounded-full bg-zinc-900/90 backdrop-blur-md border border-white/10 flex items-center justify-center shadow-xl transition-all duration-500 hover:scale-105"
         >
-          <img src="img/symbol logo.png" alt="ZVolta" className="h-6 w-auto" />
+          <img src="/img/symbol logo.png" alt="ZVolta" className="h-6 w-auto" />
         </SmartLink>
         <button
           id="dynamic-sidebar-btn"
@@ -200,7 +200,7 @@ export default function VehiclesPage() {
             />
             <div className="relative mb-10 w-24 h-24 md:w-32 md:h-32 flex items-center justify-center">
               <img
-                src="img/symbol logo.png"
+                src="/img/symbol logo.png"
                 id="loader-logo"
                 className="w-full h-full object-contain drop-shadow-[0_0_30px_rgba(22,163,74,0.3)] will-change-transform"
                 alt="ZVolta Loading"
@@ -357,7 +357,7 @@ export default function VehiclesPage() {
                         <div className="absolute inset-0 bg-gradient-to-b from-emerald-50 to-white z-0" />
                         <div className="absolute inset-0 flex items-center justify-center p-8 z-10 transition-transform duration-700 group-hover:scale-105">
                           <img
-                            src="img/3-seater.png"
+                            src="/img/3-seater.png"
                             alt="3-Seater Rickshaw"
                             className="w-full h-auto max-h-[60%] object-contain drop-shadow-2xl"
                             data-inline-onerror="this.src='https://placehold.co/600x400/transparent/333?text=3-Seater'"
@@ -382,7 +382,7 @@ export default function VehiclesPage() {
                         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-emerald-900/20 to-black z-0" />
                         <div className="absolute inset-0 flex items-center justify-center p-8 z-10 transition-transform duration-700 group-hover:scale-105">
                           <img
-                            src="img/bike-ev.png"
+                            src="/img/bike-ev.png"
                             alt="Electric Bike"
                             className="w-full h-auto max-h-[60%] object-contain drop-shadow-2xl"
                             data-inline-onerror="this.src='https://placehold.co/600x400/transparent/fff?text=EV+Bike'"
@@ -407,7 +407,7 @@ export default function VehiclesPage() {
                         <div className="absolute inset-0 bg-gradient-to-b from-emerald-50 to-white z-0" />
                         <div className="absolute inset-0 flex items-center justify-center p-8 z-10 transition-transform duration-700 group-hover:scale-105">
                           <img
-                            src="img/loader-ev.jpg"
+                            src="/img/Flux_Dev_a_highly_detailed_loader_rickshaw_with_a_sturdy_metal_3.jpg"
                             alt="EV Loader"
                             className="w-full h-auto max-h-[60%] object-contain drop-shadow-2xl"
                             data-inline-onerror="this.src='https://placehold.co/600x400/transparent/333?text=Heavy+Loader'"

@@ -66,8 +66,7 @@
   .via-yellow-300 {
     --tw-gradient-to: rgb(22 163 74 / 0) var(--tw-gradient-to-position);
     --tw-gradient-stops:
-      var(--tw-gradient-from),
-      #16a34a var(--tw-gradient-via-position),
+      var(--tw-gradient-from), #16a34a var(--tw-gradient-via-position),
       var(--tw-gradient-to);
   }
 
@@ -141,8 +140,9 @@
   .scroll-reveal {
     opacity: 0;
     transform: translateY(48px);
-    transition: opacity 0.85s cubic-bezier(0.22, 1, 0.36, 1),
-                transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+    transition:
+      opacity 0.85s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
     will-change: opacity, transform;
   }
 
@@ -232,8 +232,8 @@
   }
 
   .site-route-loader.is-exiting .site-route-loader-logo {
-    animation: site-route-loader-logo-out 0.48s cubic-bezier(0.95, 0.05, 0.795, 0.035)
-      forwards;
+    animation: site-route-loader-logo-out 0.48s
+      cubic-bezier(0.95, 0.05, 0.795, 0.035) forwards;
   }
 
   .site-route-loader.is-exiting .site-route-loader-content {
@@ -243,8 +243,8 @@
 
   .site-route-loader.is-exiting .site-route-loader-blind-top {
     transform-origin: top;
-    animation: site-route-loader-blind-top-out 0.42s cubic-bezier(0.77, 0, 0.175, 1)
-      0.3s forwards;
+    animation: site-route-loader-blind-top-out 0.42s
+      cubic-bezier(0.77, 0, 0.175, 1) 0.3s forwards;
   }
 
   .site-route-loader.is-exiting .site-route-loader-blind-bottom {

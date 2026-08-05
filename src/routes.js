@@ -18,7 +18,6 @@ const routeLabels = {
   "charging-partners": "Charging Partners",
   "coming-soon": "Coming Soon",
   "contact-us": "Contact Us",
-  home: "Home Page",
   host: "Host a Charger",
   index: "Home",
   mobile: "Mobile App",
@@ -29,7 +28,10 @@ const routeLabels = {
   stories: "Stories",
   support: "Support",
   team: "Team",
-  testing: "Testing",
+  "driver-network": "Driver Network",
+  invest: "Invest",
+  "invest-form": "Investor Enquiry",
+  vehicles: "Electric Vehicles",
 };
 
 const shortRouteLabels = {
@@ -123,6 +125,7 @@ export const footerLinkGroups = [
       "partners",
       "stories",
       "careers",
+      "invest",
     ]),
   },
   {
@@ -138,17 +141,13 @@ export const footerLinkGroups = [
       "22kw-charger",
       "mobile",
       "appstore",
+      "vehicles",
+      "driver-network",
     ]),
   },
   {
     title: "Help",
-    links: routesFromPageIds([
-      "support",
-      "contact-us",
-      "policy",
-      "blogs",
-      "home",
-    ]),
+    links: routesFromPageIds(["support", "contact-us", "policy", "blogs"]),
   },
 ];
 

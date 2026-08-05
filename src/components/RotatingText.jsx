@@ -81,7 +81,8 @@ const RotatingText = forwardRef((props, ref) => {
   const getStaggerDelay = useCallback(
     (index, totalChars) => {
       if (staggerFrom === "first") return index * staggerDuration;
-      if (staggerFrom === "last") return (totalChars - 1 - index) * staggerDuration;
+      if (staggerFrom === "last")
+        return (totalChars - 1 - index) * staggerDuration;
       if (staggerFrom === "center") {
         const center = Math.floor(totalChars / 2);
         return Math.abs(center - index) * staggerDuration;
@@ -178,7 +179,9 @@ const RotatingText = forwardRef((props, ref) => {
       >
         <motion.span
           key={currentTextIndex}
-          className={cn(splitBy === "lines" ? "text-rotate-lines" : "text-rotate")}
+          className={cn(
+            splitBy === "lines" ? "text-rotate-lines" : "text-rotate",
+          )}
           layout
           aria-hidden="true"
         >

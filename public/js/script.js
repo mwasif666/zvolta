@@ -1,9 +1,11 @@
 document.addEventListener("DOMContentLoaded", function () {
   gsap.registerPlugin(ScrollTrigger, Observer);
   let scrollObserver;
-  const LOADER_INIT_SECONDS = 2;
-  const LOADER_READY_SECONDS = 1;
-  const LOADER_MAX_ASSET_WAIT_SECONDS = 1.2;
+  // The React app owns the initial site loader. Keep page-level transitions
+  // short so client-side navigation never feels like a full reload.
+  const LOADER_INIT_SECONDS = 0.15;
+  const LOADER_READY_SECONDS = 0.55;
+  const LOADER_MAX_ASSET_WAIT_SECONDS = 0.2;
 
   // =========================================
   // GLOBAL UI ELEMENTS (Moved to top for scope access)
@@ -38,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // A. Initial States
   gsap.set(pageContent, { autoAlpha: 1 });
   gsap.set(heroElements, { y: 40, opacity: 0 });
-  gsap.set(heroBg, { scale: 1.1 });
+  if (heroBg) gsap.set(heroBg, { scale: 1.1 });
 
   // Idle Breathing Animation
   const loaderPulseTween = gsap.to(loaderLogo, {
@@ -109,7 +111,8 @@ document.addEventListener("DOMContentLoaded", function () {
       },
       onComplete: () => {
         loaderElement.style.display = "none";
-        gsap.set([heroElements, heroBg], { clearProps: "willChange" });
+        gsap.set(heroElements, { clearProps: "willChange" });
+        if (heroBg) gsap.set(heroBg, { clearProps: "willChange" });
       },
     });
 
@@ -150,8 +153,10 @@ document.addEventListener("DOMContentLoaded", function () {
         LOADER_READY_SECONDS - 0.35,
       )
       .to(blindBottom, { scaleY: 0, duration: 0.35, ease: "power4.inOut" }, "<")
-      .set(loaderElement, { display: "none" }, LOADER_READY_SECONDS)
-      .to(
+      .set(loaderElement, { display: "none" }, LOADER_READY_SECONDS);
+
+    if (heroBg) {
+      tl.to(
         heroBg,
         {
           scale: 1,
@@ -159,8 +164,10 @@ document.addEventListener("DOMContentLoaded", function () {
           ease: "power2.out",
         },
         0,
-      )
-      .to(
+      );
+    }
+
+    tl.to(
         heroElements,
         {
           y: 0,

@@ -27,7 +27,7 @@ export default function MobilePage() {
           href="/"
           className="fixed top-6 left-6 z-[900] w-12 h-12 rounded-full bg-zinc-900/90 backdrop-blur-md border border-white/10 flex items-center justify-center shadow-xl hover:scale-105 transition-transform"
         >
-          <img src="img/symbol logo.png" alt="ZVolta" className="h-6 w-auto" />
+          <img src="/img/symbol logo.png" alt="ZVolta" className="h-6 w-auto" />
         </SmartLink>
         <button
           id="dynamic-sidebar-btn"
@@ -173,28 +173,28 @@ export default function MobilePage() {
             >
               <div className="snap-center shrink-0">
                 <img
-                  src="img/mobile1.png"
+                  src="/img/mobile1.png"
                   className="w-[260px] md:w-[340px] rounded-2xl shadow-2xl border border-white/10"
                   alt="App Screenshot 1"
                 />
               </div>
               <div className="snap-center shrink-0">
                 <img
-                  src="img/mobile2.png"
+                  src="/img/mobile2.png"
                   className="w-[260px] md:w-[340px] rounded-2xl shadow-2xl border border-white/10"
                   alt="App Screenshot 2"
                 />
               </div>
               <div className="snap-center shrink-0">
                 <img
-                  src="img/mobile3.png"
+                  src="/img/mobile3.png"
                   className="w-[260px] md:w-[340px] rounded-2xl shadow-2xl border border-white/10"
                   alt="App Screenshot 3"
                 />
               </div>
               <div className="snap-center shrink-0">
                 <img
-                  src="img/mobile4.png"
+                  src="/img/mobile4.png"
                   className="w-[260px] md:w-[340px] rounded-2xl shadow-2xl border border-white/10"
                   alt="App Screenshot 4"
                 />

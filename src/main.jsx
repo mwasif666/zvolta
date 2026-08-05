@@ -1,10 +1,13 @@
 import { Suspense, lazy, useEffect, useMemo } from "react";
 import { createRoot } from "react-dom/client";
+import { HelmetProvider } from "react-helmet-async";
 import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import "./index.css";
 import { SiteLayout } from "./components/SiteLayout";
+import { PageSeo } from "./components/seo/PageSeo";
 import { routeEntries } from "./routes";
 import { useLegacyPageRuntime } from "./lib/legacy-page-runtime";
+import { useRouteAnimationRefresh } from "./hooks/useRouteAnimationRefresh";
 
 function loadNotFoundPage() {
   const notFoundRoute =
@@ -167,40 +170,39 @@ function RoutedPage({ loadPage, pageId, meta }) {
 }
 
 function MountedPage({ pageId, meta, PageComponent }) {
+  const location = useLocation();
+  const routeKey = `${location.pathname}${location.search}`;
   useLegacyPageRuntime(pageId, meta?.disableLegacyRuntime !== true);
+  useRouteAnimationRefresh(routeKey);
 
   useEffect(() => {
     document.documentElement.dataset.page = pageId;
   }, [pageId]);
 
-  useEffect(() => {
-    if (meta?.title) {
-      document.title = meta.title;
-    }
-
-    if (meta?.description) {
-      const descriptionTag = document.querySelector('meta[name="description"]');
-      if (descriptionTag) {
-        descriptionTag.setAttribute("content", meta.description);
-      }
-    }
-  }, [meta]);
-
   return (
-    <div className="legacy-page-shell" data-page-id={pageId}>
+    <div
+      className="legacy-page-shell"
+      data-page-id={pageId}
+      data-route-key={routeKey}
+    >
+      <PageSeo meta={meta} pathname={location.pathname} />
       <PageComponent />
     </div>
   );
 }
 
-function AppRouter() {
+function AppRoutes() {
   const notFoundLoader = loadNotFoundPage();
+  const location = useLocation();
 
   return (
-    <BrowserRouter>
+    <>
       <ScrollController />
       <SiteLayout>
-        <Routes>
+        <Routes
+          location={location}
+          key={`${location.pathname}${location.search}`}
+        >
           {routeEntries
             .filter((entry) => entry.pageId !== "404")
             .flatMap((entry) =>
@@ -234,7 +236,17 @@ function AppRouter() {
           ) : null}
         </Routes>
       </SiteLayout>
-    </BrowserRouter>
+    </>
+  );
+}
+
+function AppRouter() {
+  return (
+    <HelmetProvider>
+      <BrowserRouter>
+        <AppRoutes />
+      </BrowserRouter>
+    </HelmetProvider>
   );
 }
 

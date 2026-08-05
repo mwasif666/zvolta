@@ -51,7 +51,7 @@ export default function BecomeChargingPartnerPage() {
         >
           <div className="orion-loader-logo">
             <img
-              src="img/zvolta-loader.gif"
+              src="/img/zvolta-loader.gif"
               alt="Loading ZVolta..."
               draggable="false"
             />
@@ -69,7 +69,7 @@ export default function BecomeChargingPartnerPage() {
                     aria-label="ZVolta Home"
                   >
                     <img
-                      src="img/full_Logoblack.png"
+                      src="/img/full_Logoblack.png"
                       alt="ZVolta Full Logo"
                       className="navbar-logo h-8 w-auto"
                     />
@@ -193,16 +193,16 @@ export default function BecomeChargingPartnerPage() {
               <div className="mb-10">
                 <SmartLink href="/" aria-label="ZVolta Home">
                   <img
-                    src="img/full_Logoblack.png"
+                    src="/img/full_Logoblack.png"
                     alt="ZVolta Logo"
                     className="h-12 w-auto"
                   />
                 </SmartLink>
               </div>
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-4">
+              <h1 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-4">
                 Become a{" "}
                 <span className="gradient-text">Charging Partner.</span>
-              </h2>
+              </h1>
               <p className="text-gray-600 text-lg mb-8">
                 Join ZVolta’s nationwide charging network. Turn your property
                 into a smart EV charging station and earn daily income. We
@@ -271,7 +271,7 @@ export default function BecomeChargingPartnerPage() {
           <div
             className="lg:w-1/2 w-full relative flex items-center justify-center p-8"
             style={{
-              backgroundImage: 'url("img/twisty-gradient-2-comp.jpg")',
+              backgroundImage: 'url("/img/twisty-gradient-2-comp.jpg")',
               backgroundSize: "cover",
               backgroundPosition: "center",
             }}
@@ -382,9 +382,10 @@ export default function BecomeChargingPartnerPage() {
                         id="property-type"
                         name="property-type"
                         required
+                        defaultValue=""
                         className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 transition form-select"
                       >
-                        <option value disabled selected>
+                        <option value="" disabled>
                           Please Select
                         </option>
                         <option>Home</option>
@@ -405,9 +406,10 @@ export default function BecomeChargingPartnerPage() {
                         id="location"
                         name="location"
                         required
+                        defaultValue=""
                         className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 transition form-select"
                       >
-                        <option value disabled selected>
+                        <option value="" disabled>
                           Please Select
                         </option>
                         <option>Karachi</option>

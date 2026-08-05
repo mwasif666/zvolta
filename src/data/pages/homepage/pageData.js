@@ -2,7 +2,7 @@ const homepagePageData = {
   pageId: "index",
   routeFolder: "homepage",
   componentFile: "IndexPage.jsx",
-  paths: ["/"],
+  paths: ["/", "/home"],
   meta: {
     title: "ZVolta - Charging Should Feel Easy",
     description:

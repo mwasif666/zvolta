@@ -1,6 +1,9 @@
 import { useParams } from "react-router-dom";
+import { PageSeo } from "../seo/PageSeo";
 import { SmartLink } from "../SmartLink";
+import { useFormSubmission } from "../../hooks/useFormSubmission";
 import { blogPosts, getBlogPostBySlug } from "../../data/pages/blogs/blogPosts";
+import NotFoundPage from "./NotFoundPage";
 
 const blogCategories = Array.from(
   new Set(blogPosts.map((post) => post.category)),
@@ -73,6 +76,7 @@ function NotionArticleBody({ blocks }) {
 }
 
 function Sidebar({ currentSlug }) {
+  const newsletter = useFormSubmission("https://formspree.io/f/mvgrykro");
   const relatedPosts = blogPosts
     .filter((post) => post.slug !== currentSlug)
     .slice(0, 3);
@@ -117,14 +121,21 @@ function Sidebar({ currentSlug }) {
       <div className="blog-detail__newsletter">
         <span>Stay updated</span>
         <h3>Get ZVolta mobility notes in your inbox.</h3>
-        <form
-          onSubmit={(event) => {
-            event.preventDefault();
-          }}
-        >
-          <input type="email" placeholder="you@example.com" />
-          <button type="submit">Subscribe</button>
+        <form onSubmit={newsletter.submit}>
+          <input
+            type="email"
+            name="email"
+            required
+            autoComplete="email"
+            aria-label="Email address"
+            placeholder="you@example.com"
+          />
+          <input type="hidden" name="subject" value="Blog newsletter signup" />
+          <button type="submit" disabled={newsletter.status === "submitting"}>
+            {newsletter.status === "submitting" ? "Sending…" : "Subscribe"}
+          </button>
         </form>
+        <p aria-live="polite">{newsletter.message}</p>
       </div>
     </aside>
   );
@@ -133,12 +144,25 @@ function Sidebar({ currentSlug }) {
 export default function BlogDetailPage() {
   const { slug } = useParams();
   const post = getBlogPostBySlug(slug);
+
+  if (!post) {
+    return <NotFoundPage />;
+  }
+
   const related = blogPosts
     .filter((item) => item.slug !== post.slug)
     .slice(0, 3);
 
   return (
     <>
+      <PageSeo
+        pathname={`/blogs/${post.slug}`}
+        meta={{
+          title: `${post.title} | ZVolta`,
+          description: post.excerpt,
+          image: post.image,
+        }}
+      />
       <style data-page-style="blog-detail:1">{`
         .blog-detail {
           --blog-bg: #000504;

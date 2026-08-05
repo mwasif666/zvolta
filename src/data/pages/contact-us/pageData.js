@@ -4,7 +4,7 @@ const contactUsPageData = {
   componentFile: "ContactUsPage.jsx",
   paths: ["/contact-us"],
   meta: {
-    title: "Contact ZVolta | EV Charging &amp; Clean Mobility Solutions",
+    title: "Contact ZVolta | EV Charging & Clean Mobility Solutions",
     description:
       "Get in touch with ZVolta for support, partnerships, or investment inquiries. Join us in powering Pakistan's clean transportation future.",
   },

@@ -65,7 +65,10 @@ export default function SupportPage() {
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-[#050806]/85 to-[#040605]" />
         <div className="relative mx-auto w-full max-w-7xl px-4 pb-20 sm:px-6 lg:px-8">
           <nav className="mb-5 flex items-center gap-3 text-sm font-semibold text-white/70">
-            <SmartLink href="/" className="transition-colors hover:text-emerald-400">
+            <SmartLink
+              href="/"
+              className="transition-colors hover:text-emerald-400"
+            >
               Home
             </SmartLink>
             <span>/</span>
@@ -114,10 +117,16 @@ export default function SupportPage() {
                     {card.note}
                   </p>
                   <div className="mt-5 space-y-2 text-sm text-white/78">
-                    <a href={`tel:${card.phone.replace(/\s+/g, "")}`} className="block hover:text-emerald-300">
+                    <a
+                      href={`tel:${card.phone.replace(/\s+/g, "")}`}
+                      className="block hover:text-emerald-300"
+                    >
                       {card.phone}
                     </a>
-                    <a href={`mailto:${card.email}`} className="block hover:text-emerald-300">
+                    <a
+                      href={`mailto:${card.email}`}
+                      className="block hover:text-emerald-300"
+                    >
                       {card.email}
                     </a>
                   </div>
@@ -167,7 +176,9 @@ export default function SupportPage() {
                 <span className="block text-xs font-bold uppercase tracking-[0.22em] text-emerald-300">
                   Contact
                 </span>
-                <span className="mt-3 block text-lg font-medium">Open the main contact page</span>
+                <span className="mt-3 block text-lg font-medium">
+                  Open the main contact page
+                </span>
               </SmartLink>
               <SmartLink
                 href="/legal"
@@ -176,7 +187,9 @@ export default function SupportPage() {
                 <span className="block text-xs font-bold uppercase tracking-[0.22em] text-emerald-300">
                   Legal
                 </span>
-                <span className="mt-3 block text-lg font-medium">Policy and privacy questions</span>
+                <span className="mt-3 block text-lg font-medium">
+                  Policy and privacy questions
+                </span>
               </SmartLink>
               <SmartLink
                 href="/mobile"
@@ -185,7 +198,9 @@ export default function SupportPage() {
                 <span className="block text-xs font-bold uppercase tracking-[0.22em] text-emerald-300">
                   Mobile flow
                 </span>
-                <span className="mt-3 block text-lg font-medium">Understand scan, pay, and charge</span>
+                <span className="mt-3 block text-lg font-medium">
+                  Understand scan, pay, and charge
+                </span>
               </SmartLink>
               <SmartLink
                 href="/stories"
@@ -194,7 +209,9 @@ export default function SupportPage() {
                 <span className="block text-xs font-bold uppercase tracking-[0.22em] text-emerald-300">
                   Stories
                 </span>
-                <span className="mt-3 block text-lg font-medium">See how the network works in practice</span>
+                <span className="mt-3 block text-lg font-medium">
+                  See how the network works in practice
+                </span>
               </SmartLink>
             </div>
           </div>

@@ -1,6 +1,6 @@
-import gsap from 'gsap';
-import { Observer } from 'gsap/Observer';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import gsap from "gsap";
+import { Observer } from "gsap/Observer";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 let gsapRegistered = false;
 

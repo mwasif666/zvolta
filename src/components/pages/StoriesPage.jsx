@@ -62,7 +62,10 @@ export default function StoriesPage() {
 
         <div className="relative mx-auto w-full max-w-7xl px-4 pb-16 sm:px-6 lg:px-8">
           <nav className="mb-8 flex items-center gap-3 text-sm font-semibold text-white/60">
-            <SmartLink href="/" className="transition-colors hover:text-emerald-400">
+            <SmartLink
+              href="/"
+              className="transition-colors hover:text-emerald-400"
+            >
               Home
             </SmartLink>
             <span className="text-white/30">/</span>
@@ -189,7 +192,9 @@ export default function StoriesPage() {
               <p className="mt-2 text-sm text-white/55">
                 {visiblePosts.length} article
                 {visiblePosts.length === 1 ? "" : "s"}
-                {activeCategory === "All stories" ? "" : ` in ${activeCategory}`}
+                {activeCategory === "All stories"
+                  ? ""
+                  : ` in ${activeCategory}`}
               </p>
             </div>
 

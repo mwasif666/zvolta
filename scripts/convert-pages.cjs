@@ -333,7 +333,9 @@ async function main() {
       },
     );
 
-    const rawJsxBody = normalizeJsxString(converter.convert(bodyContent.trim()));
+    const rawJsxBody = normalizeJsxString(
+      converter.convert(bodyContent.trim()),
+    );
     const usesSmartLink = /<a(?:\s|>)/.test(rawJsxBody);
     const jsxBody = usesSmartLink
       ? replaceAnchorsWithSmartLink(rawJsxBody)
@@ -355,9 +357,9 @@ export default function ${componentName}() {
   return (
     <>
 ${styleMarkup ? `${styleMarkup}\n` : ""}${jsxBody
-  .split("\n")
-  .map((line) => `    ${line}`)
-  .join("\n")}
+        .split("\n")
+        .map((line) => `    ${line}`)
+        .join("\n")}
     </>
   );
 }

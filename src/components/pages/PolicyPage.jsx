@@ -196,7 +196,7 @@ export default function PolicyPage() {
                   >
                     <img
                       id="navbar-logo-img"
-                      src="img/full_Logoblack.png"
+                      src="/img/full_Logoblack.png"
                       alt="ZVolta Full Logo"
                       className="navbar-logo"
                       width={120}

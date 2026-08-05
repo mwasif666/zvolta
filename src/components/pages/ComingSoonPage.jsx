@@ -36,7 +36,7 @@ export default function ComingSoonPage() {
             />
             <div className="relative mb-10 w-24 h-24 md:w-32 md:h-32 flex items-center justify-center">
               <img
-                src="img/symbol logo.png"
+                src="/img/symbol logo.png"
                 id="loader-logo"
                 className="w-full h-full object-contain drop-shadow-[0_0_30px_rgba(22,163,74,0.3)] will-change-transform"
                 alt="ZVolta Loading"
@@ -69,7 +69,7 @@ export default function ComingSoonPage() {
           href="/"
           className="fixed top-6 left-6 z-[900] w-12 h-12 rounded-full bg-zinc-900/90 backdrop-blur-md border border-white/10 flex items-center justify-center shadow-xl hover:scale-105 transition-transform"
         >
-          <img src="img/symbol logo.png" alt="ZVolta" className="h-6 w-auto" />
+          <img src="/img/symbol logo.png" alt="ZVolta" className="h-6 w-auto" />
         </SmartLink>
         <button
           id="dynamic-sidebar-btn"

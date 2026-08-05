@@ -6,7 +6,7 @@ import "swiper/css/pagination";
 import { SmartLink } from "../SmartLink";
 
 const PLAY_STORE_LINK =
-  "https://play.google.com/store/apps/details?id=app.zvolta.android";
+  "https://play.google.com/store/apps/details?id=com.zvolta.app";
 const ALTERNATIVE_LINK = "https://evrental-app.orkofleet.com/login";
 
 const appHighlights = [
@@ -130,22 +130,22 @@ export default function AppstorePage() {
   return (
     <>
       <style data-page-style="appstore-redesign">{`
-        html,
         body {
-          overflow-x: hidden;
-          overflow-y: auto;
           background: #03130c;
         }
 
         .appstore-page {
           min-height: 100vh;
-          overflow-x: hidden;
+          overflow-x: clip;
           background:
             radial-gradient(circle at 82% 16%, rgba(33, 202, 88, 0.2), transparent 28%),
             radial-gradient(circle at 10% 4%, rgba(22, 163, 74, 0.2), transparent 24%),
             linear-gradient(180deg, #03130c 0%, #04110c 52%, #071009 100%);
           color: #FFFFFF;
-          font-family: inherit;
+          font-family: "Inter Tight", "Questrial", "Inter", sans-serif;
+          font-size: 16px;
+          font-weight: 400;
+          letter-spacing: -0.01em;
         }
 
         .appstore-container {
@@ -186,11 +186,11 @@ export default function AppstorePage() {
           border: 1px solid rgba(22, 220, 90, 0.86);
           border-radius: 999px;
           background: rgba(22, 163, 74, 0.09);
-          padding: 10px 18px;
+          padding: 9px 16px;
           color: #20e878;
-          font-size: 14px;
-          font-weight: 900;
-          letter-spacing: 0.11em;
+          font-size: 12px;
+          font-weight: 700;
+          letter-spacing: 0.12em;
           text-transform: uppercase;
         }
 
@@ -206,10 +206,10 @@ export default function AppstorePage() {
           margin-top: 34px;
           max-width: 640px;
           color: #FFFFFF;
-          font-size: clamp(42px, 5vw, 68px);
-          font-weight: 900;
-          line-height: 1.1;
-          letter-spacing: 0;
+          font-size: clamp(42px, 5vw, 62px);
+          font-weight: 600;
+          line-height: 1.03;
+          letter-spacing: -0.045em;
         }
 
         .appstore-title span {
@@ -224,129 +224,187 @@ export default function AppstorePage() {
           margin-top: 24px;
           max-width: 560px;
           color: #BFC8C2;
-          font-size: clamp(17px, 1.6vw, 22px);
-          line-height: 1.5;
+          font-size: clamp(16px, 1.35vw, 19px);
+          font-weight: 400;
+          line-height: 1.6;
+          letter-spacing: 0;
         }
 
         .appstore-actions {
           display: flex;
           flex-wrap: wrap;
-          gap: 22px;
-          margin-top: 42px;
+          gap: 14px;
+          margin-top: 38px;
         }
 
         .appstore-play,
         .appstore-alt {
           display: inline-flex;
-          min-height: 84px;
+          min-height: 58px;
           align-items: center;
-          gap: 18px;
-          border-radius: 12px;
-          padding: 16px 24px;
-          transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+          gap: 13px;
+          border-radius: 14px;
+          padding: 11px 20px;
+          transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
         }
 
         .appstore-play {
-          min-width: 260px;
+          min-width: 210px;
           background: #FFFFFF;
           color: #0B0B0B;
-          box-shadow: 0 18px 42px rgba(0, 0, 0, 0.32);
+          box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
         }
 
-        .appstore-play:hover,
+        .appstore-play:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 16px 34px rgba(0, 0, 0, 0.34);
+        }
+
         .appstore-alt:hover {
           transform: translateY(-2px);
         }
 
         .appstore-play-icon {
-          width: 42px;
-          height: 46px;
+          width: 28px;
+          height: 31px;
           flex: 0 0 auto;
         }
 
         .appstore-play small,
         .appstore-alt small {
           display: block;
-          font-size: 11px;
-          font-weight: 800;
-          letter-spacing: 0.08em;
+          font-size: 9px;
+          font-weight: 700;
+          letter-spacing: 0.09em;
           text-transform: uppercase;
+        }
+
+        .appstore-alt small {
+          color: #9fb4a8;
         }
 
         .appstore-play strong,
         .appstore-alt strong {
           display: block;
           margin-top: 2px;
-          font-size: 24px;
-          font-weight: 900;
-          line-height: 1;
+          font-size: 15px;
+          font-weight: 700;
+          line-height: 1.1;
+          letter-spacing: -0.02em;
         }
 
         .appstore-alt {
-          min-width: 300px;
-          border: 1px solid rgba(255, 255, 255, 0.74);
-          background: rgba(255, 255, 255, 0.03);
+          min-width: 232px;
+          border: 1px solid rgba(255, 255, 255, 0.16);
+          background: rgba(255, 255, 255, 0.04);
           color: #FFFFFF;
         }
 
         .appstore-alt:hover {
-          border-color: #20e878;
+          border-color: rgba(32, 232, 120, 0.55);
           background: rgba(22, 163, 74, 0.12);
         }
 
         .appstore-alt-icon {
           display: grid;
-          width: 52px;
-          height: 52px;
+          width: 38px;
+          height: 38px;
+          flex: 0 0 auto;
           place-items: center;
+          border-radius: 10px;
+          border: 1px solid rgba(32, 232, 120, 0.28);
+          background: rgba(22, 163, 74, 0.14);
           color: #20e878;
         }
 
         .appstore-alt-arrow {
           margin-left: auto;
-          color: #BFC8C2;
+          color: #7fbf9b;
+          transition: transform 0.25s ease;
+        }
+
+        .appstore-alt:hover .appstore-alt-arrow {
+          transform: translateX(3px);
+          color: #20e878;
         }
 
         .appstore-highlights {
           display: grid;
-          margin-top: 58px;
+          margin-top: 54px;
           grid-template-columns: repeat(3, minmax(0, 1fr));
-          gap: 28px;
+          gap: 16px;
         }
 
         .appstore-highlight {
-          display: grid;
-          grid-template-columns: 52px minmax(0, 1fr);
-          gap: 14px;
+          position: relative;
+          display: flex;
           align-items: center;
+          gap: 15px;
+          padding: 17px 18px;
+          border: 1px solid rgba(255, 255, 255, 0.07);
+          border-radius: 16px;
+          background: linear-gradient(160deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.015));
+          overflow: hidden;
+          transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+        }
+
+        .appstore-highlight::after {
+          content: '';
+          position: absolute;
+          left: 0;
+          top: 0;
+          bottom: 0;
+          width: 3px;
+          background: linear-gradient(180deg, #61ff5a, #23dc73);
+          opacity: 0;
+          transition: opacity 0.3s ease;
+        }
+
+        .appstore-highlight:hover {
+          transform: translateY(-3px);
+          border-color: rgba(32, 232, 120, 0.28);
+          background: linear-gradient(160deg, rgba(22, 163, 74, 0.12), rgba(255, 255, 255, 0.02));
+        }
+
+        .appstore-highlight:hover::after {
+          opacity: 1;
         }
 
         .appstore-highlight-icon,
         .appstore-info-icon {
           display: grid;
           place-items: center;
-          border: 1px solid rgba(32, 232, 120, 0.38);
-          border-radius: 10px;
-          background: rgba(22, 163, 74, 0.12);
+          border: 1px solid rgba(32, 232, 120, 0.3);
+          border-radius: 12px;
+          background: linear-gradient(160deg, rgba(32, 232, 120, 0.2), rgba(22, 163, 74, 0.06));
           color: #20e878;
-          box-shadow: inset 0 0 22px rgba(32, 232, 120, 0.08);
+          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
         }
 
         .appstore-highlight-icon {
-          width: 52px;
-          height: 52px;
+          width: 46px;
+          height: 46px;
+          flex: 0 0 auto;
+          transition: transform 0.3s ease;
+        }
+
+        .appstore-highlight:hover .appstore-highlight-icon {
+          transform: scale(1.06);
         }
 
         .appstore-highlight h3 {
-          color: #B7FFD0;
-          font-size: 17px;
-          font-weight: 900;
+          color: #EAFBF1;
+          font-size: 15px;
+          font-weight: 700;
+          letter-spacing: -0.015em;
         }
 
         .appstore-highlight p {
-          margin-top: 5px;
-          color: #BFC8C2;
-          font-size: 15px;
+          margin-top: 4px;
+          color: #9FB4A8;
+          font-size: 13px;
+          line-height: 1.45;
+          letter-spacing: 0;
         }
 
         .appstore-phone-stage {
@@ -472,13 +530,28 @@ export default function AppstorePage() {
           pointer-events: none;
         }
 
+        .appstore-swiper .swiper-pagination {
+          bottom: 14px;
+        }
+
         .appstore-swiper .swiper-pagination-bullet {
-          background: rgba(255, 255, 255, 0.5);
+          width: 7px;
+          height: 7px;
+          margin: 0 5px !important;
+          background: rgba(255, 255, 255, 0.26);
           opacity: 1;
+          transition: width 0.35s ease, background 0.35s ease, box-shadow 0.35s ease;
+        }
+
+        .appstore-swiper .swiper-pagination-bullet:hover {
+          background: rgba(255, 255, 255, 0.5);
         }
 
         .appstore-swiper .swiper-pagination-bullet-active {
-          background: #20e878;
+          width: 26px;
+          border-radius: 7px;
+          background: linear-gradient(90deg, #23dc73, #61ff5a);
+          box-shadow: 0 0 14px rgba(32, 232, 120, 0.6);
         }
 
         .appstore-info-strip {
@@ -516,14 +589,17 @@ export default function AppstorePage() {
 
         .appstore-info-item h3 {
           color: #D8FFE7;
-          font-size: 20px;
-          font-weight: 900;
+          font-size: 18px;
+          font-weight: 700;
+          letter-spacing: -0.02em;
         }
 
         .appstore-info-item p {
           margin-top: 7px;
           color: #BFC8C2;
-          font-size: 16px;
+          font-size: 15px;
+          line-height: 1.5;
+          letter-spacing: 0;
         }
 
         @media (max-width: 980px) {
@@ -563,7 +639,8 @@ export default function AppstorePage() {
           }
 
           .appstore-title {
-            font-size: 43px;
+            font-size: 40px;
+            line-height: 1.04;
           }
 
           .appstore-actions {
@@ -612,7 +689,7 @@ export default function AppstorePage() {
               Arriving 2026
             </p>
             <h1 className="appstore-title">
-              The ZVolta App
+              The Zvolta App
               <br />
               <span>Is Almost Here.</span>
             </h1>
@@ -642,13 +719,13 @@ export default function AppstorePage() {
                 className="appstore-alt"
               >
                 <span className="appstore-alt-icon">
-                  <Icon name="bag" size={36} />
+                  <Icon name="bag" size={22} />
                 </span>
                 <span>
                   <small>More Ways to Get It</small>
                   <strong>Explore Alternatives</strong>
                 </span>
-                <Icon name="arrow" className="appstore-alt-arrow" size={20} />
+                <Icon name="arrow" className="appstore-alt-arrow" size={18} />
               </SmartLink>
             </div>
 

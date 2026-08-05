@@ -1,11 +1,11 @@
 const mobilePageData = {
   pageId: "mobile",
   routeFolder: "mobile",
-  componentFile: "MobilePage.jsx",
+  componentFile: "AppstorePage.jsx",
   paths: ["/mobile"],
   meta: {
-    title: "ZVolta - Start Charging",
-    description: "Scan, Pay, and Charge instantly with ZVolta.",
+    title: "ZVolta App - Coming Soon",
+    description: "The ZVolta App is launching soon. Get ready to charge Smart.",
   },
 };
 

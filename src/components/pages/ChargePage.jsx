@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SmartLink } from "../SmartLink";
+import { SkeletonImage } from "../SkeletonImage";
 
 const APP_LINK = "/appstore";
 const MAP_LINK = "/charge";
@@ -743,7 +744,7 @@ function HeroAppPhone() {
     <div className="chl-phone">
       <span className="chl-phone-notch" aria-hidden="true" />
       <div className="chl-screen chl-screen--image">
-        <img src={HERO_APP_IMAGE} alt="Zvolta app home screen" />
+        <SkeletonImage src={HERO_APP_IMAGE} alt="Zvolta app home screen" />
       </div>
     </div>
   );
@@ -780,9 +781,9 @@ function HeroVisual() {
       <div className="chl-card chl-card--nearby">
         <p className="chl-card-title">Nearby Chargers</p>
         {[
-          ["Zvolta Lucky One Mall", "2/4 available • AC", "2.1 km"],
-          ["Zvolta Dolmen Mall Clifton", "3/4 available • DC Fast", "4.6 km"],
-        ].map(([name, meta, distance]) => (
+          ["ZVolta Headoffice - Workhall", "2/4 available • AC"],
+          ["Ignite Sports Pavilion", "3/4 available • AC"],
+        ].map(([name, meta]) => (
           <div className="chl-nearby-row" key={name}>
             <span className="chl-nearby-bolt">
               <Icon name="bolt" className="h-3.5 w-3.5" />
@@ -791,7 +792,6 @@ function HeroVisual() {
               <strong>{name}</strong>
               <span>{meta}</span>
             </span>
-            <span className="chl-nearby-distance">{distance}</span>
           </div>
         ))}
         <SmartLink href={MAP_LINK} className="chl-nearby-link">
@@ -974,10 +974,11 @@ function NetworkMapSection() {
         </div>
 
         <div className="charge-reveal charge-map-card">
-          <img
+          <SkeletonImage
             src="/img/Host/locations.png"
             alt="Map of Zvolta charging stations across Karachi"
             className="charge-map-img"
+            skeletonTone="dark"
             loading="lazy"
           />
           <div className="charge-map-overlay" />
@@ -1362,11 +1363,13 @@ function AppExperienceSection() {
 
           <div className="charge-reveal aex-slider">
             {appExperienceSlides.map((src, index) => (
-              <img
+              <SkeletonImage
                 key={src}
                 src={src}
                 alt={`Zvolta app screen ${index + 1}`}
                 className={`aex-slide ${index === activeSlide ? "is-active" : ""}`}
+                showSkeleton={index === activeSlide}
+                skeletonTone="dark"
                 loading="lazy"
               />
             ))}
@@ -1484,10 +1487,11 @@ function ReadyToChargeSection() {
             <span />
             <span />
           </div>
-          <img
+          <SkeletonImage
             src="https://res.cloudinary.com/diywraupt/image/upload/v1780395124/stand_l17ao3.png"
             alt="Zvolta EV wall charger"
             className="rcs-img"
+            skeletonTone="dark"
             loading="lazy"
           />
         </div>

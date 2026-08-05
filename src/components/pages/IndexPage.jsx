@@ -1100,7 +1100,7 @@ export default function IndexPage() {
                       </div>
                     </SmartLink>
                     <SmartLink
-                      href="https://play.google.com/store/apps/details?id=app.zvolta.android"
+                      href="https://play.google.com/store/apps/details?id=com.zvolta.app"
                       className="store-btn group bg-zinc-900 border-zinc-700 hover:bg-white hover:border-white 3xl:px-8 3xl:py-4 rounded-full"
                     >
                       <i className="bi bi-google-play text-2xl 3xl:text-3xl group-hover:text-black transition-colors" />

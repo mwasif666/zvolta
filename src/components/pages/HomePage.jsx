@@ -1,24 +1,7 @@
 ﻿import { SmartLink } from "../SmartLink";
-import { blogPosts } from "../../data/pages/blogs/blogPosts";
 import YoutubeReelsSection from "./YoutubeReelsSection";
 
-const storyFilterByCategory = {
-  "EV Users": "ev-users",
-  Hosts: "hosts",
-  Operators: "operators",
-  Sustainability: "sustainability",
-};
-
-function storyFilters(post) {
-  return Array.from(new Set([post.category, ...(post.tags ?? [])]))
-    .map((tag) => storyFilterByCategory[tag])
-    .filter(Boolean)
-    .join(" ");
-}
-
 export default function HomePage() {
-  const storyCards = blogPosts.slice(0, 4);
-
   return (
     <>
       <div>
@@ -1117,7 +1100,7 @@ export default function HomePage() {
                       </div>
                     </SmartLink>
                     <SmartLink
-                      href="https://play.google.com/store/apps/details?id=app.zvolta.android"
+                      href="https://play.google.com/store/apps/details?id=com.zvolta.app"
                       className="store-btn group bg-zinc-900 border-zinc-700 hover:bg-white hover:border-white 3xl:px-8 3xl:py-4 rounded-full"
                     >
                       <i className="bi bi-google-play text-2xl 3xl:text-3xl group-hover:text-black transition-colors" />
@@ -1386,34 +1369,103 @@ export default function HomePage() {
                   id="stories-track"
                   className="flex gap-4 3xl:gap-8 w-fit pl-4 md:pl-8 pr-8 items-center h-auto"
                 >
-                  {storyCards.map((post) => (
-                    <SmartLink
-                      href={`/blogs/${post.slug}`}
-                      className="story-card group relative min-w-[280px] md:min-w-[320px] 3xl:min-w-[450px] h-[350px] md:h-[380px] 3xl:h-[550px] rounded-[1.5rem] overflow-hidden cursor-pointer border border-gray-100 shadow-md shadow-gray-200/50"
-                      data-category={storyFilters(post)}
-                      key={post.id}
-                    >
-                      <img
-                        src={post.cardImage}
-                        alt={post.title}
-                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
-                      <div className="absolute inset-0 p-6 3xl:p-10 flex flex-col justify-end text-white">
-                        <div className="mb-2">
-                          <span className="text-[9px] 3xl:text-xs uppercase tracking-widest bg-emerald-500/80 backdrop-blur-md px-2 py-1 rounded-full border border-emerald-400/20">
-                            {post.category}
-                          </span>
-                        </div>
-                        <h3 className="text-xl 3xl:text-3xl font-bold leading-tight mb-1">
-                          {post.title}
-                        </h3>
-                        <p className="text-xs 3xl:text-base text-gray-300 line-clamp-2">
-                          {post.excerpt}
-                        </p>
+                  <div
+                    className="story-card group relative min-w-[280px] md:min-w-[320px] 3xl:min-w-[450px] h-[350px] md:h-[380px] 3xl:h-[550px] rounded-[1.5rem] overflow-hidden cursor-pointer border border-gray-100 shadow-md shadow-gray-200/50"
+                    data-category="ev-users impact"
+                  >
+                    <img
+                      src="https://placehold.co/400x600/18181b/ffffff?text=Urban+Living"
+                      alt="EV User Story"
+                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
+                    <div className="absolute inset-0 p-6 3xl:p-10 flex flex-col justify-end text-white">
+                      <div className="mb-2">
+                        <span className="text-[9px] 3xl:text-xs uppercase tracking-widest bg-white/20 backdrop-blur-md px-2 py-1 rounded-full border border-white/10">
+                          EV Users
+                        </span>
                       </div>
-                    </SmartLink>
-                  ))}
+                      <h3 className="text-xl 3xl:text-3xl font-bold leading-tight mb-1">
+                        The Urban Commuter
+                      </h3>
+                      <p className="text-xs 3xl:text-base text-gray-300 line-clamp-2">
+                        How Sarah switched to electric without a home charger.
+                      </p>
+                    </div>
+                  </div>
+                  <div
+                    className="story-card group relative min-w-[280px] md:min-w-[320px] 3xl:min-w-[450px] h-[350px] md:h-[380px] 3xl:h-[550px] rounded-[1.5rem] overflow-hidden cursor-pointer border border-gray-100 shadow-md shadow-gray-200/50"
+                    data-category="hosts places"
+                  >
+                    <img
+                      src="https://placehold.co/400x600/064e3b/ffffff?text=Green+Plaza"
+                      alt="Host Story"
+                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
+                    <div className="absolute inset-0 p-6 3xl:p-10 flex flex-col justify-end text-white">
+                      <div className="mb-2">
+                        <span className="text-[9px] 3xl:text-xs uppercase tracking-widest bg-emerald-500/80 backdrop-blur-md px-2 py-1 rounded-full border border-emerald-400/20">
+                          Hosts
+                        </span>
+                      </div>
+                      <h3 className="text-xl 3xl:text-3xl font-bold leading-tight mb-1">
+                        The Green Plaza Hotel
+                      </h3>
+                      <p className="text-xs 3xl:text-base text-gray-300 line-clamp-2">
+                        Attracting new guests with seamless destination
+                        charging.
+                      </p>
+                    </div>
+                  </div>
+                  <div
+                    className="story-card group relative min-w-[280px] md:min-w-[320px] 3xl:min-w-[450px] h-[350px] md:h-[380px] 3xl:h-[550px] rounded-[1.5rem] overflow-hidden cursor-pointer border border-gray-100 shadow-md shadow-gray-200/50"
+                    data-category="operators sustainability"
+                  >
+                    <img
+                      src="https://placehold.co/400x600/3f3f46/ffffff?text=Fleet+Ops"
+                      alt="Operator Story"
+                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
+                    <div className="absolute inset-0 p-6 3xl:p-10 flex flex-col justify-end text-white">
+                      <div className="mb-2">
+                        <span className="text-[9px] 3xl:text-xs uppercase tracking-widest bg-blue-500/80 backdrop-blur-md px-2 py-1 rounded-full border border-blue-400/20">
+                          Operators
+                        </span>
+                      </div>
+                      <h3 className="text-xl 3xl:text-3xl font-bold leading-tight mb-1">
+                        City Fleet Systems
+                      </h3>
+                      <p className="text-xs 3xl:text-base text-gray-300 line-clamp-2">
+                        Managing 500+ chargers with 99.9% uptime.
+                      </p>
+                    </div>
+                  </div>
+                  <div
+                    className="story-card group relative min-w-[280px] md:min-w-[320px] 3xl:min-w-[450px] h-[350px] md:h-[380px] 3xl:h-[550px] rounded-[1.5rem] overflow-hidden cursor-pointer border border-gray-100 shadow-md shadow-gray-200/50"
+                    data-category="sustainability impact"
+                  >
+                    <img
+                      src="https://placehold.co/400x600/14532d/ffffff?text=Reforest"
+                      alt="Sustainability Story"
+                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
+                    <div className="absolute inset-0 p-6 3xl:p-10 flex flex-col justify-end text-white">
+                      <div className="mb-2">
+                        <span className="text-[9px] 3xl:text-xs uppercase tracking-widest bg-lime-500/80 text-black backdrop-blur-md px-2 py-1 rounded-full border border-lime-400/20">
+                          Sustainability
+                        </span>
+                      </div>
+                      <h3 className="text-xl 3xl:text-3xl font-bold leading-tight mb-1">
+                        Carbon Zero Project
+                      </h3>
+                      <p className="text-xs 3xl:text-base text-gray-300 line-clamp-2">
+                        Offsetting emissions one kilowatt at a time.
+                      </p>
+                    </div>
+                  </div>
                 </div>
                 <div className="max-w-[1400px] 3xl:max-w-[2000px] mx-auto px-4 md:px-8 mt-8 shrink-0 z-10">
                   <div className="flex justify-center items-center gap-3 group/explore cursor-pointer">

@@ -1,0 +1,53 @@
+.image-skeleton-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  display: block;
+  overflow: hidden;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.image-skeleton-overlay--light {
+  background: #dfe4e1;
+  --image-skeleton-highlight: rgba(255, 255, 255, 0.72);
+}
+
+.image-skeleton-overlay--dark {
+  background: #181c1a;
+  --image-skeleton-highlight: rgba(255, 255, 255, 0.09);
+}
+
+.image-skeleton-overlay::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background: linear-gradient(
+    100deg,
+    transparent 20%,
+    var(--image-skeleton-highlight) 50%,
+    transparent 80%
+  );
+  transform: translateX(-100%);
+  animation: image-skeleton-shimmer 1.35s ease-in-out infinite;
+}
+
+.image-skeleton-target:not(.is-loaded) {
+  opacity: 0 !important;
+}
+
+.image-skeleton-target.is-loaded {
+  transition: opacity 0.3s ease;
+}
+
+@keyframes image-skeleton-shimmer {
+  to {
+    transform: translateX(100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .image-skeleton-overlay::after {
+    animation: none;
+  }
+}

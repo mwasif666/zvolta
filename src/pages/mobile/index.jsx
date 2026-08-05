@@ -1,6 +1,6 @@
 import styles from "./page.module.css";
 import pageData from "../../data/pages/mobile/pageData";
-import PageView from "../../components/pages/MobilePage.jsx";
+import PageView from "../../components/pages/AppstorePage.jsx";
 
 void styles;
 

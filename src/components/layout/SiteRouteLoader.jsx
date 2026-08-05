@@ -5,7 +5,11 @@ const EXIT_DURATION_MS = 450;
 let hasShownSiteLoader = false;
 
 export function SiteRouteLoader() {
-  const shouldShowLoader = !hasShownSiteLoader;
+  // Keep this decision stable for the component's whole lifetime. Reading the
+  // module flag on every render used to flip this value after the first timer
+  // update, which made React run the effect cleanup and cancel the remaining
+  // exit timers. The loader would then stay at "LOADING ASSETS..." forever.
+  const [shouldShowLoader] = useState(() => !hasShownSiteLoader);
   const [loaderState, setLoaderState] = useState({
     isMounted: shouldShowLoader,
     isExiting: false,

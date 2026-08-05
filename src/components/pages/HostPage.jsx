@@ -2226,6 +2226,14 @@ export default function HostPage() {
           backdrop-filter: blur(16px);
         }
 
+        .host-hero-feature {
+          position: relative;
+          display: flex;
+          min-height: 84px;
+          align-items: center;
+          gap: 16px;
+          padding: 18px 24px;
+        }
 
         .host-hero-feature + .host-hero-feature::before {
           content: '';

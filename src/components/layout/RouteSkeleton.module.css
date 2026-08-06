@@ -1,0 +1,165 @@
+.skeleton {
+  min-height: 100svh;
+  width: 100%;
+  overflow: clip;
+  background:
+    radial-gradient(circle at 78% 14%, rgb(22 163 74 / 14%), transparent 32%),
+    linear-gradient(180deg, #080a09 0%, #030504 100%);
+  color: white;
+}
+
+.container {
+  width: min(100%, 1400px);
+  margin-inline: auto;
+  padding: clamp(9rem, 16vh, 13rem) clamp(1.25rem, 5vw, 5rem) 6rem;
+}
+
+.shimmer {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgb(255 255 255 / 5%);
+  background: rgb(255 255 255 / 7%);
+}
+
+.shimmer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  translate: -110% 0;
+  background: linear-gradient(
+    100deg,
+    transparent 15%,
+    rgb(255 255 255 / 13%) 45%,
+    transparent 75%
+  );
+  animation: route-skeleton-shimmer 1.35s ease-in-out infinite;
+}
+
+.eyebrow {
+  width: 11rem;
+  height: 2rem;
+  border-radius: 999px;
+}
+
+.title,
+.titleShort {
+  height: clamp(3rem, 6.4vw, 5.5rem);
+  border-radius: 0.8rem;
+}
+
+.title {
+  width: min(82%, 58rem);
+  margin-top: 2rem;
+}
+
+.titleShort {
+  width: min(60%, 39rem);
+  margin-top: 0.8rem;
+}
+
+.copy,
+.copyShort {
+  height: 1.1rem;
+  border-radius: 999px;
+}
+
+.copy {
+  width: min(70%, 45rem);
+  margin-top: 2.25rem;
+}
+
+.copyShort {
+  width: min(48%, 31rem);
+  margin-top: 0.75rem;
+}
+
+.button {
+  width: 12rem;
+  height: 3.75rem;
+  margin-top: 2.4rem;
+  border-radius: 0.8rem;
+  background: rgb(22 163 74 / 24%);
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+  margin-top: 5rem;
+}
+
+.card {
+  min-width: 0;
+  padding: 1rem;
+  border: 1px solid rgb(255 255 255 / 8%);
+  border-radius: 1.25rem;
+  background: rgb(255 255 255 / 3%);
+}
+
+.cardMedia {
+  aspect-ratio: 16 / 10;
+  border-radius: 0.9rem;
+}
+
+.cardTitle {
+  width: 72%;
+  height: 1.5rem;
+  margin-top: 1.25rem;
+  border-radius: 999px;
+}
+
+.cardCopy {
+  width: 92%;
+  height: 0.85rem;
+  margin-top: 0.8rem;
+  border-radius: 999px;
+}
+
+.screenReaderText {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@keyframes route-skeleton-shimmer {
+  to {
+    translate: 110% 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .container {
+    padding-top: 8.5rem;
+  }
+
+  .title {
+    width: 100%;
+  }
+
+  .titleShort,
+  .copy,
+  .copyShort {
+    width: 78%;
+  }
+
+  .cards {
+    grid-template-columns: 1fr;
+    margin-top: 3.5rem;
+  }
+
+  .card:nth-child(n + 2) {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shimmer::after {
+    animation: none;
+  }
+}

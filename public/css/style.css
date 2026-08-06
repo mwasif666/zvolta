@@ -5,13 +5,21 @@
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
 
 html {
+  width: 100%;
+  min-height: 100%;
+  overflow-x: clip;
+  overflow-y: auto;
   scroll-behavior: auto;
   scroll-padding-top: 20px;
 }
 
 body {
   font-family: "Inter Tight", sans-serif;
-  overflow-x: hidden;
+  width: 100%;
+  min-width: 0;
+  min-height: 100%;
+  overflow-x: clip;
+  overflow-y: visible;
   margin: 0;
   padding: 0;
   background-color: #0a0a0a;

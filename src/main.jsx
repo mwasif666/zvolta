@@ -4,6 +4,7 @@ import { HelmetProvider } from "react-helmet-async";
 import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import "./index.css";
 import { SiteLayout } from "./components/SiteLayout";
+import { RouteSkeleton } from "./components/layout/RouteSkeleton";
 import { PageSeo } from "./components/seo/PageSeo";
 import { routeEntries } from "./routes";
 import { useLegacyPageRuntime } from "./lib/legacy-page-runtime";
@@ -155,15 +156,11 @@ function ScrollController() {
   return null;
 }
 
-function PageLoaderFallback() {
-  return null;
-}
-
 function RoutedPage({ loadPage, pageId, meta }) {
   const PageComponent = useMemo(() => lazy(loadPage), [loadPage]);
 
   return (
-    <Suspense fallback={<PageLoaderFallback />}>
+    <Suspense fallback={<RouteSkeleton />}>
       <MountedPage pageId={pageId} meta={meta} PageComponent={PageComponent} />
     </Suspense>
   );

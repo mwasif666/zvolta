@@ -1,2 +1,23 @@
-.page {
+/* Page styles are global by design; importing this CSS Module scopes its loading to the route chunk. */
+:global(html),
+:global(body) {
+  overflow-x: hidden;
+  background-color: #0a0a0a;
+}
+:global(.no-scrollbar::-webkit-scrollbar) {
+  display: none;
+}
+:global(.no-scrollbar) {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Loader specific utilities */
+:global(#loader-blind-top) {
+  transform-origin: top;
+  will-change: transform;
+}
+:global(#loader-blind-bottom) {
+  transform-origin: bottom;
+  will-change: transform;
 }

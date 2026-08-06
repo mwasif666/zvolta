@@ -1,2 +1,60 @@
-.page {
+/* Page styles are global by design; importing this CSS Module scopes its loading to the route chunk. */
+:global(html) {
+  scroll-behavior: auto;
+}
+
+:global(.steps-container::before) {
+  content: "";
+  position: absolute;
+  top: 56px;
+  left: 10%;
+  right: 10%;
+  height: 2px;
+  background-image: linear-gradient(to right, #d1d5db 50%, transparent 50%);
+  background-size: 20px 2px;
+  background-repeat: repeat-x;
+  z-index: 0;
+}
+:global(.step-card) {
+  position: relative;
+  z-index: 1;
+}
+
+:global([data-scroll-animate]),
+:global([data-load-animate]) {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.6s ease-out,
+    transform 0.6s ease-out;
+}
+:global(.is-visible) {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Web Orbit: Dynamic Navbar Styles */
+:global(#nav-container) {
+  /* This is the default state (at the top of the page) */
+  transition:
+    background-color 0.3s ease-in-out,
+    border-color 0.3s ease-in-out,
+    box-shadow 0.3s ease-in-out;
+  background-color: transparent;
+  border-color: transparent;
+  box-shadow: none;
+}
+:global(header.scrolled #nav-container) {
+  /* This state is applied on scroll */
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(16px);
+  --tw-shadow:
+    0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored:
+    0 10px 15px -3px var(--tw-shadow-color),
+    0 4px 6px -4px var(--tw-shadow-color);
+  box-shadow:
+    var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000),
+    var(--tw-shadow);
+  border-color: rgba(229, 231, 235, 0.6);
 }

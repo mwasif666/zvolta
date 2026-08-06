@@ -1,9 +1,6 @@
-import { Link, useLocation } from "react-router-dom";
-import { PageSeo } from "../seo/PageSeo";
-
+import { Link, PageSeo, useLocation } from "./NotFoundPage.shared.jsx";
 export default function NotFoundPage() {
   const { pathname } = useLocation();
-
   return (
     <section className="flex min-h-[75vh] items-center justify-center overflow-hidden bg-black px-6 py-32 text-center text-white">
       <PageSeo

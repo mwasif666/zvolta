@@ -1,5 +1,4 @@
-import RoiCalculatorSection from "./RoiCalculatorSection";
-
+import { RoiCalculatorSection } from "./RoiCalculatorPage.shared.jsx";
 export default function RoiCalculatorPage() {
   return <RoiCalculatorSection />;
 }

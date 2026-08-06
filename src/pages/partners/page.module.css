@@ -1,2 +1,38 @@
-.page {
+/* Page styles are global by design; importing this CSS Module scopes its loading to the route chunk. */
+
+:global(.partners-page) {
+  background: #0b0b0b;
+  color: #ffffff;
+  letter-spacing: 0;
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+:global(.partners-container) {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+:global(.partners-section) {
+  padding: 104px 0;
+  border-bottom: 1px solid #1f1f1f;
+}
+
+:global(.partners-story-scroll) {
+  scrollbar-width: none;
+}
+
+:global(.partners-story-scroll::-webkit-scrollbar) {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  :global(.partners-container) {
+    padding: 0 18px;
+  }
+
+  :global(.partners-section) {
+    padding: 76px 0;
+  }
 }

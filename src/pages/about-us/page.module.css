@@ -1,2 +1,41 @@
-.page {
+/* Page styles are global by design; importing this CSS Module scopes its loading to the route chunk. */
+
+:global(.about-page__column-track) {
+  animation: about-column-up 28s linear infinite;
+}
+
+:global(.about-page__column--reverse .about-page__column-track) {
+  animation-name: about-column-down;
+}
+
+:global(.about-page__pill-row) {
+  animation: about-pill-slide 20s linear infinite;
+  width: max-content;
+}
+
+@keyframes about-column-up {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(calc(-50% - 0.5rem));
+  }
+}
+
+@keyframes about-column-down {
+  0% {
+    transform: translateY(calc(-50% - 0.5rem));
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes about-pill-slide {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }

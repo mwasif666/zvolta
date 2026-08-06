@@ -1,0 +1,36 @@
+/* Page styles are global by design; importing this CSS Module scopes its loading to the route chunk. */
+:global(body) {
+  background-color: #0a0a0a;
+}
+:global(.glass-panel) {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+:global(.no-scrollbar::-webkit-scrollbar) {
+  display: none;
+}
+:global(.no-scrollbar) {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* GRADIENT FADE MASK FOR CAROUSEL */
+:global(.carousel-mask) {
+  /* Fades out the left and right edges (15% from each side) */
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 15%,
+    black 85%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 15%,
+    black 85%,
+    transparent 100%
+  );
+}

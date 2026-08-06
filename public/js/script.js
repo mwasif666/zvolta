@@ -14,172 +14,36 @@ document.addEventListener("DOMContentLoaded", function () {
   const dynamicLogo = document.getElementById("dynamic-logo");
   const dynamicSidebar = document.getElementById("dynamic-sidebar-btn");
 
-  // =========================================
-  // 1. FINAL LOADER: LOGIC BASED (SMART)
-  // =========================================
-  const loaderElement = document.getElementById("custom-loader");
-  const blindTop = document.getElementById("loader-blind-top");
-  const blindBottom = document.getElementById("loader-blind-bottom");
-  const loaderContent = document.getElementById("loader-content");
-  const loaderBar = document.getElementById("loader-bar");
-  const loaderBarContainer = document.getElementById("loader-bar-container");
-  const loaderStatus = document.getElementById("loader-status");
-  const loaderStatusContainer = document.getElementById(
-    "loader-status-container",
-  );
-  const loaderLogo = document.getElementById("loader-logo");
-  const loaderGlow = document.getElementById("loader-glow");
-
-  // Select Hero Elements
+  // The shared React layout owns the only site loader. Page animations begin
+  // immediately so legacy loader timelines cannot block route scrolling.
   const pageContent = document.querySelector("main");
   const heroElements = document.querySelectorAll(
     "#hero-section h1, #hero-section p, #hero-section .flex",
   );
   const heroBg = document.querySelector("#hero-section img");
 
-  // A. Initial States
-  gsap.set(pageContent, { autoAlpha: 1 });
-  gsap.set(heroElements, { y: 40, opacity: 0 });
-  if (heroBg) gsap.set(heroBg, { scale: 1.1 });
-
-  // Idle Breathing Animation
-  const loaderPulseTween = gsap.to(loaderLogo, {
-    scale: 1.05,
-    opacity: 0.8,
-    duration: 1.5,
-    repeat: -1,
-    yoyo: true,
-    ease: "sine.inOut",
-  });
-
-  // B. Continuous "Trickle" Progress (Never Freezes)
-  const trickleTween = gsap.to(loaderBar, {
-    width: "99%",
-    duration: LOADER_INIT_SECONDS,
-    ease: "expo.out",
-    onUpdate: function () {
-      const prog = this.progress();
-      if (loaderStatus) {
-        if (prog < 0.2) loaderStatus.innerText = "INITIALIZING...";
-        else if (prog < 0.5) loaderStatus.innerText = "LOADING ASSETS...";
-        else if (prog < 0.8) loaderStatus.innerText = "PREPARING...";
-        else loaderStatus.innerText = "ALMOST THERE...";
-      }
-    },
-  });
-
-  // C. Wait for Real Page Load
-  const criticalAssetsLoaded = new Promise(async (resolve) => {
-    try {
-      await document.fonts.ready;
-    } catch (e) {}
-    const criticalImages = document.querySelectorAll(
-      'img[data-critical="true"]',
+  if (pageContent) gsap.set(pageContent, { autoAlpha: 1 });
+  if (heroBg) {
+    gsap.fromTo(
+      heroBg,
+      { scale: 1.04 },
+      { scale: 1, duration: 0.8, ease: "power2.out", clearProps: "transform" },
     );
-    const imagePromises = Array.from(criticalImages).map((img) => {
-      if (img.complete) return Promise.resolve();
-      return new Promise((resolve) => {
-        img.onload = resolve;
-        img.onerror = resolve;
-      });
-    });
-    await Promise.all(imagePromises);
-    resolve();
-  });
-
-  const loaderReady = Promise.race([
-    criticalAssetsLoaded,
-    new Promise((resolve) =>
-      gsap.delayedCall(LOADER_MAX_ASSET_WAIT_SECONDS, resolve),
-    ),
-  ]).catch(() => {});
-
-  // D. Execution Sequence
-  Promise.all([
-    loaderReady,
-    new Promise((resolve) => gsap.delayedCall(LOADER_INIT_SECONDS, resolve)),
-  ]).then(() => {
-    trickleTween.kill();
-    loaderPulseTween.kill();
-    gsap.set(loaderLogo, { scale: 1, opacity: 1, clearProps: "transform" });
-
-    const tl = gsap.timeline({
-      defaults: { ease: "power3.inOut" },
-      onStart: () => {
-        ScrollTrigger.refresh();
-        window.scrollTo(0, 0);
+  }
+  if (heroElements.length) {
+    gsap.fromTo(
+      heroElements,
+      { y: 28, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.65,
+        stagger: 0.08,
+        ease: "power2.out",
+        clearProps: "transform",
       },
-      onComplete: () => {
-        loaderElement.style.display = "none";
-        gsap.set(heroElements, { clearProps: "willChange" });
-        if (heroBg) gsap.set(heroBg, { clearProps: "willChange" });
-      },
-    });
-
-    tl.to(loaderBar, {
-      width: "100%",
-      duration: 0.12,
-      ease: "power2.out",
-      onStart: () => {
-        if (loaderStatus) loaderStatus.innerText = "READY";
-      },
-    })
-      .to(loaderBar, {
-        backgroundColor: "#16a34a",
-        boxShadow: "0 0 30px #16a34a",
-        duration: 0.1,
-      })
-      .to(
-        [loaderBarContainer, loaderStatusContainer, loaderGlow],
-        { opacity: 0, duration: 0.15 },
-        LOADER_READY_SECONDS - 0.45,
-      )
-      .to(
-        loaderLogo,
-        {
-          scale: 20,
-          duration: 0.45,
-          ease: "expo.in",
-          force3D: true,
-          overwrite: true,
-        },
-        LOADER_READY_SECONDS - 0.45,
-      )
-      .to(loaderLogo, { opacity: 0, duration: 0.15 }, LOADER_READY_SECONDS - 0.2)
-      .set(loaderContent, { opacity: 0 })
-      .to(
-        blindTop,
-        { scaleY: 0, duration: 0.35, ease: "power4.inOut" },
-        LOADER_READY_SECONDS - 0.35,
-      )
-      .to(blindBottom, { scaleY: 0, duration: 0.35, ease: "power4.inOut" }, "<")
-      .set(loaderElement, { display: "none" }, LOADER_READY_SECONDS);
-
-    if (heroBg) {
-      tl.to(
-        heroBg,
-        {
-          scale: 1,
-          duration: LOADER_READY_SECONDS,
-          ease: "power2.out",
-        },
-        0,
-      );
-    }
-
-    tl.to(
-        heroElements,
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.6,
-          stagger: 0.1,
-          ease: "out",
-          clearProps: "transform",
-        },
-        0.3,
-      );
-  });
+    );
+  }
 
   // =========================================
   // 2. HERO TEXT ANIMATION
@@ -307,19 +171,8 @@ document.addEventListener("DOMContentLoaded", function () {
     if (sbThumb) gsap.set(sbThumb, { autoAlpha: 0 });
   }
 
-  // =========================================
-  // 4. STICKY HERO
-  // =========================================
-  const heroSection = document.getElementById("hero-section");
-  if (heroSection) {
-    ScrollTrigger.create({
-      trigger: heroSection,
-      start: "top top",
-      end: "bottom top",
-      pin: true,
-      pinSpacing: false,
-    });
-  }
+  // Keep the hero in native document flow. Pinning it without spacing made the
+  // next section overlap the banner and created a stalled-feeling scroll zone.
 
   // =========================================
   // 6. DYNAMIC HOW IT WORKS (FIXED & CLIPPING SOLVED)

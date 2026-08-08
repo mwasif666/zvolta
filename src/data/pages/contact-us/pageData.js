@@ -7,6 +7,7 @@ const contactUsPageData = {
     title: "Contact ZVolta | EV Charging & Clean Mobility Solutions",
     description:
       "Get in touch with ZVolta for support, partnerships, or investment inquiries. Join us in powering Pakistan's clean transportation future.",
+    disableLegacyRuntime: true,
   },
 };
 

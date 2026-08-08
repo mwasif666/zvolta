@@ -1,0 +1,43 @@
+/*
+ * The document is the only vertical scroll owner. Several legacy route chunks
+ * still write body overflow styles (for loaders/menus that are hidden by the
+ * shared layout). If body/root become scroll containers as well as html, the
+ * browser renders duplicate scrollbars and wheel input can get trapped.
+ */
+html {
+  width: 100%;
+  min-height: 100%;
+  overflow-x: clip !important;
+  overflow-y: auto !important;
+  scrollbar-gutter: stable;
+}
+
+html:not(.site-scroll-locked) body,
+html:not(.site-scroll-locked) #root {
+  width: 100%;
+  min-width: 0;
+  min-height: 100%;
+  height: auto !important;
+  max-height: none !important;
+  overflow: visible !important;
+}
+
+html.site-scroll-locked,
+html.site-scroll-locked body {
+  overflow: hidden !important;
+}
+
+.site-main,
+.legacy-page-shell {
+  height: auto !important;
+  max-height: none !important;
+  overflow-y: visible !important;
+}
+
+/* Route CSS is lazy-loaded and therefore remains in the document once visited.
+ * Keep the shared ZVolta accents authoritative across modern pages.
+ */
+.career-page {
+  --career-primary: #16a34a !important;
+  --career-primary-soft: rgb(22 163 74 / 16%) !important;
+}

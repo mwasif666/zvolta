@@ -135,15 +135,24 @@ export function SiteFooter() {
         <div className="max-w-[1400px] mx-auto py-10 px-6 md:px-12">
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-y-8 gap-x-4 text-zinc-400 text-base font-medium">
             <div className="flex flex-col gap-2">
-              <Link to="/about-us" className="hover:text-white transition-colors">
+              <Link
+                to="/about-us"
+                className="hover:text-white transition-colors"
+              >
                 About
               </Link>
-              <Link to="/careers" className="hover:text-white transition-colors">
+              <Link
+                to="/careers"
+                className="hover:text-white transition-colors"
+              >
                 Careers
               </Link>
             </div>
             <div className="flex flex-col gap-2">
-              <Link to="/stories" className="hover:text-white transition-colors">
+              <Link
+                to="/stories"
+                className="hover:text-white transition-colors"
+              >
                 Stories
               </Link>
               <Link

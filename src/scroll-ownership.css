@@ -1,15 +1,14 @@
 /*
- * The document is the only vertical scroll owner. Several legacy route chunks
- * still write body overflow styles (for loaders/menus that are hidden by the
- * shared layout). If body/root become scroll containers as well as html, the
- * browser renders duplicate scrollbars and wheel input can get trapped.
+ * The viewport is the only vertical scroll owner. Legacy/global route CSS can
+ * remain loaded after navigation, so normalize every shared shell here instead
+ * of letting individual pages create their own document-sized scrollbars.
  */
 html {
   width: 100%;
   min-height: 100%;
   overflow-x: clip !important;
   overflow-y: auto !important;
-  scrollbar-gutter: stable;
+  scrollbar-gutter: auto !important;
 }
 
 html:not(:has(#site-mobile-menu)) body,
@@ -19,7 +18,8 @@ html:not(:has(#site-mobile-menu)) #root {
   min-height: 100%;
   height: auto !important;
   max-height: none !important;
-  overflow: visible !important;
+  overflow-x: clip !important;
+  overflow-y: visible !important;
 }
 
 html:has(#site-mobile-menu),
@@ -29,9 +29,34 @@ html:has(#site-mobile-menu) body {
 
 .site-main,
 .legacy-page-shell {
+  width: 100%;
+  min-width: 0;
+  height: auto !important;
+  max-height: none !important;
+  overflow-x: clip !important;
+  overflow-y: visible !important;
+}
+
+/* Many converted pages use overflow-x-hidden on their outermost wrapper. Per
+ * the CSS overflow rules that makes the other axis compute to auto, which can
+ * create a second full-height scrollbar. Keep those route roots in normal
+ * document flow while still clipping horizontal artwork.
+ */
+.legacy-page-shell > .overflow-x-hidden,
+.legacy-page-shell > .overflow-x-clip,
+.legacy-page-shell > [class*="-page"] {
   height: auto !important;
   max-height: none !important;
   overflow-y: visible !important;
+}
+
+/* The old GSAP virtual scrollbar is obsolete now that the site uses native
+ * document scrolling. If legacy markup for it is present on any route, never
+ * render it beside the browser scrollbar.
+ */
+#virtual-scrollbar-track,
+#virtual-scrollbar-thumb {
+  display: none !important;
 }
 
 /* Route CSS is lazy-loaded and therefore remains in the document once visited.

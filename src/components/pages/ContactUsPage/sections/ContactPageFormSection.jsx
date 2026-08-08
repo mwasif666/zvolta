@@ -16,7 +16,7 @@ const visuallyHiddenLabelStyle = {
   border: 0,
 };
 
-const fieldClassName = "placeholder:text-white/55 placeholder:opacity-100";
+const fieldClassName = "placeholder:text-white/60 placeholder:opacity-100";
 
 export function ContactPageFormSection({
   handleSubmit,

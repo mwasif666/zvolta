@@ -297,6 +297,11 @@ function SiteHeader() {
   }, [isMenuMounted]);
 
   useEffect(() => {
+    clearCloseTimer();
+    setIsMobileMenuOpen(false);
+    setIsMenuMounted(false);
+    setIsMenuClosing(false);
+    document.body.style.overflow = "";
     setIsHeaderVisible(true);
     lastScrollYRef.current = window.scrollY;
   }, [pathname]);

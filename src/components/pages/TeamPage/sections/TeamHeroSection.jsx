@@ -2,10 +2,10 @@ import { PrimaryButton, teamMembers } from "../../TeamPage.shared.jsx";
 export function TeamHeroSection() {
   return (
     <section className="relative overflow-hidden border-b border-[#1F1F1F] pt-32 md:pt-40">
-      <div className="pointer-events-none absolute left-1/2 top-20 h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-[#00E5A8]/8 blur-[120px]" />
+      <div className="pointer-events-none absolute left-1/2 top-20 h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-[#16a34a]/8 blur-[120px]" />
       <div className="team-container relative grid min-h-[calc(100vh-120px)] gap-14 pb-24 lg:grid-cols-[0.92fr_0.88fr] lg:items-center">
         <div className="team-hero-copy max-w-3xl">
-          <p className="text-xs font-semibold uppercase text-[#00E5A8]">
+          <p className="text-xs font-semibold uppercase text-[#16a34a]">
             Zvolta team
           </p>
           <h1 className="mt-5 text-[42px] font-semibold leading-[1.04] text-white md:text-[62px]">

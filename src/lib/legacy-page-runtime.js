@@ -4,6 +4,15 @@ import { ensureGsapGlobals } from "./gsap-globals";
 
 const scriptSourceCache = new Map();
 
+function hasLegacyPageScripts(pageId) {
+  const pageScripts = legacyPageScripts[pageId];
+
+  return Boolean(
+    pageScripts &&
+      (pageScripts.externalScripts.length > 0 || pageScripts.inlineScripts.length > 0),
+  );
+}
+
 function attachInlineDomHandlers() {
   const cleanups = [];
   const elements = document.querySelectorAll("*");
@@ -320,7 +329,7 @@ function createRuntimeTracker() {
 
 export function useLegacyPageRuntime(pageId, enabled = true) {
   useLayoutEffect(() => {
-    if (!enabled) {
+    if (!enabled || !hasLegacyPageScripts(pageId)) {
       return undefined;
     }
 

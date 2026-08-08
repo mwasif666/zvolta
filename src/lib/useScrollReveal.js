@@ -11,6 +11,8 @@ export function useScrollReveal(enabled, pathname) {
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     ).matches;
+    let scanFrame = 0;
+    let mutationTarget = null;
 
     const io = new IntersectionObserver(
       (entries) => {
@@ -26,7 +28,7 @@ export function useScrollReveal(enabled, pathname) {
     );
 
     const observe = (el) => {
-      if (observed.has(el)) {
+      if (animatedElements.has(el)) {
         return;
       }
 
@@ -43,21 +45,50 @@ export function useScrollReveal(enabled, pathname) {
       io.observe(el);
     };
 
-    const scan = () => {
-      document
-        .querySelectorAll(
-          `.legacy-page-shell[data-route-key="${CSS.escape(pathname)}"] section:not([data-no-reveal]),
-         .legacy-page-shell[data-route-key="${CSS.escape(pathname)}"] .animate-section`,
-        )
-        .forEach(observe);
+    const routeSelector = `.legacy-page-shell[data-route-key="${CSS.escape(
+      pathname,
+    )}"]`;
+
+    const mo = new MutationObserver(() => {
+      if (scanFrame) {
+        return;
+      }
+
+      scanFrame = window.requestAnimationFrame(scan);
+    });
+
+    const connectMutationObserver = (target) => {
+      if (!target || mutationTarget === target) {
+        return;
+      }
+
+      mo.disconnect();
+      mutationTarget = target;
+      mo.observe(target, { childList: true, subtree: true });
     };
 
-    const mo = new MutationObserver(scan);
-    mo.observe(document.body, { childList: true, subtree: true });
-    const frame = window.requestAnimationFrame(scan);
+    function scan() {
+      scanFrame = 0;
+      const routeRoot = document.querySelector(routeSelector);
+
+      if (!routeRoot) {
+        connectMutationObserver(document.body);
+        return;
+      }
+
+      connectMutationObserver(routeRoot);
+      routeRoot
+        .querySelectorAll("section:not([data-no-reveal]), .animate-section")
+        .forEach(observe);
+    }
+
+    connectMutationObserver(document.body);
+    scanFrame = window.requestAnimationFrame(scan);
 
     return () => {
-      window.cancelAnimationFrame(frame);
+      if (scanFrame) {
+        window.cancelAnimationFrame(scanFrame);
+      }
       io.disconnect();
       mo.disconnect();
       animatedElements.forEach((element) => {

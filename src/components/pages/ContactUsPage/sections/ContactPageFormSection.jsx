@@ -3,6 +3,21 @@ import {
   FieldIcon,
   assetBase,
 } from "../../ContactUsPage.shared.jsx";
+
+const visuallyHiddenLabelStyle = {
+  position: "absolute",
+  width: "1px",
+  height: "1px",
+  padding: 0,
+  margin: "-1px",
+  overflow: "hidden",
+  clip: "rect(0, 0, 0, 0)",
+  whiteSpace: "nowrap",
+  border: 0,
+};
+
+const fieldClassName = "placeholder:text-white/55 placeholder:opacity-100";
+
 export function ContactPageFormSection({
   handleSubmit,
   resetFormState,
@@ -38,9 +53,12 @@ export function ContactPageFormSection({
                     id="first-name"
                     required
                     autoComplete="given-name"
-                    placeholder=" "
+                    placeholder="First Name*"
+                    className={fieldClassName}
                   />
-                  <label htmlFor="first-name">First Name*</label>
+                  <label htmlFor="first-name" style={visuallyHiddenLabelStyle}>
+                    First Name*
+                  </label>
                   <FieldIcon src={`${assetBase}/user-icon.svg`} alt="" />
                 </div>
 
@@ -51,9 +69,12 @@ export function ContactPageFormSection({
                     id="last-name"
                     required
                     autoComplete="family-name"
-                    placeholder=" "
+                    placeholder="Last Name*"
+                    className={fieldClassName}
                   />
-                  <label htmlFor="last-name">Last Name*</label>
+                  <label htmlFor="last-name" style={visuallyHiddenLabelStyle}>
+                    Last Name*
+                  </label>
                   <FieldIcon src={`${assetBase}/user-icon.svg`} alt="" />
                 </div>
 
@@ -64,9 +85,15 @@ export function ContactPageFormSection({
                     id="business-email"
                     required
                     autoComplete="email"
-                    placeholder=" "
+                    placeholder="Business Email*"
+                    className={fieldClassName}
                   />
-                  <label htmlFor="business-email">Business Email*</label>
+                  <label
+                    htmlFor="business-email"
+                    style={visuallyHiddenLabelStyle}
+                  >
+                    Business Email*
+                  </label>
                   <FieldIcon src={`${assetBase}/email-icon.svg`} alt="" />
                 </div>
 
@@ -77,9 +104,15 @@ export function ContactPageFormSection({
                     id="phone-number"
                     required
                     autoComplete="tel"
-                    placeholder=" "
+                    placeholder="Phone Number*"
+                    className={fieldClassName}
                   />
-                  <label htmlFor="phone-number">Phone Number*</label>
+                  <label
+                    htmlFor="phone-number"
+                    style={visuallyHiddenLabelStyle}
+                  >
+                    Phone Number*
+                  </label>
                   <FieldIcon src={`${assetBase}/phone-icon.svg`} alt="" />
                 </div>
 
@@ -89,9 +122,12 @@ export function ContactPageFormSection({
                     name="company-name"
                     id="company-name"
                     autoComplete="organization"
-                    placeholder=" "
+                    placeholder="Company Name"
+                    className={fieldClassName}
                   />
-                  <label htmlFor="company-name">Company Name</label>
+                  <label htmlFor="company-name" style={visuallyHiddenLabelStyle}>
+                    Company Name
+                  </label>
                   <FieldIcon src={`${assetBase}/company-icon.svg`} alt="" />
                 </div>
 
@@ -101,10 +137,16 @@ export function ContactPageFormSection({
                     name="how-can-we-help"
                     rows={5}
                     required
-                    placeholder=" "
+                    placeholder="How can we help?*"
+                    className={fieldClassName}
                     defaultValue=""
                   />
-                  <label htmlFor="how-can-we-help">How can we help?*</label>
+                  <label
+                    htmlFor="how-can-we-help"
+                    style={visuallyHiddenLabelStyle}
+                  >
+                    How can we help?*
+                  </label>
                   <FieldIcon src={`${assetBase}/message-icon.svg`} alt="" />
                 </div>
 

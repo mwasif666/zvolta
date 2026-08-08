@@ -62,28 +62,13 @@ function FooterLink({ href, children, className = "" }) {
   );
 }
 
-function scrollToPolicySection(sectionId, attempt = 0) {
-  const target = document.getElementById(sectionId);
-
-  if (target) {
-    target.style.scrollMarginTop = "112px";
-    target.scrollIntoView({ behavior: "auto", block: "start" });
-    return;
-  }
-
-  if (attempt < 18) {
-    window.setTimeout(() => scrollToPolicySection(sectionId, attempt + 1), 90);
-  }
-}
-
+// The router's ScrollController owns hash targets: it waits for the lazy policy
+// route to mount and keeps the section aligned while late assets reflow it.
 function PolicySectionLink({ sectionId, children }) {
   return (
     <Link
       to={`/policy#${sectionId}`}
       className="hover:text-white transition-colors"
-      onClick={() => {
-        window.requestAnimationFrame(() => scrollToPolicySection(sectionId));
-      }}
     >
       {children}
     </Link>

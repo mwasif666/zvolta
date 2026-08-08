@@ -41,12 +41,17 @@ html:has(#site-mobile-menu) body {
  * the CSS overflow rules that makes the other axis compute to auto, which can
  * create a second full-height scrollbar. Keep those route roots in normal
  * document flow while still clipping horizontal artwork.
+ *
+ * `overflow-x` must be forced to `clip` here as well: `hidden` on one axis
+ * re-resolves a `visible` sibling axis back to `auto`, so setting only
+ * `overflow-y: visible` leaves the second scrollbar in place.
  */
 .legacy-page-shell > .overflow-x-hidden,
 .legacy-page-shell > .overflow-x-clip,
 .legacy-page-shell > [class*="-page"] {
   height: auto !important;
   max-height: none !important;
+  overflow-x: clip !important;
   overflow-y: visible !important;
 }
 

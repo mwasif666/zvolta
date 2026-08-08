@@ -12,8 +12,15 @@ import { useLegacyPageRuntime } from "./lib/legacy-page-runtime";
 import { useRouteAnimationRefresh } from "./hooks/useRouteAnimationRefresh";
 
 const ROUTE_SKELETON_MIN_MS = 220;
+// Clearance for the floating nav pill so a linked section heading is never
+// parked underneath it.
+const HASH_SCROLL_OFFSET = 104;
+// Routes are lazy-loaded and their imagery keeps reflowing after mount, so the
+// hash target is tracked until its offset holds still rather than for a fixed
+// number of retries.
+const HASH_SCROLL_TIMEOUT_MS = 8000;
+const HASH_SCROLL_SETTLE_MS = 400;
 const nativeSetTimeout = window.setTimeout.bind(window);
-const nativeClearTimeout = window.clearTimeout.bind(window);
 
 function releaseGlobalScrollLock() {
   document.documentElement.classList.remove("site-scroll-locked");
@@ -39,6 +46,98 @@ function setDocumentScrollPosition(top) {
   document.documentElement.scrollTop = nextTop;
   document.body.scrollTop = nextTop;
   window.scrollTo({ top: nextTop, left: 0, behavior: "auto" });
+}
+
+function getHashTargetTop(hashId) {
+  const element = document.getElementById(hashId);
+
+  if (!element) {
+    return null;
+  }
+
+  return Math.max(
+    0,
+    element.getBoundingClientRect().top + window.scrollY - HASH_SCROLL_OFFSET,
+  );
+}
+
+function alignToHashTarget(hashId) {
+  const top = getHashTargetTop(hashId);
+
+  if (top === null) {
+    return false;
+  }
+
+  setDocumentScrollPosition(top);
+  window.ScrollTrigger?.refresh?.();
+  return true;
+}
+
+/**
+ * Keeps the viewport pinned to a hash target while the lazy route mounts and
+ * its late assets reflow the page, then stops as soon as the target offset has
+ * held still. Any real scroll intent from the reader cancels the tracking.
+ */
+function trackHashTarget(hashId) {
+  let cancelled = false;
+  let frame = 0;
+  let lastTop = null;
+  let stableSince = null;
+  const deadline = performance.now() + HASH_SCROLL_TIMEOUT_MS;
+
+  const step = () => {
+    if (cancelled) {
+      return;
+    }
+
+    const now = performance.now();
+    const top = getHashTargetTop(hashId);
+
+    if (top !== null) {
+      if (lastTop !== null && Math.abs(top - lastTop) < 1) {
+        stableSince = stableSince ?? now;
+      } else {
+        stableSince = null;
+      }
+
+      lastTop = top;
+      setDocumentScrollPosition(top);
+      window.ScrollTrigger?.refresh?.();
+
+      if (stableSince !== null && now - stableSince >= HASH_SCROLL_SETTLE_MS) {
+        return;
+      }
+    }
+
+    if (now >= deadline) {
+      return;
+    }
+
+    frame = window.requestAnimationFrame(step);
+  };
+
+  const cancel = () => {
+    cancelled = true;
+    window.cancelAnimationFrame(frame);
+  };
+
+  const intentEvents = ["wheel", "touchstart", "pointerdown", "keydown"];
+
+  intentEvents.forEach((eventName) => {
+    window.addEventListener(eventName, cancel, {
+      passive: eventName !== "keydown",
+      once: true,
+    });
+  });
+
+  frame = window.requestAnimationFrame(step);
+
+  return () => {
+    cancel();
+    intentEvents.forEach((eventName) => {
+      window.removeEventListener(eventName, cancel);
+    });
+  };
 }
 
 function loadNotFoundPage() {
@@ -72,56 +171,15 @@ function ScrollController() {
 
     if (location.hash) {
       const hashId = decodeURIComponent(location.hash.slice(1));
-      let hasScrolled = false;
-      let cancelledByUser = false;
 
-      const scrollToHashTarget = () => {
-        if (hasScrolled || cancelledByUser) {
-          return hasScrolled;
-        }
-
-        const element = document.getElementById(hashId);
-
-        if (!element) {
-          return false;
-        }
-
-        const top = element.getBoundingClientRect().top + window.scrollY;
-        scrollToPosition(top);
-        refreshScrollAnimations();
-        hasScrolled = true;
-        return true;
-      };
-
-      if (scrollToHashTarget()) {
-        return undefined;
+      // The target belongs to a route chunk that may still be loading. Land at
+      // the top of the new page first so the navigation is visible instead of
+      // leaving the reader parked on the previous page's footer offset.
+      if (!document.getElementById(hashId)) {
+        scrollToTop();
       }
 
-      const frame = window.requestAnimationFrame(scrollToHashTarget);
-      const timers = [80, 240, 600, 1200].map((delay) =>
-        nativeSetTimeout(scrollToHashTarget, delay),
-      );
-      const cancelRetriesForUser = () => {
-        cancelledByUser = true;
-        window.cancelAnimationFrame(frame);
-        timers.forEach((timer) => nativeClearTimeout(timer));
-      };
-      const intentEvents = ["wheel", "touchstart", "pointerdown", "keydown"];
-
-      intentEvents.forEach((eventName) => {
-        window.addEventListener(eventName, cancelRetriesForUser, {
-          passive: eventName !== "keydown",
-          once: true,
-        });
-      });
-
-      return () => {
-        window.cancelAnimationFrame(frame);
-        timers.forEach((timer) => nativeClearTimeout(timer));
-        intentEvents.forEach((eventName) => {
-          window.removeEventListener(eventName, cancelRetriesForUser);
-        });
-      };
+      return trackHashTarget(hashId);
     }
 
     scrollToTop();
@@ -137,21 +195,6 @@ function ScrollController() {
   }, [location.pathname, location.search, location.hash]);
 
   useEffect(() => {
-    const scrollToHash = (hash) => {
-      const hashId = decodeURIComponent(hash.replace(/^#/, ""));
-      const element = document.getElementById(hashId);
-
-      if (!element) {
-        return false;
-      }
-
-      releaseGlobalScrollLock();
-      const top = element.getBoundingClientRect().top + window.scrollY;
-      setDocumentScrollPosition(top);
-      window.ScrollTrigger?.refresh?.();
-      return true;
-    };
-
     const handleSamePageHashClick = (event) => {
       if (
         event.defaultPrevented ||
@@ -185,25 +228,21 @@ function ScrollController() {
 
       const nextLocation = `${url.pathname}${url.search}${url.hash}`;
       const currentLocation = `${window.location.pathname}${window.location.search}${window.location.hash}`;
+      const hashId = decodeURIComponent(url.hash.replace(/^#/, ""));
+
+      releaseGlobalScrollLock();
 
       if (nextLocation !== currentLocation) {
         window.history.pushState({}, "", nextLocation);
         window.dispatchEvent(new Event("popstate"));
+        // The location change re-runs ScrollController's effect, which owns
+        // tracking the target until the layout settles.
+        return;
       }
 
-      let hasScrolled = scrollToHash(url.hash);
-      const retryScroll = () => {
-        if (!hasScrolled) {
-          hasScrolled = scrollToHash(url.hash);
-        }
-      };
-
-      if (!hasScrolled) {
-        window.requestAnimationFrame(retryScroll);
-        [120, 360, 800].forEach((delay) =>
-          nativeSetTimeout(retryScroll, delay),
-        );
-      }
+      // Re-clicking the link for the section already in the URL leaves the
+      // location untouched, so scroll here instead.
+      alignToHashTarget(hashId);
     };
 
     document.addEventListener("click", handleSamePageHashClick, true);

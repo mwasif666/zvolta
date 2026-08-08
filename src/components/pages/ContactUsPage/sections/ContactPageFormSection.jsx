@@ -4,8 +4,6 @@ import {
   assetBase,
 } from "../../ContactUsPage.shared.jsx";
 
-const fieldClassName = "placeholder:text-white/60 placeholder:opacity-100";
-
 export function ContactPageFormSection({
   handleSubmit,
   resetFormState,
@@ -43,7 +41,6 @@ export function ContactPageFormSection({
                     autoComplete="given-name"
                     placeholder="First Name*"
                     aria-label="First Name"
-                    className={fieldClassName}
                   />
                   <FieldIcon src={`${assetBase}/user-icon.svg`} alt="" />
                 </div>
@@ -57,7 +54,6 @@ export function ContactPageFormSection({
                     autoComplete="family-name"
                     placeholder="Last Name*"
                     aria-label="Last Name"
-                    className={fieldClassName}
                   />
                   <FieldIcon src={`${assetBase}/user-icon.svg`} alt="" />
                 </div>
@@ -71,7 +67,6 @@ export function ContactPageFormSection({
                     autoComplete="email"
                     placeholder="Business Email*"
                     aria-label="Business Email"
-                    className={fieldClassName}
                   />
                   <FieldIcon src={`${assetBase}/email-icon.svg`} alt="" />
                 </div>
@@ -85,7 +80,6 @@ export function ContactPageFormSection({
                     autoComplete="tel"
                     placeholder="Phone Number*"
                     aria-label="Phone Number"
-                    className={fieldClassName}
                   />
                   <FieldIcon src={`${assetBase}/phone-icon.svg`} alt="" />
                 </div>
@@ -98,7 +92,6 @@ export function ContactPageFormSection({
                     autoComplete="organization"
                     placeholder="Company Name"
                     aria-label="Company Name"
-                    className={fieldClassName}
                   />
                   <FieldIcon src={`${assetBase}/company-icon.svg`} alt="" />
                 </div>
@@ -111,7 +104,6 @@ export function ContactPageFormSection({
                     required
                     placeholder="How can we help?*"
                     aria-label="How can we help?"
-                    className={fieldClassName}
                     defaultValue=""
                   />
                   <FieldIcon src={`${assetBase}/message-icon.svg`} alt="" />

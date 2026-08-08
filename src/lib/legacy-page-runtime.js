@@ -265,9 +265,8 @@ function createRuntimeTracker() {
   };
 
   const cleanup = () => {
-    // Scripts can create timelines in promises or delayed callbacks. Capture a
-    // final snapshot at unmount so those animations cannot leak into the next
-    // client-side route.
+    // Capture anything the legacy script created before cleanup, then restore
+    // shared browser APIs before we tear down page-specific resources.
     finalize();
     restorePatches();
 
@@ -342,15 +341,26 @@ export function useLegacyPageRuntime(pageId, enabled = true) {
 
         dispatchLegacyLifecycleEvents();
       } finally {
-        runtimeTracker.finalize();
-        window.requestAnimationFrame(() => {
-          if (!cancelled) {
-            globalThis.ScrollTrigger?.refresh?.();
-            window.dispatchEvent(
-              new CustomEvent("zvolta:page-ready", { detail: { pageId } }),
-            );
-          }
-        });
+        if (!cancelled) {
+          runtimeTracker.finalize();
+        }
+
+        // The tracker only needs to patch globals while the legacy scripts are
+        // being initialized. Leaving these patches active for the entire route
+        // causes React Router, Suspense and shared layout timers/listeners to be
+        // mistaken for legacy resources and removed on the next navigation.
+        runtimeTracker.restorePatches();
+
+        if (!cancelled) {
+          window.requestAnimationFrame(() => {
+            if (!cancelled) {
+              globalThis.ScrollTrigger?.refresh?.();
+              window.dispatchEvent(
+                new CustomEvent("zvolta:page-ready", { detail: { pageId } }),
+              );
+            }
+          });
+        }
       }
     };
 

@@ -1,7 +1,7 @@
 /* Page styles are global by design; importing this CSS Module scopes its loading to the route chunk. */
 
 :global(.team-page) {
-  background: #0b0b0b;
+  background: #080a09;
   color: #ffffff;
   letter-spacing: 0;
   max-width: 100vw;

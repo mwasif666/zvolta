@@ -10,6 +10,10 @@ import { routeEntries } from "./routes";
 import { useLegacyPageRuntime } from "./lib/legacy-page-runtime";
 import { useRouteAnimationRefresh } from "./hooks/useRouteAnimationRefresh";
 
+const ROUTE_SKELETON_MIN_MS = 220;
+const nativeSetTimeout = window.setTimeout.bind(window);
+const nativeClearTimeout = window.clearTimeout.bind(window);
+
 function loadNotFoundPage() {
   const notFoundRoute =
     routeEntries.find((entry) => entry.pageId === "404") ?? routeEntries[0];
@@ -35,12 +39,18 @@ function ScrollController() {
 
     const scrollToTop = () => {
       scrollToPosition(0, "auto");
-      refreshScrollAnimations();
     };
 
     if (location.hash) {
       const hashId = decodeURIComponent(location.hash.slice(1));
+      let hasScrolled = false;
+      let cancelledByUser = false;
+
       const scrollToHashTarget = () => {
+        if (hasScrolled || cancelledByUser) {
+          return hasScrolled;
+        }
+
         const element = document.getElementById(hashId);
 
         if (!element) {
@@ -50,37 +60,46 @@ function ScrollController() {
         const top = element.getBoundingClientRect().top + window.scrollY;
         scrollToPosition(top);
         refreshScrollAnimations();
+        hasScrolled = true;
         return true;
       };
 
       if (scrollToHashTarget()) {
-        return;
+        return undefined;
       }
 
       const frame = window.requestAnimationFrame(scrollToHashTarget);
-      const timers = [
-        window.setTimeout(scrollToHashTarget, 80),
-        window.setTimeout(scrollToHashTarget, 240),
-        window.setTimeout(scrollToHashTarget, 600),
-        window.setTimeout(scrollToHashTarget, 1200),
-      ];
+      const timers = [80, 240, 600, 1200].map((delay) =>
+        nativeSetTimeout(scrollToHashTarget, delay),
+      );
+      const cancelRetriesForUser = () => {
+        cancelledByUser = true;
+        window.cancelAnimationFrame(frame);
+        timers.forEach((timer) => nativeClearTimeout(timer));
+      };
+      const intentEvents = ["wheel", "touchstart", "pointerdown", "keydown"];
+
+      intentEvents.forEach((eventName) => {
+        window.addEventListener(eventName, cancelRetriesForUser, {
+          passive: eventName !== "keydown",
+          once: true,
+        });
+      });
 
       return () => {
         window.cancelAnimationFrame(frame);
-        timers.forEach((timer) => window.clearTimeout(timer));
+        timers.forEach((timer) => nativeClearTimeout(timer));
+        intentEvents.forEach((eventName) => {
+          window.removeEventListener(eventName, cancelRetriesForUser);
+        });
       };
     }
 
     scrollToTop();
-    const frame = window.requestAnimationFrame(scrollToTop);
-    const timers = [
-      window.setTimeout(scrollToTop, 80),
-      window.setTimeout(scrollToTop, 240),
-    ];
+    const frame = window.requestAnimationFrame(refreshScrollAnimations);
 
     return () => {
       window.cancelAnimationFrame(frame);
-      timers.forEach((timer) => window.clearTimeout(timer));
     };
   }, [location.pathname, location.search, location.hash]);
 
@@ -138,11 +157,18 @@ function ScrollController() {
         window.dispatchEvent(new Event("popstate"));
       }
 
-      if (!scrollToHash(url.hash)) {
-        window.requestAnimationFrame(() => scrollToHash(url.hash));
-        window.setTimeout(() => scrollToHash(url.hash), 120);
-        window.setTimeout(() => scrollToHash(url.hash), 360);
-        window.setTimeout(() => scrollToHash(url.hash), 800);
+      let hasScrolled = scrollToHash(url.hash);
+      const retryScroll = () => {
+        if (!hasScrolled) {
+          hasScrolled = scrollToHash(url.hash);
+        }
+      };
+
+      if (!hasScrolled) {
+        window.requestAnimationFrame(retryScroll);
+        [120, 360, 800].forEach((delay) =>
+          nativeSetTimeout(retryScroll, delay),
+        );
       }
     };
 
@@ -157,7 +183,22 @@ function ScrollController() {
 }
 
 function RoutedPage({ loadPage, pageId, meta }) {
-  const PageComponent = useMemo(() => lazy(loadPage), [loadPage]);
+  const PageComponent = useMemo(
+    () =>
+      lazy(async () => {
+        const prefersReducedMotion = window.matchMedia(
+          "(prefers-reduced-motion: reduce)",
+        ).matches;
+        const minimumDelay = prefersReducedMotion ? 0 : ROUTE_SKELETON_MIN_MS;
+        const [pageModule] = await Promise.all([
+          loadPage(),
+          new Promise((resolve) => nativeSetTimeout(resolve, minimumDelay)),
+        ]);
+
+        return pageModule;
+      }),
+    [loadPage],
+  );
 
   return (
     <Suspense fallback={<RouteSkeleton />}>

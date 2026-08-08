@@ -5,7 +5,7 @@ import { PrivacyPolicySection } from "./PolicyPage/sections/PrivacyPolicySection
 export default function PolicyPage() {
   return (
     <>
-      <div className="bg-white text-[#2a3b1e]">
+      <div className="policy-page bg-white text-[#2a3b1e]">
         <div className="gradient-blob-1" />
         <div className="gradient-blob-2" />
         <div className="gradient-blob-3" />

@@ -3,11 +3,13 @@ import { useEffect } from "react";
 export function useRouteAnimationRefresh(routeKey) {
   useEffect(() => {
     let cancelled = false;
+    let refreshFrame = 0;
     const timers = [];
-    const frames = [];
     const imageCleanups = [];
 
     const refresh = () => {
+      refreshFrame = 0;
+
       if (cancelled) {
         return;
       }
@@ -20,10 +22,18 @@ export function useRouteAnimationRefresh(routeKey) {
       );
     };
 
+    const requestRefresh = () => {
+      if (cancelled || refreshFrame) {
+        return;
+      }
+
+      refreshFrame = window.requestAnimationFrame(refresh);
+    };
+
     const scheduleRefresh = () => {
-      frames.push(window.requestAnimationFrame(refresh));
-      [80, 240, 600, 1200].forEach((delay) => {
-        timers.push(window.setTimeout(refresh, delay));
+      requestRefresh();
+      [180, 700].forEach((delay) => {
+        timers.push(window.setTimeout(requestRefresh, delay));
       });
     };
 
@@ -36,21 +46,23 @@ export function useRouteAnimationRefresh(routeKey) {
         return;
       }
 
-      image.addEventListener("load", refresh, { once: true });
-      image.addEventListener("error", refresh, { once: true });
+      image.addEventListener("load", requestRefresh, { once: true });
+      image.addEventListener("error", requestRefresh, { once: true });
       imageCleanups.push(() => {
-        image.removeEventListener("load", refresh);
-        image.removeEventListener("error", refresh);
+        image.removeEventListener("load", requestRefresh);
+        image.removeEventListener("error", requestRefresh);
       });
     });
 
-    document.fonts?.ready.then(refresh).catch(() => {});
+    document.fonts?.ready.then(requestRefresh).catch(() => {});
     window.addEventListener("zvolta:page-ready", scheduleRefresh);
     scheduleRefresh();
 
     return () => {
       cancelled = true;
-      frames.forEach((frame) => window.cancelAnimationFrame(frame));
+      if (refreshFrame) {
+        window.cancelAnimationFrame(refreshFrame);
+      }
       timers.forEach((timer) => window.clearTimeout(timer));
       imageCleanups.forEach((cleanup) => cleanup());
       window.removeEventListener("zvolta:page-ready", scheduleRefresh);

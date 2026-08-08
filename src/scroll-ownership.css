@@ -22,6 +22,17 @@ html:not(:has(#site-mobile-menu)) #root {
   overflow-y: visible !important;
 }
 
+/* Keep the application shell at least as tall as the viewport. Without this,
+ * short routes can finish before the viewport does, exposing the body's
+ * #0a0a0a background as a strip below the black site footer.
+ */
+#root {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
 html:has(#site-mobile-menu),
 html:has(#site-mobile-menu) body {
   overflow: hidden !important;
@@ -35,6 +46,14 @@ html:has(#site-mobile-menu) body {
   max-height: none !important;
   overflow-x: clip !important;
   overflow-y: visible !important;
+}
+
+.site-main {
+  flex: 1 0 auto;
+}
+
+.site-footer {
+  flex: 0 0 auto;
 }
 
 /* Many converted pages use overflow-x-hidden on their outermost wrapper. Per

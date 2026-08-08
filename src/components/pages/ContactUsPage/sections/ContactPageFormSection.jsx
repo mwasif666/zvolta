@@ -56,7 +56,10 @@ export function ContactPageFormSection({
                     placeholder="First Name*"
                     className={fieldClassName}
                   />
-                  <label htmlFor="first-name" style={visuallyHiddenLabelStyle}>
+                  <label
+                    htmlFor="first-name"
+                    style={visuallyHiddenLabelStyle}
+                  >
                     First Name*
                   </label>
                   <FieldIcon src={`${assetBase}/user-icon.svg`} alt="" />
@@ -72,7 +75,10 @@ export function ContactPageFormSection({
                     placeholder="Last Name*"
                     className={fieldClassName}
                   />
-                  <label htmlFor="last-name" style={visuallyHiddenLabelStyle}>
+                  <label
+                    htmlFor="last-name"
+                    style={visuallyHiddenLabelStyle}
+                  >
                     Last Name*
                   </label>
                   <FieldIcon src={`${assetBase}/user-icon.svg`} alt="" />
@@ -125,7 +131,10 @@ export function ContactPageFormSection({
                     placeholder="Company Name"
                     className={fieldClassName}
                   />
-                  <label htmlFor="company-name" style={visuallyHiddenLabelStyle}>
+                  <label
+                    htmlFor="company-name"
+                    style={visuallyHiddenLabelStyle}
+                  >
                     Company Name
                   </label>
                   <FieldIcon src={`${assetBase}/company-icon.svg`} alt="" />

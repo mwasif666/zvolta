@@ -151,7 +151,7 @@ function PrimaryButton({ href = CAREERS_LINK, children, className = "" }) {
   return (
     <SmartLink
       href={href}
-      className={`inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-[#00E5A8] px-5 py-3 text-sm font-semibold text-black transition duration-300 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-[#00E5A8]/45 ${className}`}
+      className={`inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-[#16a34a] px-5 py-3 text-sm font-semibold text-black transition duration-300 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-[#16a34a]/45 ${className}`}
     >
       {children}
       <Icon className="h-4 w-4" />
@@ -162,7 +162,7 @@ function SecondaryButton({ href = PARTNERS_LINK, children, className = "" }) {
   return (
     <SmartLink
       href={href}
-      className={`inline-flex min-h-12 items-center justify-center gap-2 rounded-lg border border-[#1F1F1F] bg-[#111111] px-5 py-3 text-sm font-semibold text-white transition duration-300 hover:scale-[1.02] hover:border-[#00E5A8]/50 focus:outline-none focus:ring-2 focus:ring-white/20 ${className}`}
+      className={`inline-flex min-h-12 items-center justify-center gap-2 rounded-lg border border-[#1F1F1F] bg-[#111111] px-5 py-3 text-sm font-semibold text-white transition duration-300 hover:scale-[1.02] hover:border-[#16a34a]/50 focus:outline-none focus:ring-2 focus:ring-white/20 ${className}`}
     >
       {children}
       <Icon className="h-4 w-4" />
@@ -182,7 +182,7 @@ function SectionIntro({ eyebrow, title, copy, centered = false }) {
       className={`team-reveal ${centered ? "mx-auto text-center" : ""} max-w-3xl`}
     >
       {eyebrow ? (
-        <p className="mb-4 text-xs font-semibold uppercase text-[#00E5A8]">
+        <p className="mb-4 text-xs font-semibold uppercase text-[#16a34a]">
           {eyebrow}
         </p>
       ) : null}
@@ -201,7 +201,7 @@ function SectionIntro({ eyebrow, title, copy, centered = false }) {
 }
 function MediaCard({ member, index }) {
   return (
-    <article className="team-card group rounded-lg border border-[#1F1F1F] bg-[#111111] p-4 transition duration-300 hover:-translate-y-1 hover:border-[#00E5A8]/40">
+    <article className="team-card group rounded-lg border border-[#1F1F1F] bg-[#111111] p-4 transition duration-300 hover:-translate-y-1 hover:border-[#16a34a]/40">
       <div
         className="relative aspect-[4/5] overflow-hidden rounded-lg border border-[#1F1F1F] bg-[#0B0B0B]"
         aria-label={`${member.name}, ${member.role}`}
@@ -214,7 +214,7 @@ function MediaCard({ member, index }) {
           />
         ) : (
           <div className="flex h-full flex-col justify-between p-5">
-            <span className="w-fit rounded-lg border border-[#1F1F1F] bg-[#111111] px-3 py-2 text-xs font-semibold text-[#00E5A8]">
+            <span className="w-fit rounded-lg border border-[#1F1F1F] bg-[#111111] px-3 py-2 text-xs font-semibold text-[#16a34a]">
               Team video
             </span>
             <div>
@@ -222,7 +222,7 @@ function MediaCard({ member, index }) {
                 {String(index + 1).padStart(2, "0")}
               </p>
               <div className="mt-5 h-2 rounded-full bg-white/10">
-                <div className="h-full w-2/3 rounded-full bg-[#00E5A8]" />
+                <div className="h-full w-2/3 rounded-full bg-[#16a34a]" />
               </div>
             </div>
           </div>
@@ -230,7 +230,7 @@ function MediaCard({ member, index }) {
       </div>
       <div className="pt-5">
         <p className="text-xl font-semibold text-white">{member.name}</p>
-        <p className="mt-1 text-sm font-semibold text-[#00E5A8]">
+        <p className="mt-1 text-sm font-semibold text-[#16a34a]">
           {member.role}
         </p>
         <p className="mt-4 text-sm leading-6 text-[#A1A1A1]">"{member.line}"</p>

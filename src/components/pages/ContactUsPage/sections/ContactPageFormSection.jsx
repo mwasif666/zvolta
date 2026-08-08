@@ -4,18 +4,6 @@ import {
   assetBase,
 } from "../../ContactUsPage.shared.jsx";
 
-const visuallyHiddenLabelStyle = {
-  position: "absolute",
-  width: "1px",
-  height: "1px",
-  padding: 0,
-  margin: "-1px",
-  overflow: "hidden",
-  clip: "rect(0, 0, 0, 0)",
-  whiteSpace: "nowrap",
-  border: 0,
-};
-
 const fieldClassName = "placeholder:text-white/60 placeholder:opacity-100";
 
 export function ContactPageFormSection({
@@ -54,14 +42,9 @@ export function ContactPageFormSection({
                     required
                     autoComplete="given-name"
                     placeholder="First Name*"
+                    aria-label="First Name"
                     className={fieldClassName}
                   />
-                  <label
-                    htmlFor="first-name"
-                    style={visuallyHiddenLabelStyle}
-                  >
-                    First Name*
-                  </label>
                   <FieldIcon src={`${assetBase}/user-icon.svg`} alt="" />
                 </div>
 
@@ -73,14 +56,9 @@ export function ContactPageFormSection({
                     required
                     autoComplete="family-name"
                     placeholder="Last Name*"
+                    aria-label="Last Name"
                     className={fieldClassName}
                   />
-                  <label
-                    htmlFor="last-name"
-                    style={visuallyHiddenLabelStyle}
-                  >
-                    Last Name*
-                  </label>
                   <FieldIcon src={`${assetBase}/user-icon.svg`} alt="" />
                 </div>
 
@@ -92,14 +70,9 @@ export function ContactPageFormSection({
                     required
                     autoComplete="email"
                     placeholder="Business Email*"
+                    aria-label="Business Email"
                     className={fieldClassName}
                   />
-                  <label
-                    htmlFor="business-email"
-                    style={visuallyHiddenLabelStyle}
-                  >
-                    Business Email*
-                  </label>
                   <FieldIcon src={`${assetBase}/email-icon.svg`} alt="" />
                 </div>
 
@@ -111,14 +84,9 @@ export function ContactPageFormSection({
                     required
                     autoComplete="tel"
                     placeholder="Phone Number*"
+                    aria-label="Phone Number"
                     className={fieldClassName}
                   />
-                  <label
-                    htmlFor="phone-number"
-                    style={visuallyHiddenLabelStyle}
-                  >
-                    Phone Number*
-                  </label>
                   <FieldIcon src={`${assetBase}/phone-icon.svg`} alt="" />
                 </div>
 
@@ -129,14 +97,9 @@ export function ContactPageFormSection({
                     id="company-name"
                     autoComplete="organization"
                     placeholder="Company Name"
+                    aria-label="Company Name"
                     className={fieldClassName}
                   />
-                  <label
-                    htmlFor="company-name"
-                    style={visuallyHiddenLabelStyle}
-                  >
-                    Company Name
-                  </label>
                   <FieldIcon src={`${assetBase}/company-icon.svg`} alt="" />
                 </div>
 
@@ -147,15 +110,10 @@ export function ContactPageFormSection({
                     rows={5}
                     required
                     placeholder="How can we help?*"
+                    aria-label="How can we help?"
                     className={fieldClassName}
                     defaultValue=""
                   />
-                  <label
-                    htmlFor="how-can-we-help"
-                    style={visuallyHiddenLabelStyle}
-                  >
-                    How can we help?*
-                  </label>
                   <FieldIcon src={`${assetBase}/message-icon.svg`} alt="" />
                 </div>
 

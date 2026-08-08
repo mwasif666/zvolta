@@ -1,8 +1,9 @@
-import { Suspense, lazy, useEffect, useMemo } from "react";
+import { Suspense, lazy, useEffect, useLayoutEffect, useMemo } from "react";
 import { createRoot } from "react-dom/client";
 import { HelmetProvider } from "react-helmet-async";
 import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import "./index.css";
+import "./scroll-ownership.css";
 import { SiteLayout } from "./components/SiteLayout";
 import { RouteSkeleton } from "./components/layout/RouteSkeleton";
 import { PageSeo } from "./components/seo/PageSeo";
@@ -14,6 +15,32 @@ const ROUTE_SKELETON_MIN_MS = 220;
 const nativeSetTimeout = window.setTimeout.bind(window);
 const nativeClearTimeout = window.clearTimeout.bind(window);
 
+function releaseGlobalScrollLock() {
+  document.documentElement.classList.remove("site-scroll-locked");
+  document.documentElement.style.removeProperty("overflow");
+  document.documentElement.style.removeProperty("overflow-y");
+  document.body.style.removeProperty("overflow");
+  document.body.style.removeProperty("overflow-y");
+  document.body.style.removeProperty("height");
+  document.body.classList.remove("is-scrolling");
+}
+
+function setDocumentScrollPosition(top) {
+  const nextTop = Math.max(0, Number(top) || 0);
+  const scrollingElement = document.scrollingElement;
+
+  if (scrollingElement) {
+    scrollingElement.scrollTop = nextTop;
+    scrollingElement.scrollLeft = 0;
+  }
+
+  // Legacy page CSS/scripts have historically made either html or body the
+  // scroll owner. Reset both as a defensive fallback while the route swaps.
+  document.documentElement.scrollTop = nextTop;
+  document.body.scrollTop = nextTop;
+  window.scrollTo({ top: nextTop, left: 0, behavior: "auto" });
+}
+
 function loadNotFoundPage() {
   const notFoundRoute =
     routeEntries.find((entry) => entry.pageId === "404") ?? routeEntries[0];
@@ -24,21 +51,23 @@ function loadNotFoundPage() {
 function ScrollController() {
   const location = useLocation();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if ("scrollRestoration" in window.history) {
       window.history.scrollRestoration = "manual";
     }
+
+    releaseGlobalScrollLock();
 
     const refreshScrollAnimations = () => {
       window.ScrollTrigger?.refresh?.();
     };
 
-    const scrollToPosition = (top, behavior = "auto") => {
-      window.scrollTo({ top, left: 0, behavior });
+    const scrollToPosition = (top) => {
+      setDocumentScrollPosition(top);
     };
 
     const scrollToTop = () => {
-      scrollToPosition(0, "auto");
+      scrollToPosition(0);
     };
 
     if (location.hash) {
@@ -96,7 +125,11 @@ function ScrollController() {
     }
 
     scrollToTop();
-    const frame = window.requestAnimationFrame(refreshScrollAnimations);
+    const frame = window.requestAnimationFrame(() => {
+      releaseGlobalScrollLock();
+      scrollToTop();
+      refreshScrollAnimations();
+    });
 
     return () => {
       window.cancelAnimationFrame(frame);
@@ -112,8 +145,9 @@ function ScrollController() {
         return false;
       }
 
+      releaseGlobalScrollLock();
       const top = element.getBoundingClientRect().top + window.scrollY;
-      window.scrollTo({ top, left: 0, behavior: "auto" });
+      setDocumentScrollPosition(top);
       window.ScrollTrigger?.refresh?.();
       return true;
     };

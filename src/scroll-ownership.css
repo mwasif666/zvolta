@@ -12,8 +12,8 @@ html {
   scrollbar-gutter: stable;
 }
 
-html:not(.site-scroll-locked) body,
-html:not(.site-scroll-locked) #root {
+html:not(:has(#site-mobile-menu)) body,
+html:not(:has(#site-mobile-menu)) #root {
   width: 100%;
   min-width: 0;
   min-height: 100%;
@@ -22,8 +22,8 @@ html:not(.site-scroll-locked) #root {
   overflow: visible !important;
 }
 
-html.site-scroll-locked,
-html.site-scroll-locked body {
+html:has(#site-mobile-menu),
+html:has(#site-mobile-menu) body {
   overflow: hidden !important;
 }
 

@@ -7,10 +7,13 @@ const scriptSourceCache = new Map();
 function hasLegacyPageScripts(pageId) {
   const pageScripts = legacyPageScripts[pageId];
 
-  return Boolean(
-    pageScripts &&
-      (pageScripts.externalScripts.length > 0 ||
-        pageScripts.inlineScripts.length > 0),
+  if (!pageScripts) {
+    return false;
+  }
+
+  return (
+    pageScripts.externalScripts.length > 0 ||
+    pageScripts.inlineScripts.length > 0
   );
 }
 

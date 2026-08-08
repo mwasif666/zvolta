@@ -32,6 +32,44 @@
     style="overscroll-behavior: none"
   >
     <div id="root"></div>
+    <script>
+      (() => {
+        const rulerSelector =
+          'body > span[style*="visibility: hidden"][style*="position: absolute"][style*="white-space: nowrap"]';
+        const heroWords = new Set(["Charging", "Investing", "Driving"]);
+
+        const cleanLegacyHeroRuler = () => {
+          const hasActiveHero = Boolean(
+            document.getElementById("hero-changing-word"),
+          );
+
+          document.querySelectorAll(rulerSelector).forEach((ruler) => {
+            if (!heroWords.has(ruler.textContent?.trim())) {
+              return;
+            }
+
+            if (!hasActiveHero) {
+              ruler.remove();
+              return;
+            }
+
+            // The legacy hero uses this node only to measure word width. Keeping
+            // it fixed at the viewport origin prevents its static body position
+            // from extending the document below the footer.
+            ruler.style.position = "fixed";
+            ruler.style.top = "0";
+            ruler.style.left = "0";
+            ruler.style.margin = "0";
+            ruler.style.pointerEvents = "none";
+            ruler.style.zIndex = "-1";
+          });
+        };
+
+        const observer = new MutationObserver(cleanLegacyHeroRuler);
+        observer.observe(document.body, { childList: true, subtree: true });
+        cleanLegacyHeroRuler();
+      })();
+    </script>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

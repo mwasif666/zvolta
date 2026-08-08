@@ -9,7 +9,8 @@ function hasLegacyPageScripts(pageId) {
 
   return Boolean(
     pageScripts &&
-      (pageScripts.externalScripts.length > 0 || pageScripts.inlineScripts.length > 0),
+      (pageScripts.externalScripts.length > 0 ||
+        pageScripts.inlineScripts.length > 0),
   );
 }
 

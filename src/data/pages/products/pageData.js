@@ -1,0 +1,1 @@
+export default { pageId: "products", paths: ["/products"], meta: { title: "EV Chargers & Accessories | ZVolta", description: "Shop connected ZVolta EV chargers and charging accessories in Pakistan.", disableLegacyRuntime: true } };

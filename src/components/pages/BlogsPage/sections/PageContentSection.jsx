@@ -2,9 +2,9 @@ import {
   BlogCard,
   BlogSidebar,
   SmartLink,
-  listPosts,
 } from "../../BlogsPage.shared.jsx";
-export function PageContentSection() {
+export function PageContentSection({ posts }) {
+  const listPosts = posts.slice(1);
   return (
     <section className="blog-page__content" aria-label="Blog posts">
       <div className="blog-page__container">
@@ -28,7 +28,7 @@ export function PageContentSection() {
             </ul>
           </div>
 
-          <BlogSidebar />
+          <BlogSidebar posts={posts} />
         </div>
       </div>
     </section>

@@ -26,7 +26,12 @@ const pageData = await Promise.all(
   ),
 );
 const routePaths = pageData
-  .filter((route) => route.pageId !== "404" && !route.meta?.noIndex)
+  .filter(
+    (route) =>
+      route.pageId !== "404" &&
+      !route.meta?.noIndex &&
+      !route.paths[0].includes(":"),
+  )
   .map((route) => route.paths[0]);
 const blogPaths = blogPosts.map((post) => `/blogs/${post.slug}`);
 const uniquePaths = [...new Set([...routePaths, ...blogPaths])];

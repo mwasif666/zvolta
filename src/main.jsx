@@ -4,12 +4,14 @@ import { HelmetProvider } from "react-helmet-async";
 import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import "./index.css";
 import "./scroll-ownership.css";
+import "./styles/commerce.css";
 import { SiteLayout } from "./components/SiteLayout";
 import { RouteSkeleton } from "./components/layout/RouteSkeleton";
 import { PageSeo } from "./components/seo/PageSeo";
 import { routeEntries } from "./routes";
 import { useLegacyPageRuntime } from "./lib/legacy-page-runtime";
 import { useRouteAnimationRefresh } from "./hooks/useRouteAnimationRefresh";
+import { CartProvider } from "./context/CartContext";
 
 const ROUTE_SKELETON_MIN_MS = 220;
 // Clearance for the floating nav pill so a linked section heading is never
@@ -355,7 +357,9 @@ function AppRouter() {
   return (
     <HelmetProvider>
       <BrowserRouter>
-        <AppRoutes />
+        <CartProvider>
+          <AppRoutes />
+        </CartProvider>
       </BrowserRouter>
     </HelmetProvider>
   );

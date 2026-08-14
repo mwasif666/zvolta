@@ -1,14 +1,16 @@
-import { blogPosts, useMemo, useState } from "./StoriesPage.shared.jsx";
+import { useMemo, useState } from "./StoriesPage.shared.jsx";
+import { useBlogPosts } from "../../hooks/useBlogApi";
 import { StoriesHeroSection } from "./StoriesPage/sections/StoriesHeroSection.jsx";
 import { FeaturedStorySection } from "./StoriesPage/sections/FeaturedStorySection.jsx";
 import { LatestStoriesSection } from "./StoriesPage/sections/LatestStoriesSection.jsx";
 import { EditorialCtaSection } from "./StoriesPage/sections/EditorialCtaSection.jsx";
 export default function StoriesPage() {
+  const { data: blogPosts } = useBlogPosts();
   const [featured, ...restPosts] = blogPosts;
   const categories = useMemo(() => {
     const unique = Array.from(new Set(blogPosts.map((post) => post.category)));
     return ["All stories", ...unique];
-  }, []);
+  }, [blogPosts]);
   const [activeCategory, setActiveCategory] = useState("All stories");
   const visiblePosts = useMemo(() => {
     if (activeCategory === "All stories") return restPosts;
@@ -21,7 +23,7 @@ export default function StoriesPage() {
       <div className="pointer-events-none absolute right-[-10rem] top-[42rem] h-[24rem] w-[24rem] rounded-full bg-lime-400/10 blur-[120px]" />
 
       {/* ================= HERO ================= */}
-      <StoriesHeroSection categories={categories} />
+      <StoriesHeroSection categories={categories} storyCount={blogPosts.length} />
 
       {/* ================= FEATURED ================= */}
       <FeaturedStorySection featured={featured} />

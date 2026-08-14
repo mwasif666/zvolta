@@ -1,11 +1,12 @@
 import {
   ArrowIcon,
+  AdminArticleBody,
   NotionArticleBody,
   Sidebar,
   SmartLink,
 } from "../../BlogDetailPage.shared.jsx";
 
-export function BlogArticleSection({ post, related }) {
+export function BlogArticleSection({ post, related, posts }) {
   return (
     <main className="blog-detail__main">
       <div className="blog-detail__container">
@@ -26,7 +27,9 @@ export function BlogArticleSection({ post, related }) {
             </div>
 
             <h2>{post.title}</h2>
-            {post.body ? (
+            {post.htmlBody ? (
+              <AdminArticleBody html={post.htmlBody} />
+            ) : post.body ? (
               <NotionArticleBody blocks={post.body} />
             ) : (
               <>
@@ -84,7 +87,7 @@ export function BlogArticleSection({ post, related }) {
             </SmartLink>
           </article>
 
-          <Sidebar currentSlug={post.slug} />
+          <Sidebar currentSlug={post.slug} posts={posts} />
         </div>
 
         <section className="blog-detail__related">

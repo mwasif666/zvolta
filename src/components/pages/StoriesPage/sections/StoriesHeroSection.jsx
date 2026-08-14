@@ -1,5 +1,5 @@
-import { SmartLink, blogPosts } from "../../StoriesPage.shared.jsx";
-export function StoriesHeroSection({ categories }) {
+import { SmartLink } from "../../StoriesPage.shared.jsx";
+export function StoriesHeroSection({ categories, storyCount }) {
   return (
     <section
       className="relative overflow-hidden border-b border-white/10 bg-cover bg-center pt-32"
@@ -61,7 +61,7 @@ export function StoriesHeroSection({ categories }) {
             <div className="mt-8 flex flex-wrap gap-8">
               <div>
                 <div className="font-display text-3xl font-semibold text-emerald-400">
-                  {blogPosts.length}
+                  {storyCount}
                 </div>
                 <div className="mt-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/50">
                   Stories

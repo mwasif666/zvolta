@@ -1,0 +1,1 @@
+export default { pageId: "order-success", paths: ["/order-success"], meta: { title: "Order Confirmed | ZVolta", description: "Your ZVolta order has been received.", disableLegacyRuntime: true, noIndex: true } };

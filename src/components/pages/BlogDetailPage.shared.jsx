@@ -65,11 +65,38 @@ function NotionArticleBody({ blocks }) {
     </div>
   );
 }
-function Sidebar({ currentSlug }) {
+function AdminArticleBody({ html }) {
+  if (!html) return null;
+  const parsed = new DOMParser().parseFromString(html, "text/html");
+  parsed
+    .querySelectorAll("script,style,iframe,object,embed")
+    .forEach((node) => node.remove());
+  parsed.querySelectorAll("*").forEach((node) => {
+    [...node.attributes].forEach((attribute) => {
+      if (attribute.name.startsWith("on") || attribute.name === "style") {
+        node.removeAttribute(attribute.name);
+      }
+      if (
+        ["href", "src"].includes(attribute.name) &&
+        /^javascript:/i.test(attribute.value)
+      ) {
+        node.removeAttribute(attribute.name);
+      }
+    });
+  });
+  return (
+    <div
+      className="blog-detail__body"
+      dangerouslySetInnerHTML={{ __html: parsed.body.innerHTML }}
+    />
+  );
+}
+function Sidebar({ currentSlug, posts = blogPosts }) {
   const newsletter = useFormSubmission("https://formspree.io/f/mvgrykro");
-  const relatedPosts = blogPosts
+  const relatedPosts = posts
     .filter((post) => post.slug !== currentSlug)
     .slice(0, 3);
+  const categories = Array.from(new Set(posts.map((post) => post.category)));
   return (
     <aside className="blog-detail__sidebar" aria-label="Blog sidebar">
       <div className="blog-detail__widget">
@@ -91,13 +118,13 @@ function Sidebar({ currentSlug }) {
       <div className="blog-detail__widget">
         <h3>Categories</h3>
         <ul className="blog-detail__category-list">
-          {blogCategories.map((category) => (
+          {categories.map((category) => (
             <li key={category}>
               <SmartLink href="/blogs">
                 <span>{category}</span>
                 <span>
                   {
-                    blogPosts.filter((post) => post.category === category)
+                    posts.filter((post) => post.category === category)
                       .length
                   }
                 </span>
@@ -132,6 +159,7 @@ function Sidebar({ currentSlug }) {
 export {
   ArrowIcon,
   NotFoundPage,
+  AdminArticleBody,
   NotionArticleBody,
   PageSeo,
   Sidebar,

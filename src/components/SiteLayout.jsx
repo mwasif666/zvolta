@@ -4,6 +4,7 @@ import { getRouteByPageId } from "../routes";
 import { useScrollReveal } from "../lib/useScrollReveal";
 import { SiteRouteLoader } from "./layout/SiteRouteLoader";
 import { SiteFooter } from "./layout/SiteFooter";
+import { useCart } from "../context/CartContext";
 
 const HOMEPAGE_PATHS = new Set(["/", "/home"]);
 
@@ -121,6 +122,7 @@ function MenuLink({ item, onClick, openDelay, closeDelay }) {
 }
 
 function SiteHeader() {
+  const { itemCount } = useCart();
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isMenuMounted, setIsMenuMounted] = useState(false);
@@ -136,9 +138,11 @@ function SiteHeader() {
   const softwareRoute = getRouteByPageId("software");
   const companyRoute = getRouteByPageId("about-us");
   const careersRoute = getRouteByPageId("careers");
+  const shopRoute = getRouteByPageId("products");
+  const cartRoute = getRouteByPageId("cart");
   const dockRoutes = useMemo(
-    () => [hostingRoute, chargingRoute, softwareRoute].filter(Boolean),
-    [hostingRoute, chargingRoute, softwareRoute],
+    () => [hostingRoute, chargingRoute, softwareRoute, shopRoute].filter(Boolean),
+    [hostingRoute, chargingRoute, shopRoute, softwareRoute],
   );
   const menuLinks = useMemo(
     () =>
@@ -147,8 +151,9 @@ function SiteHeader() {
         hostingRoute ? { route: hostingRoute, label: "Hosting" } : null,
         chargingRoute ? { route: chargingRoute, label: "Charging" } : null,
         softwareRoute ? { route: softwareRoute, label: "Software" } : null,
+        shopRoute ? { route: shopRoute, label: "Shop" } : null,
       ].filter(Boolean),
-    [careersRoute, chargingRoute, homeRoute, hostingRoute, softwareRoute],
+    [chargingRoute, homeRoute, hostingRoute, shopRoute, softwareRoute],
   );
   const menuCards = useMemo(
     () =>
@@ -193,8 +198,16 @@ function SiteHeader() {
               icon: "briefcase",
             }
           : null,
+        shopRoute
+          ? {
+              route: shopRoute,
+              title: "ZVolta Shop",
+              description: "Chargers and connected accessories.",
+              icon: "building",
+            }
+          : null,
       ].filter(Boolean),
-    [careersRoute, chargingRoute, companyRoute, hostingRoute, softwareRoute],
+    [careersRoute, chargingRoute, companyRoute, hostingRoute, shopRoute, softwareRoute],
   );
 
   const clearCloseTimer = () => {
@@ -404,6 +417,21 @@ function SiteHeader() {
           ))}
         </div>
         <div className="mx-1 h-5 w-px bg-white/10" />
+
+        {cartRoute ? (
+          <NavLink
+            to={cartRoute.path}
+            className="relative z-10 flex h-10 min-w-10 items-center justify-center rounded-full px-2 text-xs font-bold text-white/80 transition-colors hover:bg-white/10 hover:text-white"
+            aria-label={`Shopping cart with ${itemCount} item${itemCount === 1 ? "" : "s"}`}
+          >
+            Cart
+            {itemCount > 0 ? (
+              <span className="ml-1 grid h-5 min-w-5 place-items-center rounded-full bg-emerald-500 px-1 text-[10px] text-white">
+                {itemCount}
+              </span>
+            ) : null}
+          </NavLink>
+        ) : null}
 
         <button
           ref={menuTriggerRef}

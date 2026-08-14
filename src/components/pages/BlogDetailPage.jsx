@@ -1,16 +1,20 @@
 import {
   NotFoundPage,
   PageSeo,
-  blogPosts,
-  getBlogPostBySlug,
   useParams,
 } from "./BlogDetailPage.shared.jsx";
 import { BlogArticleSection } from "./BlogDetailPage/sections/BlogArticleSection.jsx";
 import { BlogHeroSection } from "./BlogDetailPage/sections/BlogHeroSection.jsx";
+import { useBlogPost, useBlogPosts } from "../../hooks/useBlogApi";
 
 export default function BlogDetailPage() {
   const { slug } = useParams();
-  const post = getBlogPostBySlug(slug);
+  const { data: post, loading } = useBlogPost(slug);
+  const { data: blogPosts } = useBlogPosts();
+
+  if (loading) {
+    return <div className="commerce-state full">Loading article…</div>;
+  }
 
   if (!post) {
     return <NotFoundPage />;
@@ -32,7 +36,7 @@ export default function BlogDetailPage() {
       />
       <div className="blog-detail">
         <BlogHeroSection />
-        <BlogArticleSection post={post} related={related} />
+        <BlogArticleSection post={post} related={related} posts={blogPosts} />
       </div>
     </>
   );

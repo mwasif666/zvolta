@@ -1,10 +1,11 @@
 import {
   ArrowIcon,
   SmartLink,
-  featuredPost,
-  topPosts,
 } from "../../BlogsPage.shared.jsx";
-export function PageFeaturedSection() {
+export function PageFeaturedSection({ posts }) {
+  const featuredPost = posts[0];
+  const topPosts = posts.slice(1, 4);
+  if (!featuredPost) return null;
   return (
     <section className="blog-page__featured" aria-label="Featured posts">
       <div className="blog-page__container">

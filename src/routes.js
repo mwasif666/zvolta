@@ -30,6 +30,11 @@ const routeLabels = {
   team: "Team",
   "driver-network": "Driver Network",
   invest: "Invest",
+  products: "Shop",
+  "product-detail": "Product",
+  cart: "Cart",
+  checkout: "Checkout",
+  "order-success": "Order confirmed",
   "invest-form": "Investor Enquiry",
   vehicles: "Electric Vehicles",
 };
@@ -53,7 +58,13 @@ const primaryNavigationPageIds = [
   "contact-us",
 ];
 
-const hiddenNavigationPageIds = new Set(["404", "roi-calculator"]);
+const hiddenNavigationPageIds = new Set([
+  "404",
+  "roi-calculator",
+  "product-detail",
+  "checkout",
+  "order-success",
+]);
 
 function labelFromPageId(pageId) {
   return (

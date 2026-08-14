@@ -1,6 +1,5 @@
 import { useMemo, useState } from "react";
 import { SmartLink } from "../SmartLink";
-import { blogPosts } from "../../data/pages/blogs/blogPosts";
 function ArrowIcon({ className = "" }) {
   return (
     <svg
@@ -18,4 +17,4 @@ function ArrowIcon({ className = "" }) {
     </svg>
   );
 }
-export { ArrowIcon, SmartLink, blogPosts, useMemo, useState };
+export { ArrowIcon, SmartLink, useMemo, useState };

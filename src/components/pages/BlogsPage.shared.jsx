@@ -66,7 +66,10 @@ function BlogCard({ post, isLarge = false }) {
     </article>
   );
 }
-function BlogSidebar() {
+function BlogSidebar({ posts = blogPosts }) {
+  const sidebarCategories = Array.from(
+    new Set(posts.map((post) => post.category)),
+  );
   return (
     <aside className="blog-page__sidebar" aria-label="Blog sidebar">
       <div className="blog-page__widget">
@@ -91,7 +94,7 @@ function BlogSidebar() {
       <div className="blog-page__widget">
         <h3>Related posts</h3>
         <div className="blog-page__recent-list">
-          {blogPosts.slice(0, 3).map((post) => (
+          {posts.slice(0, 3).map((post) => (
             <SmartLink
               key={post.id}
               href={`/blogs/${post.slug}`}
@@ -107,13 +110,13 @@ function BlogSidebar() {
       <div className="blog-page__widget">
         <h3>Categories</h3>
         <ul className="blog-page__category-list">
-          {categories.map((category) => (
+          {sidebarCategories.map((category) => (
             <li key={category}>
               <SmartLink href="/blogs">
                 <span>{category}</span>
                 <span>
                   {
-                    blogPosts.filter((post) => post.category === category)
+                    posts.filter((post) => post.category === category)
                       .length
                   }
                 </span>

@@ -26,8 +26,43 @@ import driverNetworkPageData from "./data/pages/driver-network/pageData";
 import investPageData from "./data/pages/invest/pageData";
 import investFormPageData from "./data/pages/invest-form/pageData";
 import vehiclesPageData from "./data/pages/vehicles/pageData";
+import productsPageData from "./data/pages/products/pageData";
+import productDetailPageData from "./data/pages/product-detail/pageData";
+import cartPageData from "./data/pages/cart/pageData";
+import checkoutPageData from "./data/pages/checkout/pageData";
+import orderSuccessPageData from "./data/pages/order-success/pageData";
 
 export const routeEntries = [
+  {
+    pageId: productsPageData.pageId,
+    paths: productsPageData.paths,
+    meta: productsPageData.meta,
+    load: () => import("./pages/products/index.jsx"),
+  },
+  {
+    pageId: productDetailPageData.pageId,
+    paths: productDetailPageData.paths,
+    meta: productDetailPageData.meta,
+    load: () => import("./pages/product-detail/index.jsx"),
+  },
+  {
+    pageId: cartPageData.pageId,
+    paths: cartPageData.paths,
+    meta: cartPageData.meta,
+    load: () => import("./pages/cart/index.jsx"),
+  },
+  {
+    pageId: checkoutPageData.pageId,
+    paths: checkoutPageData.paths,
+    meta: checkoutPageData.meta,
+    load: () => import("./pages/checkout/index.jsx"),
+  },
+  {
+    pageId: orderSuccessPageData.pageId,
+    paths: orderSuccessPageData.paths,
+    meta: orderSuccessPageData.meta,
+    load: () => import("./pages/order-success/index.jsx"),
+  },
   {
     pageId: notFoundPageData.pageId,
     paths: notFoundPageData.paths,

@@ -1,6 +1,8 @@
 import "./YoutubeReelsSection.module.css";
 import { SmartLink } from "../SmartLink";
-const youtubeReels = [
+import { commerceApi } from "../../services/api";
+import { useCommerceData } from "../../hooks/useCommerceData";
+const fallbackYoutubeReels = [
   {
     id: "593J_FRoru4",
     title: "This is us. Not announcing anything yet",
@@ -44,6 +46,18 @@ function ReelsIcon({ name, className = "h-5 w-5" }) {
   );
 }
 export default function YoutubeReelsSection() {
+  const videos = useCommerceData(commerceApi.videos, []);
+  const youtubeReels = videos.error
+    ? fallbackYoutubeReels
+    : (videos.data || fallbackYoutubeReels).map((video) => ({
+        id: video.youtubeId || video.id,
+        title: video.title,
+      }));
+
+  if (!videos.loading && youtubeReels.length === 0) {
+    return null;
+  }
+
   return (
     <section className="host-youtube-reels-section">
       <span

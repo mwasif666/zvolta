@@ -1,0 +1,1 @@
+export default { pageId: "product-detail", paths: ["/products/:slug"], meta: { title: "ZVolta Charging Product", description: "Explore connected ZVolta EV charging hardware.", disableLegacyRuntime: true } };

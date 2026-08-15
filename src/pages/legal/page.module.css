@@ -1,4 +1,8 @@
 /* Page styles are global by design; importing this CSS Module scopes its loading to the route chunk. */
+.routeStyles {
+  min-width: 0;
+}
+
 /* Keep route-specific presentation inside the policy wrapper. Lazy-loaded CSS
    stays mounted after navigation, so html/body rules here would leak into every
    page visited after Policy. */

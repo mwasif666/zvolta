@@ -6,6 +6,7 @@ const comingSoonPageData = {
   meta: {
     title: "ZVolta - Coming Soon",
     description: "This page is currently under development.",
+    disableLegacyRuntime: true,
   },
 };
 

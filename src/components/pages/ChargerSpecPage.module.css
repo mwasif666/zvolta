@@ -1,5 +1,9 @@
 /* Page styles are global by design; importing this CSS Module scopes its loading to the route chunk. */
 
+.routeStyles {
+  min-width: 0;
+}
+
 :global(.three-page) {
   background: #050606;
   color: #ffffff;

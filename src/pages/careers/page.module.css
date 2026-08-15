@@ -1,5 +1,9 @@
 /* Page styles are global by design; importing this CSS Module scopes its loading to the route chunk. */
 
+.routeStyles {
+  min-width: 0;
+}
+
 :global(.career-page) {
   --career-bg: #000504;
   --career-panel: rgba(255, 255, 255, 0.055);

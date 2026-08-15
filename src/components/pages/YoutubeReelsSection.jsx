@@ -1,4 +1,4 @@
-import "./YoutubeReelsSection.module.css";
+import styles from "./YoutubeReelsSection.module.css";
 import { SmartLink } from "../SmartLink";
 import { commerceApi } from "../../services/api";
 import { useCommerceData } from "../../hooks/useCommerceData";
@@ -59,7 +59,9 @@ export default function YoutubeReelsSection() {
   }
 
   return (
-    <section className="host-youtube-reels-section">
+    <section
+      className={`host-youtube-reels-section ${styles.routeStyles}`}
+    >
       <span
         className="host-reels-glow host-reels-glow-left"
         aria-hidden="true"

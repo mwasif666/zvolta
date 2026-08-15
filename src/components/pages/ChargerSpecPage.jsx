@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./ChargerSpecPage.module.css";
+import styles from "./ChargerSpecPage.module.css";
 import { DecisionSection } from "./ChargerSpecPage/sections/DecisionSection.jsx";
 import { EnvironmentSection } from "./ChargerSpecPage/sections/EnvironmentSection.jsx";
 import { ThreeKwHero } from "./ChargerSpecPage/sections/ThreeKwHero.jsx";
@@ -7,11 +7,13 @@ import { ThreeKwHostWhoBlock } from "./ChargerSpecPage/sections/ThreeKwHostWhoBl
 import { ThreeKwQuickSection } from "./ChargerSpecPage/sections/ThreeKwQuickSection.jsx";
 import { UseCasesRecommendationFaq } from "./ChargerSpecPage/sections/UseCasesRecommendationFaq.jsx";
 
-export default function ChargerSpecPage({ spec }) {
+export default function ChargerSpecPage({ routeClassName = "", spec }) {
   const [showHostingSections, setShowHostingSections] = useState(false);
 
   return (
-    <div className="three-page font-sans">
+    <div
+      className={`three-page font-sans ${styles.routeStyles} ${routeClassName}`}
+    >
       <ThreeKwHero spec={spec} />
       <ThreeKwQuickSection spec={spec} />
       <EnvironmentSection spec={spec} />

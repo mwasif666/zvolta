@@ -1,3 +1,7 @@
+.routeStyles {
+  min-width: 0;
+}
+
 :global(.host-youtube-reels-section) {
   position: relative;
   overflow: hidden;

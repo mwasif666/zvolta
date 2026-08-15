@@ -1,3 +1,7 @@
+.routeStyles {
+  min-width: 0;
+}
+
 :global(.animate-marquee-up) {
   animation: marquee-up 30s linear infinite;
 }

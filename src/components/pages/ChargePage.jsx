@@ -11,7 +11,7 @@ import { NetworkMapSection } from "./ChargePage/sections/NetworkMapSection.jsx";
 import { ReadyToChargeSection } from "./ChargePage/sections/ReadyToChargeSection.jsx";
 import { WhereToChargeSection } from "./ChargePage/sections/WhereToChargeSection.jsx";
 import { WhyChooseSection } from "./ChargePage/sections/WhyChooseSection.jsx";
-export default function ChargePage() {
+export default function ChargePage({ routeClassName = "" }) {
   const pageRef = useRef(null);
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -103,7 +103,10 @@ export default function ChargePage() {
   }, []);
   return (
     <>
-      <div ref={pageRef} className="charge-page font-sans">
+      <div
+        ref={pageRef}
+        className={`charge-page font-sans ${routeClassName}`}
+      >
         <HeroLightSection />
 
         <NetworkMapSection />

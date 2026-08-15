@@ -17,7 +17,7 @@ import { WhoSection } from "./HostPage/sections/WhoSection.jsx";
 import { PartnersSection } from "./HostPage/sections/PartnersSection.jsx";
 import { StartHostingSection } from "./HostPage/sections/StartHostingSection.jsx";
 import { RealStoriesSection } from "./HostPage/sections/RealStoriesSection.jsx";
-export default function HostPage() {
+export default function HostPage({ routeClassName = "" }) {
   const [chargerCount, setChargerCount] = useState(2);
   const [unitPrice, setUnitPrice] = useState(120);
   const [usage, setUsage] = useState(8);
@@ -35,7 +35,7 @@ export default function HostPage() {
   const activeWherePanel = activeWhereLocation[wherePanelMode];
   return (
     <>
-      <div className="host-page font-sans">
+      <div className={`host-page font-sans ${routeClassName}`}>
         <HeroSection />
 
         <ChargersSection

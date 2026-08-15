@@ -1,5 +1,9 @@
 /* Page styles are global by design; importing this CSS Module scopes its loading to the route chunk. */
 
+.routeStyles {
+  min-width: 0;
+}
+
 :global(.host-page) {
   background: #0a0a0a;
   color: #ffffff;

@@ -1,9 +1,4 @@
 import { SmartLink } from "../SmartLink";
-import { blogPosts } from "../../data/pages/blogs/blogPosts";
-const featuredPost = blogPosts[0];
-const topPosts = blogPosts.slice(1, 4);
-const listPosts = blogPosts.slice(1);
-const categories = Array.from(new Set(blogPosts.map((post) => post.category)));
 function ArrowIcon() {
   return (
     <span className="blog-page__button-icon" aria-hidden="true">
@@ -66,7 +61,7 @@ function BlogCard({ post, isLarge = false }) {
     </article>
   );
 }
-function BlogSidebar({ posts = blogPosts }) {
+function BlogSidebar({ posts = [] }) {
   const sidebarCategories = Array.from(
     new Set(posts.map((post) => post.category)),
   );
@@ -115,10 +110,7 @@ function BlogSidebar({ posts = blogPosts }) {
               <SmartLink href="/blogs">
                 <span>{category}</span>
                 <span>
-                  {
-                    posts.filter((post) => post.category === category)
-                      .length
-                  }
+                  {posts.filter((post) => post.category === category).length}
                 </span>
               </SmartLink>
             </li>
@@ -141,13 +133,4 @@ function BlogSidebar({ posts = blogPosts }) {
     </aside>
   );
 }
-export { BlogHero, BlogSidebar, ArrowIcon };
-export {
-  BlogCard,
-  SmartLink,
-  blogPosts,
-  categories,
-  featuredPost,
-  listPosts,
-  topPosts,
-};
+export { BlogHero, BlogSidebar, ArrowIcon, BlogCard, SmartLink };

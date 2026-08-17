@@ -12,6 +12,7 @@ import { routeEntries } from "./routes";
 import { useLegacyPageRuntime } from "./lib/legacy-page-runtime";
 import { useRouteAnimationRefresh } from "./hooks/useRouteAnimationRefresh";
 import { CartProvider } from "./context/CartContext";
+import { StorefrontSettingsProvider } from "./context/StorefrontSettingsContext";
 
 const ROUTE_SKELETON_MIN_MS = 220;
 // Clearance for the floating nav pill so a linked section heading is never
@@ -357,9 +358,11 @@ function AppRouter() {
   return (
     <HelmetProvider>
       <BrowserRouter>
-        <CartProvider>
-          <AppRoutes />
-        </CartProvider>
+        <StorefrontSettingsProvider>
+          <CartProvider>
+            <AppRoutes />
+          </CartProvider>
+        </StorefrontSettingsProvider>
       </BrowserRouter>
     </HelmetProvider>
   );

@@ -1,19 +1,36 @@
-import {
-  NotFoundPage,
-  PageSeo,
-  useParams,
-} from "./BlogDetailPage.shared.jsx";
+import { NotFoundPage, PageSeo, useParams } from "./BlogDetailPage.shared.jsx";
 import { BlogArticleSection } from "./BlogDetailPage/sections/BlogArticleSection.jsx";
 import { BlogHeroSection } from "./BlogDetailPage/sections/BlogHeroSection.jsx";
 import { useBlogPost, useBlogPosts } from "../../hooks/useBlogApi";
 
 export default function BlogDetailPage() {
   const { slug } = useParams();
-  const { data: post, loading } = useBlogPost(slug);
+  const {
+    data: post,
+    error,
+    errorStatus,
+    loading,
+    refetch,
+  } = useBlogPost(slug);
   const { data: blogPosts } = useBlogPosts();
 
   if (loading) {
     return <div className="commerce-state full">Loading article…</div>;
+  }
+
+  if (errorStatus === 404) {
+    return <NotFoundPage />;
+  }
+
+  if (error && !post) {
+    return (
+      <div className="commerce-state error full">
+        <p>{error}</p>
+        <button type="button" onClick={refetch}>
+          Try again
+        </button>
+      </div>
+    );
   }
 
   if (!post) {

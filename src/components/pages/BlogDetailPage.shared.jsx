@@ -2,11 +2,7 @@ import { useParams } from "react-router-dom";
 import { PageSeo } from "../seo/PageSeo";
 import { SmartLink } from "../SmartLink";
 import { useFormSubmission } from "../../hooks/useFormSubmission";
-import { blogPosts, getBlogPostBySlug } from "../../data/pages/blogs/blogPosts";
 import NotFoundPage from "./NotFoundPage";
-const blogCategories = Array.from(
-  new Set(blogPosts.map((post) => post.category)),
-);
 function ArrowIcon() {
   return (
     <span className="blog-detail__button-icon" aria-hidden="true">
@@ -91,7 +87,7 @@ function AdminArticleBody({ html }) {
     />
   );
 }
-function Sidebar({ currentSlug, posts = blogPosts }) {
+function Sidebar({ currentSlug, posts = [] }) {
   const newsletter = useFormSubmission("https://formspree.io/f/mvgrykro");
   const relatedPosts = posts
     .filter((post) => post.slug !== currentSlug)
@@ -123,10 +119,7 @@ function Sidebar({ currentSlug, posts = blogPosts }) {
               <SmartLink href="/blogs">
                 <span>{category}</span>
                 <span>
-                  {
-                    posts.filter((post) => post.category === category)
-                      .length
-                  }
+                  {posts.filter((post) => post.category === category).length}
                 </span>
               </SmartLink>
             </li>
@@ -164,9 +157,6 @@ export {
   PageSeo,
   Sidebar,
   SmartLink,
-  blogCategories,
-  blogPosts,
-  getBlogPostBySlug,
   useFormSubmission,
   useParams,
 };

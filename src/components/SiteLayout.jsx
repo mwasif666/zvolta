@@ -4,6 +4,7 @@ import { getRouteByPageId } from "../routes";
 import { useScrollReveal } from "../lib/useScrollReveal";
 import { SiteRouteLoader } from "./layout/SiteRouteLoader";
 import { SiteFooter } from "./layout/SiteFooter";
+import { useStorefrontSettings } from "../context/StorefrontSettingsContext";
 
 const HOMEPAGE_PATHS = new Set(["/", "/home"]);
 
@@ -121,6 +122,9 @@ function MenuLink({ item, onClick, openDelay, closeDelay }) {
 }
 
 function SiteHeader() {
+  const { settings } = useStorefrontSettings();
+  const showAnnouncement =
+    settings.announcement.enabled && settings.announcement.text;
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isMenuMounted, setIsMenuMounted] = useState(false);
@@ -366,9 +370,15 @@ function SiteHeader() {
 
   return (
     <header className="site-header pointer-events-none fixed inset-x-0 top-0 z-[950]">
+      {showAnnouncement ? (
+        <div className="pointer-events-auto fixed inset-x-0 top-0 z-20 bg-emerald-500 px-4 py-2 text-center text-xs font-bold tracking-wide text-black">
+          {settings.announcement.text}
+        </div>
+      ) : null}
       <nav
-        className="pointer-events-auto fixed left-1/2 top-6 flex max-w-[calc(100vw-2rem)] items-center gap-1 rounded-full border border-white/10 bg-[#111]/90 px-2 py-1.5 shadow-2xl ring-1 ring-white/5 backdrop-blur-xl transition-[transform,opacity] duration-500 ease-out"
+        className="pointer-events-auto fixed left-1/2 flex max-w-[calc(100vw-2rem)] items-center gap-1 rounded-full border border-white/10 bg-[#111]/90 px-2 py-1.5 shadow-2xl ring-1 ring-white/5 backdrop-blur-xl transition-[transform,opacity] duration-500 ease-out"
         style={{
+          top: showAnnouncement ? "3.75rem" : "1.5rem",
           transform: isHeaderVisible
             ? "translate(-50%, 0)"
             : "translate(-50%, -240%)",
@@ -385,8 +395,8 @@ function SiteHeader() {
             onClick={closeMobileMenu}
           >
             <img
-              src="/img/symbol logo.png"
-              alt="ZVolta"
+              src={settings.branding.navbarLogoUrl || "/img/symbol logo.png"}
+              alt={settings.storeName}
               className="h-6 w-auto"
             />
           </Link>
@@ -484,10 +494,10 @@ function SiteHeader() {
                     Contact us
                   </p>
                   <a
-                    href="mailto:support@zvolta.com"
+                    href={`mailto:${settings.supportEmail}`}
                     className="border-b border-transparent pb-1 font-mono text-xl text-white transition-colors hover:border-emerald-400 hover:text-emerald-400 md:text-2xl"
                   >
-                    support@zvolta.com
+                    {settings.supportEmail}
                   </a>
                 </div>
               </div>
@@ -529,6 +539,43 @@ function SiteHeader() {
   );
 }
 
+function StorefrontPopupBanner() {
+  const { settings } = useStorefrontSettings();
+  const [dismissed, setDismissed] = useState(false);
+  const banner = settings.popupBanner;
+
+  useEffect(() => {
+    setDismissed(false);
+  }, [banner.imageUrl]);
+
+  if (!banner.enabled || !banner.imageUrl || dismissed) return null;
+
+  return (
+    <div
+      className="fixed inset-0 z-[12000] grid place-items-center bg-black/75 p-5 backdrop-blur-sm"
+      role="dialog"
+      aria-modal="true"
+      aria-label={banner.altText}
+    >
+      <div className="relative max-h-[90vh] max-w-3xl overflow-hidden rounded-3xl border border-white/15 bg-black shadow-2xl">
+        <button
+          type="button"
+          className="absolute right-3 top-3 z-10 grid h-10 w-10 place-items-center rounded-full bg-black/75 text-2xl text-white"
+          aria-label="Close promotion"
+          onClick={() => setDismissed(true)}
+        >
+          ×
+        </button>
+        <img
+          src={banner.imageUrl}
+          alt={banner.altText}
+          className="max-h-[90vh] w-full object-contain"
+        />
+      </div>
+    </div>
+  );
+}
+
 export function SiteLayout({ children }) {
   const { pathname, search } = useLocation();
   const normalizedPathname = pathname.toLowerCase();
@@ -543,6 +590,7 @@ export function SiteLayout({ children }) {
       <SiteHeader />
       <main className="site-main">{children}</main>
       <SiteFooter />
+      <StorefrontPopupBanner />
     </>
   );
 }

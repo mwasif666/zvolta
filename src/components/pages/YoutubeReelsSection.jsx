@@ -2,32 +2,7 @@ import styles from "./YoutubeReelsSection.module.css";
 import { SmartLink } from "../SmartLink";
 import { commerceApi } from "../../services/api";
 import { useCommerceData } from "../../hooks/useCommerceData";
-const fallbackYoutubeReels = [
-  {
-    id: "cLdCKv-iOAQ",
-    title: "How To Locate nearby Stations | Zvolta Electric Charging App Tutorial",
-  },
-  {
-    id: "kuj9AB8TFqg",
-    title: "Impact of Zvolta chargers on Work Hall",
-  },
-  {
-    id: "593J_FRoru4",
-    title: "This is us. Not announcing anything yet",
-  },
-  {
-    id: "avV8EaQIlsw",
-    title: "We're now live at IBA main campus",
-  },
-  {
-    id: "CJuGPOKuTpU",
-    title: "How to sign up on ZVolta app",
-  },
-  {
-    id: "yV9kVHreNgs",
-    title: "ZVolta YouTube reel",
-  },
-];
+import { useStorefrontSettings } from "../../context/StorefrontSettingsContext";
 function ReelsIcon({ name, className = "h-5 w-5" }) {
   const props = {
     className,
@@ -55,21 +30,18 @@ function ReelsIcon({ name, className = "h-5 w-5" }) {
 }
 export default function YoutubeReelsSection() {
   const videos = useCommerceData(commerceApi.videos, []);
-  const youtubeReels = videos.error
-    ? fallbackYoutubeReels
-    : (videos.data || fallbackYoutubeReels).map((video) => ({
-        id: video.youtubeId || video.id,
-        title: video.title,
-      }));
+  const { settings } = useStorefrontSettings();
+  const youtubeReels = (videos.data || []).map((video) => ({
+    id: video.youtubeId || video.id,
+    title: video.title,
+  }));
 
-  if (!videos.loading && youtubeReels.length === 0) {
+  if (!videos.loading && !videos.error && youtubeReels.length === 0) {
     return null;
   }
 
   return (
-    <section
-      className={`host-youtube-reels-section ${styles.routeStyles}`}
-    >
+    <section className={`host-youtube-reels-section ${styles.routeStyles}`}>
       <span
         className="host-reels-glow host-reels-glow-left"
         aria-hidden="true"
@@ -89,24 +61,40 @@ export default function YoutubeReelsSection() {
           </div>
         </div>
 
-        <div className="host-youtube-reels-grid">
-          {youtubeReels.map((reel) => (
-            <article className="host-youtube-reel-card" key={reel.id}>
-              <iframe
-                src={`https://www.youtube.com/embed/${reel.id}?rel=0&modestbranding=1&playsinline=1`}
-                title={reel.title}
-                loading="lazy"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerPolicy="strict-origin-when-cross-origin"
-                allowFullScreen
-              />
-            </article>
-          ))}
-        </div>
+        {videos.loading ? (
+          <div className="commerce-state">Loading videos...</div>
+        ) : null}
+        {videos.error ? (
+          <div className="commerce-state error">
+            <p>{videos.error}</p>
+            <button type="button" onClick={videos.refetch}>
+              Try again
+            </button>
+          </div>
+        ) : null}
+        {!videos.loading && !videos.error ? (
+          <div className="host-youtube-reels-grid">
+            {youtubeReels.map((reel) => (
+              <article className="host-youtube-reel-card" key={reel.id}>
+                <iframe
+                  src={`https://www.youtube.com/embed/${reel.id}?rel=0&modestbranding=1&playsinline=1`}
+                  title={reel.title}
+                  loading="lazy"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  allowFullScreen
+                />
+              </article>
+            ))}
+          </div>
+        ) : null}
 
         <div className="host-youtube-reels-action">
           <SmartLink
-            href="https://www.youtube.com/@zvoltaPK"
+            href={
+              settings.socialLinks.youtube ||
+              "https://www.youtube.com/@zvoltaPK"
+            }
             target="_blank"
             className="host-youtube-reels-button"
           >

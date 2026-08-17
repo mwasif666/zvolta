@@ -1,11 +1,27 @@
 import { writeFile } from "node:fs/promises";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { glob } from "glob";
-import { blogPosts } from "../src/data/pages/blogs/blogPosts.js";
 
 const SITE_URL = "https://zvolta.com";
 const OUTPUT_URL = new URL("../public/sitemap.xml", import.meta.url);
 const projectRoot = fileURLToPath(new URL("../", import.meta.url));
+
+async function getBlogPaths() {
+  const apiBaseUrl = String(process.env.VITE_API_URL || "").replace(/\/$/, "");
+  if (!apiBaseUrl) return [];
+
+  try {
+    const response = await fetch(`${apiBaseUrl}/articles`);
+    if (!response.ok) throw new Error(`API returned ${response.status}`);
+    const payload = await response.json();
+    return (payload.data || [])
+      .filter((post) => post.slug)
+      .map((post) => `/blogs/${post.slug}`);
+  } catch (error) {
+    console.warn(`Dynamic blog URLs were skipped: ${error.message}`);
+    return [];
+  }
+}
 
 function escapeXml(value) {
   return value
@@ -33,7 +49,7 @@ const routePaths = pageData
       !route.paths[0].includes(":"),
   )
   .map((route) => route.paths[0]);
-const blogPaths = blogPosts.map((post) => `/blogs/${post.slug}`);
+const blogPaths = await getBlogPaths();
 const uniquePaths = [...new Set([...routePaths, ...blogPaths])];
 
 const body = uniquePaths

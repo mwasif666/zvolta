@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet-async";
+import { useStorefrontSettings } from "../../context/StorefrontSettingsContext";
 
 const SITE_URL = "https://zvolta.com";
 const DEFAULT_IMAGE = `${SITE_URL}/img/og-image.jpg`;
@@ -9,10 +10,9 @@ function absoluteUrl(pathname) {
 }
 
 export function PageSeo({ meta = {}, pathname = "/" }) {
-  const title = meta.title ?? "ZVolta | Electric Mobility in Pakistan";
-  const description =
-    meta.description ??
-    "ZVolta builds reliable electric vehicle charging and mobility solutions across Pakistan.";
+  const { settings } = useStorefrontSettings();
+  const title = meta.title ?? settings.seo.metaTitle;
+  const description = meta.description ?? settings.seo.metaDescription;
   const canonical = absoluteUrl(pathname);
   const image = meta.image
     ? new URL(meta.image, SITE_URL).toString()
@@ -25,7 +25,7 @@ export function PageSeo({ meta = {}, pathname = "/" }) {
       <meta name="description" content={description} />
       <link rel="canonical" href={canonical} />
       <meta property="og:type" content="website" />
-      <meta property="og:site_name" content="ZVolta" />
+      <meta property="og:site_name" content={settings.storeName} />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:url" content={canonical} />
@@ -34,6 +34,9 @@ export function PageSeo({ meta = {}, pathname = "/" }) {
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={image} />
+      {settings.seo.siteIconUrl ? (
+        <link rel="icon" href={settings.seo.siteIconUrl} />
+      ) : null}
       {meta.noIndex ? <meta name="robots" content="noindex, nofollow" /> : null}
     </Helmet>
   );

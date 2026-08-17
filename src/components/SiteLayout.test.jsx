@@ -21,7 +21,7 @@ describe("SiteLayout", () => {
     );
 
     expect(container.querySelectorAll(".site-footer")).toHaveLength(1);
-    expect(container.textContent).toContain("Copyright © 2026 Zvolta");
+    expect(container.textContent).toMatch(/Copyright © \d{4} ZVolta/);
   });
 
   it("keeps Shop and Cart out of the primary and expanded navigation", () => {

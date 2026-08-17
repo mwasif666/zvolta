@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useStorefrontSettings } from "../../context/StorefrontSettingsContext";
 
 const primaryColumns = [
   {
@@ -76,11 +77,25 @@ function PolicySectionLink({ sectionId, children }) {
 }
 
 export function SiteFooter() {
+  const { settings } = useStorefrontSettings();
+  const whatsappNumber = String(
+    settings.whatsappPhone || settings.supportPhone || "",
+  ).replace(/\D/g, "");
+  const columns = primaryColumns.map((column) => ({
+    ...column,
+    links: column.links.map(([label, href]) => [
+      label,
+      label === "Charging support" && whatsappNumber
+        ? `https://wa.me/${whatsappNumber}`
+        : href,
+    ]),
+  }));
+
   return (
     <footer className="site-footer bg-black text-white pt-24 pb-12 border-t border-white/10 relative overflow-hidden">
       <div className="border-t border-white/10 bg-black">
         <div className="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-white/10">
-          {primaryColumns.map((column) => (
+          {columns.map((column) => (
             <div
               key={column.title}
               className="group p-8 md:p-12 hover:bg-white/5 transition-colors duration-300 flex flex-col h-full min-h-[300px]"
@@ -181,47 +196,62 @@ export function SiteFooter() {
       <div className="max-w-[1400px] mx-auto px-6 pt-12 flex flex-col md:flex-row justify-between items-center gap-6">
         <div className="flex flex-col md:flex-row items-center gap-6">
           <img
-            src="/img/full_logowhite.png"
-            alt="ZVolta"
+            src={settings.branding.footerLogoUrl || "/img/full_logowhite.png"}
+            alt={settings.storeName}
             className="h-8 md:h-10 opacity-90"
           />
           <div className="hidden md:block w-px h-6 bg-zinc-800" />
           <div className="text-zinc-500 text-sm flex gap-6">
-            <span>Copyright &copy; 2026 Zvolta. All rights reserved.</span>
+            <span>
+              Copyright &copy; {new Date().getFullYear()} {settings.storeName}.
+              All rights reserved.
+            </span>
           </div>
         </div>
         <div className="flex gap-6">
           <span className="text-zinc-500">Social Links</span>
-          <a
-            href="https://www.facebook.com/share/1FUNJfnPd5/?mibextid=wwXIfr"
-            target="_blank"
-            rel="noreferrer"
-            className="text-zinc-500 hover:text-white transition-colors"
-          >
-            <i className="bi bi-facebook text-xl" />
-          </a>
-          <a
-            href="https://www.instagram.com/zvolta.pk"
-            target="_blank"
-            rel="noreferrer"
-            className="text-zinc-500 hover:text-white transition-colors"
-          >
-            <i className="bi bi-instagram text-xl" />
-          </a>
-          <a
-            href="https://wa.me/+923104446529"
-            target="_blank"
-            rel="noreferrer"
-            className="text-zinc-500 hover:text-white transition-colors"
-          >
-            <i className="bi bi-whatsapp text-xl" />
-          </a>
-          <a
-            href="mailto:support@zvolta.com"
-            className="text-zinc-500 hover:text-white transition-colors"
-          >
-            <i className="bi bi-envelope text-xl" />
-          </a>
+          {settings.socialLinks.facebook ? (
+            <a
+              href={settings.socialLinks.facebook}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Facebook"
+              className="text-zinc-500 hover:text-white transition-colors"
+            >
+              <i className="bi bi-facebook text-xl" />
+            </a>
+          ) : null}
+          {settings.socialLinks.instagram ? (
+            <a
+              href={settings.socialLinks.instagram}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Instagram"
+              className="text-zinc-500 hover:text-white transition-colors"
+            >
+              <i className="bi bi-instagram text-xl" />
+            </a>
+          ) : null}
+          {whatsappNumber ? (
+            <a
+              href={`https://wa.me/${whatsappNumber}`}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="WhatsApp"
+              className="text-zinc-500 hover:text-white transition-colors"
+            >
+              <i className="bi bi-whatsapp text-xl" />
+            </a>
+          ) : null}
+          {settings.supportEmail ? (
+            <a
+              href={`mailto:${settings.supportEmail}`}
+              aria-label="Email"
+              className="text-zinc-500 hover:text-white transition-colors"
+            >
+              <i className="bi bi-envelope text-xl" />
+            </a>
+          ) : null}
         </div>
       </div>
     </footer>

@@ -3,15 +3,32 @@ import { PageFeaturedSection } from "./BlogsPage/sections/PageFeaturedSection.js
 import { PageContentSection } from "./BlogsPage/sections/PageContentSection.jsx";
 import { useBlogPosts } from "../../hooks/useBlogApi";
 export default function BlogsPage() {
-  const { data: posts } = useBlogPosts();
+  const { data: posts, error, loading, refetch } = useBlogPosts();
   return (
     <>
       <div className="blog-page">
         <BlogHero />
 
-        <PageFeaturedSection posts={posts} />
-
-        <PageContentSection posts={posts} />
+        {loading ? (
+          <div className="commerce-state full">Loading articles...</div>
+        ) : null}
+        {!loading && error ? (
+          <div className="commerce-state error full">
+            <p>{error}</p>
+            <button type="button" onClick={refetch}>
+              Try again
+            </button>
+          </div>
+        ) : null}
+        {!loading && !error && posts.length === 0 ? (
+          <div className="commerce-state full">No published articles yet.</div>
+        ) : null}
+        {!loading && !error && posts.length > 0 ? (
+          <>
+            <PageFeaturedSection posts={posts} />
+            <PageContentSection posts={posts} />
+          </>
+        ) : null}
       </div>
     </>
   );

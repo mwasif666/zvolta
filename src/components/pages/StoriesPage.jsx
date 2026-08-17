@@ -5,7 +5,7 @@ import { FeaturedStorySection } from "./StoriesPage/sections/FeaturedStorySectio
 import { LatestStoriesSection } from "./StoriesPage/sections/LatestStoriesSection.jsx";
 import { EditorialCtaSection } from "./StoriesPage/sections/EditorialCtaSection.jsx";
 export default function StoriesPage() {
-  const { data: blogPosts } = useBlogPosts();
+  const { data: blogPosts, error, loading, refetch } = useBlogPosts();
   const [featured, ...restPosts] = blogPosts;
   const categories = useMemo(() => {
     const unique = Array.from(new Set(blogPosts.map((post) => post.category)));
@@ -23,18 +23,39 @@ export default function StoriesPage() {
       <div className="pointer-events-none absolute right-[-10rem] top-[42rem] h-[24rem] w-[24rem] rounded-full bg-lime-400/10 blur-[120px]" />
 
       {/* ================= HERO ================= */}
-      <StoriesHeroSection categories={categories} storyCount={blogPosts.length} />
+      <StoriesHeroSection
+        categories={categories}
+        storyCount={blogPosts.length}
+      />
 
       {/* ================= FEATURED ================= */}
-      <FeaturedStorySection featured={featured} />
+      {loading ? (
+        <div className="commerce-state full">Loading stories...</div>
+      ) : null}
+      {!loading && error ? (
+        <div className="commerce-state error full">
+          <p>{error}</p>
+          <button type="button" onClick={refetch}>
+            Try again
+          </button>
+        </div>
+      ) : null}
+      {!loading && !error && !featured ? (
+        <div className="commerce-state full">No published stories yet.</div>
+      ) : null}
+      {!loading && !error && featured ? (
+        <>
+          <FeaturedStorySection featured={featured} />
 
-      {/* ================= FILTER + GRID ================= */}
-      <LatestStoriesSection
-        activeCategory={activeCategory}
-        categories={categories}
-        setActiveCategory={setActiveCategory}
-        visiblePosts={visiblePosts}
-      />
+          {/* ================= FILTER + GRID ================= */}
+          <LatestStoriesSection
+            activeCategory={activeCategory}
+            categories={categories}
+            setActiveCategory={setActiveCategory}
+            visiblePosts={visiblePosts}
+          />
+        </>
+      ) : null}
 
       {/* ================= CTA BAND ================= */}
       <EditorialCtaSection />

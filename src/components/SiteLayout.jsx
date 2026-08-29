@@ -5,6 +5,8 @@ import { useScrollReveal } from "../lib/useScrollReveal";
 import { SiteRouteLoader } from "./layout/SiteRouteLoader";
 import { SiteFooter } from "./layout/SiteFooter";
 import { useStorefrontSettings } from "../context/StorefrontSettingsContext";
+import { useAuth } from "../context/AuthContext";
+import { useCart } from "../context/CartContext";
 
 const HOMEPAGE_PATHS = new Set(["/", "/home"]);
 
@@ -123,6 +125,8 @@ function MenuLink({ item, onClick, openDelay, closeDelay }) {
 
 function SiteHeader() {
   const { settings } = useStorefrontSettings();
+  const { itemCount } = useCart();
+  const { isAuthenticated, user } = useAuth();
   const showAnnouncement =
     settings.announcement.enabled && settings.announcement.text;
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
@@ -140,9 +144,12 @@ function SiteHeader() {
   const softwareRoute = getRouteByPageId("software");
   const companyRoute = getRouteByPageId("about-us");
   const careersRoute = getRouteByPageId("careers");
+  const shopRoute = getRouteByPageId("products");
+  const cartRoute = getRouteByPageId("cart");
   const dockRoutes = useMemo(
-    () => [hostingRoute, chargingRoute, softwareRoute].filter(Boolean),
-    [hostingRoute, chargingRoute, softwareRoute],
+    () =>
+      [hostingRoute, chargingRoute, softwareRoute, shopRoute].filter(Boolean),
+    [hostingRoute, chargingRoute, shopRoute, softwareRoute],
   );
   const menuLinks = useMemo(
     () =>
@@ -151,8 +158,17 @@ function SiteHeader() {
         hostingRoute ? { route: hostingRoute, label: "Hosting" } : null,
         chargingRoute ? { route: chargingRoute, label: "Charging" } : null,
         softwareRoute ? { route: softwareRoute, label: "Software" } : null,
+        shopRoute ? { route: shopRoute, label: "Shop" } : null,
+        cartRoute ? { route: cartRoute, label: "Cart" } : null,
       ].filter(Boolean),
-    [chargingRoute, homeRoute, hostingRoute, softwareRoute],
+    [
+      cartRoute,
+      chargingRoute,
+      homeRoute,
+      hostingRoute,
+      shopRoute,
+      softwareRoute,
+    ],
   );
   const menuCards = useMemo(
     () =>
@@ -413,6 +429,82 @@ function SiteHeader() {
             </DockLink>
           ))}
         </div>
+        {cartRoute ? (
+          <Link
+            to={cartRoute.path}
+            className="relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-white/75 transition-colors hover:bg-white/10 hover:text-white"
+            aria-label={`Cart, ${itemCount} ${itemCount === 1 ? "item" : "items"}`}
+            onClick={closeMobileMenu}
+          >
+            <svg
+              aria-hidden="true"
+              viewBox="0 0 24 24"
+              className="h-5 w-5"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.8"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <circle cx="9" cy="20" r="1" />
+              <circle cx="18" cy="20" r="1" />
+              <path d="M3 4h2l2.4 10.2a2 2 0 0 0 2 1.5h7.8a2 2 0 0 0 2-1.6L21 7H6" />
+            </svg>
+            {itemCount > 0 ? (
+              <span className="absolute -right-1 -top-1 grid min-h-5 min-w-5 place-items-center rounded-full bg-emerald-500 px-1 text-[10px] font-bold leading-none text-black">
+                {itemCount > 99 ? "99+" : itemCount}
+              </span>
+            ) : null}
+          </Link>
+        ) : null}
+        {isAuthenticated ? (
+          <Link
+            to="/my-account"
+            className="relative z-10 flex h-10 shrink-0 items-center gap-2 rounded-full px-3 text-white/75 transition-colors hover:bg-white/10 hover:text-white"
+            aria-label="My account"
+            title={`My account - ${user?.email || user?.name || "ZVolta"}`}
+            onClick={closeMobileMenu}
+          >
+            <svg
+              aria-hidden="true"
+              viewBox="0 0 24 24"
+              className="h-5 w-5"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.8"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <circle cx="12" cy="8" r="3.4" />
+              <path d="M4.5 20a7.5 7.5 0 0 1 15 0" />
+            </svg>
+            <span className="hidden text-xs font-semibold sm:block">
+              My account
+            </span>
+          </Link>
+        ) : (
+          <Link
+            to="/login"
+            className="relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-white/75 transition-colors hover:bg-white/10 hover:text-white"
+            aria-label="Sign in"
+            title="Sign in"
+            onClick={closeMobileMenu}
+          >
+            <svg
+              aria-hidden="true"
+              viewBox="0 0 24 24"
+              className="h-5 w-5"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.8"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <circle cx="12" cy="8" r="3.4" />
+              <path d="M4.5 20a7.5 7.5 0 0 1 15 0" />
+            </svg>
+          </Link>
+        )}
         <div className="mx-1 h-5 w-px bg-white/10" />
 
         <button

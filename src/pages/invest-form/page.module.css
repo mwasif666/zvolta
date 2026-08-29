@@ -3,9 +3,6 @@
   min-width: 0;
 }
 
-:global(body) {
-  font-family: "Questrial", sans-serif;
-}
 :global(.form-container-bg) {
   /* A more subtle, professional gradient for the background */
   background-image: url("/img/twisty-gradient.jpg");

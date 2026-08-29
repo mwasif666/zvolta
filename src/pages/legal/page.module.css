@@ -7,7 +7,7 @@
    stays mounted after navigation, so html/body rules here would leak into every
    page visited after Policy. */
 :global(.policy-page) {
-  font-family: "Questrial", sans-serif;
+  font-family: var(--font-sans);
   background-color: #ffffff;
   color: #2a3b1e;
   position: relative;
@@ -106,7 +106,7 @@
   font-size: 1.125rem;
   font-weight: 600;
   color: #1f2937;
-  font-family: "Questrial", sans-serif;
+  font-family: var(--font-sans);
 }
 
 :global(.accordion-icon) {

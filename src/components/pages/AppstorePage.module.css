@@ -16,7 +16,7 @@
     radial-gradient(circle at 10% 4%, rgba(22, 163, 74, 0.2), transparent 24%),
     linear-gradient(180deg, #03130c 0%, #04110c 52%, #071009 100%);
   color: #ffffff;
-  font-family: "Inter Tight", "Questrial", "Inter", sans-serif;
+  font-family: var(--font-sans);
   font-size: 16px;
   font-weight: 400;
   letter-spacing: -0.01em;

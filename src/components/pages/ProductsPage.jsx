@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import { commerceApi } from "../../services/api";
 import { useCommerceData } from "../../hooks/useCommerceData";
 import { useCart } from "../../context/CartContext";
+import { parseChargerPower } from "../../lib/chargerCatalog";
 import { SmartLink } from "../SmartLink";
 import {
   defaultStorefrontSettings,
@@ -9,47 +10,110 @@ import {
   useStorefrontSettings,
 } from "../../context/StorefrontSettingsContext";
 
+const iconProps = {
+  viewBox: "0 0 24 24",
+  fill: "none",
+  stroke: "currentColor",
+  strokeWidth: 1.8,
+  strokeLinecap: "round",
+  strokeLinejoin: "round",
+  "aria-hidden": "true",
+};
+
 export function formatPkr(value) {
   return formatStoreCurrency(value, defaultStorefrontSettings.currency);
 }
 
-export function ProductCard({ product }) {
+export function ProductCard({ product, index = 0 }) {
   const { addItem } = useCart();
   const { settings } = useStorefrontSettings();
+  const [added, setAdded] = useState(false);
   const price = product.discountPrice || product.price;
+  const isAvailable = Number(product.stock) > 0;
+  const power =
+    parseChargerPower(product.title) ?? parseChargerPower(product.sku);
+  const detailHref = `/products/${product.slug}`;
+  const cartLabel = isAvailable
+    ? added
+      ? `${product.title} added to cart`
+      : `Add ${product.title} to cart`
+    : `${product.title} is out of stock`;
 
   return (
     <article className="commerce-card">
-      <SmartLink
-        className="commerce-card__image"
-        href={`/products/${product.slug}`}
-      >
+      <span className="commerce-card__index">
+        {String(index + 1).padStart(2, "0")}
+      </span>
+      {product.isNewArrival ? (
+        <span className="commerce-card__badge">New</span>
+      ) : null}
+      <div className="commerce-card__intro">
+        <h2>
+          <SmartLink href={detailHref}>{product.title}</SmartLink>
+        </h2>
+        <p>{product.shortDescription || product.description}</p>
+      </div>
+      <SmartLink className="commerce-card__art" href={detailHref}>
         <img
           src={product.images?.[0]?.url}
           alt={product.images?.[0]?.alt || product.title}
         />
-        {product.isNewArrival ? <span>New</span> : null}
       </SmartLink>
-      <div className="commerce-card__body">
-        <p>{product.category?.name || "EV charging"}</p>
-        <h2>
-          <SmartLink href={`/products/${product.slug}`}>
-            {product.title}
-          </SmartLink>
-        </h2>
-        <div className="commerce-card__price">
-          <strong>{formatStoreCurrency(price, settings.currency)}</strong>
-          {product.discountPrice ? (
-            <del>{formatStoreCurrency(product.price, settings.currency)}</del>
-          ) : null}
+      <div className="commerce-card__specs">
+        <div className="commerce-card__spec-row">
+          <span>{power === null ? "Model" : "Power"}</span>
+          <strong>{power === null ? product.sku : `Upto ${power}kW`}</strong>
         </div>
+        <div className="commerce-card__spec-row">
+          <span>Category</span>
+          <strong>{product.category?.name || "EV charging"}</strong>
+        </div>
+        <div className="commerce-card__spec-row">
+          <span>Availability</span>
+          <strong>
+            {isAvailable ? `${product.stock} in stock` : "Out of stock"}
+          </strong>
+        </div>
+        <div className="commerce-card__spec-row">
+          <span>Price</span>
+          <strong>
+            {formatStoreCurrency(price, settings.currency)}
+            {product.discountPrice ? (
+              <del>{formatStoreCurrency(product.price, settings.currency)}</del>
+            ) : null}
+          </strong>
+        </div>
+      </div>
+      <div className="commerce-card__actions">
+        <SmartLink className="commerce-card__learn" href={detailHref}>
+          View details
+          <svg {...iconProps} className="h-4 w-4">
+            <path d="M5 12h14" />
+            <path d="m13 6 6 6-6 6" />
+          </svg>
+        </SmartLink>
         <button
           type="button"
-          disabled={!product.stock}
-          onClick={() => addItem(product)}
+          className={`commerce-card__cart ${added ? "is-added" : ""}`}
+          aria-label={cartLabel}
+          title={cartLabel}
+          disabled={!isAvailable}
+          onClick={() => {
+            addItem(product);
+            setAdded(true);
+          }}
         >
-          {product.stock ? "Add to cart" : "Out of stock"}
-          <span>↗</span>
+          {added ? (
+            <svg {...iconProps} className="h-5 w-5">
+              <path d="m5 12 4 4L19 6" />
+            </svg>
+          ) : (
+            <svg {...iconProps} className="h-5 w-5">
+              <circle cx="9" cy="20" r="1" />
+              <circle cx="18" cy="20" r="1" />
+              <path d="M3 4h2l2.4 10.2a2 2 0 0 0 2 1.5h7.8a2 2 0 0 0 2-1.6L21 7H6" />
+            </svg>
+          )}
         </button>
       </div>
     </article>
@@ -64,9 +128,24 @@ export default function ProductsPage() {
     [],
   );
   const categories = useCommerceData(commerceApi.categories, []);
-  const activeCategories = (categories.data || []).filter(
-    (item) => item.isActive !== false,
-  );
+  const filters = useMemo(() => {
+    const counts = new Map();
+
+    (products.data || []).forEach((product) => {
+      const slug = product.category?.slug;
+      if (slug) counts.set(slug, (counts.get(slug) || 0) + 1);
+    });
+
+    return (categories.data || [])
+      .filter((item) => item.isActive !== false)
+      .filter((item) => !products.data || counts.has(item.slug))
+      .sort(
+        (a, b) =>
+          Number(a.sortOrder || 0) - Number(b.sortOrder || 0) ||
+          String(a.name).localeCompare(String(b.name)),
+      )
+      .map((item) => ({ ...item, count: counts.get(item.slug) || 0 }));
+  }, [categories.data, products.data]);
   const filtered = useMemo(
     () =>
       (products.data || []).filter((product) => {
@@ -108,16 +187,26 @@ export default function ProductsPage() {
               onClick={() => setCategory("")}
             >
               All
+              {products.data ? <small>{products.data.length}</small> : null}
             </button>
-            {activeCategories.map((item) => (
+            {filters.map((item) => (
               <button
                 className={category === item.slug ? "active" : ""}
                 key={item._id}
                 onClick={() => setCategory(item.slug)}
               >
                 {item.name}
+                <small>{item.count}</small>
               </button>
             ))}
+            {categories.loading ? (
+              <span className="commerce-filters__state">Loading filters…</span>
+            ) : null}
+            {categories.error ? (
+              <span className="commerce-filters__state">
+                Categories unavailable right now.
+              </span>
+            ) : null}
           </div>
           <label className="commerce-search">
             <span className="sr-only">Search products</span>
@@ -140,8 +229,8 @@ export default function ProductsPage() {
         ) : null}
         {!products.loading && !products.error ? (
           <div className="commerce-grid">
-            {filtered.map((product) => (
-              <ProductCard product={product} key={product._id} />
+            {filtered.map((product, index) => (
+              <ProductCard product={product} index={index} key={product._id} />
             ))}
           </div>
         ) : null}

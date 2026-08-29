@@ -11,6 +11,7 @@ import { PageSeo } from "./components/seo/PageSeo";
 import { routeEntries } from "./routes";
 import { useLegacyPageRuntime } from "./lib/legacy-page-runtime";
 import { useRouteAnimationRefresh } from "./hooks/useRouteAnimationRefresh";
+import { AuthProvider } from "./context/AuthContext";
 import { CartProvider } from "./context/CartContext";
 import { StorefrontSettingsProvider } from "./context/StorefrontSettingsContext";
 
@@ -359,9 +360,11 @@ function AppRouter() {
     <HelmetProvider>
       <BrowserRouter>
         <StorefrontSettingsProvider>
-          <CartProvider>
-            <AppRoutes />
-          </CartProvider>
+          <AuthProvider>
+            <CartProvider>
+              <AppRoutes />
+            </CartProvider>
+          </AuthProvider>
         </StorefrontSettingsProvider>
       </BrowserRouter>
     </HelmetProvider>

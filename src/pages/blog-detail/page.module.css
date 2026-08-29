@@ -25,7 +25,7 @@
     ),
     var(--blog-bg);
   color: #ffffff;
-  font-family: "DM Sans", "Questrial", system-ui, sans-serif;
+  font-family: var(--font-sans);
 }
 
 :global(.blog-detail *) {

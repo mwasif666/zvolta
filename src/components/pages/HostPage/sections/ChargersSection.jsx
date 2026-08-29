@@ -5,11 +5,54 @@ import {
   SmartLink,
   chargerOptionBenefits,
   chargerOptionCards,
+  useState,
 } from "../../HostPage.shared.jsx";
+import { useCart } from "../../../../context/CartContext";
+import {
+  formatStoreCurrency,
+  useStorefrontSettings,
+} from "../../../../context/StorefrontSettingsContext";
+import { useCommerceData } from "../../../../hooks/useCommerceData";
+import { findChargerProduct } from "../../../../lib/chargerCatalog";
+import { commerceApi } from "../../../../services/api";
+
+function ChargerCartButton({ product }) {
+  const { addItem } = useCart();
+  const [added, setAdded] = useState(false);
+  const isAvailable = Number(product.stock) > 0;
+  const label = isAvailable
+    ? added
+      ? `${product.title} added to cart`
+      : `Add ${product.title} to cart`
+    : `${product.title} is out of stock`;
+
+  return (
+    <button
+      type="button"
+      className={`host-charger-cart ${added ? "is-added" : ""}`}
+      aria-label={label}
+      title={label}
+      disabled={!isAvailable}
+      onClick={() => {
+        addItem(product);
+        setAdded(true);
+      }}
+    >
+      <Icon name={added ? "check" : "cart"} className="h-5 w-5" />
+    </button>
+  );
+}
+
 export function ChargersSection({
   setShowInstallationOptions,
   showInstallationOptions,
 }) {
+  const { settings } = useStorefrontSettings();
+  const catalog = useCommerceData(
+    () => commerceApi.allProducts({ sort: "featured" }),
+    [],
+  );
+
   return (
     <section id="chargers" className="host-charger-options">
       <div className="host-container">
@@ -39,6 +82,14 @@ export function ChargersSection({
 
           <div className="host-charger-grid">
             {chargerOptionCards.map((charger, index) => {
+              const product = findChargerProduct(catalog.data, charger.title);
+              const price = product
+                ? formatStoreCurrency(
+                    product.discountPrice || product.price,
+                    settings.currency,
+                  )
+                : charger.price;
+
               return (
                 <Reveal key={charger.title} delay={index * 0.08}>
                   <article
@@ -88,16 +139,19 @@ export function ChargersSection({
                       </div>
                       <div className="host-charger-spec-row">
                         <span>Price</span>
-                        <strong>{charger.price}</strong>
+                        <strong>{price}</strong>
                       </div>
                     </div>
-                    <SmartLink
-                      href={charger.href}
-                      className={`host-charger-learn ${charger.popular ? "is-primary" : ""}`}
-                    >
-                      View details
-                      <Icon name="arrow" className="h-4 w-4" />
-                    </SmartLink>
+                    <div className="host-charger-actions">
+                      <SmartLink
+                        href={charger.href}
+                        className={`host-charger-learn ${charger.popular ? "is-primary" : ""}`}
+                      >
+                        View details
+                        <Icon name="arrow" className="h-4 w-4" />
+                      </SmartLink>
+                      {product ? <ChargerCartButton product={product} /> : null}
+                    </div>
                   </article>
                 </Reveal>
               );

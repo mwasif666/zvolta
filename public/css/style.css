@@ -14,7 +14,7 @@ html {
 }
 
 body {
-  font-family: "Inter Tight", sans-serif;
+  font-family: var(--font-sans);
   width: 100%;
   min-width: 0;
   min-height: 100%;
@@ -173,7 +173,7 @@ body {
 
 /* Big Number styling */
 .sleek-number {
-  font-family: "Inter Tight", sans-serif;
+  font-family: var(--font-sans);
   font-weight: 800;
   line-height: 1;
   position: absolute;

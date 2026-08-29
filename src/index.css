@@ -3,6 +3,20 @@
 @tailwind utilities;
 
 @layer base {
+  /* --font-sans / --font-mono are defined in index.html so head-linked CSS can
+     resolve them on first paint. Every stylesheet points at these tokens instead
+     of naming a family, so no route can introduce its own. */
+  html,
+  body,
+  #root,
+  button,
+  input,
+  optgroup,
+  select,
+  textarea {
+    font-family: var(--font-sans);
+  }
+
   html {
     width: 100%;
     min-height: 100%;

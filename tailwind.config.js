@@ -26,10 +26,12 @@ export default {
       "3xl": "1920px",
     },
     extend: {
+      // font-sans / font-display / font-mono all resolve to the tokens defined in
+      // index.html, so the utilities can never disagree with the stylesheets.
       fontFamily: {
-        sans: ["Inter Tight", "Questrial", "Inter", "sans-serif"],
-        display: ["Inter Tight", "Questrial", "sans-serif"],
-        mono: ["JetBrains Mono", "monospace"],
+        sans: "var(--font-sans)",
+        display: "var(--font-sans)",
+        mono: "var(--font-mono)",
       },
       colors: {
         "z-black": "#0a0a0a",

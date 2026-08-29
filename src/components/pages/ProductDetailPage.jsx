@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useCart } from "../../context/CartContext";
 import { useCommerceData } from "../../hooks/useCommerceData";
 import { commerceApi } from "../../services/api";
@@ -15,7 +15,9 @@ export default function ProductDetailPage() {
   const { slug } = useParams();
   const { addItem } = useCart();
   const { settings } = useStorefrontSettings();
+  const navigate = useNavigate();
   const [quantity, setQuantity] = useState(1);
+  const [added, setAdded] = useState(false);
   const product = useCommerceData(() => commerceApi.product(slug), [slug]);
 
   if (product.loading)
@@ -26,6 +28,17 @@ export default function ProductDetailPage() {
     );
   if (product.error || !product.data) return <NotFoundPage />;
   const item = product.data;
+  const isAvailable = Number(item.stock) > 0;
+
+  function addToCart() {
+    addItem(item, quantity);
+    setAdded(true);
+  }
+
+  function buyNow() {
+    addItem(item, quantity);
+    navigate("/checkout");
+  }
 
   return (
     <main className="commerce-page product-detail">
@@ -65,7 +78,7 @@ export default function ProductDetailPage() {
               <del>{formatStoreCurrency(item.price, settings.currency)}</del>
             ) : null}
           </div>
-          <div className="product-detail__buy">
+          <div className="product-detail__purchase">
             <label>
               Quantity
               <input
@@ -78,13 +91,30 @@ export default function ProductDetailPage() {
                 }
               />
             </label>
-            <button
-              disabled={!item.stock}
-              onClick={() => addItem(item, quantity)}
-            >
-              {item.stock ? "Add to cart" : "Out of stock"}
-              <span>↗</span>
-            </button>
+            <div className="product-detail__actions">
+              <button
+                className="commerce-action commerce-action--secondary"
+                type="button"
+                disabled={!isAvailable}
+                onClick={addToCart}
+              >
+                {isAvailable
+                  ? added
+                    ? "Added to cart"
+                    : "Add to cart"
+                  : "Out of stock"}
+                <span aria-hidden="true">{added ? "✓" : "+"}</span>
+              </button>
+              <button
+                className="commerce-action commerce-action--primary"
+                type="button"
+                disabled={!isAvailable}
+                onClick={buyNow}
+              >
+                {isAvailable ? "Buy now" : "Unavailable"}
+                <span aria-hidden="true">↗</span>
+              </button>
+            </div>
           </div>
           <p className="product-detail__stock">
             {item.stock > 0

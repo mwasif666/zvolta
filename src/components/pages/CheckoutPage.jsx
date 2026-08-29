@@ -5,15 +5,48 @@ import {
   formatStoreCurrency,
   useStorefrontSettings,
 } from "../../context/StorefrontSettingsContext";
-import { commerceApi } from "../../services/api";
+import { useLiveCartItems } from "../../hooks/useLiveCartItems";
+import { commerceApi, shippingApi } from "../../services/api";
 import { SmartLink } from "../SmartLink";
 
 export default function CheckoutPage() {
-  const { clearCart, items, subtotal } = useCart();
+  const { clearCart, coupon, discountTotal, isServerCart, items, subtotal } =
+    useCart();
+  const { hasBlockingIssues, liveItems, liveSubtotal } = useLiveCartItems();
   const { settings } = useStorefrontSettings();
   const formatPkr = (value) => formatStoreCurrency(value, settings.currency);
   const navigate = useNavigate();
   const [status, setStatus] = useState({ submitting: false, error: "" });
+  // The order endpoint prices delivery server-side, so the same endpoint is
+  // asked for a quote here rather than guessing a figure in the summary.
+  const [delivery, setDelivery] = useState({ quoted: false, fee: 0, city: "" });
+
+  const payableSubtotal = isServerCart ? subtotal : liveSubtotal;
+  const grandTotal = Math.max(
+    0,
+    payableSubtotal - discountTotal + (delivery.quoted ? delivery.fee : 0),
+  );
+
+  async function quoteDelivery(city) {
+    const cleanCity = String(city || "").trim();
+
+    if (!cleanCity || cleanCity === delivery.city) return;
+
+    try {
+      const result = await shippingApi.calculate({
+        country: "Pakistan",
+        city: cleanCity,
+        subtotal: payableSubtotal,
+      });
+      setDelivery({
+        quoted: true,
+        fee: Number(result.data.shippingFee || 0),
+        city: cleanCity,
+      });
+    } catch {
+      setDelivery({ quoted: false, fee: 0, city: "" });
+    }
+  }
 
   async function submit(event) {
     event.preventDefault();
@@ -25,6 +58,7 @@ export default function CheckoutPage() {
           product: item.productId,
           quantity: item.quantity,
         })),
+        couponCode: coupon?.code || "",
         customer: {
           name: fields.fullName,
           email: fields.email,
@@ -82,15 +116,32 @@ export default function CheckoutPage() {
               <div className="checkout-fields">
                 <label>
                   Full name
-                  <input name="fullName" required autoComplete="name" />
+                  <input
+                    name="fullName"
+                    required
+                    autoComplete="name"
+                    placeholder="Ahmed Raza"
+                  />
                 </label>
                 <label>
                   Phone
-                  <input name="phone" required autoComplete="tel" />
+                  <input
+                    name="phone"
+                    type="tel"
+                    required
+                    autoComplete="tel"
+                    inputMode="tel"
+                    placeholder="0300 1234567"
+                  />
                 </label>
                 <label className="wide">
                   Email
-                  <input name="email" type="email" autoComplete="email" />
+                  <input
+                    name="email"
+                    type="email"
+                    autoComplete="email"
+                    placeholder="ahmed.raza@example.com"
+                  />
                 </label>
               </div>
             </div>
@@ -106,23 +157,42 @@ export default function CheckoutPage() {
                     name="addressLine1"
                     required
                     autoComplete="street-address"
+                    placeholder="House 24, Street 7, DHA Phase 5"
                   />
                 </label>
                 <label className="wide">
                   Apartment, floor, landmark (optional)
-                  <input name="addressLine2" />
+                  <input
+                    name="addressLine2"
+                    placeholder="Flat 3-B, near Jinnah Park"
+                  />
                 </label>
                 <label>
                   City
-                  <input name="city" required autoComplete="address-level2" />
+                  <input
+                    name="city"
+                    required
+                    autoComplete="address-level2"
+                    placeholder="Lahore"
+                    onBlur={(event) => quoteDelivery(event.target.value)}
+                  />
                 </label>
                 <label>
                   Province
-                  <input name="state" autoComplete="address-level1" />
+                  <input
+                    name="state"
+                    autoComplete="address-level1"
+                    placeholder="Punjab"
+                  />
                 </label>
                 <label>
                   Postal code
-                  <input name="postalCode" autoComplete="postal-code" />
+                  <input
+                    name="postalCode"
+                    autoComplete="postal-code"
+                    inputMode="numeric"
+                    placeholder="54000"
+                  />
                 </label>
               </div>
             </div>
@@ -154,7 +224,7 @@ export default function CheckoutPage() {
                 Order notes
                 <textarea
                   name="notes"
-                  placeholder="Installation or delivery notes (optional)"
+                  placeholder="e.g. Deliver after 5pm, installation on the ground floor parking"
                 />
               </label>
             </div>
@@ -162,35 +232,85 @@ export default function CheckoutPage() {
         </div>
         <aside className="cart-summary checkout-summary">
           <p className="commerce-kicker">Your order</p>
-          {items.map((item) => (
-            <div className="checkout-line" key={item.productId}>
-              <img src={item.image} alt="" />
-              <span>
-                <strong>{item.title}</strong>
-                <small>Qty {item.quantity}</small>
-              </span>
-              <b>{formatPkr(item.price * item.quantity)}</b>
-            </div>
-          ))}
+          {liveItems.map((item) => {
+            const isInactive = item.unavailable || item.outOfStock;
+
+            return (
+              <div className="checkout-line" key={item.productId}>
+                <img src={item.image} alt="" />
+                <span>
+                  <strong>{item.title}</strong>
+                  <small>
+                    {item.unavailable
+                      ? "No longer sold"
+                      : item.outOfStock
+                        ? "Out of stock"
+                        : item.exceedsStock
+                          ? `Only ${item.stock} left`
+                          : `Qty ${item.quantity}`}
+                  </small>
+                </span>
+                <b>
+                  {isInactive ? "—" : formatPkr(item.price * item.quantity)}
+                </b>
+              </div>
+            );
+          })}
           <hr />
           <div>
             <span>Subtotal</span>
-            <strong>{formatPkr(subtotal)}</strong>
+            <strong>{formatPkr(payableSubtotal)}</strong>
           </div>
+          {discountTotal > 0 ? (
+            <div className="cart-summary__save">
+              <span>Coupon {coupon?.code}</span>
+              <strong>-{formatPkr(discountTotal)}</strong>
+            </div>
+          ) : null}
           <div>
             <span>Delivery</span>
-            <span>Calculated by location</span>
+            {delivery.quoted ? (
+              <strong>
+                {delivery.fee > 0 ? formatPkr(delivery.fee) : "Free"}
+              </strong>
+            ) : (
+              <span>Enter your city</span>
+            )}
+          </div>
+          <hr />
+          <div className="cart-summary__total">
+            <span>Total</span>
+            <strong>{formatPkr(grandTotal)}</strong>
           </div>
           {status.error ? (
             <p className="checkout-error">{status.error}</p>
           ) : null}
+          {hasBlockingIssues ? (
+            <p className="checkout-error">
+              Stock or pricing changed for an item in your order.{" "}
+              <SmartLink href="/cart">Review your cart</SmartLink> before
+              placing it.
+            </p>
+          ) : null}
           <button
             className="commerce-link-button"
             type="submit"
-            disabled={status.submitting}
+            disabled={status.submitting || hasBlockingIssues}
           >
             {status.submitting ? "Placing order…" : "Place order"}
-            <span>↗</span>
+            <svg
+              viewBox="0 0 24 24"
+              className="h-4 w-4"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={1.8}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M5 12h14" />
+              <path d="m13 6 6 6-6 6" />
+            </svg>
           </button>
           <small>
             By ordering, you confirm that the delivery details are correct.

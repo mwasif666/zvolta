@@ -35,6 +35,9 @@ const routeLabels = {
   cart: "Cart",
   checkout: "Checkout",
   "order-success": "Order confirmed",
+  login: "Sign in",
+  register: "Create account",
+  "my-account": "My Account",
   "invest-form": "Investor Enquiry",
   vehicles: "Electric Vehicles",
 };
@@ -64,6 +67,9 @@ const hiddenNavigationPageIds = new Set([
   "product-detail",
   "checkout",
   "order-success",
+  "login",
+  "register",
+  "my-account",
 ]);
 
 function labelFromPageId(pageId) {

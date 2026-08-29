@@ -1,75 +1,75 @@
 <!doctype html>
 <html lang="en" data-page="index.html">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>ZVolta - Charging Should Feel Easy</title>
-    <meta
-      name="description"
-      content="ZVolta builds the tools that support people, places, and all the possibilities ahead in the electric future."
-    />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Inter+Tight:ital,wght@0,100..900;1,100..900&family=JetBrains+Mono:wght@500&family=Questrial&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
-    <link rel="icon" href="/favicon.ico" sizes="any" />
-    <link rel="manifest" href="/site.webmanifest" />
-    <link href="/css/style.css" rel="stylesheet" />
-  </head>
-  <body
-    class="bg-z-black text-z-black font-sans antialiased selection:bg-z-green selection:text-white"
-    style="overscroll-behavior: none"
-  >
-    <div id="root"></div>
-    <script>
-      (() => {
-        const rulerSelector =
-          'body > span[style*="visibility: hidden"][style*="position: absolute"][style*="white-space: nowrap"]';
-        const heroWords = new Set(["Charging", "Investing", "Driving"]);
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ZVolta - Charging Should Feel Easy</title>
+  <meta name="description"
+    content="ZVolta builds the tools that support people, places, and all the possibilities ahead in the electric future." />
 
-        const cleanLegacyHeroRuler = () => {
-          const hasActiveHero = Boolean(
-            document.getElementById("hero-changing-word"),
-          );
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&family=JetBrains+Mono:wght@500&display=swap"
+    rel="stylesheet" />
+  <style>
+    /* Typography tokens live here so the stylesheets linked below this point
+         resolve them on first paint. Nothing else in the app names a family. */
+    :root {
+      --font-sans: "Inter Tight", sans-serif;
+      --font-mono: "Inter Tight", sans-serif;
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <link href="/css/style.css" rel="stylesheet" />
+</head>
 
-          document.querySelectorAll(rulerSelector).forEach((ruler) => {
-            if (!heroWords.has(ruler.textContent?.trim())) {
-              return;
-            }
+<body class="bg-z-black text-z-black font-sans antialiased selection:bg-z-green selection:text-white"
+  style="overscroll-behavior: none">
+  <div id="root"></div>
+  <script>
+    (() => {
+      const rulerSelector =
+        'body > span[style*="visibility: hidden"][style*="position: absolute"][style*="white-space: nowrap"]';
+      const heroWords = new Set(["Charging", "Investing", "Driving"]);
 
-            if (!hasActiveHero) {
-              ruler.remove();
-              return;
-            }
+      const cleanLegacyHeroRuler = () => {
+        const hasActiveHero = Boolean(
+          document.getElementById("hero-changing-word"),
+        );
 
-            // The legacy hero uses this node only to measure word width. Keeping
-            // it fixed at the viewport origin prevents its static body position
-            // from extending the document below the footer.
-            ruler.style.position = "fixed";
-            ruler.style.top = "0";
-            ruler.style.left = "0";
-            ruler.style.margin = "0";
-            ruler.style.pointerEvents = "none";
-            ruler.style.zIndex = "-1";
-          });
-        };
+        document.querySelectorAll(rulerSelector).forEach((ruler) => {
+          if (!heroWords.has(ruler.textContent?.trim())) {
+            return;
+          }
 
-        const observer = new MutationObserver(cleanLegacyHeroRuler);
-        observer.observe(document.body, { childList: true, subtree: true });
-        cleanLegacyHeroRuler();
-      })();
-    </script>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+          if (!hasActiveHero) {
+            ruler.remove();
+            return;
+          }
+
+          // The legacy hero uses this node only to measure word width. Keeping
+          // it fixed at the viewport origin prevents its static body position
+          // from extending the document below the footer.
+          ruler.style.position = "fixed";
+          ruler.style.top = "0";
+          ruler.style.left = "0";
+          ruler.style.margin = "0";
+          ruler.style.pointerEvents = "none";
+          ruler.style.zIndex = "-1";
+        });
+      };
+
+      const observer = new MutationObserver(cleanLegacyHeroRuler);
+      observer.observe(document.body, { childList: true, subtree: true });
+      cleanLegacyHeroRuler();
+    })();
+  </script>
+  <script type="module" src="/src/main.jsx"></script>
+</body>
+
 </html>

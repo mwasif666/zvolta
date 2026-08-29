@@ -1,6 +1,6 @@
   /* Manrope font for a modern, clean look */
         body {
-            font-family: 'Questrial', sans-serif;
+            font-family: var(--font-sans);
             background-color: #f8f9fa;
         }
 

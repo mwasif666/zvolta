@@ -1040,6 +1040,15 @@ function Icon({ name, className = "h-5 w-5" }) {
       </svg>
     );
   }
+  if (name === "cart") {
+    return (
+      <svg {...props}>
+        <circle cx="9" cy="20" r="1" />
+        <circle cx="18" cy="20" r="1" />
+        <path d="M3 4h2l2.4 10.2a2 2 0 0 0 2 1.5h7.8a2 2 0 0 0 2-1.6L21 7H6" />
+      </svg>
+    );
+  }
   if (name === "shopping") {
     return (
       <svg {...props}>

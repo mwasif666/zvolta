@@ -31,6 +31,9 @@ import productDetailPageData from "./data/pages/product-detail/pageData";
 import cartPageData from "./data/pages/cart/pageData";
 import checkoutPageData from "./data/pages/checkout/pageData";
 import orderSuccessPageData from "./data/pages/order-success/pageData";
+import loginPageData from "./data/pages/login/pageData";
+import registerPageData from "./data/pages/register/pageData";
+import myAccountPageData from "./data/pages/my-account/pageData";
 
 export const routeEntries = [
   {
@@ -62,6 +65,24 @@ export const routeEntries = [
     paths: orderSuccessPageData.paths,
     meta: orderSuccessPageData.meta,
     load: () => import("./pages/order-success/index.jsx"),
+  },
+  {
+    pageId: loginPageData.pageId,
+    paths: loginPageData.paths,
+    meta: loginPageData.meta,
+    load: () => import("./pages/login/index.jsx"),
+  },
+  {
+    pageId: registerPageData.pageId,
+    paths: registerPageData.paths,
+    meta: registerPageData.meta,
+    load: () => import("./pages/register/index.jsx"),
+  },
+  {
+    pageId: myAccountPageData.pageId,
+    paths: myAccountPageData.paths,
+    meta: myAccountPageData.meta,
+    load: () => import("./pages/my-account/index.jsx"),
   },
   {
     pageId: notFoundPageData.pageId,

@@ -172,6 +172,15 @@ export function SiteFooter() {
               >
                 Partners
               </Link>
+              <Link
+                to="/products"
+                className="hover:text-white transition-colors"
+              >
+                Shop
+              </Link>
+              <Link to="/cart" className="hover:text-white transition-colors">
+                Cart
+              </Link>
             </div>
             <div className="flex flex-col gap-2">
               <PolicySectionLink sectionId="terms-and-conditions">

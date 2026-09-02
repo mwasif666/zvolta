@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 import { useCart } from "../../context/CartContext";
 import {
   formatStoreCurrency,
@@ -9,44 +10,109 @@ import { useLiveCartItems } from "../../hooks/useLiveCartItems";
 import { commerceApi, shippingApi } from "../../services/api";
 import { SmartLink } from "../SmartLink";
 
+const EMPTY_DETAILS = {
+  fullName: "",
+  phone: "",
+  email: "",
+  addressLine1: "",
+  addressLine2: "",
+  city: "",
+  state: "",
+  postalCode: "",
+};
+
+// Only what the saved profile actually carries is copied across; anything the
+// account is missing stays blank so the shopper can type it in.
+function detailsFromProfile(user) {
+  if (!user) return null;
+
+  const address =
+    user.addresses?.find((item) => item.isDefault) || user.addresses?.[0] || {};
+
+  return {
+    fullName: address.fullName || user.name || "",
+    phone: address.phone || user.phone || "",
+    email: user.email || "",
+    addressLine1: address.addressLine1 || "",
+    addressLine2: address.addressLine2 || "",
+    city: address.city || "",
+    state: address.state || "",
+    postalCode: address.postalCode || "",
+  };
+}
+
 export default function CheckoutPage() {
   const { clearCart, coupon, discountTotal, isServerCart, items, subtotal } =
     useCart();
   const { hasBlockingIssues, liveItems, liveSubtotal } = useLiveCartItems();
   const { settings } = useStorefrontSettings();
+  const { user } = useAuth();
   const formatPkr = (value) => formatStoreCurrency(value, settings.currency);
   const navigate = useNavigate();
   const [status, setStatus] = useState({ submitting: false, error: "" });
   // The order endpoint prices delivery server-side, so the same endpoint is
   // asked for a quote here rather than guessing a figure in the summary.
   const [delivery, setDelivery] = useState({ quoted: false, fee: 0, city: "" });
+  // The contact and address inputs are controlled because the signed-in
+  // profile only lands once `/auth/me` resolves, which is after first render.
+  const [details, setDetails] = useState(EMPTY_DETAILS);
+  const [filledFrom, setFilledFrom] = useState("");
 
   const payableSubtotal = isServerCart ? subtotal : liveSubtotal;
   const grandTotal = Math.max(
     0,
     payableSubtotal - discountTotal + (delivery.quoted ? delivery.fee : 0),
   );
+  const profileDetails = useMemo(() => detailsFromProfile(user), [user]);
 
-  async function quoteDelivery(city) {
-    const cleanCity = String(city || "").trim();
+  const quoteDelivery = useCallback(
+    async (city) => {
+      const cleanCity = String(city || "").trim();
 
-    if (!cleanCity || cleanCity === delivery.city) return;
+      if (!cleanCity || cleanCity === delivery.city) return;
 
-    try {
-      const result = await shippingApi.calculate({
-        country: "Pakistan",
-        city: cleanCity,
-        subtotal: payableSubtotal,
-      });
-      setDelivery({
-        quoted: true,
-        fee: Number(result.data.shippingFee || 0),
-        city: cleanCity,
-      });
-    } catch {
-      setDelivery({ quoted: false, fee: 0, city: "" });
-    }
-  }
+      try {
+        const result = await shippingApi.calculate({
+          country: "Pakistan",
+          city: cleanCity,
+          subtotal: payableSubtotal,
+        });
+        setDelivery({
+          quoted: true,
+          fee: Number(result.data.shippingFee || 0),
+          city: cleanCity,
+        });
+      } catch {
+        setDelivery({ quoted: false, fee: 0, city: "" });
+      }
+    },
+    [delivery.city, payableSubtotal],
+  );
+
+  // Saved details are applied once per signed-in account, so a shopper who
+  // edits a prefilled field does not have it overwritten on the next render.
+  useEffect(() => {
+    const accountId = String(user?.id || user?._id || "");
+
+    if (!profileDetails || !accountId || filledFrom === accountId) return;
+
+    setDetails(profileDetails);
+    setFilledFrom(accountId);
+    // The city normally quotes delivery on blur, which a prefilled value never
+    // gets, so the quote is requested here instead.
+    if (profileDetails.city) quoteDelivery(profileDetails.city);
+  }, [filledFrom, profileDetails, quoteDelivery, user]);
+
+  const bindField = (name) => ({
+    name,
+    value: details[name],
+    onChange: (event) =>
+      setDetails((current) => ({ ...current, [name]: event.target.value })),
+  });
+
+  const hasAccountDetails = Boolean(
+    filledFrom && Object.values(profileDetails || {}).some(Boolean),
+  );
 
   async function submit(event) {
     event.preventDefault();
@@ -113,11 +179,19 @@ export default function CheckoutPage() {
             <span>01</span>
             <div>
               <h2>Contact</h2>
+              {hasAccountDetails ? (
+                <p className="checkout-prefill">
+                  Filled in from your saved account details.{" "}
+                  <SmartLink href="/my-account?tab=profile">
+                    Manage them in My account
+                  </SmartLink>
+                </p>
+              ) : null}
               <div className="checkout-fields">
                 <label>
                   Full name
                   <input
-                    name="fullName"
+                    {...bindField("fullName")}
                     required
                     autoComplete="name"
                     placeholder="Ahmed Raza"
@@ -126,7 +200,7 @@ export default function CheckoutPage() {
                 <label>
                   Phone
                   <input
-                    name="phone"
+                    {...bindField("phone")}
                     type="tel"
                     required
                     autoComplete="tel"
@@ -137,8 +211,9 @@ export default function CheckoutPage() {
                 <label className="wide">
                   Email
                   <input
-                    name="email"
+                    {...bindField("email")}
                     type="email"
+                    required
                     autoComplete="email"
                     placeholder="ahmed.raza@example.com"
                   />
@@ -154,7 +229,7 @@ export default function CheckoutPage() {
                 <label className="wide">
                   Address
                   <input
-                    name="addressLine1"
+                    {...bindField("addressLine1")}
                     required
                     autoComplete="street-address"
                     placeholder="House 24, Street 7, DHA Phase 5"
@@ -163,14 +238,14 @@ export default function CheckoutPage() {
                 <label className="wide">
                   Apartment, floor, landmark (optional)
                   <input
-                    name="addressLine2"
+                    {...bindField("addressLine2")}
                     placeholder="Flat 3-B, near Jinnah Park"
                   />
                 </label>
                 <label>
                   City
                   <input
-                    name="city"
+                    {...bindField("city")}
                     required
                     autoComplete="address-level2"
                     placeholder="Lahore"
@@ -180,7 +255,7 @@ export default function CheckoutPage() {
                 <label>
                   Province
                   <input
-                    name="state"
+                    {...bindField("state")}
                     autoComplete="address-level1"
                     placeholder="Punjab"
                   />
@@ -188,7 +263,7 @@ export default function CheckoutPage() {
                 <label>
                   Postal code
                   <input
-                    name="postalCode"
+                    {...bindField("postalCode")}
                     autoComplete="postal-code"
                     inputMode="numeric"
                     placeholder="54000"

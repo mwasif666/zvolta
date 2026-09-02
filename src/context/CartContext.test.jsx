@@ -200,7 +200,7 @@ test("applying a coupon takes the discount from the server cart", async () => {
   expect(screen.getByTestId("total").textContent).toBe("252000");
 });
 
-test("a rejected coupon surfaces the API message and keeps the cart", async () => {
+test("a rejected coupon stays local to the coupon form and keeps the cart", async () => {
   authApi.login.mockResolvedValue({
     data: { _id: "u1", name: "Ahmed", email: "ahmed@example.com" },
     token: "jwt-token",
@@ -220,7 +220,7 @@ test("a rejected coupon surfaces the API message and keeps the cart", async () =
     await expect(cart.applyCoupon("OLD")).rejects.toThrow("Coupon has expired");
   });
 
-  expect(cart.cartError).toBe("Coupon has expired");
+  expect(cart.cartError).toBe("");
   expect(screen.getByTestId("subtotal").textContent).toBe("280000");
 });
 

@@ -1,0 +1,1 @@
+export default { pageId: "track-order", paths: ["/track-order"], meta: { title: "Track Your Order | ZVolta", description: "Track a ZVolta order with your order number and the email or phone you ordered with.", disableLegacyRuntime: true, noIndex: true } };

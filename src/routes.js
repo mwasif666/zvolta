@@ -38,6 +38,7 @@ const routeLabels = {
   login: "Sign in",
   register: "Create account",
   "my-account": "My Account",
+  "track-order": "Track Order",
   "invest-form": "Investor Enquiry",
   vehicles: "Electric Vehicles",
 };
@@ -70,6 +71,7 @@ const hiddenNavigationPageIds = new Set([
   "login",
   "register",
   "my-account",
+  "track-order",
 ]);
 
 function labelFromPageId(pageId) {

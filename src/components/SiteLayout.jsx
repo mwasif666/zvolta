@@ -158,17 +158,10 @@ function SiteHeader() {
         hostingRoute ? { route: hostingRoute, label: "Hosting" } : null,
         chargingRoute ? { route: chargingRoute, label: "Charging" } : null,
         softwareRoute ? { route: softwareRoute, label: "Software" } : null,
-        shopRoute ? { route: shopRoute, label: "Shop" } : null,
-        cartRoute ? { route: cartRoute, label: "Cart" } : null,
       ].filter(Boolean),
-    [
-      cartRoute,
-      chargingRoute,
-      homeRoute,
-      hostingRoute,
-      shopRoute,
-      softwareRoute,
-    ],
+    // Shop and Cart stay out of the expanded menu; the floating nav already
+    // carries both, and the cart pill is the live one with the item count.
+    [chargingRoute, homeRoute, hostingRoute, softwareRoute],
   );
   const menuCards = useMemo(
     () =>

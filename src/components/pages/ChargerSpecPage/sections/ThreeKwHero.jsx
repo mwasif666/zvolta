@@ -2,11 +2,20 @@ import {
   Icon,
   PrimaryButton,
   SecondaryButton,
+  ShopNowButton,
   chargerHeroImages,
   getChargerHeroBenefits,
 } from "../../ChargerSpecPage.shared.jsx";
 
-export function ThreeKwHero({ spec }) {
+// Hero copy and artwork stay part of the hardcoded charger spec. Catalog data
+// only drives the buy action (price, stock, cart), never the visuals.
+export function ThreeKwHero({
+  spec,
+  shopDisabled = false,
+  shopLabel = "Shop now",
+  shopPrice = "",
+  onShopNow,
+}) {
   const heroBenefits = getChargerHeroBenefits(spec);
   const heroImage = chargerHeroImages[spec.power] ?? chargerHeroImages["3kW"];
   return (
@@ -29,6 +38,12 @@ export function ThreeKwHero({ spec }) {
             </span>
           </div>
           <div className="three-hero-actions">
+            <ShopNowButton
+              disabled={shopDisabled}
+              label={shopLabel}
+              price={shopPrice}
+              onClick={onShopNow}
+            />
             <PrimaryButton className="three-primary">
               <Icon name="calendar" className="h-5 w-5" />
               Book Free Installation

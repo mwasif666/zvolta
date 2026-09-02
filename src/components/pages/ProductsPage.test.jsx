@@ -75,7 +75,7 @@ describe("ProductCard purchase actions", () => {
 
     expect(
       screen.getByRole("link", { name: /view details/i }).getAttribute("href"),
-    ).toBe("/products/3kw-smart-ev-charger");
+    ).toBe("/3kw-charger");
   });
 
   it("disables the cart action when the product is out of stock", () => {
@@ -86,7 +86,6 @@ describe("ProductCard purchase actions", () => {
         name: "3kW Smart EV Charger is out of stock",
       }).disabled,
     ).toBe(true);
-    expect(screen.getByText("Out of stock")).toBeTruthy();
   });
 });
 
@@ -100,7 +99,19 @@ describe("ProductCard specification rows", () => {
   it("falls back to the SKU when no power rating is present", () => {
     renderProductCard({ title: "ZVolta Wall Mount", sku: "ZV-MOUNT" });
 
-    expect(screen.getByText("Model")).toBeTruthy();
+    expect(screen.getByText("Power")).toBeTruthy();
     expect(screen.getByText("ZV-MOUNT")).toBeTruthy();
+  });
+
+  it("shows the API-managed host card details", () => {
+    renderProductCard({
+      power: "Upto 3.3kW",
+      bestFor: "Homes and bikes",
+      location: "Indoor parking",
+    });
+
+    expect(screen.getByText("Upto 3.3kW")).toBeTruthy();
+    expect(screen.getByText("Homes and bikes")).toBeTruthy();
+    expect(screen.getByText("Indoor parking")).toBeTruthy();
   });
 });

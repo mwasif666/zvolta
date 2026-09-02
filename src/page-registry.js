@@ -34,6 +34,7 @@ import orderSuccessPageData from "./data/pages/order-success/pageData";
 import loginPageData from "./data/pages/login/pageData";
 import registerPageData from "./data/pages/register/pageData";
 import myAccountPageData from "./data/pages/my-account/pageData";
+import trackOrderPageData from "./data/pages/track-order/pageData";
 
 export const routeEntries = [
   {
@@ -83,6 +84,12 @@ export const routeEntries = [
     paths: myAccountPageData.paths,
     meta: myAccountPageData.meta,
     load: () => import("./pages/my-account/index.jsx"),
+  },
+  {
+    pageId: trackOrderPageData.pageId,
+    paths: trackOrderPageData.paths,
+    meta: trackOrderPageData.meta,
+    load: () => import("./pages/track-order/index.jsx"),
   },
   {
     pageId: notFoundPageData.pageId,

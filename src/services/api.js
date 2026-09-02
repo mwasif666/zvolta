@@ -129,10 +129,12 @@ export const authApi = {
 export const accountApi = {
   orders: () => apiRequest("/orders/my"),
   order: (id) => apiRequest(`/orders/${encodeURIComponent(id)}`),
-  trackOrder: (orderNumber) =>
+  // The order number alone no longer opens an order: the API also wants the
+  // email or phone it was placed with, unless the caller owns the order.
+  trackOrder: ({ orderNumber, contact = "" }) =>
     apiRequest("/orders/track", {
       method: "POST",
-      body: { orderNumber },
+      body: { orderNumber, contact },
     }),
 };
 

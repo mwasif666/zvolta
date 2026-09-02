@@ -46,6 +46,15 @@ function Icon({ name = "check", className = "h-5 w-5" }) {
       </svg>
     );
   }
+  if (name === "cart") {
+    return (
+      <svg {...props}>
+        <circle cx="9" cy="20" r="1" />
+        <circle cx="18" cy="20" r="1" />
+        <path d="M3 4h2l2.4 10.2a2 2 0 0 0 2 1.5h7.8a2 2 0 0 0 2-1.6L21 7H6" />
+      </svg>
+    );
+  }
   if (name === "home") {
     return (
       <svg {...props}>
@@ -434,15 +443,62 @@ const chargerStories = [
     image: "/img/clean-volta.jpg",
   },
 ];
-function PrimaryButton({ href = CONTACT_LINK, children, className = "" }) {
+function PrimaryButton({
+  href = CONTACT_LINK,
+  children,
+  className = "",
+  onClick,
+  disabled = false,
+}) {
+  const classes = `inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-[#16a34a] px-5 py-3 text-sm font-semibold text-black transition duration-300 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-[#16a34a]/45 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:scale-100 ${className}`;
+
+  if (onClick) {
+    return (
+      <button
+        type="button"
+        className={classes}
+        disabled={disabled}
+        onClick={onClick}
+      >
+        {children}
+        <Icon name="arrow" className="h-4 w-4" />
+      </button>
+    );
+  }
+
   return (
-    <SmartLink
-      href={href}
-      className={`inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-[#16a34a] px-5 py-3 text-sm font-semibold text-black transition duration-300 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-[#16a34a]/45 ${className}`}
-    >
+    <SmartLink href={href} className={classes}>
       {children}
       <Icon name="arrow" className="h-4 w-4" />
     </SmartLink>
+  );
+}
+// The hero copy and artwork stay hardcoded per charger spec; only the buy
+// action needs live catalog data, so this button owns the commerce states.
+function ShopNowButton({
+  label = "Shop now",
+  price = "",
+  disabled = false,
+  onClick,
+  className = "",
+}) {
+  return (
+    <button
+      type="button"
+      className={`three-shop-now ${className}`}
+      disabled={disabled}
+      onClick={onClick}
+    >
+      <span className="three-shop-now-glow" aria-hidden="true" />
+      <span className="three-shop-now-icon" aria-hidden="true">
+        <Icon name="cart" className="h-5 w-5" />
+      </span>
+      <span className="three-shop-now-copy">
+        <strong>{label}</strong>
+        {price ? <small>{price}</small> : null}
+      </span>
+      <Icon name="arrow" className="three-shop-now-arrow h-4 w-4" />
+    </button>
   );
 }
 function SecondaryButton({ href = CONTACT_LINK, children, className = "" }) {
@@ -912,6 +968,7 @@ export {
   SecondaryButton,
   Section,
   SectionIntro,
+  ShopNowButton,
   ShutterExpand,
   SmartLink,
   chargerAudienceIcons,

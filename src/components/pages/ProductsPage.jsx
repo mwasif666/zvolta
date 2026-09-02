@@ -2,7 +2,10 @@ import { useMemo, useState } from "react";
 import { commerceApi } from "../../services/api";
 import { useCommerceData } from "../../hooks/useCommerceData";
 import { useCart } from "../../context/CartContext";
-import { parseChargerPower } from "../../lib/chargerCatalog";
+import {
+  getChargerCardDetails,
+  getChargerDetailHref,
+} from "../../lib/chargerCatalog";
 import { SmartLink } from "../SmartLink";
 import {
   defaultStorefrontSettings,
@@ -30,9 +33,8 @@ export function ProductCard({ product, index = 0 }) {
   const [added, setAdded] = useState(false);
   const price = product.discountPrice || product.price;
   const isAvailable = Number(product.stock) > 0;
-  const power =
-    parseChargerPower(product.title) ?? parseChargerPower(product.sku);
-  const detailHref = `/products/${product.slug}`;
+  const details = getChargerCardDetails(product);
+  const detailHref = getChargerDetailHref(product);
   const cartLabel = isAvailable
     ? added
       ? `${product.title} added to cart`
@@ -61,18 +63,16 @@ export function ProductCard({ product, index = 0 }) {
       </SmartLink>
       <div className="commerce-card__specs">
         <div className="commerce-card__spec-row">
-          <span>{power === null ? "Model" : "Power"}</span>
-          <strong>{power === null ? product.sku : `Upto ${power}kW`}</strong>
+          <span>Power</span>
+          <strong>{details.power}</strong>
         </div>
         <div className="commerce-card__spec-row">
-          <span>Category</span>
-          <strong>{product.category?.name || "EV charging"}</strong>
+          <span>Best for</span>
+          <strong>{details.bestFor}</strong>
         </div>
         <div className="commerce-card__spec-row">
-          <span>Availability</span>
-          <strong>
-            {isAvailable ? `${product.stock} in stock` : "Out of stock"}
-          </strong>
+          <span>Location</span>
+          <strong>{details.location}</strong>
         </div>
         <div className="commerce-card__spec-row">
           <span>Price</span>

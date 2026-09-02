@@ -13,7 +13,11 @@ import {
   useStorefrontSettings,
 } from "../../../../context/StorefrontSettingsContext";
 import { useCommerceData } from "../../../../hooks/useCommerceData";
-import { findChargerProduct } from "../../../../lib/chargerCatalog";
+import {
+  findChargerProduct,
+  getChargerCardDetails,
+  getChargerDetailHref,
+} from "../../../../lib/chargerCatalog";
 import { commerceApi } from "../../../../services/api";
 
 function ChargerCartButton({ product }) {
@@ -83,6 +87,15 @@ export function ChargersSection({
           <div className="host-charger-grid">
             {chargerOptionCards.map((charger, index) => {
               const product = findChargerProduct(catalog.data, charger.title);
+              const details = getChargerCardDetails(product, charger);
+              const title = product?.title || charger.title;
+              const description =
+                product?.shortDescription ||
+                product?.description ||
+                charger.description;
+              const image = product?.images?.[0]?.url || charger.image;
+              const detailHref = getChargerDetailHref(product, charger.href);
+              const isPopular = Boolean(product?.isPopular || charger.popular);
               const price = product
                 ? formatStoreCurrency(
                     product.discountPrice || product.price,
@@ -93,23 +106,23 @@ export function ChargersSection({
               return (
                 <Reveal key={charger.title} delay={index * 0.08}>
                   <article
-                    className={`host-charger-card ${charger.popular ? "is-popular" : ""}`}
+                    className={`host-charger-card ${isPopular ? "is-popular" : ""}`}
                   >
                     <span className="host-charger-index">
                       {String(index + 1).padStart(2, "0")}
                     </span>
-                    {charger.popular ? (
+                    {isPopular ? (
                       <span className="host-charger-popular">Popular</span>
                     ) : null}
                     <div>
-                      <h3>{charger.title}</h3>
-                      <p>{charger.description}</p>
+                      <h3>{title}</h3>
+                      <p>{description}</p>
                     </div>
-                    {charger.image ? (
+                    {image ? (
                       <div className="host-charger-art">
                         <img
-                          src={charger.image}
-                          alt={`${charger.title} product`}
+                          src={image}
+                          alt={product?.images?.[0]?.alt || `${title} product`}
                           className={`host-charger-image ${charger.imageSize === "large" ? "is-large" : "is-small"}`}
                         />
                       </div>
@@ -127,15 +140,15 @@ export function ChargersSection({
                     <div className="host-charger-specs">
                       <div className="host-charger-spec-row">
                         <span>Power</span>
-                        <strong>{charger.power}</strong>
+                        <strong>{details.power}</strong>
                       </div>
                       <div className="host-charger-spec-row">
                         <span>Best for</span>
-                        <strong>{charger.bestFor}</strong>
+                        <strong>{details.bestFor}</strong>
                       </div>
                       <div className="host-charger-spec-row">
                         <span>Location</span>
-                        <strong>{charger.location}</strong>
+                        <strong>{details.location}</strong>
                       </div>
                       <div className="host-charger-spec-row">
                         <span>Price</span>
@@ -144,8 +157,8 @@ export function ChargersSection({
                     </div>
                     <div className="host-charger-actions">
                       <SmartLink
-                        href={charger.href}
-                        className={`host-charger-learn ${charger.popular ? "is-primary" : ""}`}
+                        href={detailHref}
+                        className={`host-charger-learn ${isPopular ? "is-primary" : ""}`}
                       >
                         View details
                         <Icon name="arrow" className="h-4 w-4" />

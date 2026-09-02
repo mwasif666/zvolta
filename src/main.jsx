@@ -11,6 +11,7 @@ import { PageSeo } from "./components/seo/PageSeo";
 import { routeEntries } from "./routes";
 import { useLegacyPageRuntime } from "./lib/legacy-page-runtime";
 import { useRouteAnimationRefresh } from "./hooks/useRouteAnimationRefresh";
+import { useRealtimeUpdates } from "./hooks/useRealtimeUpdates";
 import { AuthProvider } from "./context/AuthContext";
 import { CartProvider } from "./context/CartContext";
 import { StorefrontSettingsProvider } from "./context/StorefrontSettingsContext";
@@ -309,6 +310,9 @@ function MountedPage({ pageId, meta, PageComponent }) {
 function AppRoutes() {
   const notFoundLoader = loadNotFoundPage();
   const location = useLocation();
+
+  // One shared stream for the whole app; screens react through window events.
+  useRealtimeUpdates();
 
   return (
     <>

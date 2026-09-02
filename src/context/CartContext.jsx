@@ -111,7 +111,7 @@ export function CartProvider({ children }) {
 
   // Runs one server call and adopts its result unless a newer call started.
   const runServerCart = useCallback(
-    async (action) => {
+    async (action, { reportError = true } = {}) => {
       const requestId = requestRef.current + 1;
       requestRef.current = requestId;
       setSyncing(true);
@@ -122,7 +122,8 @@ export function CartProvider({ children }) {
         if (requestRef.current === requestId) adoptServerCart(result.data);
         return result.data;
       } catch (error) {
-        if (requestRef.current === requestId) setCartError(error.message);
+        if (requestRef.current === requestId && reportError)
+          setCartError(error.message);
         throw error;
       } finally {
         if (requestRef.current === requestId) setSyncing(false);
@@ -305,12 +306,13 @@ export function CartProvider({ children }) {
   }, []);
 
   const applyCoupon = useCallback(
-    (code) => runServerCart(() => cartApi.applyCoupon(code)),
+    (code) =>
+      runServerCart(() => cartApi.applyCoupon(code), { reportError: false }),
     [runServerCart],
   );
 
   const removeCoupon = useCallback(
-    () => runServerCart(() => cartApi.removeCoupon()),
+    () => runServerCart(() => cartApi.removeCoupon(), { reportError: false }),
     [runServerCart],
   );
 

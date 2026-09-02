@@ -24,7 +24,7 @@ describe("SiteLayout", () => {
     expect(container.textContent).toMatch(/Copyright © \d{4} ZVolta/);
   });
 
-  it("shows Shop and Cart in the primary and expanded navigation", () => {
+  it("keeps Shop and Cart in the primary nav and out of the expanded menu", () => {
     render(
       <MemoryRouter initialEntries={["/"]}>
         <SiteLayout>
@@ -44,7 +44,8 @@ describe("SiteLayout", () => {
     const expandedNavigation = screen.getByRole("dialog", {
       name: "Site navigation",
     });
-    expect(expandedNavigation.textContent).toContain("Shop");
-    expect(expandedNavigation.textContent).toContain("Cart");
+    expect(expandedNavigation.textContent).toContain("Hosting");
+    expect(expandedNavigation.textContent).not.toContain("Shop");
+    expect(expandedNavigation.textContent).not.toContain("Cart");
   });
 });

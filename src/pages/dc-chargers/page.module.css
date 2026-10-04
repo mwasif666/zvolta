@@ -310,6 +310,24 @@
   color: #68726e;
   font-size: 13px;
 }
+:global(.dc-catalog-state) {
+  min-height: 180px;
+  display: grid;
+  place-items: center;
+  padding: 32px;
+  border: 1px dashed #b9c8c0;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.65);
+  color: #53625b;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 700;
+}
+:global(.dc-catalog-state.is-error) {
+  border-color: #efb7b7;
+  background: #fff7f7;
+  color: #a33232;
+}
 :global(.dc-product-grid) {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));

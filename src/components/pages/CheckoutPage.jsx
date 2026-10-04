@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { useSearchParams } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { useCart } from "../../context/CartContext";
 import {
@@ -42,20 +41,14 @@ function detailsFromProfile(user) {
 }
 
 export default function CheckoutPage() {
-  const { coupon, discountTotal, isServerCart, items, subtotal } = useCart();
+  const { clearCart, coupon, discountTotal, isServerCart, items, subtotal } =
+    useCart();
   const { hasBlockingIssues, liveItems, liveSubtotal } = useLiveCartItems();
   const { settings } = useStorefrontSettings();
   const { user } = useAuth();
   const formatPkr = (value) => formatStoreCurrency(value, settings.currency);
-  const [params] = useSearchParams();
-  const [status, setStatus] = useState({
-    submitting: false,
-    error:
-      params.get("payment") === "failed"
-        ? params.get("message") ||
-          "Your payment was not completed. Please try again."
-        : "",
-  });
+  const [status, setStatus] = useState({ submitting: false, error: "" });
+  const [placedOrder, setPlacedOrder] = useState(null);
   // The order endpoint prices delivery server-side, so the same endpoint is
   // asked for a quote here rather than guessing a figure in the summary.
   const [delivery, setDelivery] = useState({ quoted: false, fee: 0, city: "" });
@@ -120,27 +113,6 @@ export default function CheckoutPage() {
     filledFrom && Object.values(profileDetails || {}).some(Boolean),
   );
 
-  function sendToPayFast(payment) {
-    if (!payment?.action || !payment?.fields) {
-      throw new Error("PayFast checkout could not be started.");
-    }
-
-    const form = document.createElement("form");
-    form.method = payment.method || "POST";
-    form.action = payment.action;
-
-    Object.entries(payment.fields).forEach(([name, value]) => {
-      const input = document.createElement("input");
-      input.type = "hidden";
-      input.name = name;
-      input.value = String(value ?? "");
-      form.appendChild(input);
-    });
-
-    document.body.appendChild(form);
-    form.submit();
-  }
-
   async function submit(event) {
     event.preventDefault();
     const fields = Object.fromEntries(new FormData(event.currentTarget));
@@ -168,14 +140,43 @@ export default function CheckoutPage() {
           postalCode: fields.postalCode,
           country: "Pakistan",
         },
-        paymentMethod: "PAYFAST",
+        paymentMethod: "CONTACT",
         notes: fields.notes,
       });
-      sendToPayFast(result.payment);
+      setPlacedOrder(result.data);
+      clearCart();
     } catch (error) {
       setStatus({ submitting: false, error: error.message });
     }
   }
+
+  if (placedOrder)
+    return (
+      <main className="commerce-page checkout-page">
+        <div
+          className="order-contact-modal"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="order-contact-title"
+        >
+          <div className="order-contact-modal__card">
+            <span className="order-contact-modal__icon" aria-hidden="true">
+              ✓
+            </span>
+            <p className="commerce-kicker">Order received</p>
+            <h1 id="order-contact-title">Thank you!</h1>
+            <p>
+              Your order <strong>{placedOrder.orderNumber}</strong> has been
+              placed successfully. Our team will contact you soon to confirm
+              availability, installation and final details.
+            </p>
+            <SmartLink className="commerce-link-button" href="/products">
+              Continue shopping
+            </SmartLink>
+          </div>
+        </div>
+      </main>
+    );
 
   if (!items.length)
     return (
@@ -298,27 +299,10 @@ export default function CheckoutPage() {
           <div className="checkout-section">
             <span>03</span>
             <div>
-              <h2>Payment</h2>
-              <div
-                className="payfast-method-card"
-                aria-label="PayFast selected"
-              >
-                <span className="payfast-method-card__icon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" fill="none">
-                    <rect x="3" y="6" width="18" height="12" rx="3" />
-                    <path d="M3 10h18M7 15h4" />
-                  </svg>
-                </span>
-                <span className="payfast-method-card__copy">
-                  <strong>PayFast online payment</strong>
-                  <small>Card, bank account, or supported wallet</small>
-                </span>
-                <span className="payfast-method-card__selected">Selected</span>
-              </div>
+              <h2>Order details</h2>
               <p className="checkout-prefill">
-                Payment details are entered securely on the PayFast page after
-                you click the button below. ZVolta never receives your card
-                number or CVV.
+                No online payment is required. Place your order and our team
+                will contact you to confirm the charger and installation.
               </p>
               <label>
                 Order notes
@@ -342,9 +326,7 @@ export default function CheckoutPage() {
                 type="submit"
                 disabled={status.submitting || hasBlockingIssues}
               >
-                {status.submitting
-                  ? "Opening secure payment…"
-                  : "Continue to PayFast"}
+                {status.submitting ? "Placing order…" : "Place Order"}
                 <svg
                   viewBox="0 0 24 24"
                   className="h-4 w-4"
@@ -360,7 +342,8 @@ export default function CheckoutPage() {
                 </svg>
               </button>
               <small className="payfast-continue__help">
-                First complete the contact and delivery fields above.
+                Complete the contact and delivery fields above, then place your
+                order.
               </small>
             </div>
           </div>
@@ -418,7 +401,8 @@ export default function CheckoutPage() {
             <strong>{formatPkr(grandTotal)}</strong>
           </div>
           <small>
-            The total is charged only after you approve payment on PayFast.
+            No online payment is charged. Our team will contact you after the
+            order is placed.
           </small>
         </aside>
       </form>

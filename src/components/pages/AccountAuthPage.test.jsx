@@ -1,5 +1,5 @@
 // @vitest-environment jsdom
-import { cleanup, fireEvent, render, screen } from "@testing-library/react";
+import { cleanup, render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { afterEach, expect, test, vi } from "vitest";
 import { AuthProvider } from "../../context/AuthContext";
@@ -39,19 +39,12 @@ test("login shows the site logo rather than a stand-in mark", () => {
   expect(screen.getByText("Welcome back.")).toBeTruthy();
 });
 
-test("password field offers a visibility toggle", () => {
+test("login only asks for email before sending a code", () => {
   renderAuth("login");
 
-  const toggle = screen.getByLabelText("Show password");
-  expect(screen.getByPlaceholderText("At least 6 characters")).toHaveProperty(
-    "type",
-    "password",
-  );
-  fireEvent.click(toggle);
-  expect(screen.getByPlaceholderText("At least 6 characters")).toHaveProperty(
-    "type",
-    "text",
-  );
+  expect(screen.getByPlaceholderText("ahmed.raza@example.com")).toBeTruthy();
+  expect(screen.getByRole("button", { name: "Email me a code" })).toBeTruthy();
+  expect(screen.queryByPlaceholderText("At least 6 characters")).toBeNull();
 });
 
 test("register adds the name and phone fields", () => {

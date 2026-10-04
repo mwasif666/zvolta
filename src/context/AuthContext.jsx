@@ -14,6 +14,8 @@ const AuthContext = createContext({
   loading: true,
   login: async () => {},
   register: async () => {},
+  requestEmailCode: async () => {},
+  verifyEmailCode: async () => {},
   updateProfile: async () => {},
   changePassword: async () => {},
   logout: async () => {},
@@ -67,6 +69,16 @@ export function AuthProvider({ children }) {
     [adoptSession],
   );
 
+  const requestEmailCode = useCallback(
+    (details) => authApi.requestEmailCode(details),
+    [],
+  );
+
+  const verifyEmailCode = useCallback(
+    async (details) => adoptSession(await authApi.verifyEmailCode(details)),
+    [adoptSession],
+  );
+
   const updateProfile = useCallback(async (details) => {
     const result = await authApi.updateProfile(details);
     setUser(result.data || null);
@@ -95,11 +107,23 @@ export function AuthProvider({ children }) {
       loading,
       login,
       register,
+      requestEmailCode,
+      verifyEmailCode,
       updateProfile,
       changePassword,
       logout,
     }),
-    [changePassword, loading, login, logout, register, updateProfile, user],
+    [
+      changePassword,
+      loading,
+      login,
+      logout,
+      register,
+      requestEmailCode,
+      updateProfile,
+      user,
+      verifyEmailCode,
+    ],
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

@@ -13,9 +13,9 @@ import {
 } from "../../../../context/StorefrontSettingsContext";
 import { useCommerceData } from "../../../../hooks/useCommerceData";
 import {
-  findChargerProduct,
   getChargerCardDetails,
   getChargerDetailHref,
+  parseChargerPower,
 } from "../../../../lib/chargerCatalog";
 import { commerceApi } from "../../../../services/api";
 
@@ -37,6 +37,12 @@ export function ChargersSection({
     () => commerceApi.allProducts({ sort: "featured" }),
     [],
   );
+  const liveChargers = (catalog.data || []).filter((product) => {
+    const category = `${product.category?.name || ""} ${product.category?.slug || ""}`;
+    return (
+      product.chargerType || /charger/i.test(`${product.title} ${category}`)
+    );
+  });
 
   return (
     <section id="chargers" className="host-charger-options">
@@ -65,117 +71,145 @@ export function ChargersSection({
             </p>
           </Reveal>
 
-          <div className="host-charger-grid">
-            {chargerOptionCards.map((charger, index) => {
-              const product = findChargerProduct(catalog.data, charger.title);
-              const details = getChargerCardDetails(product, charger);
-              const title = product?.title || charger.title;
-              const description =
-                product?.shortDescription ||
-                product?.description ||
-                charger.description;
-              const image = product?.images?.[0]?.url || charger.image;
-              const detailHref = getChargerDetailHref(product, charger.href);
-              const isPopular = Boolean(product?.isPopular || charger.popular);
-              const price = product
-                ? formatStoreCurrency(
-                    product.discountPrice || product.price,
-                    settings.currency,
-                  )
-                : charger.price;
-              const priceOptions = product?.pricingTiers?.length
-                ? product.pricingTiers.map((tier) => [
-                    tier.label,
-                    formatStoreCurrency(tier.price, settings.currency),
-                  ])
-                : charger.priceOptions;
+          {catalog.loading ? (
+            <div className="host-charger-state">
+              Loading live charger options…
+            </div>
+          ) : null}
+          {catalog.error ? (
+            <div className="host-charger-state is-error">
+              Live charger options are temporarily unavailable.
+            </div>
+          ) : null}
+          {!catalog.loading && !catalog.error && !liveChargers.length ? (
+            <div className="host-charger-state">
+              No chargers are published yet. Add products from the admin panel.
+            </div>
+          ) : null}
+          {liveChargers.length ? (
+            <div className="host-charger-grid">
+              {liveChargers.map((product, index) => {
+                const productPower = parseChargerPower(
+                  product.power || product.title || product.sku,
+                );
+                const charger = chargerOptionCards.find(
+                  (option) => parseChargerPower(option.title) === productPower,
+                ) || {
+                  title: product.title,
+                  href: "/products",
+                  features: [],
+                  imageSize: "large",
+                };
+                const details = getChargerCardDetails(product, charger);
+                const title = product.title;
+                const description =
+                  product.shortDescription ||
+                  product.description ||
+                  charger.description;
+                const image = product.images?.[0]?.url || charger.image;
+                const detailHref = getChargerDetailHref(product, charger.href);
+                const isPopular = Boolean(product.isPopular || charger.popular);
+                const price = formatStoreCurrency(
+                  product.discountPrice || product.price,
+                  settings.currency,
+                );
+                const priceOptions = product.pricingTiers?.length
+                  ? product.pricingTiers.map((tier) => [
+                      tier.label,
+                      formatStoreCurrency(tier.price, settings.currency),
+                    ])
+                  : [];
 
-              return (
-                <Reveal key={charger.title} delay={index * 0.08}>
-                  <article
-                    className={`host-charger-card ${isPopular ? "is-popular" : ""}`}
+                return (
+                  <Reveal
+                    key={product._id || product.sku || product.title}
+                    delay={index * 0.08}
                   >
-                    <span className="host-charger-index">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
-                    {isPopular ? (
-                      <span className="host-charger-popular">Popular</span>
-                    ) : null}
-                    <div>
-                      <h3>{title}</h3>
-                      <p>{description}</p>
-                    </div>
-                    {image ? (
-                      <div className="host-charger-art">
-                        <img
-                          src={image}
-                          alt={product?.images?.[0]?.alt || `${title} product`}
-                          className={`host-charger-image ${charger.imageSize === "large" ? "is-large" : "is-small"}`}
-                        />
+                    <article
+                      className={`host-charger-card ${isPopular ? "is-popular" : ""}`}
+                    >
+                      <span className="host-charger-index">
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                      {isPopular ? (
+                        <span className="host-charger-popular">Popular</span>
+                      ) : null}
+                      <div>
+                        <h3>{title}</h3>
+                        <p>{description}</p>
                       </div>
-                    ) : null}
-                    <div className="host-charger-feature-list">
-                      {charger.features.map((feature) => (
-                        <div className="host-charger-feature" key={feature}>
-                          <span className="host-charger-check">
-                            <Icon name="check" className="h-3 w-3" />
-                          </span>
-                          <span>{feature}</span>
+                      {image ? (
+                        <div className="host-charger-art">
+                          <img
+                            src={image}
+                            alt={product.images?.[0]?.alt || `${title} product`}
+                            className={`host-charger-image ${charger.imageSize === "large" ? "is-large" : "is-small"}`}
+                          />
                         </div>
-                      ))}
-                    </div>
-                    <div className="host-charger-specs">
-                      <div className="host-charger-spec-row">
-                        <span>Power</span>
-                        <strong>{details.power}</strong>
-                      </div>
-                      <div className="host-charger-spec-row">
-                        <span>Best for</span>
-                        <strong>{details.bestFor}</strong>
-                      </div>
-                      <div className="host-charger-spec-row">
-                        <span>Location</span>
-                        <strong>{details.location}</strong>
-                      </div>
-                      <div className="host-charger-spec-row">
-                        <span>Price</span>
-                        {priceOptions?.length ? (
-                          <div className="host-charger-price-options">
-                            {priceOptions.map(([label, optionPrice]) => (
-                              <span key={label}>
-                                <small>{label}</small>
-                                <strong>{optionPrice}</strong>
-                              </span>
-                            ))}
+                      ) : null}
+                      <div className="host-charger-feature-list">
+                        {(charger.features || []).map((feature) => (
+                          <div className="host-charger-feature" key={feature}>
+                            <span className="host-charger-check">
+                              <Icon name="check" className="h-3 w-3" />
+                            </span>
+                            <span>{feature}</span>
                           </div>
-                        ) : (
-                          <strong>{price}</strong>
-                        )}
+                        ))}
                       </div>
-                    </div>
-                    <div className="host-charger-actions">
-                      <SmartLink
-                        href={detailHref}
-                        className={`host-charger-learn ${isPopular ? "is-primary" : ""}`}
-                      >
-                        View details
-                        <Icon name="arrow" className="h-4 w-4" />
-                      </SmartLink>
-                      <SmartLink
-                        href={getWhatsAppLink(title)}
-                        target="_blank"
-                        aria-label={`Contact support on WhatsApp about the ${title}`}
-                        className="host-charger-whatsapp"
-                      >
-                        <FaWhatsapp aria-hidden="true" />
-                        Contact support
-                      </SmartLink>
-                    </div>
-                  </article>
-                </Reveal>
-              );
-            })}
-          </div>
+                      <div className="host-charger-specs">
+                        <div className="host-charger-spec-row">
+                          <span>Power</span>
+                          <strong>{details.power}</strong>
+                        </div>
+                        <div className="host-charger-spec-row">
+                          <span>Best for</span>
+                          <strong>{details.bestFor}</strong>
+                        </div>
+                        <div className="host-charger-spec-row">
+                          <span>Location</span>
+                          <strong>{details.location}</strong>
+                        </div>
+                        <div className="host-charger-spec-row">
+                          <span>Price</span>
+                          {priceOptions?.length ? (
+                            <div className="host-charger-price-options">
+                              {priceOptions.map(([label, optionPrice]) => (
+                                <span key={label}>
+                                  <small>{label}</small>
+                                  <strong>{optionPrice}</strong>
+                                </span>
+                              ))}
+                            </div>
+                          ) : (
+                            <strong>{price}</strong>
+                          )}
+                        </div>
+                      </div>
+                      <div className="host-charger-actions">
+                        <SmartLink
+                          href={detailHref}
+                          className={`host-charger-learn ${isPopular ? "is-primary" : ""}`}
+                        >
+                          View details
+                          <Icon name="arrow" className="h-4 w-4" />
+                        </SmartLink>
+                        <SmartLink
+                          href={getWhatsAppLink(title)}
+                          target="_blank"
+                          aria-label={`Contact support on WhatsApp about the ${title}`}
+                          className="host-charger-whatsapp"
+                        >
+                          <FaWhatsapp aria-hidden="true" />
+                          Contact support
+                        </SmartLink>
+                      </div>
+                    </article>
+                  </Reveal>
+                );
+              })}
+            </div>
+          ) : null}
 
           <Reveal className="host-charger-marquee-wrap">
             <SmartLink

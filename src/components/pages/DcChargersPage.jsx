@@ -6,74 +6,6 @@ import {
 } from "../../context/StorefrontSettingsContext";
 import { commerceApi } from "../../services/api";
 
-const fallbackChargers = [
-  {
-    power: "30 kW",
-    price: 1512000,
-    connectorType: "CCS2",
-    gunConfiguration: "Single gun",
-  },
-  {
-    power: "60 kW",
-    price: 3150000,
-    connectorType: "CCS2",
-    gunConfiguration: "Dual gun",
-  },
-  {
-    power: "80 kW",
-    price: 4000000,
-    connectorType: "CCS2",
-    gunConfiguration: "Dual gun",
-  },
-  {
-    power: "90 kW",
-    price: 3360000,
-    connectorType: "CCS2",
-    gunConfiguration: "Dual gun",
-  },
-  {
-    power: "120 kW",
-    price: 3780000,
-    connectorType: "CCS2",
-    gunConfiguration: "Dual gun",
-  },
-  {
-    power: "160 kW",
-    price: 4622000,
-    connectorType: "CCS2",
-    gunConfiguration: "Single gun",
-  },
-  {
-    power: "200 kW",
-    price: 5911500,
-    connectorType: "CCS2",
-    gunConfiguration: "Dual gun",
-  },
-  {
-    power: "240 kW",
-    price: 7014000,
-    connectorType: "CCS2",
-    gunConfiguration: "Dual gun",
-  },
-  {
-    power: "360 kW",
-    price: 8358000,
-    connectorType: "CCS2",
-    gunConfiguration: "Dual gun",
-  },
-].map((charger, index) => ({
-  ...charger,
-  _id: `reference-${charger.power}`,
-  title: `${charger.power} DC`,
-  shortDescription: "High-speed commercial DC charging",
-  image:
-    index % 3 === 0
-      ? "/img/charging station.png"
-      : "/img/3kw-charger/smart-3kw-charger.png",
-  pricingTiers: [],
-  isReference: true,
-}));
-
 const highlights = [
   ["bolt", "30–360 kW", "Wide power range"],
   ["plug", "Single / Dual", "Flexible configurations"],
@@ -183,7 +115,6 @@ export default function DcChargersPage({ routeClassName = "" }) {
         return product.chargerType === "dc" || /\bdc\b/i.test(category);
       })
     : [];
-  const chargers = liveChargers.length ? liveChargers : fallbackChargers;
 
   return (
     <div className={`dc-page ${routeClassName}`}>
@@ -319,23 +250,34 @@ export default function DcChargersPage({ routeClassName = "" }) {
               <span>DC Chargers</span>
             </div>
           </div>
-          {catalog.loading && !liveChargers.length ? (
-            <p className="dc-status">Loading live charger prices…</p>
+          {catalog.loading ? (
+            <div className="dc-catalog-state" role="status">
+              Loading live DC charger prices…
+            </div>
           ) : null}
-          {catalog.error && !liveChargers.length ? (
-            <p className="dc-status">
-              Showing reference pricing while the live catalog reconnects.
-            </p>
+          {!catalog.loading && catalog.error ? (
+            <div className="dc-catalog-state is-error" role="alert">
+              Live DC charger pricing is temporarily unavailable. Please try
+              again shortly.
+            </div>
           ) : null}
-          <div className="dc-product-grid">
-            {chargers.map((product) => (
-              <ChargerCard
-                key={product._id || product.sku || product.title}
-                product={product}
-                currency={settings.currency}
-              />
-            ))}
-          </div>
+          {!catalog.loading && !catalog.error && !liveChargers.length ? (
+            <div className="dc-catalog-state">
+              No DC chargers are published yet. Add and activate products from
+              the DC Chargers admin tab.
+            </div>
+          ) : null}
+          {liveChargers.length ? (
+            <div className="dc-product-grid">
+              {liveChargers.map((product) => (
+                <ChargerCard
+                  key={product._id || product.sku || product.title}
+                  product={product}
+                  currency={settings.currency}
+                />
+              ))}
+            </div>
+          ) : null}
         </div>
       </section>
 

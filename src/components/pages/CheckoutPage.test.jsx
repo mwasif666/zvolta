@@ -1,5 +1,11 @@
 // @vitest-environment jsdom
-import { cleanup, render, screen, waitFor } from "@testing-library/react";
+import {
+  cleanup,
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+} from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { afterEach, expect, test, vi } from "vitest";
 import { AuthProvider } from "../../context/AuthContext";
@@ -28,12 +34,17 @@ const savedProfile = {
   ],
 };
 
+const createOrderMock = vi.hoisted(() => vi.fn());
+
 vi.mock("../../services/api", async (importOriginal) => ({
   ...(await importOriginal()),
   readAuthToken: () => "test-token",
   writeAuthToken: () => {},
   authApi: { me: () => Promise.resolve({ data: savedProfile }) },
-  commerceApi: { settings: () => Promise.resolve({ data: null }) },
+  commerceApi: {
+    settings: () => Promise.resolve({ data: null }),
+    createOrder: createOrderMock,
+  },
   shippingApi: {
     calculate: () => Promise.resolve({ data: { shippingFee: 0 } }),
   },
@@ -102,12 +113,27 @@ test("a prefilled city quotes delivery without waiting for a blur", async () => 
   await waitFor(() => expect(screen.getByText("Free")).toBeTruthy());
 });
 
-test("offers PayFast without cash on delivery", () => {
+test("places an order without showing a payment plan", () => {
   renderCheckout();
 
-  expect(screen.getByText("PayFast online payment")).toBeTruthy();
-  expect(
-    screen.getByRole("button", { name: /Continue to PayFast/i }),
-  ).toBeTruthy();
-  expect(screen.queryByText(/Cash on delivery/i)).toBeNull();
+  expect(screen.getByRole("button", { name: /Place Order/i })).toBeTruthy();
+  expect(screen.queryByText(/PayFast/i)).toBeNull();
+  expect(screen.getByText(/No online payment is required/i)).toBeTruthy();
+});
+
+test("submits a contact order and shows the confirmation message", async () => {
+  createOrderMock.mockResolvedValueOnce({
+    data: { orderNumber: "ZV-TEST-1001" },
+  });
+  renderCheckout();
+
+  await waitFor(() => expect(fieldValue("fullName")).toBe("Ahmed Raza"));
+  fireEvent.click(screen.getByRole("button", { name: /Place Order/i }));
+
+  await waitFor(() =>
+    expect(screen.getByText(/Our team will contact you soon/i)).toBeTruthy(),
+  );
+  expect(createOrderMock).toHaveBeenCalledWith(
+    expect.objectContaining({ paymentMethod: "CONTACT" }),
+  );
 });

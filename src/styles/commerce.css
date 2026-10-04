@@ -268,6 +268,24 @@
   color: #707671;
   font-weight: 400;
 }
+.commerce-card__price-options {
+  display: grid;
+  min-width: 175px;
+  gap: 6px;
+}
+.commerce-card__price-options > span {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+.commerce-card__price-options small {
+  color: #a1a1aa;
+  text-align: left;
+}
+.commerce-card__price-options strong {
+  max-width: none;
+  white-space: nowrap;
+}
 .commerce-card__actions {
   display: flex;
   align-items: stretch;
@@ -1939,6 +1957,56 @@
 }
 .auth-switch a:hover {
   text-decoration: underline;
+}
+.auth-switch button {
+  border: 0;
+  background: transparent;
+  color: #4ade80;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+.auth-switch button:hover {
+  text-decoration: underline;
+}
+.order-contact-modal {
+  display: grid;
+  min-height: 72vh;
+  place-items: center;
+  padding: 48px 20px;
+}
+.order-contact-modal__card {
+  width: min(560px, 100%);
+  padding: 44px;
+  border: 1px solid #dce8e0;
+  border-radius: 22px;
+  background: #fff;
+  box-shadow: 0 24px 80px rgba(8, 20, 12, 0.14);
+  text-align: center;
+}
+.order-contact-modal__icon {
+  display: grid;
+  width: 64px;
+  height: 64px;
+  place-items: center;
+  margin: 0 auto 18px;
+  border-radius: 50%;
+  background: #18d66b;
+  color: #041108;
+  font-size: 30px;
+  font-weight: 900;
+}
+.order-contact-modal__card h1 {
+  margin: 8px 0 14px;
+  font-size: clamp(32px, 5vw, 48px);
+}
+.order-contact-modal__card > p:not(.commerce-kicker) {
+  margin: 0 auto 26px;
+  color: #606a64;
+  line-height: 1.7;
+}
+.order-contact-modal__card .commerce-link-button {
+  justify-content: center;
 }
 .auth-footnote {
   margin: 14px 0 0;

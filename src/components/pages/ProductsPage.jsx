@@ -76,12 +76,27 @@ export function ProductCard({ product, index = 0 }) {
         </div>
         <div className="commerce-card__spec-row">
           <span>Price</span>
-          <strong>
-            {formatStoreCurrency(price, settings.currency)}
-            {product.discountPrice ? (
-              <del>{formatStoreCurrency(product.price, settings.currency)}</del>
-            ) : null}
-          </strong>
+          {product.pricingTiers?.length ? (
+            <span className="commerce-card__price-options">
+              {product.pricingTiers.map((tier) => (
+                <span key={`${tier.label}-${tier.price}`}>
+                  <small>{tier.label}</small>
+                  <strong>
+                    {formatStoreCurrency(tier.price, settings.currency)}
+                  </strong>
+                </span>
+              ))}
+            </span>
+          ) : (
+            <strong>
+              {formatStoreCurrency(price, settings.currency)}
+              {product.discountPrice ? (
+                <del>
+                  {formatStoreCurrency(product.price, settings.currency)}
+                </del>
+              ) : null}
+            </strong>
+          )}
         </div>
       </div>
       <div className="commerce-card__actions">

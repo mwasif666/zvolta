@@ -77,7 +77,7 @@ function getNextPath(search) {
   return next.startsWith("/") && !next.startsWith("//") ? next : "/my-account";
 }
 
-export default function AccountAuthPage({ mode = "login" }) {
+export function LegacyAccountAuthPage({ mode = "login" }) {
   const text = copy[mode] || copy.login;
   const { login, register } = useAuth();
   const { settings } = useStorefrontSettings();
@@ -248,3 +248,5 @@ export default function AccountAuthPage({ mode = "login" }) {
     </main>
   );
 }
+
+export { default } from "./EmailCodeAuthPage";

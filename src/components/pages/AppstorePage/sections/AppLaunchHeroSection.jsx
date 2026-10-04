@@ -1,5 +1,6 @@
 import {
-  ALTERNATIVE_LINK,
+  APP_STORE_LINK,
+  AppleMark,
   GooglePlayMark,
   Icon,
   PLAY_STORE_LINK,
@@ -39,19 +40,16 @@ export function AppLaunchHeroSection() {
           </SmartLink>
 
           <SmartLink
-            href={ALTERNATIVE_LINK}
+            href={APP_STORE_LINK}
             target="_blank"
             rel="noreferrer"
-            className="appstore-alt"
+            className="appstore-play appstore-apple"
           >
-            <span className="appstore-alt-icon">
-              <Icon name="bag" size={22} />
-            </span>
+            <AppleMark />
             <span>
-              <small>More Ways to Get It</small>
-              <strong>Explore Alternatives</strong>
+              <small>Download on the</small>
+              <strong>App Store</strong>
             </span>
-            <Icon name="arrow" className="appstore-alt-arrow" size={18} />
           </SmartLink>
         </div>
 

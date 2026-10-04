@@ -5,9 +5,8 @@ import {
   SmartLink,
   chargerOptionBenefits,
   chargerOptionCards,
-  useState,
 } from "../../HostPage.shared.jsx";
-import { useCart } from "../../../../context/CartContext";
+import { FaWhatsapp } from "react-icons/fa6";
 import {
   formatStoreCurrency,
   useStorefrontSettings,
@@ -20,31 +19,13 @@ import {
 } from "../../../../lib/chargerCatalog";
 import { commerceApi } from "../../../../services/api";
 
-function ChargerCartButton({ product }) {
-  const { addItem } = useCart();
-  const [added, setAdded] = useState(false);
-  const isAvailable = Number(product.stock) > 0;
-  const label = isAvailable
-    ? added
-      ? `${product.title} added to cart`
-      : `Add ${product.title} to cart`
-    : `${product.title} is out of stock`;
+const SUPPORT_NUMBER = "923104446529";
+const CUSTOMIZATION_MESSAGE =
+  "For branding and customization, contact support: 0310 4446529.";
 
-  return (
-    <button
-      type="button"
-      className={`host-charger-cart ${added ? "is-added" : ""}`}
-      aria-label={label}
-      title={label}
-      disabled={!isAvailable}
-      onClick={() => {
-        addItem(product);
-        setAdded(true);
-      }}
-    >
-      <Icon name={added ? "check" : "cart"} className="h-5 w-5" />
-    </button>
-  );
+function getWhatsAppLink(chargerTitle) {
+  const message = `Hi Zvolta, I need help choosing a ${chargerTitle} configuration.`;
+  return `https://wa.me/${SUPPORT_NUMBER}?text=${encodeURIComponent(message)}`;
 }
 
 export function ChargersSection({
@@ -102,6 +83,12 @@ export function ChargersSection({
                     settings.currency,
                   )
                 : charger.price;
+              const priceOptions = product?.pricingTiers?.length
+                ? product.pricingTiers.map((tier) => [
+                    tier.label,
+                    formatStoreCurrency(tier.price, settings.currency),
+                  ])
+                : charger.priceOptions;
 
               return (
                 <Reveal key={charger.title} delay={index * 0.08}>
@@ -152,7 +139,18 @@ export function ChargersSection({
                       </div>
                       <div className="host-charger-spec-row">
                         <span>Price</span>
-                        <strong>{price}</strong>
+                        {priceOptions?.length ? (
+                          <div className="host-charger-price-options">
+                            {priceOptions.map(([label, optionPrice]) => (
+                              <span key={label}>
+                                <small>{label}</small>
+                                <strong>{optionPrice}</strong>
+                              </span>
+                            ))}
+                          </div>
+                        ) : (
+                          <strong>{price}</strong>
+                        )}
                       </div>
                     </div>
                     <div className="host-charger-actions">
@@ -163,13 +161,43 @@ export function ChargersSection({
                         View details
                         <Icon name="arrow" className="h-4 w-4" />
                       </SmartLink>
-                      {product ? <ChargerCartButton product={product} /> : null}
+                      <SmartLink
+                        href={getWhatsAppLink(title)}
+                        target="_blank"
+                        aria-label={`Contact support on WhatsApp about the ${title}`}
+                        className="host-charger-whatsapp"
+                      >
+                        <FaWhatsapp aria-hidden="true" />
+                        Contact support
+                      </SmartLink>
                     </div>
                   </article>
                 </Reveal>
               );
             })}
           </div>
+
+          <Reveal className="host-charger-marquee-wrap">
+            <SmartLink
+              href={getWhatsAppLink("branding and customization")}
+              target="_blank"
+              className="host-charger-marquee"
+              aria-label={`${CUSTOMIZATION_MESSAGE} Open WhatsApp support.`}
+            >
+              <span className="host-charger-marquee-icon">
+                <FaWhatsapp aria-hidden="true" />
+              </span>
+              <span className="host-charger-marquee-viewport">
+                <span className="host-charger-marquee-track">
+                  <span>{CUSTOMIZATION_MESSAGE}</span>
+                  <span aria-hidden="true">{CUSTOMIZATION_MESSAGE}</span>
+                  <span aria-hidden="true">{CUSTOMIZATION_MESSAGE}</span>
+                  <span aria-hidden="true">{CUSTOMIZATION_MESSAGE}</span>
+                </span>
+              </span>
+              <span className="host-charger-marquee-cta">WhatsApp us</span>
+            </SmartLink>
+          </Reveal>
 
           <Reveal className="host-charger-support-strip">
             {chargerOptionBenefits.map((item) => (

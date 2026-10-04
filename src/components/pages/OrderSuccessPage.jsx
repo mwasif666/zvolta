@@ -6,6 +6,7 @@ import {
 } from "../../context/StorefrontSettingsContext";
 import { BrandLockup } from "../commerce/BrandLogo";
 import { SmartLink } from "../SmartLink";
+import { useCart } from "../../context/CartContext";
 
 const steps = [
   {
@@ -61,10 +62,12 @@ export default function OrderSuccessPage() {
   const [params] = useSearchParams();
   const { settings } = useStorefrontSettings();
   const [copied, setCopied] = useState(false);
+  const { clearCart } = useCart();
 
   const formatPkr = (value) => formatStoreCurrency(value, settings.currency);
   const order = state?.order;
   const orderNumber = order?.orderNumber || params.get("order") || "";
+  const paymentResult = params.get("payment");
   // Only a real reference is worth offering a copy button for.
   const hasReference = Boolean(orderNumber);
   // Landing here from a shared link carries no order state, so the address is
@@ -73,6 +76,10 @@ export default function OrderSuccessPage() {
   const hasSummary = Boolean(
     hasReference || order?.grandTotal || confirmationEmail,
   );
+
+  useEffect(() => {
+    if (paymentResult === "paid") clearCart();
+  }, [clearCart, paymentResult]);
 
   // Reset the transient "Copied" label without leaving a timer behind if the
   // reader navigates away mid-countdown.
@@ -110,15 +117,16 @@ export default function OrderSuccessPage() {
           </svg>
         </div>
 
-        <p className="commerce-kicker">Order received</p>
+        <p className="commerce-kicker">Payment successful</p>
         <h1>
           Thank you.
           <br />
           We&rsquo;ll take it from here.
         </h1>
         <p className="success-lead">
-          Your ZVolta order has been created. Our team will contact you shortly
-          to confirm delivery and installation details.
+          Your PayFast payment is complete and your ZVolta order is confirmed.
+          Our team will contact you shortly to confirm delivery and installation
+          details.
         </p>
 
         {hasSummary ? (

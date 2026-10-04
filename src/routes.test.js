@@ -16,6 +16,7 @@ describe("route registry", () => {
         "/driver-network",
         "/invest",
         "/invest-form",
+        "/dc-chargers",
       ]),
     );
   });

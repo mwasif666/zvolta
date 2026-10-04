@@ -101,3 +101,13 @@ test("a prefilled city quotes delivery without waiting for a blur", async () => 
 
   await waitFor(() => expect(screen.getByText("Free")).toBeTruthy());
 });
+
+test("offers PayFast without cash on delivery", () => {
+  renderCheckout();
+
+  expect(screen.getByText("PayFast online payment")).toBeTruthy();
+  expect(
+    screen.getByRole("button", { name: /Continue to PayFast/i }),
+  ).toBeTruthy();
+  expect(screen.queryByText(/Cash on delivery/i)).toBeNull();
+});

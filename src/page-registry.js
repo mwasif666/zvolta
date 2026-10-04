@@ -35,8 +35,15 @@ import loginPageData from "./data/pages/login/pageData";
 import registerPageData from "./data/pages/register/pageData";
 import myAccountPageData from "./data/pages/my-account/pageData";
 import trackOrderPageData from "./data/pages/track-order/pageData";
+import dcChargersPageData from "./data/pages/dc-chargers/pageData";
 
 export const routeEntries = [
+  {
+    pageId: dcChargersPageData.pageId,
+    paths: dcChargersPageData.paths,
+    meta: dcChargersPageData.meta,
+    load: () => import("./pages/dc-chargers/index.jsx"),
+  },
   {
     pageId: productsPageData.pageId,
     paths: productsPageData.paths,

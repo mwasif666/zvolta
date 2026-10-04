@@ -38,6 +38,9 @@ starter products, blog or videos.
 - Keep `MONGO_DB_NAME=zvolta`; this prevents shared Mongo credentials from
   mixing ZVolta and InnerBeast data.
 - Set `VITE_API_URL=https://your-api-domain/api` before building the public site.
+- Configure the backend PayFast variables from `backend/.env.example`. In
+  production, `PAYFAST_CALLBACK_BASE_URL` must be the public HTTPS API URL,
+  including `/api` (for example `https://api.example.com/api`).
 - Change the temporary local admin password before deployment.
 - Run `npm audit --omit=dev`, `npm run test:integration`, and the frontend test
   and build commands during release verification.

@@ -41,7 +41,12 @@ const chargerOptionCards = [
     power: "Upto 3kW",
     bestFor: "Two-Wheelers & Four-Wheelers",
     location: "Homes, Shops & Small Offices",
-    price: "PKR 74,999",
+    priceOptions: [
+      ["Single socket", "PKR 49,999"],
+      ["Dual sockets", "PKR 74,999"],
+      ["Four sockets", "PKR 89,999"],
+      ["Up to 10 sockets", "PKR 149,999"],
+    ],
   },
   {
     title: "7kW Charger",
@@ -54,7 +59,10 @@ const chargerOptionCards = [
     power: "Upto 7kW",
     bestFor: "Cars & Daily Charging",
     location: "Apartments, Workplaces & Commercial Spaces",
-    price: "PKR 199,999",
+    priceOptions: [
+      ["Private use", "PKR 124,999"],
+      ["Commercial use", "PKR 149,999"],
+    ],
     popular: true,
   },
   {

@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { useCart } from "../../context/CartContext";
 import {
@@ -42,14 +42,20 @@ function detailsFromProfile(user) {
 }
 
 export default function CheckoutPage() {
-  const { clearCart, coupon, discountTotal, isServerCart, items, subtotal } =
-    useCart();
+  const { coupon, discountTotal, isServerCart, items, subtotal } = useCart();
   const { hasBlockingIssues, liveItems, liveSubtotal } = useLiveCartItems();
   const { settings } = useStorefrontSettings();
   const { user } = useAuth();
   const formatPkr = (value) => formatStoreCurrency(value, settings.currency);
-  const navigate = useNavigate();
-  const [status, setStatus] = useState({ submitting: false, error: "" });
+  const [params] = useSearchParams();
+  const [status, setStatus] = useState({
+    submitting: false,
+    error:
+      params.get("payment") === "failed"
+        ? params.get("message") ||
+          "Your payment was not completed. Please try again."
+        : "",
+  });
   // The order endpoint prices delivery server-side, so the same endpoint is
   // asked for a quote here rather than guessing a figure in the summary.
   const [delivery, setDelivery] = useState({ quoted: false, fee: 0, city: "" });
@@ -114,6 +120,27 @@ export default function CheckoutPage() {
     filledFrom && Object.values(profileDetails || {}).some(Boolean),
   );
 
+  function sendToPayFast(payment) {
+    if (!payment?.action || !payment?.fields) {
+      throw new Error("PayFast checkout could not be started.");
+    }
+
+    const form = document.createElement("form");
+    form.method = payment.method || "POST";
+    form.action = payment.action;
+
+    Object.entries(payment.fields).forEach(([name, value]) => {
+      const input = document.createElement("input");
+      input.type = "hidden";
+      input.name = name;
+      input.value = String(value ?? "");
+      form.appendChild(input);
+    });
+
+    document.body.appendChild(form);
+    form.submit();
+  }
+
   async function submit(event) {
     event.preventDefault();
     const fields = Object.fromEntries(new FormData(event.currentTarget));
@@ -141,14 +168,10 @@ export default function CheckoutPage() {
           postalCode: fields.postalCode,
           country: "Pakistan",
         },
-        paymentMethod: fields.paymentMethod,
+        paymentMethod: "PAYFAST",
         notes: fields.notes,
       });
-      clearCart();
-      navigate(
-        `/order-success?order=${encodeURIComponent(result.data.orderNumber)}`,
-        { state: { order: result.data } },
-      );
+      sendToPayFast(result.payment);
     } catch (error) {
       setStatus({ submitting: false, error: error.message });
     }
@@ -276,25 +299,27 @@ export default function CheckoutPage() {
             <span>03</span>
             <div>
               <h2>Payment</h2>
-              <div className="payment-options">
-                <label>
-                  <input
-                    type="radio"
-                    name="paymentMethod"
-                    value="COD"
-                    defaultChecked
-                  />{" "}
-                  Cash on delivery
-                </label>
-                <label>
-                  <input
-                    type="radio"
-                    name="paymentMethod"
-                    value="BANK_TRANSFER"
-                  />{" "}
-                  Bank transfer
-                </label>
+              <div
+                className="payfast-method-card"
+                aria-label="PayFast selected"
+              >
+                <span className="payfast-method-card__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <rect x="3" y="6" width="18" height="12" rx="3" />
+                    <path d="M3 10h18M7 15h4" />
+                  </svg>
+                </span>
+                <span className="payfast-method-card__copy">
+                  <strong>PayFast online payment</strong>
+                  <small>Card, bank account, or supported wallet</small>
+                </span>
+                <span className="payfast-method-card__selected">Selected</span>
               </div>
+              <p className="checkout-prefill">
+                Payment details are entered securely on the PayFast page after
+                you click the button below. ZVolta never receives your card
+                number or CVV.
+              </p>
               <label>
                 Order notes
                 <textarea
@@ -302,6 +327,41 @@ export default function CheckoutPage() {
                   placeholder="e.g. Deliver after 5pm, installation on the ground floor parking"
                 />
               </label>
+              {status.error ? (
+                <p className="checkout-error">{status.error}</p>
+              ) : null}
+              {hasBlockingIssues ? (
+                <p className="checkout-error">
+                  Stock or pricing changed for an item in your order.{" "}
+                  <SmartLink href="/cart">Review your cart</SmartLink> before
+                  paying.
+                </p>
+              ) : null}
+              <button
+                className="commerce-link-button payfast-continue"
+                type="submit"
+                disabled={status.submitting || hasBlockingIssues}
+              >
+                {status.submitting
+                  ? "Opening secure payment…"
+                  : "Continue to PayFast"}
+                <svg
+                  viewBox="0 0 24 24"
+                  className="h-4 w-4"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth={1.8}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M5 12h14" />
+                  <path d="m13 6 6 6-6 6" />
+                </svg>
+              </button>
+              <small className="payfast-continue__help">
+                First complete the contact and delivery fields above.
+              </small>
             </div>
           </div>
         </div>
@@ -357,38 +417,8 @@ export default function CheckoutPage() {
             <span>Total</span>
             <strong>{formatPkr(grandTotal)}</strong>
           </div>
-          {status.error ? (
-            <p className="checkout-error">{status.error}</p>
-          ) : null}
-          {hasBlockingIssues ? (
-            <p className="checkout-error">
-              Stock or pricing changed for an item in your order.{" "}
-              <SmartLink href="/cart">Review your cart</SmartLink> before
-              placing it.
-            </p>
-          ) : null}
-          <button
-            className="commerce-link-button"
-            type="submit"
-            disabled={status.submitting || hasBlockingIssues}
-          >
-            {status.submitting ? "Placing order…" : "Place order"}
-            <svg
-              viewBox="0 0 24 24"
-              className="h-4 w-4"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth={1.8}
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-            >
-              <path d="M5 12h14" />
-              <path d="m13 6 6 6-6 6" />
-            </svg>
-          </button>
           <small>
-            By ordering, you confirm that the delivery details are correct.
+            The total is charged only after you approve payment on PayFast.
           </small>
         </aside>
       </form>

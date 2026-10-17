@@ -302,6 +302,9 @@
 }
 
 /* ---- Screenshot-review refinements. Keep all product images original. ---- */
+:global(.cita-feature-icon) { display: grid; place-items: center; }
+:global(.cita-feature-icon svg) { display: block; width: 24px; height: 24px; flex: none; }
+
 
 /* A single authentic installation photo is enough for each hero. */
 :global(.cita-hero) {
@@ -640,7 +643,7 @@
   :global(.cita-spec-product-card img) { height: 170px; }
 }
 @media (max-width: 620px) {
-  :global(.cita-shell) { width: min(100% - 32px, 1260px); }
+  :global(.cita-shell) { width: min(1260px, calc(100% - 32px)); }
   :global(.cita-hero), :global(.cita-detail-hero) { padding-top: 110px; }
   :global(.cita-hero-grid), :global(.cita-detail-hero-grid) { min-height: 535px; }
   :global(.cita-hero h1) { font-size: clamp(46px, 11vw, 65px); }

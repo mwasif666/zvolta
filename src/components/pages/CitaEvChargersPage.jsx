@@ -126,7 +126,7 @@ export default function CitaEvChargersPage({ routeClassName = "" }) {
                 <div className="cita-solution-copy">
                   <span className="cita-solution-icon">{solution.icon}</span>
                   <div><h3>{solution.title}</h3><p>{solution.copy}</p></div>
-                  <span className="cita-round-arrow"><ArrowIcon /></span>
+                  <Link className="cita-round-arrow" to="/contact-us" aria-label={`Enquire about ${solution.title} charging`}><ArrowIcon /></Link>
                 </div>
               </article>
             ))}

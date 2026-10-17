@@ -9,10 +9,10 @@ const stats = [
 ];
 
 const differences = [
-  ["Reliable AC & DC Portfolio", "Wide range of chargers from 7kW to 480kW, designed for every use case."],
-  ["Smart Connected Ecosystem", "CITA EV App and CPMS enable real-time insights, control and operations management."],
-  ["Scalable Infrastructure", "Hardware, software, installation and support for future-ready charging networks."],
-  ["Sustainable Mobility", "Efficient charging solutions designed to support cleaner transportation."],
+  ["Innovative Technology", "Advanced features and future-ready capabilities for faster, safer and more efficient charging."],
+  ["Range & Performance", "From compact home units to high-powered commercial stations, CITA EV supports every charging environment."],
+  ["Sustainability at its Core", "Efficient charging solutions designed to support cleaner transportation and a lower-emission future."],
+  ["Charging Infrastructure", "End-to-end charging infrastructure spanning hardware, software, installation and support."],
 ];
 
 function ArrowIcon() {
@@ -43,7 +43,7 @@ function DashboardPreview() {
       <div className="cita-laptop">
         <div className="cita-laptop-screen">
           <aside>
-            <b>ZVOLTA</b>
+            <b>CITA EV</b>
             <span className="is-active">Dashboard</span>
             <span>Chargers</span>
             <span>Sessions</span>
@@ -87,7 +87,7 @@ function DashboardPreview() {
       </div>
       <div className="cita-phone">
         <div className="cita-phone-notch" />
-        <b>ZVOLTA</b>
+        <b>CITA EV</b>
         <img src="/CITA_Charger_Images/24_Smart_DC_Eco_Product.png" alt="CITA Smart DC Eco" />
         <strong>Charging</strong>
         <span>CITA Smart DC</span>
@@ -103,6 +103,15 @@ export default function CitaEvChargersPage({ routeClassName = "" }) {
   return (
     <div className={`cita-page ${routeClassName}`}>
       <section className="cita-hero">
+        <img
+          className="cita-hero-bg"
+          src="/CITA_Charger_Images/27_Smart_DC_Pro_Lifestyle.png"
+          alt=""
+          aria-hidden="true"
+        />
+        <span className="cita-hero-shade" aria-hidden="true" />
+        <span className="cita-hero-light" aria-hidden="true" />
+
         <div className="cita-shell cita-hero-grid">
           <div className="cita-hero-copy">
             <p className="cita-eyebrow">CITA EV Chargers</p>
@@ -110,18 +119,29 @@ export default function CitaEvChargersPage({ routeClassName = "" }) {
             <h2>Simple, Safe & Reliable</h2>
             <p className="cita-hero-subtitle">Home, Commercial & Fleet EV Charging Solutions</p>
             <p className="cita-hero-text">
-              CITA EV delivers innovative AC and DC charging hardware with smart software for homes, workplaces, fleets, commercial spaces and public charging networks.
+              CITA EV is committed to delivering innovative, world-class EV charging solutions that support the transition to sustainable mobility.
             </p>
             <div className="cita-actions">
               <a className="cita-btn cita-btn-primary" href="#cita-range">Explore the Range <ArrowIcon /></a>
-              <Link className="cita-btn cita-btn-ghost" to="/contact-us">Enquire Now <ArrowIcon /></Link>
+              <Link className="cita-btn cita-btn-ghost-dark" to="/contact-us">Enquire Now <ArrowIcon /></Link>
             </div>
           </div>
+
           <div className="cita-hero-art">
             <span className="cita-hero-glow" />
-            <img src="/CITA_Charger_Images/28_All_in_One_Hardware_Portfolio_Lineup.png" alt="CITA EV charger portfolio" />
+            <span className="cita-hero-floor" />
+            <img
+              src="/CITA_Charger_Images/26_Smart_DC_Pro_Product.png"
+              alt="CITA Smart DC Pro charger"
+            />
+            <div className="cita-hero-product-note">
+              <small>Superfast DC charging</small>
+              <strong>Smart DC Pro</strong>
+              <span>200–480kW</span>
+            </div>
           </div>
         </div>
+
         <div className="cita-shell cita-stat-grid">
           {stats.map(([value, label, copy], index) => (
             <article key={value}>
@@ -139,7 +159,7 @@ export default function CitaEvChargersPage({ routeClassName = "" }) {
               <p className="cita-eyebrow">Our products</p>
               <h2>Explore the CITA Charger Range</h2>
             </div>
-            <p>A complete range of AC and DC chargers designed for homes, businesses and public charging networks.</p>
+            <p>A complete range of AC and DC chargers designed for homes, workplaces, fleets, commercial spaces and public charging networks.</p>
           </div>
           <div className="cita-product-grid">
             {citaChargers.map((charger) => (
@@ -192,6 +212,7 @@ export default function CitaEvChargersPage({ routeClassName = "" }) {
           <div className="cita-difference-grid">
             {differences.map(([title, copy], index) => (
               <article key={title}>
+                <span className="cita-diff-index">0{index + 1}</span>
                 <span className="cita-diff-icon"><FeatureIcon index={index} /></span>
                 <h3>{title}</h3>
                 <p>{copy}</p>
@@ -202,6 +223,7 @@ export default function CitaEvChargersPage({ routeClassName = "" }) {
       </section>
 
       <section className="cita-software">
+        <div className="cita-software-backdrop" aria-hidden="true" />
         <div className="cita-shell cita-software-grid">
           <div className="cita-software-copy">
             <p className="cita-eyebrow">Smarter Charging</p>
@@ -220,10 +242,10 @@ export default function CitaEvChargersPage({ routeClassName = "" }) {
       </section>
 
       <section className="cita-cta">
-        <img src="/CITA_Charger_Images/27_Smart_DC_Pro_Lifestyle.png" alt="CITA EV public charging network" />
+        <img src="/CITA_Charger_Images/25_Smart_DC_Eco_Lifestyle.png" alt="CITA EV public charging network" />
         <span className="cita-cta-shade" />
         <div className="cita-shell cita-cta-inner">
-          <div><p className="cita-eyebrow">Get started</p><h2>Power the Future of Mobility with CITA EV</h2><p>Build a cleaner, smarter charging ecosystem with reliable hardware, intelligent software and scalable support.</p></div>
+          <div><p className="cita-eyebrow">Get started</p><h2>Power the Future of Mobility with CITA EV</h2><p>From AC and DC chargers to CITA EV App and CPMS, build a practical charging solution for your site.</p></div>
           <Link className="cita-btn cita-btn-primary" to="/contact-us">Enquire Now <ArrowIcon /></Link>
         </div>
       </section>

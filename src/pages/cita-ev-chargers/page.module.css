@@ -301,270 +301,362 @@
   :global(.cita-spec-row) { grid-template-columns: 1fr; gap: 6px; padding: 18px; }
 }
 
+/* ---- Screenshot-review refinements. Keep all product images original. ---- */
 
-/* ---- CITA EV visual corrections (review screenshots) ---- */
-
-/* Landing hero: keep the real lifestyle photograph and remove the boxed product cutout. */
+/* A single authentic installation photo is enough for each hero. */
 :global(.cita-hero) {
-  min-height: 760px;
-  padding: 132px 0 0;
+  min-height: 710px;
+  padding-top: 120px;
 }
 :global(.cita-hero-grid) {
   grid-template-columns: minmax(0, 760px);
-  min-height: 560px;
+  min-height: 535px;
+  gap: 0;
   align-items: center;
 }
-:global(.cita-hero-copy) { max-width: 760px; }
+:global(.cita-hero-copy) { max-width: 720px; }
 :global(.cita-hero h1) {
-  max-width: 720px;
-  font-size: clamp(62px, 6.1vw, 90px);
-  line-height: .92;
-  letter-spacing: -.045em;
+  max-width: 710px;
+  font-size: clamp(55px, 5.7vw, 84px);
+  line-height: 1.01;
+  letter-spacing: -.026em;
   word-spacing: .08em;
+  text-wrap: balance;
 }
 :global(.cita-hero h2) {
-  font-size: clamp(30px, 3vw, 43px);
-  line-height: 1.04;
-  letter-spacing: -.025em;
+  font-size: clamp(26px, 2.7vw, 38px);
+  line-height: 1.13;
+  letter-spacing: -.018em;
   word-spacing: .08em;
 }
-:global(.cita-hero-subtitle) { word-spacing: .06em; }
+:global(.cita-hero-subtitle) {
+  font-size: clamp(15px, 1.4vw, 18px);
+  line-height: 1.45;
+  word-spacing: .075em;
+}
+:global(.cita-hero-text) { max-width: 610px; font-size: 16px; line-height: 1.75; }
+:global(.cita-stat-grid) { transform: translateY(28px); }
+:global(.cita-stat-grid article) { min-width: 0; }
 
-/* Section headings: less oversized, more readable word spacing. */
+/* Lower the type scale, relax negative tracking, and preserve natural word gaps. */
 :global(.cita-section-head h2),
-:global(.cita-dark-head h2),
+:global(.cita-dark-head h2) {
+  font-size: clamp(36px, 3.45vw, 52px);
+  line-height: 1.1;
+  letter-spacing: -.023em;
+  word-spacing: .08em;
+  text-wrap: balance;
+}
 :global(.cita-detail-intro-grid h2),
 :global(.cita-detail-highlights h2),
 :global(.cita-cta h2),
 :global(.cita-detail-cta h2) {
-  letter-spacing: -.035em;
-  word-spacing: .08em;
+  font-size: clamp(36px, 3.6vw, 55px);
+  line-height: 1.11;
+  letter-spacing: -.025em;
+  word-spacing: .075em;
+  text-wrap: balance;
 }
-:global(.cita-section-head h2),
-:global(.cita-dark-head h2) {
-  font-size: clamp(38px, 3.7vw, 56px);
-  line-height: 1.03;
+:global(.cita-section-head > p),
+:global(.cita-dark-head > p) {
+  font-size: 16px;
+  line-height: 1.7;
 }
 :global(.cita-products .cita-section-head) {
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr);
   align-items: center;
-  gap: 56px;
-  margin-bottom: 42px;
+  gap: 52px;
+  margin-bottom: 36px;
 }
-:global(.cita-products .cita-section-head > div) { max-width: 690px; }
-:global(.cita-products .cita-section-head > p) {
-  max-width: 560px;
-  justify-self: end;
-  font-size: 16px;
-}
+:global(.cita-products .cita-section-head > p) { max-width: 540px; justify-self: end; }
 
-/* Product grid: clean consistent cards, no giant/cropped products. */
+/* Four-column desktop grid prevents the narrow five-card squeeze.
+   Original white-background PNGs blend into a single neutral media surface. */
 :global(.cita-product-grid) {
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 20px;
 }
 :global(.cita-product-card) {
   display: flex;
+  min-width: 0;
+  min-height: 434px;
   flex-direction: column;
-  min-height: 430px;
-  border-radius: 24px;
   overflow: hidden;
+  border-radius: 22px;
+  background: #fff;
 }
 :global(.cita-product-media) {
-  height: 245px;
-  padding: 28px;
-  background: linear-gradient(180deg, #f7faf8 0%, #eef3f0 100%);
+  height: 236px;
+  flex: 0 0 236px;
+  padding: 24px;
+  background: #f1f5f2;
+  overflow: hidden;
 }
 :global(.cita-product-media img) {
+  display: block;
   width: 100%;
   height: 100%;
-  max-width: 235px;
+  max-width: 205px;
+  max-height: 188px;
+  margin: auto;
   object-fit: contain;
-  mix-blend-mode: normal;
-  filter: drop-shadow(0 14px 14px rgba(0,0,0,.12));
+  mix-blend-mode: multiply;
+  filter: drop-shadow(0 11px 11px rgba(0,0,0,.12));
 }
 :global(.cita-product-copy) {
   display: flex;
+  min-width: 0;
   flex: 1;
   flex-direction: column;
-  padding: 22px;
+  gap: 0;
+  padding: 19px 20px 21px;
 }
 :global(.cita-product-copy p) {
-  min-height: 34px;
-  margin-bottom: 8px;
-  line-height: 1.35;
+  min-height: 32px;
+  margin: 0 0 8px;
+  font-size: 11px;
+  line-height: 1.45;
+  letter-spacing: .055em;
 }
 :global(.cita-product-copy h3) {
-  font-size: 20px;
-  line-height: 1.15;
-  word-spacing: .04em;
+  font-size: 19px;
+  line-height: 1.25;
+  letter-spacing: -.012em;
+  word-spacing: .06em;
 }
-:global(.cita-product-copy a) { margin-top: auto; }
+:global(.cita-product-copy > strong) { line-height: 1.4; }
+:global(.cita-product-copy a) { margin-top: auto; padding-top: 11px; padding-bottom: 11px; }
 
-/* Difference cards: more balanced and less empty. */
-:global(.cita-difference) { padding: 88px 0 100px; }
-:global(.cita-difference-grid) { gap: 20px; }
+/* Why CITA EV: balanced information cards, not empty oversized boxes. */
+:global(.cita-difference) { padding: 84px 0 92px; }
+:global(.cita-difference-grid) { gap: 18px; }
 :global(.cita-difference-grid article) {
-  position: relative;
-  min-height: 250px;
-  padding: 30px 28px;
-  overflow: hidden;
-  border-radius: 24px;
-  background:
-    radial-gradient(circle at 92% 92%, rgba(16,224,122,.10), transparent 34%),
-    linear-gradient(145deg,#fff,#f7faf8);
-}
-:global(.cita-difference-grid h3) {
-  max-width: 230px;
-  margin-top: 28px;
-  font-size: 21px;
-  line-height: 1.15;
-  word-spacing: .05em;
-}
-:global(.cita-difference-grid p) {
-  max-width: 270px;
-  font-size: 14px;
-  line-height: 1.55;
+  min-height: 230px;
+  padding: 25px;
+  background: linear-gradient(155deg,#fff,#f5faf7);
 }
 :global(.cita-diff-index) {
-  position: absolute;
-  top: 26px;
-  right: 26px;
-  color: #dce8e1;
-  font-size: 34px;
-  font-weight: 900;
+  top: 24px;
+  right: 24px;
+  color: #d3e4da;
+  font-size: 32px;
+}
+:global(.cita-difference-grid h3) {
+  margin: 23px 0 10px;
+  font-size: 20px;
+  line-height: 1.2;
+  letter-spacing: -.015em;
+  word-spacing: .06em;
+}
+:global(.cita-difference-grid p) {
+  max-width: 280px;
+  font-size: 14px;
+  line-height: 1.65;
 }
 
-/* Reuse real dashboard/mobile screenshots already used by the Host page. */
+/* Actual laptop/phone screenshots are shared with the existing Host page. */
+:global(.cita-software-grid) {
+  grid-template-columns: minmax(0, .88fr) minmax(0, 1.12fr);
+  gap: 48px;
+}
+:global(.cita-software-copy h2) {
+  font-size: clamp(42px, 4.4vw, 60px);
+  line-height: 1.06;
+  letter-spacing: -.02em;
+  word-spacing: .08em;
+}
+:global(.cita-software-copy > p:not(.cita-eyebrow)) { line-height: 1.75; }
 :global(.cita-dashboard-assets) {
   position: relative;
-  min-height: 520px;
   display: grid;
+  min-width: 0;
+  min-height: 480px;
   place-items: center;
+  isolation: isolate;
 }
 :global(.cita-dashboard-laptop-img) {
   position: relative;
-  z-index: 2;
-  width: min(760px, 100%);
-  max-height: 500px;
+  z-index: 1;
+  display: block;
+  width: min(700px, 100%);
+  max-height: 490px;
   object-fit: contain;
-  filter: drop-shadow(0 34px 38px rgba(0,0,0,.34));
+  filter: drop-shadow(0 26px 34px rgba(0,0,0,.38));
 }
 :global(.cita-dashboard-mobile-img) {
   position: absolute;
-  z-index: 3;
+  z-index: 2;
   right: -1%;
-  bottom: 2%;
-  width: min(260px, 34%);
-  max-height: 360px;
+  bottom: 1%;
+  width: min(205px, 26%);
+  max-height: 380px;
   object-fit: contain;
-  filter: drop-shadow(0 24px 28px rgba(0,0,0,.38));
-}
-:global(.cita-software-grid) {
-  grid-template-columns: .82fr 1.18fr;
-  gap: 72px;
-}
-:global(.cita-software-copy h2) {
-  font-size: clamp(46px, 4.7vw, 66px);
-  line-height: .96;
-  letter-spacing: -.035em;
-  word-spacing: .08em;
+  filter: drop-shadow(0 23px 28px rgba(0,0,0,.45));
 }
 
-/* Detail hero: product is smaller and no longer dominates the page. */
+/* Detail page: the full-bleed lifestyle shot remains, duplicated cutout is removed. */
 :global(.cita-detail-hero) {
-  min-height: 690px;
-  padding-top: 118px;
+  min-height: 665px;
+  padding: 122px 0 54px;
+}
+:global(.cita-detail-hero-bg) { object-position: 58% center; }
+:global(.cita-detail-hero-shade) {
+  background:
+    linear-gradient(90deg,rgba(2,8,6,.97) 0%,rgba(2,8,6,.87) 38%,rgba(2,8,6,.46) 66%,rgba(2,8,6,.19) 100%),
+    linear-gradient(0deg,rgba(2,8,6,.66),transparent 50%);
 }
 :global(.cita-detail-hero-grid) {
-  min-height: 540px;
-  grid-template-columns: 1.08fr .72fr;
-  gap: 64px;
+  min-height: 485px;
+  grid-template-columns: minmax(0, 790px);
+  gap: 0;
+  align-items: center;
 }
+:global(.cita-detail-copy) { max-width: 790px; }
 :global(.cita-detail-copy h1) {
-  max-width: 650px;
-  font-size: clamp(54px, 6vw, 82px);
-  line-height: .95;
-  letter-spacing: -.045em;
-  word-spacing: .08em;
+  max-width: 790px;
+  font-size: clamp(46px, 4.9vw, 70px);
+  line-height: 1.05;
+  letter-spacing: -.023em;
+  word-spacing: .07em;
+  text-wrap: balance;
 }
-:global(.cita-detail-product-stage) { min-height: 480px; }
-:global(.cita-detail-product-stage > img) {
-  width: min(360px, 78%);
-  max-height: 430px;
-  animation: none;
-}
-:global(.cita-detail-product-meta) {
-  right: 4%;
-  bottom: 7%;
-  min-width: 165px;
-}
+:global(.cita-detail-power) { font-size: 20px; }
+:global(.cita-detail-intro-grid) { gap: 46px; }
+:global(.cita-detail-feature-strip div) { min-width: 0; }
 
-/* Specs: reduce product card dominance and improve table proportion. */
+/* Data hierarchy: smaller product preview, legible untouched technical values. */
 :global(.cita-spec-layout) {
-  grid-template-columns: 270px minmax(0,1fr);
-  gap: 34px;
+  grid-template-columns: minmax(215px, 260px) minmax(0, 1fr);
+  gap: 26px;
 }
-:global(.cita-spec-product-card) { padding: 20px; }
+:global(.cita-spec-product-card) { padding: 18px; }
 :global(.cita-spec-product-card img) {
-  height: 215px;
-  mix-blend-mode: normal;
+  display: block;
+  height: 190px;
+  max-width: 210px;
+  margin: 0 auto 12px;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+  filter: drop-shadow(0 10px 11px rgba(0,0,0,.11));
+}
+:global(.cita-spec-product-card h3) {
+  font-size: 20px;
+  line-height: 1.25;
+  letter-spacing: -.014em;
+  word-spacing: .055em;
 }
 :global(.cita-spec-row) {
-  min-height: 76px;
-  grid-template-columns: 250px 1fr;
+  min-height: 69px;
+  grid-template-columns: minmax(170px, .68fr) minmax(0, 1fr);
+  gap: 20px;
+  padding: 15px 22px;
 }
-:global(.cita-spec-row strong) { font-size: 14px; }
+:global(.cita-spec-row span) {
+  text-transform: none;
+  letter-spacing: .015em;
+  line-height: 1.45;
+}
+:global(.cita-spec-row strong) {
+  min-width: 0;
+  font-size: 14px;
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+}
 
-/* Related products: preserve image space and keep content below it. */
+/* Related cards: image and text in separate non-overlapping rows. */
 :global(.cita-related-grid > a) {
   display: flex;
+  min-width: 0;
+  min-height: 405px;
   flex-direction: column;
-  min-height: 430px;
+  overflow: hidden;
+  background: #fff;
 }
 :global(.cita-related-media) {
-  height: 265px;
-  flex: 0 0 265px;
-  padding: 34px;
-  background: linear-gradient(180deg,#f8faf9,#eef3f0);
+  display: grid;
+  height: 232px;
+  flex: 0 0 232px;
+  place-items: center;
+  overflow: hidden;
+  padding: 20px 32px;
+  background: #f1f5f2;
 }
 :global(.cita-related-media img) {
-  max-width: 260px;
-  margin: 0 auto;
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: 205px;
+  max-height: 185px;
+  margin: auto;
   object-fit: contain;
-  mix-blend-mode: normal;
+  mix-blend-mode: multiply;
+  filter: drop-shadow(0 10px 12px rgba(0,0,0,.11));
 }
 :global(.cita-related-grid > a > div:last-child) {
   position: relative;
-  z-index: 2;
+  z-index: 1;
+  display: flex;
   flex: 1;
-  padding: 22px 24px 24px;
+  flex-direction: column;
+  padding: 20px 22px 23px;
   background: #fff;
 }
 :global(.cita-related-grid h3) {
-  font-size: 21px;
-  line-height: 1.15;
-  word-spacing: .05em;
+  margin: 0;
+  font-size: 20px;
+  line-height: 1.25;
+  letter-spacing: -.012em;
+  word-spacing: .055em;
 }
+:global(.cita-related-grid span) { margin-top: auto; padding-top: 14px; }
 
+/* Tablet and mobile: keep layouts readable and preserve image aspect ratios. */
 @media (max-width: 1180px) {
-  :global(.cita-product-grid) { grid-template-columns: repeat(3,1fr); }
-  :global(.cita-software-grid) { gap: 42px; }
+  :global(.cita-product-grid) { grid-template-columns: repeat(3,minmax(0,1fr)); }
+  :global(.cita-software-grid) { gap: 30px; }
 }
 @media (max-width: 860px) {
-  :global(.cita-hero-grid) { grid-template-columns: 1fr; }
-  :global(.cita-product-grid) { grid-template-columns: repeat(2,1fr); }
-  :global(.cita-dashboard-assets) { min-height: 440px; }
-  :global(.cita-dashboard-mobile-img) { right: 0; width: 32%; }
-  :global(.cita-detail-hero-grid) { grid-template-columns: 1fr; }
-  :global(.cita-detail-product-stage) { min-height: 390px; }
+  :global(.cita-hero), :global(.cita-detail-hero) { min-height: auto; padding-top: 125px; }
+  :global(.cita-hero-grid), :global(.cita-detail-hero-grid) {
+    min-height: 470px;
+    grid-template-columns: 1fr;
+  }
+  :global(.cita-hero h1) { font-size: clamp(51px, 9vw, 76px); }
+  :global(.cita-detail-copy h1) { font-size: clamp(44px, 7.2vw, 65px); }
+  :global(.cita-stat-grid) { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  :global(.cita-stat-grid article:nth-child(2)) { border-right: 0; }
+  :global(.cita-stat-grid article:nth-child(-n+2)) { border-bottom: 1px solid #e7ece9; }
+  :global(.cita-products .cita-section-head), :global(.cita-section-head), :global(.cita-dark-head) {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  :global(.cita-products .cita-section-head > p) { max-width: 650px; justify-self: start; }
+  :global(.cita-product-grid) { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  :global(.cita-software-grid) { grid-template-columns: 1fr; gap: 30px; }
+  :global(.cita-dashboard-assets) { min-height: 380px; }
+  :global(.cita-dashboard-mobile-img) { width: min(180px,25%); right: 5%; }
   :global(.cita-spec-layout) { grid-template-columns: 1fr; }
+  :global(.cita-spec-product-card) { position: static; display: block; }
+  :global(.cita-spec-product-card img) { height: 170px; }
 }
 @media (max-width: 620px) {
-  :global(.cita-hero) { min-height: 820px; }
-  :global(.cita-product-grid) { grid-template-columns: 1fr; }
-  :global(.cita-product-media) { height: 250px; }
-  :global(.cita-dashboard-assets) { min-height: 340px; }
-  :global(.cita-dashboard-mobile-img) { width: 37%; bottom: -2%; }
-  :global(.cita-detail-product-stage > img) { width: min(320px,82%); }
-  :global(.cita-related-media) { height: 230px; flex-basis: 230px; }
+  :global(.cita-shell) { width: min(100% - 32px, 1260px); }
+  :global(.cita-hero), :global(.cita-detail-hero) { padding-top: 110px; }
+  :global(.cita-hero-grid), :global(.cita-detail-hero-grid) { min-height: 535px; }
+  :global(.cita-hero h1) { font-size: clamp(46px, 11vw, 65px); }
+  :global(.cita-hero h2) { font-size: clamp(24px, 7vw, 31px); }
+  :global(.cita-detail-copy h1) { font-size: clamp(40px, 9vw, 58px); }
+  :global(.cita-detail-hero-bg) { object-position: 62% center; }
+  :global(.cita-product-grid), :global(.cita-difference-grid), :global(.cita-related-grid) {
+    grid-template-columns: 1fr;
+  }
+  :global(.cita-product-card) { min-height: 405px; }
+  :global(.cita-product-media) { height: 225px; flex-basis: 225px; }
+  :global(.cita-dashboard-assets) { min-height: 290px; }
+  :global(.cita-dashboard-mobile-img) { width: 26%; right: 0; }
+  :global(.cita-detail-feature-strip) { grid-template-columns: 1fr; }
+  :global(.cita-detail-feature-strip div) { border-right: 0; border-bottom: 1px solid #e3e9e6; }
+  :global(.cita-detail-feature-strip div:last-child) { border-bottom: 0; }
+  :global(.cita-spec-row) { grid-template-columns: 1fr; gap: 8px; }
+  :global(.cita-related-media) { height: 215px; flex-basis: 215px; }
 }

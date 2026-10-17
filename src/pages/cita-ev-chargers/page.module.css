@@ -246,9 +246,10 @@
 :global(.cita-round-arrow) {
   display: grid; place-items: center;
   width: 40px; height: 40px; border: 1px solid rgba(27, 226, 119, .48);
-  border-radius: 50%; color: #3bec9c; font-size: 20px;
+  border-radius: 50%; color: #3bec9c; font-size: 20px; text-decoration: none;
 }
 :global(.cita-round-arrow) { width: 36px; height: 36px; font-size: 17px; }
+:global(.cita-round-arrow:hover) { background: rgba(21, 229, 122, .12); }
 :global(.cita-solution-copy h3) { margin: 0 0 5px; font-size: 18px; line-height: 1.2; }
 :global(.cita-solution-copy p) { margin: 0; color: #bdcec4; font-size: 12px; line-height: 1.55; }
 

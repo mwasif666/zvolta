@@ -36,8 +36,22 @@ import registerPageData from "./data/pages/register/pageData";
 import myAccountPageData from "./data/pages/my-account/pageData";
 import trackOrderPageData from "./data/pages/track-order/pageData";
 import dcChargersPageData from "./data/pages/dc-chargers/pageData";
+import citaEvChargersPageData from "./data/pages/cita-ev-chargers/pageData";
+import citaChargerDetailPageData from "./data/pages/cita-charger-detail/pageData";
 
 export const routeEntries = [
+  {
+    pageId: citaEvChargersPageData.pageId,
+    paths: citaEvChargersPageData.paths,
+    meta: citaEvChargersPageData.meta,
+    load: () => import("./pages/cita-ev-chargers/index.jsx"),
+  },
+  {
+    pageId: citaChargerDetailPageData.pageId,
+    paths: citaChargerDetailPageData.paths,
+    meta: citaChargerDetailPageData.meta,
+    load: () => import("./pages/cita-charger-detail/index.jsx"),
+  },
   {
     pageId: dcChargersPageData.pageId,
     paths: dcChargersPageData.paths,

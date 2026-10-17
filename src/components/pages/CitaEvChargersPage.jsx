@@ -20,8 +20,19 @@ function ArrowIcon() {
 }
 
 function FeatureIcon({ index }) {
-  const icons = ["⌘", "◎", "▥", "◈"];
-  return <span aria-hidden="true">{icons[index] || "●"}</span>;
+  const shapes = [
+    <><circle cx="12" cy="12" r="9" /><path d="M3 12h18M12 3a16 16 0 0 1 0 18M12 3a16 16 0 0 0 0 18" /></>,
+    <><path d="m13.5 2-9 11h6l-1 9 10-12h-6z" /></>,
+    <><rect x="3" y="4" width="18" height="14" rx="2" /><path d="M8 22h8M12 18v4M7 9h10M7 12h6" /></>,
+    <><path d="m3 11 9-7 9 7v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1zM9 21v-7h6v7" /></>,
+  ];
+  return (
+    <span className="cita-feature-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+        {shapes[index] || shapes[0]}
+      </svg>
+    </span>
+  );
 }
 
 function DashboardPreview() {

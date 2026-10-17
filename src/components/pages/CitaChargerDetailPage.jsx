@@ -49,16 +49,7 @@ export default function CitaChargerDetailPage({ routeClassName = "" }) {
             </div>
           </div>
 
-          <div className="cita-detail-product-stage">
-            <span className="cita-detail-glow" />
-            <span className="cita-detail-floor" />
-            <img src={charger.productImage} alt={charger.name} />
-            <div className="cita-detail-product-meta">
-              <small>CITA EV</small>
-              <strong>{charger.name}</strong>
-              <span>{charger.power}</span>
-            </div>
-          </div>
+          {/* The authentic installation photo is the hero visual; avoid a second boxed charger. */}
         </div>
       </section>
 
@@ -68,7 +59,7 @@ export default function CitaChargerDetailPage({ routeClassName = "" }) {
             <p className="cita-eyebrow">Designed for real-world charging</p>
             <h2>Smart technology. Reliable performance.</h2>
           </div>
-          <p>{charger.description}</p>
+          <p>Explore the practical features, connectivity options and technical specifications for the {charger.name}.</p>
         </div>
 
         <div className="cita-shell cita-detail-feature-strip">
@@ -89,8 +80,8 @@ export default function CitaChargerDetailPage({ routeClassName = "" }) {
           </div>
           <div className="cita-detail-highlights">
             <p className="cita-eyebrow">CITA EV charging ecosystem</p>
-            <h2>Built to fit your charging environment.</h2>
-            <p>{charger.description}</p>
+            <h2>Built for everyday charging.</h2>
+            <p>Review the model highlights below, then compare its technical specifications to your installation needs.</p>
             <div className="cita-highlight-list">
               {charger.highlights.map((item) => (
                 <div key={item}><span>✓</span><strong>{item}</strong></div>

@@ -37,7 +37,7 @@ function FeatureIcon({ index }) {
 
 function DashboardPreview() {
   return (
-    <div className="cita-dashboard-assets" aria-label="ZVolta host dashboard and mobile app preview">
+    <div className="cita-dashboard-assets" role="group" aria-label="Screenshots of ZVolta Host dashboard and mobile app">
       <img className="cita-dashboard-laptop-img" src="/img/Host/laptop.png" alt="ZVolta charging dashboard" />
       <img className="cita-dashboard-mobile-img" src="/img/Host/mobile.png" alt="ZVolta host mobile app interface" />
     </div>
@@ -143,7 +143,6 @@ export default function CitaEvChargersPage({ routeClassName = "" }) {
           <div className="cita-difference-grid">
             {differences.map(([title, copy], index) => (
               <article key={title}>
-                <span className="cita-diff-index">0{index + 1}</span>
                 <span className="cita-diff-icon"><FeatureIcon index={index} /></span>
                 <h3>{title}</h3>
                 <p>{copy}</p>
@@ -162,10 +161,10 @@ export default function CitaEvChargersPage({ routeClassName = "" }) {
             <p>Manage and monitor your chargers with ease. Real-time insights, remote control, scheduled charging, uptime and operations management.</p>
             <Link className="cita-btn cita-btn-primary" to="/software">Learn More <ArrowIcon /></Link>
             <div className="cita-software-features">
-              <div><b>▥</b><strong>Real-time Monitoring</strong><span>Live status, alerts and performance.</span></div>
-              <div><b>◫</b><strong>Smart Scheduling</strong><span>Optimise charging and energy costs.</span></div>
-              <div><b>◩</b><strong>Usage Analytics</strong><span>Insights for smarter decisions.</span></div>
-              <div><b>☁</b><strong>Remote Management</strong><span>Control chargers anywhere.</span></div>
+              <div><span className="cita-software-feature-icon"><FeatureIcon index={2} /></span><strong>Real-time Monitoring</strong><span>Live status, alerts and performance.</span></div>
+              <div><span className="cita-software-feature-icon"><FeatureIcon index={1} /></span><strong>Smart Scheduling</strong><span>Optimise charging and energy costs.</span></div>
+              <div><span className="cita-software-feature-icon"><FeatureIcon index={0} /></span><strong>Usage Analytics</strong><span>Insights for smarter decisions.</span></div>
+              <div><span className="cita-software-feature-icon"><FeatureIcon index={3} /></span><strong>Remote Management</strong><span>Control chargers anywhere.</span></div>
             </div>
           </div>
           <DashboardPreview />

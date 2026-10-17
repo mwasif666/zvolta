@@ -26,75 +26,9 @@ function FeatureIcon({ index }) {
 
 function DashboardPreview() {
   return (
-    <div className="cita-dashboard-wrap" aria-label="CITA EV CPMS dashboard preview">
-      <div className="cita-float cita-float-online">
-        <span className="cita-status-dot" />
-        <div>
-          <small>Charger Online</small>
-          <strong>CITA Smart DC</strong>
-          <span>120 kW · Site A</span>
-        </div>
-      </div>
-      <div className="cita-float cita-float-energy">
-        <small>Energy Delivered</small>
-        <strong>12,480 kWh</strong>
-        <span>+18% this month</span>
-      </div>
-      <div className="cita-laptop">
-        <div className="cita-laptop-screen">
-          <aside>
-            <b>CITA EV</b>
-            <span className="is-active">Dashboard</span>
-            <span>Chargers</span>
-            <span>Sessions</span>
-            <span>Users</span>
-            <span>Payments</span>
-            <span>Analytics</span>
-            <span>Maintenance</span>
-            <span>Settings</span>
-          </aside>
-          <main>
-            <div className="cita-dash-head">
-              <div>
-                <small>Overview</small>
-                <strong>Charging network</strong>
-              </div>
-              <span>Last 30 Days</span>
-            </div>
-            <div className="cita-dash-stats">
-              <div><small>Total Chargers</small><strong>142</strong></div>
-              <div><small>Online Chargers</small><strong>128</strong></div>
-              <div><small>Energy Delivered</small><strong>12,480</strong></div>
-              <div><small>Total Sessions</small><strong>3,842</strong></div>
-            </div>
-            <div className="cita-dash-panels">
-              <div className="cita-chart-card">
-                <div className="cita-chart-bars">
-                  {[34, 54, 42, 70, 49, 63, 38, 56, 46, 69, 52, 43].map((height, index) => (
-                    <i key={index} style={{ height: `${height}%` }} />
-                  ))}
-                </div>
-                <small>Charging Activity</small>
-              </div>
-              <div className="cita-ring-card">
-                <div className="cita-ring"><strong>90%</strong><span>Online</span></div>
-                <small>Charger Status</small>
-              </div>
-            </div>
-          </main>
-        </div>
-        <div className="cita-laptop-base" />
-      </div>
-      <div className="cita-phone">
-        <div className="cita-phone-notch" />
-        <b>CITA EV</b>
-        <img src="/CITA_Charger_Images/24_Smart_DC_Eco_Product.png" alt="CITA Smart DC Eco" />
-        <strong>Charging</strong>
-        <span>CITA Smart DC</span>
-        <div className="cita-charge-ring">78%</div>
-        <small>32 min remaining</small>
-        <button type="button">Stop Charging</button>
-      </div>
+    <div className="cita-dashboard-assets" aria-label="ZVolta host dashboard and mobile app preview">
+      <img className="cita-dashboard-laptop-img" src="/img/Host/laptop.png" alt="ZVolta charging dashboard" />
+      <img className="cita-dashboard-mobile-img" src="/img/Host/mobileandstats.png" alt="ZVolta mobile charging app" />
     </div>
   );
 }
@@ -127,19 +61,6 @@ export default function CitaEvChargersPage({ routeClassName = "" }) {
             </div>
           </div>
 
-          <div className="cita-hero-art">
-            <span className="cita-hero-glow" />
-            <span className="cita-hero-floor" />
-            <img
-              src="/CITA_Charger_Images/26_Smart_DC_Pro_Product.png"
-              alt="CITA Smart DC Pro charger"
-            />
-            <div className="cita-hero-product-note">
-              <small>Superfast DC charging</small>
-              <strong>Smart DC Pro</strong>
-              <span>200–480kW</span>
-            </div>
-          </div>
         </div>
 
         <div className="cita-shell cita-stat-grid">

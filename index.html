@@ -14,8 +14,6 @@
     href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&family=JetBrains+Mono:wght@500&display=swap"
     rel="stylesheet" />
   <style>
-    /* Typography tokens live here so the stylesheets linked below this point
-         resolve them on first paint. Nothing else in the app names a family. */
     :root {
       --font-sans: "Inter Tight", sans-serif;
       --font-mono: "Inter Tight", sans-serif;
@@ -43,18 +41,11 @@
         );
 
         document.querySelectorAll(rulerSelector).forEach((ruler) => {
-          if (!heroWords.has(ruler.textContent?.trim())) {
-            return;
-          }
-
+          if (!heroWords.has(ruler.textContent?.trim())) return;
           if (!hasActiveHero) {
             ruler.remove();
             return;
           }
-
-          // The legacy hero uses this node only to measure word width. Keeping
-          // it fixed at the viewport origin prevents its static body position
-          // from extending the document below the footer.
           ruler.style.position = "fixed";
           ruler.style.top = "0";
           ruler.style.left = "0";
@@ -67,6 +58,42 @@
       const observer = new MutationObserver(cleanLegacyHeroRuler);
       observer.observe(document.body, { childList: true, subtree: true });
       cleanLegacyHeroRuler();
+    })();
+  </script>
+  <script>
+    (() => {
+      const CITA_PATH = "/cita-ev-chargers";
+
+      const installCitaNavigation = () => {
+        const mainNav = document.querySelector('nav[aria-label="Main"]');
+        const desktopLinks = mainNav?.querySelector('.hidden.items-center.gap-1.sm\\:flex');
+
+        if (desktopLinks && !desktopLinks.querySelector('[data-cita-nav-link]')) {
+          const link = document.createElement("a");
+          link.href = CITA_PATH;
+          link.dataset.citaNavLink = "true";
+          link.textContent = "CITA EV";
+          link.className = "dock-pill-link relative z-10 rounded-full px-4 py-2 text-xs font-bold transition-colors text-white/60 hover:text-white";
+          if (window.location.pathname.startsWith(CITA_PATH)) {
+            link.className = "dock-pill-link relative z-10 rounded-full px-4 py-2 text-xs font-bold transition-colors bg-white/10 text-white";
+          }
+          desktopLinks.appendChild(link);
+        }
+
+        const mobileNav = document.querySelector('#site-mobile-menu .site-menu-panel nav');
+        if (mobileNav && !mobileNav.querySelector('[data-cita-mobile-link]')) {
+          const row = document.createElement("div");
+          row.dataset.citaMobileLink = "true";
+          row.className = "site-menu-nav-row";
+          row.innerHTML = '<div class="mb-4 h-px w-full bg-white/10"></div><a href="/cita-ev-chargers" class="mobile-menu-link site-menu-link flex items-center justify-between text-5xl font-bold text-white transition-colors hover:text-emerald-500 sm:text-6xl md:text-7xl">CITA EV</a>';
+          mobileNav.appendChild(row);
+        }
+      };
+
+      const citaNavObserver = new MutationObserver(installCitaNavigation);
+      citaNavObserver.observe(document.body, { childList: true, subtree: true });
+      window.addEventListener("popstate", installCitaNavigation);
+      installCitaNavigation();
     })();
   </script>
   <script type="module" src="/src/main.jsx"></script>

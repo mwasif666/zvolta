@@ -49,7 +49,7 @@ export default function CitaChargerDetailPage({ routeClassName = "" }) {
             </div>
           </div>
 
-          {/* The authentic installation photo is the hero visual; avoid a second boxed charger. */}
+
         </div>
       </section>
 
@@ -75,13 +75,13 @@ export default function CitaChargerDetailPage({ routeClassName = "" }) {
       <section className="cita-detail-lifestyle">
         <div className="cita-shell cita-detail-lifestyle-grid">
           <div className="cita-detail-lifestyle-image">
-            <img src={charger.lifestyleImage} alt={`${charger.name} installed`} loading="lazy" />
-            <span className="cita-lifestyle-caption">CITA EV charging solution</span>
+            <img src={charger.productImage} alt={`${charger.name} product view`} loading="lazy" decoding="async" />
+            <span className="cita-lifestyle-caption">Original CITA EV product view</span>
           </div>
           <div className="cita-detail-highlights">
             <p className="cita-eyebrow">CITA EV charging ecosystem</p>
-            <h2>Built for everyday charging.</h2>
-            <p>Review the model highlights below, then compare its technical specifications to your installation needs.</p>
+            <h2>Designed for its charging environment.</h2>
+            <p>{charger.description}</p>
             <div className="cita-highlight-list">
               {charger.highlights.map((item) => (
                 <div key={item}><span>✓</span><strong>{item}</strong></div>
@@ -96,7 +96,7 @@ export default function CitaChargerDetailPage({ routeClassName = "" }) {
         <div className="cita-shell">
           <div className="cita-section-head cita-spec-head">
             <div><p className="cita-eyebrow">Technical aspects</p><h2>Specifications</h2></div>
-            <p>Specifications below follow the supplied CITA EV 2026 company profile.</p>
+            <p>Technical details from the supplied CITA EV company profile.</p>
           </div>
           <div className="cita-spec-layout">
             <aside className="cita-spec-product-card">

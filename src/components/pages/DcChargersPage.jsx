@@ -5,11 +5,12 @@ import {
   useStorefrontSettings,
 } from "../../context/StorefrontSettingsContext";
 import { commerceApi } from "../../services/api";
+import { citaChargers } from "../../data/citaChargers";
 
 const highlights = [
-  ["bolt", "30–360 kW", "Wide power range"],
-  ["plug", "Single / Dual", "Flexible configurations"],
-  ["stack", "Scalable", "Fleet and public sites"],
+  ["bolt", "30–480 kW", "CITA DC power range"],
+  ["plug", "CCS2 / CHAdeMO", "Flexible connector options"],
+  ["stack", "Up to 4 EVs", "Multi-vehicle charging"],
   ["gear", "OCPP Ready", "Smart and future-ready"],
 ];
 
@@ -22,15 +23,19 @@ const benefits = [
   [
     "chart",
     "Scalable power",
-    "Grow from one rapid charger to a complete charging hub.",
+    "Grow from a compact 30kW charger to a 480kW superfast charging hub.",
   ],
   [
     "support",
     "Local support",
     "Expert guidance, installation and after-sales support.",
   ],
-  ["link", "OCPP compatible", "Open, connected and ready for the future."],
+  ["link", "Connected", "OCPP-ready hardware with intelligent monitoring."],
 ];
+
+const citaDcChargers = citaChargers.filter((charger) =>
+  ["smart-30-dc", "smart-dc-eco", "smart-dc-pro"].includes(charger.slug),
+);
 
 function Icon({ name }) {
   if (name === "plug") return <span aria-hidden="true">♧</span>;
@@ -44,14 +49,14 @@ function Icon({ name }) {
 
 function ProductImage({ product }) {
   const src =
-    product.images?.[0]?.url || product.image || "/img/charging station.png";
+    product.images?.[0]?.url || product.image || "/CITA_Charger_Images/24_Smart_DC_Eco_Product.png";
   return (
     <img
       src={src}
       alt={product.images?.[0]?.alt || product.title}
       loading="lazy"
       onError={(event) => {
-        event.currentTarget.src = "/img/charging station.png";
+        event.currentTarget.src = "/CITA_Charger_Images/24_Smart_DC_Eco_Product.png";
       }}
     />
   );
@@ -74,7 +79,7 @@ function ChargerCard({ product, currency }) {
       </div>
       <h3>{product.title}</h3>
       <p className="dc-product-meta">
-        <span>ϟ</span> DC Charging
+        <span>ϟ</span> {product.power || "DC Charging"}
       </p>
       <p className="dc-product-meta">
         <span>⌁</span> {connector} · {guns}
@@ -121,24 +126,25 @@ export default function DcChargersPage({ routeClassName = "" }) {
       <section className="dc-hero">
         <img
           className="dc-hero-bg"
-          src="/img/Hero/Zv - Main Banner.png"
+          src="/CITA_Charger_Images/27_Smart_DC_Pro_Lifestyle.png"
           alt=""
         />
         <span className="dc-hero-shade" aria-hidden="true" />
         <div className="dc-shell dc-hero-grid">
           <div className="dc-hero-copy">
-            <p className="dc-kicker">EV charging solutions</p>
+            <p className="dc-kicker">CITA EV DC charging solutions</p>
             <h1>
               Fast charging.
               <br />A cleaner tomorrow.
             </h1>
             <p className="dc-lead">
-              From everyday AC charging to high-power DC infrastructure, ZVolta
-              powers a cleaner, smarter future.
+              From compact 30kW charging to 480kW superfast infrastructure,
+              CITA EV delivers reliable DC charging for commercial, fleet,
+              public and highway applications.
             </p>
             <div className="dc-actions">
-              <a className="dc-button is-green" href="#dc-pricing">
-                Explore chargers <span>→</span>
+              <a className="dc-button is-green" href="#cita-dc-range">
+                Explore CITA DC chargers <span>→</span>
               </a>
               <Link className="dc-button is-dark" to="/contact-us">
                 Talk to an expert
@@ -149,89 +155,39 @@ export default function DcChargersPage({ routeClassName = "" }) {
         <div className="dc-shell dc-highlight-grid">
           {highlights.map(([icon, title, copy]) => (
             <div className="dc-highlight" key={title}>
-              <i>
-                <Icon name={icon} />
-              </i>
-              <span>
-                <strong>{title}</strong>
-                <small>{copy}</small>
-              </span>
+              <i><Icon name={icon} /></i>
+              <span><strong>{title}</strong><small>{copy}</small></span>
             </div>
           ))}
         </div>
       </section>
 
-      <section className="dc-range-section">
+      <section className="dc-range-section" id="cita-dc-range">
         <div className="dc-shell">
           <div className="dc-section-head">
             <div>
-              <p className="dc-label">Our charger range</p>
-              <h2>
-                Choose the power that
-                <br />
-                fits your needs.
-              </h2>
+              <p className="dc-label">CITA EV DC range</p>
+              <h2>Choose the power that fits your site.</h2>
               <p>
-                AC for everyday charging. DC for faster turnaround and higher
-                traffic sites.
+                Accurate product families, imagery and specifications from the
+                supplied CITA EV 2026 profile.
               </p>
             </div>
-            <Link className="dc-outline-link" to="/contact-us">
-              Talk to an expert →
+            <Link className="dc-outline-link" to="/cita-ev-chargers">
+              View full CITA range →
             </Link>
           </div>
           <div className="dc-range-grid">
-            <article>
-              <div>
-                <h3>
-                  AC
-                  <br />
-                  Charging
-                </h3>
-                <p>
-                  Reliable and efficient charging for homes, workplaces and
-                  destinations.
-                </p>
-              </div>
-              <img
-                src="/img/3kw-charger/smart-3kw-charger.png"
-                alt="ZVolta AC charger"
-              />
-              <span>3–22 kW →</span>
-            </article>
-            <article>
-              <div>
-                <h3>
-                  Compact
-                  <br />
-                  DC
-                </h3>
-                <p>
-                  Space-saving rapid chargers for businesses and commercial
-                  sites.
-                </p>
-              </div>
-              <img src="/img/charging station.png" alt="Compact DC charger" />
-              <span>30–60 kW →</span>
-            </article>
-            <article>
-              <div>
-                <h3>
-                  High-Power
-                  <br />
-                  DC
-                </h3>
-                <p>
-                  High-performance charging for highways, fleets and
-                  high-traffic locations.
-                </p>
-              </div>
-              <img
-                src="/img/charging station.png"
-                alt="High-power DC charger"
-              />
-              <span>80–360 kW →</span>
-            </article>
+            {citaDcChargers.map((charger) => (
+              <article key={charger.slug}>
+                <div>
+                  <h3>{charger.name}</h3>
+                  <p>{charger.description}</p>
+                </div>
+                <img src={charger.productImage} alt={charger.name} />
+                <Link to={`/cita-ev-chargers/${charger.slug}`}>{charger.power} →</Link>
+              </article>
+            ))}
           </div>
         </div>
       </section>
@@ -242,29 +198,23 @@ export default function DcChargersPage({ routeClassName = "" }) {
             <div>
               <p className="dc-label">Live pricing</p>
               <h2>DC charger rate comparison</h2>
-              <p>
-                Prices below update automatically from the ZVolta admin panel.
-              </p>
+              <p>Prices below update automatically from the ZVolta admin panel.</p>
             </div>
             <div className="dc-segment" aria-label="Selected charger type">
               <span>DC Chargers</span>
             </div>
           </div>
           {catalog.loading ? (
-            <div className="dc-catalog-state" role="status">
-              Loading live DC charger prices…
-            </div>
+            <div className="dc-catalog-state" role="status">Loading live DC charger prices…</div>
           ) : null}
           {!catalog.loading && catalog.error ? (
             <div className="dc-catalog-state is-error" role="alert">
-              Live DC charger pricing is temporarily unavailable. Please try
-              again shortly.
+              Live DC charger pricing is temporarily unavailable. Please try again shortly.
             </div>
           ) : null}
           {!catalog.loading && !catalog.error && !liveChargers.length ? (
             <div className="dc-catalog-state">
-              No DC chargers are published yet. Add and activate products from
-              the DC Chargers admin tab.
+              No DC chargers are published yet. Add and activate products from the DC Chargers admin tab.
             </div>
           ) : null}
           {liveChargers.length ? (
@@ -285,28 +235,19 @@ export default function DcChargersPage({ routeClassName = "" }) {
         <div className="dc-shell">
           <div className="dc-why-head">
             <div>
-              <p className="dc-kicker">Why ZVolta</p>
-              <h2>
-                Built for a<br />
-                brighter, cleaner future.
-              </h2>
+              <p className="dc-kicker">Why ZVolta + CITA EV</p>
+              <h2>Built for a brighter, cleaner future.</h2>
             </div>
             <p>
-              More than just chargers — we deliver complete EV charging
-              solutions with the technology, support and scalability to power
-              your journey ahead.
+              Complete EV charging solutions with proven hardware, connected
+              software, support and scalability for demanding applications.
             </p>
           </div>
           <div className="dc-benefit-grid">
             {benefits.map(([icon, title, copy]) => (
               <article key={title}>
-                <i>
-                  <Icon name={icon} />
-                </i>
-                <div>
-                  <h3>{title}</h3>
-                  <p>{copy}</p>
-                </div>
+                <i><Icon name={icon} /></i>
+                <div><h3>{title}</h3><p>{copy}</p></div>
               </article>
             ))}
           </div>
@@ -318,18 +259,11 @@ export default function DcChargersPage({ routeClassName = "" }) {
           <div>
             <p className="dc-label">Ready to get started?</p>
             <h2>Let's build your charging solution.</h2>
-            <p>
-              Talk to our team for the right charger, pricing and deployment
-              support.
-            </p>
+            <p>Talk to our team for the right charger, pricing and deployment support.</p>
           </div>
           <div className="dc-actions">
-            <Link className="dc-button is-green" to="/contact-us">
-              Get a quote →
-            </Link>
-            <Link className="dc-button is-light" to="/contact-us">
-              Talk to an expert
-            </Link>
+            <Link className="dc-button is-green" to="/contact-us">Get a quote →</Link>
+            <Link className="dc-button is-light" to="/cita-ev-chargers">Explore CITA EV</Link>
           </div>
         </div>
       </section>

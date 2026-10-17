@@ -1,0 +1,1104 @@
+/* Premium presentation overrides for CITA EV landing and product detail routes. */
+
+:global(.cita-page),
+:global(.cita-detail-page) {
+  font-family: var(--font-sans);
+}
+
+/* ---------- Shared ---------- */
+:global(.cita-btn) {
+  min-height: 52px;
+  padding: 0 24px;
+  border-radius: 999px;
+  transition: transform .22s ease, box-shadow .22s ease, background-color .22s ease, border-color .22s ease;
+}
+
+:global(.cita-btn:hover) {
+  transform: translateY(-2px);
+}
+
+:global(.cita-btn-primary) {
+  background: linear-gradient(135deg, #20eb84 0%, #08bf62 100%);
+  box-shadow: 0 12px 28px rgba(8, 191, 98, .20);
+}
+
+:global(.cita-btn-ghost-dark) {
+  color: #fff;
+  border-color: rgba(255,255,255,.35);
+  background: rgba(5,18,14,.36);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.12);
+  backdrop-filter: blur(14px);
+}
+
+/* ---------- Landing hero ---------- */
+:global(.cita-hero) {
+  position: relative;
+  min-height: 820px;
+  padding: 120px 0 0;
+  overflow: hidden;
+  isolation: isolate;
+  color: #fff;
+  background: #07100d;
+}
+
+:global(.cita-hero-bg) {
+  position: absolute;
+  inset: 0;
+  z-index: -5;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transform: scale(1.01);
+}
+
+:global(.cita-hero-shade) {
+  position: absolute;
+  inset: 0;
+  z-index: -4;
+  background:
+    linear-gradient(90deg, rgba(2,8,6,.96) 0%, rgba(2,8,6,.90) 32%, rgba(2,8,6,.54) 53%, rgba(2,8,6,.16) 78%, rgba(2,8,6,.22) 100%),
+    linear-gradient(0deg, rgba(2,8,6,.92) 0%, transparent 32%);
+}
+
+:global(.cita-hero-light) {
+  position: absolute;
+  z-index: -3;
+  top: 15%;
+  right: 3%;
+  width: 44vw;
+  height: 44vw;
+  max-width: 720px;
+  max-height: 720px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(25,231,128,.18), rgba(25,231,128,.05) 40%, transparent 72%);
+  filter: blur(16px);
+}
+
+:global(.cita-hero-grid) {
+  min-height: 620px;
+  display: grid;
+  grid-template-columns: minmax(0, .92fr) minmax(360px, .78fr);
+  align-items: center;
+  gap: clamp(40px, 7vw, 110px);
+}
+
+:global(.cita-hero-copy) {
+  position: relative;
+  z-index: 3;
+  max-width: 670px;
+}
+
+:global(.cita-hero .cita-eyebrow) {
+  color: #34ef91;
+}
+
+:global(.cita-hero h1) {
+  margin: 0;
+  max-width: 760px;
+  color: #fff;
+  font-size: clamp(58px, 7vw, 102px);
+  line-height: .90;
+  letter-spacing: -.065em;
+  font-weight: 850;
+  text-wrap: balance;
+  text-shadow: 0 2px 22px rgba(0,0,0,.22);
+}
+
+:global(.cita-hero h1 span) {
+  color: #20df79;
+}
+
+:global(.cita-hero h2) {
+  margin: 18px 0 0;
+  color: #f6faf8;
+  font-size: clamp(26px, 3vw, 42px);
+  line-height: 1;
+  letter-spacing: -.045em;
+  font-weight: 720;
+}
+
+:global(.cita-hero-subtitle) {
+  margin: 13px 0 0;
+  color: rgba(255,255,255,.92);
+  font-size: 17px;
+  font-weight: 680;
+}
+
+:global(.cita-hero-text) {
+  max-width: 610px;
+  margin: 22px 0 0;
+  color: rgba(237,245,241,.78);
+  font-size: 17px;
+  line-height: 1.65;
+}
+
+:global(.cita-hero-art) {
+  position: relative;
+  min-height: 570px;
+  display: grid;
+  place-items: center;
+  align-self: end;
+}
+
+:global(.cita-hero-art)::before {
+  content: "";
+  position: absolute;
+  inset: 9% 2% 8%;
+  border: 1px solid rgba(255,255,255,.20);
+  border-radius: 40px;
+  background: linear-gradient(145deg, rgba(255,255,255,.14), rgba(255,255,255,.045));
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.18),
+    0 18px 50px rgba(0,0,0,.16);
+  backdrop-filter: blur(12px) saturate(115%);
+}
+
+:global(.cita-hero-glow) {
+  position: absolute;
+  width: 62%;
+  height: 38%;
+  bottom: 12%;
+  border-radius: 50%;
+  background: rgba(18,232,124,.18);
+  filter: blur(54px);
+}
+
+:global(.cita-hero-floor) {
+  position: absolute;
+  bottom: 10%;
+  width: 72%;
+  height: 38px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(0,0,0,.42), transparent 68%);
+  filter: blur(9px);
+}
+
+:global(.cita-hero-art > img) {
+  position: relative;
+  z-index: 2;
+  width: min(72%, 470px);
+  height: 520px;
+  object-fit: contain;
+  filter: drop-shadow(0 20px 22px rgba(0,0,0,.28));
+}
+
+:global(.cita-hero-product-note) {
+  position: absolute;
+  z-index: 3;
+  right: 7%;
+  bottom: 12%;
+  min-width: 185px;
+  display: grid;
+  gap: 4px;
+  padding: 16px 18px;
+  border: 1px solid rgba(255,255,255,.22);
+  border-radius: 18px;
+  color: #fff;
+  background: rgba(3,15,11,.68);
+  box-shadow: 0 12px 28px rgba(0,0,0,.18);
+  backdrop-filter: blur(16px);
+}
+
+:global(.cita-hero-product-note small) { color: rgba(255,255,255,.58); }
+:global(.cita-hero-product-note strong) { font-size: 16px; }
+:global(.cita-hero-product-note span) { color: #27e984; font-size: 13px; font-weight: 800; }
+
+:global(.cita-stat-grid) {
+  position: relative;
+  z-index: 6;
+  transform: translateY(34px);
+  border: 1px solid rgba(255,255,255,.76);
+  background: rgba(255,255,255,.95);
+  box-shadow: 0 16px 36px rgba(6,26,18,.14);
+  backdrop-filter: blur(20px);
+}
+
+/* ---------- Product cards ---------- */
+:global(.cita-products) {
+  padding-top: 118px;
+}
+
+:global(.cita-product-card) {
+  border-color: #e5ebe8;
+  background: #fff;
+  box-shadow: 0 8px 24px rgba(7,24,17,.055);
+}
+
+:global(.cita-product-card:hover) {
+  transform: translateY(-5px);
+  box-shadow: 0 16px 34px rgba(7,24,17,.10);
+}
+
+:global(.cita-product-media) {
+  background:
+    radial-gradient(circle at 50% 32%, #fff 0%, #f4f7f5 66%, #edf2ef 100%);
+}
+
+:global(.cita-product-media img) {
+  mix-blend-mode: normal;
+  filter: drop-shadow(0 12px 12px rgba(0,0,0,.13));
+}
+
+/* ---------- Solutions ---------- */
+:global(.cita-solutions) {
+  padding: 112px 0 118px;
+  background:
+    radial-gradient(circle at 18% 22%, rgba(14,198,108,.14), transparent 24%),
+    radial-gradient(circle at 92% 0%, rgba(18,229,126,.10), transparent 25%),
+    linear-gradient(135deg, #01100c 0%, #031a14 48%, #02120e 100%);
+}
+
+:global(.cita-solutions)::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: .15;
+  background-image: linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: linear-gradient(90deg, transparent, #000 22%, #000 78%, transparent);
+  pointer-events: none;
+}
+
+:global(.cita-solutions-grid) {
+  gap: 22px;
+}
+
+:global(.cita-solutions-grid article) {
+  border-radius: 26px;
+  border-color: rgba(45,235,145,.24);
+  background: #061a14;
+  box-shadow: 0 14px 34px rgba(0,0,0,.20);
+}
+
+:global(.cita-solution-media) {
+  height: 260px;
+}
+
+:global(.cita-solution-copy) {
+  min-height: 132px;
+  padding: 23px 22px;
+  background: linear-gradient(180deg, rgba(8,37,27,.98), rgba(4,25,18,1));
+}
+
+/* ---------- Difference ---------- */
+:global(.cita-difference) {
+  padding: 108px 0;
+  background: linear-gradient(180deg, #fff 0%, #f8faf9 100%);
+}
+
+:global(.cita-difference-grid article) {
+  position: relative;
+  min-height: 250px;
+  padding: 30px;
+  overflow: hidden;
+  border: 1px solid #e5ebe8;
+  border-radius: 24px;
+  background: #fff;
+  box-shadow: 0 7px 22px rgba(8,28,19,.045);
+}
+
+:global(.cita-diff-index) {
+  position: absolute;
+  top: 24px;
+  right: 25px;
+  color: #dbe6e0;
+  font-size: 36px;
+  font-weight: 780;
+  letter-spacing: -.06em;
+}
+
+/* ---------- Software ---------- */
+:global(.cita-software) {
+  min-height: 760px;
+  padding: 126px 0;
+  background:
+    radial-gradient(circle at 70% 35%, rgba(16,231,126,.12), transparent 25%),
+    linear-gradient(128deg, #020d0a 0%, #041711 52%, #04110e 100%);
+}
+
+:global(.cita-software-backdrop) {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: .42;
+  background:
+    radial-gradient(circle at 8% 88%, rgba(17,193,106,.12), transparent 24%),
+    linear-gradient(112deg, transparent 42%, rgba(23,224,128,.045) 58%, transparent 72%);
+}
+
+:global(.cita-software-grid) {
+  grid-template-columns: .78fr 1.22fr;
+  gap: 70px;
+}
+
+:global(.cita-software-features > div) {
+  border-color: rgba(255,255,255,.10);
+  background: rgba(255,255,255,.035);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.035);
+}
+
+:global(.cita-dashboard-wrap) {
+  position: relative;
+  min-height: 520px;
+  display: grid;
+  place-items: center;
+}
+
+:global(.cita-laptop) {
+  position: relative;
+  z-index: 3;
+  width: min(100%, 690px);
+  transform: perspective(1300px) rotateY(-4deg) rotateX(1deg);
+  filter: drop-shadow(0 32px 32px rgba(0,0,0,.28));
+}
+
+:global(.cita-laptop-screen) {
+  min-height: 390px;
+  display: grid;
+  grid-template-columns: 124px 1fr;
+  overflow: hidden;
+  padding: 10px;
+  border: 1px solid rgba(255,255,255,.16);
+  border-radius: 22px 22px 12px 12px;
+  background: #0a0f0d;
+  box-shadow: inset 0 0 0 3px #151c19;
+}
+
+:global(.cita-laptop-screen aside) {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+  padding: 18px 12px;
+  border-radius: 12px;
+  color: #83918b;
+  background: #070c0a;
+  font-size: 10px;
+}
+
+:global(.cita-laptop-screen aside b) {
+  margin-bottom: 8px;
+  color: #fff;
+  font-size: 15px;
+}
+
+:global(.cita-laptop-screen aside .is-active) {
+  padding: 9px 8px;
+  border-radius: 7px;
+  color: #04120a;
+  background: #16d874;
+  font-weight: 800;
+}
+
+:global(.cita-laptop-screen main) {
+  padding: 19px 18px;
+}
+
+:global(.cita-dash-head) {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+}
+
+:global(.cita-dash-head div) { display: grid; gap: 3px; }
+:global(.cita-dash-head small), :global(.cita-dash-head > span) { color: #6d7d76; font-size: 9px; }
+:global(.cita-dash-head strong) { font-size: 15px; }
+
+:global(.cita-dash-stats) {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-top: 18px;
+}
+
+:global(.cita-dash-stats div),
+:global(.cita-chart-card),
+:global(.cita-ring-card) {
+  border: 1px solid rgba(255,255,255,.055);
+  background: #101714;
+}
+
+:global(.cita-dash-stats div) {
+  min-height: 70px;
+  display: grid;
+  align-content: center;
+  gap: 5px;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+:global(.cita-dash-stats small) { color: #7d8d86; font-size: 8px; }
+:global(.cita-dash-stats strong) { font-size: 16px; }
+
+:global(.cita-dash-panels) {
+  display: grid;
+  grid-template-columns: 1.5fr .75fr;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+:global(.cita-chart-card), :global(.cita-ring-card) {
+  min-height: 190px;
+  padding: 14px;
+  border-radius: 12px;
+}
+
+:global(.cita-chart-bars) {
+  height: 130px;
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  padding-top: 12px;
+}
+
+:global(.cita-chart-bars i) {
+  flex: 1;
+  min-width: 5px;
+  border-radius: 4px 4px 1px 1px;
+  background: linear-gradient(180deg, #31ef92, #0aba61);
+}
+
+:global(.cita-chart-card > small), :global(.cita-ring-card > small) { color: #75837d; font-size: 9px; }
+
+:global(.cita-ring-card) {
+  display: grid;
+  place-items: center;
+}
+
+:global(.cita-ring) {
+  width: 105px;
+  height: 105px;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  border-radius: 50%;
+  background: radial-gradient(circle at center, #101714 57%, transparent 58%), conic-gradient(#20e783 0 90%, #26322d 90% 100%);
+}
+
+:global(.cita-ring strong) { font-size: 20px; }
+:global(.cita-ring span) { color: #87958f; font-size: 8px; }
+
+:global(.cita-laptop-base) {
+  width: 108%;
+  height: 16px;
+  margin-left: -4%;
+  border-radius: 2px 2px 16px 16px;
+  background: linear-gradient(180deg, #5c6662, #252c29);
+  box-shadow: 0 8px 12px rgba(0,0,0,.24);
+}
+
+:global(.cita-phone) {
+  position: absolute;
+  z-index: 5;
+  right: -3%;
+  bottom: 2%;
+  width: 168px;
+  min-height: 360px;
+  display: grid;
+  justify-items: center;
+  align-content: start;
+  gap: 7px;
+  padding: 17px 13px 14px;
+  border: 5px solid #161d1a;
+  border-radius: 28px;
+  color: #fff;
+  background: linear-gradient(180deg, #07100d, #0a1a14);
+  box-shadow: 0 24px 42px rgba(0,0,0,.34);
+}
+
+:global(.cita-phone img) {
+  width: 78px;
+  height: 112px;
+  object-fit: contain;
+  margin: 6px 0 0;
+}
+
+:global(.cita-phone > b) { font-size: 12px; }
+:global(.cita-phone > strong) { color: #27e984; font-size: 13px; }
+:global(.cita-phone > span), :global(.cita-phone > small) { color: #86968f; font-size: 8px; }
+:global(.cita-phone button) { margin-top: 5px; width: 100%; min-height: 30px; border: 1px solid rgba(32,231,131,.42); border-radius: 999px; color: #dff8eb; background: rgba(15,186,98,.08); font: inherit; font-size: 8px; }
+
+:global(.cita-charge-ring) {
+  width: 62px;
+  height: 62px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 800;
+  background: radial-gradient(circle at center, #0a1511 58%, transparent 59%), conic-gradient(#20e783 0 78%, #203029 78% 100%);
+}
+
+:global(.cita-float) {
+  position: absolute;
+  z-index: 7;
+  display: grid;
+  padding: 13px 15px;
+  border: 1px solid rgba(33,232,135,.30);
+  border-radius: 14px;
+  color: #fff;
+  background: rgba(6,28,20,.82);
+  box-shadow: 0 16px 32px rgba(0,0,0,.22);
+  backdrop-filter: blur(14px);
+}
+
+:global(.cita-float-online) { left: 3%; top: 1%; grid-template-columns: auto 1fr; gap: 10px; }
+:global(.cita-float-energy) { right: 3%; top: -2%; }
+:global(.cita-float small) { color: #8aa097; font-size: 8px; }
+:global(.cita-float strong) { font-size: 13px; }
+:global(.cita-float span:not(.cita-status-dot)) { color: #23e683; font-size: 8px; }
+:global(.cita-status-dot) { width: 8px; height: 8px; margin-top: 4px; border-radius: 50%; background: #20ea83; box-shadow: 0 0 12px rgba(32,234,131,.7); }
+
+/* ---------- CTA ---------- */
+:global(.cita-cta) {
+  min-height: 430px;
+}
+
+:global(.cita-cta-shade) {
+  background: linear-gradient(90deg, rgba(2,9,7,.90) 0%, rgba(2,9,7,.75) 45%, rgba(2,9,7,.28) 76%, rgba(2,9,7,.48) 100%);
+}
+
+/* ---------- Detail hero ---------- */
+:global(.cita-detail-hero) {
+  position: relative;
+  min-height: 780px;
+  padding: 118px 0 52px;
+  overflow: hidden;
+  isolation: isolate;
+  color: #fff;
+  background: #06100d;
+}
+
+:global(.cita-detail-hero-bg) {
+  position: absolute;
+  inset: 0;
+  z-index: -5;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transform: scale(1.01);
+}
+
+:global(.cita-detail-hero-shade) {
+  position: absolute;
+  inset: 0;
+  z-index: -4;
+  background:
+    linear-gradient(90deg, rgba(2,8,6,.96) 0%, rgba(2,8,6,.88) 35%, rgba(2,8,6,.52) 58%, rgba(2,8,6,.20) 82%, rgba(2,8,6,.35) 100%),
+    linear-gradient(0deg, rgba(2,8,6,.86), transparent 42%);
+}
+
+:global(.cita-detail-hero-grid) {
+  min-height: 610px;
+  display: grid;
+  grid-template-columns: minmax(0, .92fr) minmax(350px, .78fr);
+  align-items: center;
+  gap: clamp(44px, 7vw, 100px);
+}
+
+:global(.cita-detail-copy) {
+  position: relative;
+  z-index: 3;
+  max-width: 650px;
+}
+
+:global(.cita-back-link) {
+  display: inline-flex;
+  margin-bottom: 30px;
+  color: rgba(255,255,255,.74);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 720;
+}
+
+:global(.cita-detail-copy .cita-eyebrow) { color: #34ef91; }
+
+:global(.cita-detail-copy h1) {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(54px, 6vw, 88px);
+  line-height: .92;
+  letter-spacing: -.06em;
+  font-weight: 840;
+}
+
+:global(.cita-detail-power) {
+  display: inline-flex;
+  margin-top: 18px;
+  padding: 9px 14px;
+  border: 1px solid rgba(51,237,143,.42);
+  border-radius: 999px;
+  color: #2be686;
+  background: rgba(8,68,41,.30);
+  font-size: 14px;
+  font-weight: 800;
+  backdrop-filter: blur(10px);
+}
+
+:global(.cita-detail-copy > p:not(.cita-eyebrow)) {
+  max-width: 610px;
+  margin: 22px 0 0;
+  color: rgba(238,246,242,.78);
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+:global(.cita-detail-badges) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 21px;
+}
+
+:global(.cita-detail-badges span) {
+  padding: 8px 12px;
+  border: 1px solid rgba(255,255,255,.16);
+  border-radius: 999px;
+  color: rgba(255,255,255,.82);
+  background: rgba(255,255,255,.045);
+  font-size: 11px;
+  font-weight: 700;
+  backdrop-filter: blur(12px);
+}
+
+:global(.cita-detail-product-stage) {
+  position: relative;
+  min-height: 560px;
+  display: grid;
+  place-items: center;
+}
+
+:global(.cita-detail-product-stage)::before {
+  content: "";
+  position: absolute;
+  inset: 7% 2% 4%;
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 36px;
+  background: linear-gradient(145deg, rgba(255,255,255,.15), rgba(255,255,255,.035));
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.16), 0 18px 40px rgba(0,0,0,.18);
+  backdrop-filter: blur(13px) saturate(112%);
+}
+
+:global(.cita-detail-glow) {
+  position: absolute;
+  bottom: 15%;
+  width: 55%;
+  height: 35%;
+  border-radius: 50%;
+  background: rgba(19,229,125,.20);
+  filter: blur(55px);
+}
+
+:global(.cita-detail-floor) {
+  position: absolute;
+  bottom: 12%;
+  width: 65%;
+  height: 34px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(0,0,0,.42), transparent 70%);
+  filter: blur(8px);
+}
+
+:global(.cita-detail-product-stage > img) {
+  position: relative;
+  z-index: 2;
+  width: min(76%, 460px);
+  height: 500px;
+  object-fit: contain;
+  filter: drop-shadow(0 20px 20px rgba(0,0,0,.25));
+}
+
+:global(.cita-detail-product-meta) {
+  position: absolute;
+  z-index: 4;
+  right: 8%;
+  bottom: 9%;
+  min-width: 190px;
+  display: grid;
+  gap: 4px;
+  padding: 15px 17px;
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: 16px;
+  color: #fff;
+  background: rgba(4,18,13,.66);
+  backdrop-filter: blur(14px);
+}
+
+:global(.cita-detail-product-meta small) { color: rgba(255,255,255,.56); }
+:global(.cita-detail-product-meta span) { color: #25e583; font-size: 12px; font-weight: 800; }
+
+/* ---------- Detail intro/features ---------- */
+:global(.cita-detail-intro) {
+  padding: 100px 0 74px;
+  background: #fff;
+}
+
+:global(.cita-detail-intro-grid) {
+  display: grid;
+  grid-template-columns: 1.05fr .95fr;
+  gap: 90px;
+  align-items: end;
+}
+
+:global(.cita-detail-intro-grid h2) {
+  margin: 0;
+  max-width: 620px;
+  font-size: clamp(40px, 4vw, 58px);
+  line-height: .98;
+  letter-spacing: -.05em;
+}
+
+:global(.cita-detail-intro-grid > p) {
+  margin: 0;
+  color: #68736e;
+  line-height: 1.7;
+}
+
+:global(.cita-detail-feature-strip) {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  margin-top: 52px;
+  overflow: hidden;
+  border: 1px solid #e4ebe7;
+  border-radius: 22px;
+  background: #e4ebe7;
+}
+
+:global(.cita-detail-feature-strip > div) {
+  min-height: 112px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 12px;
+  align-items: center;
+  padding: 22px;
+  background: #f9fbfa;
+}
+
+:global(.cita-detail-feature-strip span) {
+  color: #16c568;
+  font-size: 11px;
+  font-weight: 850;
+}
+
+:global(.cita-detail-feature-strip strong) {
+  font-size: 13px;
+  line-height: 1.35;
+}
+
+/* ---------- Detail lifestyle ---------- */
+:global(.cita-detail-lifestyle) {
+  padding: 108px 0;
+  background: #f4f7f5;
+}
+
+:global(.cita-detail-lifestyle-grid) {
+  display: grid;
+  grid-template-columns: 1.12fr .88fr;
+  gap: 70px;
+  align-items: center;
+}
+
+:global(.cita-detail-lifestyle-image) {
+  position: relative;
+  height: 560px;
+  overflow: hidden;
+  border-radius: 30px;
+  box-shadow: 0 18px 44px rgba(10,35,24,.10);
+}
+
+:global(.cita-detail-lifestyle-image img) {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+:global(.cita-lifestyle-caption) {
+  position: absolute;
+  left: 22px;
+  bottom: 22px;
+  padding: 9px 12px;
+  border: 1px solid rgba(255,255,255,.26);
+  border-radius: 999px;
+  color: #fff;
+  background: rgba(3,16,11,.54);
+  font-size: 11px;
+  font-weight: 700;
+  backdrop-filter: blur(12px);
+}
+
+:global(.cita-detail-highlights h2) {
+  margin: 0;
+  font-size: clamp(38px, 4vw, 56px);
+  line-height: .98;
+  letter-spacing: -.05em;
+}
+
+:global(.cita-detail-highlights > p:not(.cita-eyebrow)) {
+  margin: 19px 0 0;
+  color: #68736e;
+  line-height: 1.65;
+}
+
+:global(.cita-highlight-list) {
+  display: grid;
+  gap: 9px;
+  margin-top: 26px;
+}
+
+:global(.cita-highlight-list > div) {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 13px 14px;
+  border: 1px solid #e2eae6;
+  border-radius: 13px;
+  background: rgba(255,255,255,.78);
+}
+
+:global(.cita-highlight-list span) {
+  width: 28px;
+  height: 28px;
+  flex: 0 0 28px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: #0ca957;
+  background: #e9faf1;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+:global(.cita-highlight-list strong) { font-size: 13px; }
+
+:global(.cita-detail-inline-link) {
+  display: inline-flex;
+  margin-top: 24px;
+  color: #0aa959;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 820;
+}
+
+/* ---------- Specs ---------- */
+:global(.cita-spec-section) {
+  padding: 110px 0;
+  background: #fff;
+}
+
+:global(.cita-spec-layout) {
+  display: grid;
+  grid-template-columns: 310px 1fr;
+  gap: 30px;
+  align-items: start;
+}
+
+:global(.cita-spec-product-card) {
+  position: sticky;
+  top: 96px;
+  display: grid;
+  justify-items: center;
+  padding: 28px;
+  border: 1px solid #e3ebe7;
+  border-radius: 24px;
+  background: linear-gradient(180deg, #fbfdfc, #f1f5f3);
+  box-shadow: 0 8px 24px rgba(7,24,17,.05);
+  text-align: center;
+}
+
+:global(.cita-spec-product-card img) {
+  width: 100%;
+  height: 260px;
+  object-fit: contain;
+  filter: drop-shadow(0 12px 12px rgba(0,0,0,.12));
+}
+
+:global(.cita-spec-product-card small) { color: #7b8781; font-size: 10px; text-transform: uppercase; letter-spacing: .08em; }
+:global(.cita-spec-product-card h3) { margin: 8px 0 0; font-size: 22px; letter-spacing: -.03em; }
+:global(.cita-spec-product-card > strong) { margin-top: 7px; color: #0aae59; font-size: 14px; }
+
+:global(.cita-spec-card) {
+  overflow: hidden;
+  border: 1px solid #e0e8e4;
+  border-radius: 24px;
+  background: #fff;
+  box-shadow: 0 8px 24px rgba(7,24,17,.045);
+}
+
+:global(.cita-spec-row) {
+  display: grid;
+  grid-template-columns: minmax(180px, .34fr) 1fr;
+  gap: 28px;
+  align-items: start;
+  padding: 18px 22px;
+  border-bottom: 1px solid #e8eeeb;
+}
+
+:global(.cita-spec-row:last-child) { border-bottom: 0; }
+:global(.cita-spec-row span) { color: #7a8580; font-size: 12px; font-weight: 700; }
+:global(.cita-spec-row strong) { color: #142019; font-size: 13px; line-height: 1.55; font-weight: 720; }
+
+/* ---------- Detail CTA / related ---------- */
+:global(.cita-detail-cta) {
+  position: relative;
+  min-height: 420px;
+  display: grid;
+  align-items: center;
+  overflow: hidden;
+  isolation: isolate;
+  color: #fff;
+}
+
+:global(.cita-detail-cta > img) {
+  position: absolute;
+  inset: 0;
+  z-index: -3;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+:global(.cita-detail-cta-shade) {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background: linear-gradient(90deg, rgba(2,9,7,.92), rgba(2,9,7,.70) 52%, rgba(2,9,7,.30));
+}
+
+:global(.cita-detail-cta-inner) {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+:global(.cita-detail-cta-inner h2) {
+  margin: 0;
+  max-width: 800px;
+  font-size: clamp(40px, 4.8vw, 66px);
+  line-height: .96;
+  letter-spacing: -.055em;
+}
+
+:global(.cita-detail-cta-inner > div > p:last-child) { max-width: 680px; color: rgba(255,255,255,.72); }
+
+:global(.cita-related) {
+  padding: 104px 0 118px;
+  background: #f7faf8;
+}
+
+:global(.cita-related-grid) {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+:global(.cita-related-grid > a) {
+  overflow: hidden;
+  border: 1px solid #e1e9e5;
+  border-radius: 22px;
+  color: #101a15;
+  background: #fff;
+  box-shadow: 0 8px 24px rgba(7,24,17,.05);
+  text-decoration: none;
+  transition: transform .22s ease, box-shadow .22s ease;
+}
+
+:global(.cita-related-grid > a:hover) {
+  transform: translateY(-4px);
+  box-shadow: 0 15px 32px rgba(7,24,17,.09);
+}
+
+:global(.cita-related-media) {
+  height: 255px;
+  display: grid;
+  place-items: center;
+  padding: 22px;
+  background: radial-gradient(circle at center, #fff, #f0f5f2 80%);
+}
+
+:global(.cita-related-media img) {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 12px 10px rgba(0,0,0,.12));
+}
+
+:global(.cita-related-grid > a > div:last-child) { padding: 20px 21px 22px; }
+:global(.cita-related-grid h3) { margin: 0; font-size: 21px; }
+:global(.cita-related-grid strong) { display: block; margin-top: 5px; color: #0caf59; font-size: 13px; }
+:global(.cita-related-grid span) { display: inline-block; margin-top: 16px; color: #17231d; font-size: 12px; font-weight: 780; }
+
+:global(.cita-detail-not-found) { min-height: 70vh; display: grid; align-items: center; padding-top: 110px; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1080px) {
+  :global(.cita-hero-grid),
+  :global(.cita-detail-hero-grid) {
+    grid-template-columns: 1fr 430px;
+    gap: 28px;
+  }
+
+  :global(.cita-product-grid) { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  :global(.cita-difference-grid) { grid-template-columns: repeat(2, 1fr); }
+  :global(.cita-software-grid) { grid-template-columns: 1fr; }
+  :global(.cita-dashboard-wrap) { margin-top: 40px; }
+  :global(.cita-detail-lifestyle-grid) { grid-template-columns: 1fr; }
+  :global(.cita-detail-lifestyle-image) { height: 520px; }
+}
+
+@media (max-width: 820px) {
+  :global(.cita-shell) { width: min(100% - 30px, 1240px); }
+
+  :global(.cita-hero), :global(.cita-detail-hero) { min-height: auto; padding-top: 104px; }
+  :global(.cita-hero-grid), :global(.cita-detail-hero-grid) { grid-template-columns: 1fr; min-height: auto; padding-bottom: 44px; }
+  :global(.cita-hero-copy), :global(.cita-detail-copy) { max-width: 620px; }
+  :global(.cita-hero-art), :global(.cita-detail-product-stage) { min-height: 500px; }
+  :global(.cita-hero-art > img), :global(.cita-detail-product-stage > img) { height: 430px; }
+
+  :global(.cita-stat-grid) { grid-template-columns: repeat(2, 1fr); transform: translateY(24px); }
+  :global(.cita-stat-grid article:nth-child(2)) { border-right: 0; }
+
+  :global(.cita-section-head), :global(.cita-dark-head), :global(.cita-detail-intro-grid) { grid-template-columns: 1fr; gap: 18px; }
+  :global(.cita-solutions-grid) { grid-template-columns: repeat(2, 1fr); }
+  :global(.cita-detail-feature-strip) { grid-template-columns: repeat(2, 1fr); }
+  :global(.cita-spec-layout) { grid-template-columns: 1fr; }
+  :global(.cita-spec-product-card) { position: relative; top: 0; }
+  :global(.cita-spec-product-card img) { height: 300px; }
+  :global(.cita-detail-cta-inner) { align-items: flex-start; flex-direction: column; }
+  :global(.cita-related-grid) { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 580px) {
+  :global(.cita-hero h1), :global(.cita-detail-copy h1) { font-size: clamp(48px, 15vw, 66px); }
+  :global(.cita-hero h2) { font-size: 28px; }
+
+  :global(.cita-hero-bg), :global(.cita-detail-hero-bg) { object-position: 64% center; }
+  :global(.cita-hero-shade), :global(.cita-detail-hero-shade) {
+    background: linear-gradient(180deg, rgba(2,8,6,.90) 0%, rgba(2,8,6,.82) 52%, rgba(2,8,6,.76) 100%);
+  }
+
+  :global(.cita-stat-grid) { grid-template-columns: 1fr; }
+  :global(.cita-stat-grid article) { border-right: 0; border-bottom: 1px solid #e9eeeb; }
+  :global(.cita-stat-grid article:last-child) { border-bottom: 0; }
+
+  :global(.cita-product-grid), :global(.cita-solutions-grid), :global(.cita-difference-grid), :global(.cita-software-features), :global(.cita-detail-feature-strip) { grid-template-columns: 1fr; }
+  :global(.cita-solution-media) { height: 230px; }
+
+  :global(.cita-laptop) { transform: none; }
+  :global(.cita-laptop-screen) { grid-template-columns: 88px 1fr; min-height: 330px; }
+  :global(.cita-laptop-screen aside) { gap: 9px; padding: 13px 8px; font-size: 8px; }
+  :global(.cita-laptop-screen main) { padding: 12px 10px; }
+  :global(.cita-dash-stats) { grid-template-columns: repeat(2, 1fr); }
+  :global(.cita-dash-panels) { grid-template-columns: 1fr; }
+  :global(.cita-ring-card) { display: none; }
+  :global(.cita-phone) { right: 1%; bottom: -4%; transform: scale(.82); transform-origin: bottom right; }
+  :global(.cita-float) { display: none; }
+
+  :global(.cita-detail-lifestyle-image) { height: 390px; border-radius: 22px; }
+  :global(.cita-spec-row) { grid-template-columns: 1fr; gap: 7px; }
+  :global(.cita-related-media) { height: 230px; }
+}

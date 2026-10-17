@@ -28,7 +28,7 @@ function DashboardPreview() {
   return (
     <div className="cita-dashboard-assets" aria-label="ZVolta host dashboard and mobile app preview">
       <img className="cita-dashboard-laptop-img" src="/img/Host/laptop.png" alt="ZVolta charging dashboard" />
-      <img className="cita-dashboard-mobile-img" src="/img/Host/mobileandstats.png" alt="ZVolta mobile charging app" />
+      <img className="cita-dashboard-mobile-img" src="/img/Host/mobile.png" alt="ZVolta host mobile app interface" />
     </div>
   );
 }
@@ -60,7 +60,6 @@ export default function CitaEvChargersPage({ routeClassName = "" }) {
               <Link className="cita-btn cita-btn-ghost-dark" to="/contact-us">Enquire Now <ArrowIcon /></Link>
             </div>
           </div>
-
         </div>
 
         <div className="cita-shell cita-stat-grid">

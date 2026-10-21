@@ -150,6 +150,11 @@
   -webkit-user-drag: none;
 }
 /* Preserve each original CITA charger photograph and its model-specific crop. */
+.cita-reel-card[data-model="smart-pro-11"] .cita-reel-card-detail > img {
+  /* Keep the charger in focus instead of the people at frame center. */
+  object-position: 74% center;
+  transform: scale(1.08);
+}
 .cita-reel-card[data-model="smart-dual"] .cita-reel-card-detail > img {
   object-position: 50% 45%;
   transform: scale(1.33);

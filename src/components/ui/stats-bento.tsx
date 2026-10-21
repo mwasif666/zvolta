@@ -3,7 +3,7 @@
 import React from "react";
 import {
   LuArrowUpRight,
-  LuGlobe2,
+  LuGlobe,
   LuHouse,
   LuMonitorSmartphone,
   LuPlugZap,
@@ -40,14 +40,14 @@ export const StatsBento = ({ className = "" }: StatsBentoProps) => {
               }}
               aria-hidden="true"
             />
-            <LuGlobe2
+            <LuGlobe
               className="pointer-events-none absolute -bottom-12 -right-7 h-52 w-52 text-white/10 sm:h-64 sm:w-64"
               strokeWidth={0.8}
               aria-hidden="true"
             />
             <div className="relative z-10">
               <span className="mb-7 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3.5 py-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-white/90">
-                <LuGlobe2 className="h-4 w-4" aria-hidden="true" />
+                <LuGlobe className="h-4 w-4" aria-hidden="true" />
                 Global Presence
               </span>
               <h2 className="text-[76px] font-semibold leading-none tracking-[-0.055em] sm:text-[92px] lg:text-[100px]">

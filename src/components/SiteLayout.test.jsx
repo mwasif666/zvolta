@@ -1,5 +1,6 @@
 // @vitest-environment jsdom
 import { cleanup, fireEvent, render, screen } from "@testing-library/react";
+import { readFileSync } from "node:fs";
 import { MemoryRouter } from "react-router-dom";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { SiteLayout } from "./SiteLayout";
@@ -22,6 +23,13 @@ describe("SiteLayout", () => {
 
     expect(container.querySelectorAll(".site-footer")).toHaveLength(1);
     expect(container.textContent).toMatch(/Copyright © \d{4} ZVolta/);
+  });
+
+  it("does not inject a second CITA EV nav link from index.html", () => {
+    const html = readFileSync(new URL("../../index.html", import.meta.url), "utf8");
+    expect(html).not.toContain("installCitaNavigation");
+    expect(html).not.toContain("data-cita-nav-link");
+    expect(html).not.toContain("data-cita-mobile-link");
   });
 
   it("keeps Shop and Cart in the primary nav and out of the expanded menu", () => {

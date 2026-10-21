@@ -26,5 +26,17 @@ describe("CITA product cards", () => {
     expect(html).toContain("11 kW");
     expect(html).toContain("22 kW");
     expect(html).toContain("cita-product-cta-icon");
+    expect((html.match(/Enquire for pricing/g) || []).length).toBe(
+      citaChargers.length,
+    );
+    expect((html.match(/Contact support/g) || []).length).toBe(
+      citaChargers.length,
+    );
+    expect((html.match(/Best for/g) || []).length).toBe(
+      citaChargers.length,
+    );
+    expect((html.match(/Location/g) || []).length).toBe(
+      citaChargers.length,
+    );
   });
 });

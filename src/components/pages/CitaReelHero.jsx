@@ -272,10 +272,11 @@ export default function CitaReelHero() {
             <br className="cita-reel-desktop-break" />
             Explore the CITA EV hardware range — built for the future of mobility.
           </p>
-          <div className="cita-reel-note cita-reel-note-right" aria-hidden="true">Power every<br />journey <span>✳</span></div>
-          <svg className="cita-reel-doodle cita-reel-arrow-right" viewBox="0 0 165 180" fill="none" aria-hidden="true">
-            <path d="M12 6C36 20 85 10 106 58C128 108 92 141 58 157M58 157L68 136M58 157L79 155" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
+          <p className="cita-reel-browse-hint">
+            <span className="cita-reel-browse-desktop">Drag to explore · Hover for charger details</span>
+            <span className="cita-reel-browse-mobile">Swipe to discover the CITA charger range</span>
+          </p>
+          <div className="cita-reel-note cita-reel-note-right" aria-hidden="true">Power every journey <span>✳</span></div>
           <div
             className="cita-reel-carousel"
             ref={bandRef}

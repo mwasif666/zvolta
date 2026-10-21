@@ -149,18 +149,18 @@ function SiteHeader() {
   const shopRoute = getRouteByPageId("products");
   const citaRoute = getRouteByPageId("cita-ev-chargers");
   const cartRoute = getRouteByPageId("cart");
+  // Primary links must be unique. CITA EV is rendered exactly once as an
+  // explicit link after Shop, never also included in this mapped route list.
   const dockRoutes = useMemo(
     () =>
-      [
-        hostingRoute,
-        chargingRoute,
-        softwareRoute,
-        shopRoute,
-        citaRoute,
-      ].filter((route, index, routes) =>
-        route && routes.findIndex((candidate) => candidate?.pageId === route.pageId) === index,
+      [hostingRoute, chargingRoute, softwareRoute, shopRoute].filter(
+        (route, index, routes) =>
+          route &&
+          routes.findIndex(
+            (candidate) => candidate?.path === route.path,
+          ) === index,
       ),
-    [hostingRoute, chargingRoute, shopRoute, softwareRoute, citaRoute],
+    [hostingRoute, chargingRoute, softwareRoute, shopRoute],
   );
   const menuLinks = useMemo(
     () =>
@@ -432,6 +432,11 @@ function SiteHeader() {
                   : route.shortLabel}
             </DockLink>
           ))}
+          {citaRoute ? (
+            <DockLink route={citaRoute} pathname={pathname}>
+              CITA EV
+            </DockLink>
+          ) : null}
         </div>
         {cartRoute ? (
           <Link

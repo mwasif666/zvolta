@@ -2800,3 +2800,97 @@
     width: 100%;
   }
 }
+
+/* CITA Shop: source-backed DC charger collection; existing commerce layout preserved */
+.cita-shop-page .commerce-hero {
+  min-height: 52vh;
+}
+.cita-shop-page .cita-shop-count {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 12px;
+  margin: 0;
+  color: #b7c6bc;
+  font-size: 15px;
+}
+.cita-shop-page .cita-shop-count strong {
+  color: #7beaac;
+  font-weight: 700;
+}
+.cita-shop-page .commerce-card {
+  min-width: 0;
+}
+.cita-shop-page .commerce-card__intro {
+  min-height: 161px;
+}
+.cita-shop-page .commerce-card__intro p {
+  display: -webkit-box;
+  min-height: 84px;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+}
+.cita-shop-page .commerce-card__art {
+  min-height: 230px;
+  height: 230px;
+  align-items: center;
+  margin: 12px 0 22px;
+  padding: 14px;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 15px;
+  background: #eaf1ec;
+  overflow: hidden;
+}
+.cita-shop-page .commerce-card__art img {
+  width: 100%;
+  height: 100%;
+  max-width: 244px;
+  max-height: 208px;
+  object-position: center;
+  filter: none;
+  -webkit-mask-image: var(--cita-shop-image-mask, none);
+  mask-image: var(--cita-shop-image-mask, none);
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}
+.cita-shop-page .commerce-card[data-model="smart-30-dc"] {
+  --cita-shop-image-mask: url("/CITA_Charger_Masks/smart-30-dc.svg");
+}
+.cita-shop-page .commerce-card[data-model="smart-dc-eco"] {
+  --cita-shop-image-mask: url("/CITA_Charger_Masks/smart-dc-eco.svg");
+}
+.cita-shop-page .commerce-card[data-model="smart-dc-pro"] {
+  --cita-shop-image-mask: url("/CITA_Charger_Masks/smart-dc-pro.svg");
+}
+.cita-shop-page .commerce-card__specs {
+  min-height: 210px;
+  gap: 10px;
+  margin-top: auto;
+}
+.cita-shop-page .commerce-card__spec-row {
+  font-size: 13px;
+}
+.cita-shop-page .commerce-card__spec-row strong {
+  max-width: 69%;
+  overflow-wrap: anywhere;
+}
+.cita-shop-page .cita-shop-card__enquire {
+  text-decoration: none;
+}
+.cita-shop-page .cita-shop-pricing-note {
+  margin: 28px 0 0;
+  color: #b5c5b9;
+  font-size: 13px;
+  line-height: 1.65;
+}
+@media (max-width: 1080px) {
+  .cita-shop-page .commerce-card__intro { min-height: 190px; }
+}
+@media (max-width: 680px) {
+  .cita-shop-page .commerce-card__intro { min-height: 0; }
+  .cita-shop-page .commerce-card__intro p { min-height: 0; }
+  .cita-shop-page .commerce-card__art { margin-top: 20px; }
+}

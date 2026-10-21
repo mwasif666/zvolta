@@ -31,17 +31,18 @@ function positionCards(cards, bandWidth, bandHeight, offset, mobile) {
   const normalizer = mobile ? Math.max(185, center - 15) : Math.max(510, center - 75);
   const middleWidth = mobile ? 142 : 184;
   const widthGain = mobile ? 20 : 39;
-  const baseHeight = mobile ? 172 : 273;
-  const edgeGain = mobile ? 47 : 93;
+  const baseHeight = mobile ? 159 : Math.min(273, bandHeight * .66);
+  // Keep the tallest outer edges inside the available band on shallow laptops.
+  const edgeGain = mobile ? 42 : Math.min(92, (bandHeight - baseHeight - 24) / 1.4);
 
   cards.forEach((card, index) => {
     const t = wrap(index * pitch + offset, period);
     // Increasing pitch towards the edges preserves the breathing room between cards.
     const x = center + t * (1 + 0.067 * (t / normalizer) ** 2);
-    const distance = Math.min(1.27, Math.abs(x - center) / normalizer);
+    const distance = Math.min(1.12, Math.abs(x - center) / normalizer);
     const width = middleWidth + widthGain * distance ** 2;
-    const leftDistance = Math.min(1.27, Math.abs(x - width / 2 - center) / normalizer);
-    const rightDistance = Math.min(1.27, Math.abs(x + width / 2 - center) / normalizer);
+    const leftDistance = Math.min(1.12, Math.abs(x - width / 2 - center) / normalizer);
+    const rightDistance = Math.min(1.12, Math.abs(x + width / 2 - center) / normalizer);
     const leftHeight = baseHeight + edgeGain * leftDistance ** 2.6;
     const rightHeight = baseHeight + edgeGain * rightDistance ** 2.6;
     const height = Math.max(leftHeight, rightHeight);
@@ -188,6 +189,8 @@ export default function CitaReelHero() {
     band.addEventListener("pointermove", onMove);
     band.addEventListener("pointerup", onUp);
     band.addEventListener("pointercancel", onUp);
+    window.addEventListener("pointerup", onUp);
+    window.addEventListener("pointercancel", onUp);
     mobileQuery.addEventListener("change", syncSize);
     motionQuery.addEventListener("change", onMediaChange);
     window.addEventListener("resize", syncSize, { passive: true });
@@ -205,6 +208,8 @@ export default function CitaReelHero() {
       band.removeEventListener("pointermove", onMove);
       band.removeEventListener("pointerup", onUp);
       band.removeEventListener("pointercancel", onUp);
+      window.removeEventListener("pointerup", onUp);
+      window.removeEventListener("pointercancel", onUp);
       mobileQuery.removeEventListener("change", syncSize);
       motionQuery.removeEventListener("change", onMediaChange);
       window.removeEventListener("resize", syncSize);

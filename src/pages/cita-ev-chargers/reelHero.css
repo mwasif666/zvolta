@@ -103,9 +103,12 @@
   user-select: none;
   -webkit-user-select: none;
   -webkit-tap-highlight-color: transparent;
+  transform: translateZ(0);
 }
 .cita-reel-carousel.is-dragging { cursor: grabbing; }
 
+
+/* Translate on every RAF; changing the curved shape is throttled in JS. */
 .cita-reel-card {
   position: absolute;
   top: 0;
@@ -116,11 +119,20 @@
   color: #fff;
   background: #dceee5;
   text-align: left;
-  text-decoration: none;
-  will-change: transform, clip-path;
+  will-change: transform;
+  contain: layout paint;
+  backface-visibility: hidden;
   -webkit-user-drag: none;
 }
-.cita-reel-card > img {
+.cita-reel-card-detail {
+  position: absolute;
+  inset: 0;
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  -webkit-user-drag: none;
+}
+.cita-reel-card-detail > img {
   position: absolute;
   inset: 0;
   display: block;
@@ -132,39 +144,53 @@
   user-select: none;
   -webkit-user-drag: none;
 }
-/* Charge point is x~50% in Smart Dual photo, but x~73% in EcoPillar. */
-.cita-reel-card[data-model="smart-dual"] > img {
+/* Preserve each original CITA charger photograph and its model-specific crop. */
+.cita-reel-card[data-model="smart-dual"] .cita-reel-card-detail > img {
   object-position: 50% 45%;
   transform: scale(1.33);
 }
-.cita-reel-card[data-model="dual-ecopillar"] > img {
+.cita-reel-card[data-model="dual-ecopillar"] .cita-reel-card-detail > img {
   object-position: 74% 47%;
   transform: scale(1.09);
 }
-.cita-reel-card[data-model="smart-30-dc"] > img { object-position: 57% center; }
-
+.cita-reel-card[data-model="smart-30-dc"] .cita-reel-card-detail > img {
+  object-position: 57% center;
+}
 .cita-reel-card-gradient {
   position: absolute;
   inset: 0;
+  opacity: 0;
   pointer-events: none;
   background: linear-gradient(
     0deg,
     rgba(2, 20, 12, .98) 0%,
-    rgba(2, 20, 12, .86) 18%,
-    rgba(2, 20, 12, .21) 53%,
-    transparent 75%
+    rgba(2, 20, 12, .81) 22%,
+    rgba(2, 20, 12, .10) 56%,
+    transparent 77%
   );
+  transition: opacity .28s ease;
+}
+.cita-reel-card-hover {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 20px 15px 21px;
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+  transition: opacity .27s ease, transform .27s ease;
 }
 .cita-reel-card-copy {
-  position: absolute;
-  z-index: 1;
-  right: 15px;
-  bottom: 24px;
-  left: 17px;
   display: flex;
   flex-direction: column;
   gap: 7px;
+  max-width: 100%;
   color: #fff;
+  text-align: left;
   pointer-events: none;
 }
 .cita-reel-card-copy small {
@@ -175,31 +201,48 @@
 }
 .cita-reel-card-copy strong {
   color: #fff;
-  font-size: 18px;
+  font-size: 17px;
   font-weight: 790;
-  line-height: 1.17;
+  line-height: 1.2;
   letter-spacing: -.012em;
-  overflow-wrap: normal;
 }
-.cita-reel-card-icon {
+.cita-reel-card-contact {
   position: absolute;
-  top: 15px;
-  right: 15px;
+  top: 14px;
+  right: 14px;
   display: grid;
   place-items: center;
-  width: 33px;
-  height: 33px;
-  border: 1px solid rgba(255, 255, 255, .7);
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(255, 255, 255, .55);
   border-radius: 50%;
-  background: rgba(245, 255, 248, .80);
-  color: #075a37;
-  backdrop-filter: blur(7px);
-  font-size: 19px;
-  font-weight: 750;
-  pointer-events: none;
+  color: #fff;
+  background: #08482d;
+  box-shadow: 0 7px 20px rgba(0, 0, 0, .2);
+  text-decoration: none;
+  pointer-events: auto;
+  transition: background-color .2s ease, transform .2s ease;
 }
-.cita-reel-card:hover .cita-reel-card-icon { background: #fff; }
-.cita-reel-card:focus-visible { outline: 4px solid #06c974; outline-offset: -6px; }
+.cita-reel-card-contact svg { display: block; width: 22px; height: 22px; }
+.cita-reel-card-contact:hover { background: #0c7547; transform: translateY(-2px); }
+.cita-reel-card-detail:focus-visible,
+.cita-reel-card-contact:focus-visible {
+  outline: 3px solid #11e488;
+  outline-offset: -3px;
+}
+.cita-reel-carousel:not(.is-dragging) .cita-reel-card:hover .cita-reel-card-hover,
+.cita-reel-card:focus-within .cita-reel-card-hover {
+  opacity: 1;
+  transform: translateY(0);
+}
+.cita-reel-carousel:not(.is-dragging) .cita-reel-card:hover .cita-reel-card-gradient,
+.cita-reel-card:focus-within .cita-reel-card-gradient { opacity: 1; }
+@media (hover: none) {
+  /* Touch devices have no hover: show model details and enquiry affordance. */
+  .cita-reel-card-hover { opacity: 1; transform: none; }
+  .cita-reel-card-gradient { opacity: 1; }
+}
+
 
 .cita-reel-note {
   position: absolute;
@@ -350,10 +393,12 @@
   }
   .cita-reel-desktop-break { display: none; }
   .cita-reel-carousel { height: 278px; margin-top: 25px; }
-  .cita-reel-card-copy { bottom: 16px; left: 13px; right: 11px; gap: 5px; }
+  .cita-reel-card-hover { padding: 13px 11px 15px; }
+  .cita-reel-card-copy { gap: 5px; }
   .cita-reel-card-copy small { font-size: 11px; }
   .cita-reel-card-copy strong { font-size: 14px; line-height: 1.20; }
-  .cita-reel-card-icon { top: 12px; right: 12px; width: 27px; height: 27px; font-size: 16px; }
+  .cita-reel-card-contact { top: 11px; right: 11px; width: 34px; height: 34px; }
+  .cita-reel-card-contact svg { width: 19px; height: 19px; }
   .cita-reel-note-right, .cita-reel-arrow-right { display: none; }
   .cita-reel-note-bottom {
     position: relative;

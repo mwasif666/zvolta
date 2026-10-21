@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import { citaChargers, citaSolutions } from "../../data/citaChargers";
 import CitaReelHero from "./CitaReelHero";
 import StatsBento from "../ui/stats-bento";
+import { FaWhatsapp } from "react-icons/fa6";
+import { citaCardDetails, CITA_PRICING_NOTE } from "../../data/citaCardDetails";
 
 const differences = [
   ["Innovative Technology", "Advanced features and future-ready capabilities for faster, safer and more efficient charging."],
@@ -66,6 +68,11 @@ export default function CitaEvChargersPage({ routeClassName = "" }) {
           <div className="cita-product-grid">
             {citaChargers.map((charger) => (
               <article className="cita-product-card" key={charger.slug} data-model={charger.slug}>
+                <header className="cita-product-intro">
+                  <p className="cita-product-subtitle">{charger.subtitle}</p>
+                  <h3>{charger.name}</h3>
+                  <p className="cita-product-description">{charger.description}</p>
+                </header>
                 <Link
                   to={`/cita-ev-chargers/${charger.slug}`}
                   className="cita-product-media"
@@ -84,14 +91,38 @@ export default function CitaEvChargersPage({ routeClassName = "" }) {
                     </span>
                   )}
                 </Link>
-                <div className="cita-product-copy">
-                  <p className="cita-product-subtitle">{charger.subtitle}</p>
-                  <h3>{charger.name}</h3>
-                  <strong className="cita-product-power">{formatPowerLabel(charger.power)}</strong>
+                <div className="cita-product-specs" aria-label={`${charger.name} overview`}>
+                  <div className="cita-product-spec-row">
+                    <span>Power</span>
+                    <strong>{formatPowerLabel(charger.power)}</strong>
+                  </div>
+                  <div className="cita-product-spec-row">
+                    <span>Best for</span>
+                    <strong>{citaCardDetails[charger.slug].bestFor}</strong>
+                  </div>
+                  <div className="cita-product-spec-row">
+                    <span>Location</span>
+                    <strong>{citaCardDetails[charger.slug].location}</strong>
+                  </div>
+                  <div className="cita-product-spec-row">
+                    <span>Price</span>
+                    <strong className="cita-product-price-note">{CITA_PRICING_NOTE}</strong>
+                  </div>
+                </div>
+                <div className="cita-product-actions">
                   <Link className="cita-product-cta" to={`/cita-ev-chargers/${charger.slug}`}>
-                    <span>View Details</span>
-                    <span className="cita-product-cta-icon" aria-hidden="true">↗</span>
+                    View details <span className="cita-product-cta-icon" aria-hidden="true">→</span>
                   </Link>
+                  <a
+                    className="cita-product-contact"
+                    href={`https://wa.me/923104446529?text=${encodeURIComponent(`Hi ZVolta, I'd like details and pricing for ${charger.name}.`)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`Contact support about ${charger.name} on WhatsApp`}
+                  >
+                    <FaWhatsapp aria-hidden="true" />
+                    <span>Contact support</span>
+                  </a>
                 </div>
               </article>
             ))}

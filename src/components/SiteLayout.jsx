@@ -86,10 +86,12 @@ function DockLink({ route, pathname, children, className = "", onClick }) {
   return (
     <NavLink
       to={route.path}
-      className={({ isActive }) =>
+      end
+      aria-current={isRouteActive(route, pathname) ? "page" : undefined}
+      className={() =>
         [
           "dock-pill-link relative z-10 rounded-full px-4 py-2 text-xs font-bold transition-colors",
-          isActive || isRouteActive(route, pathname)
+          isRouteActive(route, pathname)
             ? "bg-white/10 text-white"
             : "text-white/60 hover:text-white",
           className,
@@ -146,6 +148,7 @@ function SiteHeader() {
   const companyRoute = getRouteByPageId("about-us");
   const careersRoute = getRouteByPageId("careers");
   const shopRoute = getRouteByPageId("products");
+  const citaRoute = getRouteByPageId("cita-ev-chargers");
   const cartRoute = getRouteByPageId("cart");
   const dockRoutes = useMemo(
     () =>
@@ -155,8 +158,9 @@ function SiteHeader() {
         dcChargersRoute,
         softwareRoute,
         shopRoute,
+        citaRoute,
       ].filter(Boolean),
-    [hostingRoute, chargingRoute, dcChargersRoute, shopRoute, softwareRoute],
+    [hostingRoute, chargingRoute, dcChargersRoute, shopRoute, softwareRoute, citaRoute],
   );
   const menuLinks = useMemo(
     () =>

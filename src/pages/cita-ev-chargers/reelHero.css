@@ -122,6 +122,10 @@
   will-change: transform;
   contain: layout paint;
   backface-visibility: hidden;
+  border-radius: 15px;
+  transform-origin: center center;
+  /* The cards never resize or repaint a clip-path during scrolling. */
+  transition: none;
   -webkit-user-drag: none;
 }
 .cita-reel-card-detail {

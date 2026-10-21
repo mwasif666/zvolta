@@ -4,8 +4,7 @@ import { citaChargers } from "../../data/citaChargers";
 
 const DESKTOP_PITCH = 210;
 const MOBILE_PITCH = 156;
-const AUTO_SPEED = 42;
-const SHAPE_INTERVAL = 48;
+const AUTO_SPEED = 50;
 // Two copies let the infinite belt span widescreen displays without empty margins.
 const carouselModels = [...citaChargers, ...citaChargers];
 
@@ -13,55 +12,51 @@ function wrap(value, period) {
   return ((((value + period / 2) % period) + period) % period) - period / 2;
 }
 
-function roundedArcPath(width, leftHeight, rightHeight) {
-  const height = Math.max(leftHeight, rightHeight);
-  const topLeft = (height - leftHeight) / 2;
-  const topRight = (height - rightHeight) / 2;
-  const bottomLeft = topLeft + leftHeight;
-  const bottomRight = topRight + rightHeight;
-  const radius = 15;
-  const fmt = (n) => Number(n.toFixed(2));
-  return `path("M ${radius} ${fmt(topLeft)} L ${fmt(width - radius)} ${fmt(topRight)} Q ${fmt(width)} ${fmt(topRight)} ${fmt(width)} ${fmt(topRight + radius)} L ${fmt(width)} ${fmt(bottomRight - radius)} Q ${fmt(width)} ${fmt(bottomRight)} ${fmt(width - radius)} ${fmt(bottomRight)} L ${radius} ${fmt(bottomLeft)} Q 0 ${fmt(bottomLeft)} 0 ${fmt(bottomLeft - radius)} L 0 ${fmt(topLeft + radius)} Q 0 ${fmt(topLeft)} ${radius} ${fmt(topLeft)} Z")`;
-}
-
-function positionCards(cards, bandWidth, bandHeight, offset, mobile, updateShape) {
+// The carousel uses ONE smooth compositor transform per visible card.
+// Never alter clip-path/width/height while the carousel is moving:
+// doing so used to cause a perceptible jump every 48 ms on both edges.
+function positionCards(cards, bandWidth, bandHeight, offset, mobile) {
   const pitch = mobile ? MOBILE_PITCH : DESKTOP_PITCH;
   const period = pitch * cards.length;
   const center = bandWidth / 2;
   const normalizer = mobile ? Math.max(185, center - 15) : Math.max(510, center - 75);
   const baseWidth = mobile ? 142 : 184;
-  const baseHeight = mobile ? 159 : Math.min(273, bandHeight * 0.66);
-  const edgeGain = mobile ? 42 : Math.min(92, (bandHeight - baseHeight - 24) / 1.4);
+  const baseHeight = mobile ? 172 : bandHeight < 400 ? 235 : 270;
 
   for (let index = 0; index < cards.length; index += 1) {
     const card = cards[index];
     if (!card) continue;
+
     const t = wrap(index * pitch + offset, period);
     const x = center + t * (1 + 0.067 * (t / normalizer) ** 2);
-    const d = Math.min(1.12, Math.abs(x - center) / normalizer);
-    const width = baseWidth + (mobile ? 20 : 39) * d ** 2;
-    const offscreen = x + width / 2 < -10 || x - width / 2 > bandWidth + 10;
+    const d = Math.abs(x - center) / normalizer;
+    const distance = Math.min(1.14, d);
+    const scaleX = 1 + (mobile ? 0.12 : 0.21) * distance ** 2;
+    const scaleY = 1 + (mobile ? 0.24 : 0.32) * distance ** 2.6;
+    const halfWidth = (baseWidth * scaleX) / 2;
+    const offscreen = x + halfWidth < -20 || x - halfWidth > bandWidth + 20;
+
     if (offscreen) {
       if (card.style.visibility !== "hidden") card.style.visibility = "hidden";
       continue;
     }
     if (card.style.visibility !== "visible") card.style.visibility = "visible";
 
-    const dl = Math.min(1.12, Math.abs(x - width / 2 - center) / normalizer);
-    const dr = Math.min(1.12, Math.abs(x + width / 2 - center) / normalizer);
-    const leftHeight = baseHeight + edgeGain * dl ** 2.6;
-    const rightHeight = baseHeight + edgeGain * dr ** 2.6;
-    const height = Math.max(leftHeight, rightHeight);
-    const cy = bandHeight / 2 - (mobile ? 3 : 10) * d ** 2;
-
-    // Compositor-friendly movement every frame; more costly shape updates ~20fps.
-    card.style.transform = `translate3d(${(x - width / 2).toFixed(2)}px, ${(cy - height / 2).toFixed(2)}px, 0)`;
-    if (updateShape || !card.style.clipPath) {
-      card.style.width = `${width.toFixed(2)}px`;
-      card.style.height = `${height.toFixed(2)}px`;
-      card.style.clipPath = roundedArcPath(width, leftHeight, rightHeight);
-      card.style.zIndex = String(30 - Math.round(d * 5));
-    }
+    // Small edge lean makes the silhouette feel cylindrical.
+    // Its angle, width and height change CONTINUOUSLY on the same animation frame.
+    const lean = (x < center ? -1 : 1) * (mobile ? 2.2 : 3.4) * distance ** 1.5;
+    const cy = bandHeight / 2 - (mobile ? 3 : 10) * distance ** 2;
+    card.style.transform = `translate3d(${(x - baseWidth / 2).toFixed(3)}px, ${(cy - baseHeight / 2).toFixed(3)}px, 0) skewY(${lean.toFixed(3)}deg) scale(${scaleX.toFixed(5)}, ${scaleY.toFixed(5)})`;
+  }
+}
+function measureCards(cards, mobile, bandHeight) {
+  const width = mobile ? 142 : 184;
+  const height = mobile ? 172 : bandHeight < 400 ? 235 : 270;
+  for (const card of cards) {
+    if (!card) continue;
+    card.style.width = `${width}px`;
+    card.style.height = `${height}px`;
+    card.style.clipPath = "none";
   }
 }
 
@@ -86,7 +81,6 @@ export default function CitaReelHero() {
     let frame = 0;
     let isOnScreen = true;
     let lastTime = 0;
-    let lastShapeTime = 0;
     let bandWidth = band.clientWidth;
     let bandHeight = band.clientHeight;
     const cards = cardRefs.current;
@@ -102,7 +96,8 @@ export default function CitaReelHero() {
       isMobile = mobileQuery.matches;
       bandWidth = band.clientWidth;
       bandHeight = band.clientHeight;
-      positionCards(cards, bandWidth, bandHeight, offsetRef.current, isMobile, true);
+      measureCards(cards, isMobile, bandHeight);
+      positionCards(cards, bandWidth, bandHeight, offsetRef.current, isMobile);
     }
 
     function animateIn() {
@@ -147,9 +142,7 @@ export default function CitaReelHero() {
           const cycle = (isMobile ? MOBILE_PITCH : DESKTOP_PITCH) * cards.length;
           offsetRef.current = wrap(offsetRef.current, cycle);
         }
-        const shapeUpdate = now - lastShapeTime >= SHAPE_INTERVAL;
-        positionCards(cards, bandWidth, bandHeight, offsetRef.current, isMobile, shapeUpdate);
-        if (shapeUpdate) lastShapeTime = now;
+        positionCards(cards, bandWidth, bandHeight, offsetRef.current, isMobile);
       }
       frame = window.requestAnimationFrame(tick);
     }

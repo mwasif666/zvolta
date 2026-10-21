@@ -12,45 +12,43 @@ function wrap(value, period) {
   return ((((value + period / 2) % period) + period) % period) - period / 2;
 }
 
-// The carousel uses ONE smooth compositor transform per visible card.
-// Never alter clip-path/width/height while the carousel is moving:
-// doing so used to cause a perceptible jump every 48 ms on both edges.
+// Motion, depth and scale are interpolated on every animation frame.
+// Card dimensions stay fixed, avoiding frame-by-frame layout repaint.
 function positionCards(cards, bandWidth, bandHeight, offset, mobile) {
   const pitch = mobile ? MOBILE_PITCH : DESKTOP_PITCH;
-  const period = pitch * cards.length;
+  const cycle = pitch * cards.length;
   const center = bandWidth / 2;
-  const normalizer = mobile ? Math.max(185, center - 15) : Math.max(510, center - 75);
-  const baseWidth = mobile ? 142 : 184;
-  const baseHeight = mobile ? 172 : bandHeight < 400 ? 235 : 270;
+  const radius = mobile ? Math.max(200, center) : Math.max(540, center - 78);
+  const width = mobile ? 142 : 184;
+  const height = mobile ? 172 : bandHeight < 400 ? 235 : 270;
 
-  for (let index = 0; index < cards.length; index += 1) {
-    const card = cards[index];
-    if (!card) continue;
+  cards.forEach((card, index) => {
+    if (!card) return;
 
-    const t = wrap(index * pitch + offset, period);
-    const x = center + t * (1 + 0.067 * (t / normalizer) ** 2);
-    const d = Math.abs(x - center) / normalizer;
-    const distance = Math.min(1.14, d);
-    const scaleX = 1 + (mobile ? 0.12 : 0.21) * distance ** 2;
-    // Keep the taller outer cards within short laptop viewports too.
-    const verticalGain = mobile ? 0.24 : bandHeight < 400 ? 0.26 : 0.32;
-    const scaleY = 1 + verticalGain * distance ** 2.6;
-    const halfWidth = (baseWidth * scaleX) / 2;
-    const offscreen = x + halfWidth < -20 || x - halfWidth > bandWidth + 20;
+    const travel = wrap(index * pitch + offset, cycle);
+    const position = center + travel * (1 + 0.045 * (travel / radius) ** 2);
+    const normalized = Math.min(1.16, Math.abs(position - center) / radius);
+    const distance = Math.min(1, normalized);
+    const scaleX = 1 + (mobile ? 0.09 : 0.12) * distance ** 2;
+    const scaleY = 1 + (mobile ? 0.13 : bandHeight < 400 ? 0.16 : 0.22) * distance ** 2;
+    const rotation = -Math.sign(position - center) * (mobile ? 15 : 23) * distance ** 1.4;
+    const visibleHalfWidth = width * scaleX * 0.62;
+    const isOutside = position + visibleHalfWidth < -32 || position - visibleHalfWidth > bandWidth + 32;
 
-    if (offscreen) {
+    if (isOutside) {
       if (card.style.visibility !== "hidden") card.style.visibility = "hidden";
-      continue;
+      return;
     }
     if (card.style.visibility !== "visible") card.style.visibility = "visible";
 
-    // Small edge lean makes the silhouette feel cylindrical.
-    // Its angle, width and height change CONTINUOUSLY on the same animation frame.
-    const lean = (x < center ? -1 : 1) * (mobile ? 2.2 : 3.4) * distance ** 1.5;
-    const cy = bandHeight / 2 - (mobile ? 3 : 10) * distance ** 2;
-    card.style.transform = `translate3d(${(x - baseWidth / 2).toFixed(3)}px, ${(cy - baseHeight / 2).toFixed(3)}px, 0) skewY(${lean.toFixed(3)}deg) scale(${scaleX.toFixed(5)}, ${scaleY.toFixed(5)})`;
-  }
+    // A gentle 3-D cylinder: outer edges appear taller via perspective.
+    // The original photograph is no longer distorted by 2-D skewY.
+    // Geometry stays on a SINGLE GPU transform, without resizing clip paths.
+    const y = bandHeight / 2 - height / 2 - (mobile ? 3 : 9) * distance ** 2;
+    card.style.transform = `translate3d(${(position - width / 2).toFixed(2)}px, ${y.toFixed(2)}px, 0) perspective(${mobile ? 850 : 1100}px) rotateY(${rotation.toFixed(3)}deg) scale(${scaleX.toFixed(4)}, ${scaleY.toFixed(4)})`;
+  });
 }
+
 function measureCards(cards, mobile, bandHeight) {
   const width = mobile ? 142 : 184;
   const height = mobile ? 172 : bandHeight < 400 ? 235 : 270;

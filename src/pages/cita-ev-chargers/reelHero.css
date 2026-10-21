@@ -1,117 +1,102 @@
 @import url("https://fonts.googleapis.com/css2?family=Caveat:wght@600&display=swap");
 
 /*
- * CITA EV carousel hero
- * Inspired by the supplied curved-reels geometry, branded for ZVolta.
- * Original CITA lifestyle assets only; no invented charger/video footage.
+ * Fluid CITA EV carousel hero. No viewport-height scaling or fixed 1440px frame.
+ * Original CITA charger photos; no fabricated model renders or video clips.
+ * Keep this sheet scoped to .cita-reel-* so other ZVolta pages stay unchanged.
  */
 .cita-reel-hero {
   position: relative;
+  isolation: isolate;
   width: 100%;
-  overflow: hidden;
-  background: #f5f8ef;
-  color: #101610;
-  font-family: var(--font-sans);
+  overflow: clip;
+  background: #f6faf5;
+  color: #101810;
+  font-family: var(--font-sans, "Inter Tight", sans-serif);
 }
-.cita-reel-hero * { box-sizing: border-box; }
-.cita-reel-viewport {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-}
+
+.cita-reel-hero *,
+.cita-reel-hero *::before,
+.cita-reel-hero *::after { box-sizing: border-box; }
+
+.cita-reel-viewport,
+.cita-reel-frame { position: relative; width: 100%; min-width: 0; }
+
 .cita-reel-frame {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  width: 1440px;
-  height: 1080px;
-  transform-origin: top center;
+  padding: 127px 0 49px;
   overflow: hidden;
-  background: #f5f8ef;
+  text-align: center;
 }
+
 .cita-reel-ambient {
   position: absolute;
   inset: 0;
   pointer-events: none;
   background:
-    radial-gradient(ellipse 40% 26% at 50% 64%, rgba(47, 161, 98, .085), transparent 76%),
-    radial-gradient(circle at 100% 6%, rgba(35, 154, 86, .06), transparent 27%);
+    radial-gradient(ellipse 52% 24% at 50% 59%, rgba(27, 203, 107, .083), transparent 74%),
+    radial-gradient(circle at 93% 17%, rgba(12, 189, 102, .052), transparent 26%);
 }
+
 .cita-reel-badge {
-  position: absolute;
-  top: 132px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  align-items: center;
+  position: relative;
+  display: inline-flex;
   justify-content: center;
-  gap: 11px;
-  white-space: nowrap;
-  min-width: 300px;
-  height: 38px;
-  padding: 0 20px;
+  align-items: center;
+  gap: 10px;
+  min-height: 38px;
+  max-width: calc(100% - 30px);
+  padding: 9px 20px;
+  border: 1px solid rgba(4, 113, 61, .1);
   border-radius: 999px;
-  background: #dcebcf;
-  color: #08482d;
-  font-size: 16px;
-  font-weight: 650;
-  letter-spacing: .005em;
+  background: #e2f3e7;
+  color: #075233;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: .01em;
 }
-.cita-reel-badge span { width: 7px; height: 7px; border-radius: 50%; background: #0aa45d; }
+
+.cita-reel-badge > span {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #0dd471;
+  box-shadow: 0 0 0 4px rgba(13, 212, 113, .12);
+}
+
 .cita-reel-heading {
-  position: absolute;
-  top: 190px;
-  left: 50%;
-  width: 1120px;
-  margin: 0;
-  transform: translateX(-50%);
-  text-align: center;
-  font-size: 81px;
-  font-weight: 800;
-  line-height: 1.08;
-  letter-spacing: -.035em;
-  color: #101610;
+  position: relative;
+  max-width: min(1160px, calc(100% - 48px));
+  margin: 22px auto 0;
+  color: #0b1710;
+  font-size: clamp(54px, 5.3vw, 82px);
+  font-weight: 790;
+  line-height: 1.075;
+  letter-spacing: -.028em;
+  word-spacing: .07em;
+  text-wrap: balance;
 }
-.cita-reel-heading span { display: block; white-space: nowrap; }
-.cita-reel-heading span:last-child { letter-spacing: -.021em; }
+.cita-reel-heading span { display: block; }
+.cita-reel-heading span:last-child { letter-spacing: -.017em; }
+
 .cita-reel-subline {
-  position: absolute;
-  top: 384px;
-  left: 50%;
-  width: 800px;
-  margin: 0;
-  transform: translateX(-50%);
-  color: #5e6660;
-  text-align: center;
-  font-size: 19px;
-  line-height: 1.65;
-  font-weight: 440;
-  letter-spacing: -.006em;
+  position: relative;
+  max-width: min(820px, calc(100% - 42px));
+  margin: 19px auto 0;
+  color: #57665d;
+  font-size: clamp(17px, 1.4vw, 19px);
+  font-weight: 450;
+  line-height: 1.62;
+  letter-spacing: 0;
 }
-.cita-reel-doodle { position: absolute; color: #0c6844; pointer-events: none; }
-.cita-reel-doodle-left { width: 77px; height: 70px; top: 351px; left: 210px; transform: rotate(-12deg); }
-.cita-reel-note {
-  position: absolute;
-  z-index: 4;
-  pointer-events: none;
-  color: #095535;
-  font-family: "Caveat", "Segoe Print", cursive;
-  font-size: 32px;
-  font-weight: 600;
-  line-height: 1.04;
-  letter-spacing: -.035em;
-}
-.cita-reel-note-right { top: 323px; right: 120px; transform: rotate(15deg); }
-.cita-reel-note-right span { font-size: 20px; }
-.cita-reel-arrow-right { top: 414px; right: 91px; width: 155px; height: 167px; transform: rotate(3deg); }
-.cita-reel-note-bottom { top: 932px; left: 434px; font-size: 24px; transform: rotate(-15deg); }
-.cita-reel-arrow-bottom { top: 932px; left: 536px; width: 110px; height: 83px; transform: rotate(-12deg); }
+
 .cita-reel-carousel {
-  position: absolute;
-  top: 496px;
-  left: 0;
-  width: 1440px;
-  height: 430px;
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 432px;
+  margin-top: 38px;
   overflow: hidden;
   cursor: grab;
   touch-action: pan-y;
@@ -120,6 +105,7 @@
   -webkit-tap-highlight-color: transparent;
 }
 .cita-reel-carousel.is-dragging { cursor: grabbing; }
+
 .cita-reel-card {
   position: absolute;
   top: 0;
@@ -127,50 +113,73 @@
   display: block;
   overflow: hidden;
   isolation: isolate;
-  border: 0;
   color: #fff;
+  background: #dceee5;
+  text-align: left;
   text-decoration: none;
   will-change: transform, clip-path;
-  background: #e4eee2;
   -webkit-user-drag: none;
 }
-.cita-reel-card img {
+.cita-reel-card > img {
   position: absolute;
   inset: 0;
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center;
+  object-position: 50% 50%;
   pointer-events: none;
   user-select: none;
   -webkit-user-drag: none;
 }
+/* Charge point is x~50% in Smart Dual photo, but x~73% in EcoPillar. */
+.cita-reel-card[data-model="smart-dual"] > img {
+  object-position: 50% 45%;
+  transform: scale(1.33);
+}
+.cita-reel-card[data-model="dual-ecopillar"] > img {
+  object-position: 74% 47%;
+  transform: scale(1.09);
+}
+.cita-reel-card[data-model="smart-30-dc"] > img { object-position: 57% center; }
+
 .cita-reel-card-gradient {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background:
-    linear-gradient(0deg, rgba(1, 17, 11, .93) 0%, rgba(1, 17, 11, .52) 21%, transparent 55%),
-    linear-gradient(180deg, rgba(15, 44, 30, .03), transparent 60%);
+  background: linear-gradient(
+    0deg,
+    rgba(2, 20, 12, .98) 0%,
+    rgba(2, 20, 12, .86) 18%,
+    rgba(2, 20, 12, .21) 53%,
+    transparent 75%
+  );
 }
 .cita-reel-card-copy {
   position: absolute;
   z-index: 1;
-  bottom: 21px;
+  right: 15px;
+  bottom: 24px;
   left: 17px;
-  right: 18px;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 7px;
   color: #fff;
   pointer-events: none;
 }
-.cita-reel-card-copy small { font-size: 11px; line-height: 1.2; color: #b6f9d7; font-weight: 720; }
+.cita-reel-card-copy small {
+  color: #8ef8bc;
+  font-size: 13px;
+  font-weight: 750;
+  line-height: 1.25;
+}
 .cita-reel-card-copy strong {
-  font-size: 15px;
-  line-height: 1.16;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 790;
+  line-height: 1.17;
   letter-spacing: -.012em;
-  font-weight: 780;
+  overflow-wrap: normal;
 }
 .cita-reel-card-icon {
   position: absolute;
@@ -178,130 +187,200 @@
   right: 15px;
   display: grid;
   place-items: center;
-  width: 32px;
-  height: 32px;
-  border: 1px solid rgba(255,255,255,.65);
+  width: 33px;
+  height: 33px;
+  border: 1px solid rgba(255, 255, 255, .7);
   border-radius: 50%;
-  background: rgba(244, 249, 242, .55);
+  background: rgba(245, 255, 248, .80);
+  color: #075a37;
   backdrop-filter: blur(7px);
-  color: #104329;
-  font-size: 18px;
-  font-weight: 700;
+  font-size: 19px;
+  font-weight: 750;
   pointer-events: none;
 }
-.cita-reel-card:hover .cita-reel-card-icon { background: #f4fff8; }
-.cita-reel-card:focus-visible { outline: 4px solid #06b85e; outline-offset: -5px; }
-.cita-reel-cta {
+.cita-reel-card:hover .cita-reel-card-icon { background: #fff; }
+.cita-reel-card:focus-visible { outline: 4px solid #06c974; outline-offset: -6px; }
+
+.cita-reel-note {
   position: absolute;
-  top: 915px;
-  left: 50%;
-  width: 211px;
-  height: 80px;
-  transform: translateX(-50%);
+  z-index: 3;
+  pointer-events: none;
+  color: #0b6945;
+  font-family: "Caveat", "Segoe Print", cursive;
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 1.04;
+  letter-spacing: -.018em;
+}
+.cita-reel-note-right {
+  top: 322px;
+  right: max(4.5%, calc(50% - 720px));
+  transform: rotate(10deg);
+}
+.cita-reel-note-right span { font-size: 20px; }
+.cita-reel-doodle {
+  position: absolute;
+  z-index: 2;
+  color: #0b6c45;
+  pointer-events: none;
+}
+.cita-reel-doodle-left { display: none; }
+.cita-reel-arrow-right {
+  top: 401px;
+  right: max(5%, calc(50% - 680px));
+  width: 126px;
+  height: 137px;
+  transform: rotate(8deg);
+}
+
+.cita-reel-note-bottom {
+  bottom: 110px;
+  left: calc(50% - 341px);
+  font-size: 25px;
+  transform: rotate(-12deg);
+}
+.cita-reel-arrow-bottom {
+  bottom: 79px;
+  left: calc(50% - 208px);
+  width: 106px;
+  height: 73px;
+  transform: rotate(-8deg);
+}
+
+.cita-reel-cta {
+  position: relative;
   display: grid;
   place-items: center;
-  border: 1.5px dashed #087749;
+  width: 238px;
+  min-height: 78px;
+  margin: 20px auto 0;
+  border: 1.5px dashed #168c57;
   border-radius: 999px;
 }
 .cita-reel-cta a {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
-  width: 193px;
-  height: 62px;
+  gap: 15px;
+  width: 222px;
+  min-height: 64px;
   border-radius: 999px;
   background: #08482d;
   color: #fff;
-  text-decoration: none;
   font-size: 17px;
   font-weight: 760;
-  box-shadow: 0 12px 23px rgba(8, 72, 45, .14);
-  transition: background .18s ease, transform .18s ease;
+  text-decoration: none;
+  box-shadow: 0 13px 30px rgba(6, 80, 45, .16);
+  transition: transform .2s ease, background .2s ease, box-shadow .2s ease;
 }
-.cita-reel-cta a:hover { background: #076b40; transform: translateY(-2px); }
-.cita-reel-cta a:focus-visible { outline: 3px solid #0abd6c; outline-offset: 5px; }
+.cita-reel-cta a:hover {
+  transform: translateY(-2px);
+  background: #07643d;
+  box-shadow: 0 17px 35px rgba(6, 80, 45, .22);
+}
+.cita-reel-cta a:focus-visible { outline: 3px solid #0acd71; outline-offset: 5px; }
 .cita-reel-microcopy {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 1012px;
-  margin: 0;
-  color: #68736b;
+  position: relative;
+  margin: 14px 16px 0;
+  color: #5d7063;
   font-size: 13px;
   line-height: 1.5;
-  text-align: center;
 }
-.cita-reel-microcopy a { color: #08482d; text-decoration: none; font-weight: 740; }
+.cita-reel-microcopy a {
+  color: #075e38;
+  font-weight: 780;
+  text-decoration: none;
+}
 .cita-reel-microcopy a:hover { text-decoration: underline; }
+
 .cita-reel-hero + .cita-reel-stats {
-  background: #f5f8ef;
-  padding: 0 0 70px;
+  padding: 0 0 65px;
+  background: #f6faf5;
 }
 .cita-reel-stats .cita-stat-grid {
-  transform: none;
   position: relative;
-  border-color: #dfebdf;
-  box-shadow: 0 18px 35px rgba(17, 58, 35, .07);
+  transform: none;
+  border-color: #dce9e0;
+  box-shadow: 0 14px 31px rgba(9, 52, 32, .08);
+}
+
+/* Widescreen and shallow laptops: compress vertical gaps, never scale the frame. */
+@media (min-width: 821px) and (max-height: 920px) {
+  .cita-reel-frame { padding-top: 109px; padding-bottom: 25px; }
+  .cita-reel-badge { min-height: 34px; padding-block: 7px; }
+  .cita-reel-heading {
+    max-width: min(1100px, calc(100% - 48px));
+    margin-top: 13px;
+    font-size: clamp(54px, 4.15vw, 70px);
+    line-height: 1.04;
+  }
+  .cita-reel-subline { margin-top: 12px; font-size: 17px; line-height: 1.45; }
+  .cita-reel-carousel { height: 358px; margin-top: 20px; }
+  .cita-reel-cta { margin-top: 13px; min-height: 72px; }
+  .cita-reel-cta a { min-height: 58px; }
+  .cita-reel-microcopy { margin-top: 9px; font-size: 12px; }
+  .cita-reel-note-right { top: 250px; font-size: 27px; }
+  .cita-reel-arrow-right { top: 319px; height: 122px; }
+  .cita-reel-note-bottom { bottom: 83px; font-size: 23px; }
+  .cita-reel-arrow-bottom { bottom: 56px; }
+}
+
+@media (max-width: 1100px) and (min-width: 821px) {
+  .cita-reel-heading { font-size: clamp(52px, 5.2vw, 65px); }
+  .cita-reel-note-right { right: 2%; font-size: 25px; }
+  .cita-reel-arrow-right { right: 2%; }
+  .cita-reel-note-bottom { left: calc(50% - 312px); }
 }
 
 @media (max-width: 820px) {
-  .cita-reel-viewport { height: auto !important; overflow: hidden; }
-  .cita-reel-frame {
-    position: relative;
-    left: auto;
-    width: 100%;
-    height: 950px;
-    transform: none !important;
-  }
-  .cita-reel-badge {
-    top: 132px;
-    min-width: 0;
-    width: max-content;
-    max-width: calc(100% - 26px);
-    height: 34px;
-    font-size: clamp(10px, 2.6vw, 13px);
-    padding: 0 13px;
-    gap: 7px;
-  }
+  .cita-reel-frame { padding: 116px 0 39px; }
+  .cita-reel-badge { min-height: 35px; font-size: clamp(11px, 2.6vw, 14px); padding: 7px 13px; }
   .cita-reel-heading {
-    top: 191px;
-    width: calc(100% - 30px);
+    max-width: calc(100% - 28px);
+    margin-top: 21px;
     font-size: clamp(38px, 8vw, 56px);
-    line-height: 1.08;
-    letter-spacing: -.027em;
+    line-height: 1.10;
+    letter-spacing: -.023em;
   }
-  .cita-reel-heading span { white-space: normal; }
   .cita-reel-subline {
-    top: 352px;
-    width: min(450px, calc(100% - 36px));
-    font-size: clamp(14px, 3.5vw, 17px);
-    line-height: 1.52;
+    max-width: min(500px, calc(100% - 38px));
+    margin-top: 16px;
+    font-size: clamp(14px, 3.4vw, 17px);
+    line-height: 1.55;
   }
   .cita-reel-desktop-break { display: none; }
-  .cita-reel-carousel { top: 508px; width: 100%; height: 286px; }
-  .cita-reel-note-right, .cita-reel-arrow-right, .cita-reel-doodle-left { display: none; }
-  .cita-reel-note-bottom { top: 785px; left: 9%; font-size: 20px; }
-  .cita-reel-arrow-bottom { top: 795px; left: 29%; width: 71px; height: 52px; }
-  .cita-reel-cta { top: 828px; width: 186px; height: 69px; }
-  .cita-reel-cta a { width: 171px; height: 54px; font-size: 15px; }
-  .cita-reel-microcopy { top: 914px; font-size: 11px; }
-  .cita-reel-card-copy { left: 11px; right: 10px; bottom: 15px; }
-  .cita-reel-card-copy strong { font-size: 12px; }
-  .cita-reel-card-copy small { font-size: 10px; }
-  .cita-reel-card-icon { width: 25px; height: 25px; top: 11px; right: 11px; font-size: 15px; }
-  .cita-reel-hero + .cita-reel-stats { padding: 0 0 45px; }
+  .cita-reel-carousel { height: 278px; margin-top: 25px; }
+  .cita-reel-card-copy { bottom: 16px; left: 13px; right: 11px; gap: 5px; }
+  .cita-reel-card-copy small { font-size: 11px; }
+  .cita-reel-card-copy strong { font-size: 14px; line-height: 1.20; }
+  .cita-reel-card-icon { top: 12px; right: 12px; width: 27px; height: 27px; font-size: 16px; }
+  .cita-reel-note-right, .cita-reel-arrow-right { display: none; }
+  .cita-reel-note-bottom {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    display: block;
+    margin: 10px auto 0;
+    font-size: 23px;
+    line-height: 1;
+    transform: rotate(-3deg);
+  }
+  .cita-reel-note-bottom br { display: none; }
+  .cita-reel-arrow-bottom { display: none; }
+  .cita-reel-cta { width: 219px; min-height: 72px; margin-top: 12px; }
+  .cita-reel-cta a { width: 204px; min-height: 57px; font-size: 16px; }
+  .cita-reel-microcopy { margin-top: 13px; font-size: 11px; }
+  .cita-reel-hero + .cita-reel-stats { padding-bottom: 43px; }
 }
-@media (max-width: 460px) {
-  .cita-reel-heading { top: 193px; font-size: clamp(38px, 9.4vw, 44px); }
-  .cita-reel-subline { top: 373px; font-size: 14px; }
-  .cita-reel-carousel { top: 515px; }
-}
-@media (max-width: 375px) {
-  .cita-reel-heading { font-size: 38px; }
-  .cita-reel-subline { top: 376px; }
-  .cita-reel-note-bottom { left: 5%; }
+
+@media (max-width: 420px) {
+  .cita-reel-frame { padding-top: 109px; }
+  .cita-reel-heading { font-size: clamp(37px, 9vw, 44px); line-height: 1.1; }
+  .cita-reel-subline { font-size: 14px; }
+  .cita-reel-carousel { margin-top: 21px; }
+  .cita-reel-microcopy { font-size: 10.5px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .cita-reel-card, .cita-reel-cta a { transition: none; }
+  .cita-reel-card,
+  .cita-reel-cta a { transition: none; }
 }

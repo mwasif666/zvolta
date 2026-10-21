@@ -350,7 +350,7 @@
 .cita-reel-microcopy a:hover { text-decoration: underline; }
 
 .cita-reel-hero + .cita-reel-stats {
-  padding: 0 0 65px;
+  padding: 36px 0 70px;
   background: #f6faf5;
 }
 .cita-reel-stats .cita-stat-grid {
@@ -428,7 +428,9 @@
   .cita-reel-cta { width: 219px; min-height: 72px; margin-top: 12px; }
   .cita-reel-cta a { width: 204px; min-height: 57px; font-size: 16px; }
   .cita-reel-microcopy { margin-top: 13px; font-size: 11px; }
-  .cita-reel-hero + .cita-reel-stats { padding-bottom: 43px; }
+  .cita-reel-hero + .cita-reel-stats {
+    padding: 26px 0 48px;
+  }
 }
 
 @media (max-width: 420px) {

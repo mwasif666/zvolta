@@ -143,7 +143,6 @@ function SiteHeader() {
   const homeRoute = getRouteByPageId("index");
   const hostingRoute = getRouteByPageId("host");
   const chargingRoute = getRouteByPageId("charge");
-  const dcChargersRoute = getRouteByPageId("dc-chargers");
   const softwareRoute = getRouteByPageId("software");
   const companyRoute = getRouteByPageId("about-us");
   const careersRoute = getRouteByPageId("careers");
@@ -155,12 +154,13 @@ function SiteHeader() {
       [
         hostingRoute,
         chargingRoute,
-        dcChargersRoute,
         softwareRoute,
         shopRoute,
         citaRoute,
-      ].filter(Boolean),
-    [hostingRoute, chargingRoute, dcChargersRoute, shopRoute, softwareRoute, citaRoute],
+      ].filter((route, index, routes) =>
+        route && routes.findIndex((candidate) => candidate?.pageId === route.pageId) === index,
+      ),
+    [hostingRoute, chargingRoute, shopRoute, softwareRoute, citaRoute],
   );
   const menuLinks = useMemo(
     () =>
@@ -168,14 +168,11 @@ function SiteHeader() {
         homeRoute ? { route: homeRoute, label: "Home" } : null,
         hostingRoute ? { route: hostingRoute, label: "Hosting" } : null,
         chargingRoute ? { route: chargingRoute, label: "Charging" } : null,
-        dcChargersRoute
-          ? { route: dcChargersRoute, label: "DC Chargers" }
-          : null,
         softwareRoute ? { route: softwareRoute, label: "Software" } : null,
       ].filter(Boolean),
     // Shop and Cart stay out of the expanded menu; the floating nav already
     // carries both, and the cart pill is the live one with the item count.
-    [chargingRoute, dcChargersRoute, homeRoute, hostingRoute, softwareRoute],
+    [chargingRoute, homeRoute, hostingRoute, softwareRoute],
   );
   const menuCards = useMemo(
     () =>

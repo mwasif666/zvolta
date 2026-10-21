@@ -36,6 +36,15 @@ describe("SiteLayout", () => {
     const primaryNavigation = screen.getByRole("navigation", { name: "Main" });
     expect(primaryNavigation.textContent).toContain("Shop");
     expect(primaryNavigation.textContent).not.toContain("DC Chargers");
+    // Regression: Shop used to display "CITA EV" twice.
+    const dockLinks = [...primaryNavigation.querySelectorAll(".dock-pill-link")];
+    expect(dockLinks.map((link) => link.textContent.trim())).toEqual([
+      "Hosting",
+      "Charging",
+      "Software",
+      "Shop",
+      "CITA EV",
+    ]);
     expect(primaryNavigation.querySelectorAll('a[href="/cita-ev-chargers"]')).toHaveLength(1);
     expect(primaryNavigation.querySelectorAll('a[href="/products"]')).toHaveLength(1);
     expect(
@@ -61,6 +70,19 @@ describe("SiteLayout", () => {
     const nav = screen.getByRole("navigation", { name: "Main" });
     expect(nav.querySelector('a[href="/products"]').getAttribute("aria-current")).toBe("page");
     expect(nav.querySelector('a[href="/cita-ev-chargers"]').getAttribute("aria-current")).not.toBe("page");
+  });
+
+  it("highlights only CITA EV when navigating from Shop", () => {
+    render(
+      <MemoryRouter initialEntries={["/products"]}>
+        <SiteLayout><div>Shop content</div></SiteLayout>
+      </MemoryRouter>,
+    );
+    const nav = screen.getByRole("navigation", { name: "Main" });
+    fireEvent.click(nav.querySelector('a[href="/cita-ev-chargers"]'));
+    expect(nav.querySelectorAll('a[href="/cita-ev-chargers"]')).toHaveLength(1);
+    expect(nav.querySelector('a[href="/cita-ev-chargers"]').getAttribute("aria-current")).toBe("page");
+    expect(nav.querySelector('a[href="/products"]').getAttribute("aria-current")).not.toBe("page");
   });
 
 });

@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Caveat:wght@600&display=swap");
+
 /*
  * CITA EV carousel hero
  * Inspired by the supplied curved-reels geometry, branded for ZVolta.
@@ -93,7 +95,7 @@
   z-index: 4;
   pointer-events: none;
   color: #095535;
-  font-family: "Comic Sans MS", "Segoe Print", cursive;
+  font-family: "Caveat", "Segoe Print", cursive;
   font-size: 32px;
   font-weight: 600;
   line-height: 1.04;

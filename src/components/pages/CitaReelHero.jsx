@@ -13,9 +13,9 @@ function wrap(value, period) {
 }
 
 function roundedArcPath(width, leftHeight, rightHeight) {
-  const top = Math.max(0, (Math.max(leftHeight, rightHeight) - Math.min(leftHeight, rightHeight)) / 2);
-  const topLeft = leftHeight >= rightHeight ? 0 : top;
-  const topRight = rightHeight >= leftHeight ? 0 : top;
+  const height = Math.max(leftHeight, rightHeight);
+  const topLeft = (height - leftHeight) / 2;
+  const topRight = (height - rightHeight) / 2;
   const bottomLeft = topLeft + leftHeight;
   const bottomRight = topRight + rightHeight;
   const radius = 15;
@@ -107,7 +107,23 @@ export default function CitaReelHero() {
       ];
       parts.forEach(([selector, frames, delay]) => {
         const element = outer.querySelector(selector);
-        if (element) animations.push(element.animate(frames, { duration: 680, delay, fill: "both", easing: "cubic-bezier(.2,.7,.2,1)" }));
+        if (element) {
+          const anchored = selector === ".cita-reel-badge" ||
+            selector === ".cita-reel-heading" ||
+            selector === ".cita-reel-subline" ||
+            selector === ".cita-reel-cta";
+          const keyframes = anchored
+            ? frames.map((step) => ({
+                ...step,
+                transform: step.transform === "none"
+                  ? "translateX(-50%)"
+                  : `translateX(-50%) ${step.transform}`,
+              }))
+            : frames;
+          animations.push(element.animate(keyframes, {
+            duration: 680, delay, fill: "both", easing: "cubic-bezier(.2,.7,.2,1)",
+          }));
+        }
       });
       outer.querySelectorAll(".cita-reel-doodle path").forEach((path, index) => {
         const length = path.getTotalLength();
@@ -142,7 +158,6 @@ export default function CitaReelHero() {
       };
       speedRef.current = 0;
       band.classList.add("is-dragging");
-      band.setPointerCapture?.(event.pointerId);
     }
 
     function onMove(event) {
@@ -153,6 +168,9 @@ export default function CitaReelHero() {
       const dt = Math.max((now - drag.lastT) / 1000, .012);
       offsetRef.current += delta;
       drag.distance += Math.abs(delta);
+      if (drag.distance > 6 && !band.hasPointerCapture?.(event.pointerId)) {
+        band.setPointerCapture?.(event.pointerId);
+      }
       speedRef.current = Math.max(-900, Math.min(900, delta / dt));
       drag.lastX = event.clientX;
       drag.lastT = now;

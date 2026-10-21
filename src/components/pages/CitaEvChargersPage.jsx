@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { citaChargers, citaSolutions } from "../../data/citaChargers";
+import CitaReelHero from "./CitaReelHero";
 
 const stats = [
   ["35+", "Countries", "Global presence and growing"],
@@ -47,32 +48,9 @@ function DashboardPreview() {
 export default function CitaEvChargersPage({ routeClassName = "" }) {
   return (
     <div className={`cita-page ${routeClassName}`}>
-      <section className="cita-hero">
-        <img
-          className="cita-hero-bg"
-          src="/CITA_Charger_Images/27_Smart_DC_Pro_Lifestyle.png"
-          alt=""
-          aria-hidden="true"
-        />
-        <span className="cita-hero-shade" aria-hidden="true" />
-        <span className="cita-hero-light" aria-hidden="true" />
+      <CitaReelHero />
 
-        <div className="cita-shell cita-hero-grid">
-          <div className="cita-hero-copy">
-            <p className="cita-eyebrow">CITA EV Chargers</p>
-            <h1>CITA EV <span>Chargers</span></h1>
-            <h2>Simple, Safe & Reliable</h2>
-            <p className="cita-hero-subtitle">Home, Commercial & Fleet EV Charging Solutions</p>
-            <p className="cita-hero-text">
-              CITA EV is committed to delivering innovative, world-class EV charging solutions that support the transition to sustainable mobility.
-            </p>
-            <div className="cita-actions">
-              <a className="cita-btn cita-btn-primary" href="#cita-range">Explore the Range <ArrowIcon /></a>
-              <Link className="cita-btn cita-btn-ghost-dark" to="/contact-us">Enquire Now <ArrowIcon /></Link>
-            </div>
-          </div>
-        </div>
-
+      <section className="cita-reel-stats" aria-label="CITA EV at a glance">
         <div className="cita-shell cita-stat-grid">
           {stats.map(([value, label, copy], index) => (
             <article key={value}>

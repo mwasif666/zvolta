@@ -57,15 +57,33 @@ export default function CitaEvChargersPage({ routeClassName = "" }) {
           </div>
           <div className="cita-product-grid">
             {citaChargers.map((charger) => (
-              <article className="cita-product-card" key={charger.slug}>
-                <Link to={`/cita-ev-chargers/${charger.slug}`} className="cita-product-media">
-                  <img src={charger.productImage} alt={charger.name} loading="lazy" />
+              <article className="cita-product-card" key={charger.slug} data-model={charger.slug}>
+                <Link
+                  to={`/cita-ev-chargers/${charger.slug}`}
+                  className="cita-product-media"
+                  aria-label={`See ${charger.name} product details`}
+                >
+                  <img
+                    className="cita-product-image"
+                    src={charger.productImage}
+                    alt={charger.name}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  {charger.slug.startsWith("smart-pro-") && (
+                    <span className="cita-product-variant" aria-hidden="true">
+                      {charger.power.replace("Up to ", "")}
+                    </span>
+                  )}
                 </Link>
                 <div className="cita-product-copy">
-                  <p>{charger.subtitle}</p>
+                  <p className="cita-product-subtitle">{charger.subtitle}</p>
                   <h3>{charger.name}</h3>
-                  <strong>{charger.power}</strong>
-                  <Link to={`/cita-ev-chargers/${charger.slug}`}>View Details <ArrowIcon /></Link>
+                  <strong className="cita-product-power">{charger.power}</strong>
+                  <Link className="cita-product-cta" to={`/cita-ev-chargers/${charger.slug}`}>
+                    <span>View Details</span>
+                    <span className="cita-product-cta-icon" aria-hidden="true">↗</span>
+                  </Link>
                 </div>
               </article>
             ))}

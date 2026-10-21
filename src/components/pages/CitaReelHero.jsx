@@ -32,7 +32,9 @@ function positionCards(cards, bandWidth, bandHeight, offset, mobile) {
     const d = Math.abs(x - center) / normalizer;
     const distance = Math.min(1.14, d);
     const scaleX = 1 + (mobile ? 0.12 : 0.21) * distance ** 2;
-    const scaleY = 1 + (mobile ? 0.24 : 0.32) * distance ** 2.6;
+    // Keep the taller outer cards within short laptop viewports too.
+    const verticalGain = mobile ? 0.24 : bandHeight < 400 ? 0.26 : 0.32;
+    const scaleY = 1 + verticalGain * distance ** 2.6;
     const halfWidth = (baseWidth * scaleX) / 2;
     const offscreen = x + halfWidth < -20 || x - halfWidth > bandWidth + 20;
 

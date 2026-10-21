@@ -14,6 +14,14 @@ function ArrowIcon() {
   return <span aria-hidden="true">→</span>;
 }
 
+// Only format the display text. Original CITA data and specification values
+// remain untouched; e.g. "7kW" is rendered as "7 kW".
+function formatPowerLabel(value) {
+  return value
+    .replace(/(\d+(?:\.\d+)?)\s*kW\b/g, "$1 kW")
+    .replace(/\b2\s*x\s*(?=\d)/g, "2 × ");
+}
+
 function FeatureIcon({ index }) {
   const shapes = [
     <><circle cx="12" cy="12" r="9" /><path d="M3 12h18M12 3a16 16 0 0 1 0 18M12 3a16 16 0 0 0 0 18" /></>,
@@ -79,7 +87,7 @@ export default function CitaEvChargersPage({ routeClassName = "" }) {
                 <div className="cita-product-copy">
                   <p className="cita-product-subtitle">{charger.subtitle}</p>
                   <h3>{charger.name}</h3>
-                  <strong className="cita-product-power">{charger.power}</strong>
+                  <strong className="cita-product-power">{formatPowerLabel(charger.power)}</strong>
                   <Link className="cita-product-cta" to={`/cita-ev-chargers/${charger.slug}`}>
                     <span>View Details</span>
                     <span className="cita-product-cta-icon" aria-hidden="true">↗</span>

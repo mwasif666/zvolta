@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import { commerceApi } from "../../services/api";
 import { useCommerceData } from "../../hooks/useCommerceData";
 import { useCart } from "../../context/CartContext";
+import { citaChargers } from "../../data/citaChargers";
 import {
   getChargerCardDetails,
   getChargerDetailHref,
@@ -135,125 +136,176 @@ export function ProductCard({ product, index = 0 }) {
   );
 }
 
-export default function ProductsPage() {
-  const [category, setCategory] = useState("");
-  const [search, setSearch] = useState("");
-  const products = useCommerceData(
-    () => commerceApi.allProducts({ sort: "featured" }),
-    [],
-  );
-  const categories = useCommerceData(commerceApi.categories, []);
-  const filters = useMemo(() => {
-    const counts = new Map();
+// The CITA 2026 company profile specifies these three DC families. It does
+// NOT contain prices: those can only be obtained separately from the backend.
+export const CITA_SHOP_DC_SLUGS = ["smart-30-dc", "smart-dc-eco", "smart-dc-pro"];
+const CITA_SHOP_FAMILIES = citaChargers.filter((charger) =>
+  CITA_SHOP_DC_SLUGS.includes(charger.slug),
+);
+const BACKEND_CITA_POWER_VARIANTS = {
+  "smart-30-dc": [30],
+  "smart-dc-eco": [80, 120, 160],
+  "smart-dc-pro": [200, 240, 280, 320, 360, 400, 440, 480],
+};
 
-    (products.data || []).forEach((product) => {
-      const slug = product.category?.slug;
-      if (slug) counts.set(slug, (counts.get(slug) || 0) + 1);
-    });
+export function getApprovedCitaShopPrices(products, charger) {
+  const allowed = BACKEND_CITA_POWER_VARIANTS[charger.slug] || [];
+  const pattern = {
+    "smart-30-dc": /^CITA Smart 30 DC$/i,
+    "smart-dc-eco": /^CITA Smart DC Eco\s+(\d+)\s*kW$/i,
+    "smart-dc-pro": /^CITA Smart DC Pro\s+(\d+)\s*kW$/i,
+  }[charger.slug];
+  return (products || [])
+    .filter((product) => product.chargerType === "dc" && pattern.test(String(product.title || "")))
+    .filter((product) => {
+      const power = Number.parseInt(String(product.power || product.title || ""), 10);
+      return allowed.includes(power);
+    })
+    .map((product) => ({
+      power: product.power,
+      price: Number(product.discountPrice) > 0 ? Number(product.discountPrice) : Number(product.price),
+    }))
+    .filter(({ price }) => Number.isFinite(price) && price > 0);
+}
 
-    return (categories.data || [])
-      .filter((item) => item.isActive !== false)
-      .filter((item) => !products.data || counts.has(item.slug))
-      .sort(
-        (a, b) =>
-          Number(a.sortOrder || 0) - Number(b.sortOrder || 0) ||
-          String(a.name).localeCompare(String(b.name)),
-      )
-      .map((item) => ({ ...item, count: counts.get(item.slug) || 0 }));
-  }, [categories.data, products.data]);
-  const filtered = useMemo(
-    () =>
-      (products.data || []).filter((product) => {
-        const matchesCategory =
-          !category || product.category?.slug === category;
-        const term = search.trim().toLowerCase();
-        return (
-          matchesCategory &&
-          (!term ||
-            `${product.title} ${product.shortDescription || ""}`
-              .toLowerCase()
-              .includes(term))
-        );
-      }),
-    [category, products.data, search],
-  );
+function CitaShopCard({ charger, index, liveProducts }) {
+  const { settings } = useStorefrontSettings();
+  const prices = getApprovedCitaShopPrices(liveProducts, charger);
+  const fromPrice = prices.length ? Math.min(...prices.map(({ price }) => price)) : null;
+  const specifications = Object.fromEntries(charger.specs);
+  const href = `/cita-ev-chargers/${charger.slug}`;
+  const bestFor = {
+    "smart-30-dc": "Compact DC charging",
+    "smart-dc-eco": "Fleets, commercial & public sites",
+    "smart-dc-pro": "Highways, fleets & public stations",
+  }[charger.slug];
 
   return (
-    <main className="commerce-page">
+    <article className="commerce-card cita-shop-card" data-model={charger.slug}>
+      <span className="commerce-card__index">
+        {String(index + 1).padStart(2, "0")}
+      </span>
+      <div className="commerce-card__intro">
+        <h2><SmartLink href={href}>{charger.name}</SmartLink></h2>
+        <p>{charger.description}</p>
+      </div>
+      <SmartLink
+        className="commerce-card__art"
+        href={href}
+        aria-label={`View full technical specifications for ${charger.name}`}
+      >
+        <img src={charger.productImage} alt={charger.name} loading="lazy" decoding="async" />
+      </SmartLink>
+      <div className="commerce-card__specs">
+        <div className="commerce-card__spec-row">
+          <span>Power</span>
+          <strong>{charger.power}</strong>
+        </div>
+        <div className="commerce-card__spec-row">
+          <span>Best for</span>
+          <strong>{bestFor}</strong>
+        </div>
+        <div className="commerce-card__spec-row">
+          <span>Protection</span>
+          <strong>{specifications["Protection Rating"]}</strong>
+        </div>
+        <div className="commerce-card__spec-row">
+          <span>Warranty</span>
+          <strong>{charger.warranty}</strong>
+        </div>
+        <div className="commerce-card__spec-row">
+          <span>Price</span>
+          <strong>{fromPrice === null ? "Enquire for pricing" : `From ${formatStoreCurrency(fromPrice, settings.currency)}`}</strong>
+        </div>
+      </div>
+      <div className="commerce-card__actions">
+        <SmartLink className="commerce-card__learn" href={href}>
+          View specifications
+          <svg {...iconProps} className="h-4 w-4">
+            <path d="M5 12h14" />
+            <path d="m13 6 6 6-6 6" />
+          </svg>
+        </SmartLink>
+        <SmartLink
+          className="commerce-card__cart cita-shop-card__enquire"
+          href="/contact-us"
+          aria-label={`Enquire about ${charger.name}`}
+        >
+          <svg {...iconProps} className="h-5 w-5"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5Z"/></svg>
+        </SmartLink>
+      </div>
+    </article>
+  );
+}
+
+export default function ProductsPage() {
+  const [search, setSearch] = useState("");
+  // Availability/prices are optional. The PDF product catalogue renders
+  // immediately, even when the commerce backend is down.
+  const liveCatalog = useCommerceData(
+    () => commerceApi.allProducts({ chargerType: "dc", sort: "price_low" }),
+    [],
+  );
+  const filtered = useMemo(() => {
+    const query = search.trim().toLowerCase();
+    return CITA_SHOP_FAMILIES.filter(
+      (charger) =>
+        !query ||
+        `${charger.name} ${charger.power} ${charger.description}`
+          .toLowerCase()
+          .includes(query),
+    );
+  }, [search]);
+
+  return (
+    <main className="commerce-page cita-shop-page">
       <section className="commerce-hero">
         <div className="commerce-container">
-          <p className="commerce-kicker">ZVolta hardware</p>
+          <p className="commerce-kicker">Shop · CITA EV DC chargers</p>
           <h1>
-            Charging equipment.
+            CITA EV DC Chargers.
             <br />
-            <em>Ready for what’s next.</em>
+            <em>30 kW to 480 kW.</em>
           </h1>
           <p>
-            Connected EV chargers and accessories, backed by ZVolta software and
-            installation support.
+            Explore the original CITA Smart 30 DC, Smart DC Eco and Smart DC Pro
+            models from the CITA EV 2026 company profile.
           </p>
         </div>
       </section>
       <section className="commerce-catalog commerce-container">
         <div className="commerce-toolbar">
-          <div className="commerce-filters">
-            <button
-              className={!category ? "active" : ""}
-              onClick={() => setCategory("")}
-            >
-              All
-              {products.data ? <small>{products.data.length}</small> : null}
-            </button>
-            {filters.map((item) => (
-              <button
-                className={category === item.slug ? "active" : ""}
-                key={item._id}
-                onClick={() => setCategory(item.slug)}
-              >
-                {item.name}
-                <small>{item.count}</small>
-              </button>
-            ))}
-            {categories.loading ? (
-              <span className="commerce-filters__state">Loading filters…</span>
-            ) : null}
-            {categories.error ? (
-              <span className="commerce-filters__state">
-                Categories unavailable right now.
-              </span>
-            ) : null}
-          </div>
+          <p className="cita-shop-count">DC Chargers <strong>{CITA_SHOP_FAMILIES.length} models</strong></p>
           <label className="commerce-search">
-            <span className="sr-only">Search products</span>
+            <span className="sr-only">Search CITA DC chargers</span>
             <input
               type="search"
               value={search}
               onChange={(event) => setSearch(event.target.value)}
-              placeholder="Search products"
+              placeholder="Search DC chargers"
             />
           </label>
         </div>
-        {products.loading ? (
-          <div className="commerce-state">Loading ZVolta products…</div>
-        ) : null}
-        {products.error ? (
-          <div className="commerce-state error">
-            {products.error}
-            <small>Start the API server at port 5000 and refresh.</small>
-          </div>
-        ) : null}
-        {!products.loading && !products.error ? (
-          <div className="commerce-grid">
-            {filtered.map((product, index) => (
-              <ProductCard product={product} index={index} key={product._id} />
-            ))}
-          </div>
-        ) : null}
-        {!products.loading && !products.error && filtered.length === 0 ? (
+        <div className="commerce-grid">
+          {filtered.map((charger) => (
+            <CitaShopCard
+              key={charger.slug}
+              index={CITA_SHOP_FAMILIES.indexOf(charger)}
+              charger={charger}
+              liveProducts={liveCatalog.data}
+            />
+          ))}
+        </div>
+        {filtered.length === 0 && (
           <div className="commerce-state">
-            No products match this selection.
+            No CITA DC charger matches your search.
           </div>
-        ) : null}
+        )}
+        <p className="cita-shop-pricing-note">
+          Technical details and charger images are from the CITA EV 2026 company profile.
+          The PDF does not specify prices. Any displayed prices are from the
+          ZVolta live catalogue; contact us to confirm a current quotation.
+        </p>
       </section>
     </main>
   );

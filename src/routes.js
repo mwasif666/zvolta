@@ -60,7 +60,6 @@ const primaryNavigationPageIds = [
   "index",
   "host",
   "charge",
-  "dc-chargers",
   "cita-ev-chargers",
   "software",
   "charging-partners",
@@ -70,6 +69,7 @@ const primaryNavigationPageIds = [
 
 const hiddenNavigationPageIds = new Set([
   "404",
+  "dc-chargers",
   "roi-calculator",
   "product-detail",
   "cita-charger-detail",
@@ -158,7 +158,6 @@ export const footerLinkGroups = [
     title: "Charging",
     links: routesFromPageIds([
       "charge",
-      "dc-chargers",
       "cita-ev-chargers",
       "charging-partners",
       "become-charging-partner",

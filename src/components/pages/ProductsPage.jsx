@@ -144,9 +144,6 @@ export function ProductCard({ product, index = 0 }) {
 // CITA EV 2026 lists all ten AC/DC families. Keep the original image,
 // specifications and detailed pages; backend prices are a separate source.
 export const CITA_SHOP_DC_SLUGS = ["smart-30-dc", "smart-dc-eco", "smart-dc-pro"];
-const CITA_SHOP_FAMILIES = citaChargers.filter((charger) =>
-  CITA_SHOP_DC_SLUGS.includes(charger.slug),
-);
 const BACKEND_CITA_POWER_VARIANTS = {
   "smart-30-dc": [30],
   "smart-dc-eco": [80, 120, 160],
@@ -160,6 +157,7 @@ export function getApprovedCitaShopPrices(products, charger) {
     "smart-dc-eco": /^CITA Smart DC Eco\s+(\d+)\s*kW$/i,
     "smart-dc-pro": /^CITA Smart DC Pro\s+(\d+)\s*kW$/i,
   }[charger.slug];
+  if (!pattern || !allowed.length) return [];
   return (products || [])
     .filter((product) => product.chargerType === "dc" && pattern.test(String(product.title || "")))
     .filter((product) => {

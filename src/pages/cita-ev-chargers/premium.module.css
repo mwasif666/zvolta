@@ -273,9 +273,9 @@
   position: relative;
   z-index: 1;
   display: block;
-  width: 100%;
-  height: 100%;
-  max-width: 226px;
+  width: auto;
+  height: auto;
+  max-width: min(100%, 226px);
   max-height: 218px;
   margin: auto;
   object-fit: contain;
@@ -284,6 +284,16 @@
      studio stage, without adding any box-shaped filter/drop-shadow. */
   mix-blend-mode: multiply;
   filter: none;
+  /* Real vector alpha silhouettes extracted from the original product PNGs.
+     They preserve cables and logos without modifying the source hardware. */
+  -webkit-mask-image: var(--cita-product-mask, none);
+  mask-image: var(--cita-product-mask, none);
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
   transform: scale(var(--cita-product-zoom, 1));
   transition: transform .3s ease;
 }
@@ -298,14 +308,36 @@
 :global(.cita-product-card[data-model="smart-pro-11"]),
 :global(.cita-product-card[data-model="smart-pro-22"]) {
   --cita-product-zoom: 1.015;
+  --cita-product-mask: url("/CITA_Charger_Masks/smart-pro.svg");
 }
-:global(.cita-product-card[data-model="smart-eco"]) { --cita-product-zoom: 1.23; }
-:global(.cita-product-card[data-model="smart-dual"]) { --cita-product-zoom: 1.08; }
-:global(.cita-product-card[data-model="smart-44-gen-3"]) { --cita-product-zoom: 1.06; }
-:global(.cita-product-card[data-model="dual-ecopillar"]) { --cita-product-zoom: 1.08; }
-:global(.cita-product-card[data-model="smart-30-dc"]) { --cita-product-zoom: 1.06; }
-:global(.cita-product-card[data-model="smart-dc-eco"]) { --cita-product-zoom: 1.06; }
-:global(.cita-product-card[data-model="smart-dc-pro"]) { --cita-product-zoom: 1.07; }
+:global(.cita-product-card[data-model="smart-eco"]) {
+  --cita-product-zoom: 1.23;
+  --cita-product-mask: url("/CITA_Charger_Masks/smart-eco.svg");
+}
+:global(.cita-product-card[data-model="smart-dual"]) {
+  --cita-product-zoom: 1.08;
+  --cita-product-mask: url("/CITA_Charger_Masks/smart-dual.svg");
+}
+:global(.cita-product-card[data-model="smart-44-gen-3"]) {
+  --cita-product-zoom: 1.06;
+  --cita-product-mask: url("/CITA_Charger_Masks/smart-44-gen-3.svg");
+}
+:global(.cita-product-card[data-model="dual-ecopillar"]) {
+  --cita-product-zoom: 1.08;
+  --cita-product-mask: url("/CITA_Charger_Masks/dual-ecopillar.svg");
+}
+:global(.cita-product-card[data-model="smart-30-dc"]) {
+  --cita-product-zoom: 1.06;
+  --cita-product-mask: url("/CITA_Charger_Masks/smart-30-dc.svg");
+}
+:global(.cita-product-card[data-model="smart-dc-eco"]) {
+  --cita-product-zoom: 1.06;
+  --cita-product-mask: url("/CITA_Charger_Masks/smart-dc-eco.svg");
+}
+:global(.cita-product-card[data-model="smart-dc-pro"]) {
+  --cita-product-zoom: 1.07;
+  --cita-product-mask: url("/CITA_Charger_Masks/smart-dc-pro.svg");
+}
 
 /* Same genuine hardware, clearly labeled 7.4 / 11 / 22 kW variants. */
 :global(.cita-product-variant) {

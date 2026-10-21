@@ -220,10 +220,12 @@
   background: #08482d;
   box-shadow: 0 7px 20px rgba(0, 0, 0, .2);
   text-decoration: none;
-  pointer-events: auto;
+  pointer-events: none;
   transition: background-color .2s ease, transform .2s ease;
 }
 .cita-reel-card-contact svg { display: block; width: 22px; height: 22px; }
+.cita-reel-carousel:not(.is-dragging) .cita-reel-card:hover .cita-reel-card-contact,
+.cita-reel-card:focus-within .cita-reel-card-contact { pointer-events: auto; }
 .cita-reel-card-contact:hover { background: #0c7547; transform: translateY(-2px); }
 .cita-reel-card-detail:focus-visible,
 .cita-reel-card-contact:focus-visible {
@@ -240,6 +242,7 @@
 @media (hover: none) {
   /* Touch devices have no hover: show model details and enquiry affordance. */
   .cita-reel-card-hover { opacity: 1; transform: none; }
+  .cita-reel-card-contact { pointer-events: auto; }
   .cita-reel-card-gradient { opacity: 1; }
 }
 

@@ -1,13 +1,7 @@
 import { Link } from "react-router-dom";
 import { citaChargers, citaSolutions } from "../../data/citaChargers";
 import CitaReelHero from "./CitaReelHero";
-
-const stats = [
-  ["35+", "Countries", "Global presence and growing"],
-  ["AC & DC", "Hardware", "Complete charging portfolio"],
-  ["CITA EV", "App & CPMS", "Smart, connected charging"],
-  ["Home to Public", "Charging", "For every environment"],
-];
+import StatsBento from "../ui/stats-bento";
 
 const differences = [
   ["Innovative Technology", "Advanced features and future-ready capabilities for faster, safer and more efficient charging."],
@@ -50,16 +44,7 @@ export default function CitaEvChargersPage({ routeClassName = "" }) {
     <div className={`cita-page ${routeClassName}`}>
       <CitaReelHero />
 
-      <section className="cita-reel-stats" aria-label="CITA EV at a glance">
-        <div className="cita-shell cita-stat-grid">
-          {stats.map(([value, label, copy], index) => (
-            <article key={value}>
-              <FeatureIcon index={index} />
-              <div><strong>{value}</strong><b>{label}</b><small>{copy}</small></div>
-            </article>
-          ))}
-        </div>
-      </section>
+      <StatsBento />
 
       <section className="cita-products" id="cita-range">
         <div className="cita-shell">

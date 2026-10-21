@@ -23,7 +23,7 @@
 .cita-reel-frame { position: relative; width: 100%; min-width: 0; }
 
 .cita-reel-frame {
-  padding: 127px 0 49px;
+  padding: 112px 0 26px;
   overflow: hidden;
   text-align: center;
 }
@@ -68,9 +68,9 @@
 .cita-reel-heading {
   position: relative;
   max-width: min(1160px, calc(100% - 48px));
-  margin: 22px auto 0;
+  margin: 17px auto 0;
   color: #0b1710;
-  font-size: clamp(52px, 4.55vw, 72px);
+  font-size: clamp(49px, 4.15vw, 68px);
   font-weight: 780;
   line-height: 1.1;
   letter-spacing: -.025em;
@@ -83,20 +83,35 @@
 .cita-reel-subline {
   position: relative;
   max-width: min(840px, calc(100% - 42px));
-  margin: 20px auto 0;
-  color: #596a60;
+  margin: 14px auto 0;
+  color: #506457;
   font-size: clamp(17px, 1.35vw, 19px);
   font-weight: 450;
   line-height: 1.62;
   letter-spacing: 0;
 }
 
+.cita-reel-browse-hint {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  margin: 11px auto 0;
+  color: #597361;
+  font-size: 11px;
+  font-weight: 650;
+  line-height: 1.4;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+}
+.cita-reel-browse-mobile { display: none; }
+
 .cita-reel-carousel {
   position: relative;
   display: block;
   width: 100%;
-  height: 432px;
-  margin-top: 52px;
+  height: 372px;
+  margin-top: 16px;
   overflow: hidden;
   cursor: grab;
   touch-action: pan-y;
@@ -149,23 +164,17 @@
   user-select: none;
   -webkit-user-drag: none;
 }
-/* Preserve each original CITA charger photograph and its model-specific crop. */
-.cita-reel-card[data-model="smart-pro-11"] .cita-reel-card-detail > img {
-  /* Keep the charger in focus instead of the people at frame center. */
-  object-position: 74% center;
-  transform: scale(1.08);
-}
-.cita-reel-card[data-model="smart-dual"] .cita-reel-card-detail > img {
-  object-position: 50% 45%;
-  transform: scale(1.33);
-}
-.cita-reel-card[data-model="dual-ecopillar"] .cita-reel-card-detail > img {
-  object-position: 74% 47%;
-  transform: scale(1.09);
-}
-.cita-reel-card[data-model="smart-30-dc"] .cita-reel-card-detail > img {
-  object-position: 57% center;
-}
+/* Crop the EXISTING CITA installation photography to keep each charger in focus. */
+.cita-reel-card[data-model="smart-pro-7"] .cita-reel-card-detail > img { object-position: 59% center; }
+.cita-reel-card[data-model="smart-pro-11"] .cita-reel-card-detail > img { object-position: 43% center; }
+.cita-reel-card[data-model="smart-pro-22"] .cita-reel-card-detail > img { object-position: 59% center; }
+.cita-reel-card[data-model="smart-eco"] .cita-reel-card-detail > img { object-position: 45% center; }
+.cita-reel-card[data-model="smart-dual"] .cita-reel-card-detail > img { object-position: 51% 48%; transform: scale(1.08); }
+.cita-reel-card[data-model="smart-44-gen-3"] .cita-reel-card-detail > img { object-position: 50% center; }
+.cita-reel-card[data-model="dual-ecopillar"] .cita-reel-card-detail > img { object-position: 76% center; transform: scale(1.04); }
+.cita-reel-card[data-model="smart-30-dc"] .cita-reel-card-detail > img { object-position: 49% center; }
+.cita-reel-card[data-model="smart-dc-eco"] .cita-reel-card-detail > img { object-position: 35% center; }
+.cita-reel-card[data-model="smart-dc-pro"] .cita-reel-card-detail > img { object-position: 49% center; }
 .cita-reel-card-gradient {
   position: absolute;
   inset: 0;
@@ -269,8 +278,8 @@
   letter-spacing: -.018em;
 }
 .cita-reel-note-right {
-  top: 325px;
-  right: max(4.5%, calc(50% - 720px));
+  top: 299px;
+  right: max(3.5%, calc(50% - 740px));
   transform: rotate(8deg);
 }
 .cita-reel-note-right span { font-size: 20px; }
@@ -281,22 +290,16 @@
   pointer-events: none;
 }
 .cita-reel-doodle-left { display: none; }
-.cita-reel-arrow-right {
-  top: 411px;
-  right: max(5%, calc(50% - 680px));
-  width: 112px;
-  height: 126px;
-  transform: rotate(6deg);
-}
+
 
 .cita-reel-note-bottom {
-  bottom: 110px;
+  bottom: 94px;
   left: calc(50% - 341px);
   font-size: 25px;
   transform: rotate(-12deg);
 }
 .cita-reel-arrow-bottom {
-  bottom: 79px;
+  bottom: 64px;
   left: calc(50% - 208px);
   width: 106px;
   height: 73px;
@@ -309,7 +312,7 @@
   place-items: center;
   width: 238px;
   min-height: 78px;
-  margin: 20px auto 0;
+  margin: 8px auto 0;
   border: 1.5px dashed #168c57;
   border-radius: 999px;
 }
@@ -337,7 +340,7 @@
 .cita-reel-cta a:focus-visible { outline: 3px solid #0acd71; outline-offset: 5px; }
 .cita-reel-microcopy {
   position: relative;
-  margin: 14px 16px 0;
+  margin: 10px 16px 0;
   color: #5d7063;
   font-size: 13px;
   line-height: 1.5;
@@ -350,7 +353,7 @@
 .cita-reel-microcopy a:hover { text-decoration: underline; }
 
 .cita-reel-hero + .cita-reel-stats {
-  padding: 36px 0 70px;
+  padding: 22px 0 76px;
   background: #f6faf5;
 }
 .cita-reel-stats .cita-stat-grid {
@@ -362,23 +365,23 @@
 
 /* Widescreen and shallow laptops: compress vertical gaps, never scale the frame. */
 @media (min-width: 821px) and (max-height: 920px) {
-  .cita-reel-frame { padding-top: 109px; padding-bottom: 25px; }
+  .cita-reel-frame { padding-top: 96px; padding-bottom: 18px; }
   .cita-reel-badge { min-height: 34px; padding-block: 7px; }
   .cita-reel-heading {
     max-width: min(1080px, calc(100% - 48px));
     margin-top: 17px;
-    font-size: clamp(52px, 3.95vw, 66px);
+    font-size: clamp(48px, 3.65vw, 61px);
     line-height: 1.09;
   }
-  .cita-reel-subline { margin-top: 12px; font-size: 17px; line-height: 1.45; }
-  .cita-reel-carousel { height: 358px; margin-top: 28px; }
-  .cita-reel-cta { margin-top: 13px; min-height: 72px; }
-  .cita-reel-cta a { min-height: 58px; }
+  .cita-reel-subline { margin-top: 9px; font-size: 16px; line-height: 1.45; }
+  .cita-reel-carousel { height: 310px; margin-top: 13px; }
+  .cita-reel-cta { margin-top: 8px; min-height: 68px; }
+  .cita-reel-cta a { min-height: 55px; }
   .cita-reel-microcopy { margin-top: 9px; font-size: 12px; }
-  .cita-reel-note-right { top: 250px; font-size: 27px; }
+  .cita-reel-note-right { top: 267px; font-size: 25px; }
   .cita-reel-arrow-right { top: 319px; height: 122px; }
-  .cita-reel-note-bottom { bottom: 83px; font-size: 23px; }
-  .cita-reel-arrow-bottom { bottom: 56px; }
+  .cita-reel-note-bottom { bottom: 76px; font-size: 22px; }
+  .cita-reel-arrow-bottom { bottom: 52px; }
 }
 
 @media (max-width: 1100px) and (min-width: 821px) {
@@ -389,7 +392,7 @@
 }
 
 @media (max-width: 820px) {
-  .cita-reel-frame { padding: 116px 0 39px; }
+  .cita-reel-frame { padding: 112px 0 32px; }
   .cita-reel-badge { min-height: 35px; font-size: clamp(11px, 2.6vw, 14px); padding: 7px 13px; }
   .cita-reel-heading {
     max-width: calc(100% - 30px);
@@ -405,7 +408,10 @@
     line-height: 1.55;
   }
   .cita-reel-desktop-break { display: none; }
-  .cita-reel-carousel { height: 278px; margin-top: 31px; }
+  .cita-reel-browse-desktop { display: none; }
+  .cita-reel-browse-mobile { display: inline; }
+  .cita-reel-browse-hint { margin-top: 10px; font-size: 10px; letter-spacing: .04em; }
+  .cita-reel-carousel { height: 258px; margin-top: 19px; }
   .cita-reel-card-hover { padding: 13px 11px 15px; }
   .cita-reel-card-copy { gap: 5px; }
   .cita-reel-card-copy small { font-size: 11px; }
@@ -429,7 +435,7 @@
   .cita-reel-cta a { width: 204px; min-height: 57px; font-size: 16px; }
   .cita-reel-microcopy { margin-top: 13px; font-size: 11px; }
   .cita-reel-hero + .cita-reel-stats {
-    padding: 26px 0 48px;
+    padding: 20px 0 55px;
   }
 }
 

@@ -99,7 +99,7 @@ export default function CitaChargerDetailPage({ routeClassName = "" }) {
             <p>Technical details from the supplied CITA EV company profile.</p>
           </div>
           <div className="cita-spec-layout">
-            <aside className="cita-spec-product-card">
+            <aside className="cita-spec-product-card" data-model={charger.slug}>
               <img src={charger.productImage} alt={charger.name} loading="lazy" />
               <small>{charger.subtitle}</small>
               <h3>{charger.name}</h3>

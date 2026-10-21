@@ -82,6 +82,8 @@ export default function CitaReelHero() {
     let reduced = motionQuery.matches;
     let frame = 0;
     let isOnScreen = true;
+    let isPointerHovering = false;
+    let isKeyboardFocused = false;
     let lastTime = 0;
     let bandWidth = band.clientWidth;
     let bandHeight = band.clientHeight;
@@ -136,7 +138,7 @@ export default function CitaReelHero() {
       const dt = lastTime ? Math.max(0, Math.min((now - lastTime) / 1000, 0.045)) : 0;
       lastTime = now;
       if (!document.hidden && isOnScreen) {
-        if (!reduced && !dragRef.current.active) {
+        if (!reduced && !dragRef.current.active && !isPointerHovering && !isKeyboardFocused) {
           offsetRef.current -= AUTO_SPEED * dt;
           offsetRef.current += speedRef.current * dt;
           speedRef.current *= Math.pow(0.12, dt);
@@ -147,6 +149,29 @@ export default function CitaReelHero() {
         positionCards(cards, bandWidth, bandHeight, offsetRef.current, isMobile);
       }
       frame = window.requestAnimationFrame(tick);
+    }
+
+    function onHoverEnter(event) {
+      // Touch has no persistent hover; let touch swipes keep their momentum.
+      if (event.pointerType === "mouse" || event.pointerType === "pen") {
+        isPointerHovering = true;
+        speedRef.current = 0;
+      }
+    }
+
+    function onHoverLeave(event) {
+      if (event.pointerType === "mouse" || event.pointerType === "pen") {
+        isPointerHovering = false;
+      }
+    }
+
+    function onFocusIn() {
+      isKeyboardFocused = true;
+      speedRef.current = 0;
+    }
+
+    function onFocusOut(event) {
+      if (!band.contains(event.relatedTarget)) isKeyboardFocused = false;
     }
 
     function onDown(event) {
@@ -194,6 +219,10 @@ export default function CitaReelHero() {
       syncSize();
     }
 
+    band.addEventListener("pointerenter", onHoverEnter);
+    band.addEventListener("pointerleave", onHoverLeave);
+    band.addEventListener("focusin", onFocusIn);
+    band.addEventListener("focusout", onFocusOut);
     band.addEventListener("pointerdown", onDown);
     band.addEventListener("pointermove", onMove);
     band.addEventListener("pointerup", onUp);
@@ -212,6 +241,10 @@ export default function CitaReelHero() {
     return () => {
       window.cancelAnimationFrame(frame);
       animations.forEach((animation) => animation.cancel());
+      band.removeEventListener("pointerenter", onHoverEnter);
+      band.removeEventListener("pointerleave", onHoverLeave);
+      band.removeEventListener("focusin", onFocusIn);
+      band.removeEventListener("focusout", onFocusOut);
       band.removeEventListener("pointerdown", onDown);
       band.removeEventListener("pointermove", onMove);
       band.removeEventListener("pointerup", onUp);

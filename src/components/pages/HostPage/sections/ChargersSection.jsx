@@ -18,6 +18,7 @@ import {
   parseChargerPower,
 } from "../../../../lib/chargerCatalog";
 import { commerceApi } from "../../../../services/api";
+import { selectHostChargers } from "../../../../lib/hostChargerSelection";
 
 const SUPPORT_NUMBER = "923104446529";
 const CUSTOMIZATION_MESSAGE =
@@ -37,12 +38,7 @@ export function ChargersSection({
     () => commerceApi.allProducts({ sort: "featured" }),
     [],
   );
-  const liveChargers = (catalog.data || []).filter((product) => {
-    const category = `${product.category?.name || ""} ${product.category?.slug || ""}`;
-    return (
-      product.chargerType || /charger/i.test(`${product.title} ${category}`)
-    );
-  });
+  const liveChargers = selectHostChargers(catalog.data || []);
 
   return (
     <section id="chargers" className="host-charger-options">

@@ -1,7 +1,7 @@
-import DcChargersPage from "../../components/pages/DcChargersPage";
-import styles from "./page.module.css";
-import "./cita-overrides.css";
+import { Navigate } from "react-router-dom";
 
+// Legacy links remain safe, but there is no separate DC Chargers storefront.
+// All ZVolta and CITA DC charger products now live in the unified Shop.
 export default function DcChargersRoute() {
-  return <DcChargersPage routeClassName={styles.routeStyles} />;
+  return <Navigate to="/products" replace />;
 }

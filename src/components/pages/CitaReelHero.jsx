@@ -4,8 +4,8 @@ import { citaChargers } from "../../data/citaChargers";
 
 const DESKTOP_PITCH = 210;
 const MOBILE_PITCH = 156;
-const AUTO_SPEED = 50;
-const LONG_CLOCK_DURATION = 1e9;
+const AUTO_SPEED = 42;
+const SHAPE_INTERVAL = 48;
 // Two copies let the infinite belt span widescreen displays without empty margins.
 const carouselModels = [...citaChargers, ...citaChargers];
 
@@ -24,48 +24,55 @@ function roundedArcPath(width, leftHeight, rightHeight) {
   return `path("M ${radius} ${fmt(topLeft)} L ${fmt(width - radius)} ${fmt(topRight)} Q ${fmt(width)} ${fmt(topRight)} ${fmt(width)} ${fmt(topRight + radius)} L ${fmt(width)} ${fmt(bottomRight - radius)} Q ${fmt(width)} ${fmt(bottomRight)} ${fmt(width - radius)} ${fmt(bottomRight)} L ${radius} ${fmt(bottomLeft)} Q 0 ${fmt(bottomLeft)} 0 ${fmt(bottomLeft - radius)} L 0 ${fmt(topLeft + radius)} Q 0 ${fmt(topLeft)} ${radius} ${fmt(topLeft)} Z")`;
 }
 
-function positionCards(cards, bandWidth, bandHeight, offset, mobile) {
+function positionCards(cards, bandWidth, bandHeight, offset, mobile, updateShape) {
   const pitch = mobile ? MOBILE_PITCH : DESKTOP_PITCH;
   const period = pitch * cards.length;
   const center = bandWidth / 2;
   const normalizer = mobile ? Math.max(185, center - 15) : Math.max(510, center - 75);
-  const middleWidth = mobile ? 142 : 184;
-  const widthGain = mobile ? 20 : 39;
-  const baseHeight = mobile ? 159 : Math.min(273, bandHeight * .66);
-  // Keep the tallest outer edges inside the available band on shallow laptops.
+  const baseWidth = mobile ? 142 : 184;
+  const baseHeight = mobile ? 159 : Math.min(273, bandHeight * 0.66);
   const edgeGain = mobile ? 42 : Math.min(92, (bandHeight - baseHeight - 24) / 1.4);
 
-  cards.forEach((card, index) => {
+  for (let index = 0; index < cards.length; index += 1) {
+    const card = cards[index];
+    if (!card) continue;
     const t = wrap(index * pitch + offset, period);
-    // Increasing pitch towards the edges preserves the breathing room between cards.
     const x = center + t * (1 + 0.067 * (t / normalizer) ** 2);
-    const distance = Math.min(1.12, Math.abs(x - center) / normalizer);
-    const width = middleWidth + widthGain * distance ** 2;
-    const leftDistance = Math.min(1.12, Math.abs(x - width / 2 - center) / normalizer);
-    const rightDistance = Math.min(1.12, Math.abs(x + width / 2 - center) / normalizer);
-    const leftHeight = baseHeight + edgeGain * leftDistance ** 2.6;
-    const rightHeight = baseHeight + edgeGain * rightDistance ** 2.6;
-    const height = Math.max(leftHeight, rightHeight);
-    const verticalCenter = bandHeight / 2 - (mobile ? 3 : 10) * distance ** 2;
+    const d = Math.min(1.12, Math.abs(x - center) / normalizer);
+    const width = baseWidth + (mobile ? 20 : 39) * d ** 2;
+    const offscreen = x + width / 2 < -10 || x - width / 2 > bandWidth + 10;
+    if (offscreen) {
+      if (card.style.visibility !== "hidden") card.style.visibility = "hidden";
+      continue;
+    }
+    if (card.style.visibility !== "visible") card.style.visibility = "visible";
 
-    card.style.width = `${width.toFixed(2)}px`;
-    card.style.height = `${height.toFixed(2)}px`;
-    card.style.transform = `translate3d(${(x - width / 2).toFixed(2)}px, ${(verticalCenter - height / 2).toFixed(2)}px, 0)`;
-    card.style.clipPath = roundedArcPath(width, leftHeight, rightHeight);
-    card.style.zIndex = String(30 - Math.round(distance * 5));
-    card.style.visibility = x + width / 2 < -5 || x - width / 2 > bandWidth + 5 ? "hidden" : "visible";
-  });
+    const dl = Math.min(1.12, Math.abs(x - width / 2 - center) / normalizer);
+    const dr = Math.min(1.12, Math.abs(x + width / 2 - center) / normalizer);
+    const leftHeight = baseHeight + edgeGain * dl ** 2.6;
+    const rightHeight = baseHeight + edgeGain * dr ** 2.6;
+    const height = Math.max(leftHeight, rightHeight);
+    const cy = bandHeight / 2 - (mobile ? 3 : 10) * d ** 2;
+
+    // Compositor-friendly movement every frame; more costly shape updates ~20fps.
+    card.style.transform = `translate3d(${(x - width / 2).toFixed(2)}px, ${(cy - height / 2).toFixed(2)}px, 0)`;
+    if (updateShape || !card.style.clipPath) {
+      card.style.width = `${width.toFixed(2)}px`;
+      card.style.height = `${height.toFixed(2)}px`;
+      card.style.clipPath = roundedArcPath(width, leftHeight, rightHeight);
+      card.style.zIndex = String(30 - Math.round(d * 5));
+    }
+  }
 }
 
 export default function CitaReelHero() {
   const outerRef = useRef(null);
   const bandRef = useRef(null);
   const cardRefs = useRef([]);
-  const timeRef = useRef(0);
   const offsetRef = useRef(0);
   const speedRef = useRef(0);
   const dragRef = useRef({ active: false, lastX: 0, lastT: 0, distance: 0 });
-  const clickBlockRef = useRef(false);
+  const blockedClickUntil = useRef(0);
 
   useEffect(() => {
     const outer = outerRef.current;
@@ -78,20 +85,24 @@ export default function CitaReelHero() {
     let reduced = motionQuery.matches;
     let frame = 0;
     let isOnScreen = true;
+    let lastTime = 0;
+    let lastShapeTime = 0;
+    let bandWidth = band.clientWidth;
+    let bandHeight = band.clientHeight;
+    const cards = cardRefs.current;
     const resizeObserver = new ResizeObserver(() => syncSize());
     const visibilityObserver = new IntersectionObserver((entries) => {
       isOnScreen = entries[0]?.isIntersecting ?? true;
+      lastTime = 0;
     }, { rootMargin: "250px" });
 
-    const clock = document.documentElement.animate(
-      [{ opacity: 1 }, { opacity: 1 }],
-      { duration: LONG_CLOCK_DURATION, iterations: 1 }
-    );
     const animations = [];
 
     function syncSize() {
       isMobile = mobileQuery.matches;
-      positionCards(cardRefs.current.filter(Boolean), band.clientWidth, band.clientHeight, offsetRef.current, isMobile);
+      bandWidth = band.clientWidth;
+      bandHeight = band.clientHeight;
+      positionCards(cards, bandWidth, bandHeight, offsetRef.current, isMobile, true);
     }
 
     function animateIn() {
@@ -123,20 +134,22 @@ export default function CitaReelHero() {
       });
     }
 
-    function tick() {
-      const time = Number(clock.currentTime) || performance.now();
-      const dt = timeRef.current ? Math.max(0, Math.min((time - timeRef.current) / 1000, .06)) : 0;
-      timeRef.current = time;
-      if (!reduced && isOnScreen && !document.hidden && !dragRef.current.active) {
-        const decay = Math.pow(.95, dt);
-        speedRef.current *= decay;
-        offsetRef.current -= AUTO_SPEED * dt;
-        offsetRef.current += speedRef.current * dt;
-        const cycle = (isMobile ? MOBILE_PITCH : DESKTOP_PITCH) * cardRefs.current.length;
-        offsetRef.current = wrap(offsetRef.current, cycle);
-      }
-      if (isOnScreen) {
-        positionCards(cardRefs.current.filter(Boolean), band.clientWidth, band.clientHeight, offsetRef.current, isMobile);
+
+    function tick(now) {
+      const dt = lastTime ? Math.max(0, Math.min((now - lastTime) / 1000, 0.045)) : 0;
+      lastTime = now;
+      if (!document.hidden && isOnScreen) {
+        if (!reduced && !dragRef.current.active) {
+          offsetRef.current -= AUTO_SPEED * dt;
+          offsetRef.current += speedRef.current * dt;
+          speedRef.current *= Math.pow(0.12, dt);
+          if (Math.abs(speedRef.current) < 1) speedRef.current = 0;
+          const cycle = (isMobile ? MOBILE_PITCH : DESKTOP_PITCH) * cards.length;
+          offsetRef.current = wrap(offsetRef.current, cycle);
+        }
+        const shapeUpdate = now - lastShapeTime >= SHAPE_INTERVAL;
+        positionCards(cards, bandWidth, bandHeight, offsetRef.current, isMobile, shapeUpdate);
+        if (shapeUpdate) lastShapeTime = now;
       }
       frame = window.requestAnimationFrame(tick);
     }
@@ -164,7 +177,8 @@ export default function CitaReelHero() {
           band.setPointerCapture?.(event.pointerId);
         }
       }
-      speedRef.current = Math.max(-900, Math.min(900, delta / dt));
+      const instantaneous = Math.max(-650, Math.min(650, delta / dt));
+      speedRef.current = speedRef.current * 0.6 + instantaneous * 0.4;
       drag.lastX = event.clientX;
       drag.lastT = now;
     }
@@ -172,9 +186,9 @@ export default function CitaReelHero() {
     function onUp(event) {
       if (!dragRef.current.active) return;
       if (dragRef.current.distance > 6) {
-        clickBlockRef.current = true;
-        window.setTimeout(() => { clickBlockRef.current = false; }, 80);
+        blockedClickUntil.current = performance.now() + 320;
       }
+      if (event.type === "pointercancel") speedRef.current = 0;
       dragRef.current.active = false;
       band.classList.remove("is-dragging");
       if (band.hasPointerCapture?.(event.pointerId)) band.releasePointerCapture(event.pointerId);
@@ -202,7 +216,6 @@ export default function CitaReelHero() {
 
     return () => {
       window.cancelAnimationFrame(frame);
-      clock.cancel();
       animations.forEach((animation) => animation.cancel());
       band.removeEventListener("pointerdown", onDown);
       band.removeEventListener("pointermove", onMove);
@@ -244,45 +257,70 @@ export default function CitaReelHero() {
             aria-roledescription="carousel"
             aria-label="Draggable showcase of ten original CITA EV charger models"
             onClickCapture={(event) => {
-              if (clickBlockRef.current) { event.preventDefault(); event.stopPropagation(); }
+              if (performance.now() < blockedClickUntil.current) {
+                event.preventDefault();
+                event.stopPropagation();
+              }
             }}
           >
-            {carouselModels.map((charger, index) => (
-              <Link
-                key={`${charger.slug}-${index}`}
-                ref={(node) => { cardRefs.current[index] = node; }}
-                className="cita-reel-card"
-                data-model={charger.slug}
-                to={`/cita-ev-chargers/${charger.slug}`}
-                aria-label={`View ${charger.name} — ${charger.power}`}
-                aria-hidden={index >= citaChargers.length ? "true" : undefined}
-                tabIndex={index >= citaChargers.length ? -1 : 0}
-                draggable={false}
-              >
-                <img
-                  src={charger.lifestyleImage}
-                  alt=""
-                  draggable={false}
-                  decoding="async"
-                  loading={index < 10 ? "eager" : "lazy"}
-                />
-                <span className="cita-reel-card-gradient" />
-                <span className="cita-reel-card-copy">
-                  <small>{charger.power}</small>
-                  <strong>{charger.name.replace("CITA ", "")}</strong>
-                </span>
-                <span className="cita-reel-card-icon" aria-hidden="true">↗</span>
-              </Link>
-            ))}
+
+            {carouselModels.map((charger, index) => {
+              const duplicate = index >= citaChargers.length;
+              return (
+                <div
+                  key={`${charger.slug}-${index}`}
+                  ref={(node) => { cardRefs.current[index] = node; }}
+                  className="cita-reel-card"
+                  data-model={charger.slug}
+                  aria-hidden={duplicate ? "true" : undefined}
+                >
+                  <Link
+                    className="cita-reel-card-detail"
+                    to={`/cita-ev-chargers/${charger.slug}`}
+                    aria-label={`View details for ${charger.name}`}
+                    tabIndex={duplicate ? -1 : 0}
+                    draggable={false}
+                  >
+                    <img
+                      src={charger.lifestyleImage}
+                      alt=""
+                      draggable={false}
+                      decoding="async"
+                      loading={index < 10 ? "eager" : "lazy"}
+                    />
+                  </Link>
+                  <span className="cita-reel-card-gradient" aria-hidden="true" />
+                  <div className="cita-reel-card-hover">
+                    <div className="cita-reel-card-copy">
+                      <small>{charger.power}</small>
+                      <strong>{charger.name.replace("CITA ", "")}</strong>
+                    </div>
+                    <Link
+                      className="cita-reel-card-contact"
+                      to="/contact-us"
+                      aria-label={`Contact us about ${charger.name}`}
+                      title="Contact Us"
+                      tabIndex={duplicate ? -1 : 0}
+                      draggable={false}
+                    >
+                      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M20.5 11.5a8.5 8.5 0 0 1-8.5 8.5c-1.3 0-2.5-.27-3.6-.77L3 21l1.76-5.4A8.5 8.5 0 1 1 20.5 11.5Z" />
+                        <path d="M8 11.5h8M8 15h5" />
+                      </svg>
+                    </Link>
+                  </div>
+                </div>
+              );
+            })}
           </div>
           <div className="cita-reel-note cita-reel-note-bottom" aria-hidden="true">Find your<br />perfect charger</div>
           <svg className="cita-reel-doodle cita-reel-arrow-bottom" viewBox="0 0 130 94" fill="none" aria-hidden="true">
             <path d="M5 8C25 51 64 38 95 60L91 41M95 60L72 54" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
           <div className="cita-reel-cta">
-            <a href="#cita-range">Explore Chargers <span aria-hidden="true">↗</span></a>
+            <a href="#cita-range">Explore Chargers</a>
           </div>
-          <p className="cita-reel-microcopy">10 charger models &nbsp;·&nbsp; AC + DC &nbsp;·&nbsp; <Link to="/contact-us">Enquire with ZVolta ↗</Link></p>
+          <p className="cita-reel-microcopy">10 charger models &nbsp;·&nbsp; AC + DC &nbsp;·&nbsp; <Link to="/contact-us">Enquire with ZVolta</Link></p>
         </div>
       </div>
     </section>

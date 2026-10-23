@@ -1,15 +1,14 @@
 import { SkeletonImage } from "../SkeletonImage";
 import { ProductCardSkeletons } from "../commerce/ProductCardSkeletons";
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
+import { useSearchParams } from "react-router-dom";
+import styles from "./ProductsPage.module.css";
 import { commerceApi } from "../../services/api";
 import { useCommerceData } from "../../hooks/useCommerceData";
 import { useCart } from "../../context/CartContext";
 import { citaChargers } from "../../data/citaChargers";
 import { citaCardDetails } from "../../data/citaCardDetails";
-import {
-  CITA_SHOP_CHARGERS,
-  getZvoltaShopProducts,
-} from "../../lib/unifiedShopCatalog";
+import { getUnifiedShopItems } from "../../lib/unifiedShopCatalog";
 import {
   getChargerCardDetails,
   getChargerDetailHref,
@@ -58,6 +57,7 @@ export function ProductCard({ product, index = 0 }) {
         <span className="commerce-card__badge">New</span>
       ) : null}
       <div className="commerce-card__intro">
+        <span className={styles.brand}>ZVolta</span>
         <h2>
           <SmartLink href={detailHref}>{product.title}</SmartLink>
         </h2>
@@ -211,6 +211,7 @@ function CitaShopCard({ charger, index, liveProducts }) {
         {String(index + 1).padStart(2, "0")}
       </span>
       <div className="commerce-card__intro">
+        <span className={styles.brand}>CITA EV</span>
         <h2>
           <SmartLink href={href}>{charger.name}</SmartLink>
         </h2>
@@ -274,37 +275,47 @@ function CitaShopCard({ charger, index, liveProducts }) {
   );
 }
 
+const shopFilters = [
+  { value: "all", label: "All" },
+  { value: "zvolta", label: "ZVolta" },
+  { value: "cita", label: "CITA EV" },
+  { value: "dc", label: "DC Chargers" },
+];
+
 export default function ProductsPage() {
-  const [search, setSearch] = useState("");
-  // The full CITA PDF catalogue is always available even if the API is offline.
-  // API products supply the additional ZVolta range and approved CITA prices.
+  const [params, setParams] = useSearchParams();
+  const searchRef = useRef(null);
+  const search = params.get("q") || "";
+  const filter =
+    shopFilters.find((item) => item.value === params.get("filter")) ||
+    shopFilters[0];
+  const updateParams = (changes) => {
+    const next = new URLSearchParams(params);
+    Object.entries(changes).forEach(([key, value]) => {
+      if (!value || (key === "filter" && value === "all")) next.delete(key);
+      else next.set(key, value);
+    });
+    setParams(next, { replace: true });
+  };
   const liveCatalog = useCommerceData(
     () => commerceApi.allProducts({ sort: "featured" }),
     [],
   );
-  const zvoltaProducts = useMemo(
-    () => getZvoltaShopProducts(liveCatalog.data),
+  const items = useMemo(
+    () => getUnifiedShopItems(liveCatalog.data),
     [liveCatalog.data],
   );
-  const [visibleCita, visibleZvolta] = useMemo(() => {
+  const visibleItems = useMemo(() => {
     const term = search.trim().toLowerCase();
-    return [
-      CITA_SHOP_CHARGERS.filter(
-        (charger) =>
-          !term ||
-          `${charger.name} ${charger.subtitle} ${charger.power} ${charger.description}`
-            .toLowerCase()
-            .includes(term),
-      ),
-      zvoltaProducts.filter(
-        (product) =>
-          !term ||
-          `${product.title} ${product.shortDescription || ""} ${product.description || ""} ${product.power || ""}`
-            .toLowerCase()
-            .includes(term),
-      ),
-    ];
-  }, [search, zvoltaProducts]);
+    return items.filter(
+      (item) =>
+        (filter.value === "all" ||
+          (filter.value === "dc" ? item.isDc : item.brand === filter.value)) &&
+        (!term || item.searchText.includes(term)),
+    );
+  }, [items, filter.value, search]);
+  const needsLiveProducts = filter.value !== "cita";
+  const loading = needsLiveProducts && liveCatalog.loading;
 
   return (
     <main className="commerce-page cita-shop-page">
@@ -317,97 +328,127 @@ export default function ProductsPage() {
             <em>ZVolta &amp; CITA EV.</em>
           </h1>
           <p>
-            Explore the full ZVolta product range alongside all original CITA EV
-            AC and DC chargers, with their authentic product imagery and
-            specifications.
+            Find the right charger for your home, business or charging network.
+            Explore ZVolta and CITA EV in one catalogue.
           </p>
         </div>
       </section>
-      <section className="commerce-catalog commerce-container">
+      <section
+        className="commerce-catalog commerce-container"
+        aria-labelledby="shop-products-title"
+      >
         <div className="commerce-toolbar">
-          <p className="cita-shop-count">
-            All products
-            <strong>
-              {CITA_SHOP_CHARGERS.length + zvoltaProducts.length} available
-              models
-            </strong>
-          </p>
-          <label className="commerce-search">
-            <span className="sr-only">Search shop products</span>
-            <input
-              type="search"
-              value={search}
-              onChange={(event) => setSearch(event.target.value)}
-              placeholder="Search chargers & products"
-            />
-          </label>
-        </div>
-
-        <section
-          className="cita-shop-section"
-          aria-labelledby="shop-cita-title"
-        >
-          <h2 id="shop-cita-title" className="cita-shop-section-title">
-            CITA EV Chargers{" "}
-            <small>AC &amp; DC · {CITA_SHOP_CHARGERS.length} models</small>
-          </h2>
-          <div className="commerce-grid">
-            {visibleCita.map((charger) => (
-              <CitaShopCard
-                key={charger.slug}
-                index={CITA_SHOP_CHARGERS.indexOf(charger)}
-                charger={charger}
-                liveProducts={liveCatalog.data}
-              />
+          <div
+            className={`commerce-filters ${styles.filters}`}
+            role="group"
+            aria-label="Filter products"
+          >
+            {shopFilters.map((item) => (
+              <button
+                key={item.value}
+                type="button"
+                className={filter.value === item.value ? "active" : ""}
+                aria-pressed={filter.value === item.value}
+                aria-controls="shop-product-grid"
+                onClick={() => updateParams({ filter: item.value })}
+              >
+                {item.label}
+              </button>
             ))}
           </div>
-          {visibleCita.length === 0 && (
-            <p className="cita-shop-empty">
-              No CITA EV products match this search.
-            </p>
-          )}
-        </section>
-
-        <section
-          className="cita-shop-section"
-          aria-labelledby="shop-zvolta-title"
-        >
-          <h2 id="shop-zvolta-title" className="cita-shop-section-title">
-            ZVolta Products <small>{zvoltaProducts.length} products</small>
-          </h2>
-          {liveCatalog.error && (
-            <p className="cita-shop-loading" role="status">
-              ZVolta live products are temporarily unavailable. CITA products
-              remain visible above.
-            </p>
-          )}
-          <div className="commerce-grid" aria-busy={liveCatalog.loading}>
-            {liveCatalog.loading ? (
-              <ProductCardSkeletons />
-            ) : (
-              visibleZvolta.map((product, index) => (
-                <ProductCard
-                  product={product}
-                  index={index}
-                  key={product._id || product.slug || `zvolta-${index}`}
-                />
-              ))
+          <div className={styles.search}>
+            <label className="commerce-search">
+              <span className="sr-only">Search shop products</span>
+              <input
+                ref={searchRef}
+                type="search"
+                value={search}
+                onChange={(event) => updateParams({ q: event.target.value })}
+                placeholder="Search chargers & products"
+              />
+            </label>
+            {search && (
+              <button
+                className={styles.clearSearch}
+                type="button"
+                aria-label="Clear product search"
+                onClick={() => {
+                  updateParams({ q: "" });
+                  searchRef.current?.focus();
+                }}
+              >
+                ×
+              </button>
             )}
           </div>
-          {!liveCatalog.loading &&
-            !liveCatalog.error &&
-            visibleZvolta.length === 0 && (
-              <p className="cita-shop-empty">
-                No ZVolta products match this search.
-              </p>
+        </div>
+        <div className={styles.heading}>
+          <h2 id="shop-products-title">
+            {filter.value === "all" ? "All products" : filter.label}
+          </h2>
+          <p aria-live="polite">
+            {visibleItems.length}{" "}
+            {visibleItems.length === 1 ? "product" : "products"}
+            {loading ? " · Loading more…" : ""}
+          </p>
+        </div>
+        {needsLiveProducts && liveCatalog.error && (
+          <p className="cita-shop-loading" role="status">
+            ZVolta live products are temporarily unavailable. You can still
+            browse the available CITA EV range.
+          </p>
+        )}
+        <div
+          id="shop-product-grid"
+          className="commerce-grid"
+          aria-busy={loading}
+        >
+          {loading && <ProductCardSkeletons />}
+          {visibleItems.map((item, index) =>
+            item.brand === "cita" ? (
+              <CitaShopCard
+                key={item.key}
+                charger={item.product}
+                index={index}
+                liveProducts={liveCatalog.data}
+              />
+            ) : (
+              <ProductCard
+                key={item.key}
+                product={item.product}
+                index={index}
+              />
+            ),
+          )}
+        </div>
+        {!loading && visibleItems.length === 0 && (
+          <div className={styles.empty}>
+            <h3>
+              {liveCatalog.error && needsLiveProducts
+                ? "Products are temporarily unavailable"
+                : "No products found"}
+            </h3>
+            <p>
+              {liveCatalog.error && needsLiveProducts
+                ? "Try again, or browse the available CITA EV chargers."
+                : "Try another search or choose a different filter."}
+            </p>
+            {liveCatalog.error && needsLiveProducts && (
+              <button type="button" onClick={liveCatalog.refetch}>
+                Try again
+              </button>
             )}
-        </section>
-
+            <button
+              type="button"
+              onClick={() => updateParams({ filter: "all", q: "" })}
+            >
+              Show all products
+            </button>
+          </div>
+        )}
         <p className="cita-shop-pricing-note">
-          CITA product images and technical specifications follow the supplied
-          CITA EV company profile. Prices are not supplied in that document;
-          where available, prices come from the ZVolta catalogue. Contact us to
-          confirm current prices and product availability.
+          Contact us to confirm current prices, installation and product
+          availability.
         </p>
       </section>
     </main>

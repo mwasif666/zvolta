@@ -8,7 +8,7 @@ import "./styles/commerce.css";
 import { SiteLayout } from "./components/SiteLayout";
 import { RouteSkeleton } from "./components/layout/RouteSkeleton";
 import { PageSeo } from "./components/seo/PageSeo";
-import { routeEntries } from "./routes";
+import { getRouteLocationKey, routeEntries } from "./routes";
 import { useLegacyPageRuntime } from "./lib/legacy-page-runtime";
 import { useRouteAnimationRefresh } from "./hooks/useRouteAnimationRefresh";
 import { useRealtimeUpdates } from "./hooks/useRealtimeUpdates";
@@ -154,6 +154,7 @@ function loadNotFoundPage() {
 
 function ScrollController() {
   const location = useLocation();
+  const scrollKey = getRouteLocationKey(location);
 
   useLayoutEffect(() => {
     if ("scrollRestoration" in window.history) {
@@ -197,7 +198,7 @@ function ScrollController() {
     return () => {
       window.cancelAnimationFrame(frame);
     };
-  }, [location.pathname, location.search, location.hash]);
+  }, [scrollKey, location.hash]);
 
   useEffect(() => {
     const handleSamePageHashClick = (event) => {
@@ -287,7 +288,7 @@ function RoutedPage({ loadPage, pageId, meta }) {
 
 function MountedPage({ pageId, meta, PageComponent }) {
   const location = useLocation();
-  const routeKey = `${location.pathname}${location.search}`;
+  const routeKey = getRouteLocationKey(location);
   useLegacyPageRuntime(pageId, meta?.disableLegacyRuntime !== true);
   useRouteAnimationRefresh(routeKey);
 
@@ -318,10 +319,7 @@ function AppRoutes() {
     <>
       <ScrollController />
       <SiteLayout>
-        <Routes
-          location={location}
-          key={`${location.pathname}${location.search}`}
-        >
+        <Routes location={location} key={getRouteLocationKey(location)}>
           {routeEntries
             .filter((entry) => entry.pageId !== "404")
             .flatMap((entry) =>

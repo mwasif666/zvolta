@@ -10,23 +10,24 @@ export function SkeletonImage({
   ...imageProps
 }) {
   const imageRef = useRef(null);
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [settledSrc, setSettledSrc] = useState(null);
+  const isLoaded = settledSrc === imageProps.src;
 
   useEffect(() => {
     const image = imageRef.current;
 
     if (image?.complete) {
-      setIsLoaded(true);
+      setSettledSrc(imageProps.src);
     }
   }, [imageProps.src]);
 
   const handleLoad = (event) => {
-    setIsLoaded(true);
+    setSettledSrc(imageProps.src);
     onLoad?.(event);
   };
 
   const handleError = (event) => {
-    setIsLoaded(true);
+    setSettledSrc(imageProps.src);
     onError?.(event);
   };
 

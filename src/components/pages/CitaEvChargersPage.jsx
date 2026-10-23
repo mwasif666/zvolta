@@ -1,3 +1,5 @@
+import { SkeletonImage } from "../SkeletonImage";
+import "../commerce/ProductSkeleton.css";
 import { Link } from "react-router-dom";
 import { citaChargers, citaSolutions } from "../../data/citaChargers";
 import CitaReelHero from "./CitaReelHero";
@@ -75,10 +77,10 @@ export default function CitaEvChargersPage({ routeClassName = "" }) {
                 </header>
                 <Link
                   to={`/cita-ev-chargers/${charger.slug}`}
-                  className="cita-product-media"
+                  className="cita-product-media product-image-loading"
                   aria-label={`See ${charger.name} product details`}
                 >
-                  <img
+                  <SkeletonImage
                     className="cita-product-image"
                     src={charger.productImage}
                     alt={charger.name}

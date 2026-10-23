@@ -1,3 +1,5 @@
+import { SkeletonImage } from "../SkeletonImage";
+import { ProductCardSkeletons } from "../commerce/ProductCardSkeletons";
 import { useMemo, useState } from "react";
 import { commerceApi } from "../../services/api";
 import { useCommerceData } from "../../hooks/useCommerceData";
@@ -61,8 +63,11 @@ export function ProductCard({ product, index = 0 }) {
         </h2>
         <p>{product.shortDescription || product.description}</p>
       </div>
-      <SmartLink className="commerce-card__art" href={detailHref}>
-        <img
+      <SmartLink className="commerce-card__art product-image-loading" href={detailHref}>
+        <SkeletonImage
+          skeletonTone="dark"
+          loading="lazy"
+          decoding="async"
           src={product.images?.[0]?.url}
           alt={product.images?.[0]?.alt || product.title}
         />
@@ -190,11 +195,11 @@ function CitaShopCard({ charger, index, liveProducts }) {
         <p>{charger.description}</p>
       </div>
       <SmartLink
-        className="commerce-card__art"
+        className="commerce-card__art product-image-loading"
         href={href}
         aria-label={`View full technical specifications for ${charger.name}`}
       >
-        <img src={charger.productImage} alt={charger.name} loading="lazy" decoding="async" />
+        <SkeletonImage skeletonTone="dark" src={charger.productImage} alt={charger.name} loading="lazy" decoding="async" />
       </SmartLink>
       <div className="commerce-card__specs">
         <div className="commerce-card__spec-row">
@@ -323,17 +328,14 @@ export default function ProductsPage() {
           <h2 id="shop-zvolta-title" className="cita-shop-section-title">
             ZVolta Products <small>{zvoltaProducts.length} products</small>
           </h2>
-          {liveCatalog.loading && (
-            <p className="cita-shop-loading" role="status">Loading ZVolta products…</p>
-          )}
           {liveCatalog.error && (
             <p className="cita-shop-loading" role="status">
               ZVolta live products are temporarily unavailable. CITA products
               remain visible above.
             </p>
           )}
-          <div className="commerce-grid">
-            {visibleZvolta.map((product, index) => (
+          <div className="commerce-grid" aria-busy={liveCatalog.loading}>
+            {liveCatalog.loading ? <ProductCardSkeletons /> : visibleZvolta.map((product, index) => (
               <ProductCard
                 product={product}
                 index={index}

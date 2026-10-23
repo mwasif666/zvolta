@@ -189,3 +189,10 @@ export function getRouteByPathname(pathname) {
 export function getCanonicalPathname(pathname) {
   return getRouteByPathname(pathname)?.path ?? pathname;
 }
+
+// Shop query parameters are local catalogue controls, not a new page visit.
+export function getRouteLocationKey({ pathname, search = "" }) {
+  return getRouteByPathname(pathname)?.pageId === "products"
+    ? pathname
+    : `${pathname}${search}`;
+}

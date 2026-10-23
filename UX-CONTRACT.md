@@ -16,3 +16,11 @@ Backend codes expire after ten minutes, permit at most five attempts and are con
 Checkout requires order/contact/delivery details, not a session. Its sign-in link returns to checkout; guests can submit directly. Existing coupon rules remain owned by the backend.
 
 Existing native labels, input keyboards, visible focus styles and inline alert feedback are reused. Six-digit codes remain visible to support transcription and paste. Pending controls are disabled. The product uses English copy and PKR formatting through the existing storefront settings provider.
+
+## Shop catalogue
+
+The Shop uses one product grid with All, ZVolta, CITA EV and DC Chargers filters. All alternates available brand entries while preserving each catalogue's order. DC includes both brands' DC chargers and excludes accessories. Backend CITA variants provide prices rather than duplicate cards.
+
+The selected filter and local search are kept in the URL (`filter` and `q`) and work together. Clearing search keeps the selected filter; Show all products resets both. Filter buttons expose their selected state and retain keyboard focus. Each card labels its brand.
+
+Available CITA products remain browsable while live ZVolta data loads or fails. Live-data filters show card skeletons during the initial request, retain existing data during refresh, and offer retry on failure. Empty search results provide a reset. ProductsPage owns the controls, unifiedShopCatalog owns brand/type classification, and ProductsPage.filters.test.jsx verifies combined filtering and recovery.

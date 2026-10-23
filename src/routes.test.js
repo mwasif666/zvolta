@@ -1,5 +1,9 @@
 import { describe, expect, it } from "vitest";
-import { getCanonicalPathname, routeEntries } from "./routes";
+import {
+  getCanonicalPathname,
+  getRouteLocationKey,
+  routeEntries,
+} from "./routes";
 
 describe("route registry", () => {
   it("contains unique production paths", () => {
@@ -24,4 +28,19 @@ describe("route registry", () => {
   it("canonicalizes the home alias", () => {
     expect(getCanonicalPathname("/home")).toBe("/");
   });
+});
+
+it("keeps the Shop mounted when local filters or search change", () => {
+  expect(
+    getRouteLocationKey({
+      pathname: "/products",
+      search: "?filter=dc&q=charger",
+    }),
+  ).toBe("/products");
+  expect(
+    getRouteLocationKey({ pathname: "/products", search: "?filter=cita" }),
+  ).toBe("/products");
+  expect(
+    getRouteLocationKey({ pathname: "/login", search: "?next=/checkout" }),
+  ).toBe("/login?next=/checkout");
 });

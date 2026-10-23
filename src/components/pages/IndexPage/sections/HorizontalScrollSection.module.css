@@ -27,9 +27,9 @@
   z-index: 1;
   background: linear-gradient(
     180deg,
-    rgb(0 0 0 / 68%),
-    rgb(0 0 0 / 8%) 55%,
-    rgb(0 0 0 / 48%)
+    rgb(0 0 0 / 36%),
+    rgb(0 0 0 / 0%) 55%,
+    rgb(0 0 0 / 18%)
   );
 }
 
@@ -37,7 +37,7 @@
   position: absolute;
   inset: 0;
   content: "";
-  background: linear-gradient(180deg, rgb(0 0 0 / 45%), rgb(0 0 0 / 24%));
+  background: linear-gradient(180deg, rgb(0 0 0 / 22%), rgb(0 0 0 / 8%));
   opacity: 0;
   transition: opacity 280ms ease;
 }
@@ -61,6 +61,7 @@
   line-height: 1.08;
   letter-spacing: -0.035em;
   text-wrap: balance;
+  text-shadow: 0 2px 14px rgb(0 0 0 / 36%);
 }
 
 .titleToggle {

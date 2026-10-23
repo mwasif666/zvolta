@@ -645,7 +645,7 @@ const partnerLogos = [
     alt: "Vlektra",
   },
   {
-    src: "https://workhall.co/_next/image?url=%2Fimages%2Fwh.png&w=128&q=100",
+    src: "/img/partners/workhall.png",
     alt: "Workhall",
   },
   {

@@ -34,7 +34,7 @@ export function PartnersSection() {
             </div>
             <div className="partner-item w-28 h-28 md:w-36 md:h-36 3xl:w-48 3xl:h-48  overflow-hidden border-2 border-white  shrink-0 bg-white grayscale hover:grayscale-0 transition-all duration-500">
               <img
-                src="https://workhall.co/_next/image?url=%2Fimages%2Fwh.png&w=128&q=100"
+                src="/img/partners/orko.png"
                 className="w-full h-full object-contain p-4"
                 alt="Orko"
               />
@@ -69,7 +69,7 @@ export function PartnersSection() {
             </div>
             <div className="partner-item w-28 h-28 md:w-36 md:h-36 3xl:w-48 3xl:h-48  overflow-hidden border-2 border-white shrink-0 bg-white grayscale hover:grayscale-0 transition-all duration-500">
               <img
-                src="https://workhall.co/_next/image?url=%2Fimages%2Fwh.png&w=128&q=100"
+                src="/img/partners/workhall.png"
                 className="w-full h-full object-contain p-4"
                 alt="Workhall"
               />

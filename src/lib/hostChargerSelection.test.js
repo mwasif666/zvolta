@@ -20,11 +20,13 @@ describe("Host-only approved charger models", () => {
     ]);
   });
   it("does not substitute a CITA charger or round 7.4 kW to 7 kW", () => {
-    expect(selectHostChargers([
-      product("CITA Smart Pro 7kW"),
-      product("ZVolta Smart 7.4kW Charger"),
-      product("ZVolta Smart 3kW Charger"),
-    ])).toEqual([product("ZVolta Smart 3kW Charger")]);
+    expect(
+      selectHostChargers([
+        product("CITA Smart Pro 7kW"),
+        product("ZVolta Smart 7.4kW Charger"),
+        product("ZVolta Smart 3kW Charger"),
+      ]),
+    ).toEqual([product("ZVolta Smart 3kW Charger")]);
   });
   it("prefers the exact approved name over a variant with the same rating", () => {
     const products = [

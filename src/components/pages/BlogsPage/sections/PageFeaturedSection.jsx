@@ -1,7 +1,4 @@
-import {
-  ArrowIcon,
-  SmartLink,
-} from "../../BlogsPage.shared.jsx";
+import { ArrowIcon, SmartLink } from "../../BlogsPage.shared.jsx";
 export function PageFeaturedSection({ posts }) {
   const featuredPost = posts[0];
   const topPosts = posts.slice(1, 4);

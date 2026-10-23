@@ -2837,7 +2837,7 @@
   align-items: center;
   margin: 12px 0 22px;
   padding: 14px;
-  border: 1px solid rgba(255,255,255,.08);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 15px;
   background: #eaf1ec;
   overflow: hidden;
@@ -2887,12 +2887,20 @@
   line-height: 1.65;
 }
 @media (max-width: 1080px) {
-  .cita-shop-page .commerce-card__intro { min-height: 190px; }
+  .cita-shop-page .commerce-card__intro {
+    min-height: 190px;
+  }
 }
 @media (max-width: 680px) {
-  .cita-shop-page .commerce-card__intro { min-height: 0; }
-  .cita-shop-page .commerce-card__intro p { min-height: 0; }
-  .cita-shop-page .commerce-card__art { margin-top: 20px; }
+  .cita-shop-page .commerce-card__intro {
+    min-height: 0;
+  }
+  .cita-shop-page .commerce-card__intro p {
+    min-height: 0;
+  }
+  .cita-shop-page .commerce-card__art {
+    margin-top: 20px;
+  }
 }
 
 /* Unified Shop: CITA AC/DC + every available ZVolta backend product. */
@@ -2909,7 +2917,7 @@
   font-size: clamp(24px, 2.6vw, 35px);
   font-weight: 760;
   line-height: 1.2;
-  letter-spacing: -.027em;
+  letter-spacing: -0.027em;
 }
 .cita-shop-page .cita-shop-section-title small {
   color: #8caa99;
@@ -2921,14 +2929,20 @@
 .cita-shop-page .cita-shop-empty {
   margin: 8px 0 25px;
   padding: 17px 22px;
-  border: 1px solid rgba(255,255,255,.10);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 13px;
   color: #bad0c1;
   font-size: 14px;
 }
-.cita-shop-page .commerce-grid { align-items: stretch; }
-.cita-shop-page .commerce-card__actions { margin-top: 17px; }
-.cita-shop-page .commerce-card__learn { min-width: 0; }
+.cita-shop-page .commerce-grid {
+  align-items: stretch;
+}
+.cita-shop-page .commerce-card__actions {
+  margin-top: 17px;
+}
+.cita-shop-page .commerce-card__learn {
+  min-width: 0;
+}
 .cita-shop-page .commerce-card[data-model="smart-pro-7"],
 .cita-shop-page .commerce-card[data-model="smart-pro-11"],
 .cita-shop-page .commerce-card[data-model="smart-pro-22"] {
@@ -2947,6 +2961,10 @@
   --cita-shop-image-mask: url("/CITA_Charger_Masks/dual-ecopillar.svg");
 }
 @media (max-width: 680px) {
-  .cita-shop-page .cita-shop-section + .cita-shop-section { margin-top: 48px; }
-  .cita-shop-page .cita-shop-section-title { margin-bottom: 20px; }
+  .cita-shop-page .cita-shop-section + .cita-shop-section {
+    margin-top: 48px;
+  }
+  .cita-shop-page .cita-shop-section-title {
+    margin-bottom: 20px;
+  }
 }

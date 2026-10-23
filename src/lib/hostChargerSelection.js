@@ -22,11 +22,14 @@ function matchesHostModel(product, model) {
 
 export function selectHostChargers(products) {
   return HOST_MODELS.flatMap((model) => {
-    const matches = (products || []).filter((product) => matchesHostModel(product, model));
+    const matches = (products || []).filter((product) =>
+      matchesHostModel(product, model),
+    );
     if (!matches.length) return [];
     // Prefer the exact approved display name if duplicated in the catalog.
     const exact = matches.find(
-      (product) => product.title?.trim().toLowerCase() === model.name.toLowerCase(),
+      (product) =>
+        product.title?.trim().toLowerCase() === model.name.toLowerCase(),
     );
     return [exact || matches[0]];
   });

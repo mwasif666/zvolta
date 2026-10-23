@@ -156,9 +156,8 @@ function SiteHeader() {
       [hostingRoute, chargingRoute, softwareRoute, shopRoute].filter(
         (route, index, routes) =>
           route &&
-          routes.findIndex(
-            (candidate) => candidate?.path === route.path,
-          ) === index,
+          routes.findIndex((candidate) => candidate?.path === route.path) ===
+            index,
       ),
     [hostingRoute, chargingRoute, softwareRoute, shopRoute],
   );

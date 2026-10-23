@@ -49,14 +49,17 @@ function Icon({ name }) {
 
 function ProductImage({ product }) {
   const src =
-    product.images?.[0]?.url || product.image || "/CITA_Charger_Images/24_Smart_DC_Eco_Product.png";
+    product.images?.[0]?.url ||
+    product.image ||
+    "/CITA_Charger_Images/24_Smart_DC_Eco_Product.png";
   return (
     <img
       src={src}
       alt={product.images?.[0]?.alt || product.title}
       loading="lazy"
       onError={(event) => {
-        event.currentTarget.src = "/CITA_Charger_Images/24_Smart_DC_Eco_Product.png";
+        event.currentTarget.src =
+          "/CITA_Charger_Images/24_Smart_DC_Eco_Product.png";
       }}
     />
   );
@@ -138,9 +141,9 @@ export default function DcChargersPage({ routeClassName = "" }) {
               <br />A cleaner tomorrow.
             </h1>
             <p className="dc-lead">
-              From compact 30kW charging to 480kW superfast infrastructure,
-              CITA EV delivers reliable DC charging for commercial, fleet,
-              public and highway applications.
+              From compact 30kW charging to 480kW superfast infrastructure, CITA
+              EV delivers reliable DC charging for commercial, fleet, public and
+              highway applications.
             </p>
             <div className="dc-actions">
               <a className="dc-button is-green" href="#cita-dc-range">
@@ -155,8 +158,13 @@ export default function DcChargersPage({ routeClassName = "" }) {
         <div className="dc-shell dc-highlight-grid">
           {highlights.map(([icon, title, copy]) => (
             <div className="dc-highlight" key={title}>
-              <i><Icon name={icon} /></i>
-              <span><strong>{title}</strong><small>{copy}</small></span>
+              <i>
+                <Icon name={icon} />
+              </i>
+              <span>
+                <strong>{title}</strong>
+                <small>{copy}</small>
+              </span>
             </div>
           ))}
         </div>
@@ -185,7 +193,9 @@ export default function DcChargersPage({ routeClassName = "" }) {
                   <p>{charger.description}</p>
                 </div>
                 <img src={charger.productImage} alt={charger.name} />
-                <Link to={`/cita-ev-chargers/${charger.slug}`}>{charger.power} →</Link>
+                <Link to={`/cita-ev-chargers/${charger.slug}`}>
+                  {charger.power} →
+                </Link>
               </article>
             ))}
           </div>
@@ -198,23 +208,29 @@ export default function DcChargersPage({ routeClassName = "" }) {
             <div>
               <p className="dc-label">Live pricing</p>
               <h2>DC charger rate comparison</h2>
-              <p>Prices below update automatically from the ZVolta admin panel.</p>
+              <p>
+                Prices below update automatically from the ZVolta admin panel.
+              </p>
             </div>
             <div className="dc-segment" aria-label="Selected charger type">
               <span>DC Chargers</span>
             </div>
           </div>
           {catalog.loading ? (
-            <div className="dc-catalog-state" role="status">Loading live DC charger prices…</div>
+            <div className="dc-catalog-state" role="status">
+              Loading live DC charger prices…
+            </div>
           ) : null}
           {!catalog.loading && catalog.error ? (
             <div className="dc-catalog-state is-error" role="alert">
-              Live DC charger pricing is temporarily unavailable. Please try again shortly.
+              Live DC charger pricing is temporarily unavailable. Please try
+              again shortly.
             </div>
           ) : null}
           {!catalog.loading && !catalog.error && !liveChargers.length ? (
             <div className="dc-catalog-state">
-              No DC chargers are published yet. Add and activate products from the DC Chargers admin tab.
+              No DC chargers are published yet. Add and activate products from
+              the DC Chargers admin tab.
             </div>
           ) : null}
           {liveChargers.length ? (
@@ -246,8 +262,13 @@ export default function DcChargersPage({ routeClassName = "" }) {
           <div className="dc-benefit-grid">
             {benefits.map(([icon, title, copy]) => (
               <article key={title}>
-                <i><Icon name={icon} /></i>
-                <div><h3>{title}</h3><p>{copy}</p></div>
+                <i>
+                  <Icon name={icon} />
+                </i>
+                <div>
+                  <h3>{title}</h3>
+                  <p>{copy}</p>
+                </div>
               </article>
             ))}
           </div>
@@ -259,11 +280,18 @@ export default function DcChargersPage({ routeClassName = "" }) {
           <div>
             <p className="dc-label">Ready to get started?</p>
             <h2>Let's build your charging solution.</h2>
-            <p>Talk to our team for the right charger, pricing and deployment support.</p>
+            <p>
+              Talk to our team for the right charger, pricing and deployment
+              support.
+            </p>
           </div>
           <div className="dc-actions">
-            <Link className="dc-button is-green" to="/contact-us">Get a quote →</Link>
-            <Link className="dc-button is-light" to="/cita-ev-chargers">Explore CITA EV</Link>
+            <Link className="dc-button is-green" to="/contact-us">
+              Get a quote →
+            </Link>
+            <Link className="dc-button is-light" to="/cita-ev-chargers">
+              Explore CITA EV
+            </Link>
           </div>
         </div>
       </section>

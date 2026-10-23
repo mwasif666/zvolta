@@ -17,10 +17,16 @@
 
 .cita-reel-hero *,
 .cita-reel-hero *::before,
-.cita-reel-hero *::after { box-sizing: border-box; }
+.cita-reel-hero *::after {
+  box-sizing: border-box;
+}
 
 .cita-reel-viewport,
-.cita-reel-frame { position: relative; width: 100%; min-width: 0; }
+.cita-reel-frame {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+}
 
 .cita-reel-frame {
   padding: 112px 0 26px;
@@ -33,8 +39,16 @@
   inset: 0;
   pointer-events: none;
   background:
-    radial-gradient(ellipse 52% 24% at 50% 59%, rgba(27, 203, 107, .083), transparent 74%),
-    radial-gradient(circle at 93% 17%, rgba(12, 189, 102, .052), transparent 26%);
+    radial-gradient(
+      ellipse 52% 24% at 50% 59%,
+      rgba(27, 203, 107, 0.083),
+      transparent 74%
+    ),
+    radial-gradient(
+      circle at 93% 17%,
+      rgba(12, 189, 102, 0.052),
+      transparent 26%
+    );
 }
 
 .cita-reel-badge {
@@ -46,14 +60,14 @@
   min-height: 38px;
   max-width: calc(100% - 30px);
   padding: 9px 20px;
-  border: 1px solid rgba(4, 113, 61, .1);
+  border: 1px solid rgba(4, 113, 61, 0.1);
   border-radius: 999px;
   background: #e2f3e7;
   color: #075233;
   font-size: 14px;
   font-weight: 700;
   line-height: 1.25;
-  letter-spacing: .01em;
+  letter-spacing: 0.01em;
 }
 
 .cita-reel-badge > span {
@@ -62,7 +76,7 @@
   height: 8px;
   border-radius: 50%;
   background: #0dd471;
-  box-shadow: 0 0 0 4px rgba(13, 212, 113, .12);
+  box-shadow: 0 0 0 4px rgba(13, 212, 113, 0.12);
 }
 
 .cita-reel-heading {
@@ -73,12 +87,16 @@
   font-size: clamp(49px, 4.15vw, 68px);
   font-weight: 780;
   line-height: 1.1;
-  letter-spacing: -.025em;
-  word-spacing: .065em;
+  letter-spacing: -0.025em;
+  word-spacing: 0.065em;
   text-wrap: balance;
 }
-.cita-reel-heading span { display: block; }
-.cita-reel-heading span:last-child { letter-spacing: -.017em; }
+.cita-reel-heading span {
+  display: block;
+}
+.cita-reel-heading span:last-child {
+  letter-spacing: -0.017em;
+}
 
 .cita-reel-subline {
   position: relative;
@@ -101,10 +119,12 @@
   font-size: 11px;
   font-weight: 650;
   line-height: 1.4;
-  letter-spacing: .11em;
+  letter-spacing: 0.11em;
   text-transform: uppercase;
 }
-.cita-reel-browse-mobile { display: none; }
+.cita-reel-browse-mobile {
+  display: none;
+}
 
 .cita-reel-carousel {
   position: relative;
@@ -120,8 +140,9 @@
   -webkit-tap-highlight-color: transparent;
   transform: translateZ(0);
 }
-.cita-reel-carousel.is-dragging { cursor: grabbing; }
-
+.cita-reel-carousel.is-dragging {
+  cursor: grabbing;
+}
 
 /* Translate on every RAF; changing the curved shape is throttled in JS. */
 .cita-reel-card {
@@ -165,16 +186,38 @@
   -webkit-user-drag: none;
 }
 /* Crop the EXISTING CITA installation photography to keep each charger in focus. */
-.cita-reel-card[data-model="smart-pro-7"] .cita-reel-card-detail > img { object-position: 59% center; }
-.cita-reel-card[data-model="smart-pro-11"] .cita-reel-card-detail > img { object-position: 43% center; }
-.cita-reel-card[data-model="smart-pro-22"] .cita-reel-card-detail > img { object-position: 59% center; }
-.cita-reel-card[data-model="smart-eco"] .cita-reel-card-detail > img { object-position: 45% center; }
-.cita-reel-card[data-model="smart-dual"] .cita-reel-card-detail > img { object-position: 51% 48%; transform: scale(1.08); }
-.cita-reel-card[data-model="smart-44-gen-3"] .cita-reel-card-detail > img { object-position: 50% center; }
-.cita-reel-card[data-model="dual-ecopillar"] .cita-reel-card-detail > img { object-position: 76% center; transform: scale(1.04); }
-.cita-reel-card[data-model="smart-30-dc"] .cita-reel-card-detail > img { object-position: 49% center; }
-.cita-reel-card[data-model="smart-dc-eco"] .cita-reel-card-detail > img { object-position: 35% center; }
-.cita-reel-card[data-model="smart-dc-pro"] .cita-reel-card-detail > img { object-position: 49% center; }
+.cita-reel-card[data-model="smart-pro-7"] .cita-reel-card-detail > img {
+  object-position: 59% center;
+}
+.cita-reel-card[data-model="smart-pro-11"] .cita-reel-card-detail > img {
+  object-position: 43% center;
+}
+.cita-reel-card[data-model="smart-pro-22"] .cita-reel-card-detail > img {
+  object-position: 59% center;
+}
+.cita-reel-card[data-model="smart-eco"] .cita-reel-card-detail > img {
+  object-position: 45% center;
+}
+.cita-reel-card[data-model="smart-dual"] .cita-reel-card-detail > img {
+  object-position: 51% 48%;
+  transform: scale(1.08);
+}
+.cita-reel-card[data-model="smart-44-gen-3"] .cita-reel-card-detail > img {
+  object-position: 50% center;
+}
+.cita-reel-card[data-model="dual-ecopillar"] .cita-reel-card-detail > img {
+  object-position: 76% center;
+  transform: scale(1.04);
+}
+.cita-reel-card[data-model="smart-30-dc"] .cita-reel-card-detail > img {
+  object-position: 49% center;
+}
+.cita-reel-card[data-model="smart-dc-eco"] .cita-reel-card-detail > img {
+  object-position: 35% center;
+}
+.cita-reel-card[data-model="smart-dc-pro"] .cita-reel-card-detail > img {
+  object-position: 49% center;
+}
 .cita-reel-card-gradient {
   position: absolute;
   inset: 0;
@@ -182,12 +225,12 @@
   pointer-events: none;
   background: linear-gradient(
     0deg,
-    rgba(2, 20, 12, .98) 0%,
-    rgba(2, 20, 12, .81) 22%,
-    rgba(2, 20, 12, .10) 56%,
+    rgba(2, 20, 12, 0.98) 0%,
+    rgba(2, 20, 12, 0.81) 22%,
+    rgba(2, 20, 12, 0.1) 56%,
     transparent 77%
   );
-  transition: opacity .28s ease;
+  transition: opacity 0.28s ease;
 }
 .cita-reel-card-hover {
   position: absolute;
@@ -201,7 +244,9 @@
   opacity: 0;
   transform: translateY(10px);
   pointer-events: none;
-  transition: opacity .27s ease, transform .27s ease;
+  transition:
+    opacity 0.27s ease,
+    transform 0.27s ease;
 }
 .cita-reel-card-copy {
   display: flex;
@@ -223,7 +268,7 @@
   font-size: 17px;
   font-weight: 790;
   line-height: 1.2;
-  letter-spacing: -.012em;
+  letter-spacing: -0.012em;
 }
 .cita-reel-card-contact {
   position: absolute;
@@ -233,38 +278,63 @@
   place-items: center;
   width: 42px;
   height: 42px;
-  border: 1px solid rgba(255, 255, 255, .55);
+  border: 1px solid rgba(255, 255, 255, 0.55);
   border-radius: 50%;
   color: #fff;
   background: #08482d;
-  box-shadow: 0 7px 20px rgba(0, 0, 0, .2);
+  box-shadow: 0 7px 20px rgba(0, 0, 0, 0.2);
   text-decoration: none;
   pointer-events: none;
-  transition: background-color .2s ease, transform .2s ease;
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
 }
-.cita-reel-card-contact svg { display: block; width: 22px; height: 22px; }
-.cita-reel-carousel:not(.is-dragging) .cita-reel-card:hover .cita-reel-card-contact,
-.cita-reel-card:focus-within .cita-reel-card-contact { pointer-events: auto; }
-.cita-reel-card-contact:hover { background: #0c7547; transform: translateY(-2px); }
+.cita-reel-card-contact svg {
+  display: block;
+  width: 22px;
+  height: 22px;
+}
+.cita-reel-carousel:not(.is-dragging)
+  .cita-reel-card:hover
+  .cita-reel-card-contact,
+.cita-reel-card:focus-within .cita-reel-card-contact {
+  pointer-events: auto;
+}
+.cita-reel-card-contact:hover {
+  background: #0c7547;
+  transform: translateY(-2px);
+}
 .cita-reel-card-detail:focus-visible,
 .cita-reel-card-contact:focus-visible {
   outline: 3px solid #11e488;
   outline-offset: -3px;
 }
-.cita-reel-carousel:not(.is-dragging) .cita-reel-card:hover .cita-reel-card-hover,
+.cita-reel-carousel:not(.is-dragging)
+  .cita-reel-card:hover
+  .cita-reel-card-hover,
 .cita-reel-card:focus-within .cita-reel-card-hover {
   opacity: 1;
   transform: translateY(0);
 }
-.cita-reel-carousel:not(.is-dragging) .cita-reel-card:hover .cita-reel-card-gradient,
-.cita-reel-card:focus-within .cita-reel-card-gradient { opacity: 1; }
+.cita-reel-carousel:not(.is-dragging)
+  .cita-reel-card:hover
+  .cita-reel-card-gradient,
+.cita-reel-card:focus-within .cita-reel-card-gradient {
+  opacity: 1;
+}
 @media (hover: none) {
   /* Touch devices have no hover: show model details and enquiry affordance. */
-  .cita-reel-card-hover { opacity: 1; transform: none; }
-  .cita-reel-card-contact { pointer-events: auto; }
-  .cita-reel-card-gradient { opacity: 1; }
+  .cita-reel-card-hover {
+    opacity: 1;
+    transform: none;
+  }
+  .cita-reel-card-contact {
+    pointer-events: auto;
+  }
+  .cita-reel-card-gradient {
+    opacity: 1;
+  }
 }
-
 
 .cita-reel-note {
   position: absolute;
@@ -275,22 +345,25 @@
   font-size: 30px;
   font-weight: 600;
   line-height: 1.04;
-  letter-spacing: -.018em;
+  letter-spacing: -0.018em;
 }
 .cita-reel-note-right {
   top: 299px;
   right: max(3.5%, calc(50% - 740px));
   transform: rotate(8deg);
 }
-.cita-reel-note-right span { font-size: 20px; }
+.cita-reel-note-right span {
+  font-size: 20px;
+}
 .cita-reel-doodle {
   position: absolute;
   z-index: 2;
   color: #0b6c45;
   pointer-events: none;
 }
-.cita-reel-doodle-left { display: none; }
-
+.cita-reel-doodle-left {
+  display: none;
+}
 
 .cita-reel-note-bottom {
   bottom: 94px;
@@ -329,15 +402,21 @@
   font-size: 17px;
   font-weight: 760;
   text-decoration: none;
-  box-shadow: 0 13px 30px rgba(6, 80, 45, .16);
-  transition: transform .2s ease, background .2s ease, box-shadow .2s ease;
+  box-shadow: 0 13px 30px rgba(6, 80, 45, 0.16);
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
 }
 .cita-reel-cta a:hover {
   transform: translateY(-2px);
   background: #07643d;
-  box-shadow: 0 17px 35px rgba(6, 80, 45, .22);
+  box-shadow: 0 17px 35px rgba(6, 80, 45, 0.22);
 }
-.cita-reel-cta a:focus-visible { outline: 3px solid #0acd71; outline-offset: 5px; }
+.cita-reel-cta a:focus-visible {
+  outline: 3px solid #0acd71;
+  outline-offset: 5px;
+}
 .cita-reel-microcopy {
   position: relative;
   margin: 10px 16px 0;
@@ -350,7 +429,9 @@
   font-weight: 780;
   text-decoration: none;
 }
-.cita-reel-microcopy a:hover { text-decoration: underline; }
+.cita-reel-microcopy a:hover {
+  text-decoration: underline;
+}
 
 .cita-reel-hero + .cita-reel-stats {
   padding: 22px 0 76px;
@@ -360,46 +441,93 @@
   position: relative;
   transform: none;
   border-color: #dce9e0;
-  box-shadow: 0 14px 31px rgba(9, 52, 32, .08);
+  box-shadow: 0 14px 31px rgba(9, 52, 32, 0.08);
 }
 
 /* Widescreen and shallow laptops: compress vertical gaps, never scale the frame. */
 @media (min-width: 821px) and (max-height: 920px) {
-  .cita-reel-frame { padding-top: 96px; padding-bottom: 18px; }
-  .cita-reel-badge { min-height: 34px; padding-block: 7px; }
+  .cita-reel-frame {
+    padding-top: 96px;
+    padding-bottom: 18px;
+  }
+  .cita-reel-badge {
+    min-height: 34px;
+    padding-block: 7px;
+  }
   .cita-reel-heading {
     max-width: min(1080px, calc(100% - 48px));
     margin-top: 17px;
     font-size: clamp(48px, 3.65vw, 61px);
     line-height: 1.09;
   }
-  .cita-reel-subline { margin-top: 9px; font-size: 16px; line-height: 1.45; }
-  .cita-reel-carousel { height: 310px; margin-top: 13px; }
-  .cita-reel-cta { margin-top: 8px; min-height: 68px; }
-  .cita-reel-cta a { min-height: 55px; }
-  .cita-reel-microcopy { margin-top: 9px; font-size: 12px; }
-  .cita-reel-note-right { top: 267px; font-size: 25px; }
-  .cita-reel-arrow-right { top: 319px; height: 122px; }
-  .cita-reel-note-bottom { bottom: 76px; font-size: 22px; }
-  .cita-reel-arrow-bottom { bottom: 52px; }
+  .cita-reel-subline {
+    margin-top: 9px;
+    font-size: 16px;
+    line-height: 1.45;
+  }
+  .cita-reel-carousel {
+    height: 310px;
+    margin-top: 13px;
+  }
+  .cita-reel-cta {
+    margin-top: 8px;
+    min-height: 68px;
+  }
+  .cita-reel-cta a {
+    min-height: 55px;
+  }
+  .cita-reel-microcopy {
+    margin-top: 9px;
+    font-size: 12px;
+  }
+  .cita-reel-note-right {
+    top: 267px;
+    font-size: 25px;
+  }
+  .cita-reel-arrow-right {
+    top: 319px;
+    height: 122px;
+  }
+  .cita-reel-note-bottom {
+    bottom: 76px;
+    font-size: 22px;
+  }
+  .cita-reel-arrow-bottom {
+    bottom: 52px;
+  }
 }
 
 @media (max-width: 1100px) and (min-width: 821px) {
-  .cita-reel-heading { font-size: clamp(48px, 4.9vw, 62px); }
-  .cita-reel-note-right { right: 2%; font-size: 25px; }
-  .cita-reel-arrow-right { right: 2%; }
-  .cita-reel-note-bottom { left: calc(50% - 312px); }
+  .cita-reel-heading {
+    font-size: clamp(48px, 4.9vw, 62px);
+  }
+  .cita-reel-note-right {
+    right: 2%;
+    font-size: 25px;
+  }
+  .cita-reel-arrow-right {
+    right: 2%;
+  }
+  .cita-reel-note-bottom {
+    left: calc(50% - 312px);
+  }
 }
 
 @media (max-width: 820px) {
-  .cita-reel-frame { padding: 112px 0 32px; }
-  .cita-reel-badge { min-height: 35px; font-size: clamp(11px, 2.6vw, 14px); padding: 7px 13px; }
+  .cita-reel-frame {
+    padding: 112px 0 32px;
+  }
+  .cita-reel-badge {
+    min-height: 35px;
+    font-size: clamp(11px, 2.6vw, 14px);
+    padding: 7px 13px;
+  }
   .cita-reel-heading {
     max-width: calc(100% - 30px);
     margin-top: 21px;
     font-size: clamp(38px, 7.8vw, 55px);
-    line-height: 1.10;
-    letter-spacing: -.022em;
+    line-height: 1.1;
+    letter-spacing: -0.022em;
   }
   .cita-reel-subline {
     max-width: min(500px, calc(100% - 38px));
@@ -407,18 +535,51 @@
     font-size: clamp(14px, 3.4vw, 17px);
     line-height: 1.55;
   }
-  .cita-reel-desktop-break { display: none; }
-  .cita-reel-browse-desktop { display: none; }
-  .cita-reel-browse-mobile { display: inline; }
-  .cita-reel-browse-hint { margin-top: 10px; font-size: 10px; letter-spacing: .04em; }
-  .cita-reel-carousel { height: 258px; margin-top: 19px; }
-  .cita-reel-card-hover { padding: 13px 11px 15px; }
-  .cita-reel-card-copy { gap: 5px; }
-  .cita-reel-card-copy small { font-size: 11px; }
-  .cita-reel-card-copy strong { font-size: 14px; line-height: 1.20; }
-  .cita-reel-card-contact { top: 11px; right: 11px; width: 34px; height: 34px; }
-  .cita-reel-card-contact svg { width: 19px; height: 19px; }
-  .cita-reel-note-right, .cita-reel-arrow-right { display: none; }
+  .cita-reel-desktop-break {
+    display: none;
+  }
+  .cita-reel-browse-desktop {
+    display: none;
+  }
+  .cita-reel-browse-mobile {
+    display: inline;
+  }
+  .cita-reel-browse-hint {
+    margin-top: 10px;
+    font-size: 10px;
+    letter-spacing: 0.04em;
+  }
+  .cita-reel-carousel {
+    height: 258px;
+    margin-top: 19px;
+  }
+  .cita-reel-card-hover {
+    padding: 13px 11px 15px;
+  }
+  .cita-reel-card-copy {
+    gap: 5px;
+  }
+  .cita-reel-card-copy small {
+    font-size: 11px;
+  }
+  .cita-reel-card-copy strong {
+    font-size: 14px;
+    line-height: 1.2;
+  }
+  .cita-reel-card-contact {
+    top: 11px;
+    right: 11px;
+    width: 34px;
+    height: 34px;
+  }
+  .cita-reel-card-contact svg {
+    width: 19px;
+    height: 19px;
+  }
+  .cita-reel-note-right,
+  .cita-reel-arrow-right {
+    display: none;
+  }
   .cita-reel-note-bottom {
     position: relative;
     bottom: auto;
@@ -429,24 +590,52 @@
     line-height: 1;
     transform: rotate(-3deg);
   }
-  .cita-reel-note-bottom br { display: none; }
-  .cita-reel-arrow-bottom { display: none; }
-  .cita-reel-cta { width: 219px; min-height: 72px; margin-top: 12px; }
-  .cita-reel-cta a { width: 204px; min-height: 57px; font-size: 16px; }
-  .cita-reel-microcopy { margin-top: 13px; font-size: 11px; }
+  .cita-reel-note-bottom br {
+    display: none;
+  }
+  .cita-reel-arrow-bottom {
+    display: none;
+  }
+  .cita-reel-cta {
+    width: 219px;
+    min-height: 72px;
+    margin-top: 12px;
+  }
+  .cita-reel-cta a {
+    width: 204px;
+    min-height: 57px;
+    font-size: 16px;
+  }
+  .cita-reel-microcopy {
+    margin-top: 13px;
+    font-size: 11px;
+  }
   .cita-reel-hero + .cita-reel-stats {
     padding: 20px 0 55px;
   }
 }
 
 @media (max-width: 420px) {
-  .cita-reel-frame { padding-top: 109px; }
-  .cita-reel-heading { font-size: clamp(37px, 9vw, 44px); line-height: 1.1; }
-  .cita-reel-subline { font-size: 14px; }
-  .cita-reel-carousel { margin-top: 21px; }
-  .cita-reel-microcopy { font-size: 10.5px; }
+  .cita-reel-frame {
+    padding-top: 109px;
+  }
+  .cita-reel-heading {
+    font-size: clamp(37px, 9vw, 44px);
+    line-height: 1.1;
+  }
+  .cita-reel-subline {
+    font-size: 14px;
+  }
+  .cita-reel-carousel {
+    margin-top: 21px;
+  }
+  .cita-reel-microcopy {
+    font-size: 10.5px;
+  }
 }
 @media (prefers-reduced-motion: reduce) {
   .cita-reel-card,
-  .cita-reel-cta a { transition: none; }
+  .cita-reel-cta a {
+    transition: none;
+  }
 }

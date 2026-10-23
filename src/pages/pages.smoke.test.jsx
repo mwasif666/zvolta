@@ -5,18 +5,22 @@ import { describe, expect, test } from "vitest";
 import { routeEntries } from "../routes";
 
 describe("page route smoke tests", () => {
-  test.each(routeEntries)("renders $pageId without crashing", async (route) => {
-    const pageModule = await route.load();
-    const Page = pageModule.default;
+  // Redirect-only routes are exercised with a client router in dc-chargers/index.test.jsx.
+  test.each(routeEntries.filter((route) => route.pageId !== "dc-chargers"))(
+    "renders $pageId without crashing",
+    async (route) => {
+      const pageModule = await route.load();
+      const Page = pageModule.default;
 
-    const html = renderToString(
-      <HelmetProvider>
-        <MemoryRouter initialEntries={[route.paths[0]]}>
-          <Page />
-        </MemoryRouter>
-      </HelmetProvider>,
-    );
+      const html = renderToString(
+        <HelmetProvider>
+          <MemoryRouter initialEntries={[route.paths[0]]}>
+            <Page />
+          </MemoryRouter>
+        </HelmetProvider>,
+      );
 
-    expect(html.length).toBeGreaterThan(40);
-  });
+      expect(html.length).toBeGreaterThan(40);
+    },
+  );
 });

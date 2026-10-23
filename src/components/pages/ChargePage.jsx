@@ -103,10 +103,7 @@ export default function ChargePage({ routeClassName = "" }) {
   }, []);
   return (
     <>
-      <div
-        ref={pageRef}
-        className={`charge-page font-sans ${routeClassName}`}
-      >
+      <div ref={pageRef} className={`charge-page font-sans ${routeClassName}`}>
         <HeroLightSection />
 
         <NetworkMapSection />

@@ -22,7 +22,10 @@ export const citaChargers = [
     specs: [
       ["Charging Capacity", "Up to 7.4kW at 32A, 230VAC +/-10%"],
       ["Charging Socket", "IEC 62196 Type 2, IP54, locking"],
-      ["Charging Mode", "Mode 3 (IEC 61851-1 / SAE J1772 compliant communication protocol)"],
+      [
+        "Charging Mode",
+        "Mode 3 (IEC 61851-1 / SAE J1772 compliant communication protocol)",
+      ],
       ["Standard Communication", "WiFi 2.4 GHz"],
       ["Optional Communication", "4G, Ethernet"],
       ["Solar PV Compatibility", "Optional, with 2nd external CT clamp"],
@@ -55,7 +58,10 @@ export const citaChargers = [
     specs: [
       ["Charging Capacity", "Up to 11kW at 16A, 400V±10% AC"],
       ["Charging Socket", "IEC 62196 Type 2, IP54, locking"],
-      ["Charging Mode", "Mode 3 (IEC 61851-1 / SAE J1772 compliant communication protocol)"],
+      [
+        "Charging Mode",
+        "Mode 3 (IEC 61851-1 / SAE J1772 compliant communication protocol)",
+      ],
       ["Standard Communication", "WiFi 2.4 GHz"],
       ["Optional Communication", "4G, Ethernet"],
       ["Solar PV Compatibility", "Optional, with 2nd external CT clamp"],
@@ -88,7 +94,10 @@ export const citaChargers = [
     specs: [
       ["Charging Capacity", "Up to 22kW at 32A, 400V±10% AC"],
       ["Charging Socket", "IEC 62196 Type 2, IP54, locking"],
-      ["Charging Mode", "Mode 3 (IEC 61851-1 / SAE J1772 compliant communication protocol)"],
+      [
+        "Charging Mode",
+        "Mode 3 (IEC 61851-1 / SAE J1772 compliant communication protocol)",
+      ],
       ["Standard Communication", "WiFi 2.4 GHz"],
       ["Optional Communication", "4G, Ethernet"],
       ["Solar PV Compatibility", "Optional, with 2nd external CT clamp"],
@@ -121,7 +130,10 @@ export const citaChargers = [
     specs: [
       ["Charging Capacity", "7kW, 11kW & 22kW"],
       ["Charging Interface", "IEC 62196 Type 2 Charging Cable, 5 Meters"],
-      ["Charging Mode", "Mode 3 (IEC 61851-1 / SAE J1772 compliant communication protocol)"],
+      [
+        "Charging Mode",
+        "Mode 3 (IEC 61851-1 / SAE J1772 compliant communication protocol)",
+      ],
       ["Standard Communication", "WiFi 2.4 GHz"],
       ["Optional Communication", "4G, Ethernet"],
       ["Solar PV Compatibility", "Optional, with 2nd external CT clamp"],
@@ -154,7 +166,10 @@ export const citaChargers = [
     specs: [
       ["Charging Capacity", "2x7kW, 2x11kW & 2x22kW"],
       ["Charging Socket", "Dual IEC 62196 Type 2, IP54, locking"],
-      ["Charging Mode", "Mode 3 (IEC 61851-1 / SAE J1772 compliant communication protocol)"],
+      [
+        "Charging Mode",
+        "Mode 3 (IEC 61851-1 / SAE J1772 compliant communication protocol)",
+      ],
       ["Standard Communication", "WiFi 2.4 GHz"],
       ["Optional Communication", "4G, Ethernet"],
       ["Solar PV Compatibility", "Optional, with 2nd external CT clamp"],
@@ -187,7 +202,10 @@ export const citaChargers = [
     specs: [
       ["Charging Capacity", "Up to 2x22kW configurations"],
       ["Charging Socket", "Dual IEC 62196 Type 2, IP54 hinged lid, locking"],
-      ["Charging Mode", "Mode 3 (IEC 61851-1 / SAE J1772 compliant communication protocol)"],
+      [
+        "Charging Mode",
+        "Mode 3 (IEC 61851-1 / SAE J1772 compliant communication protocol)",
+      ],
       ["Standard Communication", "WiFi 2.4 GHz"],
       ["Optional Communication", "4G, Ethernet part of standard communication"],
       ["LCD Screen", "7 in LCD Display For Monitoring"],
@@ -220,7 +238,10 @@ export const citaChargers = [
     specs: [
       ["Charging Capacity", "Up to 2x22kW configurations"],
       ["Charging Socket", "Dual IEC 62196 Type 2, IP54 hinged lid, locking"],
-      ["Charging Mode", "Mode 3 (IEC 61851-1 / SAE J1772 compliant communication protocol)"],
+      [
+        "Charging Mode",
+        "Mode 3 (IEC 61851-1 / SAE J1772 compliant communication protocol)",
+      ],
       ["Standard Communication", "WiFi 2.4 GHz"],
       ["Optional Communication", "Ethernet / WiFi / 4G communication"],
       ["LCD Screen", "5 in LCD Display For Monitoring"],
@@ -252,8 +273,14 @@ export const citaChargers = [
     ],
     specs: [
       ["Charging Capacity", "30kW"],
-      ["Charging Socket", "1 DC Connector: CCS2 (IEC 62196-3) or CHAdeMO (IEC 62196-1) or GB/T (20234.3)"],
-      ["Charging Mode", "Mode 3 (IEC 61851-1 / SAE J1772 compliant communication protocol)"],
+      [
+        "Charging Socket",
+        "1 DC Connector: CCS2 (IEC 62196-3) or CHAdeMO (IEC 62196-1) or GB/T (20234.3)",
+      ],
+      [
+        "Charging Mode",
+        "Mode 3 (IEC 61851-1 / SAE J1772 compliant communication protocol)",
+      ],
       ["Cable Length", "3.5M"],
       ["Optional Communication", "Ethernet / 4G communication"],
       ["LCD Screen", "10.4-inch color touch screen"],
@@ -318,7 +345,10 @@ export const citaChargers = [
     ],
     specs: [
       ["Charging Capacity", "200, 240, 280, 320, 360, 400, 440 & 480kW"],
-      ["Charging Socket", "DC 1 x CCS2 and 1 x CHAdeMO (alternatively 2 x CCS2); Optional AC Type 2 socket"],
+      [
+        "Charging Socket",
+        "DC 1 x CCS2 and 1 x CHAdeMO (alternatively 2 x CCS2); Optional AC Type 2 socket",
+      ],
       ["Optional Display", "42-inch Commercial Advertising Display with RMS"],
       ["Communication", "Ethernet / WiFi / 4G communication"],
       ["LCD Screen", "15-inch color touch screen"],

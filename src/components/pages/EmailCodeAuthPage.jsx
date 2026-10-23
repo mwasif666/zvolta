@@ -15,7 +15,7 @@ const copy = {
   },
   register: {
     title: "Create your account.",
-    lead: "Add your details, then verify your email with a one-time code.",
+    lead: "Enter your email and phone number, then verify your email with a one-time code.",
     switchText: "Already have an account?",
     switchLabel: "Sign in",
     switchHref: "/login",
@@ -56,7 +56,9 @@ export default function EmailCodeAuthPage({ mode = "login" }) {
   const errorsId = useId();
   const [status, setStatus] = useState({ submitting: false, errors: [] });
   const [pending, setPending] = useState(null);
+  const [details, setDetails] = useState({ email: "", phone: "" });
   const [devCode, setDevCode] = useState("");
+  const [codeVersion, setCodeVersion] = useState(0);
   const isRegister = mode === "register";
   const hasErrors = status.errors.length > 0;
 
@@ -65,21 +67,40 @@ export default function EmailCodeAuthPage({ mode = "login" }) {
       ...details,
       intent: isRegister ? "register" : "login",
     });
+    setDetails(details);
     setPending(details);
     setDevCode(result.devCode || "");
+    setCodeVersion((version) => version + 1);
   }
 
   async function submit(event) {
     event.preventDefault();
+    if (status.submitting) return;
     const fields = Object.fromEntries(new FormData(event.currentTarget));
+    const invalidField = !pending
+      ? !/^\S+@\S+\.\S+$/.test(String(fields.email || "").trim())
+        ? ["email", "Enter a valid email address."]
+        : isRegister &&
+            (!/^\+?[\d\s().-]+$/.test(String(fields.phone || "").trim()) ||
+              !/^[0-9]{7,15}$/.test(
+                String(fields.phone || "").replace(/\D/g, ""),
+              ))
+          ? ["phone", "Enter a valid phone number with 7 to 15 digits."]
+          : null
+      : !/^\d{6}$/.test(String(fields.code || "").trim())
+        ? ["code", "Enter the 6-digit code sent to your email."]
+        : null;
+    if (invalidField) {
+      setStatus({ submitting: false, errors: [invalidField[1]] });
+      event.currentTarget.elements.namedItem(invalidField[0])?.focus();
+      return;
+    }
     setStatus({ submitting: true, errors: [] });
     try {
       if (!pending) {
         await sendCode({
-          email: fields.email,
-          ...(isRegister
-            ? { name: fields.name, phone: fields.phone || "" }
-            : {}),
+          email: fields.email.trim().toLowerCase(),
+          ...(isRegister ? { phone: fields.phone.trim() } : {}),
         });
         setStatus({ submitting: false, errors: [] });
         return;
@@ -99,6 +120,7 @@ export default function EmailCodeAuthPage({ mode = "login" }) {
   }
 
   async function resendCode() {
+    if (status.submitting) return;
     setStatus({ submitting: true, errors: [] });
     try {
       await sendCode(pending);
@@ -149,29 +171,29 @@ export default function EmailCodeAuthPage({ mode = "login" }) {
             </p>
           </div>
 
-          <form className="auth-form" onSubmit={submit}>
+          <form
+            className="auth-form"
+            onSubmit={submit}
+            noValidate
+            aria-busy={status.submitting}
+          >
             {!pending ? (
               <>
                 {isRegister ? (
                   <>
                     <label>
-                      Full name
-                      <input
-                        name="name"
-                        required
-                        autoComplete="name"
-                        placeholder="Ahmed Raza"
-                      />
-                    </label>
-                    <label>
-                      Phone{" "}
-                      <span className="auth-form__optional">optional</span>
+                      Phone
                       <input
                         name="phone"
+                        defaultValue={details.phone}
+                        required
                         type="tel"
                         inputMode="tel"
                         autoComplete="tel"
                         placeholder="0300 1234567"
+                        maxLength={40}
+                        aria-invalid={hasErrors || undefined}
+                        aria-describedby={hasErrors ? errorsId : undefined}
                       />
                     </label>
                   </>
@@ -180,6 +202,7 @@ export default function EmailCodeAuthPage({ mode = "login" }) {
                   Email
                   <input
                     name="email"
+                    defaultValue={details.email}
                     type="email"
                     required
                     autoComplete="email"
@@ -193,7 +216,9 @@ export default function EmailCodeAuthPage({ mode = "login" }) {
               <label>
                 Verification code
                 <input
+                  key={codeVersion}
                   name="code"
+                  autoFocus
                   required
                   inputMode="numeric"
                   autoComplete="one-time-code"
@@ -224,7 +249,7 @@ export default function EmailCodeAuthPage({ mode = "login" }) {
                   ? isRegister
                     ? "Verify & create account"
                     : "Verify & sign in"
-                  : "Email me a code"}
+                  : "Get Code"}
             </button>
           </form>
 
@@ -241,9 +266,11 @@ export default function EmailCodeAuthPage({ mode = "login" }) {
               {" · "}
               <button
                 type="button"
+                disabled={status.submitting}
                 onClick={() => {
                   setPending(null);
                   setDevCode("");
+                  setStatus({ submitting: false, errors: [] });
                 }}
               >
                 Change email

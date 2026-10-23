@@ -1,1 +1,10 @@
-export default { pageId: "checkout", paths: ["/checkout"], meta: { title: "Secure Checkout | ZVolta", description: "Complete your ZVolta EV charging equipment order.", disableLegacyRuntime: true, noIndex: true } };
+export default {
+  pageId: "checkout",
+  paths: ["/checkout"],
+  meta: {
+    title: "Secure Checkout | ZVolta",
+    description: "Complete your ZVolta EV charging equipment order.",
+    disableLegacyRuntime: true,
+    noIndex: true,
+  },
+};

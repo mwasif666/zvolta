@@ -12,12 +12,9 @@ const AuthContext = createContext({
   user: null,
   isAuthenticated: false,
   loading: true,
-  login: async () => {},
-  register: async () => {},
   requestEmailCode: async () => {},
   verifyEmailCode: async () => {},
   updateProfile: async () => {},
-  changePassword: async () => {},
   logout: async () => {},
 });
 
@@ -59,16 +56,6 @@ export function AuthProvider({ children }) {
     return result.data || null;
   }, []);
 
-  const login = useCallback(
-    async (credentials) => adoptSession(await authApi.login(credentials)),
-    [adoptSession],
-  );
-
-  const register = useCallback(
-    async (details) => adoptSession(await authApi.register(details)),
-    [adoptSession],
-  );
-
   const requestEmailCode = useCallback(
     (details) => authApi.requestEmailCode(details),
     [],
@@ -85,11 +72,6 @@ export function AuthProvider({ children }) {
     return result.data || null;
   }, []);
 
-  const changePassword = useCallback(
-    (details) => authApi.changePassword(details),
-    [],
-  );
-
   const logout = useCallback(async () => {
     try {
       await authApi.logout();
@@ -105,25 +87,12 @@ export function AuthProvider({ children }) {
       user,
       isAuthenticated: Boolean(user),
       loading,
-      login,
-      register,
       requestEmailCode,
       verifyEmailCode,
       updateProfile,
-      changePassword,
       logout,
     }),
-    [
-      changePassword,
-      loading,
-      login,
-      logout,
-      register,
-      requestEmailCode,
-      updateProfile,
-      user,
-      verifyEmailCode,
-    ],
+    [loading, logout, requestEmailCode, updateProfile, user, verifyEmailCode],
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

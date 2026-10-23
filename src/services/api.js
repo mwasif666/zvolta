@@ -117,8 +117,6 @@ export const commerceApi = {
 };
 
 export const authApi = {
-  register: (body) => apiRequest("/auth/register", { method: "POST", body }),
-  login: (body) => apiRequest("/auth/login", { method: "POST", body }),
   requestEmailCode: (body) =>
     apiRequest("/auth/email-code/request", { method: "POST", body }),
   verifyEmailCode: (body) =>
@@ -126,8 +124,6 @@ export const authApi = {
   logout: () => apiRequest("/auth/logout", { method: "POST" }),
   me: () => apiRequest("/auth/me"),
   updateProfile: (body) => apiRequest("/auth/me", { method: "PATCH", body }),
-  changePassword: (body) =>
-    apiRequest("/auth/change-password", { method: "PATCH", body }),
 };
 
 export const accountApi = {

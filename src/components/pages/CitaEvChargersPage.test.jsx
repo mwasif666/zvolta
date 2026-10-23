@@ -29,14 +29,10 @@ describe("CITA product cards", () => {
     expect((html.match(/Enquire for pricing/g) || []).length).toBe(
       citaChargers.length,
     );
-    expect((html.match(/Contact support/g) || []).length).toBe(
+    expect((html.match(/<span>Contact support<\/span>/g) || []).length).toBe(
       citaChargers.length,
     );
-    expect((html.match(/Best for/g) || []).length).toBe(
-      citaChargers.length,
-    );
-    expect((html.match(/Location/g) || []).length).toBe(
-      citaChargers.length,
-    );
+    expect((html.match(/Best for/g) || []).length).toBe(citaChargers.length);
+    expect((html.match(/Location/g) || []).length).toBe(citaChargers.length);
   });
 });

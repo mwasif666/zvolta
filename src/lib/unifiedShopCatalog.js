@@ -7,7 +7,9 @@ export const CITA_SHOP_CHARGERS = citaChargers;
 export function isCitaProduct(product) {
   const title = String(product?.title || "");
   const brand = String(product?.brand?.name || product?.brand || "");
-  return /^cita(?:\s|\b)/i.test(title.trim()) || /^cita(?:\s|\b)/i.test(brand.trim());
+  return (
+    /^cita(?:\s|\b)/i.test(title.trim()) || /^cita(?:\s|\b)/i.test(brand.trim())
+  );
 }
 
 export function getZvoltaShopProducts(products) {

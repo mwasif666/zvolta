@@ -1,3 +1,5 @@
+import { SkeletonImage } from "../SkeletonImage";
+import { ProductCardSkeletons } from "../commerce/ProductCardSkeletons";
 import { useMemo, useState } from "react";
 import { commerceApi } from "../../services/api";
 import { useCommerceData } from "../../hooks/useCommerceData";
@@ -61,8 +63,14 @@ export function ProductCard({ product, index = 0 }) {
         </h2>
         <p>{product.shortDescription || product.description}</p>
       </div>
-      <SmartLink className="commerce-card__art" href={detailHref}>
-        <img
+      <SmartLink
+        className="commerce-card__art product-image-loading"
+        href={detailHref}
+      >
+        <SkeletonImage
+          skeletonTone="dark"
+          loading="lazy"
+          decoding="async"
           src={product.images?.[0]?.url}
           alt={product.images?.[0]?.alt || product.title}
         />
@@ -143,7 +151,11 @@ export function ProductCard({ product, index = 0 }) {
 
 // CITA EV 2026 lists all ten AC/DC families. Keep the original image,
 // specifications and detailed pages; backend prices are a separate source.
-export const CITA_SHOP_DC_SLUGS = ["smart-30-dc", "smart-dc-eco", "smart-dc-pro"];
+export const CITA_SHOP_DC_SLUGS = [
+  "smart-30-dc",
+  "smart-dc-eco",
+  "smart-dc-pro",
+];
 const BACKEND_CITA_POWER_VARIANTS = {
   "smart-30-dc": [30],
   "smart-dc-eco": [80, 120, 160],
@@ -159,14 +171,24 @@ export function getApprovedCitaShopPrices(products, charger) {
   }[charger.slug];
   if (!pattern || !allowed.length) return [];
   return (products || [])
-    .filter((product) => product.chargerType === "dc" && pattern.test(String(product.title || "")))
+    .filter(
+      (product) =>
+        product.chargerType === "dc" &&
+        pattern.test(String(product.title || "")),
+    )
     .filter((product) => {
-      const power = Number.parseInt(String(product.power || product.title || ""), 10);
+      const power = Number.parseInt(
+        String(product.power || product.title || ""),
+        10,
+      );
       return allowed.includes(power);
     })
     .map((product) => ({
       power: product.power,
-      price: Number(product.discountPrice) > 0 ? Number(product.discountPrice) : Number(product.price),
+      price:
+        Number(product.discountPrice) > 0
+          ? Number(product.discountPrice)
+          : Number(product.price),
     }))
     .filter(({ price }) => Number.isFinite(price) && price > 0);
 }
@@ -174,11 +196,14 @@ export function getApprovedCitaShopPrices(products, charger) {
 function CitaShopCard({ charger, index, liveProducts }) {
   const { settings } = useStorefrontSettings();
   const prices = getApprovedCitaShopPrices(liveProducts, charger);
-  const fromPrice = prices.length ? Math.min(...prices.map(({ price }) => price)) : null;
+  const fromPrice = prices.length
+    ? Math.min(...prices.map(({ price }) => price))
+    : null;
   const specifications = Object.fromEntries(charger.specs);
   const href = `/cita-ev-chargers/${charger.slug}`;
   const bestFor = citaCardDetails[charger.slug]?.bestFor || "EV charging";
-  const location = citaCardDetails[charger.slug]?.location || "Ask about installation";
+  const location =
+    citaCardDetails[charger.slug]?.location || "Ask about installation";
 
   return (
     <article className="commerce-card cita-shop-card" data-model={charger.slug}>
@@ -186,15 +211,23 @@ function CitaShopCard({ charger, index, liveProducts }) {
         {String(index + 1).padStart(2, "0")}
       </span>
       <div className="commerce-card__intro">
-        <h2><SmartLink href={href}>{charger.name}</SmartLink></h2>
+        <h2>
+          <SmartLink href={href}>{charger.name}</SmartLink>
+        </h2>
         <p>{charger.description}</p>
       </div>
       <SmartLink
-        className="commerce-card__art"
+        className="commerce-card__art product-image-loading"
         href={href}
         aria-label={`View full technical specifications for ${charger.name}`}
       >
-        <img src={charger.productImage} alt={charger.name} loading="lazy" decoding="async" />
+        <SkeletonImage
+          skeletonTone="dark"
+          src={charger.productImage}
+          alt={charger.name}
+          loading="lazy"
+          decoding="async"
+        />
       </SmartLink>
       <div className="commerce-card__specs">
         <div className="commerce-card__spec-row">
@@ -221,7 +254,11 @@ function CitaShopCard({ charger, index, liveProducts }) {
         </div>
         <div className="commerce-card__spec-row">
           <span>Price</span>
-          <strong>{fromPrice === null ? "Enquire for pricing" : `From ${formatStoreCurrency(fromPrice, settings.currency)}`}</strong>
+          <strong>
+            {fromPrice === null
+              ? "Enquire for pricing"
+              : `From ${formatStoreCurrency(fromPrice, settings.currency)}`}
+          </strong>
         </div>
       </div>
       <div className="commerce-card__actions">
@@ -252,15 +289,19 @@ export default function ProductsPage() {
   const [visibleCita, visibleZvolta] = useMemo(() => {
     const term = search.trim().toLowerCase();
     return [
-      CITA_SHOP_CHARGERS.filter((charger) =>
-        !term ||
-        `${charger.name} ${charger.subtitle} ${charger.power} ${charger.description}`
-          .toLowerCase().includes(term),
+      CITA_SHOP_CHARGERS.filter(
+        (charger) =>
+          !term ||
+          `${charger.name} ${charger.subtitle} ${charger.power} ${charger.description}`
+            .toLowerCase()
+            .includes(term),
       ),
-      zvoltaProducts.filter((product) =>
-        !term ||
-        `${product.title} ${product.shortDescription || ""} ${product.description || ""} ${product.power || ""}`
-          .toLowerCase().includes(term),
+      zvoltaProducts.filter(
+        (product) =>
+          !term ||
+          `${product.title} ${product.shortDescription || ""} ${product.description || ""} ${product.power || ""}`
+            .toLowerCase()
+            .includes(term),
       ),
     ];
   }, [search, zvoltaProducts]);
@@ -277,7 +318,8 @@ export default function ProductsPage() {
           </h1>
           <p>
             Explore the full ZVolta product range alongside all original CITA EV
-            AC and DC chargers, with their authentic product imagery and specifications.
+            AC and DC chargers, with their authentic product imagery and
+            specifications.
           </p>
         </div>
       </section>
@@ -286,7 +328,8 @@ export default function ProductsPage() {
           <p className="cita-shop-count">
             All products
             <strong>
-              {CITA_SHOP_CHARGERS.length + zvoltaProducts.length} available models
+              {CITA_SHOP_CHARGERS.length + zvoltaProducts.length} available
+              models
             </strong>
           </p>
           <label className="commerce-search">
@@ -300,9 +343,13 @@ export default function ProductsPage() {
           </label>
         </div>
 
-        <section className="cita-shop-section" aria-labelledby="shop-cita-title">
+        <section
+          className="cita-shop-section"
+          aria-labelledby="shop-cita-title"
+        >
           <h2 id="shop-cita-title" className="cita-shop-section-title">
-            CITA EV Chargers <small>AC &amp; DC · {CITA_SHOP_CHARGERS.length} models</small>
+            CITA EV Chargers{" "}
+            <small>AC &amp; DC · {CITA_SHOP_CHARGERS.length} models</small>
           </h2>
           <div className="commerce-grid">
             {visibleCita.map((charger) => (
@@ -315,35 +362,45 @@ export default function ProductsPage() {
             ))}
           </div>
           {visibleCita.length === 0 && (
-            <p className="cita-shop-empty">No CITA EV products match this search.</p>
+            <p className="cita-shop-empty">
+              No CITA EV products match this search.
+            </p>
           )}
         </section>
 
-        <section className="cita-shop-section" aria-labelledby="shop-zvolta-title">
+        <section
+          className="cita-shop-section"
+          aria-labelledby="shop-zvolta-title"
+        >
           <h2 id="shop-zvolta-title" className="cita-shop-section-title">
             ZVolta Products <small>{zvoltaProducts.length} products</small>
           </h2>
-          {liveCatalog.loading && (
-            <p className="cita-shop-loading" role="status">Loading ZVolta products…</p>
-          )}
           {liveCatalog.error && (
             <p className="cita-shop-loading" role="status">
               ZVolta live products are temporarily unavailable. CITA products
               remain visible above.
             </p>
           )}
-          <div className="commerce-grid">
-            {visibleZvolta.map((product, index) => (
-              <ProductCard
-                product={product}
-                index={index}
-                key={product._id || product.slug || `zvolta-${index}`}
-              />
-            ))}
+          <div className="commerce-grid" aria-busy={liveCatalog.loading}>
+            {liveCatalog.loading ? (
+              <ProductCardSkeletons />
+            ) : (
+              visibleZvolta.map((product, index) => (
+                <ProductCard
+                  product={product}
+                  index={index}
+                  key={product._id || product.slug || `zvolta-${index}`}
+                />
+              ))
+            )}
           </div>
-          {!liveCatalog.loading && !liveCatalog.error && visibleZvolta.length === 0 && (
-            <p className="cita-shop-empty">No ZVolta products match this search.</p>
-          )}
+          {!liveCatalog.loading &&
+            !liveCatalog.error &&
+            visibleZvolta.length === 0 && (
+              <p className="cita-shop-empty">
+                No ZVolta products match this search.
+              </p>
+            )}
         </section>
 
         <p className="cita-shop-pricing-note">

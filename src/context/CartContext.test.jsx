@@ -5,7 +5,7 @@ import { afterEach, beforeEach, expect, test, vi } from "vitest";
 import { AuthProvider, useAuth } from "./AuthContext";
 import { CartProvider, useCart } from "./CartContext";
 
-const authApi = { login: vi.fn(), logout: vi.fn(), me: vi.fn() };
+const authApi = { verifyEmailCode: vi.fn(), logout: vi.fn(), me: vi.fn() };
 const cartApi = {
   get: vi.fn(),
   sync: vi.fn(),
@@ -20,7 +20,7 @@ let storedToken = "";
 
 vi.mock("../services/api", () => ({
   authApi: {
-    login: (...args) => authApi.login(...args),
+    verifyEmailCode: (...args) => authApi.verifyEmailCode(...args),
     logout: (...args) => authApi.logout(...args),
     me: (...args) => authApi.me(...args),
   },
@@ -149,7 +149,7 @@ test("a guest cart is priced locally and exposes no coupon", () => {
 });
 
 test("signing in merges the guest cart into the account cart", async () => {
-  authApi.login.mockResolvedValue({
+  authApi.verifyEmailCode.mockResolvedValue({
     data: { _id: "u1", name: "Ahmed", email: "ahmed@example.com" },
     token: "jwt-token",
   });
@@ -157,7 +157,7 @@ test("signing in merges the guest cart into the account cart", async () => {
   renderApp();
 
   await act(async () => {
-    await auth.login({ email: "ahmed@example.com", password: "secret1" });
+    await auth.verifyEmailCode({ email: "ahmed@example.com", code: "123456" });
   });
 
   await waitFor(() =>
@@ -173,7 +173,7 @@ test("signing in merges the guest cart into the account cart", async () => {
 });
 
 test("applying a coupon takes the discount from the server cart", async () => {
-  authApi.login.mockResolvedValue({
+  authApi.verifyEmailCode.mockResolvedValue({
     data: { _id: "u1", name: "Ahmed", email: "ahmed@example.com" },
     token: "jwt-token",
   });
@@ -184,7 +184,7 @@ test("applying a coupon takes the discount from the server cart", async () => {
   renderApp();
 
   await act(async () => {
-    await auth.login({ email: "ahmed@example.com", password: "secret1" });
+    await auth.verifyEmailCode({ email: "ahmed@example.com", code: "123456" });
   });
   await waitFor(() =>
     expect(screen.getByTestId("server").textContent).toBe("true"),
@@ -201,7 +201,7 @@ test("applying a coupon takes the discount from the server cart", async () => {
 });
 
 test("a rejected coupon stays local to the coupon form and keeps the cart", async () => {
-  authApi.login.mockResolvedValue({
+  authApi.verifyEmailCode.mockResolvedValue({
     data: { _id: "u1", name: "Ahmed", email: "ahmed@example.com" },
     token: "jwt-token",
   });
@@ -210,7 +210,7 @@ test("a rejected coupon stays local to the coupon form and keeps the cart", asyn
   renderApp();
 
   await act(async () => {
-    await auth.login({ email: "ahmed@example.com", password: "secret1" });
+    await auth.verifyEmailCode({ email: "ahmed@example.com", code: "123456" });
   });
   await waitFor(() =>
     expect(screen.getByTestId("server").textContent).toBe("true"),
@@ -241,7 +241,7 @@ test("an established session reads the account cart instead of re-merging", asyn
 });
 
 test("signing out clears the local cart so it cannot reach another account", async () => {
-  authApi.login.mockResolvedValue({
+  authApi.verifyEmailCode.mockResolvedValue({
     data: { _id: "u1", name: "Ahmed", email: "ahmed@example.com" },
     token: "jwt-token",
   });
@@ -250,7 +250,7 @@ test("signing out clears the local cart so it cannot reach another account", asy
   renderApp();
 
   await act(async () => {
-    await auth.login({ email: "ahmed@example.com", password: "secret1" });
+    await auth.verifyEmailCode({ email: "ahmed@example.com", code: "123456" });
   });
   await waitFor(() =>
     expect(screen.getByTestId("server").textContent).toBe("true"),

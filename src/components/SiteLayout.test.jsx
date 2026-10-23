@@ -5,6 +5,8 @@ import { MemoryRouter } from "react-router-dom";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { SiteLayout } from "./SiteLayout";
 
+vi.mock("../lib/useScrollReveal", () => ({ useScrollReveal: vi.fn() }));
+
 beforeEach(() => {
   window.matchMedia = vi.fn().mockReturnValue({ matches: false });
 });
@@ -26,7 +28,7 @@ describe("SiteLayout", () => {
   });
 
   it("does not inject a second CITA EV nav link from index.html", () => {
-    const html = readFileSync(new URL("../../index.html", import.meta.url), "utf8");
+    const html = readFileSync(`${process.cwd()}/index.html`, "utf8");
     expect(html).not.toContain("installCitaNavigation");
     expect(html).not.toContain("data-cita-nav-link");
     expect(html).not.toContain("data-cita-mobile-link");
@@ -45,7 +47,9 @@ describe("SiteLayout", () => {
     expect(primaryNavigation.textContent).toContain("Shop");
     expect(primaryNavigation.textContent).not.toContain("DC Chargers");
     // Regression: Shop used to display "CITA EV" twice.
-    const dockLinks = [...primaryNavigation.querySelectorAll(".dock-pill-link")];
+    const dockLinks = [
+      ...primaryNavigation.querySelectorAll(".dock-pill-link"),
+    ];
     expect(dockLinks.map((link) => link.textContent.trim())).toEqual([
       "Hosting",
       "Charging",
@@ -53,8 +57,12 @@ describe("SiteLayout", () => {
       "Shop",
       "CITA EV",
     ]);
-    expect(primaryNavigation.querySelectorAll('a[href="/cita-ev-chargers"]')).toHaveLength(1);
-    expect(primaryNavigation.querySelectorAll('a[href="/products"]')).toHaveLength(1);
+    expect(
+      primaryNavigation.querySelectorAll('a[href="/cita-ev-chargers"]'),
+    ).toHaveLength(1);
+    expect(
+      primaryNavigation.querySelectorAll('a[href="/products"]'),
+    ).toHaveLength(1);
     expect(
       screen.getByRole("link", { name: "Cart, 0 items" }).getAttribute("href"),
     ).toBe("/cart");
@@ -72,25 +80,40 @@ describe("SiteLayout", () => {
   it("only highlights Shop when on /products (not CITA EV)", () => {
     render(
       <MemoryRouter initialEntries={["/products"]}>
-        <SiteLayout><div>Shop content</div></SiteLayout>
+        <SiteLayout>
+          <div>Shop content</div>
+        </SiteLayout>
       </MemoryRouter>,
     );
     const nav = screen.getByRole("navigation", { name: "Main" });
-    expect(nav.querySelector('a[href="/products"]').getAttribute("aria-current")).toBe("page");
-    expect(nav.querySelector('a[href="/cita-ev-chargers"]').getAttribute("aria-current")).not.toBe("page");
+    expect(
+      nav.querySelector('a[href="/products"]').getAttribute("aria-current"),
+    ).toBe("page");
+    expect(
+      nav
+        .querySelector('a[href="/cita-ev-chargers"]')
+        .getAttribute("aria-current"),
+    ).not.toBe("page");
   });
 
   it("highlights only CITA EV when navigating from Shop", () => {
     render(
       <MemoryRouter initialEntries={["/products"]}>
-        <SiteLayout><div>Shop content</div></SiteLayout>
+        <SiteLayout>
+          <div>Shop content</div>
+        </SiteLayout>
       </MemoryRouter>,
     );
     const nav = screen.getByRole("navigation", { name: "Main" });
     fireEvent.click(nav.querySelector('a[href="/cita-ev-chargers"]'));
     expect(nav.querySelectorAll('a[href="/cita-ev-chargers"]')).toHaveLength(1);
-    expect(nav.querySelector('a[href="/cita-ev-chargers"]').getAttribute("aria-current")).toBe("page");
-    expect(nav.querySelector('a[href="/products"]').getAttribute("aria-current")).not.toBe("page");
+    expect(
+      nav
+        .querySelector('a[href="/cita-ev-chargers"]')
+        .getAttribute("aria-current"),
+    ).toBe("page");
+    expect(
+      nav.querySelector('a[href="/products"]').getAttribute("aria-current"),
+    ).not.toBe("page");
   });
-
 });

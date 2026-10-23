@@ -9,17 +9,13 @@ export default function ComingSoonPage() {
           <div className="mb-8 w-24 h-24 rounded-full bg-zinc-900 border border-emerald-500/30 flex items-center justify-center shadow-[0_0_40px_rgba(22, 163, 74,0.15)] animate-pulse-slow">
             <i className="bi bi-cone-striped text-4xl text-emerald-500" />
           </div>
-          <h1
-            className="text-5xl md:text-7xl font-display font-bold tracking-tight mb-6"
-          >
+          <h1 className="text-5xl md:text-7xl font-display font-bold tracking-tight mb-6">
             Powering <br />{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-emerald-400 to-emerald-600">
               Up Soon
             </span>
           </h1>
-          <p
-            className="text-zinc-400 text-lg md:text-xl max-w-lg mb-10 leading-relaxed"
-          >
+          <p className="text-zinc-400 text-lg md:text-xl max-w-lg mb-10 leading-relaxed">
             This page is currently plugged in and charging. We are building
             something electric for you.
           </p>

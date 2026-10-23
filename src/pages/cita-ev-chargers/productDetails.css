@@ -20,7 +20,7 @@
   border-radius: 25px;
   background: #fff;
   border: 1px solid #dfe9e3;
-  box-shadow: 0 12px 36px rgba(11, 41, 25, .052);
+  box-shadow: 0 12px 36px rgba(11, 41, 25, 0.052);
 }
 
 .cita-page .cita-product-intro {
@@ -37,7 +37,7 @@
   font-size: 11px;
   font-weight: 780;
   line-height: 1.42;
-  letter-spacing: .07em;
+  letter-spacing: 0.07em;
   text-transform: uppercase;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
@@ -49,8 +49,8 @@
   font-size: clamp(20px, 1.55vw, 25px);
   line-height: 1.13;
   font-weight: 780;
-  letter-spacing: -.026em;
-  word-spacing: .04em;
+  letter-spacing: -0.026em;
+  word-spacing: 0.04em;
 }
 .cita-page .cita-product-intro .cita-product-description {
   display: -webkit-box;
@@ -136,7 +136,7 @@
 
 .cita-page .cita-product-actions {
   display: grid;
-  grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr);
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
   gap: 9px;
   align-items: center;
   flex: 0 0 auto;
@@ -157,7 +157,10 @@
   font-size: 12px;
   font-weight: 770;
   line-height: 1.25;
-  transition: background-color .2s ease, border-color .2s ease, transform .2s ease;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
 }
 .cita-page .cita-product-actions .cita-product-cta {
   background: #0b9d56;
@@ -232,5 +235,7 @@
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .cita-page .cita-product-actions a { transition: none; }
+  .cita-page .cita-product-actions a {
+    transition: none;
+  }
 }

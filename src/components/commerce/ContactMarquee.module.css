@@ -1,0 +1,142 @@
+.strip {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin: 36px 0 0;
+  padding: 16px 20px;
+  border: 1px solid #3b9568;
+  border-radius: 16px;
+  background: linear-gradient(110deg, #071b12, #07100d 65%, #10271b);
+  color: #fff;
+  overflow: hidden;
+}
+.icon {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  color: #79dca1;
+}
+.window {
+  min-width: 0;
+  flex: 1;
+  overflow: hidden;
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 18px,
+    #000 calc(100% - 18px),
+    transparent
+  );
+}
+.track {
+  display: flex;
+  width: max-content;
+  animation: contact-scroll 42s linear infinite;
+}
+.group {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+.message {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  padding-right: 28px;
+  font-size: clamp(15px, 1.2vw, 18px);
+  font-weight: 750;
+  line-height: 1.6;
+  white-space: nowrap;
+  letter-spacing: -0.015em;
+}
+.message::after {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #79dca1;
+  flex-shrink: 0;
+}
+.strip:hover .track,
+.strip:focus-within .track,
+.paused {
+  animation-play-state: paused;
+}
+.actions {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 12px;
+}
+.pause {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid #356347;
+  border-radius: 50%;
+  color: #a6e8bd;
+  background: transparent;
+  cursor: pointer;
+}
+.cta {
+  color: #92e6b0;
+  font-weight: 750;
+  white-space: nowrap;
+  text-decoration: none;
+}
+.cta:hover {
+  color: #fff;
+}
+.cta:focus-visible,
+.pause:focus-visible {
+  outline: 2px solid #a6e8bd;
+  outline-offset: 4px;
+}
+@keyframes contact-scroll {
+  to {
+    transform: translateX(-50%);
+  }
+}
+@media (max-width: 600px) {
+  .strip {
+    gap: 10px;
+    padding: 14px 12px;
+    flex-wrap: wrap;
+  }
+  .icon {
+    width: 26px;
+    height: 26px;
+  }
+  .window {
+    flex-basis: calc(100% - 40px);
+  }
+  .actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .track {
+    animation: none;
+    width: auto;
+  }
+  .group {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .group[aria-hidden="true"],
+  .pause {
+    display: none;
+  }
+  .window {
+    mask-image: none;
+  }
+  .message {
+    white-space: normal;
+    padding: 3px 0;
+  }
+  .message::after {
+    display: none;
+  }
+}

@@ -1,3 +1,4 @@
+import { ContactMarquee } from "../commerce/ContactMarquee";
 import { SkeletonImage } from "../SkeletonImage";
 import { ProductCardSkeletons } from "../commerce/ProductCardSkeletons";
 import { useMemo, useRef, useState } from "react";
@@ -446,10 +447,7 @@ export default function ProductsPage() {
             </button>
           </div>
         )}
-        <p className="cita-shop-pricing-note">
-          Contact us to confirm current prices, installation and product
-          availability.
-        </p>
+        <ContactMarquee />
       </section>
     </main>
   );

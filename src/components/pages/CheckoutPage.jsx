@@ -196,6 +196,13 @@ export default function CheckoutPage() {
         <p className="commerce-kicker">Secure order</p>
         <h1>Checkout</h1>
         <p>Your order is verified against live product pricing and stock.</p>
+        {!user ? (
+          <p className="checkout-prefill">
+            Continue as a guest, or{" "}
+            <SmartLink href="/login?next=%2Fcheckout">sign in</SmartLink> for
+            saved details. An account is optional.
+          </p>
+        ) : null}
       </section>
       <form className="commerce-container checkout-layout" onSubmit={submit}>
         <div className="checkout-form">

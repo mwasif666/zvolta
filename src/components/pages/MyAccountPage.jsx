@@ -19,7 +19,7 @@ const tabs = [
   ["overview", "Overview", "Account summary"],
   ["orders", "Orders & tracking", "Delivery progress"],
   ["profile", "Profile details", "Contact and address"],
-  ["security", "Password", "Account security"],
+  ["security", "Security", "Account security"],
 ];
 
 function AccountIcon({ type }) {
@@ -70,14 +70,7 @@ function AccountIcon({ type }) {
 }
 
 export default function MyAccountPage() {
-  const {
-    user,
-    loading,
-    isAuthenticated,
-    updateProfile,
-    changePassword,
-    logout,
-  } = useAuth();
+  const { user, loading, isAuthenticated, updateProfile, logout } = useAuth();
   const { settings } = useStorefrontSettings();
   const navigate = useNavigate();
   const location = useLocation();
@@ -203,47 +196,6 @@ export default function MyAccountPage() {
     }
   }
 
-  async function savePassword(event) {
-    event.preventDefault();
-    const form = event.currentTarget;
-    const values = Object.fromEntries(new FormData(form));
-    if (values.newPassword !== values.confirmPassword) {
-      setFormStatus({
-        form: "security",
-        submitting: false,
-        message: "New passwords do not match.",
-        error: true,
-      });
-      return;
-    }
-    setFormStatus({
-      form: "security",
-      submitting: true,
-      message: "",
-      error: false,
-    });
-    try {
-      await changePassword({
-        currentPassword: values.currentPassword,
-        newPassword: values.newPassword,
-      });
-      form.reset();
-      setFormStatus({
-        form: "security",
-        submitting: false,
-        message: "Password changed successfully.",
-        error: false,
-      });
-    } catch (error) {
-      setFormStatus({
-        form: "security",
-        submitting: false,
-        message: error.message,
-        error: true,
-      });
-    }
-  }
-
   async function trackOrder(event) {
     event.preventDefault();
     const orderNumber = new FormData(event.currentTarget).get("orderNumber");
@@ -303,7 +255,7 @@ export default function MyAccountPage() {
         <div className="account-identity">
           <span>{user.name?.[0]?.toUpperCase() || "Z"}</span>
           <div>
-            <strong>{user.name}</strong>
+            <strong>{user.name || "Your account"}</strong>
             <small>{user.email}</small>
           </div>
         </div>
@@ -388,7 +340,7 @@ export default function MyAccountPage() {
               <div className="account-details-card">
                 <div>
                   <span className="account-label">Contact details</span>
-                  <h3>{user.name}</h3>
+                  <h3>{user.name || "Your account"}</h3>
                   <p>
                     {user.email}
                     <br />
@@ -558,6 +510,7 @@ export default function MyAccountPage() {
                       type="email"
                       autoComplete="email"
                       defaultValue={user.email}
+                      readOnly
                     />
                   </label>
                   <label className="is-wide">
@@ -646,70 +599,20 @@ export default function MyAccountPage() {
               <div className="account-section-head">
                 <div>
                   <span className="account-label">Security</span>
-                  <h2>Change password</h2>
+                  <h2>Email sign-in codes</h2>
                   <p>
-                    Use at least six characters and avoid reusing an old
-                    password.
+                    Sign in with the one-time code sent to {user.email}. No
+                    password is needed.
                   </p>
                 </div>
               </div>
-              <form
-                className="account-form account-security-form"
-                onSubmit={savePassword}
-              >
-                <label>
-                  Current password
-                  <input
-                    name="currentPassword"
-                    type="password"
-                    required
-                    minLength={6}
-                    autoComplete="current-password"
-                  />
-                </label>
-                <label>
-                  New password
-                  <input
-                    name="newPassword"
-                    type="password"
-                    required
-                    minLength={6}
-                    autoComplete="new-password"
-                  />
-                </label>
-                <label>
-                  Confirm new password
-                  <input
-                    name="confirmPassword"
-                    type="password"
-                    required
-                    minLength={6}
-                    autoComplete="new-password"
-                  />
-                </label>
-                {formStatus.form === "security" ? (
-                  <StatusNotice status={formStatus} />
-                ) : null}
-                <div className="account-form-actions">
-                  <button
-                    type="submit"
-                    disabled={
-                      formStatus.form === "security" && formStatus.submitting
-                    }
-                  >
-                    {formStatus.form === "security" && formStatus.submitting
-                      ? "Updating password..."
-                      : "Update password"}
-                  </button>
-                </div>
-              </form>
               <div className="account-security-note">
                 <AccountIcon type="security" />
                 <div>
                   <strong>Your account is protected</strong>
                   <p>
-                    ZVolta never displays or sends your password. If you did not
-                    request a change, contact support.
+                    Never share your sign-in code. If you receive a code you did
+                    not request, contact support.
                   </p>
                 </div>
               </div>

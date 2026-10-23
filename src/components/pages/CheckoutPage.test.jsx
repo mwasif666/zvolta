@@ -7,7 +7,7 @@ import {
   waitFor,
 } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
-import { afterEach, expect, test, vi } from "vitest";
+import { afterEach, beforeEach, expect, test, vi } from "vitest";
 import { AuthProvider } from "../../context/AuthContext";
 import { StorefrontSettingsProvider } from "../../context/StorefrontSettingsContext";
 import CheckoutPage from "./CheckoutPage";
@@ -34,13 +34,18 @@ const savedProfile = {
   ],
 };
 
-const createOrderMock = vi.hoisted(() => vi.fn());
+const { createOrderMock, authState } = vi.hoisted(() => ({
+  createOrderMock: vi.fn(),
+  authState: { guest: false },
+}));
 
 vi.mock("../../services/api", async (importOriginal) => ({
   ...(await importOriginal()),
-  readAuthToken: () => "test-token",
+  readAuthToken: () => (authState.guest ? "" : "test-token"),
   writeAuthToken: () => {},
-  authApi: { me: () => Promise.resolve({ data: savedProfile }) },
+  authApi: {
+    me: () => Promise.resolve({ data: authState.guest ? null : savedProfile }),
+  },
   commerceApi: {
     settings: () => Promise.resolve({ data: null }),
     createOrder: createOrderMock,
@@ -69,6 +74,10 @@ vi.mock("../../hooks/useLiveCartItems", () => ({
   }),
 }));
 
+beforeEach(() => {
+  authState.guest = false;
+  createOrderMock.mockReset();
+});
 afterEach(cleanup);
 
 function renderCheckout() {
@@ -135,5 +144,40 @@ test("submits a contact order and shows the confirmation message", async () => {
   );
   expect(createOrderMock).toHaveBeenCalledWith(
     expect.objectContaining({ paymentMethod: "CONTACT" }),
+  );
+});
+
+test("guests can place an order with sign-in remaining optional", async () => {
+  authState.guest = true;
+  createOrderMock.mockResolvedValueOnce({
+    data: { orderNumber: "ZV-GUEST-1001" },
+  });
+  renderCheckout();
+  expect(screen.getByText(/An account is optional/)).toBeTruthy();
+  expect(
+    screen.getByRole("link", { name: "sign in" }).getAttribute("href"),
+  ).toBe("/login?next=%2Fcheckout");
+  for (const [name, value] of Object.entries({
+    fullName: "Guest Shopper",
+    email: "guest@example.com",
+    phone: "03001234567",
+    addressLine1: "House 1",
+    city: "Karachi",
+  })) {
+    fireEvent.change(document.querySelector(`[name="${name}"]`), {
+      target: { value },
+    });
+  }
+  fireEvent.click(screen.getByRole("button", { name: /Place Order/i }));
+  await screen.findByText(/Our team will contact you soon/i);
+  expect(createOrderMock).toHaveBeenCalledWith(
+    expect.objectContaining({
+      customer: {
+        name: "Guest Shopper",
+        email: "guest@example.com",
+        phone: "03001234567",
+      },
+      paymentMethod: "CONTACT",
+    }),
   );
 });
